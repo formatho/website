@@ -1,16 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import {
   Bot,
   Cpu,
   Clock,
   ListTodo,
-  Settings,
-  Zap,
   Download,
   Github,
-  Terminal,
-  RefreshCw,
   Lock,
   Code
 } from 'lucide-vue-next'
