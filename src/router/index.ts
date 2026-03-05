@@ -680,6 +680,91 @@ export const routes = [
         name: 'iban-validator',
         component: () => import('../views/IbanValidatorView.vue'),
         meta: { title: 'IBAN Validator & Parser', description: 'Validate and parse IBAN numbers.' }
+      },
+      // Additional missing routes
+      {
+        path: 'qr-code-generator',
+        name: 'qr-code-generator',
+        component: () => import('../views/QRCodeGeneratorView.vue'),
+        meta: { title: 'QR Code Generator', description: 'Generate QR codes from text and URLs.' }
+      },
+      {
+        path: 'crontab-generator',
+        name: 'crontab-generator',
+        component: () => import('../views/CrontabGeneratorView.vue'),
+        meta: { title: 'Crontab Generator', description: 'Generate cron expressions with visual builder.' }
+      },
+      {
+        path: 'regex-tester',
+        name: 'regex-tester',
+        component: () => import('../views/RegexTesterView.vue'),
+        meta: { title: 'Regex Tester', description: 'Test and debug regular expressions.' }
+      },
+      {
+        path: 'math-evaluator',
+        name: 'math-evaluator',
+        component: () => import('../views/MathEvaluatorView.vue'),
+        meta: { title: 'Math Evaluator', description: 'Evaluate mathematical expressions.' }
+      },
+      {
+        path: 'percentage-calculator',
+        name: 'percentage-calculator',
+        component: () => import('../views/PercentageCalculatorView.vue'),
+        meta: { title: 'Percentage Calculator', description: 'Calculate percentages, increases, and decreases.' }
+      },
+      {
+        path: 'token-generator',
+        name: 'token-generator',
+        component: () => import('../views/TokenGeneratorView.vue'),
+        meta: { title: 'Token Generator', description: 'Generate secure random tokens.' }
+      },
+      {
+        path: 'hash-text',
+        name: 'hash-text',
+        component: () => import('../views/HashTextView.vue'),
+        meta: { title: 'Hash Text', description: 'Generate MD5, SHA-1, SHA-256, SHA-512 hashes.' }
+      },
+      {
+        path: 'ulid-generator',
+        name: 'ulid-generator',
+        component: () => import('../views/ULIDGeneratorView.vue'),
+        meta: { title: 'ULID Generator', description: 'Generate Universally Unique Lexicographically Sortable Identifiers.' }
+      },
+      {
+        path: 'case-converter',
+        name: 'case-converter',
+        component: () => import('../views/CaseConverterView.vue'),
+        meta: { title: 'Case Converter', description: 'Convert text between camelCase, snake_case, kebab-case, etc.' }
+      },
+      {
+        path: 'date-time-converter',
+        name: 'date-time-converter',
+        component: () => import('../views/DateTimeConverterView.vue'),
+        meta: { title: 'Date-Time Converter', description: 'Convert dates and times between formats.' }
+      },
+      {
+        path: 'color-converter',
+        name: 'color-converter',
+        component: () => import('../views/ColorConverterView.vue'),
+        meta: { title: 'Color Converter', description: 'Convert colors between HEX, RGB, HSL formats.' }
+      },
+      {
+        path: 'text-to-binary',
+        name: 'text-to-binary',
+        component: () => import('../views/TextToBinaryView.vue'),
+        meta: { title: 'Text to Binary Converter', description: 'Convert text to binary and vice versa.' }
+      },
+      {
+        path: 'http-status-codes',
+        name: 'http-status-codes',
+        component: () => import('../views/HTTPStatusCodesView.vue'),
+        meta: { title: 'HTTP Status Codes', description: 'Reference for HTTP status codes and meanings.' }
+      },
+      {
+        path: 'url-parser',
+        name: 'url-parser',
+        component: () => import('../views/URLParserView.vue'),
+        meta: { title: 'URL Parser', description: 'Parse and analyze URL components.' }
       }
     ]
   }

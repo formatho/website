@@ -45,6 +45,7 @@
     "lorem-ipsum": "^2.0.8",
     "lucide-vue-next": "^0.561.0",
     "papaparse": "^5.5.3",
+    "qrcode": "^1.5.4",
     "radix-vue": "^1.9.17",
     "rehype-highlight": "^7.0.2",
     "rehype-raw": "^7.0.0",
