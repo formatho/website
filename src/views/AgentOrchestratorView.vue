@@ -7,72 +7,105 @@ import {
   Download,
   Github,
   Lock,
-  Code
+  Code,
+  LayoutDashboard,
+  Calendar,
+  FileText,
+  Wand2,
+  Settings,
+  RefreshCw,
+  MessageSquare,
+  Database,
+  Shield
 } from 'lucide-vue-next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
-const features = [
+const coreFeatures = [
+  {
+    icon: LayoutDashboard,
+    title: 'Desktop App (Electron)',
+    description: 'Native desktop application with beautiful UI. Manage agents visually - no command line required. Works on macOS, Windows, and Linux.',
+    status: 'In Development'
+  },
+  {
+    icon: Wand2,
+    title: 'Text-to-Agent Creation',
+    description: 'Describe what you want in plain English. "Create an agent that emails me a daily report at 9am" and it just works.',
+    status: 'Planned'
+  },
   {
     icon: Bot,
-    title: 'Spin Up Agents with Text',
-    description: 'Describe what you want in plain English. The orchestrator creates and configures agents automatically.'
+    title: 'Agent Pool Management',
+    description: 'Run multiple agents concurrently with resource limits. Create, pause, resume, and kill agents from the dashboard.',
+    status: 'Planned'
   },
   {
     icon: ListTodo,
     title: 'Persistent TODO Queue',
-    description: 'Agents work through tasks autonomously. TODOs survive restarts with SQLite persistence.'
+    description: 'Agents work through tasks autonomously. TODOs survive restarts with SQLite persistence. Track progress in real-time.',
+    status: 'Planned'
   },
   {
-    icon: Clock,
+    icon: Calendar,
     title: 'Cron Scheduling',
-    description: 'Schedule agents to run at specific times. Perfect for recurring reports and automation.'
+    description: 'Schedule agents to run at specific times. Daily reports, weekly summaries, monthly audits - fully automated.',
+    status: 'Planned'
   },
   {
     icon: Cpu,
     title: 'Multi-LLM Support',
-    description: 'Configure different LLMs for different agents. Mix OpenAI, Anthropic, and local models.'
+    description: 'Configure different LLMs for different agents. Use GPT-4 for complex reasoning, Claude for writing, local models for speed.',
+    status: 'In Development'
+  },
+  {
+    icon: Settings,
+    title: 'Skill System',
+    description: 'Give agents real capabilities: file operations, web scraping, API calls, notifications. Sandbox with permissions.',
+    status: 'Planned'
+  },
+  {
+    icon: MessageSquare,
+    title: 'Optional Chat Interface',
+    description: 'Talk to agents when needed. Provide input, debug behavior, or just check in. Chat is optional - agents work in background.',
+    status: 'Planned'
   },
   {
     icon: Lock,
     title: '100% Local-First',
-    description: 'Your data stays on your machine. No cloud, no tracking, complete privacy.'
-  },
-  {
-    icon: Code,
-    title: 'Open Source Libraries',
-    description: 'Built from modular Go libraries. Use them independently or as a complete system.'
+    description: 'Your data stays on your machine. No cloud, no tracking, complete privacy. Works offline.',
+    status: 'Core'
   }
 ]
 
-const libraries = [
-  { name: 'go-llm-client', description: 'Unified LLM interface', stars: '0' },
-  { name: 'go-agent-pool', description: 'Agent lifecycle management', stars: 'Coming' },
-  { name: 'go-agent-skills', description: 'Skills with permissions', stars: 'Coming' },
-  { name: 'go-todo-queue', description: 'Persistent TODO queue', stars: 'Coming' },
-  { name: 'go-cron-agents', description: 'Cron scheduler', stars: 'Coming' },
-  { name: 'go-agent-config', description: 'Configuration management', stars: 'Coming' }
+const skills = [
+  { name: 'file.read/write', description: 'Read and write local files' },
+  { name: 'web.fetch/search', description: 'Scrape websites, search the web' },
+  { name: 'shell.run', description: 'Execute shell commands (sandboxed)' },
+  { name: 'http.get/post', description: 'Make HTTP requests to APIs' },
+  { name: 'notify.desktop', description: 'Send desktop notifications' },
+  { name: 'git.clone/push', description: 'Git operations' },
+  { name: 'image.generate', description: 'Generate images (ComfyUI/DALL-E)' },
+  { name: 'email.send', description: 'Send emails via SMTP' }
 ]
 
-const codeExample = `# Create an agent with just text
-formatho create "Every morning at 9am, fetch sales
-from Stripe API and email a PDF report to the team"
+const libraries = [
+  { name: 'go-llm-client', description: 'Unified LLM interface (OpenAI, Anthropic, Ollama)', status: 'In Development', stars: '0' },
+  { name: 'go-agent-pool', description: 'Agent lifecycle & resource management', status: 'Planned', stars: '-' },
+  { name: 'go-agent-skills', description: 'Skill system with permissions', status: 'Planned', stars: '-' },
+  { name: 'go-todo-queue', description: 'Persistent TODO queue (SQLite)', status: 'Planned', stars: '-' },
+  { name: 'go-cron-agents', description: 'Cron scheduler for agents', status: 'Planned', stars: '-' },
+  { name: 'go-agent-config', description: 'YAML/JSON configuration', status: 'Planned', stars: '-' }
+]
 
-# That's it. The agent:
-# - Parses your request
-# - Creates necessary skills
-# - Schedules the cron job
-# - Starts working
-
-# View all agents
-formatho list
-
-# Check agent TODOs
-formatho todos <agent-id>
-
-# Talk to an agent (optional)
-formatho chat <agent-id>`
+const roadmap = [
+  { week: '1-2', title: 'Core Libraries', items: ['go-llm-client', 'go-agent-pool'] },
+  { week: '3-4', title: 'Skills & Persistence', items: ['go-agent-skills', 'go-todo-queue'] },
+  { week: '5', title: 'Scheduling', items: ['go-cron-agents', 'go-agent-config'] },
+  { week: '6', title: 'Electron MVP', items: ['Desktop UI', 'Agent dashboard', 'TODO panel'] },
+  { week: '7+', title: 'Launch', items: ['Public release', 'HN launch', 'Community'] }
+]
 </script>
 
 <template>
@@ -86,28 +119,31 @@ formatho chat <agent-id>`
             <div class="p-3 rounded-xl bg-primary/10">
               <Bot class="h-12 w-12 text-primary" />
             </div>
-            <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
-              Agent Orchestrator
-            </h1>
+            <div class="text-left">
+              <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
+                Agent Orchestrator
+              </h1>
+              <p class="text-muted-foreground text-lg">by Formatho</p>
+            </div>
           </div>
 
           <!-- Tagline -->
           <p class="text-xl md:text-2xl font-semibold text-foreground">
-            Spin up AI workers. Let them run. Check results later.
+            Desktop app for managing autonomous AI agents
           </p>
 
           <!-- Description -->
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl">
-            A local-first desktop app for managing autonomous AI agents.
-            Describe what you want in text, and agents work on it in the background.
-            No cloud required.
+            A local-first Electron application with beautiful UI. 
+            Describe what you want, agents work in background, check results later.
+            <strong>No command line required.</strong>
           </p>
 
           <!-- Badges -->
           <div class="flex flex-wrap gap-2 justify-center">
             <Badge variant="secondary" class="text-sm">
-              <Download class="h-3 w-3 mr-1" />
-              Desktop App
+              <LayoutDashboard class="h-3 w-3 mr-1" />
+              Electron Desktop App
             </Badge>
             <Badge variant="secondary" class="text-sm">
               <Lock class="h-3 w-3 mr-1" />
@@ -116,6 +152,10 @@ formatho chat <agent-id>`
             <Badge variant="secondary" class="text-sm">
               <Code class="h-3 w-3 mr-1" />
               Open Source
+            </Badge>
+            <Badge variant="secondary" class="text-sm">
+              <Shield class="h-3 w-3 mr-1" />
+              Privacy First
             </Badge>
           </div>
 
@@ -134,23 +174,105 @@ formatho chat <agent-id>`
       </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- Desktop App Preview -->
     <section class="container mx-auto px-6 py-12 md:py-16">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold tracking-tight mb-4">Key Features</h2>
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold tracking-tight mb-4">Desktop Application</h2>
         <p class="text-muted-foreground max-w-2xl mx-auto">
-          Everything you need to run autonomous AI agents locally.
+          Manage AI agents from a beautiful native desktop UI. 
+          No terminal needed - everything is visual and intuitive.
+        </p>
+      </div>
+
+      <!-- Mock UI Preview -->
+      <div class="max-w-4xl mx-auto">
+        <Card class="overflow-hidden border-2">
+          <div class="bg-muted/50 p-2 flex items-center gap-2 border-b">
+            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            <span class="ml-4 text-sm text-muted-foreground">Agent Orchestrator</span>
+          </div>
+          <div class="grid grid-cols-4 min-h-[300px]">
+            <!-- Sidebar -->
+            <div class="bg-muted/30 border-r p-4 space-y-2">
+              <div class="text-sm font-medium text-muted-foreground mb-4">Navigation</div>
+              <div class="flex items-center gap-2 p-2 bg-primary/10 rounded text-sm">
+                <Bot class="h-4 w-4" /> Agents
+              </div>
+              <div class="flex items-center gap-2 p-2 hover:bg-muted rounded text-sm text-muted-foreground">
+                <ListTodo class="h-4 w-4" /> TODOs
+              </div>
+              <div class="flex items-center gap-2 p-2 hover:bg-muted rounded text-sm text-muted-foreground">
+                <Calendar class="h-4 w-4" /> Schedule
+              </div>
+              <div class="flex items-center gap-2 p-2 hover:bg-muted rounded text-sm text-muted-foreground">
+                <Settings class="h-4 w-4" /> Settings
+              </div>
+            </div>
+            <!-- Main Content -->
+            <div class="col-span-3 p-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-semibold">Active Agents</h3>
+                <Button size="sm">+ New Agent</Button>
+              </div>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3 p-3 bg-muted/50 rounded">
+                  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <div class="flex-1">
+                    <div class="font-medium text-sm">daily-report</div>
+                    <div class="text-xs text-muted-foreground">Generates sales report at 9am daily</div>
+                  </div>
+                  <Badge variant="outline" class="text-xs">Running</Badge>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-muted/50 rounded">
+                  <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <div class="flex-1">
+                    <div class="font-medium text-sm">code-reviewer</div>
+                    <div class="text-xs text-muted-foreground">Reviews PRs on GitHub</div>
+                  </div>
+                  <Badge variant="outline" class="text-xs">Idle</Badge>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-muted/50 rounded">
+                  <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <div class="flex-1">
+                    <div class="font-medium text-sm">email-summarizer</div>
+                    <div class="text-xs text-muted-foreground">Summarizes inbox every morning</div>
+                  </div>
+                  <Badge variant="outline" class="text-xs">Scheduled</Badge>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </section>
+
+    <!-- All Planned Features -->
+    <section class="container mx-auto px-6 py-12 md:py-16 border-t border-border">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold tracking-tight mb-4">Planned Features</h2>
+        <p class="text-muted-foreground max-w-2xl mx-auto">
+          Everything we're building for the first release. Open source, community-driven.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <Card v-for="feature in features" :key="feature.title" class="border-2 hover:border-primary/50 transition-colors">
+        <Card v-for="feature in coreFeatures" :key="feature.title" class="border-2 hover:border-primary/50 transition-colors">
           <CardHeader>
-            <div class="flex items-center gap-3">
-              <div class="p-2 rounded-lg bg-primary/10">
-                <component :is="feature.icon" class="h-5 w-5 text-primary" />
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="p-2 rounded-lg bg-primary/10">
+                  <component :is="feature.icon" class="h-5 w-5 text-primary" />
+                </div>
+                <CardTitle class="text-lg">{{ feature.title }}</CardTitle>
               </div>
-              <CardTitle class="text-lg">{{ feature.title }}</CardTitle>
+              <Badge 
+                :variant="feature.status === 'In Development' ? 'default' : feature.status === 'Core' ? 'secondary' : 'outline'" 
+                class="text-xs"
+              >
+                {{ feature.status }}
+              </Badge>
             </div>
           </CardHeader>
           <CardContent>
@@ -160,54 +282,48 @@ formatho chat <agent-id>`
       </div>
     </section>
 
-    <!-- How It Works -->
-    <section class="container mx-auto px-6 py-12 md:py-16 border-t border-border">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold tracking-tight mb-4">How It Works</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-        <div class="text-center space-y-3">
-          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto text-xl font-bold text-primary">1</div>
-          <h3 class="font-semibold text-lg">Describe Your Task</h3>
-          <p class="text-muted-foreground text-sm">Type what you want in plain English. The system understands context.</p>
-        </div>
-        <div class="text-center space-y-3">
-          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto text-xl font-bold text-primary">2</div>
-          <h3 class="font-semibold text-lg">Agent Works</h3>
-          <p class="text-muted-foreground text-sm">The agent breaks down your task into TODOs and works through them autonomously.</p>
-        </div>
-        <div class="text-center space-y-3">
-          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto text-xl font-bold text-primary">3</div>
-          <h3 class="font-semibold text-lg">Check Results</h3>
-          <p class="text-muted-foreground text-sm">Review completed work, provide feedback, or let the agent iterate.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Code Example -->
+    <!-- Skills -->
     <section class="container mx-auto px-6 py-12 md:py-16 border-t border-border">
       <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold tracking-tight mb-4">Simple CLI</h2>
-        <p class="text-muted-foreground">Create and manage agents from your terminal</p>
+        <h2 class="text-3xl font-bold tracking-tight mb-4">Built-in Skills</h2>
+        <p class="text-muted-foreground max-w-2xl mx-auto">
+          Give agents real capabilities. All skills run with permission controls.
+        </p>
       </div>
 
-      <div class="max-w-2xl mx-auto">
-        <Card class="bg-zinc-900 border-zinc-800">
-          <CardContent class="p-4">
-            <pre class="text-sm text-zinc-100 overflow-x-auto font-mono whitespace-pre-wrap">{{ codeExample }}</pre>
-          </CardContent>
-        </Card>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div v-for="skill in skills" :key="skill.name" class="p-4 border rounded-lg hover:border-primary/50 transition-colors">
+          <div class="font-mono text-sm text-primary mb-1">{{ skill.name }}</div>
+          <div class="text-xs text-muted-foreground">{{ skill.description }}</div>
+        </div>
       </div>
     </section>
 
-    <!-- Libraries -->
+    <!-- Roadmap -->
+    <section class="container mx-auto px-6 py-12 md:py-16 border-t border-border">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold tracking-tight mb-4">Development Roadmap</h2>
+        <p class="text-muted-foreground">Building in public. Follow progress on GitHub.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4 max-w-5xl mx-auto">
+        <div v-for="phase in roadmap" :key="phase.week" class="p-4 border rounded-lg">
+          <div class="text-sm font-medium text-primary mb-2">Week {{ phase.week }}</div>
+          <div class="font-semibold mb-2">{{ phase.title }}</div>
+          <ul class="text-sm text-muted-foreground space-y-1">
+            <li v-for="item in phase.items" :key="item">• {{ item }}</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modular Libraries -->
     <section class="container mx-auto px-6 py-12 md:py-16 border-t border-border">
       <div class="text-center mb-8">
         <h2 class="text-3xl font-bold tracking-tight mb-4">Modular Go Libraries</h2>
         <p class="text-muted-foreground max-w-2xl mx-auto">
-          Each component is a standalone library you can use independently.
-          MIT licensed, production-ready.
+          Each component is a standalone Go library. Use them independently or as a complete system.
+          MIT licensed.
         </p>
       </div>
 
@@ -222,10 +338,13 @@ formatho chat <agent-id>`
           <Card class="h-full hover:border-primary/50 transition-colors cursor-pointer">
             <CardHeader class="pb-2">
               <div class="flex items-center justify-between">
-                <CardTitle class="text-base group-hover:text-primary transition-colors">
+                <CardTitle class="text-base group-hover:text-primary transition-colors font-mono">
                   {{ lib.name }}
                 </CardTitle>
-                <Badge variant="outline" class="text-xs">{{ lib.stars }} ★</Badge>
+                <div class="flex items-center gap-2">
+                  <Badge variant="outline" class="text-xs">{{ lib.status }}</Badge>
+                  <Badge variant="secondary" class="text-xs">{{ lib.stars }} ★</Badge>
+                </div>
               </div>
             </CardHeader>
             <CardContent>
@@ -241,7 +360,7 @@ formatho chat <agent-id>`
       <div class="text-center space-y-6">
         <h2 class="text-3xl font-bold tracking-tight">Ready to Automate?</h2>
         <p class="text-muted-foreground max-w-xl mx-auto">
-          Agent Orchestrator is currently in development. Star the repo to follow progress
+          Agent Orchestrator is in active development. Star the repo to follow progress
           or contribute to the open source libraries.
         </p>
         <div class="flex flex-wrap gap-3 justify-center">
@@ -250,7 +369,7 @@ formatho chat <agent-id>`
             Star on GitHub
           </Button>
           <Button variant="outline" size="lg" as="a" href="https://github.com/formatho" target="_blank">
-            View All Libraries
+            View Organization
           </Button>
         </div>
       </div>
