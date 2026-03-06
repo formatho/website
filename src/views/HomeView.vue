@@ -46,7 +46,6 @@ import {
   Wifi,
   Camera
 } from 'lucide-vue-next'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import LiveSiteAnalytics from '@/components/LiveSiteAnalytics.vue'
 
