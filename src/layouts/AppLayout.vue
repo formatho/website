@@ -38,6 +38,7 @@ import {
   QrCode
 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
+import LiveSiteAnalytics from '@/components/LiveSiteAnalytics.vue'
 
 const route = useRoute()
 const isHomePage = computed(() => route.name === 'home')
@@ -401,5 +402,8 @@ const toggleSidebar = () => {
     <main class="flex-1 overflow-hidden bg-background">
       <RouterView />
     </main>
+
+    <!-- Live Analytics Widget -->
+    <LiveSiteAnalytics />
   </div>
 </template>

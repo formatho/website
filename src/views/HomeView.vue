@@ -50,6 +50,7 @@ import {
   Keyboard
 } from 'lucide-vue-next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import LiveSiteAnalytics from '@/components/LiveSiteAnalytics.vue'
 
 const tools = [
   {
@@ -732,5 +733,8 @@ const tools = [
         </div>
       </div>
     </section>
+
+    <!-- Live Analytics Widget -->
+    <LiveSiteAnalytics />
   </div>
 </template>
