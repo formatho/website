@@ -137,6 +137,16 @@ const categories = [
           >
             Blogs
           </RouterLink>
+
+          <!-- Insights Link -->
+          <a
+            href="https://formatho.com/insights/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Insights
+          </a>
         </div>
 
         <!-- Search & Mobile Menu Button -->
@@ -220,6 +230,16 @@ const categories = [
             >
               Blogs
             </RouterLink>
+
+            <!-- Insights Link -->
+            <a
+              href="https://formatho.com/insights/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-all"
+            >
+              Insights
+            </a>
           </div>
         </div>
       </div>
