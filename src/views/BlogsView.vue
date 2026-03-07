@@ -1,36 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { Calendar, Clock, ArrowRight, Tag } from 'lucide-vue-next'
-
-const blogPosts = [
-  {
-    id: 1,
-    title: 'Building Privacy-First Developer Tools',
-    excerpt: 'Why we chose to build tools that run 100% client-side and what it means for your privacy.',
-    date: '2026-03-01',
-    readTime: '5 min',
-    tags: ['Privacy', 'Development'],
-    slug: 'privacy-first-tools'
-  },
-  {
-    id: 2,
-    title: 'Introducing Agent Orchestrator',
-    excerpt: 'How our desktop application is revolutionizing how developers work with AI agents.',
-    date: '2026-02-15',
-    readTime: '7 min',
-    tags: ['AI', 'Productivity'],
-    slug: 'agent-orchestrator-intro'
-  },
-  {
-    id: 3,
-    title: 'The Future of Web Development Tools',
-    excerpt: 'Exploring trends and predictions for developer tools in the coming years.',
-    date: '2026-02-01',
-    readTime: '6 min',
-    tags: ['Web Dev', 'Trends'],
-    slug: 'future-web-dev-tools'
-  }
-]
+import { blogPosts } from '../data/blogPosts'
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString)
@@ -48,7 +19,10 @@ const formatDate = (dateString: string) => {
     <div class="text-center mb-12">
       <h1 class="text-4xl font-bold mb-4">Blog</h1>
       <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
-        Insights, updates, and stories from the Formatho team
+        Developer guides, tutorials, and insights from the Formatho team
+      </p>
+      <p class="text-sm text-muted-foreground mt-2">
+        {{ blogPosts.length }} articles
       </p>
     </div>
 
