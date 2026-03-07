@@ -7,8 +7,8 @@ import { Label } from '@/components/ui/label'
 const userAgent = ref('')
 
 const parsedInfo = computed(() => {
-  const ua = userAgent.value || navigator.userAgent
-  
+  const ua = userAgent.value || (typeof navigator !== 'undefined' ? navigator.userAgent : '')
+
   const browserPatterns = [
     { name: 'Edge', pattern: /Edge\/(\d+)/ },
     { name: 'Opera', pattern: /OPR\/(\d+)/ },
