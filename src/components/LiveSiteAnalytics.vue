@@ -5,11 +5,14 @@ import { ref, onMounted, onUnmounted } from 'vue'
 // DATA HOOK - Easy to replace with API call
 // ============================================
 const INITIAL_VISITORS = 12847 // Starting count
-const INCREMENT_INTERVAL = 5000 // Increment every 5 seconds
+const VISITOR_INCREMENT_INTERVAL = 5000 // Increment every 5 seconds
+const LIVE_USER_UPDATE_INTERVAL = 3000 // Update live users every 3 seconds
 
 // State
 const monthlyVisitors = ref(INITIAL_VISITORS)
-let incrementInterval: number | undefined
+const liveUsers = ref(1)
+let visitorInterval: number | undefined
+let liveUserInterval: number | undefined
 
 // Format number with commas
 const formatNumber = (num: number): string => {
@@ -23,26 +26,55 @@ const incrementVisitors = () => {
   monthlyVisitors.value += increment
 }
 
+// Simulate live users (1-50, fluctuating every 3 seconds)
+const updateLiveUsers = () => {
+  // Random fluctuation: +/- 1-5 users, staying within 1-50 range
+  const change = Math.floor(Math.random() * 11) - 5 // -5 to +5
+  liveUsers.value = Math.max(1, Math.min(50, liveUsers.value + change))
+}
+
 onMounted(() => {
-  // Start continuous increment - every 5 seconds
-  incrementInterval = window.setInterval(incrementVisitors, INCREMENT_INTERVAL)
+  // Initialize live users
+  liveUsers.value = Math.floor(Math.random() * 50) + 1
+
+  // Start continuous increment for visitors
+  visitorInterval = window.setInterval(incrementVisitors, VISITOR_INCREMENT_INTERVAL)
+
+  // Start live user simulation
+  liveUserInterval = window.setInterval(updateLiveUsers, LIVE_USER_UPDATE_INTERVAL)
 })
 
 onUnmounted(() => {
-  if (incrementInterval) {
-    clearInterval(incrementInterval)
+  if (visitorInterval) {
+    clearInterval(visitorInterval)
+  }
+  if (liveUserInterval) {
+    clearInterval(liveUserInterval)
   }
 })
 </script>
 
 <template>
-  <div class="visitors-counter-widget">
-    <div class="counter-card">
-      <!-- Monthly Traffic Counter -->
+  <div class="analytics-widget">
+    <div class="analytics-card">
+      <!-- Live Users -->
       <div class="metric">
         <div class="metric-header">
           <span class="pulse-dot"></span>
-          <span class="metric-label">Total Visitors This Month</span>
+          <span class="metric-label">Live Users</span>
+        </div>
+        <div class="metric-value">
+          <span class="number">{{ liveUsers }}</span>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider"></div>
+
+      <!-- Monthly Traffic Counter -->
+      <div class="metric">
+        <div class="metric-header">
+          <span class="metric-label">Visitors This Month</span>
         </div>
         <div class="metric-value">
           <span class="number">{{ formatNumber(monthlyVisitors) }}</span>
@@ -53,7 +85,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-.visitors-counter-widget {
+.analytics-widget {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -61,32 +93,29 @@ onUnmounted(() => {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
-.counter-card {
+.analytics-card {
   /* Liquid Glass Effect */
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.75);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(156, 163, 175, 0.4); /* Grey border */
   border-radius: 16px;
-  padding: 16px 24px;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  padding: 16px 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   min-width: 200px;
   transition: all 0.3s ease;
 }
 
-.counter-card:hover {
+.analytics-card:hover {
   transform: translateY(-2px);
-  box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(156, 163, 175, 0.6); /* Brighter grey on hover */
 }
 
 .metric {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .metric-header {
@@ -97,7 +126,7 @@ onUnmounted(() => {
 
 .metric-label {
   font-size: 11px;
-  color: hsl(var(--foreground) / 0.7);
+  color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 600;
@@ -106,7 +135,7 @@ onUnmounted(() => {
 .metric-value {
   font-size: 28px;
   font-weight: 700;
-  color: hsl(var(--primary));
+  color: #ffffff; /* Sharp white color */
   line-height: 1;
   display: flex;
   align-items: baseline;
@@ -115,7 +144,14 @@ onUnmounted(() => {
 
 .number {
   font-variant-numeric: tabular-nums;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for better readability */
+}
+
+.divider {
+  height: 1px;
+  background: rgba(156, 163, 175, 0.3); /* Grey divider */
+  margin: 12px 0;
 }
 
 /* Pulsing indicator dot */
@@ -142,14 +178,14 @@ onUnmounted(() => {
 
 /* Mobile responsiveness */
 @media (max-width: 640px) {
-  .visitors-counter-widget {
+  .analytics-widget {
     bottom: 10px;
     right: 10px;
   }
 
-  .counter-card {
+  .analytics-card {
     padding: 12px 16px;
-    min-width: 160px;
+    min-width: 180px;
   }
 
   .metric-value {
@@ -163,7 +199,7 @@ onUnmounted(() => {
 
 /* Ensure it doesn't block important elements */
 @media (max-width: 480px) {
-  .visitors-counter-widget {
+  .analytics-widget {
     /* Move above bottom navigation if present */
     bottom: 70px;
   }
@@ -171,9 +207,9 @@ onUnmounted(() => {
 
 /* Dark mode adjustment */
 @media (prefers-color-scheme: dark) {
-  .counter-card {
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  .analytics-card {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: rgba(156, 163, 175, 0.5); /* Grey border for dark mode */
   }
 }
 </style>
