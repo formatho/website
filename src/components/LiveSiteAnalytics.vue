@@ -61,7 +61,7 @@ onUnmounted(() => {
       <div class="metric">
         <div class="metric-header">
           <span class="pulse-dot"></span>
-          <span class="metric-label">Live Users</span>
+          <span class="metric-label">Live User Count</span>
         </div>
         <div class="metric-value">
           <span class="number">{{ liveUsers }}</span>
@@ -74,7 +74,7 @@ onUnmounted(() => {
       <!-- Monthly Traffic Counter -->
       <div class="metric">
         <div class="metric-header">
-          <span class="metric-label">Visitors This Month</span>
+          <span class="metric-label">Total Users this month</span>
         </div>
         <div class="metric-value">
           <span class="number">{{ formatNumber(monthlyVisitors) }}</span>
@@ -129,7 +129,7 @@ onUnmounted(() => {
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-weight: 600;
+  font-weight: 700; /* Bold */
 }
 
 .metric-value {
