@@ -27,6 +27,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '6 min',
     tags: ['UUID', 'Databases', 'Best Practices'],
     slug: 'uuid-v1-vs-v4',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Database server racks representing unique identifier storage and management',
     content: `<p>When generating unique identifiers in your applications, UUIDs (Universally Unique Identifiers) are often the go-to solution. But did you know there are different versions, each with distinct characteristics?</p>
 <h2>What is a UUID?</h2>
 <p>A UUID is a 128-bit number used to identify information in computer systems. The standard representation is 32 hexadecimal digits, displayed in five groups separated by hyphens.</p>
@@ -59,6 +61,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '8 min',
     tags: ['Security', 'Passwords', 'Bcrypt'],
     slug: 'bcrypt-password-hashing-guide',
+    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Digital padlock representing password security and encryption',
     content: `<p>Password security is the foundation of user trust. Storing passwords in plain text is a recipe for disaster. Enter bcrypt.</p>
 <h2>What is Bcrypt?</h2>
 <p>Bcrypt is a password hashing function designed in 1999. It's based on the Blowfish cipher and was specifically created to be slow—which is exactly what you want for password hashing.</p>
@@ -89,6 +93,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '7 min',
     tags: ['Encoding', 'Base64', 'Web Dev'],
     slug: 'base64-encoding-guide',
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Programming code on screen representing data encoding and transformation',
     content: `<p>Base64 is everywhere in web development—from embedding images in HTML to JWT tokens to email attachments.</p>
 <h2>What is Base64?</h2>
 <p>Base64 is a binary-to-text encoding scheme that converts binary data into an ASCII string format. It uses 64 characters (A-Z, a-z, 0-9, +, /) plus = for padding.</p>
@@ -119,6 +125,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '6 min',
     tags: ['ULID', 'UUID', 'Databases'],
     slug: 'ulids-vs-uuids',
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Programming code on screen representing data encoding and transformation',
     content: `<p>UUIDs are great for uniqueness, but they have one major drawback: they're random. This causes problems in databases. ULIDs solve this elegantly.</p>
 <h2>The Problem with UUID v4</h2>
 <p>Random UUIDs create several database issues:</p>
@@ -149,6 +157,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '9 min',
     tags: ['JWT', 'Authentication', 'Security'],
     slug: 'jwt-tokens-complete-guide',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Database dashboard representing time-sorted data and unique identifiers',
     content: `<p>JSON Web Tokens (JWT) have become the standard for stateless authentication in modern web applications.</p>
 <h2>What is a JWT?</h2>
 <p>A JWT is a compact, URL-safe token format consisting of three Base64URL-encoded parts: header.payload.signature</p>
@@ -177,6 +187,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '5 min',
     tags: ['SQL', 'Best Practices', 'Code Quality'],
     slug: 'sql-formatting-best-practices',
+    image: 'https://images.unsplash.com/photo-1610986603166-c78b5296f239?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Authentication security token and key concept',
     content: `<p>SQL is code, and like all code, it should be readable. Well-formatted SQL is easier to debug, review, and maintain.</p>
 <h2>Why SQL Formatting Matters</h2>
 <ul><li><strong>Code reviews:</strong> Reviewers can spot errors faster</li><li><strong>Debugging:</strong> Identify issues at a glance</li><li><strong>Collaboration:</strong> Team members understand each other's queries</li></ul>
@@ -203,6 +215,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '6 min',
     tags: ['QR Codes', 'Mobile', 'Marketing'],
     slug: 'qr-codes-explained',
+    image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'SQL database query on computer screen',
     content: `<p>QR codes (Quick Response codes) have become ubiquitous—from restaurant menus to payment systems.</p>
 <h2>What is a QR Code?</h2>
 <p>A QR code is a two-dimensional barcode that can store various types of data. Unlike traditional barcodes, QR codes store data in both dimensions.</p>
@@ -230,6 +244,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '7 min',
     tags: ['Regex', 'Text Processing', 'Reference'],
     slug: 'regex-practical-guide',
+    image: 'https://images.unsplash.com/photo-1595079676339-1534801ad6cf?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'QR code being scanned with smartphone',
     content: `<p>Regular expressions (regex) are powerful pattern matching tools. Mastering a few key patterns will cover 90% of your use cases.</p>
 <h2>Basic Syntax</h2>
 <ul><li><code>.</code> - Any character</li><li><code>\\d</code> - Digit (0-9)</li><li><code>\\w</code> - Word character</li><li><code>\\s</code> - Whitespace</li><li><code>^</code> - Start of string</li><li><code>$</code> - End of string</li></ul>
@@ -258,6 +274,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '5 min',
     tags: ['Ethereum', 'Web3', 'Blockchain'],
     slug: 'ethereum-units-explained',
+    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Code patterns and regular expressions on screen',
     content: `<p>Working with Ethereum requires understanding its denomination system.</p>
 <h2>The Hierarchy</h2>
 <p>1 Ether = 1,000,000,000,000,000,000 Wei (10^18)<br/>1 Ether = 1,000,000,000 Gwei (10^9)<br/>1 Gwei = 1,000,000,000 Wei (10^9)</p>
@@ -284,6 +302,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '6 min',
     tags: ['Cron', 'Automation', 'DevOps'],
     slug: 'crontab-guide',
+    image: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Ethereum blockchain cryptocurrency network visualization',
     content: `<p>Cron is the time-based job scheduler in Unix-like systems.</p>
 <h2>Cron Expression Syntax</h2>
 <p>* * * * * = minute hour day-of-month month day-of-week</p>
@@ -311,6 +331,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '7 min',
     tags: ['HTTP', 'API', 'Web Dev'],
     slug: 'http-status-codes-guide',
+    image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Calendar and clock representing scheduled tasks and cron jobs',
     content: `<p>HTTP status codes are the language of web APIs. Using the right status code helps clients understand what happened.</p>
 <h2>Status Code Categories</h2>
 <ul><li><strong>1xx:</strong> Informational</li><li><strong>2xx:</strong> Success</li><li><strong>3xx:</strong> Redirection</li><li><strong>4xx:</strong> Client Error</li><li><strong>5xx:</strong> Server Error</li></ul>
@@ -336,6 +358,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '6 min',
     tags: ['JSON', 'YAML', 'Config'],
     slug: 'json-yaml-toml-comparison',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Server room representing HTTP status and web infrastructure',
     content: `<p>Configuration files are everywhere in modern development. JSON, YAML, and TOML each have their strengths.</p>
 <h2>JSON</h2>
 <p>Pros: Universal support, strict syntax, fast parsing<br/>Cons: No comments, verbose</p>
@@ -366,6 +390,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '6 min',
     tags: ['Security', 'Passwords', 'Authentication'],
     slug: 'password-security-guide',
+    image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Code configuration files on developer screen',
     content: `<p>"Password123" might meet your password policy requirements, but it's still incredibly weak.</p>
 <h2>How Passwords Get Cracked</h2>
 <ul><li><strong>Brute force:</strong> Try every combination</li><li><strong>Dictionary attack:</strong> Common words and variations</li><li><strong>Rainbow tables:</strong> Pre-computed hash lookups</li><li><strong>Credential stuffing:</strong> Reused passwords from breaches</li></ul>
@@ -394,6 +420,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '8 min',
     tags: ['Networking', 'IPv4', 'DevOps'],
     slug: 'ipv4-subnetting-guide',
+    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Digital security lock representing password protection',
     content: `<p>IPv4 subnetting is fundamental to networking.</p>
 <h2>CIDR Notation</h2>
 <p>192.168.1.0/24 means 24 bits for network, 8 bits for hosts = 256 addresses (254 usable)</p>
@@ -421,6 +449,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '5 min',
     tags: ['Naming', 'Conventions', 'Code Style'],
     slug: 'case-conversion-guide',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Network infrastructure representing IP addressing and subnets',
     content: `<p>Different programming languages have different naming conventions.</p>
 <h2>Common Cases</h2>
 <table><tr><th>Case</th><th>Example</th><th>Used In</th></tr><tr><td>camelCase</td><td>userName</td><td>JavaScript, Java</td></tr><tr><td>PascalCase</td><td>UserName</td><td>Classes, React</td></tr><tr><td>snake_case</td><td>user_name</td><td>Python, Ruby</td></tr><tr><td>kebab-case</td><td>user-name</td><td>URLs, CSS</td></tr></table>
@@ -444,6 +474,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '7 min',
     tags: ['Cryptography', 'Hashing', 'Security'],
     slug: 'cryptographic-hashes-guide',
+    image: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Programming code showing text case formatting',
     content: `<p>Hash functions are the unsung heroes of cryptography.</p>
 <h2>What is a Hash Function?</h2>
 <p>A hash function takes any input and produces a fixed-size output. Key properties: deterministic, fast, one-way, collision-resistant.</p>
@@ -472,6 +504,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '6 min',
     tags: ['Markdown', 'Documentation', 'Writing'],
     slug: 'markdown-tips-tricks',
+    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Cryptographic hash visualization with binary code',
     content: `<p>Markdown has become the standard for technical documentation.</p>
 <h2>Essential Syntax</h2>
 <p># H1, ## H2, ### H3<br/>**bold**, *italic*, ~~strikethrough~~<br/>[link](url), ![image](src)</p>
@@ -497,6 +531,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '7 min',
     tags: ['Git', 'Version Control', 'Dev Tools'],
     slug: 'git-commands-cheat-sheet',
+    image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Markdown documentation on laptop screen',
     content: `<p>Git is essential for modern development.</p>
 <h2>Essential Commands</h2>
 <p>git init, git clone, git add, git commit, git push, git pull</p>
@@ -524,6 +560,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '5 min',
     tags: ['CSS', 'Colors', 'Design'],
     slug: 'color-formats-guide',
+    image: 'https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Git version control branching visualization',
     content: `<p>Colors are fundamental to web design.</p>
 <h2>HEX Colors</h2>
 <p>#RRGGBB format, most common in CSS</p>
@@ -549,6 +587,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '6 min',
     tags: ['Docker', 'DevOps', 'Containers'],
     slug: 'docker-run-to-compose',
+    image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Color palette representing HEX RGB HSL color formats',
     content: `<p>Docker compose is better than docker run for reproducible deployments.</p>
 <h2>Flag Mapping</h2>
 <table><tr><th>Docker Run</th><th>Compose</th></tr><tr><td>-p 80:80</td><td>ports: - "80:80"</td></tr><tr><td>-v /path:/path</td><td>volumes: - /path:/path</td></tr><tr><td>-e VAR=value</td><td>environment: VAR: value</td></tr></table>
@@ -572,6 +612,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '6 min',
     tags: ['Crypto', 'BIP39', 'Security'],
     slug: 'bip39-mnemonic-guide',
+    image: 'https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Docker container shipping representing containerization',
     content: `<p>BIP39 mnemonic phrases are the standard for cryptocurrency wallet backups.</p>
 <h2>How It Works</h2>
 <p>Generate entropy, add checksum, map to 2048-word list</p>
@@ -599,6 +641,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '5 min',
     tags: ['Security', 'Encryption', 'Encoding'],
     slug: 'encoding-vs-encryption',
+    image: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Cryptocurrency wallet seed words security concept',
     content: `<p>One of the most common security mistakes is treating encoding as encryption.</p>
 <h2>Encoding</h2>
 <p>Purpose: Data representation, compatibility. No key required. Always reversible. Examples: Base64, URL encoding.</p>
@@ -627,6 +671,8 @@ export const blogPosts: BlogPost[] = [
     readTime: '5 min',
     tags: ['Linux', 'Permissions', 'DevOps'],
     slug: 'unix-file-permissions',
+    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&q=80&auto=format&fit=crop',
+    imageAlt: 'Lock and key representing encryption vs encoding security',
     content: `<p>Unix file permissions control who can read, write, and execute files.</p>
 <h2>Permission Categories</h2>
 <ul><li><strong>User (u):</strong> File owner</li><li><strong>Group (g):</strong> File's group members</li><li><strong>Others (o):</strong> Everyone else</li></ul>
