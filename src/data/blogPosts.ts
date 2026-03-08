@@ -827,10 +827,11 @@ export const blogPosts: BlogPost[] = [
     readTime: '8 min',
     tags: ['AI Agents', 'Local AI', 'Infrastructure', 'Technology'],
     slug: 'when-ai-stops-feeling-like-software-and-starts-feeling-like-a-real-employee',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80&auto=format&fit=crop',
-    imageAlt: 'AI assistant integrated into workspace, representing AI as infrastructure rather than just software',
+    image: '/images/blog/ai-local-agent-banner.jpeg',
+    imageAlt: 'Clawdbot - Local AI Agent Platform',
     content: `<p>Most AI tools still feel like smarter search boxes. Helpful, fast and fundamentally contained.</p>
 <p>This didn't.</p>
+<img src="/images/blog/ai-local-agent-1.jpeg" alt="When AI starts feeling like a real employee" style="width: 100%; border-radius: 8px; margin: 1.5rem 0;" />
 <h2>The Hidden Limitation of Modern AI Tools</h2>
 <p>Modern AI is undeniably powerful, but it lives in carefully controlled places:</p>
 <ul><li>Browser tabs</li><li>Sandboxed APIs</li><li>Narrow, permission-based interfaces</li></ul>
@@ -840,6 +841,7 @@ export const blogPosts: BlogPost[] = [
 <h2>The Shift Isn't Smarter AI. It's Where AI Lives</h2>
 <p>What makes tools like Clawdbot interesting isn't intelligence.</p>
 <p><strong>It's location.</strong></p>
+<img src="/images/blog/ai-local-agent-2.jpeg" alt="Local AI agent architecture" style="width: 100%; border-radius: 8px; margin: 1.5rem 0;" />
 <p>A local AI agent runs:</p>
 <ul><li>On your own machine</li><li>Inside an environment you control</li><li>With access you explicitly grant</li></ul>
 <p>Not cloud-first. Not abstracted behind interfaces. Not limited to suggestion mode.</p>
@@ -857,6 +859,7 @@ export const blogPosts: BlogPost[] = [
 <p>No UI. No app-switching. No ceremony.</p>
 <p>That's when the abstraction collapses.</p>
 <p><strong>You stop "using" AI. You start assigning work.</strong></p>
+<img src="/images/blog/ai-local-agent-processing.jpg" alt="AI processing and infrastructure" style="width: 100%; border-radius: 8px; margin: 1.5rem 0;" />
 <h2>Setup Friction Is a Signal, Not a Flaw</h2>
 <p>Yes, local AI agents take effort to set up.</p>
 <p>You isolate environments. You install dependencies. You choose models and interfaces deliberately.</p>
