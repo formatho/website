@@ -612,12 +612,10 @@ const filteredTools = computed(() => {
 
           <!-- Description -->
           <p class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight">
-            The Privacy-First Developer Toolkit
+            The Infrastructure Hub for Web3 and AI Developers
           </p>
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            Fast, secure, privacy-first collection of 100+ developer utilities and content
-            productivity tools — built to solve everyday formatting, conversion, and debugging
-            problems directly in your browser.
+            EVM-compatible toolset with deterministic gas estimation, transaction simulation, and bytecode validation. Client-side execution eliminates RPC dependencies and ensures reproducible development workflows.
           </p>
 
           <!-- Feature Tags -->
@@ -625,22 +623,22 @@ const filteredTools = computed(() => {
             <span
               class="px-4 py-2 text-sm font-medium rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/15 transition-colors"
             >
-              No sign-up
+              Stateless computation model
             </span>
             <span
               class="px-4 py-2 text-sm font-medium rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/15 transition-colors"
             >
-              No uploads
+              Local execution guarantee
             </span>
             <span
               class="px-4 py-2 text-sm font-medium rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/15 transition-colors"
             >
-              No tracking
+              Cryptographic audit trail only
             </span>
             <span
               class="px-4 py-2 text-sm font-medium rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/15 transition-colors"
             >
-              100% Client-side
+              Deterministic output verification
             </span>
           </div>
 
