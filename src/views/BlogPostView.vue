@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
+import { useHead } from '@vueuse/head'
 import { Calendar, Clock, ArrowLeft, Tag, ExternalLink } from 'lucide-vue-next'
 import { blogPosts } from '../data/blogPosts'
 
@@ -60,6 +61,54 @@ const formatDate = (dateString: string) => {
     day: 'numeric'
   })
 }
+
+// SEO: Update meta tags for blog post
+const siteName = 'Formatho'
+const baseUrl = 'https://formatho.com/tools'
+
+// Use @vueuse/head for SEO meta tags
+useHead(computed(() => {
+  if (!post.value) {
+    return {
+      title: 'Article Not Found - Formatho',
+      meta: [
+        { name: 'description', content: 'The requested article could not be found.' }
+      ]
+    }
+  }
+
+  const fullTitle = `${post.value.title} - ${siteName}`
+  const url = `${baseUrl}/blogs/${post.value.slug}`
+  const image = post.value.image 
+    ? `${baseUrl}${post.value.image}` 
+    : `${baseUrl}/logo.png`
+
+  return {
+    title: fullTitle,
+    meta: [
+      { name: 'title', content: fullTitle },
+      { name: 'description', content: post.value.excerpt },
+      { name: 'keywords', content: post.value.tags.join(', ') },
+      { property: 'og:type', content: 'article' },
+      { property: 'og:url', content: url },
+      { property: 'og:title', content: fullTitle },
+      { property: 'og:description', content: post.value.excerpt },
+      { property: 'og:image', content: image },
+      { property: 'og:site_name', content: siteName },
+      { property: 'article:published_time', content: post.value.date },
+      { property: 'article:tag', content: post.value.tags.join(', ') },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:site', content: '@heyformatho' },
+      { name: 'twitter:url', content: url },
+      { name: 'twitter:title', content: fullTitle },
+      { name: 'twitter:description', content: post.value.excerpt },
+      { name: 'twitter:image', content: image }
+    ],
+    link: [
+      { rel: 'canonical', href: url }
+    ]
+  }
+}))
 </script>
 
 <template>

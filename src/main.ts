@@ -10,6 +10,14 @@ const siteName = 'Formatho'
 const defaultImage = `${baseUrl}/logo.png`
 const twitterHandle = '@heyformatho'
 
+// Types for route meta
+interface RouteMeta {
+  title?: string
+  description?: string
+  keywords?: string
+  image?: string
+}
+
 function updateOrCreateMeta(
   selector: string,
   attribute: string,
@@ -41,6 +49,66 @@ function updateOrCreateMeta(
   element.setAttribute(attribute, value)
 }
 
+/**
+ * Update meta tags for a route - works both during SSG build and client-side
+ */
+function updateMetaForRoute(path: string, meta: RouteMeta) {
+  const title = meta.title
+  const description = meta.description
+  const keywords = meta.keywords
+  const image = meta.image || defaultImage
+
+  // Build the full title
+  const fullTitle =
+    title && !title.includes(siteName)
+      ? `${title} - ${siteName}`
+      : title || `${siteName} - Privacy-First Developer Tools`
+
+  // Clean path for URLs
+  let cleanPath = path
+  if (cleanPath.endsWith('/') && cleanPath.length > 1) {
+    cleanPath = cleanPath.slice(0, -1)
+  }
+  const finalUrl = `${baseUrl}${cleanPath}`
+
+  // 1. Update Title
+  if (typeof document !== 'undefined') {
+    document.title = fullTitle
+  }
+
+  // 2. Update Primary Meta Tags
+  updateOrCreateMeta('meta[name="title"]', 'content', fullTitle)
+  if (description) {
+    updateOrCreateMeta('meta[name="description"]', 'content', description)
+  }
+  if (keywords) {
+    updateOrCreateMeta('meta[name="keywords"]', 'content', keywords)
+  }
+
+  // 3. Update Canonical URL
+  updateOrCreateMeta('link[rel="canonical"]', 'href', finalUrl, 'link')
+
+  // 4. Update Open Graph Tags
+  updateOrCreateMeta('meta[property="og:type"]', 'content', 'website')
+  updateOrCreateMeta('meta[property="og:url"]', 'content', finalUrl)
+  updateOrCreateMeta('meta[property="og:title"]', 'content', fullTitle)
+  if (description) {
+    updateOrCreateMeta('meta[property="og:description"]', 'content', description)
+  }
+  updateOrCreateMeta('meta[property="og:image"]', 'content', image)
+  updateOrCreateMeta('meta[property="og:site_name"]', 'content', siteName)
+
+  // 5. Update Twitter Card Tags
+  updateOrCreateMeta('meta[name="twitter:card"]', 'content', 'summary_large_image')
+  updateOrCreateMeta('meta[name="twitter:site"]', 'content', twitterHandle)
+  updateOrCreateMeta('meta[name="twitter:url"]', 'content', finalUrl)
+  updateOrCreateMeta('meta[name="twitter:title"]', 'content', fullTitle)
+  if (description) {
+    updateOrCreateMeta('meta[name="twitter:description"]', 'content', description)
+  }
+  updateOrCreateMeta('meta[name="twitter:image"]', 'content', image)
+}
+
 export const createApp = ViteSSG(
   App,
   {
@@ -48,60 +116,12 @@ export const createApp = ViteSSG(
     base: '/tools/'
   },
   ({ router }) => {
+    // Handle meta tags during SSG build and client navigation
     router.afterEach((to) => {
-      if (typeof document === 'undefined') return
-
-      const title = to.meta.title as string | undefined
-      const description = to.meta.description as string | undefined
-      const keywords = to.meta.keywords as string | undefined
-
-      // Build the full title
-      const fullTitle =
-        title && !title.includes(siteName)
-          ? `${title} - ${siteName}`
-          : title || `${siteName} - Privacy-First Developer Tools`
-
-      // Clean path for URLs
-      let cleanPath = to.path
-      if (cleanPath.endsWith('/') && cleanPath.length > 1) {
-        cleanPath = cleanPath.slice(0, -1)
+      const meta = to.meta as RouteMeta
+      if (meta && (meta.title || meta.description)) {
+        updateMetaForRoute(to.path, meta)
       }
-      const finalUrl = `${baseUrl}${cleanPath}`
-
-      // 1. Update Title
-      document.title = fullTitle
-
-      // 2. Update Primary Meta Tags
-      updateOrCreateMeta('meta[name="title"]', 'content', fullTitle)
-      if (description) {
-        updateOrCreateMeta('meta[name="description"]', 'content', description)
-      }
-      if (keywords) {
-        updateOrCreateMeta('meta[name="keywords"]', 'content', keywords)
-      }
-
-      // 3. Update Canonical URL
-      updateOrCreateMeta('link[rel="canonical"]', 'href', finalUrl, 'link')
-
-      // 4. Update Open Graph Tags
-      updateOrCreateMeta('meta[property="og:type"]', 'content', 'website')
-      updateOrCreateMeta('meta[property="og:url"]', 'content', finalUrl)
-      updateOrCreateMeta('meta[property="og:title"]', 'content', fullTitle)
-      if (description) {
-        updateOrCreateMeta('meta[property="og:description"]', 'content', description)
-      }
-      updateOrCreateMeta('meta[property="og:image"]', 'content', defaultImage)
-      updateOrCreateMeta('meta[property="og:site_name"]', 'content', siteName)
-
-      // 5. Update Twitter Card Tags
-      updateOrCreateMeta('meta[name="twitter:card"]', 'content', 'summary_large_image')
-      updateOrCreateMeta('meta[name="twitter:site"]', 'content', twitterHandle)
-      updateOrCreateMeta('meta[name="twitter:url"]', 'content', finalUrl)
-      updateOrCreateMeta('meta[name="twitter:title"]', 'content', fullTitle)
-      if (description) {
-        updateOrCreateMeta('meta[name="twitter:description"]', 'content', description)
-      }
-      updateOrCreateMeta('meta[name="twitter:image"]', 'content', defaultImage)
     })
   }
 )
