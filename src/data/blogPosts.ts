@@ -21,7 +21,7 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     id: 28,
-    title: "India's #1 Privacy-First Developer Toolkit — The 2026 Blueprint for Data Sovereignty",
+    title: "India's #1 Privacy-First Developer Toolkit — The 2026 Blueprint for Data Sovereignty by Nitin Gurbani",
     excerpt:
       "Discover how Formatho became India's leading privacy-first developer toolkit with 100+ tools that run entirely in your browser. Zero data uploads. 100% free. No sign-up ever.",
     date: '2026-03-09',
@@ -71,10 +71,10 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 29,
-    title: 'Generate UUIDs Without Internet Connection: The 2026 Masterclass',
+    title: 'Generate UUIDs Without Internet Connection: The 2026 Masterclass by Prateek Sabharwal',
     excerpt:
       'Learn why generating UUIDs offline is critical for security. Discover how client-side UUID generation protects your database primary keys from prediction attacks.',
-    date: '2026-03-10',
+    date: '2026-03-09',
     readTime: '7 min',
     tags: ['UUID', 'Security', 'Offline Tools', 'Databases'],
     slug: 'generate-uuids-without-internet-connection-2026',
@@ -118,9 +118,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 30,
-    title: 'Generate QR Codes Without Tracking Pixels: The Privacy-First Guide',
+    title: 'Generate QR Codes Without Tracking Pixels: The Privacy-First Guide by Nitin Gurbani',
     excerpt: 'Discover why most free QR generators track your users. Learn how client-side QR code generation protects user privacy and prevents data harvesting.',
-    date: '2026-03-11',
+    date: '2026-03-09',
     readTime: '7 min',
     tags: ['QR Codes', 'Privacy', 'Tracking', 'Security'],
     slug: 'generate-qr-codes-without-tracking-pixels',
@@ -154,9 +154,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 31,
-    title: 'Test Regex Patterns — No More Random Websites',
+    title: 'Test Regex Patterns — No More Random Websites by Prateek Sabharwal',
     excerpt: 'Learn why pasting production data into online regex testers is a security breach. Discover client-side regex testing that keeps your sample data private.',
-    date: '2026-03-12',
+    date: '2026-03-09',
     readTime: '7 min',
     tags: ['Regex', 'Security', 'Data Privacy', 'Testing'],
     slug: 'test-regex-patterns-securely-2026',
@@ -191,9 +191,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 32,
-    title: 'NEW: 100+ Developer Tools — All Free, All Private',
+    title: '100+ Developer Tools — All Free, All Private by Nitin Gurbani',
     excerpt: 'Discover Formatho\'s expanded toolkit with 100+ free developer tools. Every tool runs 100% locally in your browser. No server calls, no sign-ups, zero data tracking.',
-    date: '2026-03-13',
+    date: '2026-03-09',
     readTime: '7 min',
     tags: ['Developer Tools', 'Privacy', 'Free Tools', 'Formatho'],
     slug: '100-developer-tools-all-free-all-private',
@@ -230,9 +230,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 33,
-    title: 'Encode/Decode Base64 — Files Never Leave Your Browser',
+    title: 'Encode\/Decode Base64 — Files Never Leave Your Browser by Prateek Sabharwal',
     excerpt: 'Learn why Base64 is not encryption and why using online decoders for secrets is dangerous. Discover zero-trust, client-side Base64 encoding.',
-    date: '2026-03-14',
+    date: '2026-03-09',
     readTime: '7 min',
     tags: ['Base64', 'Encoding', 'Security', 'Kubernetes'],
     slug: 'encode-decode-base64-files-never-leave-browser',
@@ -270,9 +270,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 34,
-    title: 'Format SQL Queries Without Cloud Uploads',
+    title: 'Format SQL Queries Without Cloud Uploads by Nitin Gurbani',
     excerpt: 'Learn why pasting SQL queries into online formatters exposes your database schema. Discover client-side SQL formatting that keeps your queries private.',
-    date: '2026-03-15',
+    date: '2026-03-09',
     readTime: '7 min',
     tags: ['SQL', 'Database', 'Security', 'Privacy'],
     slug: 'format-sql-queries-without-cloud-uploads',
@@ -307,9 +307,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 35,
-    title: 'Decode JWT Tokens Without Server Exposure',
+    title: 'Decode JWT Tokens Without Server Exposure by Prateek Sabharwal',
     excerpt: 'Learn why pasting JWTs into online decoders exposes your authentication system. Discover client-side JWT decoding that keeps your tokens private.',
-    date: '2026-03-16',
+    date: '2026-03-09',
     readTime: '7 min',
     tags: ['JWT', 'Authentication', 'Security', 'API'],
     slug: 'decode-jwt-tokens-without-server-exposure',
@@ -348,9 +348,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 36,
-    title: 'Convert JSON to YAML in 1 Second — No Upload',
+    title: 'Convert JSON to YAML in 1 Second — No Upload by Nitin Gurbani',
     excerpt: 'Learn why converting JSON to YAML on cloud servers exposes your infrastructure configuration. Discover client-side conversion that keeps your configs private.',
-    date: '2026-03-17',
+    date: '2026-03-09',
     readTime: '7 min',
     tags: ['JSON', 'YAML', 'Configuration', 'Kubernetes'],
     slug: 'convert-json-to-yaml-no-upload',
@@ -390,9 +390,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 37,
-    title: 'Need Developer Tools That Don\'t Spy On You?',
+    title: 'Need Developer Tools That Don\'t Spy On You? by Prateek Sabharwal',
     excerpt: 'Discover why most free developer tools harvest your data. Learn about zero-trust, client-side development and the rise of privacy-first tools.',
-    date: '2026-03-18',
+    date: '2026-03-09',
     readTime: '7 min',
     tags: ['Privacy', 'Developer Tools', 'Security', 'Zero-Trust'],
     slug: 'developer-tools-that-dont-spy-on-you',
