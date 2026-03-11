@@ -10,7 +10,7 @@
     <div class="config-content">
       <!-- Loading State -->
       <div v-if="loading" class="loading-container">
-        <LoadingSpinner />
+        <div class="spinner"></div>
         <p>Loading configuration...</p>
       </div>
 
