@@ -83,6 +83,23 @@ useHead(computed(() => {
     ? `${baseUrl}${post.value.image}` 
     : `${baseUrl}/logo.png`
 
+  // JSON-LD Structured Data for Article Schema
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.value.title,
+    image: image,
+    datePublished: post.value.date,
+    dateModified: post.value.date,
+    author: {
+      '@type': 'Organization',
+      name: siteName
+    },
+    description: post.value.excerpt,
+    articleSection: post.value.tags[0] || 'Technology',
+    url: url
+  }
+
   return {
     title: fullTitle,
     meta: [
@@ -106,6 +123,12 @@ useHead(computed(() => {
     ],
     link: [
       { rel: 'canonical', href: url }
+    ],
+    script: [
+      {
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify(articleSchema)
+      }
     ]
   }
 }))
