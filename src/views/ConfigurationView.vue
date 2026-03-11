@@ -165,7 +165,11 @@
 
             <div class="form-group">
               <label class="checkbox-label">
-                <input type="checkbox" v-model="config.agent.logLevel === 'debug'" />
+                <input
+                  type="checkbox"
+                  :checked="config.agent.logLevel === 'debug'"
+                  @change="config.agent.logLevel = $event.target.checked ? 'debug' : 'info'"
+                />
                 Enable debug logging
               </label>
             </div>
