@@ -410,7 +410,7 @@ export const routes = [
       {
         path: 'agent-orchestrator/cron',
         name: 'cron-scheduler',
-        component: () => import('../views/CronSchedulerView.vue'),
+        component: () => import('../views/CrontabGeneratorView.vue'),
         meta: {
           title: 'Cron Scheduler - Agent Orchestrator | Formatho',
           description: 'Manage scheduled jobs and view run history.',
