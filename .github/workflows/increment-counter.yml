@@ -2,7 +2,6 @@ name: Increment Monthly Counter
 
 on:
   schedule:
-    # Run every 5 minutes (adjust to 3-7 minutes as needed)
     - cron: '*/5 * * * *'
   workflow_dispatch:
 
@@ -19,10 +18,7 @@ jobs:
           node-version: '20'
 
       - name: Run Counter Increment
-        run: |
-          cd scripts
-          node increment-counter.js
+        run: node scripts/increment-counter.js
 
       - name: Log Result
-        run: |
-          echo "Counter increment job completed at $(date)"
+        run: echo "Counter increment job completed at $(date)"
