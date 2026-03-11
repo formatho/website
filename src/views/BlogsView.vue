@@ -25,73 +25,74 @@ const formatDate = (dateString: string) => {
     </div>
 
     <!-- Blog Posts Grid -->
-    <div class="max-w-5xl mx-auto">
-      <div class="grid gap-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <article
           v-for="post in blogPosts"
           :key="post.id"
-          class="glass-card overflow-hidden hover:border-primary/50 transition-all group"
+          class="glass-card overflow-hidden hover:border-primary/50 transition-all group flex flex-col"
         >
-          <div class="flex flex-col md:flex-row">
-            <!-- Image -->
-            <div v-if="post.image" class="md:w-1/3 flex-shrink-0">
-              <RouterLink :to="`/blogs/${post.slug}`">
-                <img
-                  :src="post.image"
-                  :alt="post.imageAlt || post.title"
-                  class="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </RouterLink>
+          <!-- Image -->
+          <div v-if="post.image" class="aspect-video overflow-hidden">
+            <RouterLink :to="`/blogs/${post.slug}`">
+              <img
+                :src="post.image"
+                :alt="post.imageAlt || post.title"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </RouterLink>
+          </div>
+
+          <!-- Content -->
+          <div class="flex-1 p-6 flex flex-col">
+            <!-- Meta -->
+            <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-3">
+              <div class="flex items-center gap-1">
+                <Calendar class="w-4 h-4" />
+                {{ formatDate(post.date) }}
+              </div>
+              <div class="flex items-center gap-1">
+                <Clock class="w-4 h-4" />
+                {{ post.readTime }}
+              </div>
             </div>
 
-            <!-- Content -->
-            <div class="flex-1 p-6">
-              <!-- Meta -->
-              <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-3">
-                <div class="flex items-center gap-1">
-                  <Calendar class="w-4 h-4" />
-                  {{ formatDate(post.date) }}
-                </div>
-                <div class="flex items-center gap-1">
-                  <Clock class="w-4 h-4" />
-                  {{ post.readTime }}
-                </div>
-              </div>
+            <!-- Title -->
+            <RouterLink :to="`/blogs/${post.slug}`">
+              <h2 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                {{ post.title }}
+              </h2>
+            </RouterLink>
 
-              <!-- Title -->
-              <RouterLink :to="`/blogs/${post.slug}`">
-                <h2 class="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
-                  {{ post.title }}
-                </h2>
-              </RouterLink>
+            <!-- Excerpt -->
+            <p class="text-muted-foreground mb-4 leading-relaxed line-clamp-3 flex-1">
+              {{ post.excerpt }}
+            </p>
 
-              <!-- Excerpt -->
-              <p class="text-muted-foreground mb-4 leading-relaxed">
-                {{ post.excerpt }}
-              </p>
-
-              <!-- Tags -->
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span
-                  v-for="tag in post.tags"
-                  :key="tag"
-                  class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-primary/10 text-primary rounded-md"
-                >
-                  <Tag class="w-3 h-3" />
-                  {{ tag }}
-                </span>
-              </div>
-
-              <!-- Read More Link -->
-              <RouterLink
-                :to="`/blogs/${post.slug}`"
-                class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span
+                v-for="tag in post.tags.slice(0, 3)"
+                :key="tag"
+                class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-primary/10 text-primary rounded-md"
               >
-                Read More
-                <ArrowRight class="w-4 h-4" />
-              </RouterLink>
+                <Tag class="w-3 h-3" />
+                {{ tag }}
+              </span>
+              <span v-if="post.tags.length > 3" class="text-xs text-muted-foreground">
+                +{{ post.tags.length - 3 }}
+              </span>
             </div>
+
+            <!-- Read More Link -->
+            <RouterLink
+              :to="`/blogs/${post.slug}`"
+              class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors mt-auto"
+            >
+              Read More
+              <ArrowRight class="w-4 h-4" />
+            </RouterLink>
           </div>
         </article>
       </div>
