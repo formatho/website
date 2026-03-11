@@ -5,11 +5,6 @@
  *
  * This script should be run every 3-7 minutes to increment the monthly visitor counter.
  * It uses traffic-aware incrementing (morning = faster growth, night = slower growth).
- *
- * Setup:
- * 1. Add to crontab: */5 * * * * /path/to/node /path/to/increment-counter.js
- * 2. Or use a systemd timer
- * 3. Or use GitHub Actions scheduled workflow
  */
 
 const COUNTER_NAMESPACE = 'formatho.com'
