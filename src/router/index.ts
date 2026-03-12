@@ -427,6 +427,16 @@ export const routes = [
           keywords: 'settings, configuration, LLM config, API keys'
         }
       },
+      {
+        path: 'agent-orchestrator/analytics',
+        name: 'analytics-dashboard',
+        component: () => import('../views/AnalyticsDashboardView.vue'),
+        meta: {
+          title: 'Analytics Dashboard - Agent Orchestrator | Formatho (Pro)',
+          description: 'Advanced analytics dashboard for agent performance tracking, task completion trends, and team collaboration insights. Pro feature.',
+          keywords: 'analytics dashboard, agent performance, task analytics, export data, csv export, json export'
+        }
+      },
       // Crypto Tools
       {
         path: 'bcrypt',

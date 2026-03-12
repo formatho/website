@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { HeartbeatIcon, CpuIcon, ActivityIcon, ClockIcon, PlayCircleIcon, PauseCircleIcon, StopIcon, TerminalIcon } from 'lucide-vue-next'
+import { HeartbeatIcon, CpuIcon, ActivityIcon, ClockIcon, PlayCircleIcon, PauseCircleIcon, StopIcon, TerminalIcon, LayoutDashboard } from 'lucide-vue-next'
+import TeamInvitationModal from '@/components/TeamInvitationModal.vue'
 
 interface Agent {
   id: string
@@ -29,12 +30,21 @@ const activities = ref<ActivityItem[]>([])
 const socket = ref<WebSocket | null>(null)
 const isConnected = ref(false)
 
+// Team collaboration features (Pro)
+const isTeamModalOpen = ref(false)
+const organizationId = ref('org-123') // In production, this would come from auth/user context
+
 // Stats
 const totalAgents = ref(0)
 const runningAgents = ref(0)
 const totalTasksCompleted = ref(0)
 const avgCpuUsage = ref(0)
 const avgMemoryUsage = ref(0)
+
+// Analytics navigation handler
+const navigateToAnalytics = () => {
+  router.push('/agent-orchestrator/analytics')
+}
 
 const connectWebSocket = () => {
   const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
@@ -131,6 +141,12 @@ const navigateToAgentDetail = (agentId: string) => {
   router.push(`/agent-orchestrator/${agentId}`)
 }
 
+// Team collaboration handler (Pro Feature)
+const handleMemberAdded = (member: any) => {
+  console.log('New team member added:', member)
+  // In production, this would trigger a notification or refresh the team list
+}
+
 // Simulate data for demo purposes if no WebSocket connection
 const simulateData = () => {
   agents.value = [
@@ -177,17 +193,29 @@ onUnmounted(() => {
         <p class="text-gray-600 dark:text-gray-400 mt-1">Monitor and manage your AI agents in real-time</p>
       </div>
       
-      <!-- Connection Status -->
-      <div class="flex items-center gap-2">
-        <span 
-          :class="[
-            'w-3 h-3 rounded-full', 
-            isConnected ? 'bg-green-500' : 'bg-red-500'
-          ]"
-        ></span>
-        <span class="text-sm text-gray-600 dark:text-gray-400">
-          {{ isConnected ? 'Connected' : 'Disconnected' }}
-        </span>
+      <!-- Connection Status & Actions -->
+      <div class="flex items-center gap-3">
+        <!-- Analytics Dashboard Button -->
+        <button 
+          @click="navigateToAnalytics"
+          class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm font-medium transition-colors flex items-center gap-2"
+        >
+          <LayoutDashboard class="w-4 h-4" />
+          Analytics
+        </button>
+        
+        <!-- Connection Status -->
+        <div class="flex items-center gap-2 px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-md">
+          <span 
+            :class="[
+              'w-2.5 h-2.5 rounded-full', 
+              isConnected ? 'bg-green-500' : 'bg-red-500'
+            ]"
+          ></span>
+          <span class="text-sm text-gray-600 dark:text-gray-400">
+            {{ isConnected ? 'Connected' : 'Disconnected' }}
+          </span>
+        </div>
       </div>
     </div>
 
@@ -242,12 +270,20 @@ onUnmounted(() => {
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
       <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
         <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Active Agents</h2>
-        <button 
-          @click="simulateData"
-          class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm font-medium transition-colors"
-        >
-          Refresh Data
-        </button>
+        <div class="flex gap-2">
+          <button 
+            @click="isTeamModalOpen = true"
+            class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-md text-sm font-medium transition-colors flex items-center gap-2"
+          >
+            👥 Team Collaboration (Pro)
+          </button>
+          <button 
+            @click="simulateData"
+            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm font-medium transition-colors"
+          >
+            Refresh Data
+          </button>
+        </div>
       </div>
       
       <div class="overflow-x-auto">
@@ -339,6 +375,13 @@ onUnmounted(() => {
         <p class="text-gray-500 dark:text-gray-400">No activity recorded yet.</p>
       </div>
     </div>
+
+    <!-- Team Collaboration Modal (Pro Feature) -->
+    <TeamInvitationModal 
+      v-model:is-open="isTeamModalOpen"
+      :organization-id="organizationId"
+      @member-added="handleMemberAdded"
+    />
   </div>
 </template>
 

@@ -134,5 +134,26 @@ export const createApp = ViteSSG(
         updateMetaForRoute(to.path, meta)
       }
     })
+
+    // Initialize AOS (Animate On Scroll) on client side
+    if (isClient && typeof AOS !== 'undefined') {
+      // Configure AOS with bidirectional scrolling settings
+      AOS.init({
+        mirror: true,    // Enable reverse/bidirectional scroll animations
+        once: false,     // Allow elements to animate multiple times
+        duration: 600,   // Animation duration in milliseconds
+        offset: 120,     // Offset (in px) from the original trigger point
+        easing: 'ease-out-cubic', // Smooth easing function
+        delay: 0,        // Delay between animations (in ms)
+      })
+
+      // Refresh AOS on route changes to ensure animations trigger correctly
+      router.afterEach(() => {
+        // Small timeout to ensure DOM is updated
+        setTimeout(() => {
+          AOS.refresh()
+        }, 100)
+      })
+    }
   }
 )
