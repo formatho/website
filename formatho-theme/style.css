@@ -13,23 +13,24 @@ Tags: monochrome, minimal, clean, developer, blog, one-column, custom-logo, cust
 
 /* ============================================
    CSS Variables (Formatho Theme - Light Mode)
+   Standardized color system: White, Soft Greys, Blue Accents
    Matches: https://formatho.com/tools/
    ============================================ */
 :root {
   --formatho-bg: #ffffff;
-  --formatho-foreground: #1e293b;          /* Dark navy */
-  --formatho-primary: #00b4d8;             /* Light blue accent */
+  --formatho-foreground: #1e293b;          /* Dark navy text */
+  --formatho-primary: #06b6d4;             /* Blue accent - Cyan-500 */
   --formatho-primary-bg: #ffffff;
-  --formatho-secondary: #f1f5f9;
-  --formatho-muted: #f1f5f9;
-  --formatho-muted-text: #64748b;
-  --formatho-border: #e2e8f0;
-  --formatho-card: #ffffff;
+  --formatho-secondary: #f9fafb;           /* Soft grey - Slate-50 */
+  --formatho-muted: #f9fafb;               /* Soft grey surfaces */
+  --formatho-muted-text: #64748b;          /* Slate-500 */
+  --formatho-border: #e2e8f0;              /* Slate-200 */
+  --formatho-card: #f9fafb;                /* Soft grey for cards */
   --formatho-radius: 0.5rem;
-  --formatho-accent: #00b4d8;              /* Primary accent */
+  --formatho-accent: #06b6d4;              /* Blue accent - matches primary */
   --formatho-success: #22c55e;
-  --formatho-shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
-  --formatho-shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --formatho-shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.1);
+  --formatho-shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
 }
 
 /* Force light mode - remove dark mode support */
@@ -331,11 +332,12 @@ article.post {
   border: 1px solid var(--formatho-border);
   border-radius: var(--formatho-radius);
   padding: 2rem;
-  transition: box-shadow 0.2s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
 }
 
 article.post:hover {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .post-title {
@@ -784,7 +786,7 @@ pre code {
   position: relative;
   overflow: hidden;
   padding: 5rem 0;
-  background: linear-gradient(to bottom, rgba(0, 180, 216, 0.05), var(--formatho-bg));
+  background: linear-gradient(to bottom, rgba(6, 182, 212, 0.05), var(--formatho-bg));
   border-bottom: 1px solid rgba(226, 232, 240, 0.5);
 }
 
@@ -792,7 +794,7 @@ pre code {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300b4d8' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2306b6d4' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   opacity: 0.5;
 }
 
@@ -841,13 +843,13 @@ pre code {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--formatho-border);
   border-radius: var(--formatho-radius);
-  box-shadow: var(--formatho-shadow-sm);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
 }
 
 .glass-card:hover {
-  border-color: rgba(0, 180, 216, 0.5);
-  box-shadow: var(--formatho-shadow-md);
+  border-color: rgba(6, 182, 212, 0.5);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 /* Post Cards with Glass Effect */
@@ -869,14 +871,14 @@ article.post.glass-card:hover {
   font-size: 0.875rem;
   font-weight: 500;
   border-radius: 9999px;
-  background: rgba(0, 180, 216, 0.1);
+  background: rgba(6, 182, 212, 0.1);
   color: var(--formatho-primary);
-  border: 1px solid rgba(0, 180, 216, 0.2);
+  border: 1px solid rgba(6, 182, 212, 0.2);
   transition: all 0.2s ease;
 }
 
 .badge:hover {
-  background: rgba(0, 180, 216, 0.15);
+  background: rgba(6, 182, 212, 0.15);
 }
 
 .hero-badges {
