@@ -1,10 +1,42 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { Menu, X, Github, Search, ChevronDown } from 'lucide-vue-next'
 
 const isMobileMenuOpen = ref(false)
 const isToolsDropdownOpen = ref(false)
+const router = useRouter()
+
+// Available routes from router configuration
+const availableRoutes = new Set([
+  'json-lint', 'yaml-lint', 'json-yaml', 'base64', 'sql',
+  'case-converter', 'color-converter', 'integer-base-converter', 'temperature-converter', 'date-time-converter',
+  'evm-converter', 'keccak256', 'address-checksum', 'multi-chain-keys',
+  'uuid', 'token-generator', 'hash-text', 'qr-code-generator'
+])
+
+// Safe navigation handler with route validation
+const navigateToTool = (route: string, event?: Event) => {
+  if (event) {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+
+  // Check if route exists, if not, redirect to /tools directory
+  if (!availableRoutes.has(route)) {
+    console.warn(`Route not found: ${route}, redirecting to /tools`)
+    router.push('/tools')
+    return
+  }
+
+  // Navigate to the tool
+  router.push(route)
+}
+
+// Prevent dropdown from closing when clicking inside it
+const handleDropdownClick = (event: Event) => {
+  event.stopPropagation()
+}
 
 const categories = [
   {
@@ -93,6 +125,7 @@ const categories = [
 
             <!-- Dropdown Menu -->
             <div
+              @click="handleDropdownClick"
               class="absolute left-0 top-full pt-2 z-[51] opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 transform -translate-y-2 group-hover:translate-y-0"
             >
               <div
@@ -107,6 +140,7 @@ const categories = [
                       v-for="item in category.items"
                       :key="item.name"
                       :to="item.route"
+                      @click.native="(e: Event) => navigateToTool(item.route, e)"
                       class="block px-3 py-2 text-sm text-gray-700 hover:text-[#06b6d4] hover:bg-[#06b6d4]/5 rounded-md transition-all"
                     >
                       {{ item.name }}
@@ -193,7 +227,7 @@ const categories = [
             </button>
 
             <!-- Collapsible Tools Categories -->
-            <div v-show="isToolsDropdownOpen" class="space-y-3 mt-2">
+            <div v-show="isToolsDropdownOpen" @click="handleDropdownClick" class="space-y-3 mt-2">
               <div v-for="category in categories" :key="category.name" class="space-y-2">
                 <h3 class="text-xs font-semibold uppercase text-primary px-3">{{ category.name }}</h3>
                 <div class="space-y-1">
@@ -201,7 +235,7 @@ const categories = [
                     v-for="item in category.items"
                     :key="item.name"
                     :to="item.route"
-                    @click="isMobileMenuOpen = false; isToolsDropdownOpen = false"
+                    @click.native="(e: Event) => navigateToTool(item.route, e)"
                     class="block px-3 py-2 text-sm text-gray-700 hover:text-[#06b6d4] hover:bg-[#06b6d4]/5 rounded-md transition-all"
                   >
                     {{ item.name }}
