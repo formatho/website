@@ -4,6 +4,20 @@ import { useRoute, RouterLink } from 'vue-router'
 import { useHead } from '@vueuse/head'
 import { Calendar, Clock, ArrowLeft, Tag, ExternalLink } from 'lucide-vue-next'
 import { blogPosts } from '../data/blogPosts'
+import { onMounted } from 'vue'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+
+// Initialize AOS
+onMounted(() => {
+  AOS.init({
+    duration: 400,
+    easing: 'ease-out-cubic',
+    once: true,
+    mirror: true, // Critical: Enables reverse scroll animation
+    offset: 50,
+  })
+})
 
 // Define props - slug can come from route params or from props (for static routes)
 const props = defineProps<{
@@ -13,12 +27,12 @@ const props = defineProps<{
 const route = useRoute()
 
 // Get slug from multiple sources (in order of priority):
-// 1. Props (for static routes with explicit props)
-// 2. Route params (for dynamic routes with :slug)
-// 3. Route name (for static routes named 'blog-post-{slug}')
-// 4. URL path parsing (fallback for SSR)
+//1. Props (for static routes with explicit props)
+//2. Route params (for dynamic routes with :slug)
+//3. Route name (for static routes named 'blog-post-{slug}')
+//4. URL path parsing (fallback for SSR)
 const slug = computed(() => {
-  // 1. Check route meta.slug (set by static routes)
+  //1. Check route meta.slug (set by static routes)
   if (route.meta?.slug) return route.meta.slug as string
 
   // 2. Props (for static routes with explicit props)
@@ -151,7 +165,7 @@ useHead(computed(() => {
       <p class="text-muted-foreground mb-8">The article you're looking for doesn't exist.</p>
       <RouterLink
         to="/blogs"
-        class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+        class="btn-primary px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
       >
         Browse all articles
       </RouterLink>
@@ -160,7 +174,11 @@ useHead(computed(() => {
     <!-- Article Content -->
     <article v-else class="max-w-4xl mx-auto">
       <!-- Header -->
-      <header class="mb-8">
+      <header
+        class="mb-8"
+        data-aos="fade-up"
+        data-aos-duration="400"
+      >
         <!-- Meta -->
         <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
           <div class="flex items-center gap-1">
@@ -190,7 +208,13 @@ useHead(computed(() => {
       </header>
 
       <!-- Featured Image -->
-      <div v-if="post.image" class="mb-8 rounded-xl overflow-hidden">
+      <div
+        v-if="post.image"
+        class="mb-8 rounded-xl overflow-hidden"
+        data-aos="fade-up"
+        data-aos-duration="400"
+        data-aos-delay="100"
+      >
         <img
           :src="post.image"
           :alt="post.imageAlt || post.title"
@@ -203,17 +227,28 @@ useHead(computed(() => {
       </div>
 
       <!-- Article Body -->
-      <div class="prose prose-lg max-w-none dark:prose-invert">
+      <div
+        class="prose prose-lg max-w-none dark:prose-invert"
+        data-aos="fade-up"
+        data-aos-duration="400"
+        data-aos-delay="200"
+      >
         <div v-html="post.content"></div>
       </div>
 
       <!-- CTA Section -->
-      <div v-if="post.cta" class="mt-12 p-6 glass-card border-primary/30 bg-primary/5">
+      <div
+        v-if="post.cta"
+        class="mt-12 p-6 glass-card border-primary/30 bg-primary/5"
+        data-aos="fade-up"
+        data-aos-duration="400"
+        data-aos-delay="300"
+      >
         <h3 class="text-xl font-bold mb-3">{{ post.cta.title }}</h3>
         <p class="text-muted-foreground mb-4">{{ post.cta.description }}</p>
         <RouterLink
           :to="post.cta.link"
-          class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium"
+          class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium"
         >
           {{ post.cta.buttonText }}
           <ExternalLink class="w-4 h-4" />
@@ -221,14 +256,23 @@ useHead(computed(() => {
       </div>
 
       <!-- Related Tools -->
-      <div v-if="post.relatedTools && post.relatedTools.length > 0" class="mt-12">
+      <div
+        v-if="post.relatedTools && post.relatedTools.length > 0"
+        class="mt-12"
+        data-aos="fade-up"
+        data-aos-duration="400"
+        data-aos-delay="400"
+      >
         <h3 class="text-2xl font-bold mb-6">Related Tools</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <RouterLink
-            v-for="tool in post.relatedTools"
+            v-for="(tool, index) in post.relatedTools"
             :key="tool.link"
             :to="tool.link"
             class="p-4 glass-card hover:border-primary/50 transition-all group"
+            data-aos="fade-up"
+            data-aos-duration="400"
+            :data-aos-delay="400 + (index * 50)"
           >
             <h4 class="font-semibold group-hover:text-primary transition-colors">
               {{ tool.name }}
@@ -241,6 +285,9 @@ useHead(computed(() => {
       <!-- Share & Navigation -->
       <div
         class="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+        data-aos="fade-up"
+        data-aos-duration="400"
+        data-aos-delay="500"
       >
         <RouterLink
           to="/blogs"
@@ -295,5 +342,14 @@ useHead(computed(() => {
 }
 .prose :deep(th) {
   @apply bg-muted font-semibold;
+}
+
+/* Mobile: Ensure Related Tools grid stacks on mobile */
+@media (max-width: 768px) {
+  .prose :deep(.grid) {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
 }
 </style>

@@ -2,6 +2,20 @@
 import { RouterLink } from 'vue-router'
 import { Calendar, Clock, ArrowRight, Tag } from 'lucide-vue-next'
 import { blogPosts } from '../data/blogPosts'
+import { onMounted } from 'vue'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+
+// Initialize AOS
+onMounted(() => {
+  AOS.init({
+    duration: 400,
+    easing: 'ease-out-cubic',
+    once: true,
+    mirror: true, // Critical: Enables reverse scroll animation
+    offset: 50,
+  })
+})
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString)
@@ -16,7 +30,11 @@ const formatDate = (dateString: string) => {
 <template>
   <div class="container mx-auto px-4 py-12">
     <!-- Header -->
-    <div class="text-center mb-12">
+    <div
+      class="text-center mb-12"
+      data-aos="fade-up"
+      data-aos-duration="400"
+    >
       <h1 class="text-4xl font-bold mb-4">Blog</h1>
       <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
         Developer guides, tutorials, and insights from the Formatho team
@@ -28,13 +46,16 @@ const formatDate = (dateString: string) => {
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <article
-          v-for="post in blogPosts"
+          v-for="(post, index) in blogPosts"
           :key="post.id"
-          class="glass-card overflow-hidden hover:border-primary/50 transition-all group flex flex-col"
+          class="glass-card-scale overflow-hidden hover:border-primary/50 transition-all group flex flex-col"
+          data-aos="fade-up"
+          data-aos-duration="400"
+          :data-aos-delay="(index % 3) * 50"
         >
           <!-- Image -->
           <div v-if="post.image" class="aspect-video overflow-hidden">
-            <RouterLink :to="`/blogs/${post.slug}`">
+            <RouterLink :to="`/blogs/${post.slug}`" class="icon-wrapper w-full h-full">
               <img
                 :src="post.image"
                 :alt="post.imageAlt || post.title"
@@ -88,7 +109,7 @@ const formatDate = (dateString: string) => {
             <!-- Read More Link -->
             <RouterLink
               :to="`/blogs/${post.slug}`"
-              class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors mt-auto"
+              class="btn-primary inline-flex items-center gap-2 text-sm font-medium mt-auto"
             >
               Read More
               <ArrowRight class="w-4 h-4" />
@@ -105,7 +126,11 @@ const formatDate = (dateString: string) => {
 
     <!-- Newsletter Signup -->
     <div class="max-w-2xl mx-auto mt-16">
-      <div class="glass-card p-8 text-center">
+      <div
+        class="glass-card p-8 text-center"
+        data-aos="fade-up"
+        data-aos-duration="400"
+      >
         <h3 class="text-2xl font-bold mb-2">Stay Updated</h3>
         <p class="text-muted-foreground mb-6">
           Get notified when we publish new articles and updates.
@@ -117,7 +142,7 @@ const formatDate = (dateString: string) => {
             class="flex-1 px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
           />
           <button
-            class="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium"
+            class="btn-primary px-6 py-2 rounded-lg font-medium"
           >
             Subscribe
           </button>
