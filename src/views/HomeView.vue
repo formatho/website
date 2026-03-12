@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { Input } from '@/components/ui/input'
-import formathoIcons from '/Users/studio/.openclaw/workspace-chotu/assets/icons/formatho-icons.json'
+import formathoIcons from '@/assets/formatho-icons.json'
 
 // Initialize AOS
 onMounted(() => {
