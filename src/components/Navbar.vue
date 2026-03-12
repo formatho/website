@@ -10,39 +10,39 @@ const categories = [
   {
     name: 'Data Tools',
     items: [
-      { name: 'JSON Lint', route: '/json-lint' },
-      { name: 'YAML Linter', route: '/yaml-lint' },
-      { name: 'JSON to YAML', route: '/json-yaml' },
-      { name: 'Base64', route: '/base64' },
-      { name: 'SQL Formatter', route: '/sql' }
+      { name: 'JSON Lint', route: 'json-lint' },
+      { name: 'YAML Linter', route: 'yaml-lint' },
+      { name: 'JSON to YAML', route: 'json-yaml' },
+      { name: 'Base64', route: 'base64' },
+      { name: 'SQL Formatter', route: 'sql' }
     ]
   },
   {
     name: 'Converters',
     items: [
-      { name: 'Case Converter', route: '/case-converter' },
-      { name: 'Color Converter', route: '/color-converter' },
-      { name: 'Integer Base', route: '/integer-base-converter' },
-      { name: 'Temperature', route: '/temperature-converter' },
-      { name: 'Date-Time', route: '/date-time-converter' }
+      { name: 'Case Converter', route: 'case-converter' },
+      { name: 'Color Converter', route: 'color-converter' },
+      { name: 'Integer Base', route: 'integer-base-converter' },
+      { name: 'Temperature', route: 'temperature-converter' },
+      { name: 'Date-Time', route: 'date-time-converter' }
     ]
   },
   {
     name: 'EVM Tools',
     items: [
-      { name: 'Unit Converter', route: '/evm-converter' },
-      { name: 'Keccak-256', route: '/keccak256' },
-      { name: 'Checksum', route: '/address-checksum' },
-      { name: 'Multi-Chain Keys', route: '/multi-chain-keys' }
+      { name: 'Unit Converter', route: 'evm-converter' },
+      { name: 'Keccak-256', route: 'keccak256' },
+      { name: 'Checksum', route: 'address-checksum' },
+      { name: 'Multi-Chain Keys', route: 'multi-chain-keys' }
     ]
   },
   {
     name: 'Generators',
     items: [
-      { name: 'UUID', route: '/uuid' },
-      { name: 'Token Generator', route: '/token-generator' },
-      { name: 'Hash Text', route: '/hash-text' },
-      { name: 'QR Code', route: '/qr-code-generator' }
+      { name: 'UUID', route: 'uuid' },
+      { name: 'Token Generator', route: 'token-generator' },
+      { name: 'Hash Text', route: 'hash-text' },
+      { name: 'QR Code', route: 'qr-code-generator' }
     ]
   }
 ]
