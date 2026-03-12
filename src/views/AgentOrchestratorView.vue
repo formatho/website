@@ -24,14 +24,14 @@ const coreFeatures = [
     icon: LayoutDashboard,
     title: 'Desktop App (Electron)',
     description:
-      'Native desktop application with beautiful dark theme UI. Manage agents visually - no command line required. Works on macOS, Windows, and Linux.',
+      'Native desktop application with premium light theme UI. Manage agents visually - no command line required. Works on macOS, Windows, and Linux.',
     status: 'Complete'
   },
   {
     icon: Bot,
     title: 'Agent Pool Management',
     description:
-      'Run multiple agents concurrently with resource limits. Create, pause, resume, and kill agents from the dashboard. Full CRUD operations.',
+      'Run multiple agents concurrently with resource limits. Create, pause, resume, and kill agents from dashboard. Full CRUD operations.',
     status: 'Complete'
   },
   {
@@ -288,85 +288,99 @@ const downloads = [
       <div class="text-center mb-8">
         <h2 class="text-3xl font-bold tracking-tight mb-4">Desktop Application</h2>
         <p class="text-muted-foreground max-w-2xl mx-auto">
-          Manage AI agents from a beautiful native desktop UI with dark theme. No terminal needed -
+          Manage AI agents from a beautiful native desktop UI with premium light theme. No terminal needed -
           everything is visual and intuitive.
         </p>
       </div>
 
       <!-- Mock UI Preview -->
       <div class="max-w-4xl mx-auto">
-        <Card class="overflow-hidden border-2">
-          <div class="bg-slate-900 p-2 flex items-center gap-2 border-b border-slate-700">
+        <Card class="overflow-hidden" style="border: 1px solid #d1d5db; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);">
+          <!-- App Header -->
+          <div class="bg-white p-2 flex items-center gap-2" style="border-bottom: 1px solid #e5e7eb;">
             <div class="w-3 h-3 rounded-full bg-red-500"></div>
             <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
             <div class="w-3 h-3 rounded-full bg-green-500"></div>
-            <span class="ml-4 text-sm text-slate-400">Agent Orchestrator</span>
+            <span class="ml-4 text-sm font-medium" style="color: #64748b;">Agent Orchestrator</span>
           </div>
-          <div class="grid grid-cols-4 min-h-[300px] bg-slate-950">
+
+          <div class="grid grid-cols-4 min-h-[300px]" style="background-color: #f9fafb;">
             <!-- Sidebar -->
-            <div class="bg-slate-900 border-r border-slate-700 p-4 space-y-2">
-              <div class="text-sm font-medium text-slate-500 mb-4">Navigation</div>
-              <div class="flex items-center gap-2 p-2 bg-blue-500/20 rounded text-sm text-blue-400">
-                <Bot class="h-4 w-4" /> Agents
+            <div class="p-4 space-y-2" style="background-color: #ffffff; border-right: 1px solid #e5e7eb;">
+              <div class="text-sm font-medium mb-4" style="color: #1e293b;">Navigation</div>
+
+              <div class="flex items-center gap-2 p-2 rounded" style="background-color: rgb(6, 182, 212, 0.1);">
+                <Bot class="h-4 w-4" style="color: #06b6d4;" />
+                <span class="text-sm font-medium" style="color: #06b6d4;">Agents</span>
               </div>
-              <div
-                class="flex items-center gap-2 p-2 hover:bg-slate-800 rounded text-sm text-slate-400"
-              >
-                <ListTodo class="h-4 w-4" /> TODOs
+
+              <div class="flex items-center gap-2 p-2 rounded hover:shadow-md transition-shadow">
+                <ListTodo class="h-4 w-4" style="color: #64748b;" />
+                <span class="text-sm font-medium" style="color: #1e293b;">TODOs</span>
               </div>
-              <div
-                class="flex items-center gap-2 p-2 hover:bg-slate-800 rounded text-sm text-slate-400"
-              >
-                <Calendar class="h-4 w-4" /> Schedule
+
+              <div class="flex items-center gap-2 p-2 rounded hover:shadow-md transition-shadow">
+                <Calendar class="h-4 w-4" style="color: #64748b;" />
+                <span class="text-sm font-medium" style="color: #1e293b;">Schedule</span>
               </div>
-              <div
-                class="flex items-center gap-2 p-2 hover:bg-slate-800 rounded text-sm text-slate-400"
-              >
-                <Settings class="h-4 w-4" /> Settings
+
+              <div class="flex items-center gap-2 p-2 rounded hover:shadow-md transition-shadow">
+                <Settings class="h-4 w-4" style="color: #64748b;" />
+                <span class="text-sm font-medium" style="color: #1e293b;">Settings</span>
               </div>
             </div>
+
             <!-- Main Content -->
             <div class="col-span-3 p-6">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="font-semibold text-white">Active Agents</h3>
-                <Button size="sm" class="bg-blue-600 hover:bg-blue-700">+ New Agent</Button>
+                <h3 class="font-semibold" style="color: #1e293b;">Active Agents</h3>
+                <Button size="sm" style="background-color: #06b6d4; color: white;">+ New Agent</Button>
               </div>
+
               <div class="space-y-3">
+                <!-- Agent Card 1 -->
                 <div
-                  class="flex items-center gap-3 p-3 bg-slate-900 rounded border border-slate-800"
+                  class="flex items-center gap-3 p-3 rounded border"
+                  style="background-color: #ffffff; border-color: #e2e8f0; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);"
                 >
-                  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <div class="w-2 h-2 rounded-full" style="background-color: #22c55e;"></div>
                   <div class="flex-1">
-                    <div class="font-medium text-sm text-white">daily-report</div>
-                    <div class="text-xs text-slate-400">Generates sales report at 9am daily</div>
+                    <div class="font-medium text-sm" style="color: #1e293b;">daily-report</div>
+                    <div class="text-xs" style="color: #64748b;">Generates sales report at 9am daily</div>
                   </div>
-                  <Badge variant="outline" class="text-xs border-green-500 text-green-400"
-                    >Running</Badge
-                  >
+                  <Badge variant="outline" class="text-xs" style="border-color: #22c55e; color: #22c55e;">
+                    Running
+                  </Badge>
                 </div>
+
+                <!-- Agent Card 2 -->
                 <div
-                  class="flex items-center gap-3 p-3 bg-slate-900 rounded border border-slate-800"
+                  class="flex items-center gap-3 p-3 rounded border"
+                  style="background-color: #ffffff; border-color: #e2e8f0; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);"
                 >
-                  <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <div class="w-2 h-2 rounded-full" style="background-color: #eab308;"></div>
                   <div class="flex-1">
-                    <div class="font-medium text-sm text-white">code-reviewer</div>
-                    <div class="text-xs text-slate-400">Reviews PRs on GitHub</div>
+                    <div class="font-medium text-sm" style="color: #1e293b;">code-reviewer</div>
+                    <div class="text-xs" style="color: #64748b;">Reviews PRs on GitHub</div>
                   </div>
-                  <Badge variant="outline" class="text-xs border-yellow-500 text-yellow-400"
-                    >Idle</Badge
-                  >
+                  <Badge variant="outline" class="text-xs" style="border-color: #eab308; color: #eab308;">
+                    Idle
+                  </Badge>
                 </div>
+
+                <!-- Agent Card 3 -->
                 <div
-                  class="flex items-center gap-3 p-3 bg-slate-900 rounded border border-slate-800"
+                  class="flex items-center gap-3 p-3 rounded border"
+                  style="background-color: #ffffff; border-color: #e2e8f0; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);"
                 >
-                  <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <div class="w-2 h-2 rounded-full" style="background-color: #06b6d4;"></div>
                   <div class="flex-1">
-                    <div class="font-medium text-sm text-white">email-summarizer</div>
-                    <div class="text-xs text-slate-400">Summarizes inbox every morning</div>
+                    <div class="font-medium text-sm" style="color: #1e293b;">email-summarizer</div>
+                    <div class="text-xs" style="color: #64748b;">Summarizes inbox every morning</div>
                   </div>
-                  <Badge variant="outline" class="text-xs border-blue-500 text-blue-400"
-                    >Scheduled</Badge
-                  >
+                  <Badge variant="outline" class="text-xs" style="border-color: #06b6d4; color: #06b6d4;">
+                    Scheduled
+                  </Badge>
                 </div>
               </div>
             </div>
@@ -445,7 +459,7 @@ const downloads = [
                     ? 'default'
                     : feature.status === 'Core'
                       ? 'secondary'
-                      : 'outline'
+                        : 'outline'
                 "
                 :class="feature.status === 'Complete' ? 'bg-green-600 hover:bg-green-700' : ''"
                 class="text-xs"
@@ -565,3 +579,13 @@ const downloads = [
     </section>
   </div>
 </template>
+
+<style scoped>
+.transition-shadow {
+  transition: box-shadow 0.2s ease;
+}
+
+.hover\:shadow-md:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+</style>
