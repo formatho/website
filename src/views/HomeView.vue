@@ -1,21 +1,10 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
 import { Input } from '@/components/ui/input'
 import formathoIcons from '@/assets/formatho-icons.json'
 
-// Initialize AOS
-onMounted(() => {
-  AOS.init({
-    duration: 400,
-    easing: 'ease-out-cubic',
-    once: true,
-    mirror: true, // Enables reverse scroll animations
-    offset: 50,
-  })
-})
+// Note: AOS is initialized globally in main.ts to avoid conflicts
 
 const searchQuery = ref('')
 

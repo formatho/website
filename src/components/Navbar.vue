@@ -10,39 +10,39 @@ const categories = [
   {
     name: 'Data Tools',
     items: [
-      { name: 'JSON Lint', route: 'json-lint' },
-      { name: 'YAML Linter', route: 'yaml-lint' },
-      { name: 'JSON to YAML', route: 'json-yaml' },
-      { name: 'Base64', route: 'base64' },
-      { name: 'SQL Formatter', route: 'sql' }
+      { name: 'JSON Lint', route: '/tools/json-lint' },
+      { name: 'YAML Linter', route: '/tools/yaml-lint' },
+      { name: 'JSON to YAML', route: '/tools/json-yaml' },
+      { name: 'Base64', route: '/tools/base64' },
+      { name: 'SQL Formatter', route: '/tools/sql' }
     ]
   },
   {
     name: 'Converters',
     items: [
-      { name: 'Case Converter', route: 'case-converter' },
-      { name: 'Color Converter', route: 'color-converter' },
-      { name: 'Integer Base', route: 'integer-base-converter' },
-      { name: 'Temperature', route: 'temperature-converter' },
-      { name: 'Date-Time', route: 'date-time-converter' }
+      { name: 'Case Converter', route: '/tools/case-converter' },
+      { name: 'Color Converter', route: '/tools/color-converter' },
+      { name: 'Integer Base', route: '/tools/integer-base-converter' },
+      { name: 'Temperature', route: '/tools/temperature-converter' },
+      { name: 'Date-Time', route: '/tools/date-time-converter' }
     ]
   },
   {
     name: 'EVM Tools',
     items: [
-      { name: 'Unit Converter', route: 'evm-converter' },
-      { name: 'Keccak-256', route: 'keccak256' },
-      { name: 'Checksum', route: 'address-checksum' },
-      { name: 'Multi-Chain Keys', route: 'multi-chain-keys' }
+      { name: 'Unit Converter', route: '/tools/evm-converter' },
+      { name: 'Keccak-256', route: '/tools/keccak256' },
+      { name: 'Checksum', route: '/tools/address-checksum' },
+      { name: 'Multi-Chain Keys', route: '/tools/multi-chain-keys' }
     ]
   },
   {
     name: 'Generators',
     items: [
-      { name: 'UUID', route: 'uuid' },
-      { name: 'Token Generator', route: 'token-generator' },
-      { name: 'Hash Text', route: 'hash-text' },
-      { name: 'QR Code', route: 'qr-code-generator' }
+      { name: 'UUID', route: '/tools/uuid' },
+      { name: 'Token Generator', route: '/tools/token-generator' },
+      { name: 'Hash Text', route: '/tools/hash-text' },
+      { name: 'QR Code', route: '/tools/qr-code-generator' }
     ]
   }
 ]
@@ -81,9 +81,9 @@ const categories = [
           </RouterLink>
 
           <!-- Tools Dropdown -->
-          <div class="relative group">
+          <div class="relative group pointer-events-auto">
             <button
-              class="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+              class="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2 pointer-events-auto"
               @mouseenter="isToolsDropdownOpen = true"
               @mouseleave="isToolsDropdownOpen = false"
             >
@@ -93,7 +93,8 @@ const categories = [
 
             <!-- Dropdown Menu -->
             <div
-              class="absolute left-0 top-full pt-2 z-[50] opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 transform -translate-y-2 group-hover:translate-y-0"
+              class="absolute left-0 top-full pt-2 z-[9999] opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 transform -translate-y-2 group-hover:translate-y-0"
+              data-aos="no-animation"
             >
               <div
                 class="bg-white border border-[#E5E7EB] shadow-lg rounded-lg min-w-[600px] p-6 grid grid-cols-2 gap-6"
@@ -183,10 +184,10 @@ const categories = [
           </RouterLink>
 
           <!-- Mobile Tools Dropdown (Click-triggered) -->
-          <div class="space-y-2">
+          <div class="space-y-2 pointer-events-auto">
             <button
               @click="isToolsDropdownOpen = !isToolsDropdownOpen"
-              class="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-all"
+              class="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-all pointer-events-auto"
             >
               <span>Tools</span>
               <ChevronDown :class="['w-4 h-4 transition-transform', isToolsDropdownOpen ? 'rotate-180' : '']" />

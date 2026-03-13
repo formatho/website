@@ -227,6 +227,26 @@
   [data-aos="fade-left"] {
     transition-duration: 0.4s;
   }
+
+  /* Fix 8: Ensure dropdowns are not affected by overflow settings */
+  nav [data-aos="no-animation"] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* Fix 9: Ensure dropdown containers have proper z-index and pointer events */
+  .group\:hover\:pointer-events-auto {
+    pointer-events: auto !important;
+  }
+
+  /* Fix 10: Prevent AOS from interfering with interactive elements */
+  button,
+  a,
+  .pointer-events-auto,
+  [data-aos="no-animation"] {
+    pointer-events: auto !important;
+  }
 }
 
 /* Glassmorphism effect */

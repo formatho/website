@@ -144,10 +144,12 @@ export const createApp = ViteSSG(
           AOS.init({
             mirror: true,    // Enable reverse/bidirectional scroll animations
             once: false,     // Allow elements to animate multiple times
-            duration: 500,   // Animation duration in milliseconds
-            offset: 100,     // Offset (in px) from the original trigger point
+            duration: 400,   // Animation duration in milliseconds
+            offset: 50,     // Offset (in px) from the original trigger point
             easing: 'ease-out-cubic', // Smooth easing function
             delay: 0,        // Delay between animations (in ms)
+            disableMutationObserver: true, // Prevent AOS from interfering with dynamic elements
+            startEvent: 'DOMContentLoaded', // Initialize on DOMContentLoaded
           })
 
           console.log('✅ AOS initialized with bidirectional scrolling')
