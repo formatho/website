@@ -137,51 +137,8 @@ export const createApp = ViteSSG(
       }
     })
 
-    // Initialize AOS (Animate On Scroll) on client side
-    if (isClient) {
-      // Wait for AOS to load from CDN before initializing
-      const initializeAOS = () => {
-        if (typeof AOS !== 'undefined') {
-          // Configure AOS with bidirectional scrolling settings
-          // MUST use exact configuration to ensure bidirectional physics
-          AOS.init({
-            once: false,     // Allow elements to animate multiple times
-            mirror: true,    // Enable reverse/bidirectional scroll animations
-            offset: 50,     // Offset (in px) from the original trigger point
-            duration: 400    // Animation duration in milliseconds
-          })
-
-          console.log('✅ AOS initialized with bidirectional scrolling')
-        }
-      }
-
-      // Try to initialize immediately (if script already loaded)
-      initializeAOS()
-
-      // If not loaded yet, wait for the script
-      if (typeof AOS === 'undefined') {
-        window.addEventListener('load', initializeAOS)
-        // Also try after a short delay as a fallback
-        setTimeout(initializeAOS, 100)
-      }
-
-      // Refresh AOS on route changes - but debounce to prevent scroll freezing
-      let refreshTimeout: number | null = null
-      router.afterEach((to, from) => {
-        // Only refresh if it's a different route (not just hash changes)
-        if (to.path !== from.path) {
-          // Clear previous timeout to prevent multiple refreshes
-          if (refreshTimeout) {
-            clearTimeout(refreshTimeout)
-          }
-          // Debounce AOS refresh to prevent scroll freezing
-          refreshTimeout = setTimeout(() => {
-            if (typeof AOS !== 'undefined') {
-              AOS.refresh()
-            }
-          }, 150) // Increased from 100ms to 150ms for better debouncing
-        }
-      })
-    }
+    // AOS initialization moved to App.vue onMounted hook
+    // This ensures Vue virtual DOM has painted data-aos elements before AOS.init()
+    // SPA refresh is handled in App.vue via router.afterEach()
   }
 )
