@@ -2,6 +2,8 @@ import './polyfill'
 
 import { ViteSSG } from 'vite-ssg'
 import './style.css'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 import App from './App.vue'
 import { routes } from './router'
 
@@ -141,21 +143,12 @@ export const createApp = ViteSSG(
       const initializeAOS = () => {
         if (typeof AOS !== 'undefined') {
           // Configure AOS with bidirectional scrolling settings
-          // CODE RED FIX: Ensure elements animate in and don't stay hidden
+          // MUST use exact configuration to ensure bidirectional physics
           AOS.init({
-            mirror: true,    // Enable reverse/bidirectional scroll animations
             once: false,     // Allow elements to animate multiple times
-            duration: 400,   // Animation duration in milliseconds
+            mirror: true,    // Enable reverse/bidirectional scroll animations
             offset: 50,     // Offset (in px) from the original trigger point
-            easing: 'ease-out-cubic', // Smooth easing function
-            delay: 0,        // Delay between animations (in ms)
-            disableMutationObserver: true, // Prevent AOS from interfering with dynamic elements
-            startEvent: 'DOMContentLoaded', // Initialize on DOMContentLoaded
-            throttleDelay: 99, // Optimize scroll event throttling for better performance
-            debounceDelay: 50, // Optimize resize event debouncing
-            // CRITICAL FIX: Ensure elements are visible after animation
-            animatedClassName: 'aos-animate', // Use custom class
-            initClassName: 'aos-init', // Initial state before animation
+            duration: 400    // Animation duration in milliseconds
           })
 
           console.log('✅ AOS initialized with bidirectional scrolling')
