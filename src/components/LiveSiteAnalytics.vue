@@ -12,7 +12,7 @@ const { monthlyVisitors, isLoading: _counterLoading } = useMonthlyCounter()
 // LIVE USER SIMULATION (Client-side only, as requested)
 // ============================================
 const LIVE_USER_UPDATE_INTERVAL = 3000 // Update live users every 3 seconds
-const liveUsers = ref(1)
+const liveUsers = ref(12)
 let liveUserInterval: number | undefined
 
 // Format number with commas
@@ -20,16 +20,16 @@ const formatNumber = (num: number): string => {
   return num.toLocaleString('en-US')
 }
 
-// Simulate live users (1-15, fluctuating every 3 seconds as per requirements)
+// Simulate live users (8-24, fluctuating every 3 seconds as per requirements)
 const updateLiveUsers = () => {
-  // Random fluctuation: +/- 1-5 users, staying within 1-15 range
-  const change = Math.floor(Math.random() * 11) - 5 // -5 to +5
-  liveUsers.value = Math.max(1, Math.min(15, liveUsers.value + change))
+  // Random fluctuation: +/- 1-3 users, staying within 8-24 range
+  const change = Math.floor(Math.random() * 7) - 3 // -3 to +3
+  liveUsers.value = Math.max(8, Math.min(24, liveUsers.value + change))
 }
 
 onMounted(() => {
-  // Initialize live users (1-15 as per requirements)
-  liveUsers.value = Math.floor(Math.random() * 15) + 1
+  // Initialize live users (8-24 as per requirements)
+  liveUsers.value = Math.floor(Math.random() * 17) + 8 // 8-24
 
   // Start live user simulation
   liveUserInterval = window.setInterval(updateLiveUsers, LIVE_USER_UPDATE_INTERVAL)
