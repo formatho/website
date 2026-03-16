@@ -186,11 +186,14 @@ export const tools = [
         name: 'JSON Diff',
         description: 'Compare two JSON objects and see differences.',
         route: '/json-diff'
-      }
-    ]
-  },
-  {
-    category: 'Images & Media',
+      },
+      {
+        name: 'URL Parser',
+        description: 'Parse URLs into components and safely encode/decode query strings.',
+        route: '/url-parser'
+      },
+      {
+        name: 'User Agent Parser',
     items: [
       {
         name: 'QR Code Generator',
