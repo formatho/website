@@ -1001,6 +1001,15 @@ export const routes = [
         meta: { title: 'Hash Text', description: 'Generate MD5, SHA-1, SHA-256, SHA-512 hashes.' }
       },
       {
+        path: 'xml-json',
+        name: 'xml-json',
+        component: () => import('../views/tools/XmlJsonConverter.vue'),
+        meta: {
+          title: 'XML ↔ JSON Converter',
+          description: 'Bi-directional XML to JSON converter with real-time conversion and clipboard support. 100% client-side, zero server API calls.'
+        }
+      },
+      {
         path: 'ulid-generator',
         name: 'ulid-generator',
         component: () => import('../views/ULIDGeneratorView.vue'),
