@@ -2,9 +2,11 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Menu, X, Github, Search, ChevronDown } from 'lucide-vue-next'
+import GlobalSearchModal from './GlobalSearchModal.vue'
 
 const isMobileMenuOpen = ref(false)
 const isToolsDropdownOpen = ref(false)
+const isSearchModalOpen = ref(false)
 const toolsDropdownRef = ref<HTMLElement | null>(null)
 
 // Close the Tools dropdown
@@ -15,6 +17,29 @@ const closeToolsDropdown = () => {
 // Toggle the Tools dropdown (for mobile)
 const toggleToolsDropdown = () => {
   isToolsDropdownOpen.value = !isToolsDropdownOpen.value
+}
+
+// Toggle search modal
+const toggleSearchModal = () => {
+  isSearchModalOpen.value = !isSearchModalOpen.value
+}
+
+// Open search modal
+const openSearchModal = () => {
+  isSearchModalOpen.value = true
+}
+
+// Close search modal
+const closeSearchModal = () => {
+  isSearchModalOpen.value = false
+}
+
+// Handle global keyboard shortcut (Cmd+K / Ctrl+K)
+const handleGlobalKeydown = (e: KeyboardEvent) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault()
+    toggleSearchModal()
+  }
 }
 
 // Close dropdown when clicking outside
@@ -32,11 +57,15 @@ const handleToolLinkClick = () => {
 onMounted(() => {
   // Add click outside listener
   document.addEventListener('click', handleClickOutside)
+  // Add global keyboard shortcut listener
+  window.addEventListener('keydown', handleGlobalKeydown)
 })
 
 onUnmounted(() => {
   // Remove click outside listener
   document.removeEventListener('click', handleClickOutside)
+  // Remove global keyboard shortcut listener
+  window.removeEventListener('keydown', handleGlobalKeydown)
 })
 
 const categories = [
@@ -175,8 +204,8 @@ const categories = [
 
         <!-- Search & Mobile Menu Button -->
         <div class="flex items-center gap-3">
-          <RouterLink
-            to="/"
+          <button
+            @click="openSearchModal"
             class="hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground nav-hover-sweep border border-border rounded-lg transition-all"
           >
             <Search class="w-4 h-4" />
@@ -184,7 +213,7 @@ const categories = [
             <kbd class="hidden lg:inline-block ml-auto px-2 py-0.5 text-xs bg-muted rounded"
               >⌘K</kbd
             >
-          </RouterLink>
+          </button>
 
           <!-- Mobile Menu Button -->
           <button
@@ -272,4 +301,7 @@ const categories = [
       </div>
     </div>
   </nav>
+
+  <!-- Global Search Modal -->
+  <GlobalSearchModal :is-open="isSearchModalOpen" @close="closeSearchModal" />
 </template>
