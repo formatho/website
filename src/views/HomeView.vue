@@ -1,10 +1,20 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-vue-next'
-import formathoIcons from '@/assets/formatho-icons.json'
 import { tools } from '../data/tools'
+
+const formathoIcons = ref<any>(null)
+
+onMounted(async () => {
+  try {
+    const response = await fetch('/formatho-icons.json')
+    formathoIcons.value = await response.json()
+  } catch (error) {
+    console.error('Failed to load formatho-icons:', error)
+  }
+})
 
 // Note: AOS is initialized globally in main.ts to avoid conflicts
 
@@ -278,9 +288,14 @@ const filteredTools = computed(() => {
                       data-v-8d4ed633=""
                     >
                       <span
+                        v-if="formathoIcons"
                         class="w-6 h-6 text-gray-900"
                         v-html="formathoIcons.icons[toolIconMap[tool.name] || 'generators']?.svg || ''"
                       ></span>
+                      <span
+                        v-else
+                        class="w-6 h-6 text-gray-900 flex items-center justify-center"
+                      >Loading...</span>
                     </div>
                   </div>
 

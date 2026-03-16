@@ -1,6 +1,17 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
-import formathoIcons from '@/assets/formatho-icons.json'
+
+const formathoIcons = ref<any>(null)
+
+onMounted(async () => {
+  try {
+    const response = await fetch('/formatho-icons.json')
+    formathoIcons.value = await response.json()
+  } catch (error) {
+    console.error('Failed to load formatho-icons:', error)
+  }
+})
 
 // Note: AOS is initialized globally in main.ts to prevent scroll freezing conflicts
 </script>
@@ -87,9 +98,14 @@ import formathoIcons from '@/assets/formatho-icons.json'
             <div class="glass-card p-12 max-w-sm text-center">
               <div class="mb-3 flex justify-center">
                 <span
+                  v-if="formathoIcons"
                   class="text-gray-900"
-                  v-html="formathoIcons.icons['privacy-shield'].svg"
+                  v-html="formathoIcons.icons['privacy-shield']?.svg"
                 />
+                <span
+                  v-else
+                  class="text-gray-900 flex items-center justify-center"
+                >Loading...</span>
               </div>
               <h3 class="text-gray-900">Privacy Shield</h3>
               <p class="text-lg text-muted-foreground">
@@ -115,9 +131,14 @@ import formathoIcons from '@/assets/formatho-icons.json'
             <div class="glass-card p-12 max-w-sm text-center">
               <div class="mb-3 flex justify-center">
                 <span
+                  v-if="formathoIcons"
                   class="text-gray-900"
-                  v-html="formathoIcons.icons['no-log-globe'].svg"
+                  v-html="formathoIcons.icons['no-log-globe']?.svg"
                 />
+                <span
+                  v-else
+                  class="text-gray-900 flex items-center justify-center"
+                >Loading...</span>
               </div>
               <h3 class="text-gray-900">No-Log Globe</h3>
               <p class="text-lg text-muted-foreground">
@@ -216,9 +237,14 @@ import formathoIcons from '@/assets/formatho-icons.json'
             <div class="glass-card p-12 max-w-sm text-center">
               <div class="mb-3 flex justify-center">
                 <span
+                  v-if="formathoIcons"
                   class="text-gray-900"
-                  v-html="formathoIcons.icons['client-side-chip'].svg"
+                  v-html="formathoIcons.icons['client-side-chip']?.svg"
                 />
+                <span
+                  v-else
+                  class="text-gray-900 flex items-center justify-center"
+                >Loading...</span>
               </div>
               <h3 class="text-gray-900">Client-Side Chip</h3>
               <p class="text-lg text-muted-foreground">
@@ -250,9 +276,14 @@ import formathoIcons from '@/assets/formatho-icons.json'
           >
             <div class="mb-6 flex justify-center">
               <span
+                v-if="formathoIcons"
                 class="text-gray-900"
-                v-html="formathoIcons.icons['privacy-shield'].svg"
+                v-html="formathoIcons.icons['privacy-shield']?.svg"
               />
+              <span
+                v-else
+                class="text-gray-900 flex items-center justify-center"
+              >Loading...</span>
             </div>
             <h3 class="text-gray-900">Privacy First</h3>
             <p class="text-muted-foreground leading-relaxed">
@@ -269,9 +300,14 @@ import formathoIcons from '@/assets/formatho-icons.json'
           >
             <div class="mb-6 flex justify-center">
               <span
+                v-if="formathoIcons"
                 class="text-gray-900"
-                v-html="formathoIcons.icons['no-log-globe'].svg"
+                v-html="formathoIcons.icons['no-log-globe']?.svg"
               />
+              <span
+                v-else
+                class="text-gray-900 flex items-center justify-center"
+              >Loading...</span>
             </div>
             <h3 class="text-gray-900">Zero Tracking</h3>
             <p class="text-muted-foreground leading-relaxed">
@@ -288,9 +324,14 @@ import formathoIcons from '@/assets/formatho-icons.json'
           >
             <div class="mb-6 flex justify-center">
               <span
+                v-if="formathoIcons"
                 class="text-gray-900"
-                v-html="formathoIcons.icons['client-side-chip'].svg"
+                v-html="formathoIcons.icons['client-side-chip']?.svg"
               />
+              <span
+                v-else
+                class="text-gray-900 flex items-center justify-center"
+              >Loading...</span>
             </div>
             <h3 class="text-gray-900">Client-Side Only</h3>
             <p class="text-muted-foreground leading-relaxed">
