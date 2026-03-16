@@ -548,7 +548,7 @@ const tools = [
       {
         name: 'Agent Identity Generator',
         description: 'Instantly generate unique personas, traits, and system prompts for AI agents.',
-        route: '/tools/agent-identity-generator'
+        route: '/agent-identity-generator'
       },
       {
         name: 'Local Token Counter',
