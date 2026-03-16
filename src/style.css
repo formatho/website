@@ -213,21 +213,42 @@
     background-color: rgb(6, 182, 212) !important;
   }
 
-  /* Fix 6: Link Hover Effects */
+  /* Fix 6: Link Hover Effects - Premium Sweeping Underline */
   a,
   RouterLink,
   .nav-link {
-    transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
     cursor: pointer;
   }
 
+  /* Premium sweeping underline for navigation links */
+  .nav-hover-sweep {
+    position: relative;
+  }
+
+  .nav-hover-sweep::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+  }
+
+  .nav-hover-sweep:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  /* Default nav link color on hover */
   a:hover,
   RouterLink:hover,
   .nav-link:hover {
     color: rgb(6, 182, 212) !important;
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 2px;
   }
 
   /* Fix 7: AOS Reverse Scroll Animation */
@@ -377,29 +398,30 @@
   .glass-card {
     @apply glass rounded-lg;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 
   .glass-card:hover {
-    border-color: hsl(var(--primary) / 0.5);
+    transform: translateY(-4px);
+    border-color: hsl(var(--primary) / 0.6);
     box-shadow:
-      0 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      0 20px 25px -5px rgba(0, 0, 0, 0.15),
+      0 10px 10px -5px rgba(0, 0, 0, 0.08);
   }
 
   /* Glass card with scale hover for premium feel */
   .glass-card-scale {
     @apply glass rounded-lg;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 
   .glass-card-scale:hover {
-    transform: scale(1.02);
+    transform: scale(1.02) translateY(-4px);
+    border-color: hsl(var(--primary) / 0.6);
     box-shadow:
-      0 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    border-color: hsl(var(--primary) / 0.5);
+      0 20px 25px -5px rgba(0, 0, 0, 0.15),
+      0 10px 10px -5px rgba(0, 0, 0, 0.08);
   }
 
   /* Button styling for blog and sub-pages */
@@ -416,12 +438,15 @@
   .blog-card {
     @apply glass-card;
     @apply overflow-hidden;
-    @apply transition-all duration-300;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 
   .blog-card:hover {
-    @apply border-primary/50;
+    border-color: hsl(var(--primary) / 0.6);
     transform: translateY(-4px);
+    box-shadow:
+      0 20px 25px -5px rgba(0, 0, 0, 0.15),
+      0 10px 10px -5px rgba(0, 0, 0, 0.08);
   }
 
   /* Icon container for consistent centering */

@@ -716,7 +716,7 @@ const filteredTools = computed(() => {
               class="group"
             >
               <div
-                class="glass-card h-full p-6 cursor-pointer transition-all duration-300"
+                class="glass-card h-full p-6 cursor-pointer"
                 data-aos="fade-up"
                 :data-aos-delay="(toolIndex % 4) * 50"
               >
@@ -724,7 +724,7 @@ const filteredTools = computed(() => {
                   <!-- Icon with SVG from formatho-icons.json -->
                   <div class="mb-4">
                     <div
-                      class="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-all w-fit"
+                      class="p-3 rounded-xl bg-primary/10 transition-all w-fit"
                     >
                       <span
                         class="w-6 h-6 text-primary"
@@ -736,7 +736,7 @@ const filteredTools = computed(() => {
                   <!-- Content -->
                   <div class="flex-1">
                     <h3
-                      class="text-lg font-semibold mb-2 group-hover:text-primary transition-colors"
+                      class="text-lg font-semibold mb-2 transition-colors"
                     >
                       {{ tool.name }}
                     </h3>

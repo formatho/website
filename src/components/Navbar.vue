@@ -100,7 +100,7 @@ const categories = [
           <!-- Home Link -->
           <RouterLink
             to="/"
-            class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            class="text-sm font-medium text-muted-foreground nav-hover-sweep transition-colors"
           >
             Home
           </RouterLink>
@@ -108,7 +108,7 @@ const categories = [
           <!-- About Us Link -->
           <RouterLink
             to="/about"
-            class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            class="text-sm font-medium text-muted-foreground nav-hover-sweep transition-colors"
           >
             About Us
           </RouterLink>
@@ -116,7 +116,7 @@ const categories = [
           <!-- Tools Dropdown (Desktop) -->
           <div class="relative pointer-events-auto" ref="toolsDropdownRef">
             <button
-              class="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2 pointer-events-auto"
+              class="flex items-center gap-1 text-sm font-medium text-muted-foreground nav-hover-sweep transition-colors py-2 pointer-events-auto"
               @click="isToolsDropdownOpen = !isToolsDropdownOpen"
             >
               Tools
@@ -143,7 +143,7 @@ const categories = [
                       :key="item.name"
                       :to="item.route"
                       @click="handleToolLinkClick"
-                      class="block px-3 py-2 text-sm text-gray-700 hover:text-[#06b6d4] hover:bg-[#06b6d4]/5 rounded-md transition-all"
+                      class="block px-3 py-2 text-sm text-gray-700 hover:text-[#06b6d4] rounded-md transition-all"
                     >
                       {{ item.name }}
                     </RouterLink>
@@ -158,7 +158,7 @@ const categories = [
             href="https://github.com/nnn-gif/tools"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            class="flex items-center gap-2 text-sm font-medium text-muted-foreground nav-hover-sweep transition-colors"
           >
             <Github class="w-4 h-4" />
             GitHub
@@ -167,7 +167,7 @@ const categories = [
           <!-- Blogs Link -->
           <RouterLink
             to="/blogs"
-            class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            class="text-sm font-medium text-muted-foreground nav-hover-sweep transition-colors"
           >
             Blogs
           </RouterLink>
@@ -177,7 +177,7 @@ const categories = [
         <div class="flex items-center gap-3">
           <RouterLink
             to="/"
-            class="hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground border border-border rounded-lg hover:border-primary/50 transition-all"
+            class="hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground nav-hover-sweep border border-border rounded-lg transition-all"
           >
             <Search class="w-4 h-4" />
             <span>Search...</span>
@@ -189,7 +189,7 @@ const categories = [
           <!-- Mobile Menu Button -->
           <button
             @click="isMobileMenuOpen = !isMobileMenuOpen"
-            class="md:hidden p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
+            class="md:hidden p-2 text-muted-foreground nav-hover-sweep transition-colors"
           >
             <Menu v-if="!isMobileMenuOpen" class="w-5 h-5" />
             <X v-else class="w-5 h-5" />
@@ -204,7 +204,7 @@ const categories = [
           <RouterLink
             to="/"
             @click="isMobileMenuOpen = false"
-            class="block px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-all"
+            class="block px-3 py-2 text-sm font-medium text-muted-foreground nav-hover-sweep transition-colors"
           >
             Home
           </RouterLink>
@@ -213,7 +213,7 @@ const categories = [
           <RouterLink
             to="/about"
             @click="isMobileMenuOpen = false"
-            class="block px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-all"
+            class="block px-3 py-2 text-sm font-medium text-muted-foreground nav-hover-sweep transition-colors"
           >
             About Us
           </RouterLink>
@@ -222,7 +222,7 @@ const categories = [
           <div class="space-y-2 pointer-events-auto">
             <button
               @click="toggleToolsDropdown"
-              class="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-all pointer-events-auto"
+              class="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-muted-foreground nav-hover-sweep transition-colors pointer-events-auto"
             >
               <span>Tools</span>
               <ChevronDown :class="['w-4 h-4 transition-transform', isToolsDropdownOpen ? 'rotate-180' : '']" />
@@ -238,7 +238,7 @@ const categories = [
                     :key="item.name"
                     :to="item.route"
                     @click="handleToolLinkClick"
-                    class="block px-3 py-2 text-sm text-gray-700 hover:text-[#06b6d4] hover:bg-[#06b6d4]/5 rounded-md transition-all"
+                    class="block px-3 py-2 text-sm text-gray-700 hover:text-[#06b6d4] rounded-md transition-all"
                   >
                     {{ item.name }}
                   </RouterLink>
@@ -253,7 +253,7 @@ const categories = [
               href="https://github.com/nnn-gif/tools"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-all"
+              class="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground nav-hover-sweep transition-colors"
             >
               <Github class="w-4 h-4" />
               GitHub
@@ -263,7 +263,7 @@ const categories = [
             <RouterLink
               to="/blogs"
               @click="isMobileMenuOpen = false"
-              class="block px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-all"
+              class="block px-3 py-2 text-sm font-medium text-muted-foreground nav-hover-sweep transition-colors"
             >
               Blogs
             </RouterLink>
