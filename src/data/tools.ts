@@ -194,6 +194,13 @@ export const tools = [
       },
       {
         name: 'User Agent Parser',
+        description: 'Parse and analyze user agent strings.',
+        route: '/user-agent-parser'
+      }
+    ]
+  },
+  {
+    category: 'Images & Media',
     items: [
       {
         name: 'QR Code Generator',

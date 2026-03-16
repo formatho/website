@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
 
@@ -185,6 +185,13 @@ const copyOutput = async () => {
     error.value = 'Failed to copy to clipboard'
   }
 }
+
+// Placeholder computed
+const inputPlaceholder = computed(() => {
+  return direction.value === 'xml-to-json'
+    ? '<?xml version="1.0"?><root><item>Example</item></root>'
+    : '{ "root": { "item": "Example" } }'
+})
 </script>
 
 <template>
@@ -230,11 +237,7 @@ const copyOutput = async () => {
           </label>
           <Textarea
             v-model="input"
-            :placeholder="
-              direction === 'xml-to-json'
-                ? '<?xml version="1.0"?><root><item>Example</item></root>'
-                : '{ "root": { "item": "Example" } }'
-            "
+            :placeholder="inputPlaceholder"
             class="font-mono text-sm min-h-[200px]"
           />
         </div>

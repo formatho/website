@@ -1,11 +1,46 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { Link, Copy, Check, ExternalLink } from 'lucide-vue-next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
 const urlInput = ref('')
 const copied = ref<string | null>(null)
+
+// Encode/Decode utility
+const rawText = ref('')
+const encodedText = ref('')
+const isEncoding = ref(true) // true = raw to encoded, false = encoded to raw
+
+// Watch rawText for changes (encoding)
+watch(rawText, (newValue) => {
+  if (isEncoding.value) {
+    try {
+      encodedText.value = encodeURIComponent(newValue)
+    } catch {
+      encodedText.value = ''
+    }
+  }
+})
+
+// Watch encodedText for changes (decoding)
+watch(encodedText, (newValue) => {
+  if (!isEncoding.value) {
+    try {
+      rawText.value = decodeURIComponent(newValue)
+    } catch {
+      rawText.value = ''
+    }
+  }
+})
+
+const handleRawInput = () => {
+  isEncoding.value = true
+}
+
+const handleEncodedInput = () => {
+  isEncoding.value = false
+}
 
 const parsedUrl = computed(() => {
   if (!urlInput.value) return null
@@ -185,6 +220,72 @@ const copyParam = (value: string, key: string) => {
         <Link class="w-16 h-16 mx-auto mb-4 opacity-50" />
         <p>Enter a URL above to parse its components</p>
       </div>
+
+      <!-- Encode/Decode Utility Section -->
+      <Card class="mt-8">
+        <CardHeader>
+          <CardTitle>URL Encode/Decode Utility</CardTitle>
+          <CardDescription>
+            Convert text to URL-encoded format and vice versa
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Raw Text -->
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <label class="text-sm font-medium">Raw Text</label>
+                <Button
+                  @click="navigator.clipboard.writeText(rawText)"
+                  variant="ghost"
+                  size="sm"
+                  :disabled="!rawText"
+                  class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)]"
+                >
+                  <Copy class="w-4 h-4" />
+                </Button>
+              </div>
+              <textarea
+                v-model="rawText"
+                @input="handleRawInput"
+                placeholder="Enter raw text to encode..."
+                class="w-full min-h-[200px] px-3 py-2 border border-gray-200 rounded-lg font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+              />
+            </div>
+
+            <!-- Encoded Text -->
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <label class="text-sm font-medium">URL-Encoded Text</label>
+                <Button
+                  @click="navigator.clipboard.writeText(encodedText)"
+                  variant="ghost"
+                  size="sm"
+                  :disabled="!encodedText"
+                  class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)]"
+                >
+                  <Copy class="w-4 h-4" />
+                </Button>
+              </div>
+              <textarea
+                v-model="encodedText"
+                @input="handleEncodedInput"
+                placeholder="Enter encoded text to decode..."
+                class="w-full min-h-[200px] px-3 py-2 border border-gray-200 rounded-lg font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+              />
+            </div>
+          </div>
+
+          <div class="mt-4 p-3 bg-surface-hover rounded-lg border border-gray-200">
+            <p class="text-xs text-muted-foreground">
+              <strong>Tip:</strong> Type in either field to automatically convert. Raw text uses
+              <code class="px-1 py-0.5 bg-gray-100 rounded">encodeURIComponent()</code> and encoded
+              text uses
+              <code class="px-1 py-0.5 bg-gray-100 rounded">decodeURIComponent()</code>
+            </p>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   </div>
 </template>
