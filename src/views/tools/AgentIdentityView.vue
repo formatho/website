@@ -164,10 +164,10 @@ const copySystemPrompt = async () => {
       <div class="glass-card p-6 border-2 border-primary/30">
         <div class="flex items-center gap-3 mb-6">
           <div class="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center">
-            <Bot class="h-6 w-6 text-primary" />
+            <Bot class="text-gray-900" />
           </div>
           <div>
-            <h2 class="text-2xl font-bold text-primary">{{ generatedAgent.name }}</h2>
+            <h2 class="text-gray-900">{{ generatedAgent.name }}</h2>
             <p class="text-sm text-muted-foreground">{{ generatedAgent.role }}</p>
           </div>
         </div>
@@ -215,7 +215,7 @@ const copySystemPrompt = async () => {
     <!-- Empty State -->
     <div v-else class="flex-1 flex items-center justify-center">
       <div class="glass-card p-12 max-w-md text-center">
-        <Bot class="h-16 w-16 text-primary/50 mx-auto mb-4" />
+        <Bot class="text-gray-900" />
         <h3 class="text-xl font-bold mb-2">Ready to Generate</h3>
         <p class="text-sm text-muted-foreground">
           Click "Initialize New Agent" to create a unique AI persona with custom traits, capabilities, and system prompts.

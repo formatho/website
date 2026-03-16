@@ -67,7 +67,7 @@ const clearText = () => {
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <!-- Token Count (Primary Metric) -->
       <div class="glass-card p-6 text-center border-2 border-primary/30">
-        <div class="text-4xl font-bold text-primary mb-2">
+        <div class="text-gray-900">
           {{ tokenCount.toLocaleString() }}
         </div>
         <div class="text-sm font-medium text-muted-foreground uppercase tracking-wider">

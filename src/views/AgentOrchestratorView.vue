@@ -203,7 +203,7 @@ const downloads = [
           <!-- Logo & Title -->
           <div class="flex items-center gap-4">
             <div class="p-3 rounded-xl bg-primary/10">
-              <Bot class="h-12 w-12 text-primary" />
+              <Bot class="text-gray-900" />
             </div>
             <div class="text-left">
               <h1 class="text-4xl md:text-5xl font-bold tracking-tight">Agent Orchestrator</h1>
@@ -277,7 +277,7 @@ const downloads = [
     <section class="container mx-auto px-6 py-8 bg-muted/30 border-b">
       <div class="grid grid-cols-2 md:grid-cols-6 gap-4 max-w-4xl mx-auto">
         <div v-for="stat in stats" :key="stat.label" class="text-center p-4">
-          <div class="text-2xl md:text-3xl font-bold text-primary">{{ stat.value }}</div>
+          <div class="text-gray-900">{{ stat.value }}</div>
           <div class="text-xs md:text-sm text-muted-foreground">{{ stat.label }}</div>
         </div>
       </div>
@@ -449,7 +449,7 @@ const downloads = [
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <div class="p-2 rounded-lg bg-primary/10">
-                  <component :is="feature.icon" class="h-5 w-5 text-primary" />
+                  <component :is="feature.icon" class="text-gray-900" />
                 </div>
                 <CardTitle class="text-lg">{{ feature.title }}</CardTitle>
               </div>
@@ -490,7 +490,7 @@ const downloads = [
           :key="skill.name"
           class="p-4 border rounded-lg hover:border-primary/50 transition-colors"
         >
-          <div class="font-mono text-sm text-primary mb-1">{{ skill.name }}</div>
+          <div class="text-gray-900">{{ skill.name }}</div>
           <div class="text-xs text-muted-foreground">{{ skill.description }}</div>
         </div>
       </div>
@@ -517,7 +517,7 @@ const downloads = [
           <Card class="h-full hover:border-primary/50 transition-colors cursor-pointer">
             <CardHeader class="pb-2">
               <div class="flex items-center justify-between mb-2">
-                <CardTitle class="text-base group-hover:text-primary transition-colors font-mono">
+                <CardTitle class="text-base group-hover:text-gray-900 transition-colors font-mono">
                   {{ lib.name }}
                 </CardTitle>
                 <Badge variant="default" class="text-xs bg-green-600 hover:bg-green-700">

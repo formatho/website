@@ -71,7 +71,7 @@ import { RouterLink } from 'vue-router'
               href="https://policies.google.com/privacy"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-primary hover:underline"
+              class="text-gray-900"
               >Google's Privacy Policy</a
             >.
           </p>
@@ -83,7 +83,7 @@ import { RouterLink } from 'vue-router'
               href="https://www.google.com/settings/ads"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-primary hover:underline"
+              class="text-gray-900"
               >Google Ads Settings</a
             >.
           </p>
@@ -125,9 +125,9 @@ import { RouterLink } from 'vue-router'
           <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
           <p class="text-muted-foreground leading-relaxed">
             If you have any questions about this Privacy Policy, please contact us through our
-            <RouterLink to="/contact" class="text-primary hover:underline">Contact page</RouterLink>
+            <RouterLink to="/contact" class="text-gray-900">Contact page</RouterLink>
             or visit our
-            <RouterLink to="/about" class="text-primary hover:underline">About page</RouterLink> for
+            <RouterLink to="/about" class="text-gray-900">About page</RouterLink> for
             more information.
           </p>
         </section>
@@ -137,13 +137,13 @@ import { RouterLink } from 'vue-router'
       <div class="mt-8 flex flex-wrap gap-4">
         <RouterLink
           to="/terms"
-          class="text-sm text-muted-foreground hover:text-primary transition-colors"
+          class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
         >
           Terms of Service →
         </RouterLink>
         <RouterLink
           to="/contact"
-          class="text-sm text-muted-foreground hover:text-primary transition-colors"
+          class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
         >
           Contact Us →
         </RouterLink>

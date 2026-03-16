@@ -114,7 +114,7 @@ const applyPreset = (preset: (typeof presetPermissions)[0]) => {
         </CardHeader>
         <CardContent class="space-y-4">
           <div class="text-center">
-            <div class="text-6xl font-mono font-bold text-primary">{{ chmodValue }}</div>
+            <div class="text-gray-900">{{ chmodValue }}</div>
             <div class="text-2xl font-mono text-muted-foreground mt-2">{{ symbolicValue }}</div>
           </div>
           <Button @click="copyChmod" class="w-full">Copy chmod {{ chmodValue }}</Button>

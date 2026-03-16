@@ -16,7 +16,7 @@ import { Github, ExternalLink } from 'lucide-vue-next'
         <div class="glass-card p-6 hover:border-primary/50 transition-all">
           <div class="flex items-start gap-4">
             <div class="p-3 rounded-xl bg-primary/10 shrink-0">
-              <Github class="w-8 h-8 text-primary" />
+              <Github class="text-gray-900" />
             </div>
             <div>
               <h3 class="text-xl font-bold mb-2">Open Source</h3>
@@ -28,7 +28,7 @@ import { Github, ExternalLink } from 'lucide-vue-next'
                 href="https://github.com/nnn-gif/tools"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                class="text-gray-900"
               >
                 Visit GitHub Repository
                 <ExternalLink class="w-4 h-4" />
@@ -42,7 +42,7 @@ import { Github, ExternalLink } from 'lucide-vue-next'
           <div class="flex items-start gap-4">
             <div class="p-3 rounded-xl bg-primary/10 shrink-0">
               <svg
-                class="w-8 h-8 text-primary"
+                class="text-gray-900"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -65,7 +65,7 @@ import { Github, ExternalLink } from 'lucide-vue-next'
                 href="https://github.com/nnn-gif/tools/discussions"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                class="text-gray-900"
               >
                 Join Discussions
                 <ExternalLink class="w-4 h-4" />
@@ -148,19 +148,19 @@ import { Github, ExternalLink } from 'lucide-vue-next'
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <RouterLink
           to="/about"
-          class="text-sm text-muted-foreground hover:text-primary transition-colors"
+          class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
         >
           About Us →
         </RouterLink>
         <RouterLink
           to="/privacy"
-          class="text-sm text-muted-foreground hover:text-primary transition-colors"
+          class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
         >
           Privacy Policy →
         </RouterLink>
         <RouterLink
           to="/terms"
-          class="text-sm text-muted-foreground hover:text-primary transition-colors"
+          class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
         >
           Terms of Service →
         </RouterLink>

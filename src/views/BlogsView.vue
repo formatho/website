@@ -69,7 +69,7 @@ const formatDate = (dateString: string) => {
 
             <!-- Title -->
             <RouterLink :to="`/blogs/${post.slug}`">
-              <h2 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+              <h2 class="text-xl font-bold mb-2 group-hover:text-gray-900 transition-colors line-clamp-2">
                 {{ post.title }}
               </h2>
             </RouterLink>
@@ -84,7 +84,7 @@ const formatDate = (dateString: string) => {
               <span
                 v-for="tag in post.tags.slice(0, 3)"
                 :key="tag"
-                class="inline-flex items-center gap-1 px-2 py-1 text-xs bg-primary/10 text-primary rounded-md"
+                class="text-gray-900"
               >
                 <Tag class="w-3 h-3" />
                 {{ tag }}

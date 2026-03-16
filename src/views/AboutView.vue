@@ -58,19 +58,19 @@ import formathoIcons from '@/assets/formatho-icons.json'
               </p>
               <ul class="space-y-2">
                 <li class="flex items-start gap-2">
-                  <span class="text-primary font-semibold">•</span>
+                  <span class="text-gray-900">•</span>
                   <span><strong>Zero server uploads:</strong> Your code never leaves your machine</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="text-primary font-semibold">•</span>
+                  <span class="text-gray-900">•</span>
                   <span><strong>No database storage:</strong> Nothing gets saved anywhere</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="text-primary font-semibold">•</span>
+                  <span class="text-gray-900">•</span>
                   <span><strong>No third-party analytics:</strong> We don't track what you build</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="text-primary font-semibold">•</span>
+                  <span class="text-gray-900">•</span>
                   <span><strong>Offline-capable:</strong> Once loaded, many tools work without an internet connection</span>
                 </li>
               </ul>
@@ -87,11 +87,11 @@ import formathoIcons from '@/assets/formatho-icons.json'
             <div class="glass-card p-12 max-w-sm text-center">
               <div class="mb-3 flex justify-center">
                 <span
-                  class="w-24 h-24 text-primary"
+                  class="text-gray-900"
                   v-html="formathoIcons.icons['privacy-shield'].svg"
                 />
               </div>
-              <h3 class="text-2xl font-bold mb-3 text-primary">Privacy Shield</h3>
+              <h3 class="text-gray-900">Privacy Shield</h3>
               <p class="text-lg text-muted-foreground">
                 Your data never leaves your browser
               </p>
@@ -115,11 +115,11 @@ import formathoIcons from '@/assets/formatho-icons.json'
             <div class="glass-card p-12 max-w-sm text-center">
               <div class="mb-3 flex justify-center">
                 <span
-                  class="w-24 h-24 text-primary"
+                  class="text-gray-900"
                   v-html="formathoIcons.icons['no-log-globe'].svg"
                 />
               </div>
-              <h3 class="text-2xl font-bold mb-3 text-primary">No-Log Globe</h3>
+              <h3 class="text-gray-900">No-Log Globe</h3>
               <p class="text-lg text-muted-foreground">
                 Zero tracking, zero storage, zero logs
               </p>
@@ -144,15 +144,15 @@ import formathoIcons from '@/assets/formatho-icons.json'
               </p>
               <ul class="space-y-2">
                 <li class="flex items-start gap-2">
-                  <span class="text-primary font-semibold">•</span>
+                  <span class="text-gray-900">•</span>
                   <span>Pasting config files into JSON formatters only to wonder if they're being logged</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="text-primary font-semibold">•</span>
+                  <span class="text-gray-900">•</span>
                   <span>Using conversion tools that might be storing your proprietary data</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="text-primary font-semibold">•</span>
+                  <span class="text-gray-900">•</span>
                   <span>Not knowing what happens to your content after you hit "convert"</span>
                 </li>
               </ul>
@@ -184,19 +184,19 @@ import formathoIcons from '@/assets/formatho-icons.json'
               </p>
               <ul class="space-y-2">
                 <li class="flex items-start gap-2">
-                  <span class="text-primary font-semibold">•</span>
+                  <span class="text-gray-900">•</span>
                   <span><strong>GDPR compliance matters:</strong> No personal data leaves the user's device</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="text-primary font-semibold">•</span>
+                  <span class="text-gray-900">•</span>
                   <span><strong>Code security audits are required:</strong> Zero external dependencies on your codebase</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="text-primary font-semibold">•</span>
+                  <span class="text-gray-900">•</span>
                   <span><strong>Team workflows demand trust:</strong> Developers can use tools without fear of exposure</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="text-primary font-semibold">•</span>
+                  <span class="text-gray-900">•</span>
                   <span><strong>Air-gapped environments:</strong> Many tools function in offline or restricted networks</span>
                 </li>
               </ul>
@@ -216,11 +216,11 @@ import formathoIcons from '@/assets/formatho-icons.json'
             <div class="glass-card p-12 max-w-sm text-center">
               <div class="mb-3 flex justify-center">
                 <span
-                  class="w-24 h-24 text-primary"
+                  class="text-gray-900"
                   v-html="formathoIcons.icons['client-side-chip'].svg"
                 />
               </div>
-              <h3 class="text-2xl font-bold mb-3 text-primary">Client-Side Chip</h3>
+              <h3 class="text-gray-900">Client-Side Chip</h3>
               <p class="text-lg text-muted-foreground">
                 100% client-side processing
               </p>
@@ -250,11 +250,11 @@ import formathoIcons from '@/assets/formatho-icons.json'
           >
             <div class="mb-6 flex justify-center">
               <span
-                class="w-20 h-20 text-primary"
+                class="text-gray-900"
                 v-html="formathoIcons.icons['privacy-shield'].svg"
               />
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-primary">Privacy First</h3>
+            <h3 class="text-gray-900">Privacy First</h3>
             <p class="text-muted-foreground leading-relaxed">
               Your data never leaves your browser. We don't collect, store, or track anything you input. All processing happens locally on your device.
             </p>
@@ -269,11 +269,11 @@ import formathoIcons from '@/assets/formatho-icons.json'
           >
             <div class="mb-6 flex justify-center">
               <span
-                class="w-20 h-20 text-primary"
+                class="text-gray-900"
                 v-html="formathoIcons.icons['no-log-globe'].svg"
               />
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-primary">Zero Tracking</h3>
+            <h3 class="text-gray-900">Zero Tracking</h3>
             <p class="text-muted-foreground leading-relaxed">
               No analytics, no cookies, no telemetry. We don't monetize your data. We believe privacy shouldn't be a premium feature—it should be the default.
             </p>
@@ -288,11 +288,11 @@ import formathoIcons from '@/assets/formatho-icons.json'
           >
             <div class="mb-6 flex justify-center">
               <span
-                class="w-20 h-20 text-primary"
+                class="text-gray-900"
                 v-html="formathoIcons.icons['client-side-chip'].svg"
               />
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-primary">Client-Side Only</h3>
+            <h3 class="text-gray-900">Client-Side Only</h3>
             <p class="text-muted-foreground leading-relaxed">
               Every tool runs 100% in your browser. No server calls, no cloud processing. Fast, secure, and reliable tools that respect your data.
             </p>
@@ -358,7 +358,7 @@ import formathoIcons from '@/assets/formatho-icons.json'
               data-aos-delay="0"
             >
               <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <span class="text-xl font-bold text-primary">1</span>
+                <span class="text-gray-900">1</span>
               </div>
               <div>
                 <h3 class="text-lg font-semibold mb-1">No Sign-Up Required</h3>
@@ -373,7 +373,7 @@ import formathoIcons from '@/assets/formatho-icons.json'
               data-aos-delay="50"
             >
               <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <span class="text-xl font-bold text-primary">2</span>
+                <span class="text-gray-900">2</span>
               </div>
               <div>
                 <h3 class="text-lg font-semibold mb-1">No Code Uploads</h3>
@@ -388,7 +388,7 @@ import formathoIcons from '@/assets/formatho-icons.json'
               data-aos-delay="100"
             >
               <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <span class="text-xl font-bold text-primary">3</span>
+                <span class="text-gray-900">3</span>
               </div>
               <div>
                 <h3 class="text-lg font-semibold mb-1">No Analytics or Tracking</h3>
@@ -403,7 +403,7 @@ import formathoIcons from '@/assets/formatho-icons.json'
               data-aos-delay="150"
             >
               <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <span class="text-xl font-bold text-primary">4</span>
+                <span class="text-gray-900">4</span>
               </div>
               <div>
                 <h3 class="text-lg font-semibold mb-1">Open Transparency</h3>
@@ -418,7 +418,7 @@ import formathoIcons from '@/assets/formatho-icons.json'
               data-aos-delay="200"
             >
               <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <span class="text-xl font-bold text-primary">5</span>
+                <span class="text-gray-900">5</span>
               </div>
               <div>
                 <h3 class="text-lg font-semibold mb-1">Community-Driven</h3>
@@ -446,13 +446,13 @@ import formathoIcons from '@/assets/formatho-icons.json'
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <RouterLink
               to="/"
-              class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-lg font-medium text-lg transition-all duration-300 hover:bg-primary/90 hover:scale-105"
+              class="text-gray-900"
             >
               Explore Our Tools
             </RouterLink>
             <a
               href="mailto:support@formatho.com"
-              class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-lg font-medium text-lg transition-all duration-300 hover:bg-primary/90 hover:scale-105"
+              class="text-gray-900"
             >
               Contact Us
             </a>

@@ -42,8 +42,8 @@ const breadcrumbs = computed<BreadcrumbItem[]>(() => {
       v-for="(item, index) in breadcrumbs"
       :key="item.path"
       :href="item.path"
-      class="flex items-center hover:text-primary transition-colors"
-      :class="{ 'text-primary': index === breadcrumbs.length - 1 }"
+      class="flex items-center hover:text-gray-900 transition-colors"
+      :class="{ 'text-gray-900': index === breadcrumbs.length - 1 }"
     >
       <Home v-if="index === 0" class="w-4 h-4" />
       <span v-else>{{ item.name }}</span>

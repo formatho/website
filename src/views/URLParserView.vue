@@ -163,7 +163,7 @@ const copyParam = (value: string, key: string) => {
               >
                 <div class="flex items-start justify-between">
                   <div>
-                    <div class="font-semibold text-primary">{{ key }}</div>
+                    <div class="text-gray-900">{{ key }}</div>
                     <div class="font-mono text-sm mt-1 break-all">{{ value || '(empty)' }}</div>
                   </div>
                   <Button @click="copyParam(value, key)" variant="ghost" size="sm">

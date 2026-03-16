@@ -71,7 +71,7 @@ const commonNumeronyms = [
       <Card>
         <CardContent class="pt-6 text-center">
           <div class="text-sm text-muted-foreground">Numeronym</div>
-          <div class="text-3xl font-bold font-mono text-primary">
+          <div class="text-gray-900">
             {{ numeronyms[0]!.numeronym }}
           </div>
         </CardContent>
@@ -89,7 +89,7 @@ const commonNumeronyms = [
             :key="item.numeronym"
             class="p-3 rounded bg-muted flex justify-between items-center"
           >
-            <span class="font-mono font-bold text-primary">{{ item.numeronym }}</span>
+            <span class="text-gray-900">{{ item.numeronym }}</span>
             <span class="text-sm text-muted-foreground">{{ item.meaning }}</span>
           </div>
         </div>

@@ -475,7 +475,7 @@ onMounted(() => {
 
 .config-header h1 {
   font-size: 1.75rem;
-  color: var(--color-text-primary);
+  color: rgb(23, 23, 23);
   margin: 0;
 }
 
@@ -518,7 +518,7 @@ onMounted(() => {
   margin-top: 0;
   margin-bottom: 1.5rem;
   font-size: 1.25rem;
-  color: var(--color-text-primary);
+  color: rgb(23, 23, 23);
 }
 
 .config-section h3 {
@@ -549,7 +549,7 @@ onMounted(() => {
 
 label {
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: rgb(23, 23, 23);
 }
 
 input[type="text"],
@@ -563,7 +563,7 @@ textarea {
   border-radius: 8px;
   font-size: 1rem;
   background-color: var(--color-surface-secondary);
-  color: var(--color-text-primary);
+  color: rgb(23, 23, 23);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -645,7 +645,7 @@ input[type="checkbox"] {
 
 .btn-secondary {
   background-color: transparent;
-  color: var(--color-text-primary);
+  color: rgb(23, 23, 23);
   border: 2px solid var(--color-border);
 }
 

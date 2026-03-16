@@ -134,7 +134,7 @@ const categories = [
                 class="bg-white border border-[#E5E7EB] shadow-lg rounded-lg min-w-[600px] p-6 grid grid-cols-2 gap-6"
               >
                 <div v-for="category in categories" :key="category.name" class="space-y-2">
-                  <h3 class="text-xs font-semibold uppercase text-primary mb-3">
+                  <h3 class="text-xs font-semibold uppercase text-gray-900 mb-3">
                     {{ category.name }}
                   </h3>
                   <div class="space-y-1">
@@ -143,7 +143,7 @@ const categories = [
                       :key="item.name"
                       :to="item.route"
                       @click="handleToolLinkClick"
-                      class="block px-3 py-2 text-sm text-gray-700 hover:text-[#06b6d4] rounded-md transition-all"
+                      class="block px-3 py-2 text-sm text-gray-700 hover:text-gray-900 rounded-md transition-all"
                     >
                       {{ item.name }}
                     </RouterLink>
@@ -231,14 +231,14 @@ const categories = [
             <!-- Collapsible Tools Categories -->
             <div v-show="isToolsDropdownOpen" class="space-y-3 mt-2">
               <div v-for="category in categories" :key="category.name" class="space-y-2">
-                <h3 class="text-xs font-semibold uppercase text-primary px-3">{{ category.name }}</h3>
+                <h3 class="text-xs font-semibold uppercase text-gray-900 px-3">{{ category.name }}</h3>
                 <div class="space-y-1">
                   <RouterLink
                     v-for="item in category.items"
                     :key="item.name"
                     :to="item.route"
                     @click="handleToolLinkClick"
-                    class="block px-3 py-2 text-sm text-gray-700 hover:text-[#06b6d4] rounded-md transition-all"
+                    class="block px-3 py-2 text-sm text-gray-700 hover:text-gray-900 rounded-md transition-all"
                   >
                     {{ item.name }}
                   </RouterLink>

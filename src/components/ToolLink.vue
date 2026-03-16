@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<Props>(), {
 <template>
   <RouterLink
     :to="props.to"
-    class="group block w-full rounded-lg border border-border/40 bg-card p-4 hover:border-primary/50 hover:bg-primary/5 transition-all duration-200"
+    class="group block w-full rounded-lg border border-border/40 bg-card p-4 hover:border-gray-900/50 hover:bg-gray-900/5 transition-all duration-200"
   >
     <div class="flex items-center justify-between">
       <div class="flex-1">
@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<Props>(), {
           {{ props.description }}
         </div>
       </div>
-      <div class="text-primary">
+      <div class="text-gray-900">
         <span class="sr-only">Open</span>
       </div>
     </div>

@@ -631,7 +631,7 @@ const filteredTools = computed(() => {
               data-aos-delay="0"
             >
               <span
-                class="w-5 h-5 text-primary"
+                class="text-gray-900"
                 v-html="formathoIcons.icons['privacy-shield'].svg"
               />
               <span class="text-sm font-medium text-foreground">Your data never leaves your browser</span>
@@ -644,7 +644,7 @@ const filteredTools = computed(() => {
               data-aos-delay="50"
             >
               <span
-                class="w-5 h-5 text-primary"
+                class="text-gray-900"
                 v-html="formathoIcons.icons['no-log-globe'].svg"
               />
               <span class="text-sm font-medium text-foreground">Zero tracking, zero storage</span>
@@ -657,7 +657,7 @@ const filteredTools = computed(() => {
               data-aos-delay="100"
             >
               <span
-                class="w-5 h-5 text-primary"
+                class="text-gray-900"
                 v-html="formathoIcons.icons['client-side-chip'].svg"
               />
               <span class="text-sm font-medium text-foreground">100% client-side processing</span>
@@ -692,7 +692,7 @@ const filteredTools = computed(() => {
         <p class="text-xl text-muted-foreground">No tools found matching "{{ searchQuery }}"</p>
         <button
           @click="searchQuery = ''"
-          class="mt-4 px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+          class="text-gray-900"
         >
           Clear search
         </button>
@@ -727,7 +727,7 @@ const filteredTools = computed(() => {
                       class="p-3 rounded-xl bg-primary/10 transition-all w-fit"
                     >
                       <span
-                        class="w-6 h-6 text-primary"
+                        class="text-gray-900"
                         v-html="formathoIcons.icons[toolIconMap[tool.name] || 'generators']?.svg || ''"
                       />
                     </div>
@@ -747,7 +747,7 @@ const filteredTools = computed(() => {
 
                   <!-- Arrow indicator -->
                   <div
-                    class="mt-4 flex items-center text-primary text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity"
+                    class="text-gray-900"
                   >
                     Open tool
                     <svg
@@ -779,21 +779,21 @@ const filteredTools = computed(() => {
         
         <div class="grid md:grid-cols-3 gap-8">
           <div class="space-y-4">
-            <h3 class="text-lg font-semibold text-primary">Privacy-First Architecture</h3>
+            <h3 class="text-gray-900">Privacy-First Architecture</h3>
             <p class="text-muted-foreground">
               Every tool runs 100% client-side in your browser. No uploads, no database storage, and zero third-party analytics. Your sensitive data never leaves your device.
             </p>
           </div>
           
           <div class="space-y-4">
-            <h3 class="text-lg font-semibold text-primary">Lightning Fast Performance</h3>
+            <h3 class="text-gray-900">Lightning Fast Performance</h3>
             <p class="text-muted-foreground">
               Zero server latency means instant results. Tools execute directly in your browser's JavaScript engine, giving you millisecond-level response times for all operations.
             </p>
           </div>
           
           <div class="space-y-4">
-            <h3 class="text-lg font-semibold text-primary">Developer Focused</h3>
+            <h3 class="text-gray-900">Developer Focused</h3>
             <p class="text-muted-foreground">
               Built by developers, for developers. Clean interfaces, keyboard shortcuts, and powerful features that solve real-world problems in your daily workflow.
             </p>
@@ -804,7 +804,7 @@ const filteredTools = computed(() => {
           <p class="text-muted-foreground mb-4">Not seeing what you need?</p>
           <a
             href="mailto:support@formatho.com"
-            class="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium"
+            class="text-gray-900"
           >
             Suggest a tool
             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -130,7 +130,7 @@ import { RouterLink } from 'vue-router'
           <h2 class="text-2xl font-bold mb-4">11. Contact Us</h2>
           <p class="text-muted-foreground leading-relaxed">
             If you have any questions about these Terms, please contact us through our
-            <RouterLink to="/contact" class="text-primary hover:underline">Contact page</RouterLink
+            <RouterLink to="/contact" class="text-gray-900">Contact page</RouterLink
             >.
           </p>
         </section>
@@ -140,13 +140,13 @@ import { RouterLink } from 'vue-router'
       <div class="mt-8 flex flex-wrap gap-4">
         <RouterLink
           to="/privacy"
-          class="text-sm text-muted-foreground hover:text-primary transition-colors"
+          class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
         >
           Privacy Policy →
         </RouterLink>
         <RouterLink
           to="/about"
-          class="text-sm text-muted-foreground hover:text-primary transition-colors"
+          class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
         >
           About Us →
         </RouterLink>

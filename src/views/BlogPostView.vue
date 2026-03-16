@@ -141,7 +141,7 @@ useHead(computed(() => {
     <!-- Back Link -->
     <RouterLink
       to="/blogs"
-      class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8"
+      class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-gray-900 transition-colors mb-8"
     >
       <ArrowLeft class="w-4 h-4" />
       Back to all articles
@@ -187,7 +187,7 @@ useHead(computed(() => {
           <span
             v-for="tag in post.tags"
             :key="tag"
-            class="inline-flex items-center gap-1 px-3 py-1 text-sm bg-primary/10 text-primary rounded-md"
+            class="text-gray-900"
           >
             <Tag class="w-3 h-3" />
             {{ tag }}
@@ -262,7 +262,7 @@ useHead(computed(() => {
             data-aos-duration="400"
             :data-aos-delay="400 + (index * 50)"
           >
-            <h4 class="font-semibold group-hover:text-primary transition-colors">
+            <h4 class="font-semibold group-hover:text-gray-900 transition-colors">
               {{ tool.name }}
             </h4>
             <p class="text-sm text-muted-foreground">{{ tool.description }}</p>
@@ -279,7 +279,7 @@ useHead(computed(() => {
       >
         <RouterLink
           to="/blogs"
-          class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+          class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-gray-900 transition-colors"
         >
           <ArrowLeft class="w-4 h-4" />
           Back to all articles
@@ -319,7 +319,7 @@ useHead(computed(() => {
   @apply pl-4 border-l-4 border-primary italic my-4 text-muted-foreground;
 }
 .prose :deep(a) {
-  @apply text-primary hover:underline;
+  @apply text-gray-900 hover:underline;
 }
 .prose :deep(table) {
   @apply w-full border-collapse my-4;

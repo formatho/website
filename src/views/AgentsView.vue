@@ -376,7 +376,7 @@ onMounted(() => {
               <div class="flex items-start justify-between gap-4">
                 <div class="flex-1 min-w-0">
                   <div class="flex items-center gap-2 mb-2">
-                    <Bot class="h-5 w-5 text-primary" />
+                    <Bot class="text-gray-900" />
                     <h3 class="text-lg font-semibold truncate">
                       {{ agent.name || shortenAddress(agent.address) }}
                     </h3>

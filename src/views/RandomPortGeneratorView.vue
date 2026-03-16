@@ -79,7 +79,7 @@ generatePort()
         </CardHeader>
         <CardContent class="space-y-4">
           <div class="text-center">
-            <div class="text-6xl font-mono font-bold text-primary">{{ port }}</div>
+            <div class="text-gray-900">{{ port }}</div>
           </div>
           <Button @click="copyPort" variant="outline" class="w-full">Copy</Button>
         </CardContent>

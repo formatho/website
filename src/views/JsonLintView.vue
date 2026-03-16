@@ -68,19 +68,19 @@ const fillSample = () => {
           <h3 class="text-lg font-semibold">Features</h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="p-4 glass-card">
-              <div class="text-sm font-medium text-primary mb-2">Real-time Validation</div>
+              <div class="text-gray-900">Real-time Validation</div>
               <p class="text-sm text-muted-foreground">
                 Instantly detects and highlights JSON syntax errors as you type.
               </p>
             </div>
             <div class="p-4 glass-card">
-              <div class="text-sm font-medium text-primary mb-2">Format & Beautify</div>
+              <div class="text-gray-900">Format & Beautify</div>
               <p class="text-sm text-muted-foreground">
                 Automatically formats your JSON with proper indentation.
               </p>
             </div>
             <div class="p-4 glass-card">
-              <div class="text-sm font-medium text-primary mb-2">100% Client-Side</div>
+              <div class="text-gray-900">100% Client-Side</div>
               <p class="text-sm text-muted-foreground">
                 Your JSON never leaves your browser. Complete privacy.
               </p>

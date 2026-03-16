@@ -13,7 +13,7 @@ const currentYear = new Date().getFullYear()
         <div class="space-y-4">
           <RouterLink to="/" class="flex items-center gap-3">
             <img src="/logo.png" alt="Formatho" class="h-8 w-8 rounded-lg" />
-            <span class="text-lg font-bold gradient-text">Formatho</span>
+            <span class="text-lg font-bold text-foreground">Formatho</span>
           </RouterLink>
           <p class="text-sm text-muted-foreground leading-relaxed">
             Privacy-first developer tools that run 100% client-side. Your data stays in your
@@ -24,7 +24,7 @@ const currentYear = new Date().getFullYear()
               href="https://github.com/nnn-gif/tools"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-muted-foreground hover:text-primary transition-colors"
+              class="text-muted-foreground hover:text-gray-900 transition-colors"
               aria-label="GitHub"
             >
               <Github class="w-5 h-5" />
@@ -37,15 +37,15 @@ const currentYear = new Date().getFullYear()
           <h3 class="text-sm font-semibold mb-4">Features</h3>
           <ul class="space-y-3">
             <li class="flex items-center gap-2 text-sm text-muted-foreground">
-              <Shield class="w-4 h-4 text-primary" />
+              <Shield class="w-4 h-4 text-gray-900" />
               100% Client-Side
             </li>
             <li class="flex items-center gap-2 text-sm text-muted-foreground">
-              <Zap class="w-4 h-4 text-primary" />
+              <Zap class="w-4 h-4 text-gray-900" />
               Lightning Fast
             </li>
             <li class="flex items-center gap-2 text-sm text-muted-foreground">
-              <Heart class="w-4 h-4 text-primary" />
+              <Heart class="w-4 h-4 text-gray-900" />
               Privacy First
             </li>
           </ul>
@@ -58,7 +58,7 @@ const currentYear = new Date().getFullYear()
             <li>
               <RouterLink
                 to="/json-lint"
-                class="text-sm text-muted-foreground hover:text-primary transition-colors"
+                class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
               >
                 JSON Linter
               </RouterLink>
@@ -66,7 +66,7 @@ const currentYear = new Date().getFullYear()
             <li>
               <RouterLink
                 to="/uuid"
-                class="text-sm text-muted-foreground hover:text-primary transition-colors"
+                class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
               >
                 UUID Generator
               </RouterLink>
@@ -74,7 +74,7 @@ const currentYear = new Date().getFullYear()
             <li>
               <RouterLink
                 to="/base64"
-                class="text-sm text-muted-foreground hover:text-primary transition-colors"
+                class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
               >
                 Base64 Encoder
               </RouterLink>
@@ -82,7 +82,7 @@ const currentYear = new Date().getFullYear()
             <li>
               <RouterLink
                 to="/jwt"
-                class="text-sm text-muted-foreground hover:text-primary transition-colors"
+                class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
               >
                 JWT Debugger
               </RouterLink>
@@ -97,7 +97,7 @@ const currentYear = new Date().getFullYear()
             <li>
               <RouterLink
                 to="/"
-                class="text-sm text-muted-foreground hover:text-primary transition-colors"
+                class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
               >
                 Data Tools
               </RouterLink>
@@ -105,7 +105,7 @@ const currentYear = new Date().getFullYear()
             <li>
               <RouterLink
                 to="/"
-                class="text-sm text-muted-foreground hover:text-primary transition-colors"
+                class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
               >
                 Converters
               </RouterLink>
@@ -113,7 +113,7 @@ const currentYear = new Date().getFullYear()
             <li>
               <RouterLink
                 to="/"
-                class="text-sm text-muted-foreground hover:text-primary transition-colors"
+                class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
               >
                 EVM Tools
               </RouterLink>
@@ -121,7 +121,7 @@ const currentYear = new Date().getFullYear()
             <li>
               <RouterLink
                 to="/"
-                class="text-sm text-muted-foreground hover:text-primary transition-colors"
+                class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
               >
                 Generators
               </RouterLink>
@@ -140,23 +140,23 @@ const currentYear = new Date().getFullYear()
           for developers.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
-          <RouterLink to="/about" class="hover:text-primary transition-colors">
+          <RouterLink to="/about" class="hover:text-gray-900 transition-colors">
             About Us
           </RouterLink>
-          <RouterLink to="/privacy" class="hover:text-primary transition-colors">
+          <RouterLink to="/privacy" class="hover:text-gray-900 transition-colors">
             Privacy Policy
           </RouterLink>
-          <RouterLink to="/terms" class="hover:text-primary transition-colors">
+          <RouterLink to="/terms" class="hover:text-gray-900 transition-colors">
             Terms of Service
           </RouterLink>
-          <RouterLink to="/contact" class="hover:text-primary transition-colors">
+          <RouterLink to="/contact" class="hover:text-gray-900 transition-colors">
             Contact Us
           </RouterLink>
           <a
             href="https://github.com/nnn-gif/tools"
             target="_blank"
             rel="noopener noreferrer"
-            class="hover:text-primary transition-colors"
+            class="hover:text-gray-900 transition-colors"
           >
             View Source
           </a>

@@ -271,7 +271,7 @@ const applyExample = (examplePattern: string) => {
                   class="flex items-start gap-3 p-3 bg-surface-hover rounded border"
                 >
                   <div
-                    class="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground font-bold text-sm"
+                    class="text-gray-900"
                   >
                     {{ index + 1 }}
                   </div>

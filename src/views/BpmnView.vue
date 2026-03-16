@@ -220,7 +220,7 @@ onUnmounted(() => {
         <CardContent class="py-3 flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-              <FileType class="h-5 w-5 text-primary" />
+              <FileType class="text-gray-900" />
             </div>
             <div>
               <p class="font-medium text-sm">{{ file.name }}</p>
