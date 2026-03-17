@@ -53,7 +53,7 @@ onUnmounted(() => {
         <div class="flex items-center gap-2">
           <!-- Pulsing green dot -->
           <span class="w-2 h-2 bg-green-600 rounded-full flex-shrink-0 animate-pulse"></span>
-          <span class="text-[11px] text-white/70 font-bold uppercase tracking-wide">Live</span>
+          <span class="text-[11px] text-white/70 font-bold uppercase tracking-wide">LIVE USER COUNT</span>
         </div>
         <span class="text-3xl font-bold text-white tabular-nums pl-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">{{ liveUsers }}</span>
       </div>
@@ -63,7 +63,7 @@ onUnmounted(() => {
 
       <!-- Monthly Users -->
       <div class="flex flex-col gap-1.5">
-        <span class="text-[11px] text-white/70 font-bold uppercase tracking-wide">Monthly Users</span>
+        <span class="text-[11px] text-white/70 font-bold uppercase tracking-wide">TOTAL USERS THIS MONTH</span>
         <span class="text-3xl font-bold text-white tabular-nums drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">{{ formatNumber(monthlyVisitors) }}</span>
       </div>
     </div>
