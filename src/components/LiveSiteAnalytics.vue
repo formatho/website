@@ -44,38 +44,34 @@ onUnmounted(() => {
 
 <template>
   <div class="fixed bottom-5 right-5 z-[9999]">
-    <!-- Glassmorphism card with reduced sizing -->
+    <!-- Glassmorphism card: original dark slate at 20% opacity, compact size -->
     <div
-      class="bg-white/20 backdrop-blur-md border border-white/30 shadow-[0_4px_12px_rgba(0,0,0,0.05)] rounded-xl px-3 py-1.5 min-w-[160px] transition-all duration-200 hover:shadow-[0_6px_16px_rgba(0,0,0,0.08)]"
+      class="bg-slate-900/20 backdrop-blur-md border-2 border-slate-400/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-2xl px-3 py-1.5 min-w-[180px] transition-all duration-200 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:border-slate-400/40"
     >
       <!-- Live Users -->
-      <div class="flex flex-col gap-1">
+      <div class="flex flex-col gap-1.5">
         <div class="flex items-center gap-2">
-          <!-- Pulsing green dot - w-2 h-2 -->
-          <span class="w-2 h-2 bg-green-500 rounded-full flex-shrink-0 animate-pulse"></span>
-          <span class="text-xs uppercase tracking-wider text-gray-500 font-medium">Live</span>
+          <!-- Pulsing green dot -->
+          <span class="w-2 h-2 bg-green-600 rounded-full flex-shrink-0 animate-pulse"></span>
+          <span class="text-[11px] text-white/70 font-bold uppercase tracking-wide">Live</span>
         </div>
-        <span class="text-lg font-semibold text-slate-800 tabular-nums pl-4">{{ liveUsers }}</span>
+        <span class="text-3xl font-bold text-white tabular-nums pl-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">{{ liveUsers }}</span>
       </div>
 
       <!-- Divider -->
-      <div class="h-px bg-gray-300/50 my-2"></div>
+      <div class="h-px bg-slate-400/30 my-2"></div>
 
       <!-- Monthly Users -->
-      <div class="flex flex-col gap-1">
-        <span class="text-xs uppercase tracking-wider text-gray-500 font-medium"
-          >Monthly Users</span
-        >
-        <span class="text-lg font-semibold text-slate-800 tabular-nums">{{
-          formatNumber(monthlyVisitors)
-        }}</span>
+      <div class="flex flex-col gap-1.5">
+        <span class="text-[11px] text-white/70 font-bold uppercase tracking-wide">Monthly Users</span>
+        <span class="text-3xl font-bold text-white tabular-nums drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">{{ formatNumber(monthlyVisitors) }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* Minimal scoped styles - main styling via Tailwind */
+/* Pulsing animation */
 @keyframes pulse {
   0%,
   100% {
