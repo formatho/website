@@ -66,6 +66,7 @@ const formatDate = (dateString: string) => {
 
 // SEO: Update meta tags for blog post
 const siteName = 'Formatho'
+// Base URL must match the actual deployment location (formatho.com/tools/)
 const baseUrl = 'https://formatho.com/tools'
 
 // Use @vueuse/head for SEO meta tags
@@ -81,8 +82,9 @@ useHead(computed(() => {
 
   const fullTitle = `${post.value.title} - ${siteName}`
   const url = `${baseUrl}/blogs/${post.value.slug}`
+  // Fix: Check if image is already an absolute URL before concatenating
   const image = post.value.image 
-    ? `${baseUrl}${post.value.image}` 
+    ? (post.value.image.startsWith('http') ? post.value.image : `${baseUrl}${post.value.image}`)
     : `${baseUrl}/logo.png`
 
   // JSON-LD Structured Data for Article Schema
@@ -138,6 +140,15 @@ useHead(computed(() => {
 
 <template>
   <div class="container mx-auto px-4 py-12">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center space-x-2 text-sm text-muted-foreground mb-8">
+      <RouterLink to="/" class="hover:text-gray-900 transition-colors">Home</RouterLink>
+      <span>/</span>
+      <RouterLink to="/blogs" class="hover:text-gray-900 transition-colors">Blog</RouterLink>
+      <span v-if="post">/</span>
+      <span v-if="post" class="text-gray-900 line-clamp-1">{{ post.title }}</span>
+    </nav>
+    
     <!-- Back Link -->
     <RouterLink
       to="/blogs"

@@ -1,7 +1,8 @@
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 
-const domain = 'https://formatho.com'
+// Domain must match the actual deployment location
+const domain = 'https://formatho.com/tools'
 const siteName = 'Formatho'
 const defaultImage = `${domain}/logo.png`
 const twitterHandle = '@heyformatho'
