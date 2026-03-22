@@ -200,6 +200,14 @@ const categories = [
           >
             Blogs
           </RouterLink>
+
+          <!-- Pricing Link -->
+          <RouterLink
+            to="/pricing"
+            class="text-sm font-medium bg-primary text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg rounded-lg py-2 px-3"
+          >
+            Pricing
+          </RouterLink>
         </div>
 
         <!-- Search & Mobile Menu Button -->
@@ -295,6 +303,15 @@ const categories = [
               class="block px-3 py-2 text-sm font-medium text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:bg-white rounded-lg"
             >
               Blogs
+            </RouterLink>
+
+            <!-- Pricing Link -->
+            <RouterLink
+              to="/pricing"
+              @click="isMobileMenuOpen = false"
+              class="block px-3 py-2 text-sm font-medium bg-primary text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg rounded-lg mt-2"
+            >
+              Pricing
             </RouterLink>
           </div>
         </div>
