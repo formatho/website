@@ -1092,6 +1092,16 @@ export const routes = [
         name: 'url-parser',
         component: () => import('../views/URLParserView.vue'),
         meta: { title: 'URL Parser', description: 'Parse and analyze URL components.' }
+      },
+      {
+        path: 'tutorial',
+        name: 'tutorial',
+        component: () => import('../views/TutorialView.vue'),
+        meta: {
+          title: 'Agent Orchestrator Tutorial - Learn in 5 Minutes',
+          description: 'Interactive tutorial to teaches you how to create agents, assign tasks, and monitor progress in Agent Orchestrator.',
+          keywords: 'agent orchestrator tutorial, how to use agent orchestrator, ai agents tutorial'
+        }
       }
     ]
   }
