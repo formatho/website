@@ -55,6 +55,7 @@ const routes = [
   // Document tools
   { path: '/markdown', priority: '0.9', changefreq: 'monthly' },
   { path: '/bpmn', priority: '0.9', changefreq: 'monthly' },
+  { path: '/bpmn-to-visio', priority: '0.9', changefreq: 'monthly' },
   
   // Crypto & Security
   { path: '/token-generator', priority: '0.8', changefreq: 'monthly' },
