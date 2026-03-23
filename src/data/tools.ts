@@ -121,6 +121,11 @@ export const tools = [
         name: 'XML ↔ JSON',
         description: 'Bi-directional XML to JSON converter with real-time conversion and clipboard support.',
         route: '/xml-json'
+      },
+      {
+        name: 'BPMN to Visio',
+        description: 'Convert BPMN process diagrams into Microsoft Visio compatible formats.',
+        route: '/bpmn-to-visio'
       }
     ]
   },

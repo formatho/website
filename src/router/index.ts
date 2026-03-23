@@ -283,6 +283,18 @@ export const routes = [
         }
       },
       {
+        path: 'bpmn-to-visio',
+        name: 'bpmn-to-visio',
+        component: () => import('../views/BpmnToVisioConverterView.vue'),
+        meta: {
+          title: 'BPMN to Visio Converter',
+          description:
+            'Convert BPMN process diagrams into Microsoft Visio compatible formats. Free, privacy-first converter that runs entirely in your browser.',
+          keywords:
+            'bpmn to visio, bpmn converter, visio converter, process diagram, bpmn export, microsoft visio, privacy-first'
+        }
+      },
+      {
         path: 'evm-converter',
         name: 'evm-converter',
         component: () => import('../views/EvmUnitConverterView.vue'),
