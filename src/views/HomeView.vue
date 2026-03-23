@@ -1,128 +1,15 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-vue-next'
+import * as LucideIcons from 'lucide-vue-next'
 import { tools } from '../data/tools'
 import EmailCapture from '@/components/EmailCapture.vue'
-
-const formathoIcons = ref<any>(null)
-
-onMounted(async () => {
-  try {
-    const response = await fetch('/formatho-icons.json')
-    formathoIcons.value = await response.json()
-  } catch (error) {
-    console.error('Failed to load formatho-icons:', error)
-  }
-})
 
 // Note: AOS is initialized globally in main.ts to avoid conflicts
 
 const searchQuery = ref('')
-
-// Tool to icon mapping
-const toolIconMap: Record<string, string> = {
-  // Crypto & Security
-  'Token Generator': 'generators',
-  'Hash Text': 'hashing',
-  'Bcrypt': 'encryption',
-  'UUID Generator': 'validation',
-  'ULID Generator': 'generators',
-  'Encrypt/Decrypt': 'encryption',
-  'BIP39 Passphrase': 'blockchain',
-  'HMAC Generator': 'hashing',
-  'RSA Key Pair': 'crypto',
-  'Password Strength': 'security',
-
-  // Converters
-  'Date-Time Converter': 'datetime',
-  'Integer Base Converter': 'converters',
-  'Roman Numerals': 'converters',
-  'Base64 String': 'base64',
-  'Base64 File': 'base64',
-  'Color Converter': 'design',
-  'Case Converter': 'formatting',
-  'Text to NATO': 'text-processing',
-  'Text to Binary': 'encoding',
-  'JSON <> YAML': 'toml',
-  'JSON <> CSV': 'text-processing',
-  'Temperature': 'datetime',
-  'XML <> JSON': 'toml',
-
-  // Web & Network
-  'URL Encoder/Decoder': 'formatting',
-  'HTML Entities': 'formatting',
-  'URL Parser': 'network',
-  'Device Information': 'devops',
-  'Basic Auth Generator': 'security',
-  'Meta Tag Generator': 'formatting',
-  'JWT Debugger': 'validation',
-  'Keycode Info': 'devops',
-  'Slugify': 'text-processing',
-  'User Agent Parser': 'network',
-  'HTTP Status Codes': 'network',
-  'JSON Diff': 'validation',
-
-  // Images & Media
-  'QR Code Generator': 'media',
-  'WiFi QR Code': 'media',
-  'Image Compressor': 'media',
-  'Camera Recorder': 'media',
-
-  // Development
-  'Git Cheat Sheet': 'devops',
-  'Crontab Generator': 'devops',
-  'JSON Viewer': 'data',
-  'JSON Minify': 'data',
-  'SQL Formatter': 'database',
-  'Chmod Calculator': 'devops',
-  'Docker to Compose': 'devops',
-  'XML Formatter': 'data',
-  'YAML Viewer': 'data',
-  'Regex Tester': 'development',
-
-  // Network Tools
-  'IPv4 Subnet Calculator': 'network',
-  'IPv4 Address Converter': 'network',
-  'IPv4 Range Expander': 'network',
-  'MAC Address Lookup': 'network',
-  'MAC Address Generator': 'network',
-  'IPv6 ULA Generator': 'network',
-
-  // Math & Calculators
-  'Math Evaluator': 'calculator',
-  'ETA Calculator': 'calculator',
-  'Percentage Calculator': 'calculator',
-
-  // Text Tools
-  'Lorem Ipsum Generator': 'text',
-  'Markdown Editor': 'text',
-  'Diff Checker': 'text',
-  'Text Statistics': 'text',
-  'Emoji Picker': 'text',
-  'String Obfuscator': 'security',
-  'ASCII Art': 'text',
-
-  // Data Validation
-  'Phone Parser': 'validation',
-  'IBAN Validator': 'validation',
-  'JSON Linter': 'data',
-  'YAML Linter': 'data',
-
-  // Blockchain
-  'EVM Unit Converter': 'blockchain',
-  'Keccak-256 Hasher': 'blockchain',
-  'Address Checksum': 'blockchain',
-  'Multi-Chain Keys': 'blockchain',
-  'Address from Key': 'blockchain',
-  'Solidity to Opcodes': 'blockchain',
-
-  // Artificial Intelligence
-  'Agent Orchestrator': 'generators',
-  'Agent Identity Generator': 'bot',
-  'Local Token Counter': 'hashing',
-}
 
 // Filter tools based on search query
 const filteredTools = computed(() => {
@@ -293,21 +180,17 @@ const filteredTools = computed(() => {
                 data-v-8d4ed633=""
               >
                 <div class="flex flex-col h-full" data-v-8d4ed633="">
-                  <!-- Icon with SVG from formatho-icons.json -->
+                  <!-- Icon with dynamic Lucide component -->
                   <div class="mb-4" data-v-8d4ed633="">
                     <div
                       class="p-3 rounded-xl bg-primary/10 transition-all w-fit"
                       data-v-8d4ed633=""
                     >
-                      <span
-                        v-if="formathoIcons"
+                      <component
+                        :is="LucideIcons[tool.iconName] || LucideIcons.Wrench"
                         class="w-6 h-6 text-gray-900"
-                        v-html="formathoIcons.icons[toolIconMap[tool.name] || 'generators']?.svg || ''"
-                      ></span>
-                      <span
-                        v-else
-                        class="w-6 h-6 text-gray-900 flex items-center justify-center"
-                      >Loading...</span>
+                        stroke-width="2"
+                      />
                     </div>
                   </div>
 
