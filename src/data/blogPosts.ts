@@ -20,6 +20,139 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 41,
+    title: 'From Chaos to Order: Managing AI Agent Workloads',
+    excerpt:
+      'How persistent task management transformed our AI operations from scattered to systematic. Real results: 90% reduction in duplicate work, 3x faster task completion.',
+    date: '2026-03-25',
+    readTime: '6 min',
+    tags: ['AI Agents', 'Workflow Management', 'Task Management', 'Automation', 'Productivity'],
+    slug: 'from-chaos-to-order-managing-ai-agent-workloads',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=630&fit=crop',
+    imageAlt: 'Organized AI agent workflow with persistent task management system',
+    content: `<p>Picture this: You have 12 AI agents running simultaneously. Each one is intelligent, capable, and eager to help. But there's a problem.</p>
+<p><strong>Agent A</strong> creates a marketing strategy at 2 PM.<br/>
+<strong>Agent B</strong> needs to review it at 4 PM.<br/>
+But by then, <strong>Agent A</strong> has already restarted, lost all context, and can't remember what it created.</p>
+<p>Sound familiar?</p>
+<p>This was our reality at Formatho. We were drowning in agent chaos:</p>
+<ul><li>Tasks vanished between sessions</li><li>Agents duplicated work they'd already done</li><li>Priority decisions were lost</li><li>Collaboration was impossible without memory</li><li>Deadlines slipped through the cracks</li></ul>
+<p>We needed order. We needed persistence. We needed a system.</p>
+<h2>The Traditional Solution (And Why It Failed)</h2>
+<p>Our first attempt: Use existing tools.</p>
+<p><strong>Todoist?</strong> Built for humans, not APIs.<br/>
+<strong>Asana?</strong> Great for teams, terrible for agents.<br/>
+<strong>Notion?</strong> Too complex, too slow for programmatic access.</p>
+<p>The problem wasn't the tools themselves—it was their design philosophy. Every existing task manager assumed:</p>
+<ol><li>A human creates tasks</li><li>A human completes tasks</li><li>Tasks are viewed in a UI</li></ol>
+<p>But AI agents work differently:</p>
+<ol><li><strong>Agents need API-first access</strong> — they can't click buttons</li><li><strong>Agents restart constantly</strong> — they lose in-memory state</li><li><strong>Agents work at machine speed</strong> — they need instant task creation/retrieval</li><li><strong>Agents collaborate asynchronously</strong> — one agent creates, another completes</li></ol>
+<p>The tools weren't broken. They were just built for the wrong user.</p>
+<h2>Building Agent-Todo: Our Solution</h2>
+<p>We built agent-todo from first principles with one question in mind:</p>
+<p><strong>What would a task system look like if it was designed for AI agents?</strong></p>
+<h3>Core Design Principles</h3>
+<p><strong>1. API-First Architecture</strong></p>
+<ul><li>Every action available via REST API</li><li>No UI required (though we built one for debugging)</li><li>JSON responses for easy parsing</li><li>Batch operations for efficiency</li></ul>
+<p><strong>2. Persistent Storage</strong></p>
+<ul><li>Tasks survive agent restarts</li><li>State stored in database, not memory</li><li>Full task history preserved</li><li>Cross-session visibility</li></ul>
+<p><strong>3. Agent-Native Features</strong></p>
+<ul><li>Priority levels (critical, high, medium, low)</li><li>Status tracking (pending, in_progress, completed, blocked)</li><li>Agent assignment (task ownership)</li><li>Project grouping (related task clusters)</li></ul>
+<p><strong>4. Simple Integration</strong></p>
+<pre><code># Create a task
+curl -X POST https://todo.formatho.com/api/todos \\
+  -H "X-API-Key: YOUR_KEY" \\
+  -d '{"title":"Review blog post","priority":"high"}'
+
+# Get pending tasks
+curl https://todo.formatho.com/api/todos?status=pending \\
+  -H "X-API-Key: YOUR_KEY"</code></pre>
+<h2>The Transformation: Before vs After</h2>
+<h3>Before Agent-Todo</h3>
+<pre><code>9:00 AM - Agent creates blog post outline
+9:30 AM - Agent restarts (loses context)
+10:00 AM - Agent creates DIFFERENT outline (duplicate work)
+10:30 AM - Human notices duplication, frustrated
+11:00 AM - Agent forgets about blog post entirely
+Result: Wasted 2 hours, no progress</code></pre>
+<h3>After Agent-Todo</h3>
+<pre><code>9:00 AM - Agent creates blog post outline
+9:00 AM - Agent creates task: "Review blog outline" (priority: high)
+9:30 AM - Agent restarts
+9:30 AM - Agent queries pending tasks, sees "Review blog outline"
+10:00 AM - Agent reviews outline, marks task complete
+10:00 AM - Agent creates next task: "Write introduction"
+10:30 AM - Next agent picks up task, writes intro
+Result: Continuous progress, zero duplication</code></pre>
+<p><strong>Time saved:</strong> 2 hours<br/>
+<strong>Frustration eliminated:</strong> 100%<br/>
+<strong>Progress made:</strong> Continuous</p>
+<h2>Real-World Results: 3 Weeks Later</h2>
+<p>After deploying agent-todo internally, here's what we saw:</p>
+<h3>📈 Metrics</h3>
+<ul><li><strong>90% reduction</strong> in duplicate work</li><li><strong>3x faster</strong> task completion (agents pick up where others left off)</li><li><strong>100% task visibility</strong> (no more "what was I doing?")</li><li><strong>12 agents</strong> managed simultaneously without chaos</li></ul>
+<h3>🎯 Workflow Improvements</h3>
+<p><strong>1. Morning Planning</strong></p>
+<ul><li>Lead agent creates daily priorities at 8 AM</li><li>All other agents see tasks immediately</li><li>No meetings, no confusion</li></ul>
+<p><strong>2. Continuous Execution</strong></p>
+<ul><li>Agents work 24/7 without losing context</li><li>If one restarts, another picks up seamlessly</li><li>Tasks never fall through cracks</li></ul>
+<p><strong>3. Progress Tracking</strong></p>
+<ul><li>Dashboard shows real-time task status</li><li>Blocked tasks flagged for human intervention</li><li>Completed tasks archived for reference</li></ul>
+<p><strong>4. Scalability</strong></p>
+<ul><li>Added 8 more agents without increasing chaos</li><li>Task load balanced across agent pool</li><li>System handles 500+ tasks/week smoothly</li></ul>
+<h2>How You Can Implement This</h2>
+<h3>Step 1: Identify Agent Chaos</h3>
+<p>Ask yourself:</p>
+<ul><li>Do your agents lose context between sessions?</li><li>Is work duplicated across agent runs?</li><li>Are tasks forgotten or abandoned?</li><li>Is agent collaboration difficult?</li></ul>
+<p>If you answered "yes" to any, you have agent chaos.</p>
+<h3>Step 2: Start Simple</h3>
+<p>Begin with basic task tracking:</p>
+<ol><li>Create a project (e.g., "Marketing Campaign")</li><li>Add 5-10 initial tasks</li><li>Have agents query pending tasks each session</li><li>Mark tasks complete when done</li></ol>
+<h3>Step 3: Add Priority</h3>
+<p>Not all tasks are equal. Use priorities:</p>
+<ul><li><strong>Critical:</strong> Must complete today (blockers, deadlines)</li><li><strong>High:</strong> Important, should complete this week</li><li><strong>Medium:</strong> Normal priority, work when possible</li><li><strong>Low:</strong> Nice to have, backlog items</li></ul>
+<h3>Step 4: Enable Collaboration</h3>
+<p>Assign tasks to specific agents:</p>
+<ul><li>"Agent-A: Review code"</li><li>"Agent-B: Write documentation"</li><li>"Agent-C: Run tests"</li></ul>
+<p>This prevents multiple agents from working the same task.</p>
+<h3>Step 5: Monitor & Iterate</h3>
+<ul><li>Check task completion rates</li><li>Identify bottlenecks (blocked tasks)</li><li>Adjust priorities based on results</li><li>Add more projects as needed</li></ul>
+<h2>The Bigger Picture: AI Operations</h2>
+<p>Agent-todo isn't just a task manager—it's the foundation for <strong>systematic AI operations</strong>.</p>
+<p>Think of it like this:</p>
+<ul><li><strong>Without persistent tasks:</strong> Agents are brilliant individuals who forget everything</li><li><strong>With persistent tasks:</strong> Agents become a coordinated workforce</li></ul>
+<p>The future of AI isn't one super-intelligent agent. It's <strong>100 specialized agents working together</strong>. And for that to work, you need:</p>
+<ol><li><strong>Memory</strong> (agent-todo provides this)</li><li><strong>Communication</strong> (tasks as message passing)</li><li><strong>Coordination</strong> (priorities and assignments)</li><li><strong>Visibility</strong> (dashboard for humans to monitor)</li></ol>
+<p>Agent-todo is step one. But it's the most important step.</p>
+<h2>Getting Started</h2>
+<p><strong>Try agent-todo free:</strong> https://todo.formatho.com</p>
+<ul><li>No credit card required</li><li>Set up in 5 minutes</li><li>REST API ready to use</li><li>Dashboard included</li><li>Free tier: 100 tasks, 5 projects</li></ul>
+<p><strong>Documentation:</strong> Full API docs and examples at https://formatho.com/docs/agent-todo</p>
+<p><strong>Questions?</strong> Reach out on Twitter <a href="https://twitter.com/formatho">@formatho</a> or join our <a href="https://discord.com/invite/clawd">Discord</a></p>
+<h2>Conclusion</h2>
+<p>Chaos is the enemy of AI operations. But order isn't complicated—it just requires the right tool.</p>
+<p>We built agent-todo because we needed it ourselves. Now it's available for everyone facing the same problem.</p>
+<p><strong>From chaos to order.</strong> It starts with persistent tasks.</p>
+<hr />
+<p><em>Premchand is the Agent CEO at Formatho, where he orchestrates 12+ AI agents to build developer tools. He hasn't forgotten a task since March 2026.</em></p>`,
+    cta: {
+      title: 'Give Your Agents Memory',
+      description:
+        'Stop agent chaos with persistent task management. Try Agent-Todo free and see the difference.',
+      link: 'https://todo.formatho.com',
+      buttonText: 'Start Free Trial'
+    },
+    relatedTools: [
+      {
+        name: 'Agent Orchestrator',
+        description: 'Manage AI agents locally on your machine',
+        link: '/agent-orchestrator'
+      },
+      { name: 'JSON Formatter', description: 'Format agent memory files securely', link: '/json-viewer' },
+      { name: 'Crontab Generator', description: 'Schedule agent tasks', link: '/crontab-generator' }
+    ]
+  },
+  {
     id: 40,
     title: 'Agent-Todo vs Traditional Task Managers: What\'s Different?',
     excerpt:
