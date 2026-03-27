@@ -59,6 +59,30 @@ export const routes = [
         }
       },
       {
+        path: 'beta',
+        name: 'beta',
+        component: () => import('../views/BetaView.vue'),
+        meta: {
+          title: 'Beta Program - Agent Orchestrator | Formatho',
+          description:
+            'Become a founding beta tester for Agent Orchestrator. Get 6 months free Pro tier ($294 value) and shape the future of AI agent automation.',
+          keywords:
+            'beta tester, agent orchestrator beta, early access, free pro tier, ai agents, developer tools beta'
+        }
+      },
+      {
+        path: 'compare',
+        name: 'compare',
+        component: () => import('../views/CompareView.vue'),
+        meta: {
+          title: 'Agent-Todo vs Zapier, n8n, Make - Comparison | Formatho',
+          description:
+            'Compare Agent-Todo with Zapier, n8n, and Make. See why Agent-Todo is the privacy-first, developer-friendly choice for AI agent task management.',
+          keywords:
+            'zapier alternative, n8n alternative, make alternative, agent todo comparison, privacy first automation, ai agent task management'
+        }
+      },
+      {
         path: 'blogs',
         name: 'blogs',
         component: () => import('../views/BlogsView.vue'),
