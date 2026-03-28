@@ -2,15 +2,11 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Input } from '@/components/ui/input'
-import { Search, Sparkles } from 'lucide-vue-next'
+import { Search } from 'lucide-vue-next'
 import * as LucideIcons from 'lucide-vue-next'
 import { tools } from '../data/tools'
 import EmailCapture from '@/components/EmailCapture.vue'
 import TestimonialsSection from '@/components/TestimonialsSection.vue'
-import TrustBadges from '@/components/TrustBadges.vue'
-import SocialProofStats from '@/components/SocialProofStats.vue'
-import UrgencyBanner from '@/components/UrgencyBanner.vue'
-import FloatingCTA from '@/components/FloatingCTA.vue'
 
 // Note: AOS is initialized globally in main.ts to avoid conflicts
 
@@ -35,22 +31,12 @@ const filteredTools = computed(() => {
 
 <template>
   <div class="min-h-screen">
-    <!-- Urgency Banner -->
-    <UrgencyBanner />
-
     <!-- Hero Section -->
     <section
       class="relative overflow-hidden border-b border-border/50 bg-gradient-to-b from-primary/5 via-background to-background"
       data-v-8d4ed633=""
     >
       <div class="absolute inset-0 bg-grid-pattern opacity-5" data-v-8d4ed633=""></div>
-      
-      <!-- Animated Gradient Background -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
-      
       <div class="container mx-auto px-4 py-12 md:py-16 relative" data-v-8d4ed633="">
         <div class="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto" data-v-8d4ed633="">
           <div class="flex items-center gap-4" data-aos="fade-down" data-aos-delay="0" data-v-8d4ed633="">
@@ -147,71 +133,11 @@ const filteredTools = computed(() => {
               source="homepage"
               variant="hero"
               placeholder="Get updates delivered to your inbox"
-              buttonText="Get Early Access"
+              buttonText="Subscribe"
               :show-icon="true"
             />
           </div>
-          
-          <!-- Trust Badges -->
-          <div class="w-full mt-8">
-            <TrustBadges />
-          </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Social Proof Section -->
-    <section class="container mx-auto px-4 py-12 border-b border-border/50">
-      <SocialProofStats />
-    </section>
-
-    <!-- Popular Tools Quick Access -->
-    <section class="container mx-auto px-4 py-12 border-b border-border/50">
-      <div class="text-center mb-8">
-        <h2 class="text-2xl md:text-3xl font-bold mb-3">
-          Start Using These Tools Now
-        </h2>
-        <p class="text-muted-foreground">
-          No signup required • Instant results • 100% private
-        </p>
-      </div>
-      
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-        <RouterLink 
-          to="/json-yaml" 
-          class="group p-4 bg-card border border-border rounded-lg hover:border-primary transition-all"
-        >
-          <div class="text-3xl mb-2">🔄</div>
-          <h3 class="font-semibold group-hover:text-primary transition-colors">JSON ↔ YAML</h3>
-          <p class="text-xs text-muted-foreground mt-1">Most popular</p>
-        </RouterLink>
-        
-        <RouterLink 
-          to="/base64" 
-          class="group p-4 bg-card border border-border rounded-lg hover:border-primary transition-all"
-        >
-          <div class="text-3xl mb-2">🔐</div>
-          <h3 class="font-semibold group-hover:text-primary transition-colors">Base64 Encoder</h3>
-          <p class="text-xs text-muted-foreground mt-1">Essential</p>
-        </RouterLink>
-        
-        <RouterLink 
-          to="/uuid" 
-          class="group p-4 bg-card border border-border rounded-lg hover:border-primary transition-all"
-        >
-          <div class="text-3xl mb-2">🎲</div>
-          <h3 class="font-semibold group-hover:text-primary transition-colors">UUID Generator</h3>
-          <p class="text-xs text-muted-foreground mt-1">Developer favorite</p>
-        </RouterLink>
-        
-        <RouterLink 
-          to="/diff" 
-          class="group p-4 bg-card border border-border rounded-lg hover:border-primary transition-all"
-        >
-          <div class="text-3xl mb-2">📊</div>
-          <h3 class="font-semibold group-hover:text-primary transition-colors">Diff Checker</h3>
-          <p class="text-xs text-muted-foreground mt-1">Compare text</p>
-        </RouterLink>
       </div>
     </section>
 
@@ -352,50 +278,16 @@ const filteredTools = computed(() => {
           <p class="text-muted-foreground mb-4" data-v-8d4ed633=""> Not seeing what you need?</p>
           <a
             href="mailto:support@formatho.com"
-            class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+            class="text-gray-900"
+            data-v-8d4ed633=""
           >
-            <Sparkles class="w-4 h-4" />
-            Suggest a Tool
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Final CTA Section -->
-    <section class="container mx-auto px-4 py-16 bg-gradient-to-b from-background to-primary/5 border-t border-border/50">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">
-          Ready to Boost Your Productivity?
-        </h2>
-        <p class="text-xl text-muted-foreground mb-8">
-          Join 15,000+ developers who trust Formatho for their daily workflow
-        </p>
-        
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-          <RouterLink
-            to="/pricing"
-            class="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
-          >
-            Get Started Free
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            Suggest a tool
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
             </svg>
-          </RouterLink>
-          <a
-            href="mailto:support@formatho.com"
-            class="inline-flex items-center gap-2 px-8 py-3 bg-secondary text-secondary-foreground rounded-lg font-medium hover:bg-secondary/80 transition-all"
-          >
-            Contact Us
           </a>
         </div>
-        
-        <p class="text-sm text-muted-foreground">
-          ✓ No credit card required • ✓ 100+ free tools • ✓ Instant access
-        </p>
       </div>
     </section>
-
-    <!-- Floating CTA for Mobile -->
-    <FloatingCTA />
   </div>
 </template>

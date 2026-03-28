@@ -2,8 +2,6 @@ import './polyfill'
 
 import { ViteSSG } from 'vite-ssg'
 import './style.css'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
 import App from './App.vue'
 import { routes } from './router'
 

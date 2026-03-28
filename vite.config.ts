@@ -29,16 +29,38 @@ export default defineConfig({
     // Core Web Vitals Optimization - Code Splitting
     rollupOptions: {
       output: {
-        manualChunks: {
+        // Use function-based manualChunks to handle SSR builds properly
+        // SSR builds treat 'vue' as external, so we need to exclude it
+        manualChunks(id) {
+          // Skip for SSR external modules (vue, vue-router are externals in SSR)
+          if (id.includes('node_modules/vue/') || id.includes('node_modules/@vue/') || id.includes('node_modules/vue-router/')) {
+            return undefined
+          }
+          
           // Split large vendor dependencies
-          'vue-vendor': ['vue', 'vue-router'],
-          'crypto-vendor': ['crypto-js', 'bcryptjs', 'bip39', '@noble/hashes'],
-          'blockchain-vendor': ['@solana/web3.js', 'viem', '@polkadot/keyring'],
-          'document-vendor': ['docx', 'jspdf', 'html2pdf.js'],
-          'code-vendor': ['highlight.js', 'marked', 'sql-formatter', 'gpt-tokenizer'],
-          'ui-vendor': ['radix-vue', 'lucide-vue-next', 'aos'],
-          'chart-vendor': ['chart.js', 'vue-chartjs'],
-          'bpmn-vendor': ['bpmn-js']
+          if (id.includes('node_modules/crypto-js/') || id.includes('node_modules/bcryptjs/') || id.includes('node_modules/bip39/') || id.includes('node_modules/@noble/hashes/')) {
+            return 'crypto-vendor'
+          }
+          if (id.includes('node_modules/@solana/web3.js/') || id.includes('node_modules/viem/') || id.includes('node_modules/@polkadot/keyring/')) {
+            return 'blockchain-vendor'
+          }
+          if (id.includes('node_modules/docx/') || id.includes('node_modules/jspdf/') || id.includes('node_modules/html2pdf.js/')) {
+            return 'document-vendor'
+          }
+          if (id.includes('node_modules/highlight.js/') || id.includes('node_modules/marked/') || id.includes('node_modules/sql-formatter/') || id.includes('node_modules/gpt-tokenizer/')) {
+            return 'code-vendor'
+          }
+          if (id.includes('node_modules/radix-vue/') || id.includes('node_modules/lucide-vue-next/')) {
+            return 'ui-vendor'
+          }
+          if (id.includes('node_modules/chart.js/') || id.includes('node_modules/vue-chartjs/')) {
+            return 'chart-vendor'
+          }
+          if (id.includes('node_modules/bpmn-js/')) {
+            return 'bpmn-vendor'
+          }
+          
+          return undefined
         }
       }
     },

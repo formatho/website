@@ -1136,19 +1136,22 @@ export const routes = [
         }
       },
       {
-        path: 'url-parser',
-        name: 'url-parser',
-        component: () => import('../views/URLParserView.vue'),
-        meta: { title: 'URL Parser', description: 'Parse and analyze URL components.' }
+        path: 'beta-feedback',
+        name: 'beta-feedback',
+        component: () => import('../views/BetaFeedbackView.vue'),
+        meta: {
+          title: 'Beta Feedback - Formatho',
+          description: 'Share your feedback to help us improve Formatho',
+          keywords: 'beta feedback, bug report, feature request'
+        }
       },
       {
-        path: 'tutorial',
-        name: 'tutorial',
-        component: () => import('../views/TutorialView.vue'),
+        path: 'admin/beta-feedback',
+        name: 'admin-beta-feedback',
+        component: () => import('../views/admin/BetaFeedbackAdmin.vue'),
         meta: {
-          title: 'Agent Orchestrator Tutorial - Learn in 5 Minutes',
-          description: 'Interactive tutorial to teaches you how to create agents, assign tasks, and monitor progress in Agent Orchestrator.',
-          keywords: 'agent orchestrator tutorial, how to use agent orchestrator, ai agents tutorial'
+          title: 'Beta Feedback Dashboard - Formatho Admin',
+          description: 'Review and manage beta tester feedback'
         }
       }
     ]
