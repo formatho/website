@@ -2,7 +2,7 @@
 import { RouterLink } from 'vue-router'
 import { useHead } from '@vueuse/head'
 import { Calendar, Clock, ArrowRight, Tag } from 'lucide-vue-next'
-import { blogPosts } from '../data/blogPosts'
+import { blogMetadata } from '../data/blogMetadata'
 import EmailCapture from '@/components/EmailCapture.vue'
 
 // Note: AOS is initialized globally in main.ts to prevent scroll freezing conflicts
@@ -32,7 +32,7 @@ useHead({
           name: 'Formatho',
           url: 'https://formatho.com'
         },
-        blogPost: blogPosts.slice(0, 10).map(post => ({
+        blogPost: blogMetadata.slice(0, 10).map(post => ({
           '@type': 'BlogPosting',
           headline: post.title,
           datePublished: post.date,
@@ -63,14 +63,14 @@ useHead({
       <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
         Developer guides, tutorials, and insights from the Formatho team
       </p>
-      <p class="text-sm text-muted-foreground mt-2">{{ blogPosts.length }} articles</p>
+      <p class="text-sm text-muted-foreground mt-2">{{ blogMetadata.length }} articles</p>
     </div>
 
     <!-- Blog Posts Grid -->
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <article
-          v-for="(post, index) in blogPosts"
+          v-for="(post, index) in blogMetadata"
           :key="post.id"
           class="glass-card-scale overflow-hidden hover:border-primary/50 transition-all group flex flex-col"
           data-aos="fade-up"
@@ -143,7 +143,7 @@ useHead({
       </div>
 
       <!-- Empty State (if no posts) -->
-      <div v-if="blogPosts.length === 0" class="text-center py-12">
+      <div v-if="blogMetadata.length === 0" class="text-center py-12">
         <p class="text-muted-foreground">No blog posts yet. Check back soon!</p>
       </div>
     </div>
