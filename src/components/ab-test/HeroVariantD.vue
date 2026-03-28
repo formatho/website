@@ -170,7 +170,9 @@ const exampleQueries = [
 }
 
 .example-link {
-  @apply text-primary hover:underline cursor-pointer bg-transparent border-0 p-0 font-inherit;
+  @apply text-primary hover:underline cursor-pointer bg-transparent border-0 p-0;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .search-results {

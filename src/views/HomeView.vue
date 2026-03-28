@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Input } from '@/components/ui/input'
 import { Search, Sparkles } from 'lucide-vue-next'
@@ -12,7 +12,29 @@ import SocialProofStats from '@/components/SocialProofStats.vue'
 import UrgencyBanner from '@/components/UrgencyBanner.vue'
 import FloatingCTA from '@/components/FloatingCTA.vue'
 
+// A/B Testing - Hero Variants
+import { useABTest } from '@/composables/useABTest'
+import HeroVariantB from '@/components/ab-test/HeroVariantB.vue'
+import HeroVariantC from '@/components/ab-test/HeroVariantC.vue'
+import HeroVariantD from '@/components/ab-test/HeroVariantD.vue'
+
 // Note: AOS is initialized globally in main.ts to avoid conflicts
+
+// A/B Testing setup
+const { variant: heroVariant, isLoaded: abTestLoaded, trackConversion } = useABTest()
+
+// Track impression when component mounts
+onMounted(() => {
+  if (abTestLoaded.value) {
+    trackConversion('impression')
+  }
+})
+
+// Determine which hero to show
+const showControlHero = computed(() => abTestLoaded.value && heroVariant.value === 'control')
+const showVariantB = computed(() => abTestLoaded.value && heroVariant.value === 'b')
+const showVariantC = computed(() => abTestLoaded.value && heroVariant.value === 'c')
+const showVariantD = computed(() => abTestLoaded.value && heroVariant.value === 'd')
 
 const searchQuery = ref('')
 
@@ -35,11 +57,22 @@ const filteredTools = computed(() => {
 
 <template>
   <div class="min-h-screen">
-    <!-- Urgency Banner -->
+    <!-- Urgency Banner (shown for all variants) -->
     <UrgencyBanner />
 
-    <!-- Hero Section -->
+    <!-- A/B Test Hero Section -->
+    <!-- Variant B: Social Proof -->
+    <HeroVariantB v-if="showVariantB" />
+    
+    <!-- Variant C: Problem-Solution -->
+    <HeroVariantC v-else-if="showVariantC" />
+    
+    <!-- Variant D: Minimal CTA-Focused -->
+    <HeroVariantD v-else-if="showVariantD" />
+    
+    <!-- Control: Current Hero (default) -->
     <section
+      v-else
       class="relative overflow-hidden border-b border-border/50 bg-gradient-to-b from-primary/5 via-background to-background"
       data-v-8d4ed633=""
     >
