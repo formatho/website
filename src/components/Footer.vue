@@ -22,7 +22,7 @@ const currentYear = new Date().getFullYear()
           </p>
           <div class="flex items-center gap-4">
             <a
-              href="https://github.com/formatho/tools"
+              href="https://github.com/formatho/website"
               target="_blank"
               rel="noopener noreferrer"
               class="text-muted-foreground hover:text-gray-900 transition-colors"
@@ -164,7 +164,7 @@ const currentYear = new Date().getFullYear()
             Contact Us
           </RouterLink>
           <a
-            href="https://github.com/formatho/tools"
+            href="https://github.com/formatho/website"
             target="_blank"
             rel="noopener noreferrer"
             class="hover:text-gray-900 transition-colors"

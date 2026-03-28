@@ -184,7 +184,7 @@ const categories = [
 
           <!-- GitHub Link -->
           <a
-            href="https://github.com/formatho/tools"
+            href="https://github.com/formatho/website"
             target="_blank"
             rel="noopener noreferrer"
             class="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:bg-white rounded-lg py-2 px-3"
@@ -287,7 +287,7 @@ const categories = [
           <!-- GitHub Link -->
           <div class="pt-4 border-t border-border">
             <a
-              href="https://github.com/formatho/tools"
+              href="https://github.com/formatho/website"
               target="_blank"
               rel="noopener noreferrer"
               class="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:bg-white rounded-lg"

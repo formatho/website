@@ -41,7 +41,7 @@ onMounted(() => {
                 GitHub.
               </p>
               <a
-                href="https://github.com/formatho/tools"
+                href="https://github.com/formatho/website"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-gray-900"
@@ -78,7 +78,7 @@ onMounted(() => {
                 developers.
               </p>
               <a
-                href="https://github.com/formatho/tools/discussions"
+                href="https://github.com/formatho/website/discussions"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-gray-900"
