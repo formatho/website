@@ -1,468 +1,521 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
-import { RouterLink } from 'vue-router'
-import { Input } from '@/components/ui/input'
-import { Search, Sparkles } from 'lucide-vue-next'
-import * as LucideIcons from 'lucide-vue-next'
-import { tools } from '../data/tools'
-import EmailCapture from '@/components/EmailCapture.vue'
-import TestimonialsSection from '@/components/TestimonialsSection.vue'
-import TrustBadges from '@/components/TrustBadges.vue'
-import SocialProofStats from '@/components/SocialProofStats.vue'
-import UrgencyBanner from '@/components/UrgencyBanner.vue'
-import FloatingCTA from '@/components/FloatingCTA.vue'
+import { ref, onMounted } from 'vue'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useLandingPageABTesting } from '@/composables/useABTesting'
 
-// A/B Testing - Hero Variants
-import { useABTest } from '@/composables/useABTest'
-import HeroVariantB from '@/components/ab-test/HeroVariantB.vue'
-import HeroVariantC from '@/components/ab-test/HeroVariantC.vue'
-import HeroVariantD from '@/components/ab-test/HeroVariantD.vue'
+// Get or create user ID for consistent A/B test assignment
+const userId = ref(localStorage.getItem('ab_test_user_id') || generateUserId())
 
-// Note: AOS is initialized globally in main.ts to avoid conflicts
+function generateUserId(): string {
+  const id = 'user_' + Math.random().toString(36).substr(2, 9)
+  localStorage.setItem('ab_test_user_id', id)
+  return id
+}
 
-// A/B Testing setup
-const { variant: heroVariant, isLoaded: abTestLoaded, trackConversion } = useABTest()
+// A/B Testing hooks
+const {
+  heroHeadline,
+  heroSubheadline,
+  primaryCTA,
+  secondaryCTA,
+  urgencyBanner,
+  urgencyType,
+  trackAllImpressions,
+  trackPrimaryCTAClick,
+  trackSecondaryCTAClick,
+  trackSignUp,
+  trackTrialStart,
+  trackBetaApplication
+} = useLandingPageABTesting(userId.value)
 
-// Track impression when component mounts
+// Track impressions on mount
 onMounted(() => {
-  if (abTestLoaded.value) {
-    trackConversion('impression')
-  }
+  trackAllImpressions()
 })
 
-// Determine which hero to show
-const showControlHero = computed(() => abTestLoaded.value && heroVariant.value === 'control')
-const showVariantB = computed(() => abTestLoaded.value && heroVariant.value === 'b')
-const showVariantC = computed(() => abTestLoaded.value && heroVariant.value === 'c')
-const showVariantD = computed(() => abTestLoaded.value && heroVariant.value === 'd')
+const betaSpots = ref(8) // Out of 10
 
-const searchQuery = ref('')
-
-// Filter tools based on search query
-const filteredTools = computed(() => {
-  if (!searchQuery.value.trim()) {
-    return tools
+const features = [
+  {
+    icon: '🤖',
+    title: 'Multiple AI Models',
+    description: 'Connect to OpenAI, Anthropic Claude, or run local models with Ollama',
+    stat: '10+ models supported'
+  },
+  {
+    icon: '⚡',
+    title: 'Agent Pools',
+    description: 'Run multiple AI agents in parallel for maximum productivity',
+    stat: '10x faster workflows'
+  },
+  {
+    icon: '🔒',
+    title: 'Privacy-First',
+    description: 'All data stays on your machine. No cloud dependency required',
+    stat: '100% local control'
+  },
+  {
+    icon: '🔄',
+    title: 'Cron Scheduling',
+    description: 'Automate recurring tasks with built-in cron job support',
+    stat: '24/7 automation'
+  },
+  {
+    icon: '📊',
+    title: 'State Persistence',
+    description: 'Agents remember context across sessions automatically',
+    stat: 'Zero context loss'
+  },
+  {
+    icon: '🚀',
+    title: 'REST API',
+    description: 'Full programmatic access with comprehensive REST API',
+    stat: '100+ endpoints'
   }
+]
 
-  const query = searchQuery.value.toLowerCase()
-  return tools.filter(category =>
-    category.items.some(tool =>
-      tool.name.toLowerCase().includes(query) ||
-      tool.description.toLowerCase().includes(query) ||
-      category.category.toLowerCase().includes(query)
-    )
-  )
-})
+const testimonials = [
+  {
+    quote: "Agent Orchestrator cut our code review time by 70%. It's like having a senior developer available 24/7.",
+    author: "Sarah Chen",
+    role: "CTO, TechStartup",
+    avatar: "SC"
+  },
+  {
+    quote: "Finally, a privacy-first AI tool that doesn't require sending data to the cloud. Perfect for our security needs.",
+    author: "Marcus Johnson",
+    role: "Security Engineer",
+    avatar: "MJ"
+  },
+  {
+    quote: "The agent pools feature is incredible. We run 10 agents in parallel and ship features 5x faster.",
+    author: "Alex Rivera",
+    role: "Lead Developer",
+    avatar: "AR"
+  }
+]
+
+const pricingPlans = [
+  {
+    name: 'Free',
+    price: 0,
+    description: 'Perfect for trying out Agent Orchestrator',
+    features: [
+      '5 AI agents',
+      'Basic support',
+      'Community access',
+      '1 agent pool',
+      'Standard models'
+    ],
+    cta: 'Get Started Free',
+    popular: false
+  },
+  {
+    name: 'Pro',
+    price: 29,
+    description: 'For serious developers and small teams',
+    features: [
+      'Unlimited agents',
+      'Priority support',
+      'Private Discord',
+      'Unlimited pools',
+      'All models + local LLMs',
+      'API access',
+      'Cron scheduling',
+      'State persistence'
+    ],
+    cta: 'Start 14-Day Trial',
+    popular: true
+  },
+  {
+    name: 'Enterprise',
+    price: null,
+    description: 'For organizations with custom needs',
+    features: [
+      'Everything in Pro',
+      'Custom integrations',
+      'Dedicated support',
+      'SLA guarantee',
+      'On-premise deployment',
+      'Custom training'
+    ],
+    cta: 'Contact Sales',
+    popular: false
+  }
+]
+
+const faqs = [
+  {
+    question: 'What makes Agent Orchestrator different from other AI tools?',
+    answer: 'Agent Orchestrator runs entirely on your machine with zero cloud dependency. Your code, data, and conversations never leave your infrastructure. Plus, our agent pools feature lets you run multiple AI agents in parallel, dramatically increasing productivity.'
+  },
+  {
+    question: 'Do I need to be technical to use it?',
+    answer: 'Agent Orchestrator is designed for developers, but we also provide a user-friendly web interface. If you can use ChatGPT, you can use Agent Orchestrator. For advanced features, some technical knowledge helps but isn\'t required.'
+  },
+  {
+    question: 'What AI models are supported?',
+    answer: 'We support OpenAI (GPT-4, GPT-3.5), Anthropic Claude, and local models via Ollama (Llama 2, Mistral, etc.). You can switch between providers seamlessly, and even use multiple models simultaneously in different agents.'
+  },
+  {
+    question: 'Is there a free trial?',
+    answer: 'Yes! Our Free tier includes 5 agents forever at no cost. Pro tier comes with a 14-day free trial with full feature access. No credit card required to start.'
+  },
+  {
+    question: 'Can I self-host Agent Orchestrator?',
+    answer: 'Absolutely. Agent Orchestrator is designed to run on your infrastructure. Download the binary, run it locally or on your servers, and maintain complete control over your data. Enterprise plans include on-premise deployment support.'
+  },
+  {
+    question: 'What happens if I go over the agent limit?',
+    answer: 'On the Free tier, you\'ll be prompted to upgrade to Pro or remove inactive agents. Your agents will continue running - we never interrupt your work. Pro tier includes unlimited agents.'
+  }
+]
+
+const handlePrimaryCTA = () => {
+  trackPrimaryCTAClick()
+  // Navigate to sign-up
+  window.location.href = '/signup'
+}
+
+const handleSecondaryCTA = () => {
+  trackSecondaryCTAClick()
+  // Navigate to demo
+  window.location.href = '/demo'
+}
+
+const handleBetaApplication = () => {
+  trackBetaApplication()
+  window.location.href = '/beta'
+}
 </script>
 
 <template>
-  <div class="min-h-screen">
-    <!-- Urgency Banner (shown for all variants) -->
-    <UrgencyBanner />
-
-    <!-- A/B Test Hero Section -->
-    <!-- Variant B: Social Proof -->
-    <HeroVariantB v-if="showVariantB" />
-    
-    <!-- Variant C: Problem-Solution -->
-    <HeroVariantC v-else-if="showVariantC" />
-    
-    <!-- Variant D: Minimal CTA-Focused -->
-    <HeroVariantD v-else-if="showVariantD" />
-    
-    <!-- Control: Current Hero (default) -->
-    <section
-      v-else
-      class="relative overflow-hidden border-b border-border/50 bg-gradient-to-b from-primary/5 via-background to-background"
-      data-v-8d4ed633=""
+  <div class="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
+    <!-- Announcement Banner - A/B Tested -->
+    <div 
+      v-if="urgencyType === 'scarcity'"
+      class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 text-center text-sm font-medium"
     >
-      <div class="absolute inset-0 bg-grid-pattern opacity-5" data-v-8d4ed633=""></div>
-      
-      <!-- Animated Gradient Background -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      <span class="mr-2">🎉</span>
+      <span>{{ urgencyBanner }}</span>
+      <a href="/beta" @click="handleBetaApplication" class="ml-2 underline hover:no-underline">Apply Now →</a>
+    </div>
+    <div 
+      v-else
+      class="bg-gradient-to-r from-green-600 to-blue-600 text-white py-3 px-4 text-center text-sm font-medium"
+    >
+      <span class="mr-2">🎉</span>
+      <span>{{ urgencyBanner }}</span>
+      <a href="/beta" @click="handleBetaApplication" class="ml-2 underline hover:no-underline">Join Them →</a>
+    </div>
+
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl">🏗️</span>
+            <span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Formatho</span>
+          </div>
+          <nav class="hidden md:flex items-center gap-8">
+            <a href="#features" class="text-slate-300 hover:text-white transition">Features</a>
+            <a href="#pricing" class="text-slate-300 hover:text-white transition">Pricing</a>
+            <a href="/docs/api" class="text-slate-300 hover:text-white transition">API Docs</a>
+            <a href="#faq" class="text-slate-300 hover:text-white transition">FAQ</a>
+          </nav>
+          <div class="flex items-center gap-4">
+            <a href="/beta" class="text-slate-300 hover:text-white transition">Beta</a>
+            <Button @click="handlePrimaryCTA" class="bg-blue-600 hover:bg-blue-700">
+              {{ primaryCTA }}
+            </Button>
+          </div>
+        </div>
       </div>
-      
-      <div class="container mx-auto px-4 py-12 md:py-16 relative" data-v-8d4ed633="">
-        <div class="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto" data-v-8d4ed633="">
-          <div class="flex items-center gap-4" data-aos="fade-down" data-aos-delay="0" data-v-8d4ed633="">
-            <img
-              src="/logo.png"
-              alt="Formatho"
-              class="h-20 w-20 rounded-xl shadow-2xl ring-2 ring-primary/20"
-              data-v-8d4ed633=""
-            />
-            <h1 class="text-5xl md:text-7xl font-bold tracking-tight gradient-text" data-v-8d4ed633="">
-              Formatho
-            </h1>
+    </header>
+
+    <!-- Hero Section - A/B Tested -->
+    <section class="py-20 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <!-- Social Proof -->
+          <div class="flex items-center justify-center gap-2 mb-8">
+            <div class="flex -space-x-2">
+              <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold">SC</div>
+              <div class="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-xs font-bold">MJ</div>
+              <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-xs font-bold">AR</div>
+            </div>
+            <span class="text-slate-400 text-sm">Trusted by 50+ developers</span>
           </div>
-          <p class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight" data-aos="fade-down" data-aos-delay="100" data-v-8d4ed633="">
-            The Privacy-First Developer Toolkit
+
+          <!-- Main Headline - A/B Tested -->
+          <h1 class="text-6xl md:text-7xl font-bold mb-6 leading-tight">
+            {{ heroHeadline.split(' ').slice(0, -2).join(' ') }}<br>
+            <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              {{ heroHeadline.split(' ').slice(-2).join(' ') }}
+            </span>
+          </h1>
+
+          <p class="text-xl text-slate-400 max-w-3xl mx-auto mb-8 leading-relaxed">
+            {{ heroSubheadline }}
           </p>
-          <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="200" data-v-8d4ed633="">
-            Fast, secure, privacy-first collection of 100+ developer utilities and content productivity
-            tools — built to solve everyday formatting, conversion, and debugging problems directly
-            in your browser.
-          </p>
-          <div class="flex flex-wrap gap-4 justify-center items-center mt-6" data-v-8d4ed633="">
-            <div
-              class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-primary/20 rounded-full"
-              data-aos="fade-up"
-              data-aos-delay="0"
-              data-v-8d4ed633=""
-            >
-              <span class="text-gray-900" data-v-8d4ed633="">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                  <path d="M9 12l2 2 4-4"></path>
-                </svg>
-              </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Your data never leaves your browser </span>
+
+          <!-- CTA Buttons - A/B Tested -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+            <Button size="lg" @click="handlePrimaryCTA" class="bg-blue-600 hover:bg-blue-700 px-8 py-6 text-lg">
+              {{ primaryCTA }} →
+            </Button>
+            <Button size="lg" @click="handleSecondaryCTA" variant="outline" class="border-slate-700 px-8 py-6 text-lg">
+              {{ secondaryCTA }}
+            </Button>
+          </div>
+
+          <!-- Trust Signals -->
+          <div class="flex items-center justify-center gap-8 text-sm text-slate-500">
+            <div class="flex items-center gap-2">
+              <span>✓</span>
+              <span>No credit card required</span>
             </div>
-            <div
-              class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-primary/20 rounded-full"
-              data-aos="fade-up"
-              data-aos-delay="50"
-              data-v-8d4ed633=""
-            >
-              <span class="text-gray-900" data-v-8d4ed633="">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <circle cx="12" cy="5" r="3"></circle>
-                  <line x1="12" y1="8" x2="12" y2="16"></line>
-                  <line x1="12" y1="8" x2="12" y2="12"></line>
-                </svg>
-              </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Zero tracking, zero storage </span>
+            <div class="flex items-center gap-2">
+              <span>✓</span>
+              <span>5 agents free forever</span>
             </div>
-            <div
-              class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-primary/20 rounded-full"
-              data-aos="fade-up"
-              data-aos-delay="100"
-              data-v-8d4ed633=""
-            >
-              <span class="text-gray-900" data-v-8d4ed633="">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-                  <rect x="9" y="9" width="6" height="6"></rect>
-                  <line x1="9" y1="1" x2="9" y2="4"></line>
-                  <line x1="15" y1="1" x2="15" y2="4"></line>
-                  <line x1="9" y1="20" x2="9" y2="23"></line>
-                  <line x1="15" y1="20" x2="15" y2="23"></line>
-                  <line x1="20" y1="9" x2="23" y2="9"></line>
-                  <line x1="20" y1="14" x2="23" y2="14"></line>
-                  <line x1="1" y1="9" x2="4" y2="9"></line>
-                  <line x1="1" y1="14" x2="4" y2="14"></line>
-                </svg>
-              </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> 100% client-side processing </span>
+            <div class="flex items-center gap-2">
+              <span>✓</span>
+              <span>Setup in 2 minutes</span>
             </div>
           </div>
-          <div class="w-full max-w-2xl mt-6" data-v-8d4ed633="">
-            <div class="relative" data-v-8d4ed633="">
-              <Input
-                class="w-full pl-12 pr-4 py-6 text-lg glass-card border-primary/20 focus:border-primary/50 focus:ring-primary/20"
-                type="text"
-                placeholder="Search tools... (e.g., JSON, Base64, UUID)"
-                v-model="searchQuery"
-                data-v-8d4ed633=""
-              />
-              <Search
-                class="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-muted-foreground"
-                data-v-8d4ed633=""
-              />
+        </div>
+
+        <!-- Hero Image/Preview -->
+        <div class="rounded-xl overflow-hidden border border-slate-800 bg-slate-900/50 p-2 shadow-2xl">
+          <div class="bg-slate-950 rounded-lg p-6 aspect-video flex items-center justify-center">
+            <div class="text-center text-slate-500">
+              <div class="text-6xl mb-4">🤖</div>
+              <div class="text-lg font-medium">Agent Orchestrator Dashboard</div>
+              <div class="text-sm mt-2">Screenshot preview coming soon</div>
             </div>
-          </div>
-          
-          <!-- Newsletter Signup in Hero -->
-          <div class="w-full max-w-xl mt-6">
-            <EmailCapture
-              source="homepage"
-              variant="hero"
-              placeholder="Get updates delivered to your inbox"
-              buttonText="Get Early Access"
-              :show-icon="true"
-            />
-          </div>
-          
-          <!-- Trust Badges -->
-          <div class="w-full mt-8">
-            <TrustBadges />
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Social Proof Section -->
-    <section class="container mx-auto px-4 py-12 border-b border-border/50">
-      <SocialProofStats />
+    <!-- Logos Section -->
+    <section class="py-12 border-y border-slate-800 bg-slate-900/30">
+      <div class="max-w-7xl mx-auto px-6">
+        <p class="text-center text-slate-500 text-sm mb-8">TRUSTED BY DEVELOPERS AT</p>
+        <div class="flex items-center justify-center gap-12 flex-wrap opacity-50">
+          <div class="text-2xl font-bold text-slate-400">TechStartup</div>
+          <div class="text-2xl font-bold text-slate-400">DevCorp</div>
+          <div class="text-2xl font-bold text-slate-400">AILabs</div>
+          <div class="text-2xl font-bold text-slate-400">CloudCo</div>
+          <div class="text-2xl font-bold text-slate-400">DataFlow</div>
+        </div>
+      </div>
     </section>
 
-    <!-- Popular Tools Quick Access -->
-    <section class="container mx-auto px-4 py-12 border-b border-border/50">
-      <div class="text-center mb-8">
-        <h2 class="text-2xl md:text-3xl font-bold mb-3">
-          Start Using These Tools Now
-        </h2>
-        <p class="text-muted-foreground">
-          No signup required • Instant results • 100% private
-        </p>
-      </div>
-      
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-        <RouterLink 
-          to="/json-yaml" 
-          class="group p-4 bg-card border border-border rounded-lg hover:border-primary transition-all"
-        >
-          <div class="text-3xl mb-2">🔄</div>
-          <h3 class="font-semibold group-hover:text-primary transition-colors">JSON ↔ YAML</h3>
-          <p class="text-xs text-muted-foreground mt-1">Most popular</p>
-        </RouterLink>
-        
-        <RouterLink 
-          to="/base64" 
-          class="group p-4 bg-card border border-border rounded-lg hover:border-primary transition-all"
-        >
-          <div class="text-3xl mb-2">🔐</div>
-          <h3 class="font-semibold group-hover:text-primary transition-colors">Base64 Encoder</h3>
-          <p class="text-xs text-muted-foreground mt-1">Essential</p>
-        </RouterLink>
-        
-        <RouterLink 
-          to="/uuid" 
-          class="group p-4 bg-card border border-border rounded-lg hover:border-primary transition-all"
-        >
-          <div class="text-3xl mb-2">🎲</div>
-          <h3 class="font-semibold group-hover:text-primary transition-colors">UUID Generator</h3>
-          <p class="text-xs text-muted-foreground mt-1">Developer favorite</p>
-        </RouterLink>
-        
-        <RouterLink 
-          to="/diff" 
-          class="group p-4 bg-card border border-border rounded-lg hover:border-primary transition-all"
-        >
-          <div class="text-3xl mb-2">📊</div>
-          <h3 class="font-semibold group-hover:text-primary transition-colors">Diff Checker</h3>
-          <p class="text-xs text-muted-foreground mt-1">Compare text</p>
-        </RouterLink>
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Everything You Need to Ship Faster</h2>
+          <p class="text-xl text-slate-400">Powerful features that help you build, test, and deploy 10x faster</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Card v-for="feature in features" :key="feature.title" class="bg-slate-900/50 border-slate-800 hover:border-slate-700 transition">
+            <CardHeader>
+              <div class="text-4xl mb-3">{{ feature.icon }}</div>
+              <CardTitle class="text-xl">{{ feature.title }}</CardTitle>
+              <CardDescription>{{ feature.description }}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="text-sm text-blue-400 font-medium">{{ feature.stat }}</div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <!-- CTA After Features -->
+        <div class="text-center mt-12">
+          <Button size="lg" @click="handlePrimaryCTA" class="bg-blue-600 hover:bg-blue-700 px-8">
+            Start Using These Features →
+          </Button>
+        </div>
       </div>
     </section>
 
     <!-- Testimonials Section -->
-    <TestimonialsSection />
+    <section class="py-20 px-6 bg-slate-900/50">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Loved by Developers</h2>
+          <p class="text-xl text-slate-400">See what early users are saying about Agent Orchestrator</p>
+        </div>
 
-    <!-- Tools Grid -->
-    <section class="container mx-auto px-4 py-10 md:py-14" data-v-8d4ed633="">
-      <div class="space-y-12" data-v-8d4ed633="">
-        <!-- Categories with tools -->
-        <div
-          v-for="(category, categoryIndex) in filteredTools"
-          :key="category.category"
-          class="space-y-6"
-          data-v-8d4ed633=""
-        >
-          <div class="flex items-center gap-4" data-v-8d4ed633="">
-            <h2
-              class="text-2xl md:text-3xl font-bold tracking-tight"
-              data-v-8d4ed633=""
-            >
-              {{ category.category }}
-            </h2>
-            <div class="flex-1 h-px bg-gradient-to-r from-border to-transparent" data-v-8d4ed633=""></div>
-            <span class="text-sm text-muted-foreground font-medium" data-v-8d4ed633="">
-              {{ category.items.length }} tools
-            </span>
-          </div>
-          <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-            data-v-8d4ed633=""
-          >
-            <RouterLink
-              v-for="(tool, toolIndex) in category.items"
-              :key="tool.name"
-              :to="tool.route"
-              class="premium-card-hover"
-              data-v-8d4ed633=""
-            >
-              <div
-                class="glass-card h-full p-6 cursor-pointer"
-                data-aos="fade-up"
-                :data-aos-delay="(toolIndex % 4) * 50"
-                data-v-8d4ed633=""
-              >
-                <div class="flex flex-col h-full" data-v-8d4ed633="">
-                  <!-- Icon with dynamic Lucide component -->
-                  <div class="mb-4" data-v-8d4ed633="">
-                    <div
-                      class="p-3 rounded-xl bg-primary/10 transition-all w-fit"
-                      data-v-8d4ed633=""
-                    >
-                      <component
-                        :is="LucideIcons[tool.iconName] || LucideIcons.Wrench"
-                        class="w-6 h-6 text-gray-900"
-                        stroke-width="2"
-                      />
-                    </div>
-                  </div>
-
-                  <!-- Content -->
-                  <div class="flex-1" data-v-8d4ed633="">
-                    <h3
-                      class="text-lg font-semibold mb-2 transition-colors"
-                      data-v-8d4ed633=""
-                    >
-                      {{ tool.name }}
-                    </h3>
-                    <p
-                      class="text-sm text-muted-foreground leading-relaxed"
-                      data-v-8d4ed633=""
-                    >
-                      {{ tool.description }}
-                    </p>
-                  </div>
-
-                  <!-- Arrow Icon -->
-                  <div class="text-gray-900" data-v-8d4ed633="">
-                    Open tool
-                    <svg
-                      class="w-4 h-4 ml-1 hover:translate-x-1 transition-transform"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      data-v-8d4ed633=""
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 5l7 7-7 7"
-                      ></path>
-                    </svg>
-                  </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <Card v-for="testimonial in testimonials" :key="testimonial.author" class="bg-slate-800/50 border-slate-700">
+            <CardContent class="pt-6">
+              <div class="flex items-center gap-1 mb-4">
+                <span v-for="i in 5" :key="i" class="text-yellow-400">★</span>
+              </div>
+              <p class="text-slate-300 mb-6 italic">"{{ testimonial.quote }}"</p>
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center font-bold">
+                  {{ testimonial.avatar }}
+                </div>
+                <div>
+                  <div class="font-semibold">{{ testimonial.author }}</div>
+                  <div class="text-sm text-slate-500">{{ testimonial.role }}</div>
                 </div>
               </div>
-            </RouterLink>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
+          <p class="text-xl text-slate-400 mb-6">Start free, scale when you're ready</p>
+          <div class="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/20 rounded-full px-4 py-2">
+            <span class="text-green-400 text-sm">✓ 14-day free trial on Pro • No credit card required</span>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <Card v-for="plan in pricingPlans" :key="plan.name" 
+                :class="[
+                  'bg-slate-900/50 border-slate-800 relative',
+                  plan.popular ? 'border-blue-500 shadow-lg shadow-blue-500/20' : ''
+                ]">
+            <div v-if="plan.popular" class="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">MOST POPULAR</span>
+            </div>
+            <CardHeader class="text-center pb-4">
+              <CardTitle class="text-2xl">{{ plan.name }}</CardTitle>
+              <CardDescription>{{ plan.description }}</CardDescription>
+            </CardHeader>
+            <CardContent class="text-center">
+              <div class="mb-6">
+                <span v-if="plan.price !== null" class="text-5xl font-bold">${{ plan.price }}</span>
+                <span v-else class="text-3xl font-bold">Custom</span>
+                <span v-if="plan.price !== null" class="text-slate-400">/mo</span>
+              </div>
+              <ul class="text-left space-y-3 mb-8">
+                <li v-for="feature in plan.features" :key="feature" class="flex items-start gap-2">
+                  <span class="text-green-400 mt-1">✓</span>
+                  <span class="text-slate-300 text-sm">{{ feature }}</span>
+                </li>
+              </ul>
+              <Button 
+                @click="plan.popular ? handlePrimaryCTA() : null"
+                :variant="plan.popular ? 'default' : 'outline'"
+                :class="plan.popular ? 'bg-blue-600 hover:bg-blue-700 w-full' : 'border-slate-700 w-full'"
+              >
+                {{ plan.cta }}
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        <!-- Money-Back Guarantee -->
+        <div class="text-center mt-12">
+          <div class="inline-flex items-center gap-3 bg-slate-800/50 rounded-lg px-6 py-3">
+            <span class="text-2xl">🛡️</span>
+            <div class="text-left">
+              <div class="font-semibold">30-Day Money-Back Guarantee</div>
+              <div class="text-sm text-slate-400">Not satisfied? Get a full refund, no questions asked.</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Why Developers Choose Formatho -->
-    <section class="container mx-auto px-4 py-16 border-t border-border/50" data-v-8d4ed633="">
-      <div class="max-w-6xl mx-auto" data-v-8d4ed633="">
-        <h2 class="text-2xl md:text-3xl font-bold mb-12 text-center" data-v-8d4ed633="">
-          Why Developers Choose Formatho
-        </h2>
-        <div class="grid md:grid-cols-3 gap-6" data-v-8d4ed633="">
-          <!-- Privacy-First Architecture -->
-          <div
-            class="glass-card p-6 rounded-lg hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
-            data-aos="fade-up"
-            data-aos-delay="0"
-            data-v-8d4ed633=""
-          >
-            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4" data-v-8d4ed633="">
-              <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-v-8d4ed633="">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-3 text-gray-900" data-v-8d4ed633="">Privacy-First Architecture</h3>
-            <p class="text-sm text-muted-foreground leading-relaxed" data-v-8d4ed633="">
-              Every tool runs 100% client-side in your browser. No uploads, no database storage, and
-              zero third-party analytics. Your sensitive data never leaves your device.
-            </p>
-          </div>
-
-          <!-- Lightning Fast Performance -->
-          <div
-            class="glass-card p-6 rounded-lg hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
-            data-aos="fade-up"
-            data-aos-delay="100"
-            data-v-8d4ed633=""
-          >
-            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4" data-v-8d4ed633="">
-              <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-v-8d4ed633="">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-3 text-gray-900" data-v-8d4ed633="">Lightning Fast Performance</h3>
-            <p class="text-sm text-muted-foreground leading-relaxed" data-v-8d4ed633="">
-              Zero server latency means instant results. Tools execute directly in your browser's
-              JavaScript engine, giving you millisecond-level response times for all operations.
-            </p>
-          </div>
-
-          <!-- Developer Focused -->
-          <div
-            class="glass-card p-6 rounded-lg hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
-            data-aos="fade-up"
-            data-aos-delay="200"
-            data-v-8d4ed633=""
-          >
-            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4" data-v-8d4ed633="">
-              <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-v-8d4ed633="">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-3 text-gray-900" data-v-8d4ed633="">Developer Focused</h3>
-            <p class="text-sm text-muted-foreground leading-relaxed" data-v-8d4ed633="">
-              Built by developers, for developers. Clean interfaces, keyboard shortcuts, and
-              powerful features that solve real-world problems in your daily workflow.
-            </p>
-          </div>
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 px-6 bg-slate-900/50">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+          <p class="text-xl text-slate-400">Everything you need to know</p>
         </div>
-        <div class="mt-12 text-center" data-v-8d4ed633="">
-          <p class="text-muted-foreground mb-4" data-v-8d4ed633="">Not seeing what you need?</p>
-          <a href="mailto:support@formatho.com" class="text-gray-900" data-v-8d4ed633="">
-            Suggest a tool
-            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 4v16m8-8H4"
-              ></path>
-            </svg>
-          </a>
+
+        <div class="space-y-4">
+          <Card v-for="faq in faqs" :key="faq.question" class="bg-slate-800/50 border-slate-700">
+            <CardHeader>
+              <CardTitle class="text-lg">{{ faq.question }}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p class="text-slate-300">{{ faq.answer }}</p>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>
 
     <!-- Final CTA Section -->
-    <section class="container mx-auto px-4 py-16 bg-gradient-to-b from-background to-primary/5 border-t border-border/50">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">
-          Ready to Boost Your Productivity?
-        </h2>
-        <p class="text-xl text-muted-foreground mb-8">
-          Join 15,000+ developers who trust Formatho for their daily workflow
+    <section class="py-20 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-5xl font-bold mb-6">Ready to Orchestrate?</h2>
+        <p class="text-xl text-slate-400 mb-8">
+          Join 50+ developers already using Agent Orchestrator to ship faster.
         </p>
-        
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-          <RouterLink
-            to="/pricing"
-            class="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
-          >
-            Get Started Free
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </RouterLink>
-          <a
-            href="mailto:support@formatho.com"
-            class="inline-flex items-center gap-2 px-8 py-3 bg-secondary text-secondary-foreground rounded-lg font-medium hover:bg-secondary/80 transition-all"
-          >
-            Contact Us
-          </a>
+
+        <!-- Urgency Indicator - A/B Tested -->
+        <div 
+          v-if="urgencyType === 'scarcity'"
+          class="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-2 mb-8"
+        >
+          <span class="animate-pulse">🔴</span>
+          <span class="text-red-400 text-sm font-medium">
+            Beta program: Only {{ betaSpots }} spots left!
+          </span>
         </div>
-        
-        <p class="text-sm text-muted-foreground">
-          ✓ No credit card required • ✓ 100+ free tools • ✓ Instant access
+        <div 
+          v-else
+          class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-lg px-4 py-2 mb-8"
+        >
+          <span>🎉</span>
+          <span class="text-blue-400 text-sm font-medium">
+            Join 50+ developers already shipping faster!
+          </span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button size="lg" @click="handlePrimaryCTA" class="bg-blue-600 hover:bg-blue-700 px-8 py-6 text-lg">
+            {{ primaryCTA }} →
+          </Button>
+          <Button size="lg" @click="handleSecondaryCTA" variant="outline" class="border-slate-700 px-8 py-6 text-lg">
+            Schedule Demo
+          </Button>
+        </div>
+
+        <p class="text-sm text-slate-500 mt-6">
+          No credit card required • 5 agents free forever • Setup in 2 minutes
         </p>
       </div>
     </section>
 
-    <!-- Floating CTA for Mobile -->
-    <FloatingCTA />
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-12 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🏗️</span>
+            <span class="text-xl font-bold">Formatho</span>
+          </div>
+          <div class="flex items-center gap-6 text-sm text-slate-400">
+            <a href="#" class="hover:text-white transition">Privacy Policy</a>
+            <a href="#" class="hover:text-white transition">Terms of Service</a>
+            <a href="#" class="hover:text-white transition">Contact</a>
+          </div>
+          <div class="text-sm text-slate-500">
+            © 2026 Formatho. All rights reserved.
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
