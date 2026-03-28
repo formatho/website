@@ -1,278 +1,408 @@
-/**
- * Analytics composable for tracking conversion funnel events
- * Uses Google Analytics 4 (GA4) via gtag.js
- */
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router'
 
-// GA4 Measurement ID
-const GA_MEASUREMENT_ID = 'G-ZJ1GXW78TW'
+// Types
+interface AnalyticsEvent {
+  name: string
+  category: string
+  action: string
+  label?: string
+  value?: number
+  timestamp?: Date
+  properties?: Record<string, any>
+}
 
-// Declare gtag function type
+interface PageView {
+  path: string
+  title: string
+  referrer?: string
+  timestamp: Date
+  duration?: number
+}
+
+interface UserSession {
+  sessionId: string
+  userId?: string
+  startTime: Date
+  pageViews: number
+  events: AnalyticsEvent[]
+  device: DeviceInfo
+  location?: LocationInfo
+}
+
+interface DeviceInfo {
+  userAgent: string
+  language: string
+  screenSize: string
+  viewportSize: string
+  platform: string
+  timezone: string
+}
+
+interface LocationInfo {
+  country?: string
+  region?: string
+  city?: string
+}
+
+interface ConversionFunnel {
+  name: string
+  steps: string[]
+  currentStep: number
+  completed: boolean
+}
+
+// State
+const sessionId = ref<string>('')
+const userId = ref<string>('')
+const pageViewStart = ref<Date>(new Date())
+const currentPage = ref<string>('')
+const events = ref<AnalyticsEvent[]>([])
+const isEnabled = ref(true)
+
+// Configuration
+const config = {
+  apiEndpoint: import.meta.env.VITE_ANALYTICS_API_URL || 'http://localhost:18766/api/analytics',
+  googleAnalyticsId: import.meta.env.VITE_GA_TRACKING_ID || '',
+  debug: import.meta.env.VITE_ANALYTICS_DEBUG === 'true',
+  trackPageViews: true,
+  trackClicks: true,
+  trackScrollDepth: true,
+  trackFormSubmissions: true,
+  sessionTimeout: 30 * 60 * 1000, // 30 minutes
+}
+
+// Generate session ID
+function generateSessionId(): string {
+  return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+}
+
+// Get device info
+function getDeviceInfo(): DeviceInfo {
+  return {
+    userAgent: navigator.userAgent,
+    language: navigator.language,
+    screenSize: `${screen.width}x${screen.height}`,
+    viewportSize: `${window.innerWidth}x${window.innerHeight}`,
+    platform: navigator.platform,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  }
+}
+
+// Initialize analytics
+export function useAnalytics() {
+  const route = useRoute()
+
+  // Initialize session
+  function init() {
+    if (!isEnabled.value) return
+
+    // Get or create session ID
+    const storedSessionId = sessionStorage.getItem('analytics_session_id')
+    const sessionTimestamp = sessionStorage.getItem('analytics_session_timestamp')
+    
+    if (storedSessionId && sessionTimestamp) {
+      const sessionAge = Date.now() - parseInt(sessionTimestamp)
+      if (sessionAge < config.sessionTimeout) {
+        sessionId.value = storedSessionId
+      } else {
+        // Session expired, create new
+        sessionId.value = generateSessionId()
+      }
+    } else {
+      sessionId.value = generateSessionId()
+    }
+
+    // Store session
+    sessionStorage.setItem('analytics_session_id', sessionId.value)
+    sessionStorage.setItem('analytics_session_timestamp', Date.now().toString())
+
+    // Track initial page view
+    if (config.trackPageViews) {
+      trackPageView()
+    }
+
+    // Set up automatic tracking
+    setupAutoTracking()
+
+    if (config.debug) {
+      console.log('[Analytics] Initialized with session:', sessionId.value)
+    }
+  }
+
+  // Set up automatic tracking
+  function setupAutoTracking() {
+    // Track scroll depth
+    if (config.trackScrollDepth) {
+      let maxScroll = 0
+      window.addEventListener('scroll', () => {
+        const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+        if (scrollPercent > maxScroll) {
+          maxScroll = scrollPercent
+          if (maxScroll >= 25 && maxScroll < 50) {
+            trackEvent('scroll_depth', 'engagement', '25%', 25)
+          } else if (maxScroll >= 50 && maxScroll < 75) {
+            trackEvent('scroll_depth', 'engagement', '50%', 50)
+          } else if (maxScroll >= 75 && maxScroll < 100) {
+            trackEvent('scroll_depth', 'engagement', '75%', 75)
+          } else if (maxScroll >= 100) {
+            trackEvent('scroll_depth', 'engagement', '100%', 100)
+          }
+        }
+      })
+    }
+
+    // Track outbound clicks
+    if (config.trackClicks) {
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement
+        const link = target.closest('a')
+        if (link && link.href && !link.href.includes(window.location.hostname)) {
+          trackEvent('outbound_click', 'navigation', link.href)
+        }
+      })
+    }
+  }
+
+  // Track page view
+  function trackPageView(pagePath?: string, pageTitle?: string) {
+    const path = pagePath || route.path
+    const title = pageTitle || document.title
+
+    const pageView: PageView = {
+      path,
+      title,
+      referrer: document.referrer,
+      timestamp: new Date(),
+    }
+
+    currentPage.value = path
+    pageViewStart.value = new Date()
+
+    // Send to backend
+    sendToBackend('pageview', pageView)
+
+    // Send to Google Analytics
+    if (config.googleAnalyticsId && typeof window.gtag !== 'undefined') {
+      window.gtag('config', config.googleAnalyticsId, {
+        page_path: path,
+        page_title: title,
+      })
+    }
+
+    if (config.debug) {
+      console.log('[Analytics] Page view:', path, title)
+    }
+  }
+
+  // Track event
+  function trackEvent(
+    name: string,
+    category: string,
+    label?: string,
+    value?: number,
+    properties?: Record<string, any>
+  ) {
+    const event: AnalyticsEvent = {
+      name,
+      category,
+      action: name,
+      label,
+      value,
+      timestamp: new Date(),
+      properties,
+    }
+
+    events.value.push(event)
+
+    // Send to backend
+    sendToBackend('event', event)
+
+    // Send to Google Analytics
+    if (config.googleAnalyticsId && typeof window.gtag !== 'undefined') {
+      window.gtag('event', name, {
+        event_category: category,
+        event_label: label,
+        value: value,
+        ...properties,
+      })
+    }
+
+    if (config.debug) {
+      console.log('[Analytics] Event:', name, category, label, value)
+    }
+  }
+
+  // Track conversion funnel
+  function trackFunnelStep(funnelName: string, stepName: string, stepNumber: number, totalSteps: number) {
+    trackEvent('funnel_step', funnelName, stepName, stepNumber, {
+      funnel_name: funnelName,
+      step_name: stepName,
+      step_number: stepNumber,
+      total_steps: totalSteps,
+      completion_percentage: (stepNumber / totalSteps) * 100,
+    })
+  }
+
+  // Track conversion
+  function trackConversion(conversionType: string, value?: number, properties?: Record<string, any>) {
+    trackEvent('conversion', conversionType, undefined, value, {
+      conversion_type: conversionType,
+      conversion_value: value,
+      ...properties,
+    })
+  }
+
+  // Track feature usage
+  function trackFeatureUsage(featureName: string, action: string, properties?: Record<string, any>) {
+    trackEvent('feature_usage', featureName, action, undefined, {
+      feature_name: featureName,
+      feature_action: action,
+      ...properties,
+    })
+  }
+
+  // Track tool usage
+  function trackToolUsage(toolName: string, action: 'view' | 'use' | 'complete' | 'error', properties?: Record<string, any>) {
+    trackEvent('tool_usage', toolName, action, undefined, {
+      tool_name: toolName,
+      tool_action: action,
+      ...properties,
+    })
+  }
+
+  // Track timing
+  function trackTiming(category: string, variable: string, time: number, label?: string) {
+    trackEvent('timing', category, label, time, {
+      timing_category: category,
+      timing_variable: variable,
+      timing_time: time,
+      timing_label: label,
+    })
+  }
+
+  // Track error
+  function trackError(errorType: string, errorMessage: string, properties?: Record<string, any>) {
+    trackEvent('error', errorType, errorMessage, undefined, {
+      error_type: errorType,
+      error_message: errorMessage,
+      ...properties,
+    })
+  }
+
+  // Set user ID
+  function setUserId(id: string) {
+    userId.value = id
+    sessionStorage.setItem('analytics_user_id', id)
+
+    // Update Google Analytics
+    if (config.googleAnalyticsId && typeof window.gtag !== 'undefined') {
+      window.gtag('set', { user_id: id })
+    }
+  }
+
+  // Identify user
+  function identify(userId: string, traits?: Record<string, any>) {
+    setUserId(userId)
+    
+    sendToBackend('identify', {
+      user_id: userId,
+      traits,
+      device: getDeviceInfo(),
+    })
+
+    if (config.debug) {
+      console.log('[Analytics] Identify:', userId, traits)
+    }
+  }
+
+  // Send to backend
+  async function sendToBackend(type: string, data: any) {
+    if (!isEnabled.value) return
+
+    const payload = {
+      type,
+      session_id: sessionId.value,
+      user_id: userId.value,
+      timestamp: new Date().toISOString(),
+      url: window.location.href,
+      path: window.location.pathname,
+      referrer: document.referrer,
+      data,
+    }
+
+    try {
+      // Use navigator.sendBeacon for reliability
+      const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' })
+      navigator.sendBeacon(`${config.apiEndpoint}/track`, blob)
+    } catch (error) {
+      if (config.debug) {
+        console.error('[Analytics] Failed to send:', error)
+      }
+    }
+  }
+
+  // Clean up
+  function cleanup() {
+    // Track page duration before leaving
+    if (currentPage.value) {
+      const duration = Date.now() - pageViewStart.value.getTime()
+      trackTiming('engagement', 'page_duration', duration, currentPage.value)
+    }
+  }
+
+  // Lifecycle
+  onMounted(() => {
+    init()
+  })
+
+  onUnmounted(() => {
+    cleanup()
+  })
+
+  // Window unload
+  if (typeof window !== 'undefined') {
+    window.addEventListener('beforeunload', cleanup)
+  }
+
+  return {
+    // State
+    sessionId,
+    userId,
+    isEnabled,
+    
+    // Methods
+    init,
+    trackPageView,
+    trackEvent,
+    trackFunnelStep,
+    trackConversion,
+    trackFeatureUsage,
+    trackToolUsage,
+    trackTiming,
+    trackError,
+    setUserId,
+    identify,
+    
+    // Utilities
+    getDeviceInfo,
+  }
+}
+
+// Singleton instance for global use
+let analyticsInstance: ReturnType<typeof useAnalytics> | null = null
+
+export function getAnalytics() {
+  if (!analyticsInstance) {
+    analyticsInstance = useAnalytics()
+  }
+  return analyticsInstance
+}
+
+// Global type declarations
 declare global {
   interface Window {
-    gtag: (
-      command: string,
-      actionOrId: string,
-      params?: Record<string, unknown>
-    ) => void
-    dataLayer: unknown[]
+    gtag: (...args: any[]) => void
+    dataLayer: any[]
   }
-}
-
-// Funnel stages for tracking
-export type FunnelStage =
-  | 'page_view'
-  | 'pricing_view'
-  | 'plan_selected'
-  | 'billing_cycle_changed'
-  | 'checkout_initiated'
-  | 'checkout_success'
-  | 'checkout_canceled'
-  | 'checkout_error'
-
-// Plan types
-export type PlanType = 'free' | 'pro' | 'enterprise'
-
-// Billing cycles
-export type BillingCycle = 'monthly' | 'yearly'
-
-// Event parameters interface
-interface EventParams {
-  [key: string]: string | number | boolean | undefined
-}
-
-/**
- * Check if gtag is available
- */
-function isGtagAvailable(): boolean {
-  return typeof window !== 'undefined' && typeof window.gtag === 'function'
-}
-
-/**
- * Track a custom event in GA4
- */
-function trackEvent(eventName: string, params?: EventParams): void {
-  if (!isGtagAvailable()) {
-    console.debug('[Analytics] gtag not available, skipping event:', eventName)
-    return
-  }
-
-  try {
-    window.gtag('event', eventName, params)
-    console.debug('[Analytics] Event tracked:', eventName, params)
-  } catch (error) {
-    console.error('[Analytics] Error tracking event:', eventName, error)
-  }
-}
-
-/**
- * Track page view (manual override if needed)
- */
-export function trackPageView(pagePath: string, pageTitle?: string): void {
-  trackEvent('page_view', {
-    page_path: pagePath,
-    page_title: pageTitle,
-  })
-}
-
-/**
- * Track pricing page view
- */
-export function trackPricingView(): void {
-  trackEvent('pricing_page_view', {
-    page_category: 'conversion',
-    funnel_stage: 'pricing_view',
-  })
-}
-
-/**
- * Track when a user selects a plan
- */
-export function trackPlanSelected(plan: PlanType): void {
-  trackEvent('plan_selected', {
-    plan_type: plan,
-    page_category: 'conversion',
-    funnel_stage: 'plan_selected',
-    value: plan === 'pro' ? 19 : plan === 'enterprise' ? 99 : 0,
-    currency: 'USD',
-  })
-}
-
-/**
- * Track billing cycle change
- */
-export function trackBillingCycleChanged(cycle: BillingCycle): void {
-  trackEvent('billing_cycle_changed', {
-    billing_cycle: cycle,
-    page_category: 'conversion',
-    funnel_stage: 'billing_cycle_changed',
-  })
-}
-
-/**
- * Track checkout initiation
- */
-export function trackCheckoutInitiated(
-  plan: PlanType,
-  cycle: BillingCycle,
-  price: number
-): void {
-  trackEvent('begin_checkout', {
-    items: [
-      {
-        item_id: `formatho_${plan}_${cycle}`,
-        item_name: `Formatho ${plan.charAt(0).toUpperCase() + plan.slice(1)}`,
-        item_category: 'subscription',
-        item_variant: cycle,
-        price: price,
-        quantity: 1,
-      },
-    ],
-    value: price,
-    currency: 'USD',
-    plan_type: plan,
-    billing_cycle: cycle,
-    page_category: 'conversion',
-    funnel_stage: 'checkout_initiated',
-  })
-}
-
-/**
- * Track successful checkout/subscription
- */
-export function trackCheckoutSuccess(
-  plan: PlanType,
-  cycle: BillingCycle,
-  price: number,
-  customerId?: string
-): void {
-  trackEvent('purchase', {
-    transaction_id: customerId || `txn_${Date.now()}`,
-    value: price,
-    currency: 'USD',
-    items: [
-      {
-        item_id: `formatho_${plan}_${cycle}`,
-        item_name: `Formatho ${plan.charAt(0).toUpperCase() + plan.slice(1)}`,
-        item_category: 'subscription',
-        item_variant: cycle,
-        price: price,
-        quantity: 1,
-      },
-    ],
-    plan_type: plan,
-    billing_cycle: cycle,
-    page_category: 'conversion',
-    funnel_stage: 'checkout_success',
-  })
-}
-
-/**
- * Track checkout cancellation
- */
-export function trackCheckoutCanceled(
-  plan: PlanType,
-  cycle: BillingCycle
-): void {
-  trackEvent('checkout_canceled', {
-    plan_type: plan,
-    billing_cycle: cycle,
-    page_category: 'conversion',
-    funnel_stage: 'checkout_canceled',
-  })
-}
-
-/**
- * Track checkout error
- */
-export function trackCheckoutError(
-  plan: PlanType,
-  cycle: BillingCycle,
-  errorMessage: string
-): void {
-  trackEvent('checkout_error', {
-    plan_type: plan,
-    billing_cycle: cycle,
-    error_message: errorMessage,
-    page_category: 'conversion',
-    funnel_stage: 'checkout_error',
-  })
-}
-
-/**
- * Track tool usage (for engagement metrics)
- */
-export function trackToolUsage(toolName: string, category?: string): void {
-  trackEvent('tool_usage', {
-    tool_name: toolName,
-    tool_category: category || 'general',
-  })
-}
-
-/**
- * Track search query
- */
-export function trackSearch(query: string, resultsCount?: number): void {
-  trackEvent('search', {
-    search_term: query,
-    results_count: resultsCount,
-  })
-}
-
-/**
- * Track contact form submission
- */
-export function trackContactFormSubmitted(plan?: PlanType): void {
-  trackEvent('generate_lead', {
-    plan_interest: plan || 'unknown',
-    page_category: 'conversion',
-  })
-}
-
-/**
- * Main composable export
- */
-export function useAnalytics() {
-  return {
-    // Page tracking
-    trackPageView,
-    trackPricingView,
-
-    // Funnel tracking
-    trackPlanSelected,
-    trackBillingCycleChanged,
-    trackCheckoutInitiated,
-    trackCheckoutSuccess,
-    trackCheckoutCanceled,
-    trackCheckoutError,
-
-    // Engagement tracking
-    trackToolUsage,
-    trackSearch,
-    trackContactFormSubmitted,
-  }
-}
-
-/**
- * Conversion funnel stages in order
- * Used for funnel visualization in GA4
- */
-export const CONVERSION_FUNNEL: FunnelStage[] = [
-  'page_view',
-  'pricing_view',
-  'plan_selected',
-  'checkout_initiated',
-  'checkout_success',
-]
-
-/**
- * Calculate conversion rate between stages
- */
-export function calculateConversionRate(
-  fromStage: number,
-  toStage: number,
-  fromCount: number,
-  toCount: number
-): number {
-  if (fromCount === 0) return 0
-  return Math.round((toCount / fromCount) * 100)
 }
