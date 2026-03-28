@@ -315,47 +315,81 @@ const filteredTools = computed(() => {
     </section>
 
     <!-- Why Developers Choose Formatho -->
-    <section
-      class="container mx-auto px-4 py-16 border-t border-border/50"
-      data-v-8d4ed633=""
-    >
-      <div class="max-w-4xl mx-auto" data-v-8d4ed633="">
-        <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center" data-v-8d4ed633="">
+    <section class="container mx-auto px-4 py-16 border-t border-border/50" data-v-8d4ed633="">
+      <div class="max-w-6xl mx-auto" data-v-8d4ed633="">
+        <h2 class="text-2xl md:text-3xl font-bold mb-12 text-center" data-v-8d4ed633="">
           Why Developers Choose Formatho
         </h2>
-        <div class="grid md:grid-cols-3 gap-8" data-v-8d4ed633="">
-          <div class="space-y-4" data-v-8d4ed633="">
-            <h3 class="text-gray-900" data-v-8d4ed633="">Privacy-First Architecture</h3>
-            <p class="text-muted-foreground" data-v-8d4ed633="">
-              Every tool runs 100% client-side in your browser. No uploads, no database
-              storage, and zero third-party analytics. Your sensitive data never leaves your
-              device.
+        <div class="grid md:grid-cols-3 gap-6" data-v-8d4ed633="">
+          <!-- Privacy-First Architecture -->
+          <div
+            class="glass-card p-6 rounded-lg hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+            data-aos="fade-up"
+            data-aos-delay="0"
+            data-v-8d4ed633=""
+          >
+            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4" data-v-8d4ed633="">
+              <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-v-8d4ed633="">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-3 text-gray-900" data-v-8d4ed633="">Privacy-First Architecture</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed" data-v-8d4ed633="">
+              Every tool runs 100% client-side in your browser. No uploads, no database storage, and
+              zero third-party analytics. Your sensitive data never leaves your device.
             </p>
           </div>
-          <div class="space-y-4" data-v-8d4ed633="">
-            <h3 class="text-gray-900" data-v-8d4ed633="">Lightning Fast Performance</h3>
-            <p class="text-muted-foreground" data-v-8d4ed633="">
+
+          <!-- Lightning Fast Performance -->
+          <div
+            class="glass-card p-6 rounded-lg hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+            data-aos="fade-up"
+            data-aos-delay="100"
+            data-v-8d4ed633=""
+          >
+            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4" data-v-8d4ed633="">
+              <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-v-8d4ed633="">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-3 text-gray-900" data-v-8d4ed633="">Lightning Fast Performance</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed" data-v-8d4ed633="">
               Zero server latency means instant results. Tools execute directly in your browser's
-              JavaScript engine, giving you millisecond-level response times for all
-              operations.
+              JavaScript engine, giving you millisecond-level response times for all operations.
             </p>
           </div>
-          <div class="space-y-4" data-v-8d4ed633="">
-            <h3 class="text-gray-900" data-v-8d4ed633="">Developer Focused</h3>
-            <p class="text-muted-foreground" data-v-8d4ed633="">
+
+          <!-- Developer Focused -->
+          <div
+            class="glass-card p-6 rounded-lg hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+            data-aos="fade-up"
+            data-aos-delay="200"
+            data-v-8d4ed633=""
+          >
+            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4" data-v-8d4ed633="">
+              <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-v-8d4ed633="">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-3 text-gray-900" data-v-8d4ed633="">Developer Focused</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed" data-v-8d4ed633="">
               Built by developers, for developers. Clean interfaces, keyboard shortcuts, and
               powerful features that solve real-world problems in your daily workflow.
             </p>
           </div>
         </div>
         <div class="mt-12 text-center" data-v-8d4ed633="">
-          <p class="text-muted-foreground mb-4" data-v-8d4ed633=""> Not seeing what you need?</p>
-          <a
-            href="mailto:support@formatho.com"
-            class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
-          >
-            <Sparkles class="w-4 h-4" />
-            Suggest a Tool
+          <p class="text-muted-foreground mb-4" data-v-8d4ed633="">Not seeing what you need?</p>
+          <a href="mailto:support@formatho.com" class="text-gray-900" data-v-8d4ed633="">
+            Suggest a tool
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 4v16m8-8H4"
+              ></path>
+            </svg>
           </a>
         </div>
       </div>
