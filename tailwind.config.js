@@ -3,7 +3,7 @@ const animate = require('tailwindcss-animate')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: false, /* Disabled - strictly maintaining light mode only */
+  // Note: Dark mode not used - strictly maintaining light mode only
   content: [
     './pages/**/*.{ts,tsx,vue}',
     './components/**/*.{ts,tsx,vue}',
