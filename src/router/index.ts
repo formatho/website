@@ -1153,6 +1153,15 @@ export const routes = [
           title: 'Beta Feedback Dashboard - Formatho Admin',
           description: 'Review and manage beta tester feedback'
         }
+      },
+      {
+        path: 'admin/ab-tests',
+        name: 'admin-ab-tests',
+        component: () => import('../components/ab-test/ABTestDashboard.vue'),
+        meta: {
+          title: 'A/B Test Dashboard - Formatho Admin',
+          description: 'Monitor and analyze A/B test results for landing page optimization'
+        }
       }
     ]
   }
