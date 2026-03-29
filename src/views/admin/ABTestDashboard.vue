@@ -3,7 +3,6 @@ import { ref, onMounted, computed } from 'vue'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
 
 interface ABTestVariant {
   variant_id: string
@@ -260,14 +259,20 @@ onMounted(() => {
 
               <!-- Progress Bar -->
               <div class="mt-3">
-                <Progress
-                  :value="variant.conversion_rate"
-                  :max="10"
+                <div 
                   :class="[
-                    'h-2',
+                    'h-2 rounded-full overflow-hidden',
                     test.winner === variant.variant_id ? 'bg-green-500/20' : 'bg-slate-700'
                   ]"
-                />
+                >
+                  <div 
+                    :class="[
+                      'h-full rounded-full transition-all',
+                      test.winner === variant.variant_id ? 'bg-green-500' : 'bg-blue-500'
+                    ]"
+                    :style="{ width: `${Math.min((variant.conversion_rate / 10) * 100, 100)}%` }"
+                  />
+                </div>
               </div>
             </div>
           </div>
