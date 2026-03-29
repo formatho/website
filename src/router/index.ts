@@ -1157,7 +1157,7 @@ export const routes = [
       {
         path: 'admin/ab-tests',
         name: 'admin-ab-tests',
-        component: () => import('../components/ab-test/ABTestDashboard.vue'),
+        component: () => import('../views/admin/ABTestDashboard.vue'),
         meta: {
           title: 'A/B Test Dashboard - Formatho Admin',
           description: 'Monitor and analyze A/B test results for landing page optimization'

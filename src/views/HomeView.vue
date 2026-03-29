@@ -3,6 +3,10 @@ import { ref, onMounted } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useLandingPageABTesting } from '@/composables/useABTesting'
+import TrustBadges from '@/components/TrustBadges.vue'
+import SocialProofStats from '@/components/SocialProofStats.vue'
+import UrgencyBanner from '@/components/UrgencyBanner.vue'
+import FloatingCTA from '@/components/FloatingCTA.vue'
 
 // Get or create user ID for consistent A/B test assignment
 const userId = ref(localStorage.getItem('ab_test_user_id') || generateUserId())
@@ -192,23 +196,8 @@ const handleBetaApplication = () => {
 
 <template>
   <div class="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
-    <!-- Announcement Banner - A/B Tested -->
-    <div 
-      v-if="urgencyType === 'scarcity'"
-      class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 text-center text-sm font-medium"
-    >
-      <span class="mr-2">🎉</span>
-      <span>{{ urgencyBanner }}</span>
-      <a href="/beta" @click="handleBetaApplication" class="ml-2 underline hover:no-underline">Apply Now →</a>
-    </div>
-    <div 
-      v-else
-      class="bg-gradient-to-r from-green-600 to-blue-600 text-white py-3 px-4 text-center text-sm font-medium"
-    >
-      <span class="mr-2">🎉</span>
-      <span>{{ urgencyBanner }}</span>
-      <a href="/beta" @click="handleBetaApplication" class="ml-2 underline hover:no-underline">Join Them →</a>
-    </div>
+    <!-- Urgency Banner -->
+    <UrgencyBanner />
 
     <!-- Header -->
     <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-50">
@@ -271,7 +260,7 @@ const handleBetaApplication = () => {
           </div>
 
           <!-- Trust Signals -->
-          <div class="flex items-center justify-center gap-8 text-sm text-slate-500">
+          <div class="flex items-center justify-center gap-8 text-sm text-slate-500 mb-6">
             <div class="flex items-center gap-2">
               <span>✓</span>
               <span>No credit card required</span>
@@ -285,6 +274,9 @@ const handleBetaApplication = () => {
               <span>Setup in 2 minutes</span>
             </div>
           </div>
+
+          <!-- Trust Badges -->
+          <TrustBadges />
         </div>
 
         <!-- Hero Image/Preview -->
@@ -297,6 +289,13 @@ const handleBetaApplication = () => {
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Social Proof Stats Section -->
+    <section class="py-16 px-6 bg-slate-900/50">
+      <div class="max-w-7xl mx-auto">
+        <SocialProofStats />
       </div>
     </section>
 
@@ -517,5 +516,8 @@ const handleBetaApplication = () => {
         </div>
       </div>
     </footer>
+
+    <!-- Floating CTA for Mobile -->
+    <FloatingCTA />
   </div>
 </template>
