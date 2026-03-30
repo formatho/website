@@ -6,7 +6,6 @@ import { Search, Sparkles } from 'lucide-vue-next'
 import * as LucideIcons from 'lucide-vue-next'
 import { tools } from '../data/tools'
 import EmailCapture from '@/components/EmailCapture.vue'
-import TestimonialsSection from '@/components/TestimonialsSection.vue'
 import TrustBadges from '@/components/TrustBadges.vue'
 import SocialProofStats from '@/components/SocialProofStats.vue'
 import UrgencyBanner from '@/components/UrgencyBanner.vue'
@@ -214,9 +213,6 @@ const filteredTools = computed(() => {
         </RouterLink>
       </div>
     </section>
-
-    <!-- Testimonials Section -->
-    <TestimonialsSection />
 
     <!-- Tools Grid -->
     <section class="container mx-auto px-4 py-10 md:py-14" data-v-8d4ed633="">
