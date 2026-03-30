@@ -5,7 +5,7 @@ import { Users, Wrench, Activity, Shield } from 'lucide-vue-next'
 const stats = ref([
   {
     icon: Users,
-    value: 0,
+    value: 15000,
     target: 15000,
     suffix: '+',
     label: 'Monthly Users',
@@ -13,7 +13,7 @@ const stats = ref([
   },
   {
     icon: Wrench,
-    value: 0,
+    value: 100,
     target: 100,
     suffix: '+',
     label: 'Developer Tools',
@@ -21,7 +21,7 @@ const stats = ref([
   },
   {
     icon: Activity,
-    value: 0,
+    value: 99.9,
     target: 99.9,
     suffix: '%',
     label: 'Uptime',
