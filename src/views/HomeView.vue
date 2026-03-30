@@ -289,8 +289,8 @@ const filteredTools = computed(() => {
                   </div>
 
                   <!-- Arrow Icon -->
-                  <div class="text-gray-900" data-v-8d4ed633="">
-                    Open tool
+                  <div class="flex items-center text-gray-900" data-v-8d4ed633="">
+                    <span>Open tool</span>
                     <svg
                       class="w-4 h-4 ml-1 hover:translate-x-1 transition-transform"
                       fill="none"
