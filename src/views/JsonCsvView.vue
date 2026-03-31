@@ -4,8 +4,8 @@ import Papa from 'papaparse'
 import { FileJson, FileSpreadsheet, Download } from 'lucide-vue-next'
 import FileSaver from 'file-saver'
 import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import CodeEditor from '@/components/CodeEditor.vue'
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card'
 
 const jsonInput = ref('')
 const csvInput = ref('')
@@ -80,9 +80,10 @@ const fillSample = () => {
           <Button size="sm" @click="convertToCsv"> To CSV -&gt; </Button>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="jsonInput"
-            class="h-full resize-none font-mono"
+            language="json"
+            class="h-full"
             placeholder='[{"name": "Alice", "age": 25}, ...]'
           />
         </CardContent>
@@ -105,9 +106,10 @@ const fillSample = () => {
           </div>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="csvInput"
-            class="h-full resize-none font-mono"
+            language="plaintext"
+            class="h-full"
             placeholder="name,age,city..."
           />
         </CardContent>

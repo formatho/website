@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const jsonInput = ref('')
 const minifiedOutput = ref('')
@@ -49,9 +49,10 @@ watch(jsonInput, minify)
           <CardTitle>Input</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="jsonInput"
-            class="h-full resize-none font-mono text-sm"
+            language="json"
+            class="h-full"
             placeholder="Enter JSON to minify..."
           />
         </CardContent>
@@ -65,10 +66,11 @@ watch(jsonInput, minify)
           >
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             :model-value="minifiedOutput"
+            language="json"
             readonly
-            class="h-full resize-none font-mono text-sm"
+            class="h-full"
             placeholder="Minified JSON will appear here..."
           />
         </CardContent>

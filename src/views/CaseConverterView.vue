@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { Type, Copy, Check, ArrowRightLeft } from 'lucide-vue-next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const input = ref('')
 const copied = ref<string | null>(null)
@@ -93,11 +94,12 @@ const examples = [
           <CardDescription>Enter text to convert</CardDescription>
         </CardHeader>
         <CardContent class="space-y-4">
-          <textarea
+          <CodeEditor
             v-model="input"
+            language="plaintext"
+            class="min-h-[128px]"
             placeholder="Enter text here..."
-            class="w-full h-32 px-3 py-2 border rounded-md font-mono resize-none focus:outline-none focus:ring-2 focus:ring-primary"
-          ></textarea>
+          />
 
           <div class="flex gap-2 flex-wrap">
             <Button @click="swapCase" variant="outline" size="sm">

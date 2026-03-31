@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const jsonInput = ref('')
 const tomlOutput = ref('')
@@ -60,9 +60,10 @@ watch(jsonInput, () => {
           <CardTitle>JSON Input</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="jsonInput"
-            class="h-full resize-none font-mono"
+            language="json"
+            class="h-full"
             placeholder="Enter JSON..."
           />
         </CardContent>
@@ -73,10 +74,11 @@ watch(jsonInput, () => {
           <CardTitle>TOML Output</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             :model-value="tomlOutput"
+            language="plaintext"
             readonly
-            class="h-full resize-none font-mono"
+            class="h-full"
             placeholder="TOML output will appear here..."
           />
         </CardContent>

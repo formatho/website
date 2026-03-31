@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const dockerRunInput = ref('')
 const dockerComposeOutput = ref('')
@@ -133,11 +133,11 @@ const copyOutput = () => {
         <CardTitle>Docker Run Command</CardTitle>
       </CardHeader>
       <CardContent class="flex-1 min-h-0 space-y-4">
-        <Textarea
+        <CodeEditor
           v-model="dockerRunInput"
-          rows="3"
+          language="plaintext"
+          class="min-h-[80px]"
           placeholder="docker run -d -p 80:80 --name nginx nginx:latest"
-          class="font-mono"
         />
         <Button @click="convertToCompose">Convert</Button>
       </CardContent>
@@ -149,7 +149,12 @@ const copyOutput = () => {
         <Button variant="outline" size="sm" @click="copyOutput">Copy</Button>
       </CardHeader>
       <CardContent class="flex-1 min-h-0">
-        <Textarea :model-value="dockerComposeOutput" readonly rows="15" class="font-mono text-sm" />
+        <CodeEditor
+          :model-value="dockerComposeOutput"
+          language="yaml"
+          readonly
+          class="min-h-[400px]"
+        />
       </CardContent>
     </Card>
   </div>
