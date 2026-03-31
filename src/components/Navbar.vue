@@ -182,6 +182,14 @@ const categories = [
             </div>
           </div>
 
+          <!-- Mascots Link -->
+          <RouterLink
+            to="/mascots"
+            class="text-sm font-medium text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:bg-white rounded-lg py-2 px-3"
+          >
+            Mascots
+          </RouterLink>
+
           <!-- GitHub Link -->
           <a
             href="https://github.com/formatho/website"
@@ -283,6 +291,15 @@ const categories = [
               </div>
             </div>
           </div>
+
+          <!-- Mascots Link -->
+          <RouterLink
+            to="/mascots"
+            @click="isMobileMenuOpen = false"
+            class="block px-3 py-2 text-sm font-medium text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:bg-white rounded-lg"
+          >
+            Mascots
+          </RouterLink>
 
           <!-- GitHub Link -->
           <div class="pt-4 border-t border-border">
