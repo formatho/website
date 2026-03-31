@@ -1,83 +1,48 @@
+import { fileURLToPath, from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import path from 'node:path'
-import { nodePolyfills } from 'vite-plugin-node-polyfills'
+import path from 'path'
 
-// https://vite.dev/config/
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    nodePolyfills({
-      include: ['buffer', 'process', 'stream', 'util'],
-      globals: {
-        Buffer: true,
-        global: true,
-        process: true
-      }
-    })
-  ],
+  plugins: [vue()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
-    }
+    '@': fileURLToPath(new URL('./src', import.meta.url))
   },
-  base: '/tools/',
-  ssr: {
-    noExternal: ['@headlessui/vue']
   },
   build: {
-    // Core Web Vitals Optimization - Code Splitting
-    rollupOptions: {
+    // Enable chunk splitting for better caching
+    rollOptions: {
       output: {
-        // Use function-based manualChunks to handle SSR builds properly
-        // SSR builds treat 'vue' as external, so we need to exclude it
-        manualChunks(id) {
-          // Skip for SSR external modules (vue, vue-router are externals in SSR)
-          if (id.includes('node_modules/vue/') || id.includes('node_modules/@vue/') || id.includes('node_modules/vue-router/')) {
-            return undefined
-          }
-          
-          // Split large vendor dependencies
-          if (id.includes('node_modules/crypto-js/') || id.includes('node_modules/bcryptjs/') || id.includes('node_modules/bip39/') || id.includes('node_modules/@noble/hashes/')) {
-            return 'crypto-vendor'
-          }
-          if (id.includes('node_modules/@solana/web3.js/') || id.includes('node_modules/viem/') || id.includes('node_modules/@polkadot/keyring/')) {
-            return 'blockchain-vendor'
-          }
-          if (id.includes('node_modules/docx/') || id.includes('node_modules/jspdf/') || id.includes('node_modules/html2pdf.js/')) {
-            return 'document-vendor'
-          }
-          if (id.includes('node_modules/highlight.js/') || id.includes('node_modules/marked/') || id.includes('node_modules/sql-formatter/') || id.includes('node_modules/gpt-tokenizer/')) {
-            return 'code-vendor'
-          }
-          if (id.includes('node_modules/radix-vue/') || id.includes('node_modules/lucide-vue-next/')) {
-            return 'ui-vendor'
-          }
-          if (id.includes('node_modules/chart.js/') || id.includes('node_modules/vue-chartjs/')) {
-            return 'chart-vendor'
-          }
-          if (id.includes('node_modules/bpmn-js/')) {
-            return 'bpmn-vendor'
-          }
-          
-          return undefined
-        }
-      }
+        // Create separate chunks for better caching
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+      },
     },
-    // Increase chunk size warning limit
-    chunkSizeWarningLimit: 1000,
-    // Enable minification
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    }
+    // Split large dependencies into separate chunks
+    manualChunks: {
+      // Vue core
+      'vue-vendor': ['vue', 'vue-router', 'pinia'],
+      
+      // UI framework
+      'ui-vendor': ['radix-vue', '@vueuse/core', '@vueuse/integrations/useLocalStorage'],
+      
+      // Monaco Editor - separate chunk
+      'monaco-editor': ['monaco-editor', '@guolao/vue-monaco-editor'],
+      
+      // Crypto libraries
+      'crypto': ['bcryptjs', '@noble/curves/secp256k1', '@noble/hashes/sha2', '@noble/hashes/legacy'],
+      
+      // Diff library
+      'diff': ['diff'],
+      
+      // Charts/Data visualization
+      'charts': ['chart.js'],
+    },
   },
-  // Optimize dependency pre-bundling
   optimizeDeps: {
-    include: ['vue', 'vue-router', 'crypto-js'],
-    exclude: ['@polkadot/keyring', '@polkadot/util-crypto']
-  }
+    // Include all dependencies that are dynamically imported
+    include: ['monaco-editor', '@guolao/vue-monaco-editor'],
+  },
 })
