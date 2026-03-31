@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Input } from '@/components/ui/input'
 import { Search, Sparkles } from 'lucide-vue-next'
@@ -10,7 +10,18 @@ import TrustBadges from '@/components/TrustBadges.vue'
 import SocialProofStats from '@/components/SocialProofStats.vue'
 import UrgencyBanner from '@/components/UrgencyBanner.vue'
 import FloatingCTA from '@/components/FloatingCTA.vue'
-import OrigamiMascot from '@/components/OrigamiMascot.vue'
+import { useTwins } from '@/composables/useTwins'
+
+// Summon Halo for onboarding welcome
+const { summonTwin } = useTwins()
+
+onMounted(() => {
+  // Summon Halo to welcome users
+  summonTwin('halo', 'Welcome to Formatho. I\'ll guide you through your toolkit.', 'dashboard-welcome', {
+    x: 'center',
+    y: 120
+  })
+})
 
 // Note: AOS is initialized globally in main.ts to avoid conflicts
 
@@ -139,16 +150,6 @@ const filteredTools = computed(() => {
                 data-v-8d4ed633=""
               />
             </div>
-          </div>
-          
-          <!-- Halo Onboarding Mascot -->
-          <div class="w-full max-w-2xl mt-6 mb-4" data-v-8d4ed633="">
-            <OrigamiMascot
-              character="halo"
-              message="Welcome to Formatho. I'll guide you through your toolkit."
-              size="w-12 h-12"
-              contextId="dashboard-welcome"
-            />
           </div>
           
           <!-- Newsletter Signup in Hero -->

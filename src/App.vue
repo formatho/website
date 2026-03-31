@@ -1,10 +1,13 @@
 <script setup>
 // Main application container - uses Vue Router for navigation
+import TwinOverlay from '@/components/TwinOverlay.vue'
 </script>
 
 <template>
   <div id="app">
     <router-view />
+    <!-- Global Twin Overlay - enables summoning from any component -->
+    <TwinOverlay />
   </div>
 </template>
 

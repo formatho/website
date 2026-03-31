@@ -1,10 +1,20 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { onMounted } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Home, ArrowLeft } from 'lucide-vue-next'
-import OrigamiMascot from '@/components/OrigamiMascot.vue'
+import { useTwins } from '@/composables/useTwins'
 
 const router = useRouter()
+const { summonTwin } = useTwins()
+
+onMounted(() => {
+  // Summon Morpho for 404 error
+  summonTwin('morpho', 'I folded this wrong. This page doesn\'t exist.', '404-error', {
+    x: 'center',
+    y: 100
+  })
+})
 
 const goBack = () => {
   router.back()
@@ -18,16 +28,6 @@ const goHome = () => {
 <template>
   <div class="min-h-screen flex items-center justify-center p-4">
     <div class="max-w-lg w-full text-center">
-      <!-- Mascot -->
-      <div class="mb-8 flex justify-center" data-aos="fade-down" data-aos-duration="600">
-        <OrigamiMascot
-          character="morpho"
-          size="w-16 h-16"
-          contextId="404-error"
-          message="I folded this wrong. This page doesn't exist."
-        />
-      </div>
-
       <!-- Error Code -->
       <h1
         class="text-8xl md:text-9xl font-bold text-muted-foreground/20 mb-4"
