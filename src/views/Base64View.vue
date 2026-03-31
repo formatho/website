@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 
@@ -11,10 +11,10 @@ const error = ref('')
 
 const fillSample = () => {
   inputText.value = 'Hello World'
-  onInputInput()
+  encodeToBase64()
 }
 
-const onInputInput = () => {
+const encodeToBase64 = () => {
   try {
     base64Text.value = btoa(inputText.value)
     error.value = ''
@@ -23,7 +23,7 @@ const onInputInput = () => {
   }
 }
 
-const onBase64Input = () => {
+const decodeFromBase64 = () => {
   try {
     inputText.value = atob(base64Text.value)
     error.value = ''
@@ -31,6 +31,10 @@ const onBase64Input = () => {
     error.value = 'Invalid Base64'
   }
 }
+
+// Watch for changes
+watch(inputText, encodeToBase64)
+watch(base64Text, decodeFromBase64)
 </script>
 
 <template>
@@ -50,11 +54,11 @@ const onBase64Input = () => {
           <CardTitle class="text-sm font-medium">Plain Text</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="inputText"
-            @input="onInputInput"
-            class="h-full resize-none font-mono"
-            placeholder="Type text to encode..."
+            language="plaintext"
+            min-height="200px"
+            :line-numbers="'off'"
           />
         </CardContent>
       </Card>
@@ -65,11 +69,11 @@ const onBase64Input = () => {
           <CardTitle class="text-sm font-medium">Base64 Output</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="base64Text"
-            @input="onBase64Input"
-            class="h-full resize-none font-mono"
-            placeholder="Type Base64 to decode..."
+            language="plaintext"
+            min-height="200px"
+            :line-numbers="'off'"
           />
         </CardContent>
       </Card>

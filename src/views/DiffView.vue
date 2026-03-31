@@ -2,7 +2,7 @@
 import { ref, watch, computed } from 'vue'
 import * as Diff from 'diff'
 import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 
 const originalText = ref('')
@@ -71,22 +71,25 @@ Unchanged footer.`
             <CardTitle class="text-sm font-medium">Original Text</CardTitle>
           </CardHeader>
           <CardContent class="flex-1 min-h-0">
-            <Textarea
+            <CodeEditor
               v-model="originalText"
-              class="h-full resize-none font-mono text-sm leading-relaxed"
-              placeholder="Paste original text here..."
+              language="plaintext"
+              min-height="200px"
+              :line-numbers="'on'"
             />
           </CardContent>
         </Card>
+
         <Card class="flex-1 flex flex-col min-h-0">
           <CardHeader class="py-2">
             <CardTitle class="text-sm font-medium">Modified Text</CardTitle>
           </CardHeader>
           <CardContent class="flex-1 min-h-0">
-            <Textarea
+            <CodeEditor
               v-model="modifiedText"
-              class="h-full resize-none font-mono text-sm leading-relaxed"
-              placeholder="Paste modified text here..."
+              language="plaintext"
+              min-height="200px"
+              :line-numbers="'on'"
             />
           </CardContent>
         </Card>

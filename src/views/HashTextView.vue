@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import { Hash, Copy, Check } from 'lucide-vue-next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import CodeEditor from '@/components/CodeEditor.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 
 const input = ref('')
@@ -240,11 +241,12 @@ const copyHash = (type: string) => {
           <CardDescription>Enter text to hash</CardDescription>
         </CardHeader>
         <CardContent>
-          <textarea
+          <CodeEditor
             v-model="input"
-            placeholder="Enter text to hash..."
-            class="w-full h-32 px-3 py-2 border rounded-md font-mono resize-none focus:outline-none focus:ring-2 focus:ring-primary"
-          ></textarea>
+            language="plaintext"
+            min-height="120px"
+            :line-numbers="'off'"
+          />
         </CardContent>
       </Card>
 

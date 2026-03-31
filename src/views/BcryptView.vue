@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const password = ref('')
 const saltRounds = ref(10)
@@ -51,7 +51,13 @@ const verifyHash = () => {
           <Button @click="generateHash" class="w-full">Generate Hash</Button>
           <div v-if="hashResult" class="space-y-2">
             <Label>Hash Result</Label>
-            <Textarea :model-value="hashResult" readonly class="font-mono text-sm" rows="3" />
+            <CodeEditor
+              :model-value="hashResult"
+              language="plaintext"
+              :readonly="true"
+              min-height="80px"
+              :line-numbers="'off'"
+            />
           </div>
         </CardContent>
       </Card>
@@ -72,11 +78,11 @@ const verifyHash = () => {
           </div>
           <div class="grid gap-2">
             <Label>Hash</Label>
-            <Textarea
+            <CodeEditor
               v-model="hashToVerify"
-              placeholder="Enter bcrypt hash..."
-              rows="3"
-              class="font-mono text-sm"
+              language="plaintext"
+              min-height="80px"
+              :line-numbers="'off'"
             />
           </div>
           <Button @click="verifyHash" class="w-full">Verify</Button>
