@@ -17,6 +17,7 @@
     "@ethereumjs/evm": "^10.1.1",
     "@ethereumjs/statemanager": "^10.1.1",
     "@ethereumjs/util": "^10.1.1",
+    "@guolao/vue-monaco-editor": "^1.6.0",
     "@noble/hashes": "^2.0.1",
     "@polkadot/keyring": "^14.0.1",
     "@polkadot/util-crypto": "^14.0.1",
