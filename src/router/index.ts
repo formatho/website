@@ -1176,5 +1176,15 @@ export const routes = [
         }
       }
     ]
+  },
+  // 404 Catch-all route
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import('../views/NotFoundView.vue'),
+    meta: {
+      title: '404 - Page Not Found | Formatho',
+      description: 'The page you are looking for does not exist.'
+    }
   }
 ]

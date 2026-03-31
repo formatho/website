@@ -5,6 +5,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 import { Upload, Download, FileCode, CheckCircle2, AlertCircle } from 'lucide-vue-next'
+import OrigamiMascot from '@/components/OrigamiMascot.vue'
 
 const bpmnInput = ref('')
 const error = ref('')
@@ -517,6 +518,15 @@ const reset = () => {
     <!-- Success & Download Section -->
     <Card v-if="conversionSuccess && visioBlob" class="border-green-300 bg-green-50">
       <CardContent class="py-4">
+        <!-- Mascot appears on successful conversion -->
+        <div class="mb-4">
+          <OrigamiMascot
+            character="flowtho"
+            message="Automation complete. Your Visio flow is ready."
+            size="w-10 h-10"
+            contextId="bpmn-success"
+          />
+        </div>
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
           <div class="flex items-center gap-3">
             <CheckCircle2 class="h-6 w-6 text-green-600 shrink-0" />

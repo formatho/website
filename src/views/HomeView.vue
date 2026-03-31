@@ -10,6 +10,7 @@ import TrustBadges from '@/components/TrustBadges.vue'
 import SocialProofStats from '@/components/SocialProofStats.vue'
 import UrgencyBanner from '@/components/UrgencyBanner.vue'
 import FloatingCTA from '@/components/FloatingCTA.vue'
+import OrigamiMascot from '@/components/OrigamiMascot.vue'
 
 // Note: AOS is initialized globally in main.ts to avoid conflicts
 
@@ -138,6 +139,16 @@ const filteredTools = computed(() => {
                 data-v-8d4ed633=""
               />
             </div>
+          </div>
+          
+          <!-- Halo Onboarding Mascot -->
+          <div class="w-full max-w-2xl mt-6 mb-4" data-v-8d4ed633="">
+            <OrigamiMascot
+              character="halo"
+              message="Welcome to Formatho. I'll guide you through your toolkit."
+              size="w-12 h-12"
+              contextId="dashboard-welcome"
+            />
           </div>
           
           <!-- Newsletter Signup in Hero -->
