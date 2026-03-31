@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { HeartbeatIcon, CpuIcon, ActivityIcon, ClockIcon, PlayCircleIcon, PauseCircleIcon, StopIcon, TerminalIcon, LayoutDashboard } from 'lucide-vue-next'
+import { Button } from '@/components/ui/button'
 import { InvitationModal, TeamMemberList } from '@/components/team'
 
 interface TeamMember {
@@ -311,13 +312,14 @@ onUnmounted(() => {
       <!-- Connection Status & Actions -->
       <div class="flex items-center gap-3">
         <!-- Analytics Dashboard Button -->
-        <button 
+        <Button 
           @click="navigateToAnalytics"
-          class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm font-medium transition-colors flex items-center gap-2"
+          size="sm"
+          class="flex items-center gap-2"
         >
           <LayoutDashboard class="w-4 h-4" />
           Analytics
-        </button>
+        </Button>
         
         <!-- Connection Status -->
         <div class="flex items-center gap-2 px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-md">
@@ -392,12 +394,12 @@ onUnmounted(() => {
           >
             👥 Team Collaboration (Pro)
           </button>
-          <button 
+          <Button 
             @click="simulateData"
-            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm font-medium transition-colors"
+            size="sm"
           >
             Refresh Data
-          </button>
+          </Button>
         </div>
       </div>
       
@@ -495,12 +497,12 @@ onUnmounted(() => {
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
       <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
         <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Team Collaboration</h2>
-        <button 
+        <Button 
           @click="isTeamModalOpen = true"
-          class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm font-medium transition-colors"
+          size="sm"
         >
           + Invite Member
-        </button>
+        </Button>
       </div>
       
       <div class="p-6">

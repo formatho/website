@@ -48,8 +48,8 @@ const handleSubmit = async () => {
     <div class="max-w-4xl mx-auto">
       <!-- Header -->
       <div class="text-center mb-12">
-        <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-2 mb-6">
-          <span class="text-blue-400 text-sm font-medium">🚀 Beta Program</span>
+        <div class="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 mb-6">
+          <span class="text-primary text-sm font-medium">🚀 Beta Program</span>
         </div>
         <h1 class="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
           Become a Founding Beta Tester
@@ -201,7 +201,8 @@ const handleSubmit = async () => {
             <Button
               type="submit"
               :disabled="isSubmitting"
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 text-lg"
+              size="lg"
+              class="w-full font-semibold py-6 text-lg"
             >
               {{ isSubmitting ? 'Submitting...' : 'Apply for Beta Access' }}
             </Button>

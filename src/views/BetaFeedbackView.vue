@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { Button } from '@/components/ui/button'
 
 const props = defineProps<{
   betaTesterId?: string
@@ -326,13 +327,14 @@ const removeFile = (index: number) => {
       </div>
 
       <!-- Submit Button -->
-      <button
+      <Button
         type="submit"
         :disabled="isSubmitting"
-        class="w-full py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        size="lg"
+        class="w-full"
       >
         {{ isSubmitting ? 'Submitting...' : 'Submit Feedback' }}
-      </button>
+      </Button>
 
       <!-- Privacy Note -->
       <p class="text-xs text-muted-foreground text-center">
