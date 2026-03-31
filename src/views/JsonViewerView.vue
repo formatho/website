@@ -3,6 +3,9 @@ import { ref, watch } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import CodeEditor from '@/components/CodeEditor.vue'
+import { useTwins } from '@/composables/useTwins'
+
+const { summonTwin } = useTwins()
 
 const jsonInput = ref('')
 const jsonOutput = ref('')
@@ -17,6 +20,12 @@ const formatJson = () => {
     }
     const parsed = JSON.parse(jsonInput.value)
     jsonOutput.value = JSON.stringify(parsed, null, 2)
+    
+    // Summon Memo on successful format
+    summonTwin('memo', 'Data parsed and secured.', 'json-format-success', {
+      x: 'right',
+      y: 'bottom'
+    })
   } catch (e: any) {
     error.value = e.message || 'Invalid JSON'
   }
@@ -31,6 +40,12 @@ const minifyJson = () => {
     }
     const parsed = JSON.parse(jsonInput.value)
     jsonOutput.value = JSON.stringify(parsed)
+    
+    // Summon Memo on successful minify
+    summonTwin('memo', 'Data parsed and secured.', 'json-minify-success', {
+      x: 'right',
+      y: 'bottom'
+    })
   } catch (e: any) {
     error.value = e.message || 'Invalid JSON'
   }

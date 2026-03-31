@@ -4,6 +4,9 @@ import { Button } from '@/components/ui/button'
 import CodeEditor from '@/components/CodeEditor.vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import Breadcrumb from '@/components/Breadcrumb.vue'
+import { useTwins } from '@/composables/useTwins'
+
+const { summonTwin } = useTwins()
 
 const inputText = ref('')
 const base64Text = ref('')
@@ -18,6 +21,14 @@ const encodeToBase64 = () => {
   try {
     base64Text.value = btoa(inputText.value)
     error.value = ''
+    
+    // Summon Memo on successful encode
+    if (inputText.value) {
+      summonTwin('memo', 'Data parsed and secured.', 'base64-encode-success', {
+        x: 'right',
+        y: 'bottom'
+      })
+    }
   } catch (e) {
     // ignore
   }
@@ -27,6 +38,12 @@ const decodeFromBase64 = () => {
   try {
     inputText.value = atob(base64Text.value)
     error.value = ''
+    
+    // Summon Memo on successful decode
+    summonTwin('memo', 'Data parsed and secured.', 'base64-decode-success', {
+      x: 'right',
+      y: 'bottom'
+    })
   } catch (e) {
     error.value = 'Invalid Base64'
   }

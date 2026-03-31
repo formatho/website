@@ -2,8 +2,11 @@
 import { ref, onUnmounted } from 'vue'
 import { Button } from '@/components/ui/button'
 import CodeEditor from '@/components/CodeEditor.vue'
+import { useTwins } from '@/composables/useTwins'
 
 import SolidityWorker from '@/workers/solidity.worker?worker'
+
+const { summonTwin } = useTwins()
 
 const sourceCode = ref(`// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
@@ -51,6 +54,12 @@ const initWorker = () => {
       isCompiling.value = false
       if (trace) {
         executionTrace.value = trace
+        
+        // Summon Morpho on successful compilation
+        summonTwin('morpho', 'Architecture compiled. Keys generated.', 'solidity-compile-success', {
+          x: 'right',
+          y: 80
+        })
       }
       processOutput(output)
     } else if (action === 'error') {

@@ -15,6 +15,9 @@ import { Buffer } from 'buffer'
 import { secp256k1 } from '@noble/curves/secp256k1'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { useTwins } from '@/composables/useTwins'
+
+const { summonTwin } = useTwins()
 
 // Polyfill Buffer for browser environment
 if (typeof window !== 'undefined' && !window.Buffer) {
@@ -186,6 +189,12 @@ const generateKeys = async () => {
 
     results.value = resultsList
     generated.value = true
+    
+    // Summon Morpho on successful key generation
+    summonTwin('morpho', 'Architecture compiled. Keys generated.', 'multichain-keys-success', {
+      x: 'right',
+      y: 80
+    })
   } catch (err: any) {
     console.error(err)
     error.value = 'Error generating keys: ' + err.message

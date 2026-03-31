@@ -4,6 +4,9 @@ import * as Diff from 'diff'
 import { Button } from '@/components/ui/button'
 import CodeEditor from '@/components/CodeEditor.vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { useTwins } from '@/composables/useTwins'
+
+const { summonTwin } = useTwins()
 
 const originalText = ref('')
 const modifiedText = ref('')
@@ -16,6 +19,14 @@ const computeDiff = () => {
   }
   const diffs = Diff.diffLines(originalText.value, modifiedText.value)
   diffResult.value = diffs
+  
+  // Summon Flowtho when diff is computed (both inputs have content)
+  if (originalText.value && modifiedText.value) {
+    summonTwin('flowtho', 'Process flows perfectly. Diff computed.', 'diff-success', {
+      x: 'right',
+      y: 'bottom'
+    })
+  }
 }
 
 watch([originalText, modifiedText], computeDiff)

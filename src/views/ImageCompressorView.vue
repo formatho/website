@@ -5,6 +5,9 @@ import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Slider } from '@/components/ui/slider'
 import { Label } from '@/components/ui/label'
+import { useTwins } from '@/composables/useTwins'
+
+const { summonTwin } = useTwins()
 
 const file = ref<File | null>(null)
 const previewUrl = ref('')
@@ -64,6 +67,12 @@ const processImage = () => {
         compressedUrl.value = URL.createObjectURL(blob)
         compressedSize.value = blob.size
         isProcessing.value = false
+        
+        // Summon Flowtho on successful compression
+        summonTwin('flowtho', 'Process flows perfectly. Optimization complete.', 'image-compress-success', {
+          x: 'right',
+          y: 'bottom'
+        })
       },
       file.value?.type || 'image/jpeg',
       q

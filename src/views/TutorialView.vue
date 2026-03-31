@@ -3,6 +3,9 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { useTwins } from '@/composables/useTwins'
+
+const { summonTwin } = useTwins()
 
 // Tutorial steps
 const currentStep = ref(0)
@@ -171,6 +174,16 @@ const handleKeydown = (e: KeyboardEvent) => {
 
 onMounted(() => {
   window.addEventListener('keydown', handleKeydown)
+  
+  // Summon Halo on first visit to tutorial
+  const hasVisitedTutorial = localStorage.getItem('formatho-tutorial-visited')
+  if (!hasVisitedTutorial) {
+    localStorage.setItem('formatho-tutorial-visited', 'true')
+    summonTwin('halo', "Welcome to Formatho. Let's build something.", 'tutorial-first-visit', {
+      x: 'center',
+      y: 100
+    })
+  }
 })
 
 onUnmounted(() => {
