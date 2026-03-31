@@ -47,9 +47,9 @@ onMounted(() => {
 })
 
 const copyTitle = computed(() => {
-  return abVariant.value === 'A' 
-    ? 'Get early access to Agent Orchestrator'
-    : 'Privacy tips for developers + early access'
+  return abVariant.value === 'A'
+    ? '🚀 Agent Orchestrator Beta: First 100 spots filling fast'
+    : '⚡ Privacy-first tools + AI orchestration (beta access)'
 })
 
 const dismissBanner = () => {
@@ -119,9 +119,9 @@ const handleDismiss = () => {
           <Button
             @click="toggleForm"
             size="sm"
-            class="ml-2 px-4 py-1 h-7 bg-white/20 hover:bg-white/30 text-white border border-white/30 rounded-full text-sm font-semibold transition-all"
+            class="ml-2 px-4 py-1 h-7 bg-white/20 hover:bg-white/30 text-white border border-white/30 rounded-full text-sm font-semibold transition-all hover:scale-105"
           >
-            Notify Me
+            Claim Spot
           </Button>
           <button
             @click="dismissBanner"
