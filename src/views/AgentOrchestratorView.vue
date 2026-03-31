@@ -213,15 +213,19 @@ const downloads = [
 
           <!-- Tagline -->
           <p class="text-xl md:text-2xl font-semibold text-foreground">
-            Desktop app for managing autonomous AI agents
+            Team Collaboration for AI Agents • $29/month
           </p>
 
           <!-- Description -->
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl">
-            A local-first Electron application with beautiful UI. Manage agents, schedule tasks, and
-            automate workflows.
-            <strong>No command line required. 100% private.</strong>
+            Enterprise-grade AI agent management for teams. Coordinate agents, persist state, and collaborate securely.
+            <strong>No command line required. 100% private. Team-ready.</strong>
           </p>
+          
+          <!-- Pricing Badge -->
+          <div class="flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full">
+            <span class="text-sm font-semibold text-primary">💰 Simple Pricing: $29/month per team</span>
+          </div>
 
           <!-- Status Badges -->
           <div class="flex flex-wrap gap-2 justify-center">
@@ -385,6 +389,44 @@ const downloads = [
               </div>
             </div>
           </div>
+        </Card>
+      </div>
+    </section>
+
+    <!-- Demo Video Section -->
+    <section class="container mx-auto px-6 py-12 md:py-16 border-t border-border">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold tracking-tight mb-4">See It In Action</h2>
+        <p class="text-muted-foreground max-w-2xl mx-auto">
+          Watch how easy it is to manage AI agents with Agent Orchestrator's intuitive interface.
+        </p>
+      </div>
+      
+      <!-- Video Placeholder -->
+      <div class="max-w-4xl mx-auto">
+        <Card class="overflow-hidden bg-gradient-to-br from-primary/5 to-primary/10 border-2 border-dashed border-primary/30">
+          <CardContent class="p-12">
+            <div class="flex flex-col items-center justify-center space-y-4">
+              <div class="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center">
+                <svg class="w-10 h-10 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div class="text-center">
+                <h3 class="text-xl font-semibold mb-2">Demo Video Coming Soon</h3>
+                <p class="text-sm text-muted-foreground max-w-md">
+                  We're preparing a comprehensive walkthrough showing team collaboration features, 
+                  agent management, and real-world use cases. Check back in a few days!
+                </p>
+              </div>
+              <Badge variant="secondary" class="mt-2">
+                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                Estimated: Week 2 (April 2026)
+              </Badge>
+            </div>
+          </CardContent>
         </Card>
       </div>
     </section>

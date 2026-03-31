@@ -6,9 +6,9 @@ import { Search, Sparkles } from 'lucide-vue-next'
 import * as LucideIcons from 'lucide-vue-next'
 import { tools } from '../data/tools'
 import EmailCapture from '@/components/EmailCapture.vue'
+import EmailStickyBanner from '@/components/EmailStickyBanner.vue'
 import TrustBadges from '@/components/TrustBadges.vue'
 import SocialProofStats from '@/components/SocialProofStats.vue'
-import UrgencyBanner from '@/components/UrgencyBanner.vue'
 import FloatingCTA from '@/components/FloatingCTA.vue'
 import { useTwins } from '@/composables/useTwins'
 
@@ -46,8 +46,8 @@ const filteredTools = computed(() => {
 
 <template>
   <div class="min-h-screen">
-    <!-- Urgency Banner -->
-    <UrgencyBanner />
+    <!-- Email Capture Sticky Banner -->
+    <EmailStickyBanner />
 
     <!-- Hero Section -->
     <section
@@ -63,7 +63,14 @@ const filteredTools = computed(() => {
       </div>
       
       <div class="container mx-auto px-4 py-12 md:py-16 relative" data-v-8d4ed633="">
-        <div class="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto" data-v-8d4ed633="">
+            <div class="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto" data-v-8d4ed633="">
+          <!-- NO SIGNUP REQUIRED - HERO BADGE -->
+          <div class="flex items-center gap-2 px-6 py-3 bg-green-50 border-2 border-green-500 rounded-full" data-aos="fade-down" data-aos-delay="0">
+            <span class="text-2xl">🚀</span>
+            <span class="text-lg font-bold text-green-700">NO SIGNUP REQUIRED • INSTANT ACCESS • 100% FREE</span>
+            <span class="text-2xl">🚀</span>
+          </div>
+          
           <div class="flex items-center gap-4" data-aos="fade-down" data-aos-delay="0" data-v-8d4ed633="">
             <img
               src="/logo.png"

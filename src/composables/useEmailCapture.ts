@@ -5,11 +5,14 @@ export interface EmailCaptureResult {
   message: string
 }
 
-export type EmailCaptureSource = 'homepage' | 'pricing' | 'blog' | 'footer'
+export type EmailCaptureSource = 'homepage' | 'pricing' | 'blog' | 'footer' | 'banner' | 'popup' | 'contextual'
 
 // Configuration - can be set via environment variables
 const EMAIL_API_ENDPOINT = import.meta.env.VITE_EMAIL_API_ENDPOINT || '/api/newsletter/subscribe'
 const RESEND_API_ENDPOINT = import.meta.env.VITE_RESEND_API_ENDPOINT || '/api/resend/subscribe'
+
+// Honeypot field name for spam prevention
+const HONEYPOT_FIELD = 'website_url'
 
 export function useEmailCapture() {
   const email = ref('')
@@ -31,6 +34,28 @@ export function useEmailCapture() {
     return emailRegex.test(emailAddress)
   }
 
+  // Store email locally as fallback (can be synced later)
+  const storeEmailLocally = (
+    emailAddress: string,
+    source: EmailCaptureSource,
+    metadata?: Record<string, string>
+  ) => {
+    try {
+      const pendingSignups = JSON.parse(
+        localStorage.getItem('formatho_pending_signups') || '[]'
+      )
+      pendingSignups.push({
+        email: emailAddress,
+        source,
+        timestamp: new Date().toISOString(),
+        metadata
+      })
+      localStorage.setItem('formatho_pending_signups', JSON.stringify(pendingSignups))
+    } catch (e) {
+      console.warn('Failed to store email locally:', e)
+    }
+  }
+
   // Submit email to the backend
   const submitEmail = async (
     emailAddress: string,
@@ -48,22 +73,40 @@ export function useEmailCapture() {
         throw new Error('Please enter a valid email address')
       }
 
-      // Prepare payload
+      // Check for duplicate submissions in the last 5 seconds
+      const submissionId = `${emailAddress}-${source}`
+      const lastSubmission = sessionStorage.getItem('last_email_submission')
+      const lastSubmissionTime = sessionStorage.getItem('last_email_submission_time')
+      
+      if (lastSubmission === submissionId && lastSubmissionTime) {
+        const timeSinceLastSubmission = Date.now() - parseInt(lastSubmissionTime)
+        if (timeSinceLastSubmission < 5000) {
+          throw new Error('This email was just submitted. Please wait a moment.')
+        }
+      }
+      
+      sessionStorage.setItem('last_email_submission', submissionId)
+      sessionStorage.setItem('last_email_submission_time', Date.now().toString())
+
+      // Prepare payload with honeypot field for spam prevention
       const payload = {
         email: emailAddress,
         source,
         timestamp: new Date().toISOString(),
+        // Honeypot field - should be empty for legitimate submissions
+        [HONEYPOT_FIELD]: '',
         metadata: {
           url: window.location.href,
           referrer: document.referrer || 'direct',
           userAgent: navigator.userAgent,
+          screenResolution: `${window.screen.width}x${window.screen.height}`,
+          language: navigator.language,
           ...metadata
         }
       }
 
       // Try the primary endpoint first
       let response: Response | null = null
-      let lastError: Error | null = null
 
       // Try Resend API endpoint
       try {
@@ -75,7 +118,7 @@ export function useEmailCapture() {
           body: JSON.stringify(payload),
         })
       } catch (e) {
-        lastError = e instanceof Error ? e : new Error('Network error')
+        console.warn('Resend endpoint failed:', e)
       }
 
       // If Resend fails, try fallback endpoint
@@ -89,7 +132,7 @@ export function useEmailCapture() {
             body: JSON.stringify(payload),
           })
         } catch (e) {
-          lastError = e instanceof Error ? e : new Error('Network error')
+          console.warn('Newsletter endpoint failed:', e)
         }
       }
 
@@ -112,7 +155,7 @@ export function useEmailCapture() {
               }),
             })
           } catch (e) {
-            lastError = e instanceof Error ? e : new Error('Network error')
+            console.warn('Formspree endpoint failed:', e)
           }
         }
       }
@@ -146,28 +189,6 @@ export function useEmailCapture() {
       }
     } finally {
       isLoading.value = false
-    }
-  }
-
-  // Store email locally as fallback (can be synced later)
-  const storeEmailLocally = (
-    emailAddress: string,
-    source: EmailCaptureSource,
-    metadata?: Record<string, string>
-  ) => {
-    try {
-      const pendingSignups = JSON.parse(
-        localStorage.getItem('formatho_pending_signups') || '[]'
-      )
-      pendingSignups.push({
-        email: emailAddress,
-        source,
-        timestamp: new Date().toISOString(),
-        metadata
-      })
-      localStorage.setItem('formatho_pending_signups', JSON.stringify(pendingSignups))
-    } catch (e) {
-      console.warn('Failed to store email locally:', e)
     }
   }
 
