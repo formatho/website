@@ -19,6 +19,9 @@ interface Props {
   positionX?: 'left' | 'center' | 'right' | number
   positionY?: 'top' | 'center' | 'bottom' | number
   positionType?: 'fixed' | 'absolute'
+  // Glow-active state for orchestration selection
+  isActive?: boolean
+  isThinking?: boolean
   // Dismiss callback for overlay mode
   onDismiss?: () => void
 }
@@ -27,7 +30,9 @@ const props = withDefaults(defineProps<Props>(), {
   size: 'w-8 h-8',
   positionX: 'right',
   positionY: 'bottom',
-  positionType: 'fixed'
+  positionType: 'fixed',
+  isActive: false,
+  isThinking: false
 })
 
 // ============================================================
@@ -53,6 +58,7 @@ interface CharacterConfig {
   borderClass: string
   animationClass: string
   glowClass: string
+  glowColor: string // HEX color for glow-active state
 }
 
 const characterConfigs: Record<MascotName, CharacterConfig> = {
@@ -62,7 +68,8 @@ const characterConfigs: Record<MascotName, CharacterConfig> = {
     textClass: 'text-cyan-400',
     borderClass: 'border-cyan-500/20',
     animationClass: 'animate-wave-breathe',
-    glowClass: 'shadow-cyan-500/20'
+    glowClass: 'shadow-cyan-500/20',
+    glowColor: '#06b6d4'
   },
   morpho: {
     color: 'violet',
@@ -70,7 +77,8 @@ const characterConfigs: Record<MascotName, CharacterConfig> = {
     textClass: 'text-violet-400',
     borderClass: 'border-violet-500/20',
     animationClass: 'animate-fox-morph',
-    glowClass: 'shadow-violet-500/20'
+    glowClass: 'shadow-violet-500/20',
+    glowColor: '#8b5cf6'
   },
   memo: {
     color: 'amber',
@@ -78,7 +86,8 @@ const characterConfigs: Record<MascotName, CharacterConfig> = {
     textClass: 'text-amber-400',
     borderClass: 'border-amber-500/20',
     animationClass: 'animate-memory-pulse',
-    glowClass: 'shadow-amber-500/20'
+    glowClass: 'shadow-amber-500/20',
+    glowColor: '#d97706'
   },
   nexo: {
     color: 'emerald',
@@ -86,7 +95,8 @@ const characterConfigs: Record<MascotName, CharacterConfig> = {
     textClass: 'text-emerald-400',
     borderClass: 'border-emerald-500/20',
     animationClass: 'animate-crane-flap',
-    glowClass: 'shadow-emerald-500/20'
+    glowClass: 'shadow-emerald-500/20',
+    glowColor: '#10b981'
   },
   halo: {
     color: 'rose',
@@ -94,7 +104,8 @@ const characterConfigs: Record<MascotName, CharacterConfig> = {
     textClass: 'text-rose-400',
     borderClass: 'border-rose-500/20',
     animationClass: 'animate-dove-glow',
-    glowClass: 'shadow-rose-500/20'
+    glowClass: 'shadow-rose-500/20',
+    glowColor: '#f43f5e'
   }
 }
 
@@ -208,8 +219,11 @@ onMounted(() => {
           config.borderClass,
           config.glowClass,
           config.animationClass,
-          size
+          size,
+          { 'glow-active': isActive },
+          { 'glow-thinking': isThinking }
         ]"
+        :style="isActive ? { '--agent-glow-color': config.glowColor } : {}"
       >
         <!-- Dynamic SVG Rendering -->
         <div
@@ -279,6 +293,95 @@ onMounted(() => {
   to {
     opacity: 0;
     transform: translateY(-10px) scale(0.95);
+  }
+}
+
+/* ============================================================
+   GLOW-ACTIVE STATE - Agent Selection Glow
+   ui-ux-pro-max color palette integration
+   ============================================================ */
+.glow-active {
+  position: relative;
+  box-shadow: 
+    0 0 20px color-mix(in srgb, var(--agent-glow-color, #06b6d4) 40%, transparent),
+    0 0 40px color-mix(in srgb, var(--agent-glow-color, #06b6d4) 20%, transparent),
+    inset 0 0 20px color-mix(in srgb, var(--agent-glow-color, #06b6d4) 10%, transparent);
+  animation: glow-pulse-active 2s ease-in-out infinite;
+}
+
+.glow-active::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at center,
+    color-mix(in srgb, var(--agent-glow-color, #06b6d4) 30%, transparent) 0%,
+    transparent 70%
+  );
+  opacity: 0.6;
+  z-index: -1;
+  animation: glow-ring-expand 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-active {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px color-mix(in srgb, var(--agent-glow-color, #06b6d4) 40%, transparent),
+      0 0 40px color-mix(in srgb, var(--agent-glow-color, #06b6d4) 20%, transparent);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px color-mix(in srgb, var(--agent-glow-color, #06b6d4) 60%, transparent),
+      0 0 60px color-mix(in srgb, var(--agent-glow-color, #06b6d4) 30%, transparent);
+  }
+}
+
+@keyframes glow-ring-expand {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.4;
+  }
+}
+
+/* ============================================================
+   GLOW-THINKING STATE - Agent Processing Animation
+   ============================================================ */
+.glow-thinking {
+  animation: thinking-glow 0.6s ease-in-out infinite;
+}
+
+.glow-thinking::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: inherit;
+  border: 2px solid var(--agent-glow-color, #06b6d4);
+  opacity: 0.5;
+  animation: thinking-ring 0.8s ease-in-out infinite;
+}
+
+@keyframes thinking-glow {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.3);
+  }
+}
+
+@keyframes thinking-ring {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.2;
   }
 }
 </style>
