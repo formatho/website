@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import yaml from 'js-yaml'
 import { FileJson, FileType } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 
@@ -66,9 +66,10 @@ const fillSample = () => {
           <Button size="sm" @click="convertToYaml"> To YAML -> </Button>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="jsonInput"
-            class="h-full resize-none font-mono"
+            language="json"
+            class="h-full"
             placeholder='{"key": "value"}'
           />
         </CardContent>
@@ -83,9 +84,10 @@ const fillSample = () => {
           <Button size="sm" @click="convertToJson" variant="secondary"> &lt;- To JSON </Button>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="yamlInput"
-            class="h-full resize-none font-mono"
+            language="yaml"
+            class="h-full"
             placeholder="key: value"
           />
         </CardContent>

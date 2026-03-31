@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import yaml from 'js-yaml'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const tomlInput = ref('')
 const yamlOutput = ref('')
@@ -88,9 +88,10 @@ watch(tomlInput, () => {
           <CardTitle>TOML Input</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="tomlInput"
-            class="h-full resize-none font-mono"
+            language="plaintext"
+            class="h-full"
             placeholder="Enter TOML..."
           />
         </CardContent>
@@ -101,10 +102,11 @@ watch(tomlInput, () => {
           <CardTitle>YAML Output</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             :model-value="yamlOutput"
+            language="yaml"
             readonly
-            class="h-full resize-none font-mono"
+            class="h-full"
             placeholder="YAML output will appear here..."
           />
         </CardContent>
