@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Button } from '@/components/ui/button'
 import { AlertCircle, CheckCircle, ArrowRight } from 'lucide-vue-next'
 import * as yaml from 'js-yaml'
@@ -82,9 +82,10 @@ address:
           </Button>
         </CardHeader>
         <CardContent class="flex-1 min-h-0 flex flex-col gap-2">
-          <Textarea
+          <CodeEditor
             v-model="yamlInput"
-            class="flex-1 resize-none font-mono text-sm"
+            language="yaml"
+            class="flex-1 min-h-0"
             placeholder="key: value"
           />
           <div
@@ -103,11 +104,12 @@ address:
           <CardTitle class="text-sm font-medium">Formatted Output</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
-            v-model="yamlOutput"
-            class="h-full resize-none font-mono text-sm"
-            placeholder="Formatted YAML will appear here..."
+          <CodeEditor
+            :model-value="yamlOutput"
+            language="yaml"
             readonly
+            class="h-full min-h-0"
+            placeholder="Formatted YAML will appear here..."
           />
         </CardContent>
       </Card>

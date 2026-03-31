@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { format } from 'sql-formatter'
 import { Copy, RefreshCw } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import {
   Select,
@@ -69,9 +69,10 @@ formatSql()
               <Button @click="formatSql"> <RefreshCw class="mr-2 h-4 w-4" /> Format </Button>
             </div>
           </div>
-          <Textarea
+          <CodeEditor
             v-model="inputSql"
-            class="flex-1 font-mono resize-none"
+            language="sql"
+            class="flex-1 min-h-0"
             placeholder="Paste your SQL here..."
           />
         </CardContent>
@@ -89,11 +90,12 @@ formatSql()
           <div v-if="error" class="p-4 text-sm text-destructive bg-destructive/10 rounded-md">
             {{ error }}
           </div>
-          <pre
-            v-else
-            class="flex-1 overflow-auto p-4 rounded-md border bg-background font-mono text-sm"
-            >{{ outputSql }}</pre
-          >
+          <CodeEditor
+            :model-value="outputSql"
+            language="sql"
+            readonly
+            class="flex-1 min-h-0"
+          />
         </CardContent>
       </Card>
     </div>
