@@ -80,6 +80,9 @@
       system-ui,
       -apple-system,
       sans-serif;
+    /* UUPM: Base font size upgraded from 14px to 16px for readability */
+    font-size: 16px;
+    line-height: 1.6;
     /* Fix: Use overflow-x: hidden only to prevent horizontal scrollbar */
     /* Do NOT use overflow-y: hidden or height: 100vh to prevent scroll freezing */
     overflow-x: hidden;
@@ -87,6 +90,38 @@
     width: 100%;
     /* Ensure smooth scrolling behavior */
     scroll-behavior: smooth;
+  }
+
+  /* ============================================
+     UUPM: Premium Focus Indicators (A11y)
+     Custom brand-aligned focus rings
+     ============================================ */
+  
+  /* Remove default browser outlines */
+  :focus {
+    outline: none;
+  }
+  
+  /* Premium focus-visible ring for all interactive elements */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+    transition: box-shadow 0.15s ease-in-out;
+  }
+  
+  /* Button focus states */
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  a:focus-visible,
+  [href]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+  
+  /* Skip link enhanced visibility when focused */
+  .sr-only:focus:not(.sr-only) {
+    @apply ring-2 ring-primary ring-offset-2;
   }
 
   /* Monospace fonts for code and inputs */

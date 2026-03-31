@@ -59,7 +59,7 @@ useHead({
       data-aos="fade-up"
       data-aos-duration="400"
     >
-      <h1 class="text-4xl font-bold mb-4">Blog</h1>
+      <h1 class="text-5xl font-bold mb-4">Blog</h1>
       <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
         Developer guides, tutorials, and insights from the Formatho team
       </p>

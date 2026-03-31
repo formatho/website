@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router'
 <template>
   <div class="container mx-auto px-4 py-12">
     <div class="max-w-4xl mx-auto">
-      <h1 class="text-4xl font-bold mb-8">Terms of Service</h1>
+      <h1 class="text-5xl font-bold mb-8">Terms of Service</h1>
       <p class="text-muted-foreground mb-8">Last updated: March 7, 2026</p>
 
       <div class="glass-card p-8 md:p-12 space-y-8">

@@ -21,7 +21,7 @@ onMounted(() => {
 <template>
   <div class="container mx-auto px-4 py-12">
     <div class="max-w-4xl mx-auto">
-      <h1 class="text-4xl font-bold mb-8 text-center">Contact Us</h1>
+      <h1 class="text-5xl font-bold mb-8 text-center">Contact Us</h1>
       <p class="text-xl text-muted-foreground max-w-2xl mx-auto text-center mb-12">
         Have questions, feedback, or want to contribute? We'd love to hear from you.
       </p>
