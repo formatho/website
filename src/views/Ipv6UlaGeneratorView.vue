@@ -56,7 +56,7 @@ generateULA()
           </div>
         </div>
         <div class="flex gap-2">
-          <Button @click="generateULA" class="flex-1">Generate New</Button>
+          <Button @click="generateULA" class="flex-1" aria-label="Generate new ULA">Generate New</Button>
           <Button variant="outline" @click="copyUla" aria-label="Copy ULA address">Copy</Button>
         </div>
       </CardContent>

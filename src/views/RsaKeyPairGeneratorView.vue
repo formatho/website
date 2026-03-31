@@ -66,7 +66,7 @@ const arrayBufferToPem = (buffer: ArrayBuffer, label: string): string => {
             </select>
           </div>
           <div class="flex items-end">
-            <Button @click="generateKeyPair" :disabled="generating" class="w-full">
+            <Button @click="generateKeyPair" :disabled="generating" class="w-full" aria-label="Generate RSA key pair">
               {{ generating ? 'Generating...' : 'Generate Key Pair' }}
             </Button>
           </div>

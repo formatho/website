@@ -121,7 +121,7 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <Button @click="generateTOTP" class="w-full md:w-auto">Generate Code</Button>
+        <Button @click="generateTOTP" class="w-full md:w-auto" aria-label="Generate TOTP code">Generate Code</Button>
       </CardContent>
     </Card>
 

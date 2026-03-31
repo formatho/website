@@ -71,7 +71,7 @@ const generateHMAC = () => {
           </div>
           <div class="grid gap-2 md:col-span-2">
             <Label>Secret Key</Label>
-            <Input v-model="secretKey" type="password" placeholder="Enter secret key..." />
+            <Input v-model="secretKey" type="password" placeholder="Enter secret key..." aria-label="HMAC secret key" />
           </div>
         </div>
 
@@ -80,7 +80,7 @@ const generateHMAC = () => {
           <Textarea v-model="message" placeholder="Enter message to hash..." rows="4" />
         </div>
 
-        <Button @click="generateHMAC" class="w-full md:w-auto">Generate HMAC</Button>
+        <Button @click="generateHMAC" class="w-full md:w-auto" aria-label="Generate HMAC">Generate HMAC</Button>
 
         <div v-if="hmacResult" class="space-y-2">
           <Label>HMAC Result (hex)</Label>

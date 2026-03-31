@@ -114,7 +114,7 @@ const decrypt = () => {
           </div>
           <div class="grid gap-2">
             <Label>Secret Key</Label>
-            <Input v-model="secretKey" type="password" placeholder="Enter secret key..." />
+            <Input v-model="secretKey" type="password" placeholder="Enter secret key..." aria-label="Encryption key" />
           </div>
           <div class="grid gap-2">
             <Label>Plaintext</Label>
@@ -136,7 +136,7 @@ const decrypt = () => {
         <CardContent class="flex-1 space-y-4">
           <div class="grid gap-2">
             <Label>Secret Key</Label>
-            <Input v-model="decryptKey" type="password" placeholder="Enter secret key..." />
+            <Input v-model="decryptKey" type="password" placeholder="Enter secret key..." aria-label="Decryption key" />
           </div>
           <div class="grid gap-2">
             <Label>Ciphertext</Label>

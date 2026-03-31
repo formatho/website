@@ -57,11 +57,11 @@ const etaInfo = computed<EtaInfo>(() => {
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="grid gap-2">
             <Label>Distance (km or miles)</Label>
-            <Input v-model.number="distance" type="number" min="0" step="0.1" />
+            <Input v-model.number="distance" type="number" min="0" step="0.1" aria-label="Distance" />
           </div>
           <div class="grid gap-2">
             <Label>Speed (km/h or mph)</Label>
-            <Input v-model.number="speed" type="number" min="1" step="0.1" />
+            <Input v-model.number="speed" type="number" min="1" step="0.1" aria-label="Speed" />
           </div>
           <div class="grid gap-2">
             <Label>Start Time (optional)</Label>

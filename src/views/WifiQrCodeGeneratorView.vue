@@ -61,7 +61,7 @@ const downloadQR = () => {
               <option value="nopass">No Password</option>
             </select>
           </div>
-          <Button @click="generateQR" class="w-full">Generate QR Code</Button>
+          <Button @click="generateQR" class="w-full" aria-label="Generate WiFi QR code">Generate QR Code</Button>
         </CardContent>
       </Card>
 

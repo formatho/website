@@ -42,11 +42,11 @@ const verifyHash = () => {
         <CardContent class="flex-1 space-y-4">
           <div class="grid gap-2">
             <Label>Password</Label>
-            <Input v-model="password" type="password" placeholder="Enter password..." />
+            <Input v-model="password" type="password" placeholder="Enter password..." aria-label="Password to hash" />
           </div>
           <div class="grid gap-2">
             <Label>Salt Rounds</Label>
-            <Input v-model.number="saltRounds" type="number" min="4" max="20" />
+            <Input v-model.number="saltRounds" type="number" min="4" max="20" aria-label="Salt rounds" />
           </div>
           <Button @click="generateHash" class="w-full" aria-label="Generate new hash">Generate Hash</Button>
           <div v-if="hashResult" class="space-y-2">

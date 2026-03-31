@@ -69,7 +69,7 @@ generatePort()
               />
             </div>
           </div>
-          <Button @click="generatePort" class="w-full">Generate Port</Button>
+          <Button @click="generatePort" class="w-full" aria-label="Generate random port">Generate Port</Button>
         </CardContent>
       </Card>
 

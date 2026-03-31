@@ -134,7 +134,7 @@ const copyEmoji = (emoji: string) => {
 
     <Card>
       <CardContent class="pt-6">
-        <Input v-model="searchQuery" placeholder="Search emojis..." class="w-full" />
+        <Input v-model="searchQuery" placeholder="Search emojis..." class="w-full" aria-label="Search emojis" />
       </CardContent>
     </Card>
 

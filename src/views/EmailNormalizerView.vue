@@ -45,7 +45,7 @@ const analysis = computed(() => {
       <CardContent class="space-y-4">
         <div class="grid gap-2">
           <Label>Input Email</Label>
-          <Input v-model="emailInput" placeholder="Enter email address..." />
+          <Input v-model="emailInput" placeholder="Enter email address..." aria-label="Email address to normalize" />
         </div>
       </CardContent>
     </Card>

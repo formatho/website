@@ -67,7 +67,7 @@ generateMnemonic()
               <option :value="24">24 words</option>
             </select>
           </div>
-          <Button @click="generateMnemonic" class="w-full">Generate New Mnemonic</Button>
+          <Button @click="generateMnemonic" class="w-full" aria-label="Generate new BIP39 mnemonic">Generate New Mnemonic</Button>
 
           <div class="space-y-2">
             <Label>Mnemonic Phrase</Label>

@@ -53,7 +53,7 @@ const copyToClipboard = (text: string) => {
         <CardContent class="space-y-4">
           <div class="space-y-2">
             <Label>Value</Label>
-            <Input v-model="textValue" placeholder="Enter value..." />
+            <Input v-model="textValue" placeholder="Enter value..." aria-label="Value to convert" />
           </div>
           <div class="space-y-2">
             <Label>Unit</Label>

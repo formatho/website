@@ -119,7 +119,7 @@ generate()
               <RefreshCw class="w-4 h-4 mr-2" />
               Generate {{ count }}
             </Button>
-            <Button @click="generateOne" variant="outline" class="flex-1"> + Generate One </Button>
+            <Button @click="generateOne" variant="outline" class="flex-1" aria-label="Generate one ULID"> + Generate One </Button>
           </div>
         </CardContent>
       </Card>

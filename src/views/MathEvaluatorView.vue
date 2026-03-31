@@ -189,7 +189,7 @@ const functions = [
                   {{ btn }}
                 </Button>
               </div>
-              <Button @click="addToHistory" class="w-full h-12"> = Calculate </Button>
+              <Button @click="addToHistory" class="w-full h-12" aria-label="Calculate expression"> = Calculate </Button>
             </div>
 
             <!-- Functions -->

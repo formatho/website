@@ -70,10 +70,10 @@ const copyAscii = () => {
       <CardContent class="space-y-4">
         <div class="grid gap-2">
           <Label>Text</Label>
-          <Input v-model="inputText" placeholder="Enter text..." maxlength="20" />
+          <Input v-model="inputText" placeholder="Enter text..." maxlength="20" aria-label="Text to convert to ASCII" />
         </div>
         <div class="flex gap-2">
-          <Button @click="generateAscii">Generate</Button>
+          <Button @click="generateAscii" aria-label="Generate ASCII art">Generate</Button>
           <Button variant="outline" @click="copyAscii" aria-label="Copy ASCII art">Copy</Button>
         </div>
       </CardContent>
