@@ -323,11 +323,11 @@ const removeFile = (index: number) => {
       <!-- Submit Button -->
       <Button
         type="submit"
-        :disabled="isSubmitting"
+        :loading="isSubmitting"
         size="lg"
         class="w-full"
       >
-        {{ isSubmitting ? 'Submitting...' : 'Submit Feedback' }}
+        Submit Feedback
       </Button>
 
       <!-- Privacy Note -->

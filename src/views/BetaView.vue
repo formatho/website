@@ -200,11 +200,11 @@ const handleSubmit = async () => {
 
             <Button
               type="submit"
-              :disabled="isSubmitting"
+              :loading="isSubmitting"
               size="lg"
               class="w-full font-semibold py-6 text-lg"
             >
-              {{ isSubmitting ? 'Submitting...' : 'Apply for Beta Access' }}
+              Apply for Beta Access
             </Button>
 
             <p class="text-center text-sm text-slate-500">

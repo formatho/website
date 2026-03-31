@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onUnmounted } from 'vue'
 import { Button } from '@/components/ui/button'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 import SolidityWorker from '@/workers/solidity.worker?worker'
 
@@ -452,12 +453,12 @@ onUnmounted(() => {
           </div>
 
           <div class="flex-1 relative">
-            <textarea
+            <CodeEditor
               v-model="sourceCode"
-              class="absolute inset-0 w-full h-full p-4 font-mono text-sm bg-transparent resize-none focus:outline-none dark:text-slate-300"
-              placeholder="// Enter Solidity Code..."
-              spellcheck="false"
-            ></textarea>
+              language="solidity"
+              min-height="100%"
+              class="absolute inset-0"
+            />
           </div>
 
           <div
@@ -465,16 +466,10 @@ onUnmounted(() => {
           >
             <Button
               @click="compile"
-              :disabled="isCompiling || isCompilerLoading"
+              :loading="isCompiling || isCompilerLoading"
               class="w-full"
             >
-              <span v-if="isCompiling || isCompilerLoading" class="flex items-center gap-2">
-                <span
-                  class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"
-                ></span>
-                {{ isCompilerLoading ? 'Loading Compiler...' : 'Compiling...' }}
-              </span>
-              <span v-else>Compile & View Opcodes</span>
+              {{ isCompilerLoading ? 'Loading Compiler...' : 'Compile & View Opcodes' }}
             </Button>
             <div
               v-if="error"
