@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Button } from '@/components/ui/button'
 
 const inputText = ref('')
@@ -47,7 +47,12 @@ const encodeAll = () => {
         <CardTitle>Input</CardTitle>
       </CardHeader>
       <CardContent class="space-y-4">
-        <Textarea v-model="inputText" rows="4" placeholder="Enter text to encode or decode..." />
+        <CodeEditor
+          v-model="inputText"
+          language="plaintext"
+          class="min-h-[100px]"
+          placeholder="Enter text to encode or decode..."
+        />
         <div class="flex gap-2 flex-wrap">
           <Button @click="encode">Encode</Button>
           <Button @click="encodeAll" variant="outline">Encode All Characters</Button>
@@ -62,10 +67,11 @@ const encodeAll = () => {
           <CardTitle>Encoded</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             :model-value="encodedText"
+            language="plaintext"
             readonly
-            class="h-full resize-none font-mono text-sm"
+            class="h-full"
             placeholder="Encoded result..."
           />
         </CardContent>
@@ -76,10 +82,11 @@ const encodeAll = () => {
           <CardTitle>Decoded</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             :model-value="decodedText"
+            language="plaintext"
             readonly
-            class="h-full resize-none font-mono text-sm"
+            class="h-full"
             placeholder="Decoded result..."
           />
         </CardContent>

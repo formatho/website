@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { LoremIpsum } from 'lorem-ipsum'
 import { Copy, RefreshCw } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import {
   Select,
@@ -13,7 +14,6 @@ import {
 } from '@/components/ui/select'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 
 const count = ref(3)
 const units = ref('paragraphs')
@@ -95,7 +95,12 @@ generate()
           </Button>
         </CardHeader>
         <CardContent class="flex-1 min-h-0 pt-4">
-          <Textarea v-model="generatedText" readonly class="h-full resize-none bg-muted/50" />
+          <CodeEditor
+            :model-value="generatedText"
+            language="markdown"
+            readonly
+            class="h-full"
+          />
         </CardContent>
       </Card>
     </div>

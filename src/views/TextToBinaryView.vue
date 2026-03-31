@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { Binary, Copy, Check, ArrowRightLeft } from 'lucide-vue-next'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { ref } from 'vue'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Button } from '@/components/ui/button'
+import { Binary, Copy, Check, ArrowRightLeft } from 'lucide-vue-next'
 
 const textInput = ref('Hello World')
 const binaryInput = ref(
@@ -96,11 +97,12 @@ const swapMode = () => {
             <CardDescription>Enter text to convert to binary</CardDescription>
           </CardHeader>
           <CardContent>
-            <textarea
+            <CodeEditor
               v-model="textInput"
+              language="plaintext"
+              class="min-h-[128px]"
               placeholder="Enter text..."
-              class="w-full h-32 px-3 py-2 border rounded-md font-mono resize-none focus:outline-none focus:ring-2 focus:ring-primary"
-            ></textarea>
+            />
           </CardContent>
         </Card>
 
@@ -164,11 +166,12 @@ const swapMode = () => {
             <CardDescription>Enter binary (spaces between bytes optional)</CardDescription>
           </CardHeader>
           <CardContent>
-            <textarea
+            <CodeEditor
               v-model="binaryInput"
+              language="plaintext"
+              class="min-h-[128px]"
               placeholder="01001000 01100101 01101100 01101100 01101111..."
-              class="w-full h-32 px-3 py-2 border rounded-md font-mono resize-none focus:outline-none focus:ring-2 focus:ring-primary"
-            ></textarea>
+            />
           </CardContent>
         </Card>
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 
@@ -90,7 +90,12 @@ const downloadAsText = () => {
               <Button variant="outline" size="sm" @click="downloadAsText">Download</Button>
             </div>
           </div>
-          <Textarea :model-value="base64Output" readonly rows="10" class="font-mono text-xs" />
+          <CodeEditor
+            :model-value="base64Output"
+            language="plaintext"
+            readonly
+            class="min-h-[250px]"
+          />
           <div class="text-sm text-muted-foreground">
             Size: {{ (base64Output.length / 1024).toFixed(2) }} KB
           </div>

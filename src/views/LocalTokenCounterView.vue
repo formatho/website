@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { encode } from 'gpt-tokenizer/model/gpt-4o'
 import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 
@@ -55,9 +55,10 @@ const clearText = () => {
         <CardTitle class="text-sm font-medium">Input Text</CardTitle>
       </CardHeader>
       <CardContent class="flex-1 min-h-0">
-        <Textarea
+        <CodeEditor
           v-model="inputText"
-          class="h-full resize-none font-mono text-base"
+          language="plaintext"
+          class="h-full"
           placeholder="Paste your text here..."
         />
       </CardContent>

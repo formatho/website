@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const inputText = ref('')
 
@@ -66,9 +66,10 @@ const stats = computed<Stats>(() => {
           <CardTitle>Input Text</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="inputText"
-            class="h-full resize-none"
+            language="plaintext"
+            class="h-full"
             placeholder="Enter or paste text here..."
           />
         </CardContent>

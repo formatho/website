@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Button } from '@/components/ui/button'
 
 const inputList = ref('')
@@ -150,9 +150,10 @@ const convert = () => {
           <CardTitle>Input</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="inputList"
-            class="h-full resize-none font-mono"
+            language="plaintext"
+            class="h-full"
             placeholder="Enter list items..."
           />
         </CardContent>
@@ -163,10 +164,11 @@ const convert = () => {
           <CardTitle>Output</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
-            v-model="outputList"
+          <CodeEditor
+            :model-value="outputList"
+            language="plaintext"
             readonly
-            class="h-full resize-none font-mono"
+            class="h-full"
             placeholder="Converted list will appear here..."
           />
         </CardContent>
