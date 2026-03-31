@@ -1,6 +1,7 @@
 /**
  * Agent Council Orchestration Store
  * Manages council handoff simulation for the "Mission Control" experience
+ * Version: 1.1.0 - Todo Sync Integration
  */
 import { reactive, computed, ref } from 'vue'
 import { mascotMetadata, type MascotName } from '@/assets/mascot-assets'
@@ -280,3 +281,4 @@ export function useAgentCouncil() {
 
 // Default export for convenience
 export default useAgentCouncil
+// Build trigger 1774984826
