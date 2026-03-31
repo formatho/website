@@ -43,7 +43,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="fixed bottom-5 right-5 z-[9999]">
+  <div class="fixed bottom-5 left-5 z-[9999]">
     <!-- Glassmorphism card: original dark slate at 20% opacity, compact size -->
     <div
       class="bg-slate-900/20 backdrop-blur-md border-2 border-slate-400/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-2xl px-3 py-1.5 min-w-[180px] transition-all duration-200 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:border-slate-400/40"
