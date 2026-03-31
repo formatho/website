@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const title = ref('')
 const description = ref('')
@@ -137,7 +137,12 @@ const copyTags = () => {
         <Button variant="outline" size="sm" @click="copyTags">Copy</Button>
       </CardHeader>
       <CardContent>
-        <Textarea :model-value="generatedTags" readonly rows="12" class="font-mono text-sm" />
+        <CodeEditor
+          :model-value="generatedTags"
+          language="html"
+          readonly
+          class="min-h-[300px]"
+        />
       </CardContent>
     </Card>
   </div>
