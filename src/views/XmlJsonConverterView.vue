@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 
 type ConversionDirection = 'xml-to-json' | 'json-to-xml'
@@ -206,28 +207,18 @@ const inputPlaceholder = computed(() => {
       <CardContent class="space-y-4">
         <!-- Direction Toggle -->
         <div class="flex gap-2 mb-4">
-          <button
+          <Button
             @click="direction = 'xml-to-json'"
-            :class="[
-              'px-4 py-2 rounded-lg font-medium transition-colors',
-              direction === 'xml-to-json'
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-muted hover:bg-muted/80'
-            ]"
+            :variant="direction === 'xml-to-json' ? 'default' : 'outline'"
           >
             XML to JSON
-          </button>
-          <button
+          </Button>
+          <Button
             @click="direction = 'json-to-xml'"
-            :class="[
-              'px-4 py-2 rounded-lg font-medium transition-colors',
-              direction === 'json-to-xml'
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-muted hover:bg-muted/80'
-            ]"
+            :variant="direction === 'json-to-xml' ? 'default' : 'outline'"
           >
             JSON to XML
-          </button>
+          </Button>
         </div>
 
         <!-- Input -->
@@ -248,13 +239,14 @@ const inputPlaceholder = computed(() => {
             <label class="text-sm font-medium">
               {{ direction === 'xml-to-json' ? 'JSON Output' : 'XML Output' }}
             </label>
-            <button
+            <Button
               @click="copyOutput"
               :disabled="!output"
-              class="px-3 py-1 text-sm bg-muted hover:bg-muted/80 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+              variant="outline"
+              size="sm"
             >
               Copy
-            </button>
+            </Button>
           </div>
           <Textarea
             v-model="output"

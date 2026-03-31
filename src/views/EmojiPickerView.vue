@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { Card, CardContent } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
 const searchQuery = ref('')
@@ -142,15 +143,17 @@ const copyEmoji = (emoji: string) => {
       <Card>
         <CardContent class="pt-4">
           <div class="flex flex-wrap gap-2">
-            <button
+            <Button
               v-for="item in category.emojis"
               :key="item.emoji"
               @click="copyEmoji(item.emoji)"
-              class="p-2 text-2xl rounded hover:bg-muted transition-colors cursor-pointer"
+              variant="ghost"
+              size="icon"
+              class="text-2xl p-2"
               :title="item.name"
             >
               {{ item.emoji }}
-            </button>
+            </Button>
           </div>
         </CardContent>
       </Card>

@@ -9,6 +9,8 @@ import { sha256 } from '@noble/hashes/sha2.js'
 import { Buffer } from 'buffer'
 import { bech32 } from 'bech32'
 import { Keypair } from '@solana/web3.js'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 
 // Polyfill Buffer
 if (typeof window !== 'undefined' && !window.Buffer) {
@@ -271,12 +273,12 @@ const calculateAddresses = async () => {
               <p class="text-xs text-slate-500 mt-1">Enter 64 hex characters (32 bytes).</p>
             </div>
 
-            <button
+            <Button
               @click="calculateAddresses"
-              class="w-full inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:cursor-pointer transition-colors"
+              class="w-full"
             >
               Derive Addresses
-            </button>
+            </Button>
 
             <div
               v-if="error"
