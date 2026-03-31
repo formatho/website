@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const router = useRouter()
 const route = useRoute()
@@ -65,7 +67,7 @@ onMounted(() => {
   <div class="agent-detail-view">
     <!-- Header -->
     <header class="detail-header">
-      <button @click="goBack" class="btn-back">← Back to Dashboard</button>
+      <Button @click="goBack" variant="outline">← Back to Dashboard</Button>
       <h1 v-if="agent">{{ agent.name }}</h1>
       <h1 v-else>Loading...</h1>
     </header>
@@ -151,8 +153,8 @@ onMounted(() => {
       <section class="actions-card">
         <h2>⚙️ Actions</h2>
         <div class="action-buttons">
-          <button class="btn-action btn-export" @click="exportState()">Export State History</button>
-          <button class="btn-action btn-delete" @click="deleteAgent()">Delete Agent</button>
+          <Button variant="outline" @click="exportState()">Export State History</Button>
+          <Button variant="destructive" @click="deleteAgent()">Delete Agent</Button>
         </div>
       </section>
     </template>

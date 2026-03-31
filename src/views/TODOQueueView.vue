@@ -290,12 +290,10 @@ onUnmounted(() => {
         </div>
 
         <!-- Filter Toggle -->
-        <button 
+        <Button 
           @click="showFilters = !showFilters"
-          :class="[
-            'flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors',
-            showFilters ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
-          ]"
+          :variant="showFilters ? 'default' : 'outline'"
+          class="flex items-center gap-2"
         >
           <Icon name="filter" class="w-5 h-5" />
           Filters
@@ -305,7 +303,7 @@ onUnmounted(() => {
           <template v-else>
             <Icon name="chevron-up" class="w-4 h-4" />
           </template>
-        </button>
+        </Button>
 
         <!-- Sort Dropdown -->
         <select 
@@ -318,22 +316,23 @@ onUnmounted(() => {
         </select>
 
         <!-- Clear Completed -->
-        <button 
+        <Button 
           @click="clearCompleted"
           v-if="completedTasks > 0"
-          class="px-4 py-2 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 font-medium transition-colors"
+          variant="ghost"
+          class="text-red-600 hover:text-red-800"
         >
           Clear Completed
-        </button>
+        </Button>
 
         <!-- Reset Filters -->
-        <button 
+        <Button 
           @click="resetFilters"
           v-if="searchQuery || priorityFilter !== 'all' || statusFilter !== 'all'"
-          class="px-4 py-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300 font-medium transition-colors"
+          variant="ghost"
         >
           Reset Filters
-        </button>
+        </Button>
       </div>
 
       <!-- Expanded Filters -->
@@ -371,9 +370,10 @@ onUnmounted(() => {
         <!-- Sort Order -->
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Sort Order</label>
-          <button 
+          <Button 
             @click="sortOrder = sortOrder === 'asc' ? 'desc' : 'asc'"
-            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white flex items-center justify-between"
+            variant="outline"
+            class="w-full flex items-center justify-between"
           >
             {{ sortOrder === 'desc' ? 'Descending (High → Low)' : 'Ascending (Low → High)' }}
             <template v-if="sortOrder === 'desc'">
@@ -382,7 +382,7 @@ onUnmounted(() => {
             <template v-else>
               <Icon name="chevron-up" class="w-4 h-4" />
             </template>
-          </button>
+          </Button>
         </div>
       </div>
     </div>
@@ -394,12 +394,14 @@ onUnmounted(() => {
           <!-- Task Content -->
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-3 mb-2">
-              <button 
+              <Button 
                 @click="toggleTaskStatus(task.id)"
-                class="text-gray-400 hover:text-blue-600 transition-colors"
+                variant="ghost"
+                size="icon"
+                class="text-gray-400 hover:text-blue-600"
               >
                 <Icon :name="getStatusIcon(task.status)" class="w-4 h-4" />
-              </button>
+              </Button>
               
               <h3 :class="[
                 'font-semibold text-gray-900 dark:text-white',
@@ -452,22 +454,26 @@ onUnmounted(() => {
 
           <!-- Actions -->
           <div class="flex items-center gap-2 ml-4">
-            <button 
+            <Button 
               @click="$router.push(`/agent-orchestrator/${task.agentId}`)"
               v-if="task.agentId"
-              class="p-2 text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              variant="ghost"
+              size="icon"
+              class="text-blue-600 hover:bg-blue-50"
               title="View Agent"
             >
               <EditIcon class="w-4 h-4" />
-            </button>
+            </Button>
             
-            <button 
+            <Button 
               @click="deleteTask(task.id)"
-              class="p-2 text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              variant="ghost"
+              size="icon"
+              class="text-red-600 hover:bg-red-50"
               title="Delete Task"
             >
               <Trash2Icon class="w-4 h-4" />
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -478,12 +484,11 @@ onUnmounted(() => {
         <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">No tasks found</h3>
         <p class="text-gray-600 dark:text-gray-400 mb-4">Try adjusting your filters or search query</p>
         
-        <button 
+        <Button 
           @click="resetFilters"
-          class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
         >
           Reset Filters
-        </button>
+        </Button>
       </div>
     </div>
 
