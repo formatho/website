@@ -111,8 +111,12 @@ const svgContent = computed<string | null>(() => {
 /**
  * Check if this context was dismissed within the cooldown period
  * Uses localStorage to persist dismissal timestamps
+ * SSR-safe: checks for window availability
  */
 const checkCooldown = (): boolean => {
+  // SSR guard - localStorage only available in browser
+  if (typeof window === 'undefined') return false
+  
   const storageKey = `${STORAGE_PREFIX}${props.contextId}`
   const dismissedAt = localStorage.getItem(storageKey)
   
@@ -127,8 +131,12 @@ const checkCooldown = (): boolean => {
 
 /**
  * Dismiss the mascot and store timestamp in localStorage
+ * SSR-safe: checks for window availability
  */
 const dismissMascot = () => {
+  // SSR guard
+  if (typeof window === 'undefined') return
+  
   const storageKey = `${STORAGE_PREFIX}${props.contextId}`
   localStorage.setItem(storageKey, Date.now().toString())
   isVisible.value = false
@@ -157,14 +165,13 @@ onMounted(() => {
     <div
       :class="[
         'flex-shrink-0 flex items-center justify-center rounded-lg transition-all duration-300',
+        'border shadow-sm',
         config.bgClass,
         config.borderClass,
-        'border',
-        size,
-        config.animationClass
+        config.glowClass,
+        config.animationClass,
+        size
       ]"
-      :style="{ boxShadow: `0 0 20px var(--tw-shadow-color)` }"
-      :class="[config.glowClass, 'shadow-sm']"
     >
       <!-- Dynamic SVG Rendering -->
       <div
