@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import Papa from 'papaparse'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 // Time range selector
 const timeRange = ref<'7d' | '30d' | '90d'>('7d')
@@ -114,55 +116,40 @@ const recentActivity = computed(() => [...analyticsData.value].reverse().slice(0
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <!-- Time Range Selector -->
         <div class="inline-flex rounded-md shadow-sm" role="group">
-          <button 
+          <Button 
             @click="onTimeRangeChange('7d')"
-            :class="[
-              'px-4 py-2 text-sm font-medium border',
-              timeRange === '7d' 
-                ? 'bg-blue-600 text-white border-blue-600' 
-                : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
-            ]"
+            :variant="timeRange === '7d' ? 'default' : 'outline'"
           >
             Last 7 Days
-          </button>
-          <button 
+          </Button>
+          <Button 
             @click="onTimeRangeChange('30d')"
-            :class="[
-              'px-4 py-2 text-sm font-medium border',
-              timeRange === '30d' 
-                ? 'bg-blue-600 text-white border-blue-600' 
-                : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
-            ]"
+            :variant="timeRange === '30d' ? 'default' : 'outline'"
           >
             Last 30 Days
-          </button>
-          <button 
+          </Button>
+          <Button 
             @click="onTimeRangeChange('90d')"
-            :class="[
-              'px-4 py-2 text-sm font-medium border',
-              timeRange === '90d' 
-                ? 'bg-blue-600 text-white border-blue-600' 
-                : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
-            ]"
+            :variant="timeRange === '90d' ? 'default' : 'outline'"
           >
             Last 90 Days
-          </button>
+          </Button>
         </div>
 
         <!-- Export Buttons -->
         <div class="flex gap-2">
-          <button 
+          <Button 
             @click="exportToCSV"
-            class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md text-sm font-medium transition-colors flex items-center gap-2"
+            class="bg-green-600 hover:bg-green-700"
           >
             Export CSV
-          </button>
-          <button 
+          </Button>
+          <Button 
             @click="exportToJSON"
-            class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-md text-sm font-medium transition-colors flex items-center gap-2"
+            class="bg-purple-600 hover:bg-purple-700"
           >
             Export JSON
-          </button>
+          </Button>
         </div>
       </div>
 

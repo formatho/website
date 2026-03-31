@@ -119,12 +119,11 @@ const removeFile = (index: number) => {
       <p class="text-muted-foreground mb-6">
         Your feedback has been submitted successfully. We'll review it and get back to you soon.
       </p>
-      <button
+      <Button
         @click="submitted = false; title = ''; description = ''; rating = 0"
-        class="px-6 py-2 bg-primary text-primary-foreground rounded-lg"
       >
         Submit Another
-      </button>
+      </Button>
     </div>
 
     <!-- Feedback Form -->
@@ -139,21 +138,17 @@ const removeFile = (index: number) => {
       <div class="space-y-3">
         <label class="text-sm font-medium">Feedback Type *</label>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <button
+          <Button
             v-for="type in feedbackTypes"
             :key="type.value"
             type="button"
             @click="feedbackType = type.value as any"
-            :class="[
-              'p-4 rounded-lg border-2 transition-all text-center',
-              feedbackType === type.value
-                ? 'border-primary bg-primary/10'
-                : 'border-border hover:border-primary/50'
-            ]"
+            :variant="feedbackType === type.value ? 'default' : 'outline'"
+            class="p-4 h-auto flex-col"
           >
             <div class="text-2xl mb-1">{{ type.icon }}</div>
             <div class="text-sm font-medium">{{ type.label.split(' ')[1] }}</div>
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -161,15 +156,16 @@ const removeFile = (index: number) => {
       <div v-if="feedbackType === 'testimonial' || feedbackType === 'general'" class="space-y-3">
         <label class="text-sm font-medium">Overall Rating</label>
         <div class="flex gap-2">
-          <button
+          <Button
             v-for="i in 5"
             :key="i"
             type="button"
             @click="rating = i"
-            class="text-3xl transition-transform hover:scale-110"
+            variant="ghost"
+            class="text-3xl hover:scale-110"
           >
             {{ i <= rating ? '⭐' : '☆' }}
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -212,20 +208,16 @@ const removeFile = (index: number) => {
       <div v-if="feedbackType === 'bug' || feedbackType === 'feature'" class="space-y-3">
         <label class="text-sm font-medium">Priority</label>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-          <button
+          <Button
             v-for="p in priorities"
             :key="p.value"
             type="button"
             @click="priority = p.value as any"
-            :class="[
-              'px-3 py-2 rounded-lg border-2 text-sm font-medium transition-all',
-              priority === p.value
-                ? `border-${p.color}-500 bg-${p.color}-500/10 text-${p.color}-600`
-                : 'border-border hover:border-primary/50'
-            ]"
+            :variant="priority === p.value ? 'default' : 'outline'"
+            size="sm"
           >
             {{ p.label }}
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -310,13 +302,15 @@ const removeFile = (index: number) => {
             class="flex items-center justify-between p-2 bg-muted rounded"
           >
             <span class="text-sm truncate">{{ file.name }}</span>
-            <button
+            <Button
               type="button"
               @click="removeFile(index)"
+              variant="ghost"
+              size="icon"
               class="text-red-500 hover:text-red-600"
             >
               ✕
-            </button>
+            </Button>
           </div>
         </div>
       </div>

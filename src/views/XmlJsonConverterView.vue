@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 type ConversionDirection = 'xml-to-json' | 'json-to-xml'
 
@@ -226,10 +226,10 @@ const inputPlaceholder = computed(() => {
           <label class="text-sm font-medium">
             {{ direction === 'xml-to-json' ? 'XML Input' : 'JSON Input' }}
           </label>
-          <Textarea
+          <CodeEditor
             v-model="input"
-            :placeholder="inputPlaceholder"
-            class="font-mono text-sm min-h-[200px]"
+            :language="direction === 'xml-to-json' ? 'xml' : 'json'"
+            min-height="200px"
           />
         </div>
 
@@ -248,11 +248,11 @@ const inputPlaceholder = computed(() => {
               Copy
             </Button>
           </div>
-          <Textarea
+          <CodeEditor
             v-model="output"
-            readonly
-            placeholder="Output will appear here..."
-            class="font-mono text-sm min-h-[200px]"
+            :language="direction === 'xml-to-json' ? 'json' : 'xml'"
+            :readonly="true"
+            min-height="200px"
           />
         </div>
 

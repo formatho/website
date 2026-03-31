@@ -388,12 +388,12 @@ onUnmounted(() => {
       <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
         <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Active Agents</h2>
         <div class="flex gap-2">
-          <button 
+          <Button 
             @click="isTeamModalOpen = true"
-            class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-md text-sm font-medium transition-colors flex items-center gap-2"
+            class="bg-purple-600 hover:bg-purple-700"
           >
             👥 Team Collaboration (Pro)
-          </button>
+          </Button>
           <Button 
             @click="simulateData"
             size="sm"
@@ -446,7 +446,7 @@ onUnmounted(() => {
                 {{ formatTime(agent.lastActive) }}
               </td>
               <td class="px-6 py-4 text-right text-sm font-medium">
-                <button @click.stop="navigateToAgentDetail(agent.id)" class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300">View</button>
+                <Button @click.stop="navigateToAgentDetail(agent.id)" variant="link" class="text-blue-600 hover:text-blue-900 p-0">View</Button>
               </td>
             </tr>
           </tbody>
