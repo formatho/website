@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 import { Upload, Download, FileCode, CheckCircle2, AlertCircle } from 'lucide-vue-next'
@@ -497,9 +497,10 @@ const reset = () => {
           </div>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="bpmnInput"
-            class="h-64 md:h-full resize-none font-mono text-sm bg-white border-gray-200 text-slate-800 placeholder:text-slate-400"
+            language="xml"
+            class="min-h-[256px] md:h-full"
             placeholder="Paste your BPMN XML here, or upload a .bpmn file above..."
           />
         </CardContent>

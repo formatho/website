@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { useTwins } from '@/composables/useTwins'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const { summonTwin } = useTwins()
 
@@ -331,12 +332,12 @@ onUnmounted(() => {
 
               <div class="space-y-2">
                 <label class="text-sm font-medium">System Prompt</label>
-                <textarea
+                <CodeEditor
                   v-model="agentPrompt"
-                  rows="4"
+                  language="markdown"
+                  class="min-h-[100px]"
                   placeholder="e.g., You are a research assistant. Help users find and summarize information."
-                  class="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-                ></textarea>
+                />
               </div>
 
               <Button
@@ -392,12 +393,12 @@ onUnmounted(() => {
 
               <div class="space-y-2">
                 <label class="text-sm font-medium">Description (Optional)</label>
-                <textarea
+                <CodeEditor
                   v-model="taskDescription"
-                  rows="3"
+                  language="markdown"
+                  class="min-h-[75px]"
                   placeholder="Add more details about what you want the agent to do..."
-                  class="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-                ></textarea>
+                />
               </div>
 
               <div class="flex items-center gap-4 p-4 rounded-lg bg-muted/30">
