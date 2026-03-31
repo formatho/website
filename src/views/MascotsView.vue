@@ -2,6 +2,8 @@
 // MascotsView.vue - Formatho Character Universe
 // Note: AOS is initialized globally in main.ts
 
+import { mascotSvgs } from '@/assets/mascot-assets'
+
 interface Mascot {
   name: string
   role: string
@@ -10,59 +12,65 @@ interface Mascot {
   signatureLine: string
   color: string
   glowColor: string
-  icon: string
+  svgKey: 'flowtho' | 'morpho' | 'memo' | 'nexo' | 'halo'
+  textClass: string
 }
 
 const mascots: Mascot[] = [
   {
     name: 'Flowtho',
-    role: 'The Guide',
+    role: 'The Guide (Peacock)',
     traits: ['Calm', 'Intelligent'],
-    description: 'Helps users move through workflows with ease and clarity.',
+    description: 'An elegant peacock that helps users flow through workflows with ease and clarity.',
     signatureLine: '"Let\'s make this flow."',
     color: 'cyan',
     glowColor: 'rgba(6, 182, 212, 0.3)',
-    icon: 'wave'
+    svgKey: 'flowtho',
+    textClass: 'text-cyan-400'
   },
   {
     name: 'Morpho',
-    role: 'The Builder',
+    role: 'The Builder (Fox)',
     traits: ['Creative', 'Structured'],
-    description: 'Converts prompts into fully-formed workflows and systems.',
+    description: 'A clever fox that transforms prompts into fully-formed workflows and systems.',
     signatureLine: '"Let\'s morph this idea into a system."',
     color: 'violet',
     glowColor: 'rgba(139, 92, 246, 0.3)',
-    icon: 'shape'
+    svgKey: 'morpho',
+    textClass: 'text-violet-400'
   },
   {
     name: 'Memo',
-    role: 'The Memory Keeper',
+    role: 'The Memory Keeper (Elephant)',
     traits: ['Organized', 'Observant'],
-    description: 'Stores knowledge and tracks history across all interactions.',
+    description: 'A wise elephant that stores knowledge and tracks history across all interactions.',
     signatureLine: '"I remember this."',
     color: 'amber',
     glowColor: 'rgba(245, 158, 11, 0.3)',
-    icon: 'cube'
+    svgKey: 'memo',
+    textClass: 'text-amber-400'
   },
   {
     name: 'Nexo',
-    role: 'The Connector',
+    role: 'The Connector (Crane)',
     traits: ['Social', 'Technical'],
-    description: 'Connects apps, syncs data, and bridges disparate systems.',
+    description: 'A graceful crane that connects apps, syncs data, and bridges disparate systems.',
     signatureLine: '"Let\'s connect that."',
     color: 'emerald',
     glowColor: 'rgba(16, 185, 129, 0.3)',
-    icon: 'network'
+    svgKey: 'nexo',
+    textClass: 'text-emerald-400'
   },
   {
     name: 'Halo',
-    role: 'The Onboarding Guide',
+    role: 'The Onboarding Guide (Dove)',
     traits: ['Friendly', 'Welcoming'],
-    description: 'Guides new users through product tours and initial setup.',
+    description: 'A peaceful dove that guides new users through product tours and initial setup.',
     signatureLine: '"I\'ll guide you."',
     color: 'rose',
     glowColor: 'rgba(244, 63, 94, 0.3)',
-    icon: 'circle'
+    svgKey: 'halo',
+    textClass: 'text-rose-400'
   }
 ]
 </script>
@@ -130,210 +138,55 @@ const mascots: Mascot[] = [
 
         <!-- Responsive Grid - 5 cards: 3 on top, 2 centered on bottom -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          <!-- Flowtho - The Guide -->
           <div
+            v-for="(mascot, index) in mascots"
+            :key="mascot.name"
             class="glass-card p-8 group hover:-translate-y-1 transition-all duration-300"
+            :class="{
+              'lg:col-start-2': index === 3 // Center 4th card on bottom row
+            }"
             data-aos="fade-up"
             data-aos-duration="600"
-            data-aos-delay="100"
+            :data-aos-delay="100 + (index * 100)"
           >
-            <!-- Visual -->
+            <!-- Visual - High-Fidelity SVG -->
             <div class="flex justify-center mb-6">
               <div 
-                class="w-20 h-20 rounded-2xl flex items-center justify-center relative"
-                :style="{ background: `linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(6, 182, 212, 0.1))`, boxShadow: `0 0 40px rgba(6, 182, 212, 0.3)` }"
-              >
-                <!-- Wave SVG -->
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4 20C4 20 8 12 12 20C16 28 20 12 24 20C28 28 32 12 36 20" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M4 28C4 28 8 20 12 28C16 36 20 20 24 28C28 36 32 20 36 28" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
-                </svg>
-              </div>
+                class="w-20 h-20 rounded-2xl flex items-center justify-center relative overflow-hidden"
+                :style="{ background: `linear-gradient(135deg, ${mascot.glowColor.replace('0.3', '0.2')}, ${mascot.glowColor.replace('0.3', '0.1')})`, boxShadow: `0 0 40px ${mascot.glowColor}` }"
+                v-html="mascotSvgs[mascot.svgKey]"
+              />
             </div>
             
             <!-- Name & Role -->
-            <h3 class="text-xl font-bold text-center mb-1">Flowtho</h3>
-            <p class="text-cyan-400 text-sm text-center mb-4 font-medium">The Guide</p>
+            <h3 class="text-xl font-bold text-center mb-1">{{ mascot.name }}</h3>
+            <p :class="[mascot.textClass, 'text-sm text-center mb-4 font-medium']">{{ mascot.role }}</p>
             
             <!-- Traits -->
             <div class="flex justify-center gap-2 mb-4">
-              <span class="px-3 py-1 text-xs rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">Calm</span>
-              <span class="px-3 py-1 text-xs rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">Intelligent</span>
+              <span 
+                v-for="trait in mascot.traits" 
+                :key="trait"
+                class="px-3 py-1 text-xs rounded-full border"
+                :class="[
+      `bg-${mascot.color}-500/10`,
+      `border-${mascot.color}-500/20`,
+      `text-${mascot.color}-300`
+    ]"
+              >
+                {{ trait }}
+              </span>
             </div>
             
             <!-- Description -->
             <p class="text-muted-foreground text-sm text-center mb-4">
-              Helps users move through workflows with ease and clarity.
+              {{ mascot.description }}
             </p>
             
             <!-- Signature Line -->
-            <p class="text-center text-sm italic text-cyan-400/80">"Let's make this flow."</p>
-          </div>
-
-          <!-- Morpho - The Builder -->
-          <div
-            class="glass-card p-8 group hover:-translate-y-1 transition-all duration-300"
-            data-aos="fade-up"
-            data-aos-duration="600"
-            data-aos-delay="200"
-          >
-            <!-- Visual -->
-            <div class="flex justify-center mb-6">
-              <div 
-                class="w-20 h-20 rounded-2xl flex items-center justify-center relative"
-                :style="{ background: `linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.1))`, boxShadow: `0 0 40px rgba(139, 92, 246, 0.3)` }"
-              >
-                <!-- Transforming Shape SVG -->
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="20,4 36,20 20,36 4,20" stroke="#8b5cf6" stroke-width="2.5" fill="none"/>
-                  <circle cx="20" cy="20" r="8" stroke="#8b5cf6" stroke-width="2" fill="none" opacity="0.5"/>
-                </svg>
-              </div>
-            </div>
-            
-            <!-- Name & Role -->
-            <h3 class="text-xl font-bold text-center mb-1">Morpho</h3>
-            <p class="text-violet-400 text-sm text-center mb-4 font-medium">The Builder</p>
-            
-            <!-- Traits -->
-            <div class="flex justify-center gap-2 mb-4">
-              <span class="px-3 py-1 text-xs rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300">Creative</span>
-              <span class="px-3 py-1 text-xs rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300">Structured</span>
-            </div>
-            
-            <!-- Description -->
-            <p class="text-muted-foreground text-sm text-center mb-4">
-              Converts prompts into fully-formed workflows and systems.
+            <p class="text-center text-sm italic" :class="[mascot.textClass, 'opacity-80']">
+              {{ mascot.signatureLine }}
             </p>
-            
-            <!-- Signature Line -->
-            <p class="text-center text-sm italic text-violet-400/80">"Let's morph this idea into a system."</p>
-          </div>
-
-          <!-- Memo - The Memory Keeper -->
-          <div
-            class="glass-card p-8 group hover:-translate-y-1 transition-all duration-300"
-            data-aos="fade-up"
-            data-aos-duration="600"
-            data-aos-delay="300"
-          >
-            <!-- Visual -->
-            <div class="flex justify-center mb-6">
-              <div 
-                class="w-20 h-20 rounded-2xl flex items-center justify-center relative"
-                :style="{ background: `linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1))`, boxShadow: `0 0 40px rgba(245, 158, 11, 0.3)` }"
-              >
-                <!-- Cube SVG -->
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20 4L34 12V28L20 36L6 28V12L20 4Z" stroke="#f59e0b" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
-                  <path d="M20 4V20M20 20L6 12M20 20L34 12" stroke="#f59e0b" stroke-width="2" opacity="0.5"/>
-                </svg>
-              </div>
-            </div>
-            
-            <!-- Name & Role -->
-            <h3 class="text-xl font-bold text-center mb-1">Memo</h3>
-            <p class="text-amber-400 text-sm text-center mb-4 font-medium">The Memory Keeper</p>
-            
-            <!-- Traits -->
-            <div class="flex justify-center gap-2 mb-4">
-              <span class="px-3 py-1 text-xs rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300">Organized</span>
-              <span class="px-3 py-1 text-xs rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300">Observant</span>
-            </div>
-            
-            <!-- Description -->
-            <p class="text-muted-foreground text-sm text-center mb-4">
-              Stores knowledge and tracks history across all interactions.
-            </p>
-            
-            <!-- Signature Line -->
-            <p class="text-center text-sm italic text-amber-400/80">"I remember this."</p>
-          </div>
-
-          <!-- Nexo - The Connector -->
-          <div
-            class="glass-card p-8 group hover:-translate-y-1 transition-all duration-300 lg:col-start-1 lg:col-end-2 lg:[&:nth-child(4)]:lg:col-start-2"
-            style="grid-column: auto"
-            data-aos="fade-up"
-            data-aos-duration="600"
-            data-aos-delay="400"
-          >
-            <!-- Visual -->
-            <div class="flex justify-center mb-6">
-              <div 
-                class="w-20 h-20 rounded-2xl flex items-center justify-center relative"
-                :style="{ background: `linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1))`, boxShadow: `0 0 40px rgba(16, 185, 129, 0.3)` }"
-              >
-                <!-- Network/Nodes SVG -->
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="8" cy="12" r="4" stroke="#10b981" stroke-width="2" fill="none"/>
-                  <circle cx="32" cy="12" r="4" stroke="#10b981" stroke-width="2" fill="none"/>
-                  <circle cx="20" cy="28" r="4" stroke="#10b981" stroke-width="2" fill="none"/>
-                  <line x1="11" y1="14" x2="17" y2="26" stroke="#10b981" stroke-width="2" opacity="0.5"/>
-                  <line x1="29" y1="14" x2="23" y2="26" stroke="#10b981" stroke-width="2" opacity="0.5"/>
-                  <line x1="12" y1="12" x2="28" y2="12" stroke="#10b981" stroke-width="2" opacity="0.5"/>
-                </svg>
-              </div>
-            </div>
-            
-            <!-- Name & Role -->
-            <h3 class="text-xl font-bold text-center mb-1">Nexo</h3>
-            <p class="text-emerald-400 text-sm text-center mb-4 font-medium">The Connector</p>
-            
-            <!-- Traits -->
-            <div class="flex justify-center gap-2 mb-4">
-              <span class="px-3 py-1 text-xs rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">Social</span>
-              <span class="px-3 py-1 text-xs rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">Technical</span>
-            </div>
-            
-            <!-- Description -->
-            <p class="text-muted-foreground text-sm text-center mb-4">
-              Connects apps, syncs data, and bridges disparate systems.
-            </p>
-            
-            <!-- Signature Line -->
-            <p class="text-center text-sm italic text-emerald-400/80">"Let's connect that."</p>
-          </div>
-
-          <!-- Halo - The Onboarding Guide -->
-          <div
-            class="glass-card p-8 group hover:-translate-y-1 transition-all duration-300"
-            data-aos="fade-up"
-            data-aos-duration="600"
-            data-aos-delay="500"
-          >
-            <!-- Visual -->
-            <div class="flex justify-center mb-6">
-              <div 
-                class="w-20 h-20 rounded-2xl flex items-center justify-center relative"
-                :style="{ background: `linear-gradient(135deg, rgba(244, 63, 94, 0.2), rgba(244, 63, 94, 0.1))`, boxShadow: `0 0 40px rgba(244, 63, 94, 0.3)` }"
-              >
-                <!-- Glowing Circle SVG -->
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="20" cy="20" r="12" stroke="#f43f5e" stroke-width="2.5" fill="none"/>
-                  <circle cx="20" cy="20" r="6" stroke="#f43f5e" stroke-width="2" fill="none" opacity="0.5"/>
-                  <circle cx="20" cy="20" r="16" stroke="#f43f5e" stroke-width="1" fill="none" opacity="0.3"/>
-                </svg>
-              </div>
-            </div>
-            
-            <!-- Name & Role -->
-            <h3 class="text-xl font-bold text-center mb-1">Halo</h3>
-            <p class="text-rose-400 text-sm text-center mb-4 font-medium">The Onboarding Guide</p>
-            
-            <!-- Traits -->
-            <div class="flex justify-center gap-2 mb-4">
-              <span class="px-3 py-1 text-xs rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-300">Friendly</span>
-              <span class="px-3 py-1 text-xs rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-300">Welcoming</span>
-            </div>
-            
-            <!-- Description -->
-            <p class="text-muted-foreground text-sm text-center mb-4">
-              Guides new users through product tours and initial setup.
-            </p>
-            
-            <!-- Signature Line -->
-            <p class="text-center text-sm italic text-rose-400/80">"I'll guide you."</p>
           </div>
         </div>
       </div>
@@ -356,15 +209,10 @@ const mascots: Mascot[] = [
   background-clip: text;
 }
 
-/* Center last two cards on large screens */
-@media (min-width: 1024px) {
-  .grid > div:nth-child(4) {
-    grid-column: 1 / 2;
-    grid-row: 2;
-  }
-  .grid > div:nth-child(5) {
-    grid-column: 2 / 3;
-    grid-row: 2;
-  }
+/* Ensure high-fidelity SVGs render properly */
+:deep(svg) {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 </style>

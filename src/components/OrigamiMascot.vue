@@ -179,8 +179,9 @@ onMounted(() => {
       ]"
     >
       <!-- Dynamic SVG Rendering -->
+      <!-- Removed textClass - SVGs now have their own multi-colored 3D shading -->
       <div
-        :class="['w-full h-full p-1.5', config.textClass]"
+        class="w-full h-full p-1.5"
         v-html="svgContent"
       />
     </div>
