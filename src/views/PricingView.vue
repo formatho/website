@@ -4,6 +4,8 @@ import { RouterLink } from 'vue-router'
 import { useStripe } from '@/composables/useStripe'
 import { useAnalytics, type PlanType, type BillingCycle } from '@/composables/useAnalytics'
 import EmailCapture from '@/components/EmailCapture.vue'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 
 const billingCycle = ref<BillingCycle>('monthly')
 const { createCheckoutSession, isLoading, error } = useStripe()
@@ -153,31 +155,24 @@ const faqs = [
           
           <!-- Billing Toggle -->
           <div class="flex items-center gap-4 mt-8 p-1 bg-muted/30 rounded-full">
-            <button
+            <Button
               @click="billingCycle = 'monthly'"
-              :class="[
-                'px-6 py-2 rounded-full text-sm font-medium transition-all',
-                billingCycle === 'monthly'
-                  ? 'bg-primary text-primary-foreground shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground'
-              ]"
+              :variant="billingCycle === 'monthly' ? 'default' : 'ghost'"
+              class="rounded-full"
             >
               Monthly
-            </button>
-            <button
+            </Button>
+            <Button
               @click="billingCycle = 'yearly'"
-              :class="[
-                'px-6 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2',
-                billingCycle === 'yearly'
-                  ? 'bg-primary text-primary-foreground shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground'
+              :variant="billingCycle === 'yearly' ? 'default' : 'ghost'"
+              class="rounded-full"
               ]"
             >
               Yearly
-              <span class="text-xs bg-green-500/20 text-green-600 dark:text-green-400 px-2 py-0.5 rounded-full">
+              <span class="text-xs bg-green-500/20 text-green-600 px-2 py-0.5 rounded-full">
                 Save 17%
               </span>
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -263,20 +258,16 @@ const faqs = [
           </ul>
 
           <!-- CTA Button -->
-          <button
+          <Button
             v-if="plan.name === 'Pro' || plan.name === 'Enterprise'"
             @click="handleSubscribe(plan.name.toLowerCase() as 'pro' | 'enterprise')"
             :disabled="isLoading"
-            :class="[
-              'block w-full text-center py-3 px-6 rounded-lg font-medium transition-all cursor-pointer',
-              plan.highlighted
-                ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20'
-                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-              isLoading ? 'opacity-50 cursor-not-allowed' : ''
-            ]"
+            :variant="plan.highlighted ? 'default' : 'outline'"
+            class="w-full"
+            :class="{ 'shadow-lg shadow-primary/20': plan.highlighted }"
           >
             {{ isLoading ? 'Loading...' : plan.cta }}
-          </button>
+          </Button>
           <RouterLink
             v-else
             :to="plan.ctaLink"
