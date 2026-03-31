@@ -7,7 +7,7 @@ import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import rehypeHighlight from 'rehype-highlight'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Button } from '@/components/ui/button'
 
 const markdownInput = ref('')
@@ -55,9 +55,10 @@ const copyHtml = () => {
           <CardTitle>Markdown Input</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="markdownInput"
-            class="h-full resize-none font-mono"
+            language="markdown"
+            class="h-full"
             placeholder="Enter Markdown..."
           />
         </CardContent>
@@ -69,10 +70,11 @@ const copyHtml = () => {
           <Button v-if="htmlOutput" variant="outline" size="sm" @click="copyHtml">Copy</Button>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             :model-value="htmlOutput"
+            language="html"
             readonly
-            class="h-full resize-none font-mono text-sm"
+            class="h-full"
             placeholder="HTML output will appear here..."
           />
         </CardContent>

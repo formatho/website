@@ -3,6 +3,7 @@ import { ref, computed, watchEffect } from 'vue'
 import { Code, Check, X, Copy } from 'lucide-vue-next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const pattern = ref('')
 const testString = ref('')
@@ -231,11 +232,12 @@ const applyExample = (examplePattern: string) => {
               <CardDescription>Enter text to test against the pattern</CardDescription>
             </CardHeader>
             <CardContent>
-              <textarea
-                v-model="testString"
-                placeholder="Enter test string..."
-                class="w-full h-40 px-3 py-2 border rounded-md font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary"
-              ></textarea>
+            <CodeEditor
+              v-model="testString"
+              language="plaintext"
+              class="min-h-[160px]"
+              placeholder="Enter test string..."
+            />
             </CardContent>
           </Card>
 
