@@ -32,6 +32,7 @@ const STORAGE_PREFIX = 'formatho-mascot-dismissed-'
 // ============================================================
 const isVisible = ref(true)
 const isDismissed = ref(false)
+const isMounted = ref(false) // SSR safety: don't render until mounted
 
 // ============================================================
 // Character Configuration
@@ -147,6 +148,9 @@ const dismissMascot = () => {
 // Lifecycle
 // ============================================================
 onMounted(() => {
+  // SSR safety: mark as mounted before any client-side logic
+  isMounted.value = true
+  
   // Check cooldown on mount - hide if recently dismissed
   if (checkCooldown()) {
     isVisible.value = false
@@ -157,8 +161,9 @@ onMounted(() => {
 
 <template>
   <!-- Graceful failure: render nothing for invalid character or dismissed context -->
+  <!-- SSR safety: don't render until client-side mounted -->
   <div
-    v-if="isValidCharacter && isVisible && config && svgContent"
+    v-if="isValidCharacter && isMounted && isVisible && config && svgContent"
     class="flex items-start gap-3 group"
   >
     <!-- Mascot Icon Container -->

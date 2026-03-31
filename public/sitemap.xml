@@ -2,853 +2,853 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://formatho.com/tools/</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/about</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/privacy</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/terms</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/contact</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/india-privacy-first-developer-toolkit-2026</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/generate-uuids-without-internet-connection-2026</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/generate-qr-codes-without-tracking-pixels</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/test-regex-patterns-securely-2026</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/100-developer-tools-all-free-all-private</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/encode-decode-base64-files-never-leave-browser</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/format-sql-queries-without-cloud-uploads</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/decode-jwt-tokens-without-server-exposure</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/convert-json-to-yaml-no-upload</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/developer-tools-that-dont-spy-on-you</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/uuid-v1-vs-v4</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/bcrypt-password-hashing-guide</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/base64-encoding-guide</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/ulids-vs-uuids</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/jwt-tokens-complete-guide</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/sql-formatting-best-practices</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/qr-codes-explained</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/regex-practical-guide</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/ethereum-units-explained</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/crontab-guide</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/http-status-codes-guide</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/json-yaml-toml-comparison</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/password-security-guide</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/ipv4-subnetting-guide</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/case-conversion-guide</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/cryptographic-hashes-guide</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/markdown-tips-tricks</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/git-commands-cheat-sheet</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/color-formats-guide</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/docker-run-to-compose</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/bip39-mnemonic-guide</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/encoding-vs-encryption</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/unix-file-permissions</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/ai-agent-orchestration-career-blueprint-2026</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/meta-ai-restructuring-applied-superintelligence-2026</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/ai-job-safety-22-careers-anthropic-research</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/blogs/when-ai-stops-feeling-like-software-and-starts-feeling-like-a-real-employee</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/markdown</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/bpmn</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/bpmn-to-visio</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/token-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/hash-text</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/bcrypt</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/uuid</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/ulid-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/encryption</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/bip39-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/hmac-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/rsa-key-pair-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/password-strength-analyser</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/date-time-converter</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/integer-base-converter</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/roman-numeral-converter</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/base64</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/base64-file-converter</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/color-converter</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/case-converter</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/text-to-nato-alphabet</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/text-to-binary</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/text-to-unicode</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/json-yaml</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/json-csv</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/yaml-to-toml</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/json-to-toml</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/list-converter</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/toml-to-json</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/toml-to-yaml</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/xml-to-json</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/json-to-xml</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/markdown-to-html</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/temperature-converter</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/url-encoder</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/html-entities</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/url-parser</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/device-information</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/basic-auth-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/meta-tag-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/otp-code-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/mime-types</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/jwt</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/keycode-info</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/slugify-string</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/html-wysiwyg-editor</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/user-agent-parser</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/http-status-codes</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/json-diff</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/safelink-decoder</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/qr-code-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/wifi-qr-code-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/svg-placeholder-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/image</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/camera-recorder</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/git-memo</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/random-port-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/crontab-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/json-viewer</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/json-minify</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/sql</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/chmod-calculator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/docker-run-to-compose</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/xml-formatter</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/yaml-viewer</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/email-normalizer</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/regex-tester</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/regex-memo</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/ipv4-subnet-calculator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/ipv4-address-converter</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/ipv4-range-expander</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/mac-address-lookup</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/mac-address-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/ipv6-ula-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/math-evaluator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/eta-calculator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/percentage-calculator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/chronometer</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/benchmark-builder</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/diff</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/lorem</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/text-statistics</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/emoji-picker</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/string-obfuscator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/numeronym-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/ascii-text-drawer</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/phone-parser</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/iban-validator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/json-lint</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/yaml-lint</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/evm-converter</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/keccak256</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/address-checksum</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/multi-chain-keys</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/address-from-key</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/solidity-to-opcodes</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/agent-orchestrator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/agent-identity-generator</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/tools/agents</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

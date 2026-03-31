@@ -2,7 +2,19 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { HeartbeatIcon, CpuIcon, ActivityIcon, ClockIcon, PlayCircleIcon, PauseCircleIcon, StopIcon, TerminalIcon, LayoutDashboard } from 'lucide-vue-next'
-import TeamInvitationModal from '@/components/TeamInvitationModal.vue'
+import { InvitationModal, TeamMemberList } from '@/components/team'
+
+interface TeamMember {
+  id: string
+  email: string
+  name?: string
+  avatar?: string
+  role: 'owner' | 'admin' | 'member' | 'viewer'
+  status: 'active' | 'pending' | 'inactive'
+  joinedAt?: string
+  invitedAt: string
+  lastActive?: string
+}
 
 interface Agent {
   id: string
@@ -33,6 +45,10 @@ const isConnected = ref(false)
 // Team collaboration features (Pro)
 const isTeamModalOpen = ref(false)
 const organizationId = ref('org-123') // In production, this would come from auth/user context
+const teamMembers = ref<TeamMember[]>([])
+const isLoadingMembers = ref(false)
+const isInviting = ref(false)
+const currentUserId = ref('user-1') // In production, this would come from auth
 
 // Stats
 const totalAgents = ref(0)
@@ -141,10 +157,109 @@ const navigateToAgentDetail = (agentId: string) => {
   router.push(`/agent-orchestrator/${agentId}`)
 }
 
-// Team collaboration handler (Pro Feature)
+// Team collaboration handlers (Pro Feature)
+const fetchTeamMembers = async () => {
+  isLoadingMembers.value = true
+  try {
+    const response = await fetch(`/api/team/${organizationId.value}/members`)
+    if (!response.ok) throw new Error('Failed to fetch team members')
+    
+    const data = await response.json()
+    if (data.success && Array.isArray(data.data)) {
+      teamMembers.value = data.data as TeamMember[]
+    }
+  } catch (error) {
+    console.error('Error fetching team members:', error)
+  } finally {
+    isLoadingMembers.value = false
+  }
+}
+
+const handleInvite = async (payload: { email: string; role: 'admin' | 'member' | 'viewer' }) => {
+  isInviting.value = true
+  try {
+    const response = await fetch(`/api/team/${organizationId.value}/members`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+    
+    if (!response.ok) throw new Error('Failed to invite member')
+    
+    const data = await response.json()
+    if (data.success) {
+      // Add new member to list
+      teamMembers.value.unshift({
+        id: 'pending-' + Date.now(),
+        email: payload.email,
+        role: payload.role,
+        status: 'pending',
+        invitedAt: new Date().toISOString(),
+      })
+      isTeamModalOpen.value = false
+    }
+  } catch (error) {
+    console.error('Error inviting member:', error)
+  } finally {
+    isInviting.value = false
+  }
+}
+
+const handleRoleUpdate = async ({ memberId, role }: { memberId: string; role: 'owner' | 'admin' | 'member' | 'viewer' }) => {
+  try {
+    const response = await fetch(`/api/team/${organizationId.value}/members/${memberId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ role }),
+    })
+    
+    if (!response.ok) throw new Error('Failed to update role')
+    
+    // Update local state
+    const member = teamMembers.value.find(m => m.id === memberId)
+    if (member) {
+      member.role = role
+    }
+  } catch (error) {
+    console.error('Error updating member role:', error)
+  }
+}
+
+const handleRemoveMember = async (memberId: string) => {
+  if (!confirm('Are you sure you want to remove this team member?')) return
+  
+  try {
+    const response = await fetch(`/api/team/${organizationId.value}/members/${memberId}`, {
+      method: 'DELETE',
+    })
+    
+    if (!response.ok) throw new Error('Failed to remove member')
+    
+    // Remove from local state
+    teamMembers.value = teamMembers.value.filter(m => m.id !== memberId)
+  } catch (error) {
+    console.error('Error removing member:', error)
+  }
+}
+
+const handleResendInvite = async (memberId: string) => {
+  try {
+    const response = await fetch(`/api/team/${organizationId.value}/members/${memberId}/resend`, {
+      method: 'POST',
+    })
+    
+    if (!response.ok) throw new Error('Failed to resend invitation')
+    
+    alert('Invitation resent successfully!')
+  } catch (error) {
+    console.error('Error resending invitation:', error)
+  }
+}
+
 const handleMemberAdded = (member: any) => {
   console.log('New team member added:', member)
-  // In production, this would trigger a notification or refresh the team list
+  // Refresh team members list
+  fetchTeamMembers()
 }
 
 // Simulate data for demo purposes if no WebSocket connection
@@ -376,11 +491,38 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- Team Collaboration Modal (Pro Feature) -->
-    <TeamInvitationModal 
+    <!-- Team Collaboration Section (Pro Feature) -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+      <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Team Collaboration</h2>
+        <button 
+          @click="isTeamModalOpen = true"
+          class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm font-medium transition-colors"
+        >
+          + Invite Member
+        </button>
+      </div>
+      
+      <div class="p-6">
+        <TeamMemberList
+          :members="teamMembers"
+          :organization-id="organizationId"
+          :current-user-id="currentUserId"
+          :is-loading="isLoadingMembers"
+          :can-manage="true"
+          @update-role="handleRoleUpdate"
+          @remove="handleRemoveMember"
+          @resend-invite="handleResendInvite"
+        />
+      </div>
+    </div>
+
+    <!-- Invitation Modal -->
+    <InvitationModal
       v-model:is-open="isTeamModalOpen"
       :organization-id="organizationId"
-      @member-added="handleMemberAdded"
+      :is-loading="isInviting"
+      @invite="handleInvite"
     />
   </div>
 </template>
