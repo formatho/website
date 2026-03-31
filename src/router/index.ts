@@ -247,6 +247,18 @@ export const routes = [
         }
       },
       {
+        path: 'tools',
+        name: 'tools',
+        component: () => import('../views/ToolsView.vue'),
+        meta: {
+          title: 'All Developer Tools - Formatho',
+          description:
+            'Complete collection of privacy-first developer tools. JSON, YAML, encoding, hashing, crypto, and more. All tools run in your browser.',
+          keywords:
+            'developer tools, json formatter, yaml validator, base64 encoder, hash generator, privacy-first tools'
+        }
+      },
+      {
         path: 'uuid',
         name: 'uuid',
         component: () => import('../views/UuidGeneratorView.vue'),
