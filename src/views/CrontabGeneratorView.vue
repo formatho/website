@@ -201,7 +201,7 @@ const specialChars = [
             </div>
 
             <!-- Copy Button -->
-            <Button @click="copyCron" class="w-full">
+            <Button @click="copyCron" class="w-full" aria-label="Copy cron expression">
               <component :is="copied ? Check : Copy" class="w-4 h-4 mr-2" />
               {{ copied ? 'Copied!' : 'Copy Expression' }}
             </Button>

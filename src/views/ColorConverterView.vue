@@ -205,7 +205,7 @@ const randomColor = () => {
                 <div class="text-sm text-muted-foreground mb-1">{{ type }}</div>
                 <div class="font-mono">{{ value }}</div>
               </div>
-              <Button @click="copyFormat(type)" variant="ghost" size="sm">
+              <Button @click="copyFormat(type)" variant="ghost" size="sm" aria-label="Copy color value">
                 <component :is="copied === type ? Check : Copy" class="w-4 h-4" />
               </Button>
             </div>

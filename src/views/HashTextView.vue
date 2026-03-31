@@ -263,7 +263,7 @@ const copyHash = (type: string) => {
           >
             <div class="flex items-center justify-between mb-2">
               <span class="font-semibold">{{ type }}</span>
-              <Button @click="copyHash(type)" variant="ghost" size="sm">
+              <Button @click="copyHash(type)" variant="ghost" size="sm" aria-label="Copy hash value">
                 <component :is="copied === type ? Check : Copy" class="w-4 h-4" />
               </Button>
             </div>

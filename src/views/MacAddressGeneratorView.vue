@@ -44,7 +44,7 @@ generateMac()
         </div>
         <div class="flex gap-2">
           <Button @click="generateMac" class="flex-1">Generate New</Button>
-          <Button variant="outline" @click="copyMac">Copy</Button>
+          <Button variant="outline" @click="copyMac" aria-label="Copy MAC address">Copy</Button>
         </div>
       </CardContent>
     </Card>

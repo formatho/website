@@ -41,7 +41,7 @@ const copyOutput = () => {
     </div>
 
     <div class="flex gap-2">
-      <Button @click="formatYaml">Format</Button>
+      <Button @click="formatYaml" aria-label="Format YAML">Format</Button>
       <Button variant="outline" @click="copyOutput" :disabled="!yamlInput">Copy</Button>
     </div>
 

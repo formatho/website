@@ -147,7 +147,7 @@ generate()
             </div>
 
             <!-- Generate Button -->
-            <Button @click="generate" class="w-full">
+            <Button @click="generate" class="w-full" aria-label="Generate secure token">
               <RefreshCw class="w-4 h-4 mr-2" />
               Generate Tokens
             </Button>

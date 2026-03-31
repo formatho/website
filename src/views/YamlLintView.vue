@@ -58,7 +58,7 @@ address:
   <div class="h-full flex flex-col p-4 gap-4 bg-muted/30">
     <div class="flex items-center justify-between">
       <h1 class="text-3xl font-bold tracking-tight">YAML Linter</h1>
-      <Button variant="ghost" @click="fillSample">Load Sample</Button>
+      <Button variant="ghost" @click="fillSample" aria-label="Load sample YAML data">Load Sample</Button>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 min-h-0">

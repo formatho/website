@@ -60,7 +60,7 @@ const fillSample = () => {
       <div class="space-y-6">
         <!-- Sample Button -->
         <div>
-          <Button variant="outline" @click="fillSample" class="gap-2"> Load Sample JSON </Button>
+          <Button variant="outline" @click="fillSample" class="gap-2" aria-label="Load sample JSON"> Load Sample JSON </Button>
         </div>
 
         <!-- Features -->

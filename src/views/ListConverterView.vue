@@ -140,7 +140,7 @@ const convert = () => {
       </Card>
 
       <Card class="flex items-center justify-center">
-        <Button @click="convert" class="w-full">Convert</Button>
+        <Button @click="convert" class="w-full" aria-label="Convert list format">Convert</Button>
       </Card>
     </div>
 

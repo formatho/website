@@ -101,7 +101,7 @@ const convertToNumber = () => {
               placeholder="Enter number..."
             />
           </div>
-          <Button @click="convertToRoman" class="w-full">Convert</Button>
+          <Button @click="convertToRoman" class="w-full" aria-label="Convert number to Roman numeral">Convert</Button>
           <div v-if="romanOutput" class="p-4 rounded-lg bg-muted">
             <div class="text-sm text-muted-foreground mb-1">Roman Numeral</div>
             <div class="text-3xl font-bold font-mono">{{ romanOutput }}</div>
@@ -122,7 +122,7 @@ const convertToNumber = () => {
               class="uppercase"
             />
           </div>
-          <Button @click="convertToNumber" class="w-full">Convert</Button>
+          <Button @click="convertToNumber" class="w-full" aria-label="Convert Roman numeral to number">Convert</Button>
           <div v-if="numberOutput !== null" class="p-4 rounded-lg bg-muted">
             <div class="text-sm text-muted-foreground mb-1">Number</div>
             <div class="text-3xl font-bold">{{ numberOutput }}</div>

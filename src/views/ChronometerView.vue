@@ -77,7 +77,7 @@ onUnmounted(() => {
             >Pause</Button
           >
           <Button v-if="isRunning && isPaused" @click="resume" size="lg">Resume</Button>
-          <Button v-if="isRunning" @click="reset" variant="destructive" size="lg">Reset</Button>
+          <Button v-if="isRunning" @click="reset" variant="destructive" size="lg" aria-label="Reset chronometer">Reset</Button>
         </div>
       </CardContent>
     </Card>

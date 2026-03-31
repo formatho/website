@@ -66,7 +66,7 @@ formatSql()
               </Select>
             </div>
             <div class="flex items-end">
-              <Button @click="formatSql"> <RefreshCw class="mr-2 h-4 w-4" /> Format </Button>
+              <Button @click="formatSql" aria-label="Format SQL query"> <RefreshCw class="mr-2 h-4 w-4" /> Format </Button>
             </div>
           </div>
           <CodeEditor

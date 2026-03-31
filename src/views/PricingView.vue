@@ -159,6 +159,7 @@ const faqs = [
               @click="billingCycle = 'monthly'"
               :variant="billingCycle === 'monthly' ? 'default' : 'ghost'"
               class="rounded-full"
+              aria-label="Select monthly billing"
             >
               Monthly
             </Button>
@@ -166,6 +167,7 @@ const faqs = [
               @click="billingCycle = 'yearly'"
               :variant="billingCycle === 'yearly' ? 'default' : 'ghost'"
               class="rounded-full"
+              aria-label="Select yearly billing (save 17%)"
             >
               Yearly
               <span class="text-xs bg-green-500/20 text-green-600 px-2 py-0.5 rounded-full">

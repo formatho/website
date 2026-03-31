@@ -179,7 +179,7 @@ const compressionRatio = computed(() => {
           </div>
 
           <div class="flex flex-col gap-2">
-            <Button @click="downloadCompressed" :loading="isProcessing" class="w-full">
+            <Button @click="downloadCompressed" :loading="isProcessing" class="w-full" aria-label="Download compressed image">
               <Download class="mr-2 h-4 w-4" /> Download
             </Button>
             <Button variant="outline" class="w-full relative">

@@ -154,7 +154,7 @@ const functions = [
               />
               <div class="absolute right-2 top-1/2 -translate-y-1/2 flex gap-1">
                 <Button @click="backspace" variant="ghost" size="sm">←</Button>
-                <Button @click="clearExpression" variant="ghost" size="sm">
+                <Button @click="clearExpression" variant="ghost" size="sm" aria-label="Clear expression">
                   <Trash2 class="w-4 h-4" />
                 </Button>
               </div>

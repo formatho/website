@@ -83,7 +83,7 @@ const copyAll = () => {
     <Card v-if="expandedIps.length > 0" class="flex flex-col min-h-0 flex-1">
       <CardHeader class="flex-row items-center justify-between">
         <CardTitle>Expanded IPs ({{ expandedIps.length }})</CardTitle>
-        <Button variant="outline" size="sm" @click="copyAll">Copy All</Button>
+        <Button variant="outline" size="sm" @click="copyAll" aria-label="Copy all IP addresses">Copy All</Button>
       </CardHeader>
       <CardContent class="flex-1 min-h-0 overflow-y-auto">
         <div class="space-y-1">

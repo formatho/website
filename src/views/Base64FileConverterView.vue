@@ -86,7 +86,7 @@ const downloadAsText = () => {
           <div class="flex justify-between items-center">
             <Label>Base64 Output</Label>
             <div class="flex gap-2">
-              <Button variant="outline" size="sm" @click="copyToClipboard">Copy</Button>
+              <Button variant="outline" size="sm" @click="copyToClipboard" aria-label="Copy Base64 output">Copy</Button>
               <Button variant="outline" size="sm" @click="downloadAsText">Download</Button>
             </div>
           </div>

@@ -117,7 +117,7 @@ const applyPreset = (preset: (typeof presetPermissions)[0]) => {
             <div class="text-gray-900">{{ chmodValue }}</div>
             <div class="text-2xl font-mono text-muted-foreground mt-2">{{ symbolicValue }}</div>
           </div>
-          <Button @click="copyChmod" class="w-full">Copy chmod {{ chmodValue }}</Button>
+          <Button @click="copyChmod" class="w-full" aria-label="Copy chmod command">Copy chmod {{ chmodValue }}</Button>
 
           <div class="space-y-2">
             <div class="text-sm font-semibold">Command:</div>

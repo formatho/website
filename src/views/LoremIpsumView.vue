@@ -78,7 +78,7 @@ generate()
               </SelectContent>
             </Select>
           </div>
-          <Button @click="generate" class="w-full">
+          <Button @click="generate" class="w-full" aria-label="Generate lorem ipsum text">
             <RefreshCw class="mr-2 h-4 w-4" />
             Generate
           </Button>

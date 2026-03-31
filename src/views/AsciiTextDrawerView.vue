@@ -74,7 +74,7 @@ const copyAscii = () => {
         </div>
         <div class="flex gap-2">
           <Button @click="generateAscii">Generate</Button>
-          <Button variant="outline" @click="copyAscii">Copy</Button>
+          <Button variant="outline" @click="copyAscii" aria-label="Copy ASCII art">Copy</Button>
         </div>
       </CardContent>
     </Card>

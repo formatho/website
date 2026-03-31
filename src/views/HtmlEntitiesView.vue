@@ -66,8 +66,8 @@ const decode = () => {
           placeholder="Enter text to encode or decode..."
         />
         <div class="flex gap-2">
-          <Button @click="encode">Encode</Button>
-          <Button @click="decode" variant="secondary">Decode</Button>
+          <Button @click="encode" aria-label="Encode HTML entities">Encode</Button>
+          <Button @click="decode" variant="secondary" aria-label="Decode HTML entities">Decode</Button>
         </div>
       </CardContent>
     </Card>

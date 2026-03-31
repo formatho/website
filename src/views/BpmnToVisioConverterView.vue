@@ -467,8 +467,8 @@ const reset = () => {
         </p>
       </div>
       <div class="flex gap-2">
-        <Button variant="ghost" @click="fillSample">Load Sample</Button>
-        <Button v-if="bpmnInput" variant="outline" @click="reset">Reset</Button>
+        <Button variant="ghost" @click="fillSample" aria-label="Load sample BPMN XML">Load Sample</Button>
+        <Button v-if="bpmnInput" variant="outline" @click="reset" aria-label="Reset BPMN input">Reset</Button>
       </div>
     </div>
 

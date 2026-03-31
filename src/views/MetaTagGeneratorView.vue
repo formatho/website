@@ -134,7 +134,7 @@ const copyTags = () => {
     <Card>
       <CardHeader class="flex-row items-center justify-between">
         <CardTitle>Generated Meta Tags</CardTitle>
-        <Button variant="outline" size="sm" @click="copyTags">Copy</Button>
+        <Button variant="outline" size="sm" @click="copyTags" aria-label="Copy meta tags">Copy</Button>
       </CardHeader>
       <CardContent>
         <CodeEditor

@@ -35,7 +35,7 @@ const generate = () => {
           </div>
         </div>
 
-        <Button @click="generate" class="w-full md:w-auto">Generate</Button>
+        <Button @click="generate" class="w-full md:w-auto" aria-label="Generate Basic Auth credentials">Generate</Button>
 
         <div v-if="header" class="space-y-2">
           <Label>Authorization Header</Label>

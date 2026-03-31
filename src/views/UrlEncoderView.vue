@@ -54,9 +54,9 @@ const encodeAll = () => {
           placeholder="Enter text to encode or decode..."
         />
         <div class="flex gap-2 flex-wrap">
-          <Button @click="encode">Encode</Button>
-          <Button @click="encodeAll" variant="outline">Encode All Characters</Button>
-          <Button @click="decode" variant="secondary">Decode</Button>
+          <Button @click="encode" aria-label="Encode URL">Encode</Button>
+          <Button @click="encodeAll" variant="outline" aria-label="Encode all characters">Encode All Characters</Button>
+          <Button @click="decode" variant="secondary" aria-label="Decode URL">Decode</Button>
         </div>
       </CardContent>
     </Card>

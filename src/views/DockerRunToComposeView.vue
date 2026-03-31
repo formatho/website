@@ -146,7 +146,7 @@ const copyOutput = () => {
     <Card v-if="dockerComposeOutput" class="flex flex-col min-h-0">
       <CardHeader class="flex-row items-center justify-between">
         <CardTitle>docker-compose.yml</CardTitle>
-        <Button variant="outline" size="sm" @click="copyOutput">Copy</Button>
+        <Button variant="outline" size="sm" @click="copyOutput" aria-label="Copy docker-compose output">Copy</Button>
       </CardHeader>
       <CardContent class="flex-1 min-h-0">
         <CodeEditor

@@ -67,7 +67,7 @@ const copyHtml = () => {
       <Card class="flex flex-col min-h-0">
         <CardHeader class="flex-row items-center justify-between">
           <CardTitle>HTML Output</CardTitle>
-          <Button v-if="htmlOutput" variant="outline" size="sm" @click="copyHtml">Copy</Button>
+          <Button v-if="htmlOutput" variant="outline" size="sm" @click="copyHtml" aria-label="Copy HTML output">Copy</Button>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
           <CodeEditor

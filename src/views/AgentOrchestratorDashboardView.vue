@@ -446,7 +446,7 @@ onUnmounted(() => {
                 {{ formatTime(agent.lastActive) }}
               </td>
               <td class="px-6 py-4 text-right text-sm font-medium">
-                <Button @click.stop="navigateToAgentDetail(agent.id)" variant="link" class="text-blue-600 hover:text-blue-900 p-0">View</Button>
+                <Button @click.stop="navigateToAgentDetail(agent.id)" variant="link" class="text-blue-600 hover:text-blue-900 p-0" aria-label="View agent details">View</Button>
               </td>
             </tr>
           </tbody>

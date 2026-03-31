@@ -115,7 +115,7 @@ generate()
                 class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
-            <Button @click="generate" class="flex-1">
+            <Button @click="generate" class="flex-1" aria-label="Generate ULID">
               <RefreshCw class="w-4 h-4 mr-2" />
               Generate {{ count }}
             </Button>

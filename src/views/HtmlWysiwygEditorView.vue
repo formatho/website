@@ -50,7 +50,7 @@ const copyHtml = () => {
       <Button variant="outline" size="sm" @click="execCommand('formatBlock', 'h3')">H3</Button>
       <Button variant="outline" size="sm" @click="execCommand('formatBlock', 'p')">P</Button>
       <div class="w-px h-8 bg-border mx-1"></div>
-      <Button variant="outline" size="sm" @click="execCommand('removeFormat')">Clear</Button>
+      <Button variant="outline" size="sm" @click="execCommand('removeFormat')" aria-label="Clear formatting">Clear</Button>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 min-h-0">
