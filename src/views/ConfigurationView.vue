@@ -18,7 +18,7 @@
       <div v-else-if="error" class="error-container">
         <AlertCircle />
         <p>{{ error }}</p>
-        <button @click="loadConfig" class="retry-btn">Retry</button>
+        <Button @click="loadConfig" variant="outline">Retry</Button>
       </div>
 
       <!-- Configuration Form -->
@@ -108,9 +108,9 @@
             </div>
 
             <!-- Test Connection -->
-            <button type="button" @click="testLLMConnection" class="btn btn-secondary">
-              <Wifi /> Test LLM Connection
-            </button>
+            <Button type="button" @click="testLLMConnection" variant="outline">
+              <Wifi class="w-4 h-4 mr-2" /> Test LLM Connection
+            </Button>
             
             <p v-if="connectionStatus" :class="'status ' + connectionStatus.type">
               {{ connectionStatus.message }}
@@ -248,12 +248,12 @@
 
         <!-- Action Buttons -->
         <div class="action-buttons">
-          <button type="submit" form="configForm" @click="saveConfig" class="btn btn-primary">
-            <SaveIcon /> Save Configuration
-          </button>
-          <button type="button" @click="loadConfig" class="btn btn-secondary">
-            <RefreshIcon /> Reset to Defaults
-          </button>
+          <Button type="submit" form="configForm" @click="saveConfig">
+            <Save class="w-4 h-4 mr-2" /> Save Configuration
+          </Button>
+          <Button type="button" @click="loadConfig" variant="outline">
+            <RefreshIcon class="w-4 h-4 mr-2" /> Reset to Defaults
+          </Button>
         </div>
 
         <!-- Success Message -->
@@ -269,6 +269,8 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Settings, AlertCircle, Bot, Wifi, Database as DatabaseIcon, RotateCcw as RefreshIcon, Save, CheckCircle } from 'lucide-vue-next'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 
 const router = useRouter()
 

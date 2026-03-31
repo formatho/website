@@ -219,15 +219,16 @@ const functions = [
           </CardHeader>
           <CardContent>
             <div v-if="history.length > 0" class="space-y-2">
-              <button
+              <Button
                 v-for="(item, index) in history"
                 :key="index"
                 @click="useHistoryItem(item)"
-                class="w-full p-3 bg-surface-hover rounded-lg border text-left hover:bg-surface transition-colors"
+                variant="ghost"
+                class="w-full p-4 h-auto bg-surface-hover rounded-lg border text-left hover:bg-surface transition-colors flex-col items-start"
               >
                 <div class="font-mono text-sm text-muted-foreground">{{ item.expr }}</div>
                 <div class="font-mono text-lg font-bold">= {{ item.result }}</div>
-              </button>
+              </Button>
             </div>
             <div v-else class="text-center py-8 text-muted-foreground">
               <Calculator class="w-12 h-12 mx-auto mb-2 opacity-50" />

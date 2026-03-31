@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { 
   PlusIcon, 
   FilterIcon, 
@@ -218,13 +220,13 @@ onUnmounted(() => {
       </div>
       
       <!-- Add Task Button -->
-      <button 
+      <Button 
         @click="$router.push(`/agent-orchestrator/config`)"
-        class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+        class="flex items-center gap-2"
       >
         <PlusIcon class="w-5 h-5" />
         Add Task
-      </button>
+      </Button>
     </div>
 
     <!-- Stats Cards -->

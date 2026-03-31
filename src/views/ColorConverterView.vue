@@ -175,10 +175,12 @@ const randomColor = () => {
                 🎲 Random Color
               </Button>
               <div class="flex flex-wrap gap-2">
-                <button
+                <Button
                   v-for="preset in presets"
                   :key="preset.name"
                   @click="hex = preset.color"
+                  variant="ghost"
+                  size="icon"
                   class="w-8 h-8 rounded-full border-2 border-transparent hover:border-primary transition-colors"
                   :style="{ backgroundColor: preset.color }"
                   :title="preset.name"
