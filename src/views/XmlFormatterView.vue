@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Button } from '@/components/ui/button'
 
 const xmlInput = ref('')
@@ -115,9 +115,10 @@ watch([xmlInput, indentSize], formatXml)
           <CardTitle>Input XML</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="xmlInput"
-            class="h-full resize-none font-mono text-sm"
+            language="xml"
+            class="h-full"
             placeholder="Enter XML to format..."
           />
         </CardContent>
@@ -131,10 +132,11 @@ watch([xmlInput, indentSize], formatXml)
           >
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             :model-value="formattedOutput"
+            language="xml"
             readonly
-            class="h-full resize-none font-mono text-sm"
+            class="h-full"
             placeholder="Formatted XML will appear here..."
           />
         </CardContent>

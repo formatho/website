@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { keccak256, toHex, stringToBytes } from 'viem'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
@@ -39,10 +39,11 @@ const copyHash = () => {
         </CardHeader>
         <CardContent class="space-y-4">
           <Label>Text to Hash</Label>
-          <Textarea
+          <CodeEditor
             v-model="inputText"
+            language="plaintext"
+            class="min-h-[160px]"
             placeholder="Enter text to hash..."
-            class="h-40 font-mono text-sm"
           />
         </CardContent>
       </Card>

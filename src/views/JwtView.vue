@@ -3,7 +3,7 @@ import { ref, watch } from 'vue'
 import { jwtDecode } from 'jwt-decode'
 import { ShieldAlert } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 
@@ -66,9 +66,10 @@ const fillSample = () => {
           <CardTitle class="text-sm font-medium">Encoded Token</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="token"
-            class="h-full resize-none font-mono"
+            language="plaintext"
+            class="h-full"
             placeholder="Paste JWT here..."
           />
         </CardContent>
@@ -81,7 +82,12 @@ const fillSample = () => {
             <CardTitle class="text-sm font-medium">Header</CardTitle>
           </CardHeader>
           <CardContent class="flex-1 min-h-0 overflow-auto">
-            <pre class="font-mono text-xs">{{ header }}</pre>
+            <CodeEditor
+              :model-value="header"
+              language="json"
+              readonly
+              class="h-full min-h-[100px]"
+            />
           </CardContent>
         </Card>
         <Card class="flex flex-col min-h-0 flex-[2]">
@@ -89,7 +95,12 @@ const fillSample = () => {
             <CardTitle class="text-sm font-medium">Payload</CardTitle>
           </CardHeader>
           <CardContent class="flex-1 min-h-0 overflow-auto">
-            <pre class="font-mono text-xs">{{ payload }}</pre>
+            <CodeEditor
+              :model-value="payload"
+              language="json"
+              readonly
+              class="h-full min-h-[200px]"
+            />
           </CardContent>
         </Card>
       </div>

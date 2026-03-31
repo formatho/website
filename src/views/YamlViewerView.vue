@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import yaml from 'js-yaml'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Button } from '@/components/ui/button'
 
 const yamlInput = ref('')
@@ -50,9 +50,10 @@ const copyOutput = () => {
         <CardTitle>YAML</CardTitle>
       </CardHeader>
       <CardContent class="flex-1 min-h-0">
-        <Textarea
+        <CodeEditor
           v-model="yamlInput"
-          class="h-full resize-none font-mono text-sm"
+          language="yaml"
+          class="h-full"
           placeholder="Enter YAML..."
         />
       </CardContent>

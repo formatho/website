@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Button } from '@/components/ui/button'
 
 const json1 = ref('')
@@ -95,9 +95,10 @@ const compare = () => {
           <CardTitle>JSON 1</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="json1"
-            class="h-full resize-none font-mono text-sm"
+            language="json"
+            class="h-full"
             placeholder="Enter first JSON..."
           />
         </CardContent>
@@ -108,9 +109,10 @@ const compare = () => {
           <CardTitle>JSON 2</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="json2"
-            class="h-full resize-none font-mono text-sm"
+            language="json"
+            class="h-full"
             placeholder="Enter second JSON..."
           />
         </CardContent>
