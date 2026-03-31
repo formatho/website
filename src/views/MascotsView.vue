@@ -3,15 +3,29 @@
 // Pentagonal layout with interactive agent nodes
 // Note: AOS is initialized globally in main.ts
 
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { mascotSvgs, mascotMetadata, type MascotName } from '@/assets/mascot-assets'
+import { useAgentCouncil } from '@/store/useAgentCouncil'
+import AgentLog from '@/components/AgentLog.vue'
 
 // ============================================================
-// Agent State Management (Orchestration Store Integration)
+// Agent Council Store Integration
 // ============================================================
+const council = useAgentCouncil()
+const { 
+  currentlyActiveAgent, 
+  isRunning, 
+  triggerCouncil, 
+  stopCouncil, 
+  isAgentActive 
+} = council
+
+// Local state for manual selection
 const selectedAgent = ref<MascotName | null>(null)
-const thinkingAgent = ref<MascotName | null>(null)
 
+// ============================================================
+// Mascot Data
+// ============================================================
 interface Mascot {
   name: string
   role: string
@@ -97,17 +111,32 @@ const mascots: Mascot[] = [
 // ============================================================
 // Agent Interaction Handlers
 // ============================================================
+
+// Manual agent selection (when council is not running)
 const selectAgent = (mascotKey: MascotName) => {
+  if (isRunning.value) return // Don't allow manual selection during council
   selectedAgent.value = mascotKey
-  // Trigger thinking state animation
-  thinkingAgent.value = mascotKey
-  setTimeout(() => {
-    thinkingAgent.value = null
-  }, 2000)
 }
 
-const isSelected = (mascotKey: MascotName) => selectedAgent.value === mascotKey
-const isThinking = (mascotKey: MascotName) => thinkingAgent.value === mascotKey
+// Check if agent is selected (manual or via council)
+const isSelected = (mascotKey: MascotName) => {
+  return selectedAgent.value === mascotKey || isAgentActive(mascotKey)
+}
+
+// Check if agent is thinking (active in council)
+const isThinking = (mascotKey: MascotName) => {
+  return isAgentActive(mascotKey)
+}
+
+// Start/Stop Council
+const handleCouncilToggle = async () => {
+  if (isRunning.value) {
+    stopCouncil()
+  } else {
+    selectedAgent.value = null // Clear manual selection
+    await triggerCouncil()
+  }
+}
 </script>
 
 <template>
@@ -163,16 +192,41 @@ const isThinking = (mascotKey: MascotName) => thinkingAgent.value === mascotKey
     <!-- Pentagonal Council Layout -->
     <section class="container mx-auto px-4 py-16 md:py-24">
       <div class="max-w-6xl mx-auto">
-        <!-- Section Header -->
+        <!-- Section Header with Council Controls -->
         <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="600">
           <h2 class="text-2xl md:text-3xl font-bold mb-4">The Agent Council</h2>
-          <p class="text-muted-foreground max-w-xl mx-auto">
-            Click any agent to activate. Each twin has unique capabilities for your workflow.
+          <p class="text-muted-foreground max-w-xl mx-auto mb-6">
+            Click any agent to explore, or start the council to see agents collaborate.
           </p>
+          
+          <!-- Council Control Button -->
+          <button
+            @click="handleCouncilToggle"
+            class="px-8 py-3 rounded-xl font-semibold transition-all duration-300"
+            :class="[
+              isRunning 
+                ? 'bg-red-500/20 border border-red-500/50 text-red-400 hover:bg-red-500/30' 
+                : 'bg-primary/20 border border-primary/50 text-primary hover:bg-primary/30'
+            ]"
+          >
+            <span v-if="isRunning" class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+              Stop Council
+            </span>
+            <span v-else class="flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Start Council
+            </span>
+          </button>
         </div>
 
-        <!-- Pentagonal Grid Layout -->
-        <div class="pentagonal-council">
+        <!-- Council Grid + Log Panel Layout -->
+        <div class="flex flex-col lg:flex-row gap-8 items-start">
+          <!-- Pentagonal Grid Layout -->
+          <div class="flex-1 w-full">
           <div
             v-for="(mascot, index) in mascots"
             :key="mascot.name"
