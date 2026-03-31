@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 
 // Tutorial steps
 const currentStep = ref(0)
@@ -213,20 +215,19 @@ onUnmounted(() => {
       <div class="flex justify-center mb-8">
         <div class="flex items-center gap-2">
           <template v-for="(step, index) in steps" :key="step.id">
-            <button
+            <Button
               @click="currentStep = index"
+              :variant="currentStep === index ? 'default' : index < currentStep ? 'default' : 'outline'"
+              size="icon"
               :class="[
-                'w-12 h-12 rounded-full flex items-center justify-center text-xl transition-all duration-300',
-                currentStep === index 
-                  ? 'bg-primary text-primary-foreground scale-110 shadow-lg' 
-                  : index < currentStep
-                    ? 'bg-green-500 text-white'
-                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                'w-12 h-12 rounded-full text-xl transition-all duration-300',
+                currentStep === index ? 'scale-110 shadow-lg' : '',
+                index < currentStep ? 'bg-green-500 text-white hover:bg-green-600' : ''
               ]"
             >
               <span v-if="index < currentStep">✓</span>
               <span v-else>{{ step.icon }}</span>
-            </button>
+            </Button>
             <div 
               v-if="index < steps.length - 1"
               :class="[
@@ -272,13 +273,14 @@ onUnmounted(() => {
           </div>
           
           <div class="pt-8">
-            <button
+            <Button
               @click="nextStep"
-              class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+              size="lg"
+              class="px-8 shadow-lg shadow-primary/20"
             >
               Start Tutorial
               <span class="ml-2">→</span>
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -324,13 +326,13 @@ onUnmounted(() => {
                 ></textarea>
               </div>
 
-              <button
+              <Button
                 @click="createAgent"
                 :disabled="!agentName || !agentPrompt || agentCreating"
-                class="w-full py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                class="w-full"
               >
                 {{ agentCreating ? 'Creating...' : 'Create Agent' }}
-              </button>
+              </Button>
             </div>
 
             <div v-else class="text-center space-y-4">
@@ -346,12 +348,11 @@ onUnmounted(() => {
               <p class="text-muted-foreground text-sm">
                 Your agent is now ready to accept tasks!
               </p>
-              <button
+              <Button
                 @click="nextStep"
-                class="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium"
               >
                 Next: Assign a Task →
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -394,13 +395,13 @@ onUnmounted(() => {
                 </div>
               </div>
 
-              <button
+              <Button
                 @click="assignTask"
                 :disabled="!taskTitle || taskAssigning"
-                class="w-full py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all disabled:opacity-50"
+                class="w-full"
               >
                 {{ taskAssigning ? 'Assigning...' : 'Assign Task' }}
-              </button>
+              </Button>
             </div>
 
             <div v-else class="text-center space-y-4">
@@ -413,12 +414,11 @@ onUnmounted(() => {
                   <span class="text-blue-600">Status:</span> <span class="text-yellow-600">pending</span>
                 </p>
               </div>
-              <button
+              <Button
                 @click="nextStep"
-                class="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium"
               >
                 Next: Monitor Progress →
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -479,13 +479,13 @@ onUnmounted(() => {
               </div>
             </div>
 
-            <button
+            <Button
               v-if="taskComplete"
               @click="nextStep"
-              class="w-full py-3 bg-primary text-primary-foreground rounded-lg font-medium"
+              class="w-full"
             >
               Next: Review Results →
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -525,22 +525,22 @@ onUnmounted(() => {
             >
               Launch Agent Orchestrator
             </RouterLink>
-            <button
+            <Button
               @click="resetTutorial"
-              class="px-8 py-3 bg-secondary text-secondary-foreground rounded-lg font-medium hover:bg-secondary/80 transition-all"
+              variant="secondary"
             >
               Restart Tutorial
-            </button>
+            </Button>
           </div>
         </div>
       </div>
 
       <!-- Navigation -->
       <div class="flex justify-between items-center max-w-4xl mx-auto mt-12 pt-8 border-t border-border">
-        <button
+        <Button
           @click="prevStep"
           :disabled="currentStep === 0"
-          class="px-6 py-2 rounded-lg font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:bg-muted"
+          variant="ghost"
         >
           ← Previous
         </button>
