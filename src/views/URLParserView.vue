@@ -3,6 +3,7 @@ import { ref, computed, watch } from 'vue'
 import { Link, Copy, Check, ExternalLink, RefreshCw } from 'lucide-vue-next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const urlInput = ref('')
 const copied = ref<string | null>(null)
@@ -295,11 +296,11 @@ const swapEncodeDecode = () => {
                   <Copy class="w-4 h-4" />
                 </Button>
               </div>
-              <textarea
+              <CodeEditor
                 v-model="rawText"
-                @input="handleRawInput"
+                language="plaintext"
+                class="min-h-[200px]"
                 placeholder="Enter raw text to encode..."
-                class="w-full min-h-[200px] px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg font-mono text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-600 resize-none bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-600"
               />
             </div>
 
@@ -317,11 +318,11 @@ const swapEncodeDecode = () => {
                   <Copy class="w-4 h-4" />
                 </Button>
               </div>
-              <textarea
+              <CodeEditor
                 v-model="encodedText"
-                @input="handleEncodedInput"
+                language="plaintext"
+                class="min-h-[200px]"
                 placeholder="Enter encoded text to decode..."
-                class="w-full min-h-[200px] px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg font-mono text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-600 resize-none bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-600"
               />
             </div>
           </div>
