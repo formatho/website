@@ -10,6 +10,7 @@ interface Props extends PrimitiveProps {
   class?: HTMLAttributes['class']
   loading?: boolean
   disabled?: boolean
+  ariaLabel?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -34,6 +35,8 @@ const spinnerColorClass = computed(() => {
     :as="as"
     :as-child="asChild"
     :disabled="isDisabled"
+    :aria-label="ariaLabel || (loading ? 'Loading...' : undefined)"
+    :aria-busy="loading"
     :class="cn(
       buttonVariants({ variant, size }), 
       props.class,

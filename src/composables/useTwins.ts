@@ -63,6 +63,55 @@ const setDismissed = (contextId: string) => {
 const generateId = () => `twin-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
 
 // ============================================================
+// Audio System (Subtle Twin Spawn Sound)
+// ============================================================
+const audioEnabled = ref(true)
+
+const playSpawnSound = () => {
+  if (!audioEnabled.value) return
+  if (typeof window === 'undefined') return
+  
+  try {
+    // Create a subtle, premium UI "pop" sound
+    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
+    const oscillator = audioContext.createOscillator()
+    const gainNode = audioContext.createGain()
+    
+    oscillator.connect(gainNode)
+    gainNode.connect(audioContext.destination)
+    
+    // Frequency sweep for a pleasant "pop"
+    oscillator.frequency.setValueAtTime(800, audioContext.currentTime)
+    oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1)
+    
+    // Very low volume, subtle
+    gainNode.gain.setValueAtTime(0.05, audioContext.currentTime)
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1)
+    
+    oscillator.start(audioContext.currentTime)
+    oscillator.stop(audioContext.currentTime + 0.1)
+  } catch (e) {
+    // Fail silently if browser blocks audio
+    console.debug('[useTwins] Audio playback blocked or failed')
+  }
+}
+
+const setAudioEnabled = (enabled: boolean) => {
+  audioEnabled.value = enabled
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('formatho-twin-audio', String(enabled))
+  }
+}
+
+// Load audio preference on mount
+if (typeof window !== 'undefined') {
+  const savedPref = localStorage.getItem('formatho-twin-audio')
+  if (savedPref !== null) {
+    audioEnabled.value = savedPref === 'true'
+  }
+}
+
+// ============================================================
 // Composable Export
 // ============================================================
 export function useTwins() {
@@ -111,6 +160,9 @@ export function useTwins() {
     
     activeTwins.value.push(twin)
     console.log(`[useTwins] Summoned ${character} with context "${contextId}"`)
+    
+    // Play subtle spawn sound
+    playSpawnSound()
     
     return twin.id
   }
@@ -186,7 +238,11 @@ export function useTwins() {
     // Helpers
     getTwin,
     isTwinActive,
-    checkCooldown
+    checkCooldown,
+    
+    // Audio
+    audioEnabled,
+    setAudioEnabled
   }
 }
 
