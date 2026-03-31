@@ -57,7 +57,7 @@ const copyHash = () => {
             <Label>Keccak-256 Hash</Label>
             <div class="flex gap-2">
               <Input readonly :value="hash" class="font-mono text-sm" />
-              <Button variant="ghost" size="icon" @click="copyHash">
+              <Button variant="ghost" size="icon" @click="copyHash" aria-label="Copy hash">
                 <Copy class="h-4 w-4" />
               </Button>
             </div>

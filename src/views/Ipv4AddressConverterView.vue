@@ -53,7 +53,7 @@ const ipInfo = computed<IpInfo | null>(() => {
       <CardContent>
         <div class="grid gap-2">
           <Label>IPv4 Address</Label>
-          <Input v-model="ipAddress" placeholder="192.168.1.1" class="font-mono" />
+          <Input v-model="ipAddress" placeholder="192.168.1.1" class="font-mono" aria-label="IPv4 address" />
         </div>
       </CardContent>
     </Card>

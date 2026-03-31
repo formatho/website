@@ -35,7 +35,7 @@ const clearText = () => {
     
     <div class="flex items-center justify-between">
       <h1 class="text-3xl font-bold tracking-tight">Local Token Counter</h1>
-      <Button variant="outline" @click="clearText" :disabled="!inputText">
+      <Button variant="outline" @click="clearText" :disabled="!inputText" aria-label="Clear text">
         Clear Text
       </Button>
     </div>

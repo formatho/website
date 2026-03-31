@@ -121,7 +121,7 @@ const compare = () => {
 
     <Card>
       <CardContent class="pt-6 space-y-4">
-        <Button @click="compare" class="w-full md:w-auto">Compare</Button>
+        <Button @click="compare" class="w-full md:w-auto" aria-label="Compare JSON documents">Compare</Button>
         <div
           v-if="diffResult"
           class="p-4 rounded-lg bg-muted font-mono text-sm whitespace-pre-wrap"

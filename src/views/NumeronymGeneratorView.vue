@@ -53,7 +53,7 @@ const commonNumeronyms = [
       <CardContent class="space-y-4">
         <div class="grid gap-2">
           <Label>Input Word</Label>
-          <Input v-model="inputWord" placeholder="Enter a word (e.g., internationalization)" />
+          <Input v-model="inputWord" placeholder="Enter a word (e.g., internationalization)" aria-label="Word to convert to numeronym" />
         </div>
       </CardContent>
     </Card>
