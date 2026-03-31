@@ -166,7 +166,6 @@ const faqs = [
               @click="billingCycle = 'yearly'"
               :variant="billingCycle === 'yearly' ? 'default' : 'ghost'"
               class="rounded-full"
-              ]"
             >
               Yearly
               <span class="text-xs bg-green-500/20 text-green-600 px-2 py-0.5 rounded-full">
