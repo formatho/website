@@ -4,6 +4,7 @@ import { QrCode, Download, Copy, Check } from 'lucide-vue-next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import QRCode from 'qrcode'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const text = ref('')
 const qrDataUrl = ref('')
@@ -102,12 +103,12 @@ generateQR()
             <!-- Text Input -->
             <div>
               <label class="block text-sm font-medium mb-2">Content</label>
-              <textarea
+              <CodeEditor
                 v-model="text"
-                @input="generateQR"
+                language="plaintext"
+                class="min-h-[128px]"
                 placeholder="Enter text, URL, or any data..."
-                class="w-full h-32 px-3 py-2 border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-primary"
-              ></textarea>
+              />
             </div>
 
             <!-- Presets -->
