@@ -13,6 +13,8 @@ import { sha256 } from '@noble/hashes/sha2.js'
 import { ripemd160 } from '@noble/hashes/legacy.js'
 import { Buffer } from 'buffer'
 import { secp256k1 } from '@noble/curves/secp256k1'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 
 // Polyfill Buffer for browser environment
 if (typeof window !== 'undefined' && !window.Buffer) {
@@ -220,18 +222,17 @@ const generateKeys = async () => {
         </div>
 
         <div class="flex flex-wrap gap-3">
-          <button
+          <Button
             @click="generateMnemonic"
-            class="inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:cursor-pointer"
           >
             Generate Random
-          </button>
-          <button
+          </Button>
+          <Button
             @click="validateAndGenerate"
-            class="inline-flex items-center justify-center rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 hover:cursor-pointer"
+            class="bg-emerald-600 hover:bg-emerald-700"
           >
             Calculate Keys
-          </button>
+          </Button>
         </div>
 
         <div
