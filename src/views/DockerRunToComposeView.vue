@@ -139,7 +139,7 @@ const copyOutput = () => {
           class="min-h-[80px]"
           placeholder="docker run -d -p 80:80 --name nginx nginx:latest"
         />
-        <Button @click="convertToCompose">Convert</Button>
+        <Button @click="convertToCompose" aria-label="Convert Docker run command to docker-compose format">Convert</Button>
       </CardContent>
     </Card>
 

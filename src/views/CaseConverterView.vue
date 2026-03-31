@@ -102,7 +102,7 @@ const examples = [
           />
 
           <div class="flex gap-2 flex-wrap">
-            <Button @click="swapCase" variant="outline" size="sm">
+            <Button @click="swapCase" variant="outline" size="sm" aria-label="Swap text case (uppercase to lowercase)">
               <ArrowRightLeft class="w-4 h-4 mr-2" />
               Swap Case
             </Button>
@@ -136,7 +136,7 @@ const examples = [
               <div class="text-sm text-muted-foreground mb-1">{{ type }}</div>
               <div class="font-mono">{{ value }}</div>
             </div>
-            <Button @click="copyCase(type)" variant="ghost" size="sm">
+            <Button @click="copyCase(type)" variant="ghost" size="sm" aria-label="Copy converted text">
               <component :is="copied === type ? Check : Copy" class="w-4 h-4" />
             </Button>
           </div>

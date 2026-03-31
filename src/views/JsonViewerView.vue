@@ -65,8 +65,8 @@ watch(jsonInput, formatJson)
     </div>
 
     <div class="flex gap-2">
-      <Button @click="formatJson">Format (Pretty)</Button>
-      <Button @click="minifyJson" variant="outline">Minify</Button>
+      <Button @click="formatJson" aria-label="Format JSON with pretty printing">Format (Pretty)</Button>
+      <Button @click="minifyJson" variant="outline" aria-label="Minify JSON to compact format">Minify</Button>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 min-h-0">

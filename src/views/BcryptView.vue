@@ -48,7 +48,7 @@ const verifyHash = () => {
             <Label>Salt Rounds</Label>
             <Input v-model.number="saltRounds" type="number" min="4" max="20" />
           </div>
-          <Button @click="generateHash" class="w-full">Generate Hash</Button>
+          <Button @click="generateHash" class="w-full" aria-label="Generate new hash">Generate Hash</Button>
           <div v-if="hashResult" class="space-y-2">
             <Label>Hash Result</Label>
             <CodeEditor

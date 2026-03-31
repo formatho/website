@@ -148,6 +148,7 @@ const filteredTools = computed(() => {
               <Input
                 class="w-full pl-12 pr-4 py-6 text-lg glass-card border-primary/20 focus:border-primary/50 focus:ring-primary/20"
                 type="text"
+                aria-label="Search developer tools"
                 placeholder="Search tools... (e.g., JSON, Base64, UUID)"
                 v-model="searchQuery"
                 data-v-8d4ed633=""

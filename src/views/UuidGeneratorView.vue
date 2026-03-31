@@ -41,9 +41,9 @@ generate()
         <CardContent class="grid gap-6">
           <div class="grid gap-2">
             <Label>Quantity</Label>
-            <Input type="number" v-model.number="count" min="1" max="100" />
+            <Input type="number" v-model.number="count" min="1" max="100" aria-label="Number of UUIDs to generate" />
           </div>
-          <Button @click="generate" class="w-full">
+          <Button @click="generate" class="w-full" aria-label="Generate new UUIDs">
             <RefreshCw class="mr-2 h-4 w-4" />
             Generate
           </Button>
