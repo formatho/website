@@ -99,12 +99,13 @@
             <!-- System Prompt -->
             <div class="form-group full-width">
               <label for="systemPrompt">System Prompt</label>
-              <textarea 
-                id="systemPrompt" 
-                v-model="config.llm.systemPrompt" 
-                rows="4"
+              <CodeEditor
+                id="systemPrompt"
+                v-model="config.llm.systemPrompt"
+                language="markdown"
+                class="min-h-[100px]"
                 placeholder="Define the agent's behavior and personality..."
-              ></textarea>
+              />
             </div>
 
             <!-- Test Connection -->
@@ -271,6 +272,7 @@ import { useRouter } from 'vue-router'
 import { Settings, AlertCircle, Bot, Wifi, Database as DatabaseIcon, RotateCcw as RefreshIcon, Save, CheckCircle } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const router = useRouter()
 
