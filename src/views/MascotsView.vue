@@ -1,31 +1,20 @@
 <script setup lang="ts">
 // MascotsView.vue - Council of Agents UI
 // Pentagonal layout with interactive agent nodes
-// Note: AOS is initialized globally in main.ts
 
-import { ref, computed, watch } from 'vue'
+import { ref } from 'vue'
 import { mascotSvgs, mascotMetadata, type MascotName } from '@/assets/mascot-assets'
 import { useAgentCouncil } from '@/store/useAgentCouncil'
 import AgentLog from '@/components/AgentLog.vue'
 
-// ============================================================
 // Agent Council Store Integration
-// ============================================================
 const council = useAgentCouncil()
-const { 
-  currentlyActiveAgent, 
-  isRunning, 
-  triggerCouncil, 
-  stopCouncil, 
-  isAgentActive 
-} = council
+const { isRunning, triggerCouncil, stopCouncil, isAgentActive } = council
 
 // Local state for manual selection
 const selectedAgent = ref<MascotName | null>(null)
 
-// ============================================================
 // Mascot Data
-// ============================================================
 interface Mascot {
   name: string
   role: string
@@ -108,32 +97,25 @@ const mascots: Mascot[] = [
   }
 ]
 
-// ============================================================
 // Agent Interaction Handlers
-// ============================================================
-
-// Manual agent selection (when council is not running)
 const selectAgent = (mascotKey: MascotName) => {
-  if (isRunning.value) return // Don't allow manual selection during council
+  if (isRunning.value) return
   selectedAgent.value = mascotKey
 }
 
-// Check if agent is selected (manual or via council)
 const isSelected = (mascotKey: MascotName) => {
   return selectedAgent.value === mascotKey || isAgentActive(mascotKey)
 }
 
-// Check if agent is thinking (active in council)
 const isThinking = (mascotKey: MascotName) => {
   return isAgentActive(mascotKey)
 }
 
-// Start/Stop Council
 const handleCouncilToggle = async () => {
   if (isRunning.value) {
     stopCouncil()
   } else {
-    selectedAgent.value = null // Clear manual selection
+    selectedAgent.value = null
     await triggerCouncil()
   }
 }
@@ -143,46 +125,24 @@ const handleCouncilToggle = async () => {
   <div class="min-h-screen">
     <!-- Hero Section -->
     <section class="relative overflow-hidden border-b border-border/50">
-      <!-- Gradient Background -->
       <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background"></div>
-      
-      <!-- Decorative Elements -->
       <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
       <div class="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl"></div>
       <div class="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
 
       <div class="container mx-auto px-4 py-20 md:py-32 relative">
         <div class="max-w-4xl mx-auto">
-          <!-- Glassmorphic Hero Card -->
-          <div
-            class="glass-card p-12 md:p-16 text-center"
-            data-aos="fade-up"
-            data-aos-duration="600"
-          >
-            <!-- Decorative Top Line -->
+          <div class="glass-card p-12 md:p-16 text-center" data-aos="fade-up" data-aos-duration="600">
             <div class="w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-8"></div>
             
-            <!-- Title -->
-            <h1
-              class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
-              data-aos="fade-up"
-              data-aos-duration="600"
-              data-aos-delay="100"
-            >
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
               <span class="gradient-text">Council of Agents</span>
             </h1>
             
-            <!-- Subtitle -->
-            <p
-              class="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
-              data-aos="fade-up"
-              data-aos-duration="600"
-              data-aos-delay="200"
-            >
+            <p class="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
               Five digital twins. One orchestration OS.
             </p>
             
-            <!-- Decorative Bottom Line -->
             <div class="w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mt-8"></div>
           </div>
         </div>
@@ -192,7 +152,7 @@ const handleCouncilToggle = async () => {
     <!-- Pentagonal Council Layout -->
     <section class="container mx-auto px-4 py-16 md:py-24">
       <div class="max-w-6xl mx-auto">
-        <!-- Section Header with Council Controls -->
+        <!-- Section Header -->
         <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="600">
           <h2 class="text-2xl md:text-3xl font-bold mb-4">The Agent Council</h2>
           <p class="text-muted-foreground max-w-xl mx-auto mb-6">
@@ -210,7 +170,7 @@ const handleCouncilToggle = async () => {
             ]"
           >
             <span v-if="isRunning" class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+              <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
               Stop Council
             </span>
             <span v-else class="flex items-center gap-2">
@@ -223,111 +183,92 @@ const handleCouncilToggle = async () => {
           </button>
         </div>
 
-        <!-- Council Grid + Log Panel Layout -->
+        <!-- Council Grid + Log Panel -->
         <div class="flex flex-col lg:flex-row gap-8 items-start">
-          <!-- Pentagonal Grid Layout -->
+          <!-- Pentagonal Grid -->
           <div class="flex-1 w-full">
-          <div
-            v-for="(mascot, index) in mascots"
-            :key="mascot.name"
-            class="council-node"
-            :class="[
-              `council-node-${index + 1}`,
-              { 'node-selected': isSelected(mascot.svgKey) },
-              { 'node-thinking': isThinking(mascot.svgKey) }
-            ]"
-            @click="selectAgent(mascot.svgKey)"
-            data-aos="fade-up"
-            data-aos-duration="600"
-            :data-aos-delay="100 + (index * 100)"
-          >
-            <!-- Agent Node Container -->
-            <div
-              class="agent-orb"
-              :style="{ 
-                '--agent-glow': mascot.glowColor,
-                '--agent-color': mascot.color
-              }"
-            >
-              <!-- Glow Layer -->
-              <div class="orb-glow"></div>
-              
-              <!-- SVG Container -->
-              <div 
-                class="orb-content"
-                v-html="mascotSvgs[mascot.svgKey]"
-              ></div>
-              
-              <!-- Thinking Indicator -->
-              <div v-if="isThinking(mascot.svgKey)" class="thinking-indicator">
-                <span class="thinking-dot"></span>
-                <span class="thinking-dot"></span>
-                <span class="thinking-dot"></span>
+            <div class="pentagonal-council">
+              <div
+                v-for="(mascot, index) in mascots"
+                :key="mascot.name"
+                class="council-node"
+                :class="[
+                  `council-node-${index + 1}`,
+                  { 'node-selected': isSelected(mascot.svgKey) },
+                  { 'node-thinking': isThinking(mascot.svgKey) }
+                ]"
+                @click="selectAgent(mascot.svgKey)"
+                data-aos="fade-up"
+                data-aos-duration="600"
+                :data-aos-delay="100 + (index * 100)"
+              >
+                <div
+                  class="agent-orb"
+                  :style="{ 
+                    '--agent-glow': mascot.glowColor,
+                    '--agent-color': mascot.color
+                  }"
+                >
+                  <div class="orb-glow"></div>
+                  <div class="orb-content" v-html="mascotSvgs[mascot.svgKey]"></div>
+                  <div v-if="isThinking(mascot.svgKey)" class="thinking-indicator">
+                    <span class="thinking-dot"></span>
+                    <span class="thinking-dot"></span>
+                    <span class="thinking-dot"></span>
+                  </div>
+                </div>
+                
+                <div class="agent-info">
+                  <h3 class="text-lg font-bold">{{ mascot.name }}</h3>
+                  <p :class="[mascot.textClass, 'text-sm font-medium']">{{ mascot.role }}</p>
+                  <div v-if="isSelected(mascot.svgKey)" class="skills-container">
+                    <span v-for="skill in mascot.skills" :key="skill" class="skill-tag">{{ skill }}</span>
+                  </div>
+                </div>
               </div>
             </div>
-            
-            <!-- Agent Info -->
-            <div class="agent-info">
-              <h3 class="text-lg font-bold">{{ mascot.name }}</h3>
-              <p :class="[mascot.textClass, 'text-sm font-medium']">{{ mascot.role }}</p>
-              
-              <!-- Skills Tags (shown on selection) -->
-              <div v-if="isSelected(mascot.svgKey)" class="skills-container">
-                <span 
-                  v-for="skill in mascot.skills" 
-                  :key="skill"
-                  class="skill-tag"
-                >
-                  {{ skill }}
-                </span>
+
+            <!-- Mobile Fallback -->
+            <div class="mobile-council md:hidden">
+              <div
+                v-for="(mascot, index) in mascots"
+                :key="mascot.name"
+                class="mobile-node glass-card p-6"
+                :class="{ 'node-selected': isSelected(mascot.svgKey) }"
+                @click="selectAgent(mascot.svgKey)"
+                data-aos="fade-up"
+                data-aos-duration="600"
+                :data-aos-delay="100 + (index * 50)"
+              >
+                <div class="flex items-center gap-4">
+                  <div 
+                    class="w-16 h-16 rounded-xl flex items-center justify-center"
+                    :style="{ 
+                      background: `linear-gradient(135deg, ${mascot.glowColor.replace('0.3', '0.2')}, ${mascot.glowColor.replace('0.3', '0.1')})`,
+                      boxShadow: `0 0 30px ${mascot.glowColor}`
+                    }"
+                    v-html="mascotSvgs[mascot.svgKey]"
+                  ></div>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-bold">{{ mascot.name }}</h3>
+                    <p :class="[mascot.textClass, 'text-sm']">{{ mascot.role }}</p>
+                  </div>
+                </div>
+                
+                <div v-if="isSelected(mascot.svgKey)" class="mt-4 pt-4 border-t border-border/50">
+                  <p class="text-muted-foreground text-sm mb-3">{{ mascot.description }}</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span v-for="skill in mascot.skills" :key="skill" class="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary">{{ skill }}</span>
+                  </div>
+                  <p class="mt-3 text-sm italic" :class="mascot.textClass">{{ mascot.signatureLine }}</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Mobile Fallback: Stack Layout -->
-        <div class="mobile-council md:hidden">
-          <div
-            v-for="(mascot, index) in mascots"
-            :key="mascot.name"
-            class="mobile-node glass-card p-6"
-            :class="{ 'node-selected': isSelected(mascot.svgKey) }"
-            @click="selectAgent(mascot.svgKey)"
-            data-aos="fade-up"
-            data-aos-duration="600"
-            :data-aos-delay="100 + (index * 50)"
-          >
-            <div class="flex items-center gap-4">
-              <!-- Mascot Icon -->
-              <div 
-                class="w-16 h-16 rounded-xl flex items-center justify-center"
-                :style="{ 
-                  background: `linear-gradient(135deg, ${mascot.glowColor.replace('0.3', '0.2')}, ${mascot.glowColor.replace('0.3', '0.1')})`,
-                  boxShadow: `0 0 30px ${mascot.glowColor}`
-                }"
-                v-html="mascotSvgs[mascot.svgKey]"
-              />
-              
-              <div class="flex-1">
-                <h3 class="text-lg font-bold">{{ mascot.name }}</h3>
-                <p :class="[mascot.textClass, 'text-sm']">{{ mascot.role }}</p>
-              </div>
-            </div>
-            
-            <!-- Expanded Details -->
-            <div v-if="isSelected(mascot.svgKey)" class="mt-4 pt-4 border-t border-border/50">
-              <p class="text-muted-foreground text-sm mb-3">{{ mascot.description }}</p>
-              <div class="flex flex-wrap gap-2">
-                <span 
-                  v-for="skill in mascot.skills" 
-                  :key="skill"
-                  class="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary"
-                >
-                  {{ skill }}
-                </span>
-              </div>
-              <p class="mt-3 text-sm italic" :class="mascot.textClass">{{ mascot.signatureLine }}</p>
-            </div>
+          <!-- Agent Log Panel (Desktop) -->
+          <div class="hidden lg:block lg:w-80">
+            <AgentLog />
           </div>
         </div>
       </div>
@@ -350,9 +291,7 @@ const handleCouncilToggle = async () => {
   background-clip: text;
 }
 
-/* ============================================================
-   PENTAGONAL COUNCIL LAYOUT (Desktop)
-   ============================================================ */
+/* Pentagonal Council Layout */
 .pentagonal-council {
   display: none;
   position: relative;
@@ -380,7 +319,6 @@ const handleCouncilToggle = async () => {
   }
 }
 
-/* Pentagon vertex positions */
 .council-node {
   position: absolute;
   width: 140px;
@@ -392,12 +330,11 @@ const handleCouncilToggle = async () => {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Pentagon positions (5 vertices) */
-.council-node-1 { top: 0%; left: 50%; transform: translateX(-50%); }           /* Top */
-.council-node-2 { top: 38%; left: 5%; }                                        /* Bottom-left */
-.council-node-3 { top: 38%; right: 5%; }                                       /* Bottom-right */
-.council-node-4 { top: 75%; left: 18%; }                                       /* Left */
-.council-node-5 { top: 75%; right: 18%; }                                      /* Right */
+.council-node-1 { top: 0%; left: 50%; transform: translateX(-50%); }
+.council-node-2 { top: 38%; left: 5%; }
+.council-node-3 { top: 38%; right: 5%; }
+.council-node-4 { top: 75%; left: 18%; }
+.council-node-5 { top: 75%; right: 18%; }
 
 .council-node:hover {
   transform: scale(1.08);
@@ -406,9 +343,6 @@ const handleCouncilToggle = async () => {
 
 .council-node-1:hover { transform: translateX(-50%) scale(1.08); }
 
-/* ============================================================
-   AGENT ORB - Interactive Node Container
-   ============================================================ */
 .agent-orb {
   position: relative;
   width: 100px;
@@ -421,7 +355,6 @@ const handleCouncilToggle = async () => {
   transition: all 0.3s ease;
 }
 
-/* Glow Layer */
 .orb-glow {
   position: absolute;
   inset: -10px;
@@ -437,7 +370,6 @@ const handleCouncilToggle = async () => {
   50% { opacity: 0.7; transform: scale(1.05); }
 }
 
-/* SVG Content */
 .orb-content {
   width: 70%;
   height: 70%;
@@ -451,9 +383,6 @@ const handleCouncilToggle = async () => {
   display: block;
 }
 
-/* ============================================================
-   NODE STATES: Selected & Thinking
-   ============================================================ */
 .node-selected .agent-orb {
   transform: scale(1.1);
 }
@@ -477,7 +406,6 @@ const handleCouncilToggle = async () => {
   50% { opacity: 1; }
 }
 
-/* Thinking Indicator (3 dots) */
 .thinking-indicator {
   position: absolute;
   bottom: -20px;
@@ -501,9 +429,6 @@ const handleCouncilToggle = async () => {
   40% { transform: scale(1); opacity: 1; }
 }
 
-/* ============================================================
-   AGENT INFO & SKILLS
-   ============================================================ */
 .agent-info {
   text-align: center;
   margin-top: 1rem;
@@ -532,9 +457,6 @@ const handleCouncilToggle = async () => {
   white-space: nowrap;
 }
 
-/* ============================================================
-   MOBILE RESPONSIVE (380px+)
-   ============================================================ */
 @media (max-width: 380px) {
   .mobile-node {
     padding: 1rem;

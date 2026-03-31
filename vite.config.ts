@@ -19,24 +19,35 @@ export default defineConfig({
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
         // Split large dependencies into separate chunks
-        manualChunks: {
-          // Vue core
-          'vue-vendor': ['vue', 'vue-router', 'pinia'],
-          
-          // UI framework
-          'ui-vendor': ['radix-vue', '@vueuse/core'],
-          
-          // Monaco Editor - separate chunk
-          'monaco-editor': ['monaco-editor', '@guolao/vue-monaco-editor'],
-          
-          // Crypto libraries
-          'crypto': ['bcryptjs', '@noble/curves/secp256k1', '@noble/hashes/sha2'],
-          
-          // Diff library
-          'diff': ['diff'],
-          
-          // Charts/Data visualization
-          'charts': ['chart.js'],
+        manualChunks(id) {
+          // Don't split for SSR build (external modules)
+          if (id.includes('node_modules')) {
+            // Vue core
+            if (id.includes('vue/dist') || id.includes('vue-router')) {
+              return 'vue-vendor'
+            }
+            // UI framework
+            if (id.includes('radix-vue') || id.includes('@vueuse/core')) {
+              return 'ui-vendor'
+            }
+            // Monaco Editor
+            if (id.includes('monaco-editor') || id.includes('@guolao/vue-monaco-editor')) {
+              return 'monaco-editor'
+            }
+            // Crypto libraries
+            if (id.includes('bcryptjs') || id.includes('@noble/curves')) {
+              return 'crypto'
+            }
+            // Diff library
+            if (id.includes('/diff/')) {
+              return 'diff'
+            }
+            // Charts
+            if (id.includes('chart.js')) {
+              return 'charts'
+            }
+          }
+          return undefined
         }
       }
     }
