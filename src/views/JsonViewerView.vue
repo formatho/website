@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const jsonInput = ref('')
 const jsonOutput = ref('')
@@ -60,10 +60,11 @@ watch(jsonInput, formatJson)
           <CardTitle>Input</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             v-model="jsonInput"
-            class="h-full resize-none font-mono text-sm"
-            placeholder="Enter JSON..."
+            language="json"
+            min-height="300px"
+            max-height="100%"
           />
         </CardContent>
       </Card>
@@ -76,11 +77,12 @@ watch(jsonInput, formatJson)
           >
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
-            :model-value="jsonOutput"
-            readonly
-            class="h-full resize-none font-mono text-sm"
-            placeholder="Formatted JSON will appear here..."
+          <CodeEditor
+            v-model="jsonOutput"
+            language="json"
+            :readonly="true"
+            min-height="300px"
+            max-height="100%"
           />
         </CardContent>
       </Card>
