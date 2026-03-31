@@ -14,6 +14,7 @@ import { ripemd160 } from '@noble/hashes/legacy.js'
 import { Buffer } from 'buffer'
 import { secp256k1 } from '@noble/curves/secp256k1'
 import { Button } from '@/components/ui/button'
+import CodeEditor from '@/components/CodeEditor.vue'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { useTwins } from '@/composables/useTwins'
 
@@ -221,12 +222,12 @@ const generateKeys = async () => {
             Mnemonic Phrase (Seed)
           </label>
           <div class="relative">
-            <textarea
+            <CodeEditor
               v-model="mnemonic"
-              rows="3"
-              class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-900 dark:text-white"
+              language="plaintext"
+              class="min-h-[80px]"
               placeholder="Enter your 12 or 24 word phrase..."
-            ></textarea>
+            />
           </div>
         </div>
 

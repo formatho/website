@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
+import CodeEditor from '@/components/CodeEditor.vue'
 
 const keySize = ref(2048)
 const publicKey = ref('')
@@ -80,10 +80,11 @@ const arrayBufferToPem = (buffer: ArrayBuffer, label: string): string => {
           <CardTitle>Public Key (PEM)</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             :model-value="publicKey"
+            language="plaintext"
             readonly
-            class="h-full resize-none font-mono text-xs"
+            class="h-full"
             placeholder="Public key will appear here..."
           />
         </CardContent>
@@ -94,10 +95,11 @@ const arrayBufferToPem = (buffer: ArrayBuffer, label: string): string => {
           <CardTitle>Private Key (PEM)</CardTitle>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
-          <Textarea
+          <CodeEditor
             :model-value="privateKey"
+            language="plaintext"
             readonly
-            class="h-full resize-none font-mono text-xs"
+            class="h-full"
             placeholder="Private key will appear here..."
           />
         </CardContent>
