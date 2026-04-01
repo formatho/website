@@ -576,6 +576,16 @@ export const routes = [
         }
       },
       {
+        path: 'crypto-forecasts',
+        name: 'crypto-forecasts',
+        component: () => import('../views/CryptoForecastsView.vue'),
+        meta: {
+          title: 'AI-Powered Crypto Price Forecasts',
+          description:
+            '30-day crypto price predictions using Google TimesFM 2.5. Privacy-first AI forecasts for BTC, ETH, SOL, and more.'
+        }
+      },
+      {
         path: 'hmac-generator',
         name: 'hmac-generator',
         component: () => import('../views/HmacGeneratorView.vue'),
