@@ -18,7 +18,7 @@
       <div v-else-if="error" class="error-container">
         <AlertCircle />
         <p>{{ error }}</p>
-        <Button @click="loadConfig" variant="outline">Retry</Button>
+        <Button @click="loadConfig" variant="outline" aria-label="Reload configuration">Retry</Button>
       </div>
 
       <!-- Configuration Form -->
@@ -109,7 +109,7 @@
             </div>
 
             <!-- Test Connection -->
-            <Button type="button" @click="testLLMConnection" variant="outline">
+            <Button type="button" @click="testLLMConnection" variant="outline" aria-label="Test LLM connection">
               <Wifi class="w-4 h-4 mr-2" /> Test LLM Connection
             </Button>
             
@@ -249,10 +249,10 @@
 
         <!-- Action Buttons -->
         <div class="action-buttons">
-          <Button type="submit" form="configForm" @click="saveConfig">
+          <Button type="submit" form="configForm" @click="saveConfig" aria-label="Save configuration">
             <Save class="w-4 h-4 mr-2" /> Save Configuration
           </Button>
-          <Button type="button" @click="loadConfig" variant="outline">
+          <Button type="button" @click="loadConfig" variant="outline" aria-label="Reset to defaults">
             <RefreshIcon class="w-4 h-4 mr-2" /> Reset to Defaults
           </Button>
         </div>

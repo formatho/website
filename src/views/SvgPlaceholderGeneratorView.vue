@@ -81,8 +81,8 @@ const copySvg = () => {
             <Input v-model="text" placeholder="Leave empty for dimensions" />
           </div>
           <div class="flex gap-2">
-            <Button @click="downloadSvg">Download SVG</Button>
-            <Button variant="outline" @click="copySvg">Copy SVG Code</Button>
+            <Button @click="downloadSvg" aria-label="Download SVG file">Download SVG</Button>
+            <Button variant="outline" @click="copySvg" aria-label="Copy SVG code to clipboard">Copy SVG Code</Button>
           </div>
         </CardContent>
       </Card>

@@ -102,8 +102,8 @@ onUnmounted(() => {
             style="max-height: 400px"
           ></video>
           <div class="flex gap-2 flex-wrap">
-            <Button @click="startCamera" variant="outline" size="sm">Start Camera</Button>
-            <Button @click="toggleCamera" variant="outline" size="sm">Toggle Camera</Button>
+            <Button @click="startCamera" variant="outline" size="sm" aria-label="Start camera">Start Camera</Button>
+            <Button @click="toggleCamera" variant="outline" size="sm" aria-label="Toggle front/back camera">Toggle Camera</Button>
             <Button
               v-if="!isRecording"
               @click="startRecording"
@@ -112,7 +112,7 @@ onUnmounted(() => {
             >
               Start Recording
             </Button>
-            <Button v-else @click="stopRecording" size="sm"> Stop Recording </Button>
+            <Button v-else @click="stopRecording" size="sm" aria-label="Stop recording"> Stop Recording </Button>
           </div>
         </CardContent>
       </Card>
@@ -120,7 +120,7 @@ onUnmounted(() => {
       <Card v-if="recordedVideoUrl" class="flex flex-col min-h-0">
         <CardHeader class="flex-row items-center justify-between">
           <CardTitle>Recording</CardTitle>
-          <Button variant="outline" size="sm" @click="downloadRecording">Download</Button>
+          <Button variant="outline" size="sm" @click="downloadRecording" aria-label="Download recording">Download</Button>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
           <video
