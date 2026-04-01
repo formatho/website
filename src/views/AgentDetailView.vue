@@ -67,7 +67,7 @@ onMounted(() => {
   <div class="agent-detail-view">
     <!-- Header -->
     <header class="detail-header">
-      <Button @click="goBack" variant="outline">← Back to Dashboard</Button>
+      <Button @click="goBack" variant="outline" aria-label="Back to agents list">← Back to Dashboard</Button>
       <h1 v-if="agent">{{ agent.name }}</h1>
       <h1 v-else>Loading...</h1>
     </header>
@@ -153,8 +153,8 @@ onMounted(() => {
       <section class="actions-card">
         <h2>⚙️ Actions</h2>
         <div class="action-buttons">
-          <Button variant="outline" @click="exportState()">Export State History</Button>
-          <Button variant="destructive" @click="deleteAgent()">Delete Agent</Button>
+          <Button variant="outline" @click="exportState()" aria-label="Export agent state history">Export State History</Button>
+          <Button variant="destructive" @click="deleteAgent()" aria-label="Delete this agent permanently">Delete Agent</Button>
         </div>
       </section>
     </template>
