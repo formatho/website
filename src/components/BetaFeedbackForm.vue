@@ -101,7 +101,7 @@ const resetForm = () => {
         <p class="text-slate-400 mb-6">
           Your feedback has been submitted successfully. We appreciate your input!
         </p>
-        <Button @click="resetForm" variant="outline" class="border-slate-700">
+        <Button @click="resetForm" variant="outline" class="border-slate-700" aria-label="Reset feedback form">
           Submit Another Response
         </Button>
       </div>

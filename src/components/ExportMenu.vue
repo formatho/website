@@ -89,11 +89,11 @@ const handleExportDOCX = async () => {
 
 <template>
   <div class="flex gap-2">
-    <Button @click="handleExportPDF" :disabled="isExporting" variant="secondary" size="sm">
+    <Button @click="handleExportPDF" :disabled="isExporting" variant="secondary" size="sm" aria-label="Export as PDF">
       <FileType class="mr-2 h-4 w-4" />
       {{ isExporting ? '...' : 'PDF' }}
     </Button>
-    <Button @click="handleExportDOCX" :disabled="isExporting" variant="secondary" size="sm">
+    <Button @click="handleExportDOCX" :disabled="isExporting" variant="secondary" size="sm" aria-label="Export as DOCX">
       <FileText class="mr-2 h-4 w-4" />
       {{ isExporting ? '...' : 'DOCX' }}
     </Button>
