@@ -127,7 +127,7 @@ watch([xmlInput, indentSize], formatXml)
       <Card class="flex flex-col min-h-0">
         <CardHeader class="flex-row items-center justify-between">
           <CardTitle>Formatted XML</CardTitle>
-          <Button variant="outline" size="sm" @click="copyOutput" :disabled="!formattedOutput"
+          <Button variant="outline" size="sm" @click="copyOutput" :disabled="!formattedOutput" aria-label="Copy formatted XML">
             >Copy</Button
           >
         </CardHeader>

@@ -179,6 +179,7 @@ const copyIban = () => {
             v-model="ibanInput"
             placeholder="DE89 3704 0044 0532 0130 00"
             class="font-mono uppercase"
+            aria-label="IBAN input for validation"
           />
         </div>
       </CardContent>

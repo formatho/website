@@ -112,7 +112,7 @@ const formatNumber = (num: number) => {
                 <div class="text-sm text-muted-foreground">Result</div>
                 <div class="text-2xl font-bold">{{ formatNumber(result1) }}</div>
               </div>
-              <Button @click="copyResult('1', result1)" variant="ghost" size="sm">
+              <Button @click="copyResult('1', result1)" variant="ghost" size="sm" aria-label="Copy result">
                 <component :is="copied === '1' ? Check : Copy" class="w-4 h-4" />
               </Button>
             </div>
@@ -156,7 +156,7 @@ const formatNumber = (num: number) => {
                 <div class="text-sm text-muted-foreground">Result</div>
                 <div class="text-2xl font-bold">{{ formatNumber(result2) }}%</div>
               </div>
-              <Button @click="copyResult('2', result2)" variant="ghost" size="sm">
+              <Button @click="copyResult('2', result2)" variant="ghost" size="sm" aria-label="Copy result">
                 <component :is="copied === '2' ? Check : Copy" class="w-4 h-4" />
               </Button>
             </div>
@@ -205,7 +205,7 @@ const formatNumber = (num: number) => {
                 <div class="text-sm text-muted-foreground">Result</div>
                 <div class="text-2xl font-bold">{{ formatNumber(result3) }}</div>
               </div>
-              <Button @click="copyResult('3', result3)" variant="ghost" size="sm">
+              <Button @click="copyResult('3', result3)" variant="ghost" size="sm" aria-label="Copy result">
                 <component :is="copied === '3' ? Check : Copy" class="w-4 h-4" />
               </Button>
             </div>
@@ -254,7 +254,7 @@ const formatNumber = (num: number) => {
                   {{ result4 >= 0 ? '+' : '' }}{{ formatNumber(result4) }}%
                 </div>
               </div>
-              <Button @click="copyResult('4', result4)" variant="ghost" size="sm">
+              <Button @click="copyResult('4', result4)" variant="ghost" size="sm" aria-label="Copy result">
                 <component :is="copied === '4' ? Check : Copy" class="w-4 h-4" />
               </Button>
             </div>

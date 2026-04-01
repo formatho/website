@@ -76,7 +76,7 @@ const swapMode = () => {
             >
               Text → Binary
             </Button>
-            <Button @click="swapMode" variant="ghost">
+            <Button @click="swapMode" variant="ghost" aria-label="Swap conversion mode">
               <ArrowRightLeft class="w-4 h-4" />
             </Button>
             <Button
@@ -115,7 +115,7 @@ const swapMode = () => {
               <div class="p-4 bg-surface-hover rounded-lg border font-mono text-sm break-all">
                 {{ binaryOutput }}
               </div>
-              <Button @click="copyOutput" class="w-full">
+              <Button @click="copyOutput" class="w-full" aria-label="Copy binary output">
                 <component :is="copied ? Check : Copy" class="w-4 h-4 mr-2" />
                 {{ copied ? 'Copied!' : 'Copy Binary' }}
               </Button>
@@ -184,7 +184,7 @@ const swapMode = () => {
               <div class="p-4 bg-surface-hover rounded-lg border font-mono text-xl break-all">
                 {{ textOutput }}
               </div>
-              <Button @click="copyOutput" class="w-full">
+              <Button @click="copyOutput" class="w-full" aria-label="Copy text output">
                 <component :is="copied ? Check : Copy" class="w-4 h-4 mr-2" />
                 {{ copied ? 'Copied!' : 'Copy Text' }}
               </Button>

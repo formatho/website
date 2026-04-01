@@ -61,7 +61,7 @@ watch(jsonInput, minify)
       <Card class="flex flex-col min-h-0">
         <CardHeader class="flex-row items-center justify-between">
           <CardTitle>Minified Output</CardTitle>
-          <Button variant="outline" size="sm" @click="copyOutput" :disabled="!minifiedOutput"
+          <Button variant="outline" size="sm" @click="copyOutput" :disabled="!minifiedOutput" aria-label="Copy minified JSON"
             >Copy</Button
           >
         </CardHeader>

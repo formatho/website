@@ -195,11 +195,11 @@ generateQR()
 
               <!-- Actions -->
               <div class="flex gap-2">
-                <Button @click="downloadQR" class="flex-1">
+                <Button @click="downloadQR" class="flex-1" aria-label="Download QR code">
                   <Download class="w-4 h-4 mr-2" />
                   Download PNG
                 </Button>
-                <Button @click="copyToClipboard" variant="outline" class="flex-1">
+                <Button @click="copyToClipboard" variant="outline" class="flex-1" aria-label="Copy QR code to clipboard">
                   <component :is="copied ? Check : Copy" class="w-4 h-4 mr-2" />
                   {{ copied ? 'Copied!' : 'Copy to Clipboard' }}
                 </Button>

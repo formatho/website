@@ -50,7 +50,7 @@ const copyOutput = () => {
       <CardContent class="space-y-4">
         <div class="grid gap-2">
           <Label>Input</Label>
-          <Input v-model="inputText" placeholder="Enter text..." />
+          <Input v-model="inputText" placeholder="Enter text..." aria-label="Text to obfuscate or deobfuscate" />
         </div>
 
         <div class="flex gap-2">

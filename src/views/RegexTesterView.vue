@@ -216,7 +216,7 @@ const applyExample = (examplePattern: string) => {
             </div>
 
             <!-- Copy -->
-            <Button v-if="pattern" @click="copyRegex" variant="outline" class="w-full">
+            <Button v-if="pattern" @click="copyRegex" variant="outline" class="w-full" aria-label="Copy regex pattern">
               <Copy class="w-4 h-4 mr-2" />
               Copy Regex
             </Button>

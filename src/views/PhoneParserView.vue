@@ -121,7 +121,7 @@ const copyValue = (value: string) => {
         <CardContent class="pt-6">
           <div class="text-sm text-muted-foreground mb-2">E.164 Format</div>
           <div class="font-mono text-lg">{{ parsedPhone.e164 }}</div>
-          <Button variant="ghost" size="sm" class="mt-2" @click="copyValue(parsedPhone.e164)"
+          <Button variant="ghost" size="sm" class="mt-2" @click="copyValue(parsedPhone.e164)" aria-label="Copy E164 format">
             >Copy</Button
           >
         </CardContent>
@@ -131,7 +131,7 @@ const copyValue = (value: string) => {
         <CardContent class="pt-6">
           <div class="text-sm text-muted-foreground mb-2">National Format</div>
           <div class="font-mono text-lg">{{ parsedPhone.national }}</div>
-          <Button variant="ghost" size="sm" class="mt-2" @click="copyValue(parsedPhone.national)"
+          <Button variant="ghost" size="sm" class="mt-2" @click="copyValue(parsedPhone.national)" aria-label="Copy national format">
             >Copy</Button
           >
         </CardContent>
