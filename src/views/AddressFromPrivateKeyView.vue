@@ -274,7 +274,7 @@ const calculateAddresses = async () => {
             </div>
 
             <Button
-              @click="calculateAddresses"
+              @click="calculateAddresses" aria-label="Calculate addresses from private key"
               class="w-full"
             >
               Derive Addresses

@@ -160,7 +160,7 @@ const removeFile = (index: number) => {
             v-for="i in 5"
             :key="i"
             type="button"
-            @click="rating = i"
+            @click="rating = i" aria-label="Rate feedback"
             variant="ghost"
             class="text-3xl hover:scale-110"
           >

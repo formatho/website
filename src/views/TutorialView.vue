@@ -230,7 +230,7 @@ onUnmounted(() => {
         <div class="flex items-center gap-2">
           <template v-for="(step, index) in steps" :key="step.id">
             <Button
-              @click="currentStep = index"
+              @click="currentStep = index" aria-label="Go to step"
               :variant="currentStep === index ? 'default' : index < currentStep ? 'default' : 'outline'"
               size="icon"
               :class="[
@@ -288,7 +288,7 @@ onUnmounted(() => {
           
           <div class="pt-8">
             <Button
-              @click="nextStep"
+              @click="nextStep" aria-label="Next step"
               size="lg"
               class="px-8 shadow-lg shadow-primary/20"
             >
@@ -341,7 +341,7 @@ onUnmounted(() => {
               </div>
 
               <Button
-                @click="createAgent"
+                @click="createAgent" aria-label="Create agent"
                 :disabled="!agentName || !agentPrompt || agentCreating"
                 class="w-full"
               >
@@ -363,7 +363,7 @@ onUnmounted(() => {
                 Your agent is now ready to accept tasks!
               </p>
               <Button
-                @click="nextStep"
+                @click="nextStep" aria-label="Next step"
               >
                 Next: Assign a Task →
               </Button>
@@ -429,7 +429,7 @@ onUnmounted(() => {
                 </p>
               </div>
               <Button
-                @click="nextStep"
+                @click="nextStep" aria-label="Next step"
               >
                 Next: Monitor Progress →
               </Button>
@@ -495,7 +495,7 @@ onUnmounted(() => {
 
             <Button
               v-if="taskComplete"
-              @click="nextStep"
+              @click="nextStep" aria-label="Next step"
               class="w-full"
             >
               Next: Review Results →
@@ -564,7 +564,7 @@ onUnmounted(() => {
         </div>
         
         <button
-          @click="nextStep"
+          @click="nextStep" aria-label="Next step"
           :disabled="currentStep === steps.length - 1"
           class="px-6 py-2 rounded-lg font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:bg-muted"
         >

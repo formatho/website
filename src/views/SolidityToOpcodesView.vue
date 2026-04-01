@@ -474,7 +474,7 @@ onUnmounted(() => {
             class="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50"
           >
             <Button
-              @click="compile"
+              @click="compile" aria-label="Compile Solidity to opcodes"
               :loading="isCompiling || isCompilerLoading"
               class="w-full"
             >

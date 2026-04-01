@@ -233,12 +233,12 @@ const generateKeys = async () => {
 
         <div class="flex flex-wrap gap-3">
           <Button
-            @click="generateMnemonic"
+            @click="generateMnemonic" aria-label="Generate new mnemonic"
           >
             Generate Random
           </Button>
           <Button
-            @click="validateAndGenerate"
+            @click="validateAndGenerate" aria-label="Validate and generate keys"
             class="bg-emerald-600 hover:bg-emerald-700"
           >
             Calculate Keys

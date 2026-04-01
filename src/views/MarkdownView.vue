@@ -200,7 +200,7 @@ const handleFileUpload = (e: Event) => {
     <div class="flex items-center justify-between gap-4">
       <h1 class="text-3xl font-bold tracking-tight">Markdown Editor</h1>
       <div class="flex items-center gap-2">
-        <Button variant="secondary" size="sm" class="relative overflow-hidden">
+        <Button variant="secondary" size="sm" class="relative overflow-hidden" aria-label="Upload markdown file">
           <Upload class="mr-2 h-4 w-4" />
           Upload MD
           <input

@@ -151,7 +151,7 @@ const swapEncodeDecode = () => {
             />
             <Button 
               v-if="urlInput" 
-              @click="clearAll" 
+              @click="clearAll" aria-label="Clear all fields" 
               variant="outline"
               class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md border-gray-200 dark:border-gray-700"
             >
@@ -159,7 +159,7 @@ const swapEncodeDecode = () => {
             </Button>
             <Button 
               v-if="parsedUrl" 
-              @click="openUrl" 
+              @click="openUrl" aria-label="Open URL in browser" 
               variant="outline"
               class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md border-gray-200 dark:border-gray-700"
             >
@@ -195,7 +195,7 @@ const swapEncodeDecode = () => {
               v-for="(value, type) in components"
               :key="type"
               class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-100 dark:border-gray-800 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 hover:border-gray-200 dark:hover:border-gray-700 group cursor-pointer"
-              @click="copyComponent(type)"
+              @click="copyComponent(type)" aria-label="Copy URL component"
             >
               <div class="flex-1">
                 <div class="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1 font-medium">{{ type }}</div>

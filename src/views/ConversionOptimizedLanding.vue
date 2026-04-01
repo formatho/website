@@ -171,7 +171,7 @@ const faqs = [
           </nav>
           <div class="flex items-center gap-4">
             <a href="/beta" class="text-slate-300 hover:text-white transition">Beta</a>
-            <Button class="bg-blue-600 hover:bg-blue-700">
+            <Button class="bg-blue-600 hover:bg-blue-700" aria-label="Get started with Formatho">
               Get Started Free
             </Button>
           </div>
@@ -208,10 +208,10 @@ const faqs = [
 
           <!-- CTA Buttons -->
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <Button size="lg" class="bg-blue-600 hover:bg-blue-700 px-8 py-6 text-lg">
+            <Button size="lg" class="bg-blue-600 hover:bg-blue-700 px-8 py-6 text-lg" aria-label="Get started with Formatho">
               Start Building Free →
             </Button>
-            <Button size="lg" variant="outline" class="border-slate-700 px-8 py-6 text-lg">
+            <Button size="lg" variant="outline" class="border-slate-700 px-8 py-6 text-lg" aria-label="View documentation">
               Watch Demo (2 min)
             </Button>
           </div>
@@ -283,7 +283,7 @@ const faqs = [
 
         <!-- CTA After Features -->
         <div class="text-center mt-12">
-          <Button size="lg" class="bg-blue-600 hover:bg-blue-700 px-8">
+          <Button size="lg" class="bg-blue-600 hover:bg-blue-700 px-8" aria-label="Start building workflows"
             Start Using These Features →
           </Button>
         </div>
@@ -417,10 +417,10 @@ const faqs = [
         </div>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button size="lg" class="bg-blue-600 hover:bg-blue-700 px-8 py-6 text-lg">
+          <Button size="lg" class="bg-blue-600 hover:bg-blue-700 px-8 py-6 text-lg" aria-label="Get started with Formatho">
             Get Started Free →
           </Button>
-          <Button size="lg" variant="outline" class="border-slate-700 px-8 py-6 text-lg">
+          <Button size="lg" variant="outline" class="border-slate-700 px-8 py-6 text-lg" aria-label="View documentation">
             Schedule Demo
           </Button>
         </div>

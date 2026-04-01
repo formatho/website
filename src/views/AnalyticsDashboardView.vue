@@ -117,19 +117,19 @@ const recentActivity = computed(() => [...analyticsData.value].reverse().slice(0
         <!-- Time Range Selector -->
         <div class="inline-flex rounded-md shadow-sm" role="group">
           <Button 
-            @click="onTimeRangeChange('7d')"
+            @click="onTimeRangeChange('7d')" aria-label="Show last 7 days"
             :variant="timeRange === '7d' ? 'default' : 'outline'"
           >
             Last 7 Days
           </Button>
           <Button 
-            @click="onTimeRangeChange('30d')"
+            @click="onTimeRangeChange('30d')" aria-label="Show last 30 days"
             :variant="timeRange === '30d' ? 'default' : 'outline'"
           >
             Last 30 Days
           </Button>
           <Button 
-            @click="onTimeRangeChange('90d')"
+            @click="onTimeRangeChange('90d')" aria-label="Show last 90 days"
             :variant="timeRange === '90d' ? 'default' : 'outline'"
           >
             Last 90 Days
@@ -139,7 +139,7 @@ const recentActivity = computed(() => [...analyticsData.value].reverse().slice(0
         <!-- Export Buttons -->
         <div class="flex gap-2">
           <Button 
-            @click="exportToCSV"
+            @click="exportToCSV" aria-label="Export analytics as CSV"
             class="bg-green-600 hover:bg-green-700"
           >
             Export CSV

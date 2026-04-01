@@ -221,7 +221,7 @@ onUnmounted(() => {
       
       <!-- Add Task Button -->
       <Button 
-        @click="$router.push(`/agent-orchestrator/config`)"
+        @click="$router.push(`/agent-orchestrator/config`)" aria-label="Add new task"
         class="flex items-center gap-2"
       >
         <PlusIcon class="w-5 h-5" />
@@ -291,7 +291,7 @@ onUnmounted(() => {
 
         <!-- Filter Toggle -->
         <Button 
-          @click="showFilters = !showFilters"
+          @click="showFilters = !showFilters" aria-label="Toggle filters"
           :variant="showFilters ? 'default' : 'outline'"
           class="flex items-center gap-2"
         >
@@ -317,7 +317,7 @@ onUnmounted(() => {
 
         <!-- Clear Completed -->
         <Button 
-          @click="clearCompleted"
+          @click="clearCompleted" aria-label="Clear completed tasks"
           v-if="completedTasks > 0"
           variant="ghost"
           class="text-red-600 hover:text-red-800"
@@ -327,7 +327,7 @@ onUnmounted(() => {
 
         <!-- Reset Filters -->
         <Button 
-          @click="resetFilters"
+          @click="resetFilters" aria-label="Reset all filters"
           v-if="searchQuery || priorityFilter !== 'all' || statusFilter !== 'all'"
           variant="ghost"
         >
@@ -485,7 +485,7 @@ onUnmounted(() => {
         <p class="text-gray-600 dark:text-gray-400 mb-4">Try adjusting your filters or search query</p>
         
         <Button 
-          @click="resetFilters"
+          @click="resetFilters" aria-label="Reset all filters"
         >
           Reset Filters
         </Button>

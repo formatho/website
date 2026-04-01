@@ -45,6 +45,7 @@ const copyChecksum = () => {
           <Input
             v-model="address"
             placeholder="0x..."
+            aria-label="Ethereum address input"
             class="font-mono"
             :class="{
               'border-green-500': validationResult.status === 'valid',
@@ -69,7 +70,7 @@ const copyChecksum = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                @click="copyChecksum"
+                @click="copyChecksum" aria-label="Copy checksummed address"
                 :disabled="validationResult.status !== 'valid'"
               >
                 <Copy class="h-4 w-4" />

@@ -97,7 +97,7 @@ const checkSignatures = async () => {
           />
           <label for="pdf-upload" class="cursor-pointer">
             <div class="text-muted-foreground mb-2">Click to upload PDF or drag and drop</div>
-            <Button variant="outline" as="span">Select PDF File</Button>
+            <Button variant="outline" as="span" aria-label="Select PDF file for signature check">Select PDF File</Button>
           </label>
         </div>
 

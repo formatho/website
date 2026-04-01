@@ -198,7 +198,7 @@ const handleSubmit = async () => {
               />
             </div>
 
-            <Button
+            <Button aria-label="Explore Formatho beta"
               type="submit"
               :loading="isSubmitting"
               size="lg"
