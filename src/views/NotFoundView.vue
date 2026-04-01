@@ -64,11 +64,11 @@ const goHome = () => {
         data-aos-duration="600"
         data-aos-delay="400"
       >
-        <Button @click="goBack" variant="outline" class="gap-2">
+        <Button @click="goBack" variant="outline" class="gap-2" aria-label="Go back to previous page">
           <ArrowLeft class="w-4 h-4" />
           Go Back
         </Button>
-        <Button @click="goHome" class="gap-2">
+        <Button @click="goHome" class="gap-2" aria-label="Go to home page">
           <Home class="w-4 h-4" />
           Back to Home
         </Button>

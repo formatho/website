@@ -212,7 +212,7 @@ onMounted(() => {
           </p>
         </div>
       </div>
-      <Button variant="outline" size="sm" @click="refresh" :disabled="loading">
+      <Button variant="outline" size="sm" @click="refresh" :disabled="loading" aria-label="Refresh agents list">
         <RefreshCw :class="{ 'animate-spin': loading }" class="h-4 w-4 mr-2" />
         Refresh
       </Button>
@@ -429,7 +429,7 @@ onMounted(() => {
                 </div>
 
                 <div class="flex items-center gap-2">
-                  <Button variant="outline" size="sm" @click.prevent="openEtherscan(agent.address)">
+                  <Button variant="outline" size="sm" @click.prevent="openEtherscan(agent.address)" aria-label="View on Etherscan">
                     <ExternalLink class="h-4 w-4 mr-2" />
                     Etherscan
                   </Button>
@@ -460,7 +460,7 @@ onMounted(() => {
           </div>
 
           <div class="flex items-center gap-2">
-            <Button variant="outline" size="sm" :disabled="currentPage === 1" @click="prevPage">
+            <Button variant="outline" size="sm" :disabled="currentPage === 1" @click="prevPage" aria-label="Previous page">
               Previous
             </Button>
 

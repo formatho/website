@@ -178,11 +178,11 @@ onUnmounted(() => {
     <div class="flex items-center justify-between">
       <h1 class="text-3xl font-bold tracking-tight">BPMN Viewer</h1>
       <div v-if="file" class="flex gap-2">
-        <Button @click="handleExportPDF" :disabled="isExporting" variant="secondary" size="sm">
+        <Button @click="handleExportPDF" :disabled="isExporting" variant="secondary" size="sm" aria-label="Export BPMN as PDF">
           <FileType class="mr-2 h-4 w-4" />
           {{ isExporting ? 'Exporting...' : 'Export PDF' }}
         </Button>
-        <Button @click="resetViewer" variant="outline" size="sm"> New File </Button>
+        <Button @click="resetViewer" variant="outline" size="sm" aria-label="Load new BPMN file"> New File </Button>
       </div>
     </div>
 

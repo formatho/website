@@ -115,8 +115,8 @@ for (let i = 0; i < iterations; i++) {
         </div>
 
         <div class="flex gap-2">
-          <Button @click="runBenchmark">Run Benchmark</Button>
-          <Button variant="outline" @click="runComparison">Compare Implementations</Button>
+          <Button @click="runBenchmark" aria-label="Run performance benchmark">Run Benchmark</Button>
+          <Button variant="outline" @click="runComparison" aria-label="Compare implementations">Compare Implementations</Button>
         </div>
       </CardContent>
     </Card>
