@@ -1,10 +1,10 @@
 <script setup lang="ts">
 // AgentLog.vue - Live Thinking Timeline Panel
 // Displays the council handoff sequence in real-time
+// Version: 2.0.0 - Dark Theme Optimized for Sidebar
 
 import { computed, ref } from 'vue'
 import { useAgentCouncil } from '@/store/useAgentCouncil'
-import { mascotMetadata } from '@/assets/mascot-assets'
 
 const { 
   messageQueue, 
@@ -25,13 +25,13 @@ const createdTaskId = ref<string | null>(null)
 const TODO_API_KEY = import.meta.env.VITE_TODO_API_KEY || 'sk_agent_6fd8d60a-c09f-4130-9d08-37da8eefbbd8'
 const TODO_PROJECT_ID = import.meta.env.VITE_TODO_PROJECT_ID || '824fd09b-a52a-4e94-95db-462483ce74fe'
 
-// Color mapping for agents
+// Color mapping for agents (dark theme)
 const agentColors: Record<string, string> = {
-  flowtho: 'border-cyan-500 bg-cyan-500/10',
-  morpho: 'border-orange-500 bg-orange-500/10',
-  memo: 'border-amber-500 bg-amber-500/10',
-  nexo: 'border-emerald-500 bg-emerald-500/10',
-  halo: 'border-rose-500 bg-rose-500/10'
+  flowtho: 'border-cyan-500/50 bg-cyan-500/5',
+  morpho: 'border-orange-500/50 bg-orange-500/5',
+  memo: 'border-amber-500/50 bg-amber-500/5',
+  nexo: 'border-emerald-500/50 bg-emerald-500/5',
+  halo: 'border-rose-500/50 bg-rose-500/5'
 }
 
 const agentTextColors: Record<string, string> = {
@@ -50,21 +50,6 @@ const formatTime = (date: Date) => {
     second: '2-digit'
   })
 }
-
-// Phase label
-const phaseLabel = computed(() => {
-  const labels: Record<string, string> = {
-    idle: 'Council Idle',
-    planning: 'Planning Phase',
-    building: 'Building Phase',
-    connecting: 'Connecting Phase',
-    remembering: 'Memory Phase',
-    guiding: 'Onboarding Phase',
-    complete: 'Complete',
-    generate_task: 'Task Generated'
-  }
-  return labels[currentPhase.value] || 'Unknown'
-})
 
 // Create official ticket
 const createOfficialTicket = async () => {
@@ -113,56 +98,38 @@ const createOfficialTicket = async () => {
 </script>
 
 <template>
-  <div class="agent-log glass-card p-4 w-full max-w-sm">
-    <!-- Header -->
-    <div class="flex items-center justify-between mb-4 pb-3 border-b border-border/50">
-      <div class="flex items-center gap-2">
-        <div 
-          class="w-2 h-2 rounded-full"
-          :class="isRunning ? 'bg-green-500 animate-pulse' : 'bg-gray-500'"
-        />
-        <span class="text-sm font-medium">Agent Council Log</span>
-      </div>
-      <span class="text-xs text-muted-foreground">{{ phaseLabel }}</span>
-    </div>
-
+  <div class="agent-log">
     <!-- Message List -->
-    <div class="space-y-3 max-h-96 overflow-y-auto">
+    <div class="message-list">
       <TransitionGroup name="log-entry">
         <div
           v-for="message in messageQueue"
           :key="message.id"
-          class="log-entry p-3 rounded-lg border-l-4 transition-all"
+          class="log-entry border-l-2"
           :class="agentColors[message.agent]"
         >
           <!-- Agent Name & Time -->
-          <div class="flex items-center justify-between mb-1">
+          <div class="entry-header">
             <span 
-              class="text-sm font-semibold capitalize"
+              class="agent-name capitalize"
               :class="agentTextColors[message.agent]"
             >
               {{ message.agent }}
             </span>
-            <span class="text-xs text-muted-foreground">
+            <span class="entry-time">
               {{ formatTime(message.timestamp) }}
             </span>
           </div>
           
           <!-- Action Text -->
-          <p class="text-sm text-slate-300">{{ message.action }}</p>
+          <p class="entry-action">{{ message.action }}</p>
           
-          <!-- Duration Badge -->
-          <div class="mt-2 flex items-center gap-1">
-            <span class="text-xs text-muted-foreground">
-              {{ message.duration }}ms
-            </span>
-            <div class="flex-1 h-1 bg-slate-700 rounded-full overflow-hidden">
-              <div 
-                class="h-full rounded-full transition-all duration-300"
-                :class="agentTextColors[message.agent].replace('text-', 'bg-')"
-                style="width: 100%"
-              />
-            </div>
+          <!-- Duration Bar -->
+          <div class="duration-bar">
+            <div 
+              class="duration-fill"
+              :class="agentTextColors[message.agent].replace('text-', 'bg-')"
+            ></div>
           </div>
         </div>
       </TransitionGroup>
@@ -170,83 +137,312 @@ const createOfficialTicket = async () => {
       <!-- Empty State -->
       <div 
         v-if="messageQueue.length === 0" 
-        class="text-center py-8 text-muted-foreground"
+        class="empty-state"
       >
-        <p class="text-sm">Click "Start Council" to begin</p>
-        <p class="text-xs mt-1">Watch agents collaborate in real-time</p>
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <p class="empty-text">No activity yet</p>
+        <p class="empty-hint">Enter a prompt to start the council</p>
       </div>
     </div>
 
-    <!-- Status Bar -->
+    <!-- Running Indicator -->
     <div 
       v-if="isRunning" 
-      class="mt-4 pt-3 border-t border-border/50 flex items-center gap-2"
+      class="running-indicator"
     >
-      <div class="flex gap-1">
-        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-bounce" style="animation-delay: 0ms" />
-        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-bounce" style="animation-delay: 150ms" />
-        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-bounce" style="animation-delay: 300ms" />
+      <div class="running-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
       </div>
-      <span class="text-xs text-green-400">Council Active</span>
+      <span class="running-text">Council Active</span>
     </div>
 
     <!-- Create Official Ticket Button -->
     <div 
       v-if="canGenerateTask" 
-      class="mt-4 pt-3 border-t border-border/50"
+      class="task-creation"
     >
-      <div class="text-center">
-        <p class="text-xs text-muted-foreground mb-2">
-          Council simulation complete. Ready to create task?
-        </p>
-        <button
-          @click="createOfficialTicket"
-          :disabled="isCreatingTask"
-          class="w-full py-2 px-4 rounded-lg font-medium text-sm transition-all
-                 bg-gradient-to-r from-cyan-500 to-emerald-500 
-                 hover:from-cyan-400 hover:to-emerald-400
-                 disabled:opacity-50 disabled:cursor-not-allowed
-                 text-white shadow-lg shadow-cyan-500/20"
-        >
-          <span v-if="isCreatingTask" class="flex items-center justify-center gap-2">
-            <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-            </svg>
-            Creating...
-          </span>
-          <span v-else class="flex items-center justify-center gap-2">
-            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-            </svg>
-            Create Official Ticket
-          </span>
-        </button>
-        <p v-if="taskCreationError" class="mt-2 text-xs text-red-400">
-          {{ taskCreationError }}
-        </p>
-      </div>
+      <p class="task-hint">
+        Council simulation complete. Create task?
+      </p>
+      <button
+        @click="createOfficialTicket"
+        :disabled="isCreatingTask"
+        class="create-task-btn"
+      >
+        <span v-if="isCreatingTask" class="btn-loading">
+          <svg class="spinner" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+          </svg>
+          Creating...
+        </span>
+        <span v-else class="btn-content">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+          Create Ticket
+        </span>
+      </button>
+      <p v-if="taskCreationError" class="task-error">
+        {{ taskCreationError }}
+      </p>
     </div>
 
     <!-- Task Created Confirmation -->
     <div 
       v-if="taskGenerated && createdTaskId" 
-      class="mt-4 pt-3 border-t border-border/50"
+      class="task-success"
     >
-      <div class="text-center p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
-        <svg class="h-8 w-8 mx-auto mb-2 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <p class="text-sm font-medium text-emerald-400">Task Created!</p>
-        <p class="text-xs text-muted-foreground mt-1">
-          View on <a href="https://todo.formatho.com" target="_blank" class="text-emerald-400 hover:underline">todo.formatho.com</a>
-        </p>
-      </div>
+      <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <p class="success-text">Task Created!</p>
+      <a href="https://todo.formatho.com" target="_blank" class="success-link">
+        View on todo.formatho.com →
+      </a>
     </div>
   </div>
 </template>
 
 <style scoped>
+.agent-log {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Message List */
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+/* Log Entry */
+.log-entry {
+  padding: 0.625rem 0.75rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.entry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.agent-name {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.entry-time {
+  font-size: 0.5625rem;
+  color: #475569;
+  font-variant-numeric: tabular-nums;
+}
+
+.entry-action {
+  font-size: 0.6875rem;
+  color: #94a3b8;
+  line-height: 1.4;
+  margin-bottom: 0.375rem;
+}
+
+.duration-bar {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.duration-fill {
+  height: 100%;
+  border-radius: 1px;
+  width: 100%;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 1.5rem 0.5rem;
+}
+
+.empty-icon {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 0.5rem;
+  color: #374151;
+}
+
+.empty-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.empty-text {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.empty-hint {
+  font-size: 0.625rem;
+  color: #475569;
+}
+
+/* Running Indicator */
+.running-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.running-dots {
+  display: flex;
+  gap: 3px;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: dot-pulse 1.4s ease-in-out infinite;
+}
+
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dot-pulse {
+  0%, 80%, 100% { opacity: 0.4; }
+  40% { opacity: 1; }
+}
+
+.running-text {
+  font-size: 0.6875rem;
+  color: #22c55e;
+  font-weight: 500;
+}
+
+/* Task Creation */
+.task-creation {
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.task-hint {
+  font-size: 0.625rem;
+  color: #64748b;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.create-task-btn {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+}
+
+.create-task-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.create-task-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-content,
+.btn-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+}
+
+.btn-content svg {
+  width: 14px;
+  height: 14px;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.task-error {
+  font-size: 0.625rem;
+  color: #f87171;
+  text-align: center;
+  margin-top: 0.375rem;
+}
+
+/* Task Success */
+.task-success {
+  padding: 0.75rem;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.success-icon {
+  width: 28px;
+  height: 28px;
+  color: #22c55e;
+  margin: 0 auto 0.375rem;
+}
+
+.success-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #22c55e;
+  margin-bottom: 0.25rem;
+}
+
+.success-link {
+  font-size: 0.625rem;
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.success-link:hover {
+  color: #22c55e;
+}
+
+/* Transitions */
 .log-entry-enter-active {
   animation: slide-in 0.3s ease-out;
 }
@@ -258,7 +454,7 @@ const createOfficialTicket = async () => {
 @keyframes slide-in {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-10px);
   }
   to {
     opacity: 1;
@@ -273,25 +469,25 @@ const createOfficialTicket = async () => {
   }
   to {
     opacity: 0;
-    transform: translateX(20px);
+    transform: translateX(10px);
   }
 }
 
 /* Custom scrollbar */
-.overflow-y-auto::-webkit-scrollbar {
-  width: 4px;
+.message-list::-webkit-scrollbar {
+  width: 3px;
 }
 
-.overflow-y-auto::-webkit-scrollbar-track {
+.message-list::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.overflow-y-auto::-webkit-scrollbar-thumb {
+.message-list::-webkit-scrollbar-thumb {
   background: rgba(100, 116, 139, 0.3);
   border-radius: 2px;
 }
 
-.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+.message-list::-webkit-scrollbar-thumb:hover {
   background: rgba(100, 116, 139, 0.5);
 }
 </style>
