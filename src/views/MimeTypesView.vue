@@ -82,16 +82,17 @@ const allTypes = computed(() => {
       <CardContent class="space-y-4">
         <div class="flex gap-4">
           <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" v-model="searchType" value="extension" />
+            <input type="radio" v-model="searchType" aria-label="Search by file extension" value="extension" />
             <span>By Extension</span>
           </label>
           <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" v-model="searchType" value="mime" />
+            <input type="radio" v-model="searchType" aria-label="Search by MIME type" value="mime" />
             <span>By MIME Type</span>
           </label>
         </div>
         <Input
           v-model="inputText"
+          aria-label="Search MIME types"
           :placeholder="
             searchType === 'extension'
               ? 'Enter file extension (e.g., pdf, jpg)...'

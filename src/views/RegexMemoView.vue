@@ -88,7 +88,7 @@ const copyPattern = (pattern: string) => {
 
     <Card>
       <CardContent class="pt-6">
-        <Input v-model="searchQuery" placeholder="Search patterns..." class="w-full" />
+        <Input v-model="searchQuery" aria-label="Search regex patterns" placeholder="Search patterns..." class="w-full" />
       </CardContent>
     </Card>
 

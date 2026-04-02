@@ -79,6 +79,7 @@ const updateFromHex = () => {
             <Input
               v-model="decimalValue"
               @input="updateFromDecimal"
+              aria-label="Decimal number input"
               placeholder="Enter decimal number..."
               class="font-mono"
             />
@@ -88,6 +89,7 @@ const updateFromHex = () => {
             <Input
               v-model="binaryValue"
               @input="updateFromBinary"
+              aria-label="Binary number input"
               placeholder="Enter binary number..."
               class="font-mono"
             />
@@ -97,6 +99,7 @@ const updateFromHex = () => {
             <Input
               v-model="octalValue"
               @input="updateFromOctal"
+              aria-label="Octal number input"
               placeholder="Enter octal number..."
               class="font-mono"
             />
@@ -106,6 +109,7 @@ const updateFromHex = () => {
             <Input
               v-model="hexadecimalValue"
               @input="updateFromHex"
+              aria-label="Hexadecimal number input"
               placeholder="Enter hex number..."
               class="font-mono"
             />

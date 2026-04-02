@@ -140,21 +140,21 @@ const typeIcons = {
 
     <!-- Filters -->
     <div class="flex gap-4 mb-6">
-      <select v-model="filter.status" class="px-4 py-2 border border-border rounded-lg bg-background">
+      <select v-model="filter.status" aria-label="Filter by status" class="px-4 py-2 border border-border rounded-lg bg-background">
         <option value="">All Statuses</option>
         <option value="new">New</option>
         <option value="in_progress">In Progress</option>
         <option value="resolved">Resolved</option>
         <option value="closed">Closed</option>
       </select>
-      <select v-model="filter.type" class="px-4 py-2 border border-border rounded-lg bg-background">
+      <select v-model="filter.type" aria-label="Filter by type" class="px-4 py-2 border border-border rounded-lg bg-background">
         <option value="">All Types</option>
         <option value="bug">Bug</option>
         <option value="feature">Feature</option>
         <option value="testimonial">Testimonial</option>
         <option value="general">General</option>
       </select>
-      <select v-model="filter.priority" class="px-4 py-2 border border-border rounded-lg bg-background">
+      <select v-model="filter.priority" aria-label="Filter by priority" class="px-4 py-2 border border-border rounded-lg bg-background">
         <option value="">All Priorities</option>
         <option value="low">Low</option>
         <option value="medium">Medium</option>
@@ -228,7 +228,7 @@ const typeIcons = {
               From: {{ selectedFeedback.name || 'Anonymous' }} ({{ selectedFeedback.email }})
             </p>
           </div>
-          <button @click="selectedFeedback = null" class="text-2xl hover:text-red-500">✕</button>
+          <button @click="selectedFeedback = null" aria-label="Close feedback detail" class="text-2xl hover:text-red-500">✕</button>
         </div>
 
         <div class="space-y-4">
@@ -250,6 +250,7 @@ const typeIcons = {
               <select
                 :value="selectedFeedback.status"
                 @change="updateStatus(selectedFeedback.id, ($event.target as HTMLSelectElement).value)"
+                aria-label="Update feedback status"
                 class="px-4 py-2 border border-border rounded-lg bg-background"
               >
                 <option value="new">New</option>

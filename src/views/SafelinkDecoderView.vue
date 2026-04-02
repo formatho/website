@@ -42,6 +42,7 @@ const decodedUrl = computed(() => {
           <Label>Outlook Safelink URL</Label>
           <Input
             v-model="safelinkUrl"
+            aria-label="Safelink URL to decode"
             placeholder="Paste Outlook safelink URL here..."
             class="font-mono text-sm"
           />

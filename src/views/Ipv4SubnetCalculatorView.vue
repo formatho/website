@@ -75,11 +75,11 @@ const subnetInfo = computed<SubnetInfo | null>(() => {
         <div class="grid grid-cols-2 gap-4">
           <div class="grid gap-2">
             <Label>IP Address</Label>
-            <Input v-model="ipAddress" placeholder="192.168.1.1" class="font-mono" />
+            <Input v-model="ipAddress" aria-label="IP address" placeholder="192.168.1.1" class="font-mono" />
           </div>
           <div class="grid gap-2">
             <Label>CIDR / Subnet</Label>
-            <Input v-model.number="cidr" type="number" min="0" max="32" class="font-mono" />
+            <Input v-model.number="cidr" type="number" aria-label="CIDR prefix length" min="0" max="32" class="font-mono" />
           </div>
         </div>
       </CardContent>

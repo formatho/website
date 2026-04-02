@@ -52,6 +52,7 @@ onUnmounted(() => {
       <CardContent>
         <Input
           placeholder="Click here and press any key..."
+          aria-label="Keycode detector - press any key"
           class="text-center text-xl h-16"
           readonly
           :model-value="keyInfo?.key || ''"

@@ -29,7 +29,7 @@ const slug = computed(() => {
       <CardContent class="space-y-4">
         <div class="grid gap-2">
           <Label>Input Text</Label>
-          <Input v-model="inputText" placeholder="Enter text to slugify..." />
+          <Input v-model="inputText" aria-label="Text to slugify" placeholder="Enter text to slugify..." />
         </div>
 
         <div v-if="slug" class="grid gap-2">

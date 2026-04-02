@@ -210,12 +210,14 @@ const inputPlaceholder = computed(() => {
           <Button
             @click="direction = 'xml-to-json'"
             :variant="direction === 'xml-to-json' ? 'default' : 'outline'"
+            aria-label="Convert XML to JSON"
           >
             XML to JSON
           </Button>
           <Button
             @click="direction = 'json-to-xml'"
             :variant="direction === 'json-to-xml' ? 'default' : 'outline'"
+            aria-label="Convert JSON to XML"
           >
             JSON to XML
           </Button>
@@ -244,6 +246,7 @@ const inputPlaceholder = computed(() => {
               :disabled="!output"
               variant="outline"
               size="sm"
+              aria-label="Copy output to clipboard"
             >
               Copy
             </Button>

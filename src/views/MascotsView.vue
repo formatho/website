@@ -232,6 +232,7 @@ const phaseLabel = computed(() => {
                 v-model="workflowPrompt"
                 placeholder="E.g., Build a system that monitors my inbox and creates tasks in Todoist..."
                 class="command-input"
+                aria-label="Describe your workflow"
                 rows="2"
                 @keydown.enter.prevent="handleSubmit"
                 :disabled="isRunning"
@@ -243,6 +244,7 @@ const phaseLabel = computed(() => {
                 v-if="!isRunning"
                 @click="handleSubmit"
                 :disabled="!workflowPrompt.trim()"
+                aria-label="Start council discussion"
                 class="submit-btn"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -253,6 +255,7 @@ const phaseLabel = computed(() => {
               <button
                 v-else
                 @click="handleStop"
+                aria-label="Stop council discussion"
                 class="stop-btn"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

@@ -126,6 +126,7 @@ const formatDuration = (ms: number) => {
               <input
                 v-model="dateRange.start"
                 type="date"
+                aria-label="Start date"
                 class="w-full px-3 py-2 border border-border rounded"
               />
             </div>
@@ -134,12 +135,14 @@ const formatDuration = (ms: number) => {
               <input
                 v-model="dateRange.end"
                 type="date"
+                aria-label="End date"
                 class="w-full px-3 py-2 border border-border rounded"
               />
             </div>
           </div>
           <button
             @click="fetchStats"
+            aria-label="Apply date range filter"
             class="w-full mt-4 py-2 bg-primary text-primary-foreground rounded font-medium"
           >
             Apply

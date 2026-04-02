@@ -108,6 +108,7 @@ const lookupMac = () => {
           <Input
             v-model="macAddress"
             @input="lookupMac"
+            aria-label="MAC address to look up"
             placeholder="00:1A:2B:3C:4D:5E"
             class="font-mono uppercase"
           />

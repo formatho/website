@@ -151,6 +151,7 @@ const copySystemPrompt = async () => {
         size="lg" 
         @click="generateAgent" 
         :disabled="isGenerating"
+        aria-label="Initialize new agent identity"
         class="px-8 py-6 text-lg gap-2"
       >
         <Sparkles class="h-5 w-5" />
@@ -196,6 +197,7 @@ const copySystemPrompt = async () => {
             variant="outline" 
             size="sm" 
             @click="copySystemPrompt"
+            aria-label="Copy system prompt to clipboard"
             class="gap-2"
           >
             <Copy class="h-4 w-4" />
@@ -206,6 +208,7 @@ const copySystemPrompt = async () => {
           <Textarea
             readonly
             :model-value="generatedAgent.systemPrompt"
+            aria-label="Generated system prompt"
             class="h-full resize-none font-mono text-sm bg-muted/50"
           />
         </div>

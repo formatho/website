@@ -55,6 +55,7 @@ const units = [
             <Label>From</Label>
             <select
               v-model="fromUnit"
+              aria-label="Convert from unit"
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
             >
               <option v-for="unit in units" :key="unit.value" :value="unit.value">
@@ -64,12 +65,13 @@ const units = [
           </div>
           <div class="grid gap-2">
             <Label>Value</Label>
-            <Input v-model="inputValue" type="number" placeholder="Enter temperature..." />
+            <Input v-model="inputValue" type="number" aria-label="Temperature value" placeholder="Enter temperature..." />
           </div>
           <div class="grid gap-2">
             <Label>To</Label>
             <select
               v-model="toUnit"
+              aria-label="Convert to unit"
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
             >
               <option v-for="unit in units" :key="unit.value" :value="unit.value">

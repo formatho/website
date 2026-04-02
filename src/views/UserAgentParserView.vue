@@ -86,6 +86,7 @@ const parsedInfo = computed(() => {
           <Label>User Agent String</Label>
           <Input
             v-model="userAgent"
+            aria-label="User agent string to parse"
             placeholder="Enter user agent or leave empty to use your browser's..."
           />
         </div>

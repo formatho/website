@@ -831,6 +831,7 @@ onMounted(() => {
               <span class="text-sm text-slate-400">API URL:</span>
               <Input
                 v-model="apiBaseUrl"
+                aria-label="API base URL"
                 class="w-64 bg-slate-800 border-slate-700"
                 placeholder="http://localhost:18765"
               />
@@ -840,6 +841,7 @@ onMounted(() => {
               <Input
                 v-model="authToken"
                 type="password"
+                aria-label="Authentication token"
                 class="w-64 bg-slate-800 border-slate-700"
                 placeholder="Optional JWT token"
               />
@@ -862,6 +864,7 @@ onMounted(() => {
               v-for="cat in categories"
               :key="cat.id"
               @click="activeCategory = cat.id"
+              :aria-label="'Navigate to ' + cat.name + ' endpoints'"
               :class="[
                 'w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all',
                 activeCategory === cat.id
@@ -912,6 +915,7 @@ onMounted(() => {
                   variant="outline"
                   @click="tryEndpoint(endpoint)"
                   :disabled="isLoading"
+                  aria-label="Try endpoint"
                   class="border-slate-700 hover:bg-slate-800"
                 >
                   {{ isLoading && activeEndpoint === endpoint.path ? 'Loading...' : 'Try It' }}
@@ -944,6 +948,7 @@ onMounted(() => {
                     variant="ghost"
                     class="absolute top-2 right-2 h-8 w-8 p-0"
                     @click="copyCode(endpoint.body)"
+                    aria-label="Copy request body code"
                   >
                     📋
                   </Button>
@@ -973,6 +978,7 @@ onMounted(() => {
                         variant="ghost"
                         class="absolute top-2 right-2 h-8 w-8 p-0"
                         @click="copyCode(ex.code)"
+                        aria-label="Copy code example"
                       >
                         📋
                       </Button>

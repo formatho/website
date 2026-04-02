@@ -440,6 +440,7 @@ const copyCode = (code: number) => {
             <input
               v-model="searchQuery"
               type="text"
+              aria-label="Search HTTP status codes"
               placeholder="Search by code, name, or description..."
               class="w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             />

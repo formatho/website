@@ -41,18 +41,18 @@ const htmlOutput = computed(() => {
       <CardContent class="flex-1 space-y-4">
         <div class="grid gap-2">
           <Label>Input Text</Label>
-          <Input v-model="inputText" placeholder="Enter text to convert..." />
+          <Input v-model="inputText" aria-label="Text to convert to Unicode" placeholder="Enter text to convert..." />
         </div>
 
         <div class="grid gap-2">
           <Label>Output Format</Label>
           <div class="flex gap-4">
             <label class="flex items-center gap-2 cursor-pointer">
-              <input type="radio" v-model="conversionType" value="unicode" />
+              <input type="radio" v-model="conversionType" aria-label="Unicode output format" value="unicode" />
               <span>Unicode (U+XXXX)</span>
             </label>
             <label class="flex items-center gap-2 cursor-pointer">
-              <input type="radio" v-model="conversionType" value="html" />
+              <input type="radio" v-model="conversionType" aria-label="HTML entities output format" value="html" />
               <span>HTML Entities (&amp;#XXX;)</span>
             </label>
           </div>

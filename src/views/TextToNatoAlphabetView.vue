@@ -70,7 +70,7 @@ const natoOutput = computed(() => {
       <CardContent class="flex-1 space-y-4">
         <div class="grid gap-2">
           <Label>Input Text</Label>
-          <Input v-model="inputText" placeholder="Enter text to convert..." />
+          <Input v-model="inputText" aria-label="Text to convert to NATO alphabet" placeholder="Enter text to convert..." />
         </div>
 
         <div v-if="natoOutput" class="space-y-2">

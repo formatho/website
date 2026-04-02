@@ -133,11 +133,11 @@ onMounted(() => {
           </span>
         </div>
 
-        <Button @click="toggleAutoRefresh" variant="outline">
+        <Button @click="toggleAutoRefresh" variant="outline" :aria-label="autoRefresh ? 'Pause live updates' : 'Resume live updates'">
           {{ autoRefresh ? 'Pause' : 'Resume' }}
         </Button>
 
-        <Button @click="fetchTests">
+        <Button @click="fetchTests" aria-label="Refresh test data">
           Refresh
         </Button>
       </div>

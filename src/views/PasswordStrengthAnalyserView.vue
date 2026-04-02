@@ -118,7 +118,7 @@ const analysis = computed<AnalysisResult>(() => {
       <CardContent class="flex-1 space-y-6">
         <div class="grid gap-2">
           <Label>Password</Label>
-          <Input v-model="password" type="password" placeholder="Enter password to analyze..." />
+          <Input v-model="password" type="password" aria-label="Password to analyze" placeholder="Enter password to analyze..." />
         </div>
 
         <div v-if="password" class="space-y-4">

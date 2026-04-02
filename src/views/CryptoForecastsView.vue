@@ -219,6 +219,7 @@ const symbolColors: Record<string, string> = {
           v-for="f in forecasts"
           :key="f.symbol"
           @click="selectedAsset = f.symbol"
+          :aria-label="'Select ' + f.symbol + ' forecast'"
           :class="[
             'px-4 py-2 rounded-lg font-semibold text-sm transition-all',
             selectedAsset === f.symbol
