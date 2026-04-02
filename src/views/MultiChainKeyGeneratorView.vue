@@ -45,9 +45,14 @@ interface ChainResult {
 const results = ref<ChainResult[]>([])
 
 const generateMnemonic = () => {
-  mnemonic.value = bip39.generateMnemonic()
-  error.value = ''
-  generateKeys() // Auto generate
+  try {
+    mnemonic.value = bip39.generateMnemonic()
+    error.value = ''
+    generateKeys() // Auto generate
+  } catch (err: any) {
+    console.error(err)
+    error.value = 'Error generating mnemonic: ' + err.message
+  }
 }
 
 const validateAndGenerate = () => {

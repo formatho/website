@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import * as bip39 from 'bip39'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
@@ -12,6 +12,7 @@ const mnemonic = ref('')
 const seed = ref('')
 const passphrase = ref('')
 const entropy = ref('')
+const isReady = ref(false)
 
 const generateMnemonic = () => {
   const strength =
@@ -28,9 +29,15 @@ const generateMnemonic = () => {
   updateSeed()
 }
 
-const updateSeed = () => {
+const updateSeed = async () => {
   if (mnemonic.value) {
-    seed.value = bip39.mnemonicToSeedSync(mnemonic.value, passphrase.value).toString('hex')
+    try {
+      const seedBytes = await bip39.mnemonicToSeed(mnemonic.value, passphrase.value)
+      seed.value = Array.from(seedBytes).map(b => b.toString(16).padStart(2, '0')).join('')
+    } catch (err) {
+      console.error('Seed derivation failed:', err)
+      seed.value = 'Error deriving seed'
+    }
   }
 }
 
@@ -38,7 +45,11 @@ const validateMnemonic = () => {
   return mnemonic.value ? bip39.validateMnemonic(mnemonic.value) : false
 }
 
-generateMnemonic()
+// Only run after mount (client-side) to avoid SSR crypto issues
+onMounted(() => {
+  isReady.value = true
+  generateMnemonic()
+})
 </script>
 
 <template>
@@ -47,7 +58,7 @@ generateMnemonic()
       <h1 class="text-3xl font-bold tracking-tight">BIP39 Mnemonic Generator</h1>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 min-h-0">
+    <div v-if="isReady" class="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 min-h-0">
       <!-- Generate -->
       <Card class="flex flex-col min-h-0">
         <CardHeader>
@@ -116,6 +127,9 @@ generateMnemonic()
           </div>
         </CardContent>
       </Card>
+    </div>
+    <div v-else class="flex items-center justify-center py-20 text-muted-foreground">
+      Loading...
     </div>
   </div>
 </template>
