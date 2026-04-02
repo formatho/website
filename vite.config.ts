@@ -11,6 +11,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  define: {
+    'global': 'globalThis',
+  },
   build: {
     // Enable chunk splitting for better caching
     rollupOptions: {
