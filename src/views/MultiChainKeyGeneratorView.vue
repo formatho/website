@@ -326,6 +326,7 @@ const deriveKeys = async () => {
 
     // Import HDKey
     const { HDKey } = await import('viem/accounts')
+      const rootHdKey = HDKey.fromMasterSeed(seed)
     const rootHdKey = HDKey.fromMasterSeed(seed)
 
     // ========================================================================
