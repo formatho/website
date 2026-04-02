@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import * as bip39 from 'bip39'
 // @ts-ignore
 import { derivePath } from 'ed25519-hd-key'
