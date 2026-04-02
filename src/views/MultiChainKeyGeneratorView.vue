@@ -5,8 +5,8 @@ import { wordlist } from '@scure/bip39/wordlists/english.js'
 import { HDKey } from '@scure/bip32'
 import { sha256 } from '@noble/hashes/sha256'
 import { ripemd160 } from '@noble/hashes/ripemd160'
+import { keccak_256 } from '@noble/hashes/sha3'
 import { bech32 } from 'bech32'
-import { mnemonicToAccount } from 'viem/accounts'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 
@@ -28,8 +28,17 @@ interface ChainResult {
 
 const results = ref<ChainResult[]>([])
 
-// Helper: convert Uint8Array to hex string (no Buffer dependency)
+// Helper: convert Uint8Array to hex string
 const toHex = (bytes: Uint8Array) => Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('')
+
+// Generate Ethereum address from public key
+const getEthAddress = (publicKey: Uint8Array) => {
+  // Uncompressed public key: first byte is 0x04, rest is X + Y coordinates
+  // Remove the 0x04 prefix, then keccak256 hash the rest
+  const pubKeyBytes = publicKey.length === 65 ? publicKey.slice(1) : publicKey
+  const hash = keccak_256(pubKeyBytes)
+  return '0x' + toHex(hash.slice(-20))
+}
 
 const generateMnemonic = () => {
   try {
@@ -66,34 +75,38 @@ const generateKeys = () => {
 
     // 1. Ethereum (and EVM)
     const ethPath = "m/44'/60'/0'/0/0"
-    const ethAccount = mnemonicToAccount(mnemonic.value, { path: ethPath } as any)
     const ethChild = master.derive(ethPath)
-    resultsList.push({
-      name: 'Ethereum',
-      ticker: 'ETH',
-      address: ethAccount.address,
-      privateKey: ethChild.privateKey ? toHex(ethChild.privateKey) : 'Unavailable',
-      publicKey: ethChild.publicKey ? toHex(ethChild.publicKey) : 'Unavailable',
-      path: ethPath,
-      algo: 'Secp256k1',
-      algoDesc: 'ECDSA on secp256k1 curve. Used by Bitcoin, Ethereum, Cosmos.',
-      color: 'bg-blue-100 dark:bg-blue-900'
-    })
+    if (ethChild.publicKey) {
+      const ethAddress = getEthAddress(ethChild.publicKey)
+      resultsList.push({
+        name: 'Ethereum',
+        ticker: 'ETH',
+        address: ethAddress,
+        privateKey: ethChild.privateKey ? toHex(ethChild.privateKey) : 'Unavailable',
+        publicKey: toHex(ethChild.publicKey),
+        path: ethPath,
+        algo: 'Secp256k1',
+        algoDesc: 'ECDSA on secp256k1 curve. Used by Bitcoin, Ethereum, Cosmos.',
+        color: 'bg-blue-100 dark:bg-blue-900'
+      })
+    }
 
-    // 2. Solana (BIP44 derivation)
+    // 2. Solana (BIP44 derivation path — note: real Solana uses SLIP-0010 Ed25519)
     const solPath = "m/44'/501'/0'/0'"
     const solChild = master.derive(solPath)
-    resultsList.push({
-      name: 'Solana',
-      ticker: 'SOL',
-      address: 'Requires Ed25519 (see note)',
-      privateKey: solChild.privateKey ? toHex(solChild.privateKey) : 'Unavailable',
-      publicKey: solChild.publicKey ? toHex(solChild.publicKey) : 'Unavailable',
-      path: solPath,
-      algo: 'Ed25519',
-      algoDesc: 'EdDSA on Curve25519. Solana uses Ed25519 with specific SLIP-0010 derivation.',
-      color: 'bg-indigo-100 dark:bg-indigo-900'
-    })
+    if (solChild.publicKey) {
+      resultsList.push({
+        name: 'Solana',
+        ticker: 'SOL',
+        address: 'Requires SLIP-0010 Ed25519 derivation',
+        privateKey: solChild.privateKey ? toHex(solChild.privateKey) : 'Unavailable',
+        publicKey: toHex(solChild.publicKey),
+        path: solPath,
+        algo: 'Ed25519',
+        algoDesc: 'EdDSA on Curve25519. Solana uses SLIP-0010 Ed25519 with specific derivation.',
+        color: 'bg-indigo-100 dark:bg-indigo-900'
+      })
+    }
 
     // 3. Cosmos
     const cosmosPath = "m/44'/118'/0'/0/0"
@@ -116,17 +129,19 @@ const generateKeys = () => {
     // 4. Bitcoin (Native SegWit)
     const btcPath = "m/84'/0'/0'/0/0"
     const btcChild = master.derive(btcPath)
-    resultsList.push({
-      name: 'Bitcoin',
-      ticker: 'BTC',
-      address: 'Requires Bech32m encoding (see note)',
-      privateKey: btcChild.privateKey ? toHex(btcChild.privateKey) : 'Unavailable',
-      publicKey: btcChild.publicKey ? toHex(btcChild.publicKey) : 'Unavailable',
-      path: btcPath,
-      algo: 'Secp256k1',
-      algoDesc: 'Native SegWit (BIP84). Uses Bech32m encoding for addresses.',
-      color: 'bg-orange-100 dark:bg-orange-900'
-    })
+    if (btcChild.publicKey) {
+      resultsList.push({
+        name: 'Bitcoin',
+        ticker: 'BTC',
+        address: 'Requires Bech32m encoding',
+        privateKey: btcChild.privateKey ? toHex(btcChild.privateKey) : 'Unavailable',
+        publicKey: toHex(btcChild.publicKey),
+        path: btcPath,
+        algo: 'Secp256k1',
+        algoDesc: 'Native SegWit (BIP84). Uses Bech32m encoding for addresses.',
+        color: 'bg-orange-100 dark:bg-orange-900'
+      })
+    }
 
     // 5. Polkadot
     resultsList.push({
