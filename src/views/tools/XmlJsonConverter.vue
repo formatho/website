@@ -270,7 +270,7 @@ const copyJsonToClipboard = async () => {
           <div class="flex gap-2">
             <Button
               size="sm"
-              @click="convertXmlToJson"
+              @click="convertXmlToJson" aria-label="Convert XML to JSON"
               class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)] rounded-lg"
             >
               To JSON &rarr;
@@ -278,9 +278,7 @@ const copyJsonToClipboard = async () => {
             <Button
               size="icon"
               variant="outline"
-              @click="copyXmlToClipboard"
-              class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)] rounded-lg"
-              :disabled="!xmlInput"
+              @click="copyXmlToClipboard"               class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)] rounded-lg"
             >
               <Copy class="h-4 w-4" />
             </Button>
@@ -306,7 +304,7 @@ const copyJsonToClipboard = async () => {
             <Button
               size="sm"
               variant="secondary"
-              @click="convertJsonToXml"
+              @click="convertJsonToXml" aria-label="Convert JSON to XML"
               class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)] rounded-lg"
             >
               &larr; To XML
@@ -314,7 +312,7 @@ const copyJsonToClipboard = async () => {
             <Button
               size="icon"
               variant="outline"
-              @click="copyJsonToClipboard"
+              @click="copyJsonToClipboard" aria-label="Copy JSON to clipboard"
               class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)] rounded-lg"
               :disabled="!jsonInput"
             >

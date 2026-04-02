@@ -253,7 +253,7 @@ const downloads = [
 
           <!-- CTA Buttons -->
           <div class="flex flex-wrap gap-3 justify-center mt-4">
-            <Button
+            <Button aria-label="View Agent Orchestrator on GitHub"
               as="a"
               href="https://github.com/formatho/agent-orchestrator"
               target="_blank"
@@ -262,7 +262,7 @@ const downloads = [
               <Github class="h-4 w-4 mr-2" />
               View on GitHub
             </Button>
-            <Button
+            <Button aria-label="Download Agent Orchestrator"
               variant="outline"
               size="lg"
               as="a"
@@ -338,7 +338,7 @@ const downloads = [
             <div class="col-span-3 p-6">
               <div class="flex items-center justify-between mb-4">
                 <h3 class="font-semibold" style="color: #1e293b;">Active Agents</h3>
-                <Button size="sm" style="background-color: #06b6d4; color: white;">+ New Agent</Button>
+                <Button size="sm" style="background-color: #06b6d4; color: white;" aria-label="Add new agent">+ New Agent</Button>
               </div>
 
               <div class="space-y-3">
