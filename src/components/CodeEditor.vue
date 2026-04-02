@@ -4,23 +4,19 @@
  * Reusable Monaco Editor wrapper for Formatho
  * Premium dark-mode SaaS aesthetic with language support
  */
-import { ref, computed, watch, onBeforeMount } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
-import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
-import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
-import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
-import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
-import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker'
 
-// Configure Monaco workers for Vite build
-onBeforeMount(() => {
+// Configure Monaco workers via CDN (works with SSG/Vite)
+onMounted(() => {
   self.MonacoEnvironment = {
-    getWorker(_: unknown, label: string) {
-      if (label === 'json') return new jsonWorker()
-      if (label === 'css' || label === 'scss' || label === 'less') return new cssWorker()
-      if (label === 'html' || label === 'handlebars' || label === 'razor') return new htmlWorker()
-      if (label === 'typescript' || label === 'javascript') return new tsWorker()
-      return new editorWorker()
+    getWorkerUrl(_: unknown, label: string) {
+      const base = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min'
+      if (label === 'json') return `${base}/vs/language/json/json.worker.js`
+      if (label === 'css' || label === 'scss' || label === 'less') return `${base}/vs/language/css/css.worker.js`
+      if (label === 'html' || label === 'handlebars' || label === 'razor') return `${base}/vs/language/html/html.worker.js`
+      if (label === 'typescript' || label === 'javascript') return `${base}/vs/language/typescript/ts.worker.js`
+      return `${base}/vs/editor/editor.worker.js`
     }
   }
 })

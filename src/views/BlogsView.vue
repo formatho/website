@@ -148,16 +148,5 @@ useHead({
       </div>
     </div>
 
-    <!-- Newsletter Signup -->
-    <div class="max-w-2xl mx-auto mt-16">
-      <EmailCapture
-        source="blog"
-        variant="card"
-        title="Stay Updated"
-        subtitle="Get notified when we publish new articles, tutorials, and developer insights. No spam, just quality content."
-        placeholder="your@email.com"
-        buttonText="Subscribe to Newsletter"
-      />
-    </div>
   </div>
 </template>

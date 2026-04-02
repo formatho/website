@@ -152,17 +152,6 @@ export const routes = [
         }
       },
       {
-        path: 'pricing',
-        name: 'pricing',
-        component: () => import('../views/PricingView.vue'),
-        meta: {
-          title: 'Pricing - Formatho',
-          description:
-            'Simple, transparent pricing for Formatho developer tools. Start free, upgrade when you need more.',
-          keywords: 'pricing, plans, subscription, pro, enterprise'
-        }
-      },
-      {
         path: 'markdown',
         name: 'markdown',
         component: MarkdownView,
