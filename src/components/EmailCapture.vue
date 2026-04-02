@@ -98,47 +98,7 @@ const isButtonDisabled = computed(() => {
     data-aos-delay="300"
   >
     <div v-if="!success" class="space-y-3">
-      <!-- Social Proof -->
-      <div class="flex items-center justify-center gap-2 mb-2">
-        <div class="flex -space-x-2">
-          <div class="w-6 h-6 rounded-full bg-primary/20 border-2 border-background flex items-center justify-center text-xs font-bold text-primary">P</div>
-          <div class="w-6 h-6 rounded-full bg-blue-500/20 border-2 border-background flex items-center justify-center text-xs font-bold text-blue-600">S</div>
-          <div class="w-6 h-6 rounded-full bg-green-500/20 border-2 border-background flex items-center justify-center text-xs font-bold text-green-600">R</div>
-        </div>
-        <span class="text-xs text-muted-foreground font-medium">
-          <span class="text-primary font-bold">13,847+</span> developers trust us
-        </span>
-      </div>
-
-      <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-        <div class="relative flex-1">
-          <Mail v-if="showIcon" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-          <Input
-            v-model="email"
-            type="email"
-            :placeholder="placeholder"
-            :class="[
-              'w-full h-12 text-base',
-              showIcon ? 'pl-10 pr-4' : 'px-4',
-              error ? 'border-red-500 focus:border-red-500' : ''
-            ]"
-            @focus="handleFocus"
-            @keyup.enter="handleSubmit"
-          />
-        </div>
-        <Button
-          @click="handleSubmit"
-          :disabled="isButtonDisabled"
-          class="h-12 px-6 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all hover:scale-105"
-        >
-          <Loader2 v-if="isLoading" class="w-4 h-4 mr-2 animate-spin" />
-          <Sparkles v-else class="w-4 h-4 mr-1" />
-          {{ isLoading ? 'Subscribing...' : 'Reserve Your Spot' }}
-        </Button>
-      </div>
-
-      <!-- Urgency Element -->
-      <p class="text-xs text-center text-muted-foreground">
+      <p class="text-sm text-center text-muted-foreground">
         <span class="text-orange-600 font-semibold">🚀 Join the waitlist</span> for early access
       </p>
     </div>
