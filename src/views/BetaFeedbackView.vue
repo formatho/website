@@ -121,6 +121,7 @@ const removeFile = (index: number) => {
       </p>
       <Button
         @click="submitted = false; title = ''; description = ''; rating = 0"
+        aria-label="Submit another feedback"
       >
         Submit Another
       </Button>
@@ -145,6 +146,7 @@ const removeFile = (index: number) => {
             @click="feedbackType = type.value as any"
             :variant="feedbackType === type.value ? 'default' : 'outline'"
             class="p-4 h-auto flex-col"
+            :aria-label="'Select ' + type.label + ' feedback type'"
           >
             <div class="text-2xl mb-1">{{ type.icon }}</div>
             <div class="text-sm font-medium">{{ type.label.split(' ')[1] }}</div>
@@ -160,7 +162,7 @@ const removeFile = (index: number) => {
             v-for="i in 5"
             :key="i"
             type="button"
-            @click="rating = i" aria-label="Rate feedback"
+            @click="rating = i" :aria-label="'Rate ' + i + ' out of 5 stars'"
             variant="ghost"
             class="text-3xl hover:scale-110"
           >
@@ -176,6 +178,7 @@ const removeFile = (index: number) => {
           <input
             v-model="name"
             type="text"
+            aria-label="Your name"
             placeholder="Your name"
             class="w-full px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
           />
@@ -186,6 +189,7 @@ const removeFile = (index: number) => {
             v-model="email"
             type="email"
             required
+            aria-label="Your email address"
             placeholder="your@email.com"
             class="w-full px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
           />
@@ -199,6 +203,7 @@ const removeFile = (index: number) => {
           v-model="title"
           type="text"
           required
+          aria-label="Feedback title"
           placeholder="Brief summary of your feedback"
           class="w-full px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
         />
@@ -215,6 +220,7 @@ const removeFile = (index: number) => {
             @click="priority = p.value as any"
             :variant="priority === p.value ? 'default' : 'outline'"
             size="sm"
+            :aria-label="'Set priority to ' + p.label"
           >
             {{ p.label }}
           </Button>
@@ -228,6 +234,7 @@ const removeFile = (index: number) => {
           v-model="description"
           required
           rows="5"
+          aria-label="Feedback description"
           :placeholder="feedbackType === 'bug' 
             ? 'Describe what happened...' 
             : feedbackType === 'feature'
@@ -248,6 +255,7 @@ const removeFile = (index: number) => {
           <textarea
             v-model="stepsToReproduce"
             rows="3"
+            aria-label="Steps to reproduce"
             placeholder="1. Go to...&#10;2. Click on...&#10;3. See error..."
             class="w-full px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none"
           ></textarea>
@@ -258,6 +266,7 @@ const removeFile = (index: number) => {
           <input
             v-model="expectedBehavior"
             type="text"
+            aria-label="Expected behavior"
             placeholder="What should have happened?"
             class="w-full px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
           />
@@ -268,6 +277,7 @@ const removeFile = (index: number) => {
           <input
             v-model="actualBehavior"
             type="text"
+            aria-label="Actual behavior"
             placeholder="What actually happened?"
             class="w-full px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
           />
@@ -283,6 +293,7 @@ const removeFile = (index: number) => {
             multiple
             accept="image/*,.pdf,.txt"
             @change="handleFileUpload"
+            aria-label="Upload file attachments"
             class="hidden"
             id="file-upload"
           />
@@ -307,6 +318,7 @@ const removeFile = (index: number) => {
               @click="removeFile(index)"
               variant="ghost"
               size="icon"
+              aria-label="Remove file"
               class="text-red-500 hover:text-red-600"
             >
               ✕
@@ -325,6 +337,7 @@ const removeFile = (index: number) => {
         type="submit"
         :loading="isSubmitting"
         size="lg"
+        aria-label="Submit feedback"
         class="w-full"
       >
         Submit Feedback

@@ -30,25 +30,25 @@ const copyHtml = () => {
     </div>
 
     <!-- Toolbar -->
-    <div class="flex flex-wrap gap-1 p-2 bg-muted rounded-lg">
-      <Button variant="outline" size="sm" @click="execCommand('bold')"><b>B</b></Button>
-      <Button variant="outline" size="sm" @click="execCommand('italic')"><i>I</i></Button>
-      <Button variant="outline" size="sm" @click="execCommand('underline')"><u>U</u></Button>
-      <Button variant="outline" size="sm" @click="execCommand('strikeThrough')"><s>S</s></Button>
+    <div class="flex flex-wrap gap-1 p-2 bg-muted rounded-lg" role="toolbar" aria-label="Text formatting toolbar">
+      <Button variant="outline" size="sm" @click="execCommand('bold')" aria-label="Bold"><b>B</b></Button>
+      <Button variant="outline" size="sm" @click="execCommand('italic')" aria-label="Italic"><i>I</i></Button>
+      <Button variant="outline" size="sm" @click="execCommand('underline')" aria-label="Underline"><u>U</u></Button>
+      <Button variant="outline" size="sm" @click="execCommand('strikeThrough')" aria-label="Strikethrough"><s>S</s></Button>
       <div class="w-px h-8 bg-border mx-1"></div>
-      <Button variant="outline" size="sm" @click="execCommand('justifyLeft')">Left</Button>
-      <Button variant="outline" size="sm" @click="execCommand('justifyCenter')">Center</Button>
-      <Button variant="outline" size="sm" @click="execCommand('justifyRight')">Right</Button>
+      <Button variant="outline" size="sm" @click="execCommand('justifyLeft')" aria-label="Align left">Left</Button>
+      <Button variant="outline" size="sm" @click="execCommand('justifyCenter')" aria-label="Align center">Center</Button>
+      <Button variant="outline" size="sm" @click="execCommand('justifyRight')" aria-label="Align right">Right</Button>
       <div class="w-px h-8 bg-border mx-1"></div>
       <Button variant="outline" size="sm" @click="execCommand('insertUnorderedList')"
-        >• List</Button
+        aria-label="Bullet list">• List</Button
       >
-      <Button variant="outline" size="sm" @click="execCommand('insertOrderedList')">1. List</Button>
+      <Button variant="outline" size="sm" @click="execCommand('insertOrderedList')" aria-label="Numbered list">1. List</Button>
       <div class="w-px h-8 bg-border mx-1"></div>
-      <Button variant="outline" size="sm" @click="execCommand('formatBlock', 'h1')">H1</Button>
-      <Button variant="outline" size="sm" @click="execCommand('formatBlock', 'h2')">H2</Button>
-      <Button variant="outline" size="sm" @click="execCommand('formatBlock', 'h3')">H3</Button>
-      <Button variant="outline" size="sm" @click="execCommand('formatBlock', 'p')">P</Button>
+      <Button variant="outline" size="sm" @click="execCommand('formatBlock', 'h1')" aria-label="Heading 1">H1</Button>
+      <Button variant="outline" size="sm" @click="execCommand('formatBlock', 'h2')" aria-label="Heading 2">H2</Button>
+      <Button variant="outline" size="sm" @click="execCommand('formatBlock', 'h3')" aria-label="Heading 3">H3</Button>
+      <Button variant="outline" size="sm" @click="execCommand('formatBlock', 'p')" aria-label="Paragraph">P</Button>
       <div class="w-px h-8 bg-border mx-1"></div>
       <Button variant="outline" size="sm" @click="execCommand('removeFormat')" aria-label="Clear formatting">Clear</Button>
     </div>
@@ -58,7 +58,7 @@ const copyHtml = () => {
       <Card class="flex flex-col min-h-0">
         <CardHeader class="flex-row items-center justify-between">
           <CardTitle>Editor</CardTitle>
-          <Button variant="outline" size="sm" @click="getHtml">Get HTML</Button>
+          <Button variant="outline" size="sm" @click="getHtml" aria-label="Get HTML output">Get HTML</Button>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
           <div
@@ -75,7 +75,7 @@ const copyHtml = () => {
         <CardHeader class="flex-row items-center justify-between">
           <CardTitle>HTML Output</CardTitle>
           <Button variant="outline" size="sm" @click="copyHtml" :disabled="!htmlContent"
-            >Copy</Button
+            aria-label="Copy HTML to clipboard">Copy</Button
           >
         </CardHeader>
         <CardContent class="flex-1 min-h-0">

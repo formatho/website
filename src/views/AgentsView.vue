@@ -226,6 +226,7 @@ onMounted(() => {
           :variant="sortBy === 'reputation' ? 'default' : 'outline'"
           size="sm"
           @click="changeSort('reputation')"
+          aria-label="Sort by reputation"
         >
           <TrendingUp class="h-4 w-4 mr-2" />
           Reputation
@@ -234,6 +235,7 @@ onMounted(() => {
           :variant="sortBy === 'created' ? 'default' : 'outline'"
           size="sm"
           @click="changeSort('created')"
+          aria-label="Sort by newest"
         >
           Newly Created
         </Button>
@@ -241,6 +243,7 @@ onMounted(() => {
           :variant="sortBy === 'updated' ? 'default' : 'outline'"
           size="sm"
           @click="changeSort('updated')"
+          aria-label="Sort by last updated"
         >
           Last Updated
         </Button>
@@ -248,6 +251,7 @@ onMounted(() => {
           :variant="sortBy === 'first_seen' ? 'default' : 'outline'"
           size="sm"
           @click="changeSort('first_seen')"
+          aria-label="Sort by first seen"
         >
           First Seen
         </Button>
@@ -301,6 +305,7 @@ onMounted(() => {
                     size="sm"
                     class="h-5 w-5 p-0 shrink-0"
                     @click="copyAddress(indexerStatus.registry_addr)"
+                    aria-label="Copy registry address"
                     :title="
                       copiedAddress === indexerStatus.registry_addr ? 'Copied!' : 'Copy address'
                     "
@@ -328,6 +333,7 @@ onMounted(() => {
                     size="sm"
                     class="h-5 w-5 p-0 shrink-0"
                     @click="copyAddress(indexerStatus.reputation_addr)"
+                    aria-label="Copy reputation address"
                     :title="
                       copiedAddress === indexerStatus.reputation_addr ? 'Copied!' : 'Copy address'
                     "
@@ -386,6 +392,7 @@ onMounted(() => {
                       size="sm"
                       class="h-6 w-6 p-0"
                       @click.prevent="copyAddress(agent.address)"
+                      aria-label="Copy agent address"
                       :title="copiedAddress === agent.address ? 'Copied!' : 'Copy address'"
                     >
                       <Check
@@ -472,6 +479,7 @@ onMounted(() => {
                 size="sm"
                 class="w-8"
                 @click="goToPage(page)"
+                :aria-label="'Go to page ' + page"
               >
                 {{ page }}
               </Button>
@@ -485,6 +493,7 @@ onMounted(() => {
               size="sm"
               :disabled="currentPage === totalPages"
               @click="nextPage"
+              aria-label="Next page"
             >
               Next
             </Button>
