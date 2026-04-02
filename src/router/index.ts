@@ -47,18 +47,6 @@ export const routes = [
         }
       },
       {
-        path: 'mascots',
-        name: 'mascots',
-        component: () => import('../views/MascotsView.vue'),
-        meta: {
-          title: 'Meet the Formatho Team - Formatho',
-          description:
-            'Meet the Formatho Character Universe - Flowtho, Morpho, Memo, Nexo, and Halo. Where workflows take form.',
-          keywords:
-            'formatho team, formatho mascots, flowtho, morpho, memo, nexo, halo, character universe'
-        }
-      },
-      {
         path: 'docs/api',
         name: 'api-docs',
         component: () => import('../views/docs/ApiDocsView.vue'),

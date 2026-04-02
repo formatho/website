@@ -1,14 +1,11 @@
 <script setup>
 // Main application container - uses Vue Router for navigation
-import TwinOverlay from '@/components/TwinOverlay.vue'
 import ExitIntentPopup from '@/components/ExitIntentPopup.vue'
 </script>
 
 <template>
   <div id="app">
     <router-view />
-    <!-- Global Twin Overlay - enables summoning from any component -->
-    <TwinOverlay />
     <!-- Global Exit Intent Popup - shows on mouse leave -->
     <ExitIntentPopup />
   </div>
