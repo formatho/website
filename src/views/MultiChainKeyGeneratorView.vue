@@ -223,6 +223,7 @@ const generateWallet = async () => {
   } catch (err: any) {
     console.error('Generate wallet error:', err)
     error.value = 'Error generating wallet: ' + (err?.message || String(err))
+  } finally {
     isGenerating.value = false
   }
 }
