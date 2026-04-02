@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input'
 import { Search, Sparkles } from 'lucide-vue-next'
 import * as LucideIcons from 'lucide-vue-next'
 import { tools } from '../data/tools'
-import EmailCapture from '@/components/EmailCapture.vue'
 import EmailStickyBanner from '@/components/EmailStickyBanner.vue'
 import TrustBadges from '@/components/TrustBadges.vue'
 
@@ -147,17 +146,6 @@ const filteredTools = computed(() => {
                 data-v-8d4ed633=""
               />
             </div>
-          </div>
-          
-          <!-- Newsletter Signup in Hero -->
-          <div class="w-full max-w-xl mt-6">
-            <EmailCapture
-              source="homepage"
-              variant="hero"
-              placeholder="Get updates delivered to your inbox"
-              buttonText="Get Early Access"
-              :show-icon="true"
-            />
           </div>
           
           <!-- Trust Badges -->
