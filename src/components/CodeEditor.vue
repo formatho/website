@@ -4,22 +4,8 @@
  * Reusable Monaco Editor wrapper for Formatho
  * Premium dark-mode SaaS aesthetic with language support
  */
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
-
-// Configure Monaco workers via CDN (works with SSG/Vite)
-onMounted(() => {
-  self.MonacoEnvironment = {
-    getWorkerUrl(_: unknown, label: string) {
-      const base = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min'
-      if (label === 'json') return `${base}/vs/language/json/json.worker.js`
-      if (label === 'css' || label === 'scss' || label === 'less') return `${base}/vs/language/css/css.worker.js`
-      if (label === 'html' || label === 'handlebars' || label === 'razor') return `${base}/vs/language/html/html.worker.js`
-      if (label === 'typescript' || label === 'javascript') return `${base}/vs/language/typescript/ts.worker.js`
-      return `${base}/vs/editor/editor.worker.js`
-    }
-  }
-})
 
 // ============================================================
 // Props
