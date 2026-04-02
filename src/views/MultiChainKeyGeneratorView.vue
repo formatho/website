@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { Buffer } from 'buffer'
+// Ensure Buffer is available globally for bip39 and crypto libs
+if (typeof window !== 'undefined') {
+  (window as any).Buffer = Buffer
+  ;(globalThis as any).Buffer = Buffer
+}
 import * as bip39 from 'bip39'
 // @ts-ignore
 import { derivePath } from 'ed25519-hd-key'
