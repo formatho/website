@@ -28,8 +28,5 @@ const showBreadcrumb = computed(() => route.path !== '/')
       <RouterView />
     </main>
     <Footer />
-
-    <!-- Live Analytics Widget -->
-    <LiveSiteAnalytics />
   </div>
 </template>
