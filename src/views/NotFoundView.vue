@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { onMounted } from 'vue'
+import { useHead } from '@vueuse/head'
 import { Button } from '@/components/ui/button'
 import { Home, ArrowLeft } from 'lucide-vue-next'
 import { useTwins } from '@/composables/useTwins'
 
 const router = useRouter()
 const { summonTwin } = useTwins()
+
+// Prevent Google from indexing 404 pages (fixes soft 404 in Search Console)
+useHead({
+  meta: [
+    { name: 'robots', content: 'noindex, nofollow' }
+  ]
+})
 
 onMounted(() => {
   // Summon Morpho for 404 error
