@@ -31,13 +31,6 @@ import {
   CardDescription,
 } from '@/components/ui/card'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import {
   Wallet,
   Key,
   Shield,
@@ -220,17 +213,16 @@ const generateWallet = async () => {
     error.value = ''
     success.value = ''
 
-    const strength = mnemonicWords.value === 12 ? 128 : 256
+    const strength = mnemonicWords.value === '24' ? 256 : 128
     const mnemonic = bip39.generateMnemonic(strength)
     importedMnemonic.value = mnemonic
     importedPrivateKey.value = ''
 
-    success.value = 'New mnemonic generated! Click "Derive Keys" to see addresses.'
+    success.value = 'New mnemonic generated! Deriving keys...'
     await deriveKeys()
   } catch (err: any) {
-    console.error(err)
-    error.value = 'Error generating wallet: ' + err.message
-  } finally {
+    console.error('Generate wallet error:', err)
+    error.value = 'Error generating wallet: ' + (err?.message || String(err))
     isGenerating.value = false
   }
 }
@@ -774,15 +766,14 @@ onMounted(() => {
             <div class="space-y-3">
               <div class="flex items-center justify-between">
                 <Label for="mnemonic-length" class="text-sm">Mnemonic Length</Label>
-                <Select v-model="mnemonicWords" id="mnemonic-length">
-                  <SelectTrigger class="w-24">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem :value="12">12 words</SelectItem>
-                    <SelectItem :value="24">24 words</SelectItem>
-                  </SelectContent>
-                </Select>
+                <select
+                  id="mnemonic-length"
+                  v-model="mnemonicWords"
+                  class="flex h-9 w-24 rounded-md border border-input bg-background px-3 py-1 text-sm"
+                >
+                  <option value="12">12 words</option>
+                  <option value="24">24 words</option>
+                </select>
               </div>
 
               <div class="flex items-center justify-between">
@@ -1102,20 +1093,19 @@ onMounted(() => {
 
           <div class="flex items-center justify-between">
             <h2 class="text-xl font-semibold">HD Path Explorer</h2>
-            <Select v-model="selectedChainForExplorer" @update:model-value="updateExplorer">
-              <SelectTrigger class="w-48">
-                <SelectValue placeholder="Select chain" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem
-                  v-for="chain in chainConfigs"
-                  :key="chain.id"
-                  :value="chain.id"
-                >
-                  {{ chain.icon }} {{ chain.name }}
-                </SelectItem>
-              </SelectContent>
-            </Select>
+            <select
+              v-model="selectedChainForExplorer"
+              @change="updateExplorer(selectedChainForExplorer)"
+              class="flex h-9 w-48 rounded-md border border-input bg-background px-3 py-1 text-sm"
+            >
+              <option
+                v-for="chain in chainConfigs"
+                :key="chain.id"
+                :value="chain.id"
+              >
+                {{ chain.icon }} {{ chain.name }}
+              </option>
+            </select>
           </div>
 
           <Card>
