@@ -72,11 +72,11 @@ onUnmounted(() => {
     <Card>
       <CardContent class="pt-6">
         <div class="flex gap-2 justify-center flex-wrap">
-          <Button v-if="!isRunning" @click="start" size="lg">Start</Button>
+          <Button v-if="!isRunning" @click="start" size="lg" aria-label="Start chronometer">Start</Button>
           <Button v-if="isRunning && !isPaused" @click="pause" variant="secondary" size="lg"
-            >Pause</Button
+            aria-label="Pause chronometer">Pause</Button
           >
-          <Button v-if="isRunning && isPaused" @click="resume" size="lg">Resume</Button>
+          <Button v-if="isRunning && isPaused" @click="resume" size="lg" aria-label="Resume chronometer">Resume</Button>
           <Button v-if="isRunning" @click="reset" variant="destructive" size="lg" aria-label="Reset chronometer">Reset</Button>
         </div>
       </CardContent>

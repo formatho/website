@@ -483,7 +483,7 @@ const reset = () => {
               BPMN XML Input
             </CardTitle>
             <label class="cursor-pointer">
-              <Button variant="secondary" size="sm" class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md rounded-lg">
+              <Button variant="secondary" size="sm" aria-label="Upload BPMN file" class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md rounded-lg">
                 <Upload class="mr-2 h-4 w-4" />
                 Upload .bpmn File
               </Button>
@@ -521,6 +521,7 @@ const reset = () => {
         @click="handleConvert" 
         :disabled="isConverting || !bpmnInput.trim()"
         size="lg"
+        aria-label="Convert BPMN to Visio"
         class="px-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md rounded-lg bg-slate-800 hover:bg-slate-700"
       >
         <span v-if="isConverting">Converting...</span>
@@ -541,6 +542,7 @@ const reset = () => {
           </div>
           <Button 
             @click="handleDownload"
+            aria-label="Download Visio file"
             class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md rounded-lg bg-green-600 hover:bg-green-700"
           >
             <Download class="mr-2 h-4 w-4" />

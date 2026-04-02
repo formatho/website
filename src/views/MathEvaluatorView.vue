@@ -153,7 +153,7 @@ const functions = [
                 class="w-full px-3 py-4 border rounded-lg font-mono text-xl focus:outline-none focus:ring-2 focus:ring-primary"
               />
               <div class="absolute right-2 top-1/2 -translate-y-1/2 flex gap-1">
-                <Button @click="backspace" variant="ghost" size="sm">←</Button>
+                <Button @click="backspace" variant="ghost" size="sm" aria-label="Backspace">←</Button>
                 <Button @click="clearExpression" variant="ghost" size="sm" aria-label="Clear expression">
                   <Trash2 class="w-4 h-4" />
                 </Button>
@@ -170,6 +170,7 @@ const functions = [
                   @click="copyResult"
                   variant="ghost"
                   size="sm"
+                  aria-label="Copy result"
                 >
                   <component :is="copied ? Check : Copy" class="w-5 h-5" />
                 </Button>
@@ -184,6 +185,7 @@ const functions = [
                   :key="btn"
                   @click="insertChar(btn)"
                   variant="outline"
+                  :aria-label="'Insert ' + btn"
                   class="flex-1 h-12 text-lg font-mono"
                 >
                   {{ btn }}
@@ -202,6 +204,7 @@ const functions = [
                   @click="insertChar(fn)"
                   variant="outline"
                   size="sm"
+                  :aria-label="'Insert function ' + fn"
                   class="font-mono"
                 >
                   {{ fn }}
@@ -224,6 +227,7 @@ const functions = [
                 :key="index"
                 @click="useHistoryItem(item)"
                 variant="ghost"
+                :aria-label="'Use history item: ' + item.expr + ' equals ' + item.result"
                 class="w-full p-4 h-auto bg-surface-hover rounded-lg border text-left hover:bg-surface transition-colors flex-col items-start"
               >
                 <div class="font-mono text-sm text-muted-foreground">{{ item.expr }}</div>

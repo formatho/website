@@ -77,7 +77,7 @@ const fillSample = () => {
           <CardTitle class="text-sm font-medium flex items-center gap-2">
             <FileJson class="h-4 w-4" /> JSON (Array)
           </CardTitle>
-          <Button size="sm" @click="convertToCsv"> To CSV -&gt; </Button>
+          <Button size="sm" @click="convertToCsv" aria-label="Convert JSON to CSV"> To CSV -&gt; </Button>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
           <CodeEditor
@@ -99,8 +99,8 @@ const fillSample = () => {
             <FileSpreadsheet class="h-4 w-4" /> CSV
           </CardTitle>
           <div class="flex gap-2">
-            <Button size="sm" @click="convertToJson" variant="secondary"> &lt;- To JSON </Button>
-            <Button size="icon" variant="outline" @click="downloadCsv" :disabled="!csvInput">
+            <Button size="sm" @click="convertToJson" variant="secondary" aria-label="Convert CSV to JSON"> &lt;- To JSON </Button>
+            <Button size="icon" variant="outline" @click="downloadCsv" :disabled="!csvInput" aria-label="Download CSV file">
               <Download class="h-4 w-4" />
             </Button>
           </div>

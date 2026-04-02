@@ -133,11 +133,11 @@ generate()
               <CardDescription>{{ ulids.length }} ULID(s)</CardDescription>
             </div>
             <div class="flex gap-2">
-              <Button v-if="ulids.length > 0" @click="copyAll" variant="outline" size="sm">
+              <Button v-if="ulids.length > 0" @click="copyAll" variant="outline" size="sm" aria-label="Copy all ULIDs">
                 <component :is="copied === -1 ? Check : Copy" class="w-4 h-4 mr-2" />
                 {{ copied === -1 ? 'Copied!' : 'Copy All' }}
               </Button>
-              <Button v-if="ulids.length > 0" @click="clear" variant="outline" size="sm">
+              <Button v-if="ulids.length > 0" @click="clear" variant="outline" size="sm" aria-label="Clear all ULIDs">
                 <Trash2 class="w-4 h-4 mr-2" />
                 Clear
               </Button>
@@ -157,7 +157,7 @@ generate()
                   {{ parseUlid(ulid).date }}
                 </div>
               </div>
-              <Button @click="copyUlid(index)" variant="ghost" size="sm">
+              <Button @click="copyUlid(index)" variant="ghost" size="sm" :aria-label="'Copy ULID ' + (index + 1)">
                 <component :is="copied === index ? Check : Copy" class="w-4 h-4" />
               </Button>
             </div>

@@ -62,6 +62,7 @@ const copyToClipboard = (text: string) => {
                 variant="outline"
                 :class="{ 'bg-primary text-primary-foreground': selectedUnit === 'ether' }"
                 @click="selectedUnit = 'ether'"
+                aria-label="Select Ether unit"
               >
                 Ether
               </Button>
@@ -69,6 +70,7 @@ const copyToClipboard = (text: string) => {
                 variant="outline"
                 :class="{ 'bg-primary text-primary-foreground': selectedUnit === 'gwei' }"
                 @click="selectedUnit = 'gwei'"
+                aria-label="Select Gwei unit"
               >
                 Gwei
               </Button>
@@ -76,6 +78,7 @@ const copyToClipboard = (text: string) => {
                 variant="outline"
                 :class="{ 'bg-primary text-primary-foreground': selectedUnit === 'wei' }"
                 @click="selectedUnit = 'wei'"
+                aria-label="Select Wei unit"
               >
                 Wei
               </Button>
@@ -93,7 +96,7 @@ const copyToClipboard = (text: string) => {
             <Label>Ether (10^18 Wei)</Label>
             <div class="flex gap-2">
               <Input readonly :value="computedValues.ether" />
-              <Button variant="ghost" size="icon" @click="copyToClipboard(computedValues.ether)">
+              <Button variant="ghost" size="icon" @click="copyToClipboard(computedValues.ether)" aria-label="Copy Ether value">
                 <Copy class="h-4 w-4" />
               </Button>
             </div>
@@ -103,7 +106,7 @@ const copyToClipboard = (text: string) => {
             <Label>Gwei (10^9 Wei)</Label>
             <div class="flex gap-2">
               <Input readonly :value="computedValues.gwei" />
-              <Button variant="ghost" size="icon" @click="copyToClipboard(computedValues.gwei)">
+              <Button variant="ghost" size="icon" @click="copyToClipboard(computedValues.gwei)" aria-label="Copy Gwei value">
                 <Copy class="h-4 w-4" />
               </Button>
             </div>
@@ -113,7 +116,7 @@ const copyToClipboard = (text: string) => {
             <Label>Wei</Label>
             <div class="flex gap-2">
               <Input readonly :value="computedValues.wei" />
-              <Button variant="ghost" size="icon" @click="copyToClipboard(computedValues.wei)">
+              <Button variant="ghost" size="icon" @click="copyToClipboard(computedValues.wei)" aria-label="Copy Wei value">
                 <Copy class="h-4 w-4" />
               </Button>
             </div>

@@ -373,6 +373,7 @@ onUnmounted(() => {
           <Button 
             @click="sortOrder = sortOrder === 'asc' ? 'desc' : 'asc'"
             variant="outline"
+            aria-label="Toggle sort order"
             class="w-full flex items-center justify-between"
           >
             {{ sortOrder === 'desc' ? 'Descending (High → Low)' : 'Ascending (Low → High)' }}
@@ -398,6 +399,7 @@ onUnmounted(() => {
                 @click="toggleTaskStatus(task.id)"
                 variant="ghost"
                 size="icon"
+                :aria-label="'Toggle task status: ' + task.title"
                 class="text-gray-400 hover:text-blue-600"
               >
                 <Icon :name="getStatusIcon(task.status)" class="w-4 h-4" />
@@ -459,6 +461,7 @@ onUnmounted(() => {
               v-if="task.agentId"
               variant="ghost"
               size="icon"
+              aria-label="View agent details"
               class="text-blue-600 hover:bg-blue-50"
               title="View Agent"
             >
@@ -469,6 +472,7 @@ onUnmounted(() => {
               @click="deleteTask(task.id)"
               variant="ghost"
               size="icon"
+              aria-label="Delete task"
               class="text-red-600 hover:bg-red-50"
               title="Delete Task"
             >
