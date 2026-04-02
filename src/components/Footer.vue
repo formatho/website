@@ -157,9 +157,6 @@ const currentYear = new Date().getFullYear()
           <RouterLink to="/privacy" class="hover:text-gray-900 transition-colors">
             Privacy Policy
           </RouterLink>
-          <RouterLink to="/terms" class="hover:text-gray-900 transition-colors">
-            Terms of Service
-          </RouterLink>
           <RouterLink to="/contact" class="hover:text-gray-900 transition-colors">
             Contact Us
           </RouterLink>

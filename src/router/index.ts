@@ -131,16 +131,6 @@ export const routes = [
         }
       },
       {
-        path: 'terms',
-        name: 'terms',
-        component: () => import('../views/TermsOfServiceView.vue'),
-        meta: {
-          title: 'Terms of Service - Formatho',
-          description: 'Terms of Service for Formatho - privacy-first developer tools.',
-          keywords: 'terms of service, user agreement'
-        }
-      },
-      {
         path: 'contact',
         name: 'contact',
         component: () => import('../views/ContactView.vue'),
