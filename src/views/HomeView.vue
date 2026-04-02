@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { Input } from '@/components/ui/input'
 import { Search, Sparkles } from 'lucide-vue-next'
 import * as LucideIcons from 'lucide-vue-next'
@@ -20,6 +20,16 @@ onMounted(() => {
 // Note: AOS is initialized globally in main.ts to avoid conflicts
 
 const searchQuery = ref('')
+
+// Prefetch route chunk on hover for instant navigation
+const router = useRouter()
+const prefetchRoute = (route: string) => {
+  const resolved = router.resolve(route)
+  const matched = resolved.matched[0]
+  if (matched?.components?.default && typeof matched.components.default === 'function') {
+    matched.components.default()
+  }
+}
 
 // Filter tools based on search query
 const filteredTools = computed(() => {
@@ -183,6 +193,7 @@ const filteredTools = computed(() => {
               :key="tool.name"
               :to="tool.route"
               class="premium-card-hover"
+              @mouseenter="prefetchRoute(tool.route)"
               data-v-8d4ed633=""
             >
               <div
