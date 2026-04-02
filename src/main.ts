@@ -5,20 +5,6 @@ import './style.css'
 import App from './App.vue'
 import { routes } from './router'
 
-// Configure Monaco workers globally (before any component loads)
-if (typeof window !== 'undefined') {
-  ;(window as any).MonacoEnvironment = {
-    getWorkerUrl(_: unknown, label: string) {
-      const base = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min'
-      if (label === 'json') return `${base}/vs/language/json/json.worker.js`
-      if (label === 'css' || label === 'scss' || label === 'less') return `${base}/vs/language/css/css.worker.js`
-      if (label === 'html' || label === 'handlebars' || label === 'razor') return `${base}/vs/language/html/html.worker.js`
-      if (label === 'typescript' || label === 'javascript') return `${base}/vs/language/typescript/ts.worker.js`
-      return `${base}/vs/editor/editor.worker.js`
-    }
-  }
-}
-
 const baseUrl = 'https://formatho.com/tools'
 const siteName = 'Formatho'
 const defaultImage = `${baseUrl}/logo.png`

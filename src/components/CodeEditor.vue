@@ -1,11 +1,10 @@
 <script setup lang="ts">
 /**
  * CodeEditor.vue
- * Reusable Monaco Editor wrapper for Formatho
- * Premium dark-mode SaaS aesthetic with language support
+ * Lightweight textarea-based code editor for Formatho
+ * Replaces Monaco Editor for reliability and performance
  */
-import { ref, computed, watch } from 'vue'
-import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 
 // ============================================================
 // Props
@@ -25,7 +24,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   language: 'json',
   readonly: false,
-  minHeight: '200px',
+  minHeight: '120px',
   maxHeight: '500px',
   lineNumbers: 'on',
   wordWrap: 'on',
@@ -44,7 +43,9 @@ const emit = defineEmits<{
 // ============================================================
 // Editor State
 // ============================================================
+const textarea = ref<HTMLTextAreaElement | null>(null)
 const content = ref(props.modelValue)
+const isFocused = ref(false)
 
 // Sync external changes
 watch(
@@ -57,89 +58,137 @@ watch(
 )
 
 // ============================================================
-// Monaco Configuration
+// Line Count
 // ============================================================
-const options = computed(() => ({
-  // Theme
-  theme: 'vs-dark',
-  
-  // Basic options
-  readOnly: props.readonly,
-  language: props.language,
-  fontSize: props.fontSize,
-  fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
-  
-  // Layout
-  minimap: { enabled: props.showMinimap },
-  lineNumbers: props.lineNumbers,
-  wordWrap: props.wordWrap,
-  
-  // Appearance
-  scrollBeyondLastLine: false,
-  renderLineHighlight: 'line',
-  cursorBlinking: 'smooth',
-  
-  // Behavior
-  automaticLayout: true,
-  tabSize: 2,
-  insertSpaces: true,
-  
-  // Scrollbar
-  scrollbar: {
-    verticalScrollbarSize: 10,
-    horizontalScrollbarSize: 10,
-    useShadows: false
-  },
-  
-  // Padding
-  padding: { top: 16, bottom: 16 },
-  
-  // Features
-  folding: true,
-  bracketPairColorization: { enabled: true },
-  contextmenu: true,
-  quickSuggestions: true
-}))
+const lineCount = computed(() => {
+  return content.value.split('\n').length
+})
 
 // ============================================================
 // Event Handlers
 // ============================================================
-const handleChange = (value: string | undefined) => {
-  const newValue = value || ''
+const handleInput = (event: Event) => {
+  const target = event.target as HTMLTextAreaElement
+  const newValue = target.value
   content.value = newValue
   emit('update:modelValue', newValue)
   emit('change', newValue)
 }
+
+const handleFocus = () => { isFocused.value = true }
+const handleBlur = () => { isFocused.value = false }
+
+// Handle tab key for indentation
+const handleKeydown = (event: KeyboardEvent) => {
+  if (event.key === 'Tab') {
+    event.preventDefault()
+    const textarea = event.target as HTMLTextAreaElement
+    const start = textarea.selectionStart
+    const end = textarea.selectionEnd
+    const newValue = content.value.substring(0, start) + '  ' + content.value.substring(end)
+    content.value = newValue
+    emit('update:modelValue', newValue)
+    emit('change', newValue)
+    nextTick(() => {
+      textarea.selectionStart = textarea.selectionEnd = start + 2
+    })
+  }
+}
+
+// Auto-resize
+const adjustHeight = () => {
+  const el = textarea.value
+  if (!el) return
+  el.style.height = 'auto'
+  el.style.height = Math.max(parseInt(props.minHeight), el.scrollHeight) + 'px'
+}
+
+onMounted(() => {
+  adjustHeight()
+})
+
+watch(content, () => {
+  nextTick(adjustHeight)
+})
 </script>
 
 <template>
-  <div class="code-editor-wrapper rounded-lg overflow-hidden border border-slate-700 bg-slate-900">
-    <!-- Language Badge -->
+  <div
+    class="code-editor-wrapper rounded-lg overflow-hidden border transition-colors duration-200"
+    :class="isFocused ? 'border-slate-500' : 'border-slate-700'"
+  >
+    <!-- Header Bar -->
     <div class="flex items-center justify-between px-3 py-1.5 bg-slate-800/50 border-b border-slate-700">
       <span class="text-xs text-slate-400 font-mono px-2 py-0.5 rounded bg-slate-700/50">
         {{ language.toUpperCase() }}
       </span>
+      <span class="text-xs text-slate-500">
+        {{ lineCount }} lines
+      </span>
     </div>
-    
-    <!-- Monaco Editor -->
-    <div :style="{ minHeight, maxHeight, overflow: 'auto' }">
-      <VueMonacoEditor
-        v-model:value="content"
-        :language="language"
-        :options="options"
-        :height="minHeight"
-        @change="handleChange"
+
+    <!-- Editor Area with Line Numbers -->
+    <div class="flex bg-slate-900" :style="{ minHeight, maxHeight: readonly ? minHeight : maxHeight, overflow: 'auto' }">
+      <!-- Line Numbers -->
+      <div
+        v-if="lineNumbers === 'on'"
+        class="flex-shrink-0 py-4 px-2 text-right select-none bg-slate-900/50 border-r border-slate-700/50"
+        :style="{ fontSize: fontSize + 'px' }"
+      >
+        <div
+          v-for="i in lineCount"
+          :key="i"
+          class="text-slate-600 leading-6 font-mono"
+        >
+          {{ i }}
+        </div>
+      </div>
+
+      <!-- Textarea -->
+      <textarea
+        ref="textarea"
+        :value="content"
+        :readonly="readonly"
+        :class="[
+          'w-full py-4 px-3 bg-transparent text-slate-200 resize-none outline-none',
+          'font-mono leading-6 placeholder:text-slate-600',
+          readonly ? 'cursor-default' : ''
+        ]"
+        :style="{ fontSize: fontSize + 'px', minHeight }"
+        :placeholder="readonly ? 'No content' : 'Type here...'"
+        @input="handleInput"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @keydown="handleKeydown"
+        spellcheck="false"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
       />
     </div>
   </div>
 </template>
 
 <style scoped>
-.code-editor-wrapper :deep(.monaco-editor) {
-  border-radius: 0;
+.code-editor-wrapper textarea::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-.code-editor-wrapper :deep(.monaco-editor .margin) {
-  background-color: transparent;
+.code-editor-wrapper textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.code-editor-wrapper textarea::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+.code-editor-wrapper textarea::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+.code-editor-wrapper textarea::selection {
+  background: rgba(59, 130, 246, 0.3);
 }
 </style>
