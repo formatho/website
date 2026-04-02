@@ -62,7 +62,7 @@ import {
 // STATE MANAGEMENT
 // ============================================================================
 
-const mnemonicWords = ref(12)
+const mnemonicWords = ref('12')
 const passphrase = ref('')
 const showSensitive = ref(false)
 const deriveLocallyOnly = ref(true)
