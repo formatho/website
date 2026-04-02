@@ -106,6 +106,7 @@ const specialChars = [
                 <input
                   v-model="minute"
                   type="text"
+                  aria-label="Minute (0-59)"
                   placeholder="0-59"
                   class="w-full px-3 py-2 border rounded-md font-mono text-center focus:outline-none focus:ring-2 focus:ring-primary"
                 />
@@ -116,6 +117,7 @@ const specialChars = [
                 <input
                   v-model="hour"
                   type="text"
+                  aria-label="Hour (0-23)"
                   placeholder="0-23"
                   class="w-full px-3 py-2 border rounded-md font-mono text-center focus:outline-none focus:ring-2 focus:ring-primary"
                 />
@@ -126,6 +128,7 @@ const specialChars = [
                 <input
                   v-model="dayOfMonth"
                   type="text"
+                  aria-label="Day of month (1-31)"
                   placeholder="1-31"
                   class="w-full px-3 py-2 border rounded-md font-mono text-center focus:outline-none focus:ring-2 focus:ring-primary"
                 />
@@ -136,6 +139,7 @@ const specialChars = [
                 <input
                   v-model="month"
                   type="text"
+                  aria-label="Month (1-12)"
                   placeholder="1-12"
                   class="w-full px-3 py-2 border rounded-md font-mono text-center focus:outline-none focus:ring-2 focus:ring-primary"
                 />
@@ -146,6 +150,7 @@ const specialChars = [
                 <input
                   v-model="dayOfWeek"
                   type="text"
+                  aria-label="Day of week (0-6)"
                   placeholder="0-6"
                   class="w-full px-3 py-2 border rounded-md font-mono text-center focus:outline-none focus:ring-2 focus:ring-primary"
                 />
@@ -163,6 +168,7 @@ const specialChars = [
                   @click="applyPreset(preset.cron)"
                   variant="outline"
                   size="sm"
+                  :aria-label="'Apply preset: ' + preset.label"
                 >
                   {{ preset.label }}
                 </Button>
