@@ -94,13 +94,13 @@ const applyPreset = (preset: (typeof presetPermissions)[0]) => {
               <tr v-for="(perm, category) in permissions" :key="category">
                 <td class="py-2 font-semibold capitalize text-left">{{ category }}</td>
                 <td class="py-2">
-                  <input type="checkbox" v-model="perm.read" class="w-5 h-5" />
+                  <input type="checkbox" v-model="perm.read" :aria-label="category + ' read permission'" class="w-5 h-5" />
                 </td>
                 <td class="py-2">
-                  <input type="checkbox" v-model="perm.write" class="w-5 h-5" />
+                  <input type="checkbox" v-model="perm.write" :aria-label="category + ' write permission'" class="w-5 h-5" />
                 </td>
                 <td class="py-2">
-                  <input type="checkbox" v-model="perm.execute" class="w-5 h-5" />
+                  <input type="checkbox" v-model="perm.execute" :aria-label="category + ' execute permission'" class="w-5 h-5" />
                 </td>
               </tr>
             </tbody>
@@ -140,6 +140,7 @@ const applyPreset = (preset: (typeof presetPermissions)[0]) => {
             :key="preset.name"
             variant="outline"
             @click="applyPreset(preset)"
+            :aria-label="'Apply ' + preset.name + ' preset'"
           >
             {{ preset.name }}
           </Button>

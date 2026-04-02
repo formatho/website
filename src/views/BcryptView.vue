@@ -73,6 +73,7 @@ const verifyHash = () => {
             <Input
               v-model="passwordToVerify"
               type="password"
+              aria-label="Password to verify"
               placeholder="Enter password to verify..."
             />
           </div>
@@ -85,7 +86,7 @@ const verifyHash = () => {
               :line-numbers="'off'"
             />
           </div>
-          <Button @click="verifyHash" class="w-full">Verify</Button>
+          <Button @click="verifyHash" class="w-full" aria-label="Verify hash">Verify</Button>
           <div
             v-if="verifyResult"
             :class="[

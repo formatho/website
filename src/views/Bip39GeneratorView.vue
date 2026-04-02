@@ -58,6 +58,7 @@ generateMnemonic()
             <Label>Word Count</Label>
             <select
               v-model.number="wordCount"
+              aria-label="Mnemonic word count"
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
             >
               <option :value="12">12 words</option>
@@ -75,6 +76,7 @@ generateMnemonic()
               v-model="mnemonic"
               @input="updateSeed"
               rows="4"
+              aria-label="BIP39 mnemonic phrase"
               class="font-mono"
               placeholder="Enter or generate mnemonic..."
             />
@@ -100,16 +102,17 @@ generateMnemonic()
               v-model="passphrase"
               @input="updateSeed"
               type="password"
+              aria-label="BIP39 passphrase"
               placeholder="Enter passphrase..."
             />
           </div>
           <div class="space-y-2">
             <Label>Seed (hex)</Label>
-            <Textarea :model-value="seed" readonly rows="8" class="font-mono text-xs" />
+            <Textarea :model-value="seed" readonly aria-label="Derived seed hex" rows="8" class="font-mono text-xs" />
           </div>
           <div class="space-y-2">
             <Label>Entropy (hex)</Label>
-            <Textarea :model-value="entropy" readonly rows="3" class="font-mono text-xs" />
+            <Textarea :model-value="entropy" readonly aria-label="Entropy hex" rows="3" class="font-mono text-xs" />
           </div>
         </CardContent>
       </Card>

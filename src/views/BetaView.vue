@@ -165,6 +165,7 @@ const handleSubmit = async () => {
                 v-model="name"
                 placeholder="Your name"
                 required
+                aria-label="Your name"
                 class="bg-slate-800 border-slate-700"
               />
             </div>
@@ -176,6 +177,7 @@ const handleSubmit = async () => {
                 type="email"
                 placeholder="you@example.com"
                 required
+                aria-label="Your email"
                 class="bg-slate-800 border-slate-700"
               />
             </div>
@@ -185,6 +187,7 @@ const handleSubmit = async () => {
               <Input
                 v-model="role"
                 placeholder="e.g., Full-stack developer, DevOps engineer, Founder"
+                aria-label="Your role"
                 class="bg-slate-800 border-slate-700"
               />
             </div>
@@ -193,6 +196,7 @@ const handleSubmit = async () => {
               <label class="block text-sm font-medium mb-2">What would you use Agent Orchestrator for? (optional)</label>
               <textarea
                 v-model="useCase"
+                aria-label="Use case description"
                 placeholder="e.g., Automating code reviews, content generation, data processing..."
                 class="w-full bg-slate-800 border border-slate-700 rounded-md px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[100px]"
               />

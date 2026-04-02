@@ -27,11 +27,11 @@ const generate = () => {
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="grid gap-2">
             <Label>Username</Label>
-            <Input v-model="username" placeholder="Enter username..." />
+            <Input v-model="username" aria-label="Username" placeholder="Enter username..." />
           </div>
           <div class="grid gap-2">
             <Label>Password</Label>
-            <Input v-model="password" type="password" placeholder="Enter password..." />
+            <Input v-model="password" type="password" aria-label="Password" placeholder="Enter password..." />
           </div>
         </div>
 

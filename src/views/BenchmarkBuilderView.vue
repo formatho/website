@@ -93,6 +93,7 @@ const runComparison = async () => {
           <input
             v-model.number="iterations"
             type="number"
+            aria-label="Number of iterations"
             min="1"
             class="flex h-10 w-32 rounded-md border border-input bg-background px-3 py-2 text-sm"
           />
@@ -103,6 +104,7 @@ const runComparison = async () => {
           <Textarea
             v-model="codeInput"
             rows="8"
+            aria-label="JavaScript code to benchmark"
             placeholder="// Enter JavaScript code to benchmark
 // Use 'iterations' variable for loop count
 for (let i = 0; i < iterations; i++) {

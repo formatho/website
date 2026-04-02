@@ -103,6 +103,7 @@ const decrypt = () => {
             <Label>Algorithm</Label>
             <select
               v-model="algorithm"
+              aria-label="Encryption algorithm"
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
             >
               <option value="AES">AES</option>
@@ -118,12 +119,12 @@ const decrypt = () => {
           </div>
           <div class="grid gap-2">
             <Label>Plaintext</Label>
-            <Textarea v-model="plaintext" placeholder="Enter text to encrypt..." rows="4" />
+            <Textarea v-model="plaintext" placeholder="Enter text to encrypt..." aria-label="Text to encrypt" rows="4" />
           </div>
-          <Button @click="encrypt" class="w-full">Encrypt</Button>
+          <Button @click="encrypt" class="w-full" aria-label="Encrypt text">Encrypt</Button>
           <div v-if="ciphertext" class="space-y-2">
             <Label>Ciphertext</Label>
-            <Textarea :model-value="ciphertext" readonly class="font-mono text-sm" rows="3" />
+            <Textarea :model-value="ciphertext" readonly aria-label="Encrypted ciphertext" class="font-mono text-sm" rows="3" />
           </div>
         </CardContent>
       </Card>
@@ -143,14 +144,15 @@ const decrypt = () => {
             <Textarea
               v-model="decryptText"
               placeholder="Enter ciphertext to decrypt..."
+              aria-label="Ciphertext to decrypt"
               rows="4"
               class="font-mono text-sm"
             />
           </div>
-          <Button @click="decrypt" class="w-full">Decrypt</Button>
+          <Button @click="decrypt" class="w-full" aria-label="Decrypt text">Decrypt</Button>
           <div v-if="decryptResult" class="space-y-2">
             <Label>Plaintext</Label>
-            <Textarea :model-value="decryptResult" readonly rows="3" />
+            <Textarea :model-value="decryptResult" readonly aria-label="Decrypted plaintext" rows="3" />
           </div>
         </CardContent>
       </Card>
