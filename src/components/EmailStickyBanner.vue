@@ -48,7 +48,7 @@ onMounted(() => {
 
 const copyTitle = computed(() => {
   return abVariant.value === 'A'
-    ? '🚀 Agent Orchestrator Beta: First 100 spots filling fast'
+    ? '🚀 Agent Orchestrator Beta: Get early access'
     : '⚡ Privacy-first tools + AI orchestration (beta access)'
 })
 
