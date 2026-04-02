@@ -44,16 +44,17 @@ const downloadQR = () => {
         <CardContent class="space-y-4">
           <div class="grid gap-2">
             <Label>Network Name (SSID)</Label>
-            <Input v-model="ssid" placeholder="Enter WiFi network name..." />
+            <Input v-model="ssid" aria-label="WiFi network name" placeholder="Enter WiFi network name..." />
           </div>
           <div class="grid gap-2">
             <Label>Password</Label>
-            <Input v-model="password" type="password" placeholder="Enter WiFi password..." />
+            <Input v-model="password" type="password" aria-label="WiFi password" placeholder="Enter WiFi password..." />
           </div>
           <div class="grid gap-2">
             <Label>Encryption</Label>
             <select
               v-model="encryption"
+              aria-label="WiFi encryption type"
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
             >
               <option value="WPA">WPA/WPA2</option>
@@ -68,7 +69,7 @@ const downloadQR = () => {
       <Card v-if="qrDataUrl">
         <CardHeader class="flex-row items-center justify-between">
           <CardTitle>QR Code</CardTitle>
-          <Button variant="outline" size="sm" @click="downloadQR">Download</Button>
+          <Button variant="outline" size="sm" @click="downloadQR" aria-label="Download QR code">Download</Button>
         </CardHeader>
         <CardContent class="flex justify-center">
           <img :src="qrDataUrl" alt="WiFi QR Code" class="max-w-full rounded-lg shadow-lg" />
