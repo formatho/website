@@ -412,6 +412,7 @@ onUnmounted(() => {
               <Button
                 @click="assignTask"
                 :disabled="!taskTitle || taskAssigning"
+                aria-label="Assign task to agent"
                 class="w-full"
               >
                 {{ taskAssigning ? 'Assigning...' : 'Assign Task' }}
@@ -542,6 +543,7 @@ onUnmounted(() => {
             <Button
               @click="resetTutorial"
               variant="secondary"
+              aria-label="Restart tutorial"
             >
               Restart Tutorial
             </Button>
@@ -555,6 +557,7 @@ onUnmounted(() => {
           @click="prevStep"
           :disabled="currentStep === 0"
           variant="ghost"
+          aria-label="Previous step"
         >
           ← Previous
         </button>

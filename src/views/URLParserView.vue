@@ -176,6 +176,7 @@ const swapEncodeDecode = () => {
               @click="urlInput = example.url"
               variant="ghost"
               size="sm"
+              :aria-label="'Use example URL: ' + example.label"
               class="font-mono text-xs transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
             >
               {{ example.label }}
@@ -204,6 +205,7 @@ const swapEncodeDecode = () => {
               <Button 
                 variant="ghost" 
                 size="sm"
+                aria-label="Copy URL component"
                 class="opacity-0 group-hover:opacity-100 transition-all duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
               >
                 <component :is="copied === type ? Check : Copy" class="w-4 h-4" />
@@ -234,6 +236,7 @@ const swapEncodeDecode = () => {
                   <Button 
                     variant="ghost" 
                     size="sm"
+                    aria-label="Copy query parameter value"
                     class="opacity-0 group-hover:opacity-100 transition-all duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
                   >
                     <component :is="copied === key ? Check : Copy" class="w-4 h-4" />
@@ -273,6 +276,7 @@ const swapEncodeDecode = () => {
               @click="swapEncodeDecode" 
               variant="outline"
               size="sm"
+              aria-label="Swap encode/decode direction"
               class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md border-gray-200 dark:border-gray-700"
             >
               <RefreshCw class="w-4 h-4 mr-2" />
@@ -291,6 +295,7 @@ const swapEncodeDecode = () => {
                   variant="ghost"
                   size="sm"
                   :disabled="!rawText"
+                  aria-label="Copy raw text"
                   class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50"
                 >
                   <Copy class="w-4 h-4" />
@@ -313,6 +318,7 @@ const swapEncodeDecode = () => {
                   variant="ghost"
                   size="sm"
                   :disabled="!encodedText"
+                  aria-label="Copy encoded text"
                   class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50"
                 >
                   <Copy class="w-4 h-4" />

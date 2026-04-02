@@ -315,6 +315,7 @@ onUnmounted(() => {
         <Button 
           @click="navigateToAnalytics"
           size="sm"
+          aria-label="Open analytics dashboard"
           class="flex items-center gap-2"
         >
           <LayoutDashboard class="w-4 h-4" />
@@ -390,6 +391,7 @@ onUnmounted(() => {
         <div class="flex gap-2">
           <Button 
             @click="isTeamModalOpen = true"
+            aria-label="Open team collaboration"
             class="bg-purple-600 hover:bg-purple-700"
           >
             👥 Team Collaboration (Pro)
@@ -397,6 +399,7 @@ onUnmounted(() => {
           <Button 
             @click="simulateData"
             size="sm"
+            aria-label="Simulate demo data"
           >
             Refresh Data
           </Button>
@@ -500,6 +503,7 @@ onUnmounted(() => {
         <Button 
           @click="isTeamModalOpen = true"
           size="sm"
+          aria-label="Invite team member"
         >
           + Invite Member
         </Button>
@@ -507,7 +511,6 @@ onUnmounted(() => {
       
       <div class="p-6">
         <TeamMemberList
-          :members="teamMembers"
           :organization-id="organizationId"
           :current-user-id="currentUserId"
           :is-loading="isLoadingMembers"
