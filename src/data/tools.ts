@@ -1,5 +1,34 @@
 export const tools = [
   {
+    category: 'Blockchain',
+    items: [
+      {
+        name: 'Multi-Chain Wallet',
+        description: 'Generate keys & addresses for multiple blockchains from one mnemonic, derive addresses from keys, and validate checksums.',
+        route: '/multi-chain-keys',
+        iconName: 'Link'
+      },
+      {
+        name: 'EVM Unit Converter',
+        description: 'Convert between Wei, Gwei, and Ether.',
+        route: '/evm-converter',
+        iconName: 'ArrowRightLeft'
+      },
+      {
+        name: 'Keccak-256 Hasher',
+        description: 'Generate Keccak-256 hashes for Ethereum.',
+        route: '/keccak256',
+        iconName: 'Hash'
+      },
+      {
+        name: 'Solidity to Opcodes',
+        description: 'Compile Solidity to EVM opcodes.',
+        route: '/solidity-to-opcodes',
+        iconName: 'Code'
+      }
+    ]
+  },
+  {
     category: 'Crypto & Security',
     items: [
       {
@@ -473,47 +502,6 @@ export const tools = [
         description: 'Validate and lint YAML code.',
         route: '/yaml-lint',
         iconName: 'CheckCircle'
-      }
-    ]
-  },
-  {
-    category: 'Blockchain',
-    items: [
-      {
-        name: 'EVM Unit Converter',
-        description: 'Convert between Wei, Gwei, and Ether.',
-        route: '/evm-converter',
-        iconName: 'ArrowRightLeft'
-      },
-      {
-        name: 'Keccak-256 Hasher',
-        description: 'Generate Keccak-256 hashes for Ethereum.',
-        route: '/keccak256',
-        iconName: 'Hash'
-      },
-      {
-        name: 'Address Checksum',
-        description: 'Validate Ethereum addresses (EIP-55).',
-        route: '/address-checksum',
-        iconName: 'CheckCircle'
-      },
-      {
-        name: 'Multi-Chain Keys',
-        description: 'Generate keys for multiple blockchains from one mnemonic.',
-        route: '/multi-chain-keys',
-        iconName: 'Link'
-      },
-      {
-        name: 'Address from Key',
-        description: 'Derive addresses from private keys.',
-        route: '/address-from-key',
-        iconName: 'Key'
-      },
-      {
-        name: 'Solidity to Opcodes',
-        description: 'Compile Solidity to EVM opcodes.',
-        route: '/solidity-to-opcodes',
-        iconName: 'Code'
       }
     ]
   },
