@@ -248,40 +248,6 @@ const filteredTools = computed(() => {
       </div>
     </section>
 
-    <!-- Final CTA Section -->
-    <section class="container mx-auto px-4 py-16 bg-gradient-to-b from-background to-primary/5 border-t border-border/50">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">
-          Ready to Boost Your Productivity?
-        </h2>
-        <p class="text-xl text-muted-foreground mb-8">
-          Join 15,000+ developers who trust Formatho for their daily workflow
-        </p>
-        
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-          <RouterLink
-            to="/pricing"
-            class="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
-          >
-            Get Started Free
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </RouterLink>
-          <a
-            href="mailto:support@formatho.com"
-            class="inline-flex items-center gap-2 px-8 py-3 bg-secondary text-secondary-foreground rounded-lg font-medium hover:bg-secondary/80 transition-all"
-          >
-            Contact Us
-          </a>
-        </div>
-        
-        <p class="text-sm text-muted-foreground">
-          ✓ No credit card required • ✓ 100+ free tools • ✓ Instant access
-        </p>
-      </div>
-    </section>
-
     <!-- Floating CTA for Mobile -->
     <FloatingCTA />
   </div>
