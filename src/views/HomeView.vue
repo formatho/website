@@ -156,56 +156,6 @@ const filteredTools = computed(() => {
       </div>
     </section>
 
-    <!-- Popular Tools Quick Access -->
-    <section class="container mx-auto px-4 py-12 border-b border-border/50">
-      <div class="text-center mb-8">
-        <h2 class="text-2xl md:text-3xl font-bold mb-3">
-          Start Using These Tools Now
-        </h2>
-        <p class="text-muted-foreground">
-          No signup required • Instant results • 100% private
-        </p>
-      </div>
-      
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-        <RouterLink 
-          to="/json-yaml" 
-          class="group p-4 bg-card border border-border rounded-lg hover:border-primary transition-all"
-        >
-          <div class="text-3xl mb-2">🔄</div>
-          <h3 class="font-semibold group-hover:text-primary transition-colors">JSON ↔ YAML</h3>
-          <p class="text-xs text-muted-foreground mt-1">Most popular</p>
-        </RouterLink>
-        
-        <RouterLink 
-          to="/base64" 
-          class="group p-4 bg-card border border-border rounded-lg hover:border-primary transition-all"
-        >
-          <div class="text-3xl mb-2">🔐</div>
-          <h3 class="font-semibold group-hover:text-primary transition-colors">Base64 Encoder</h3>
-          <p class="text-xs text-muted-foreground mt-1">Essential</p>
-        </RouterLink>
-        
-        <RouterLink 
-          to="/uuid" 
-          class="group p-4 bg-card border border-border rounded-lg hover:border-primary transition-all"
-        >
-          <div class="text-3xl mb-2">🎲</div>
-          <h3 class="font-semibold group-hover:text-primary transition-colors">UUID Generator</h3>
-          <p class="text-xs text-muted-foreground mt-1">Developer favorite</p>
-        </RouterLink>
-        
-        <RouterLink 
-          to="/diff" 
-          class="group p-4 bg-card border border-border rounded-lg hover:border-primary transition-all"
-        >
-          <div class="text-3xl mb-2">📊</div>
-          <h3 class="font-semibold group-hover:text-primary transition-colors">Diff Checker</h3>
-          <p class="text-xs text-muted-foreground mt-1">Compare text</p>
-        </RouterLink>
-      </div>
-    </section>
-
     <!-- Tools Grid -->
     <section class="container mx-auto px-4 py-10 md:py-14" data-v-8d4ed633="">
       <div class="space-y-12" data-v-8d4ed633="">
