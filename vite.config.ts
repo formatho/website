@@ -8,8 +8,8 @@ export default defineConfig({
   plugins: [
     vue(),
     nodePolyfills({
-      include: ['buffer'],
-      globals: { Buffer: true },
+      include: ['buffer', 'stream', 'util', 'process'],
+      globals: { Buffer: true, process: true },
     }),
   ],
   resolve: {
