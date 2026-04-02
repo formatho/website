@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input'
 import { Search, Sparkles } from 'lucide-vue-next'
 import * as LucideIcons from 'lucide-vue-next'
 import { tools } from '../data/tools'
-import EmailStickyBanner from '@/components/EmailStickyBanner.vue'
 import TrustBadges from '@/components/TrustBadges.vue'
 
 import FloatingCTA from '@/components/FloatingCTA.vue'
@@ -41,9 +40,6 @@ const filteredTools = computed(() => {
 
 <template>
   <div class="min-h-screen">
-    <!-- Email Capture Sticky Banner -->
-    <EmailStickyBanner />
-
     <!-- Hero Section -->
     <section
       class="relative overflow-hidden border-b border-border/50 bg-gradient-to-b from-primary/5 via-background to-background"
