@@ -131,6 +131,14 @@
 
 <body>
   <div id="app"></div>
+  <!-- Buffer polyfill - MUST load before any crypto chunks that reference Buffer -->
+  <script src="https://cdn.jsdelivr.net/npm/buffer@6.0.3/index.min.js"></script>
+  <script>
+    // Ensure Buffer is globally available for bip39, ed25519-hd-key, etc.
+    if (typeof globalThis !== 'undefined' && typeof globalThis.Buffer === 'undefined') {
+      globalThis.Buffer = window.Buffer;
+    }
+  </script>
   <!-- AOS (Animate On Scroll) Library JS - Deferred -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
   <script type="module" src="/src/main.ts"></script>
