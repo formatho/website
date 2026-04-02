@@ -72,7 +72,7 @@ const downloadAsText = () => {
           <input type="file" @change="handleFileUpload" class="hidden" id="file-upload" />
           <label for="file-upload" class="cursor-pointer">
             <div class="text-muted-foreground mb-2">Click to select a file</div>
-            <Button variant="outline" as="span">Select File</Button>
+            <Button variant="outline" as="span" aria-label="Select file to convert">Select File</Button>
           </label>
         </div>
 
@@ -87,7 +87,7 @@ const downloadAsText = () => {
             <Label>Base64 Output</Label>
             <div class="flex gap-2">
               <Button variant="outline" size="sm" @click="copyToClipboard" aria-label="Copy Base64 output">Copy</Button>
-              <Button variant="outline" size="sm" @click="downloadAsText">Download</Button>
+              <Button variant="outline" size="sm" @click="downloadAsText" aria-label="Download as text file">Download</Button>
             </div>
           </div>
           <CodeEditor

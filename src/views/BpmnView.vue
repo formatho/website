@@ -201,7 +201,7 @@ onUnmounted(() => {
             Upload a BPMN 2.0 XML file to visualize and export as PDF
           </p>
         </div>
-        <Button class="w-full relative">
+        <Button class="w-full relative" aria-label="Select BPMN file">
           Select BPMN File
           <input
             type="file"
@@ -227,7 +227,7 @@ onUnmounted(() => {
               <p class="text-xs text-muted-foreground">{{ formatSize(file.size) }}</p>
             </div>
           </div>
-          <Button variant="ghost" size="sm" class="relative">
+          <Button variant="ghost" size="sm" class="relative" aria-label="Change BPMN file">
             Change File
             <input
               type="file"

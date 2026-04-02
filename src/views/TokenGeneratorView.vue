@@ -164,7 +164,7 @@ generate()
                   >{{ tokens.length }} token(s) of {{ length }} characters</CardDescription
                 >
               </div>
-              <Button @click="copyAll" variant="outline" size="sm">
+              <Button @click="copyAll" variant="outline" size="sm" aria-label="Copy all tokens">
                 <component :is="copied === -1 ? Check : Copy" class="w-4 h-4 mr-2" />
                 {{ copied === -1 ? 'Copied!' : 'Copy All' }}
               </Button>
@@ -178,7 +178,7 @@ generate()
                 class="flex items-center justify-between p-3 bg-surface-hover rounded-lg border"
               >
                 <div class="font-mono text-sm break-all">{{ token }}</div>
-                <Button @click="copyToken(index)" variant="ghost" size="sm">
+                <Button @click="copyToken(index)" variant="ghost" size="sm" :aria-label="'Copy token ' + (index + 1)">
                   <component :is="copied === index ? Check : Copy" class="w-4 h-4" />
                 </Button>
               </div>

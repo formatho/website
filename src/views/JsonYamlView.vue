@@ -63,7 +63,7 @@ const fillSample = () => {
           <CardTitle class="text-sm font-medium flex items-center gap-2">
             <FileJson class="h-4 w-4" /> JSON
           </CardTitle>
-          <Button size="sm" @click="convertToYaml"> To YAML -> </Button>
+          <Button size="sm" @click="convertToYaml" aria-label="Convert JSON to YAML"> To YAML -> </Button>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
           <CodeEditor
@@ -81,7 +81,7 @@ const fillSample = () => {
           <CardTitle class="text-sm font-medium flex items-center gap-2">
             <FileType class="h-4 w-4" /> YAML
           </CardTitle>
-          <Button size="sm" @click="convertToJson" variant="secondary"> &lt;- To JSON </Button>
+          <Button size="sm" @click="convertToJson" variant="secondary" aria-label="Convert YAML to JSON"> &lt;- To JSON </Button>
         </CardHeader>
         <CardContent class="flex-1 min-h-0">
           <CodeEditor

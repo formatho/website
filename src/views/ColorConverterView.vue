@@ -171,7 +171,7 @@ const randomColor = () => {
 
             <!-- Random & Presets -->
             <div class="space-y-2">
-              <Button @click="randomColor" variant="outline" class="w-full">
+              <Button @click="randomColor" variant="outline" class="w-full" aria-label="Generate random color">
                 🎲 Random Color
               </Button>
               <div class="flex flex-wrap gap-2">
@@ -181,6 +181,7 @@ const randomColor = () => {
                   @click="hex = preset.color"
                   variant="ghost"
                   size="icon"
+                  :aria-label="'Select ' + preset.name + ' color'"
                   class="w-8 h-8 rounded-full border-2 border-transparent hover:border-primary transition-colors"
                   :style="{ backgroundColor: preset.color }"
                   :title="preset.name"

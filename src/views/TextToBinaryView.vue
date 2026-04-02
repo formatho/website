@@ -73,6 +73,7 @@ const swapMode = () => {
             <Button
               :variant="mode === 'text-to-binary' ? 'default' : 'outline'"
               @click="mode = 'text-to-binary'"
+              aria-label="Convert text to binary"
             >
               Text → Binary
             </Button>
@@ -82,6 +83,7 @@ const swapMode = () => {
             <Button
               :variant="mode === 'binary-to-text' ? 'default' : 'outline'"
               @click="mode = 'binary-to-text'"
+              aria-label="Convert binary to text"
             >
               Binary → Text
             </Button>

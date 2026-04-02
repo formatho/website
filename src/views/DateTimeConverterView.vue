@@ -121,7 +121,7 @@ const presets = [
           </div>
 
           <div class="flex gap-2 flex-wrap">
-            <Button @click="setCurrentTime" variant="outline" size="sm">
+            <Button @click="setCurrentTime" variant="outline" size="sm" aria-label="Set to current time">
               <RefreshCw class="w-4 h-4 mr-2" />
               Current Time
             </Button>
@@ -131,6 +131,7 @@ const presets = [
               @click="inputDate = preset.value()"
               variant="outline"
               size="sm"
+              :aria-label="'Set to ' + preset.label"
             >
               {{ preset.label }}
             </Button>

@@ -114,7 +114,7 @@ const compressionRatio = computed(() => {
           <h3 class="font-semibold text-lg">Upload an image</h3>
           <p class="text-sm text-muted-foreground">Drag and drop or click to upload</p>
         </div>
-        <Button class="w-full relative">
+        <Button class="w-full relative" aria-label="Select image file to compress">
           Select File
           <input
             type="file"
@@ -182,7 +182,7 @@ const compressionRatio = computed(() => {
             <Button @click="downloadCompressed" :loading="isProcessing" class="w-full" aria-label="Download compressed image">
               <Download class="mr-2 h-4 w-4" /> Download
             </Button>
-            <Button variant="outline" class="w-full relative">
+            <Button variant="outline" class="w-full relative" aria-label="Select new image">
               New Image
               <input
                 type="file"

@@ -54,8 +54,8 @@ const copyOutput = () => {
         </div>
 
         <div class="flex gap-2">
-          <Button @click="obfuscate">Obfuscate</Button>
-          <Button variant="outline" @click="deobfuscate">Deobfuscate</Button>
+          <Button @click="obfuscate" aria-label="Obfuscate text">Obfuscate</Button>
+          <Button variant="outline" @click="deobfuscate" aria-label="Deobfuscate text">Deobfuscate</Button>
         </div>
       </CardContent>
     </Card>
@@ -63,7 +63,7 @@ const copyOutput = () => {
     <Card v-if="outputText">
       <CardHeader class="flex-row items-center justify-between">
         <CardTitle>Output</CardTitle>
-        <Button variant="outline" size="sm" @click="copyOutput">Copy</Button>
+        <Button variant="outline" size="sm" @click="copyOutput" aria-label="Copy output">Copy</Button>
       </CardHeader>
       <CardContent>
         <div class="p-4 rounded-lg bg-muted font-mono text-sm break-all">

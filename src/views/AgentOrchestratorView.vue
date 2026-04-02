@@ -461,6 +461,7 @@ const downloads = [
               as="a"
               href="https://github.com/formatho/agent-orchestrator/releases"
               target="_blank"
+              aria-label="Download Agent Orchestrator"
               class="w-full"
               :disabled="!download.available"
             >
@@ -593,6 +594,7 @@ const downloads = [
             href="https://github.com/formatho/agent-orchestrator"
             target="_blank"
             size="lg"
+            aria-label="Star on GitHub"
           >
             <Github class="h-4 w-4 mr-2" />
             Star on GitHub
@@ -603,6 +605,7 @@ const downloads = [
             as="a"
             href="https://github.com/formatho/agent-orchestrator/releases"
             target="_blank"
+            aria-label="Download latest release"
           >
             <Download class="h-4 w-4 mr-2" />
             Download Latest
@@ -613,6 +616,7 @@ const downloads = [
             as="a"
             href="https://github.com/formatho"
             target="_blank"
+            aria-label="Contribute to Formatho"
           >
             View Organization
           </Button>
