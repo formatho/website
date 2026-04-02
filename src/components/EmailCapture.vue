@@ -139,7 +139,7 @@ const isButtonDisabled = computed(() => {
 
       <!-- Urgency Element -->
       <p class="text-xs text-center text-muted-foreground">
-        <span class="text-orange-600 font-semibold">🔥 Limited:</span> First 100 users get priority access
+        <span class="text-orange-600 font-semibold">🚀 Join the waitlist</span> for early access
       </p>
     </div>
 
