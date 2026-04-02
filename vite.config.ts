@@ -15,48 +15,38 @@ export default defineConfig({
     'global': 'globalThis',
   },
   build: {
-    // Enable chunk splitting for better caching
     rollupOptions: {
       output: {
-        // Create separate chunks for better caching
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
-        // Split large dependencies into separate chunks
         manualChunks(id) {
-          // Don't split for SSR build (external modules)
-          if (id.includes('node_modules')) {
-            // Vue core
-            if (id.includes('vue/dist') || id.includes('vue-router')) {
-              return 'vue-vendor'
-            }
-            // UI framework
-            if (id.includes('radix-vue') || id.includes('@vueuse/core')) {
-              return 'ui-vendor'
-            }
-            // Monaco Editor
-            if (id.includes('monaco-editor') || id.includes('@guolao/vue-monaco-editor')) {
-              return 'monaco-editor'
-            }
-            // Crypto libraries
-            if (id.includes('bcryptjs') || id.includes('@noble/curves')) {
-              return 'crypto'
-            }
-            // Diff library
-            if (id.includes('/diff/')) {
-              return 'diff'
-            }
-            // Charts
-            if (id.includes('chart.js')) {
-              return 'charts'
-            }
+          if (!id.includes('node_modules')) return undefined
+
+          // Vue core
+          if (id.includes('vue/dist') || id.includes('vue-router') || id.includes('@vueuse/')) {
+            return 'vue-vendor'
           }
-          return undefined
+          // UI framework
+          if (id.includes('radix-vue')) {
+            return 'ui-radix'
+          }
+          // Heavy crypto — each in its own chunk
+          if (id.includes('@polkadot') || id.includes('@solana')) return 'crypto-polkadot-solana'
+          if (id.includes('bip39') || id.includes('ed25519-hd-key')) return 'crypto-bip39'
+          if (id.includes('bcryptjs')) return 'crypto-bcrypt'
+          if (id.includes('@noble')) return 'crypto-noble'
+          if (id.includes('viem')) return 'crypto-viem'
+          if (id.includes('bech32')) return 'crypto-bech32'
+          // PDF
+          if (id.includes('jspdf') || id.includes('html2pdf') || id.includes('html2canvas')) return 'pdf'
+          // Charts
+          if (id.includes('chart.js')) return 'charts'
+          // Solidity
+          if (id.includes('solidity') || id.includes('compiler')) return 'solidity'
+          // Everything else
+          return 'vendor'
         }
       }
     }
-  },
-  optimizeDeps: {
-    // Include all dependencies that are dynamically imported
-    include: ['monaco-editor', '@guolao/vue-monaco-editor'],
   },
 })
