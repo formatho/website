@@ -80,9 +80,9 @@ const filteredTools = computed(() => {
             The Privacy-First Developer Toolkit
           </p>
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="200" data-v-8d4ed633="">
-            Fast, secure, privacy-first collection of 100+ developer utilities and content productivity
-            tools — built to solve everyday formatting, conversion, and debugging problems directly
-            in your browser.
+            100+ free developer tools that run entirely in your browser. No signup, no tracking,
+            no data leaves your machine. Plus <RouterLink to="/agent-todo" class="text-primary font-semibold hover:underline">Agent Todo</RouterLink> and
+            <RouterLink to="/agent-orchestrator" class="text-primary font-semibold hover:underline">Agent Orchestrator</RouterLink> for AI-powered workflows.
           </p>
           <div class="flex flex-wrap gap-4 justify-center items-center mt-6" data-v-8d4ed633="">
             <div
@@ -137,6 +137,20 @@ const filteredTools = computed(() => {
               <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> 100% client-side processing </span>
             </div>
           </div>
+          <!-- Conversion CTA -->
+          <div class="flex flex-col sm:flex-row gap-4 items-center mt-4" data-v-8d4ed633="">
+            <RouterLink to="/agent-orchestrator" data-v-8d4ed633="">
+              <button class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg" data-v-8d4ed633="">
+                🚀 Try Agent Orchestrator Free
+              </button>
+            </RouterLink>
+            <RouterLink to="/agent-todo" data-v-8d4ed633="">
+              <button class="px-8 py-3 border border-primary/30 rounded-lg font-medium text-lg hover:bg-primary/5 transition-colors" data-v-8d4ed633="">
+                📋 Agent Todo — Task Management
+              </button>
+            </RouterLink>
+          </div>
+
           <div class="w-full max-w-2xl mt-6" data-v-8d4ed633="">
             <div class="relative" data-v-8d4ed633="">
               <Input

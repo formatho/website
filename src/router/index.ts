@@ -27,11 +27,11 @@ export const routes = [
         name: 'home',
         component: HomeView,
         meta: {
-          title: 'Formatho - Privacy-First Developer Tools',
+          title: 'Formatho - 100+ Free Privacy-First Developer Tools & AI Agent Platform',
           description:
-            'Fast, secure, privacy-first collection of online text formatting tools, developer utilities, and content productivity tools.',
+            '100+ free online developer tools that run in your browser. JSON formatter, Base64, UUID, and more. Plus Agent Orchestrator for AI-powered workflows. Zero tracking, 100% client-side.',
           keywords:
-            'developer tools, text formatter, json formatter, privacy-first tools, online utilities'
+            'developer tools, json formatter, base64 encoder, uuid generator, privacy-first tools, ai agent orchestrator, agent todo, online utilities, free developer tools, client-side tools'
         }
       },
       {
