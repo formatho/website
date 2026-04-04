@@ -176,6 +176,64 @@ const filteredTools = computed(() => {
       </div>
     </section>
 
+    <!-- Why Agent Todo Section -->
+    <section class="container mx-auto px-4 py-12 md:py-16 bg-gradient-to-b from-background to-muted/30">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Built for AI Agents, Not Humans</h2>
+        <p class="text-muted-foreground text-center mb-10 max-w-2xl mx-auto">Todoist and Asana were built for people. Agent Todo is built for the agents that work for them.</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-border">
+                <th class="py-3 px-4 font-semibold">Feature</th>
+                <th class="py-3 px-4 font-semibold text-center text-primary">Agent Todo</th>
+                <th class="py-3 px-4 font-semibold text-center text-muted-foreground">Todoist / Asana</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm">
+              <tr class="border-b border-border/50">
+                <td class="py-3 px-4">REST API for agents</td>
+                <td class="py-3 px-4 text-center">✅ Native</td>
+                <td class="py-3 px-4 text-center text-muted-foreground">❌ Bolted on</td>
+              </tr>
+              <tr class="border-b border-border/50">
+                <td class="py-3 px-4">Agent identity & tracking</td>
+                <td class="py-3 px-4 text-center">✅ Built-in</td>
+                <td class="py-3 px-4 text-center text-muted-foreground">❌ No concept</td>
+              </tr>
+              <tr class="border-b border-border/50">
+                <td class="py-3 px-4">Priority queues for agents</td>
+                <td class="py-3 px-4 text-center">✅ Yes</td>
+                <td class="py-3 px-4 text-center text-muted-foreground">❌ Manual</td>
+              </tr>
+              <tr class="border-b border-border/50">
+                <td class="py-3 px-4">Status lifecycle (pending → blocked → done)</td>
+                <td class="py-3 px-4 text-center">✅ Full workflow</td>
+                <td class="py-3 px-4 text-center text-muted-foreground">⚠️ Basic</td>
+              </tr>
+              <tr class="border-b border-border/50">
+                <td class="py-3 px-4">Free tier</td>
+                <td class="py-3 px-4 text-center">✅ Free forever</td>
+                <td class="py-3 px-4 text-center text-muted-foreground">⚠️ Limited</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4">Setup time</td>
+                <td class="py-3 px-4 text-center">2 minutes</td>
+                <td class="py-3 px-4 text-center text-muted-foreground">30+ minutes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-center mt-8">
+          <a href="https://todo.formatho.com" target="_blank" rel="noopener">
+            <button class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg">
+              Start Free — No Credit Card
+            </button>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- Tools Grid -->
     <section class="container mx-auto px-4 py-10 md:py-14" data-v-8d4ed633="">
       <div class="space-y-12" data-v-8d4ed633="">

@@ -45,26 +45,9 @@ const features = [
   }
 ]
 
-const testimonials = [
-  {
-    quote: "Agent Orchestrator cut our code review time by 70%. It's like having a senior developer available 24/7.",
-    author: "Sarah Chen",
-    role: "CTO, TechStartup",
-    avatar: "SC"
-  },
-  {
-    quote: "Finally, a privacy-first AI tool that doesn't require sending data to the cloud. Perfect for our security needs.",
-    author: "Marcus Johnson",
-    role: "Security Engineer",
-    avatar: "MJ"
-  },
-  {
-    quote: "The agent pools feature is incredible. We run 10 agents in parallel and ship features 5x faster.",
-    author: "Alex Rivera",
-    role: "Lead Developer",
-    avatar: "AR"
-  }
-]
+// NOTE: Testimonials removed - were placeholder/fake.
+// Replace with real customer quotes before enabling this section.
+const testimonials: Array<{quote: string; author: string; role: string; avatar: string}> = []
 
 const pricingPlans = [
   {
