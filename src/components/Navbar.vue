@@ -201,6 +201,14 @@ const categories = [
             Blogs
           </RouterLink>
 
+          <!-- Pricing Link -->
+          <RouterLink
+            to="/pricing"
+            class="text-sm font-medium text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:bg-white rounded-lg py-2 px-3"
+          >
+            Pricing
+          </RouterLink>
+
         </div>
 
         <!-- Search & Mobile Menu Button -->

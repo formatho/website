@@ -428,6 +428,18 @@ export const routes = [
         }
       },
       {
+        path: 'pricing',
+        name: 'pricing',
+        component: () => import('../views/PricingView.vue'),
+        meta: {
+          title: 'Pricing - Formatho Agent Todo & Tools',
+          description:
+            'Simple, transparent pricing for Formatho Agent Todo. Start free with 3 agents, upgrade to Pro for unlimited power. No hidden fees.',
+          keywords:
+            'formatho pricing, agent todo pricing, ai agent task management pricing, developer tools pricing'
+        }
+      },
+      {
         path: 'agent-todo',
         name: 'agent-todo',
         component: () => import('../views/AgentTodoLandingView.vue'),
