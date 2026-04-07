@@ -238,6 +238,7 @@ const faqs = [
             Learn More
           </RouterLink>
         </div>
+        <p class="text-xs text-muted-foreground mt-4">No credit card required • Setup in 2 minutes • Cancel anytime</p>
       </div>
     </section>
   </div>
