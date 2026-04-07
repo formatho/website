@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Check } from 'lucide-vue-next'
+import { useStructuredData } from '@/composables/useStructuredData'
+
+const { addFAQStructuredData, addBreadcrumbStructuredData } = useStructuredData()
 
 const billingPeriod = ref<'monthly' | 'yearly'>('monthly')
 
@@ -88,6 +91,14 @@ const faqs = [
     answer: 'Enterprise plans include on-premise deployment. Self-hosted Pro is coming Q3 2026. Join our newsletter to get notified.'
   }
 ]
+
+onMounted(() => {
+  addBreadcrumbStructuredData([
+    { name: 'Home', url: 'https://formatho.com' },
+    { name: 'Pricing', url: 'https://formatho.com/pricing' }
+  ])
+  addFAQStructuredData(faqs.map(f => ({ question: f.question, answer: f.answer })))
+})
 </script>
 
 <template>
