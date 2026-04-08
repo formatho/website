@@ -246,7 +246,7 @@ const filteredTools = computed(() => {
           </table>
         </div>
         <div class="text-center mt-8">
-          <a href="https://todo.formatho.com" target="_blank" rel="noopener">
+          <a href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=homepage_cta" target="_blank" rel="noopener">
             <button class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg">
               Start Free — No Credit Card
             </button>

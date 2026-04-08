@@ -23,7 +23,7 @@ const plans = [
       '1 project'
     ],
     cta: 'Get Started Free',
-    ctaLink: 'https://todo.formatho.com',
+    ctaLink: 'https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=pricing_page',
     popular: false
   },
   {
@@ -44,7 +44,7 @@ const plans = [
       'Custom integrations'
     ],
     cta: 'Start 14-Day Free Trial',
-    ctaLink: 'https://todo.formatho.com',
+    ctaLink: 'https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=pricing_page',
     popular: true
   },
   {
@@ -237,7 +237,7 @@ onMounted(() => {
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="https://todo.formatho.com"
+            href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=pricing_bottom_cta"
             class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-lg"
           >
             Start Free — No Credit Card
