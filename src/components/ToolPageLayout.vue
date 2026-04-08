@@ -215,6 +215,26 @@ defineExpose({
         <div v-if="$slots.content" class="mt-8">
           <slot name="content"></slot>
         </div>
+
+        <!-- Agent Todo Cross-Sell Banner -->
+        <div class="mt-12 rounded-xl border border-border bg-gradient-to-br from-primary/5 via-background to-primary/10 p-6 md:p-8">
+          <div class="flex flex-col md:flex-row items-center gap-6">
+            <div class="flex-1 text-center md:text-left">
+              <h3 class="text-xl font-bold mb-2">🤖 Give Your AI Agents Persistent Memory</h3>
+              <p class="text-muted-foreground text-sm">
+                Your agents forget tasks between sessions. Agent Todo gives them a persistent task queue with REST API, priority management, and agent identity tracking. Free forever for solo developers.
+              </p>
+            </div>
+            <a
+              href="https://todo.formatho.com"
+              target="blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors whitespace-nowrap"
+            >
+              Try Agent Todo Free →
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
