@@ -197,6 +197,38 @@ const filteredTools = computed(() => {
       </div>
     </section>
 
+    <!-- How It Works -->
+    <section class="container mx-auto px-4 py-12 md:py-16">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Get Started in 2 Minutes</h2>
+        <p class="text-muted-foreground mb-12 max-w-2xl mx-auto">Three steps to give your AI agents persistent task management.</p>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="glass-card p-8 text-center">
+            <div class="w-12 h-12 rounded-full bg-primary/10 text-primary font-bold text-xl flex items-center justify-center mx-auto mb-4">1</div>
+            <h3 class="font-semibold text-lg mb-2">Get Your API Key</h3>
+            <p class="text-sm text-muted-foreground">Sign up free at Agent Todo. Copy your API key. No credit card needed.</p>
+          </div>
+          <div class="glass-card p-8 text-center">
+            <div class="w-12 h-12 rounded-full bg-primary/10 text-primary font-bold text-xl flex items-center justify-center mx-auto mb-4">2</div>
+            <h3 class="font-semibold text-lg mb-2">Create Tasks via API</h3>
+            <p class="text-sm text-muted-foreground">One curl command to create tasks. Your agents never lose context again.</p>
+          </div>
+          <div class="glass-card p-8 text-center">
+            <div class="w-12 h-12 rounded-full bg-primary/10 text-primary font-bold text-xl flex items-center justify-center mx-auto mb-4">3</div>
+            <h3 class="font-semibold text-lg mb-2">Ship Faster</h3>
+            <p class="text-sm text-muted-foreground">Track progress, manage blockers, and keep your AI workforce productive 24/7.</p>
+          </div>
+        </div>
+        <div class="mt-8">
+          <a href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=how_it_works" target="_blank" rel="noopener">
+            <button class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg">
+              Try It Free Now
+            </button>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- Why Agent Todo Section -->
     <section class="container mx-auto px-4 py-12 md:py-16 bg-gradient-to-b from-background to-muted/30">
       <div class="max-w-5xl mx-auto">
