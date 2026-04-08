@@ -14,7 +14,7 @@
             Just clean, developer-friendly task management.
           </p>
           <div class="hero-cta">
-            <a href="https://todo.formatho.com" class="btn btn-primary">
+            <a href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=compare_page" class="btn btn-primary">
               Try Agent-Todo Free
             </a>
             <a href="#comparison" class="btn btn-secondary">
@@ -297,7 +297,7 @@
               <li><span class="check">✓</span> Self-hostable</li>
               <li><span class="check">✓</span> No vendor lock-in</li>
             </ul>
-            <a href="https://todo.formatho.com" class="btn btn-primary btn-block">
+            <a href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=compare_page" class="btn btn-primary btn-block">
               Get Started Free
             </a>
           </div>
@@ -459,7 +459,7 @@
           Start free. No credit card required. Upgrade when you need more.
         </p>
         <div class="cta-buttons">
-          <a href="https://todo.formatho.com" class="btn btn-primary btn-large">
+          <a href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=compare_page" class="btn btn-primary btn-large">
             Start Free Trial
           </a>
           <a href="https://github.com/formatho/agent-todo" class="btn btn-secondary btn-large" target="_blank">
