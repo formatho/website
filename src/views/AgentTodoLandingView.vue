@@ -14,7 +14,7 @@
           </p>
           <div class="hero-cta">
             <a href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=agent_todo_landing" class="btn btn-primary">
-              Start Free Trial
+              Get Started Free — 2 Min Setup
             </a>
             <a href="#demo" class="btn btn-secondary">
               Watch Demo
@@ -183,7 +183,7 @@ curl -X PATCH https://todo.formatho.com/api/tasks/{id}/status \
               <li>✓ Custom integrations</li>
             </ul>
             <a href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=agent_todo_landing" class="btn btn-primary">
-              Start Free Trial
+              Get Started Free
             </a>
           </div>
           <div class="pricing-card">
@@ -246,7 +246,7 @@ curl -X PATCH https://todo.formatho.com/api/tasks/{id}/status \
         <h2>Ready to Supercharge Your AI Agents?</h2>
         <p>Join developers who are already managing their AI workforce with agent-todo.</p>
         <a href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=agent_todo_landing" class="btn btn-primary btn-large">
-          Start Free Trial
+          Get Started Free
         </a>
         <p class="cta-note">No credit card required • Setup in 5 minutes</p>
       </div>
