@@ -204,10 +204,10 @@ onMounted(() => {
           <a
             :href="plan.ctaLink"
             :class="[
-              'block w-full text-center py-4 font-bold tracking-widest text-xs uppercase rounded-none transition-none',
+              'block w-full text-center py-4 font-bold tracking-widest text-xs uppercase rounded-none cursor-pointer',
               plan.popular
-                ? 'bg-background text-foreground hover:bg-foreground hover:text-background border border-background'
-                : 'bg-transparent text-foreground border border-foreground hover:bg-foreground hover:text-background'
+                ? 'bg-background text-foreground border border-background hover:opacity-80'
+                : 'bg-foreground text-background border border-foreground hover:opacity-80'
             ]"
           >
             {{ plan.cta }}
@@ -277,7 +277,7 @@ onMounted(() => {
           <div class="md:text-right">
             <a
               href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=pricing_bottom_cta"
-              class="inline-block bg-foreground text-background px-10 py-4 text-xs font-bold tracking-widest uppercase rounded-none hover:bg-background hover:text-foreground border border-foreground transition-none"
+              class="inline-block bg-foreground text-background px-10 py-4 text-xs font-bold tracking-widest uppercase rounded-none border border-foreground hover:opacity-80"
             >
               Start Free — No Credit Card
             </a>
