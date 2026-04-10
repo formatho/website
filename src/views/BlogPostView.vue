@@ -2,57 +2,36 @@
 import { computed } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import { useHead } from '@vueuse/head'
-import { Calendar, Clock, ArrowLeft, Tag, ExternalLink } from 'lucide-vue-next'
+import { ArrowLeft } from 'lucide-vue-next'
 import { blogPosts } from '../data/blogPosts'
 import EmailCapture from '@/components/EmailCapture.vue'
 
-// Note: AOS is initialized globally in main.ts to avoid conflicts and prevent scroll freezing
-
-// Define props - slug can come from route params or from props (for static routes)
 const props = defineProps<{
   slug?: string
 }>()
 
 const route = useRoute()
 
-// Get slug from multiple sources (in order of priority):
-//1. Props (for static routes with explicit props)
-//2. Route params (for dynamic routes with :slug)
-//3. Route name (for static routes named 'blog-post-{slug}')
-//4. URL path parsing (fallback for SSR)
 const slug = computed(() => {
-  //1. Check route meta.slug (set by static routes)
   if (route.meta?.slug) return route.meta.slug as string
-
-  // 2. Props (for static routes with explicit props)
   if (props.slug) return props.slug
-
-  // 3. Route params (for dynamic routes with :slug)
   if (route.params.slug) return route.params.slug as string
-
-  // 4. Extract slug from route name (e.g., 'blog-post-uuid-v1-vs-v4' -> 'uuid-v1-vs-v4')
   if (route.name && typeof route.name === 'string' && route.name.startsWith('blog-post-')) {
     return route.name.replace('blog-post-', '')
   }
-
-  // 5. Fallback: parse from URL path (e.g., '/blogs/uuid-v1-vs-v4' -> 'uuid-v1-vs-v4')
   if (route.path) {
     const pathParts = route.path.split('/').filter(Boolean)
-    // For path like /blogs/uuid-v1-vs-v4, pathParts = ['blogs', 'uuid-v1-vs-v4']
     if (pathParts.length >= 2 && pathParts[0] === 'blogs') {
       return pathParts.slice(1).join('/')
     }
   }
-
   return ''
 })
 
 const post = computed(() => {
-  // First check if postData was injected into meta during SSR
   if (route.meta?.postData) {
     return route.meta.postData as (typeof blogPosts)[0]
   }
-  // Otherwise look up by slug
   return blogPosts.find((p) => p.slug === slug.value)
 })
 
@@ -65,12 +44,9 @@ const formatDate = (dateString: string) => {
   })
 }
 
-// SEO: Update meta tags for blog post
 const siteName = 'Formatho'
-// Base URL must match the actual deployment location (formatho.com/tools/)
 const baseUrl = 'https://formatho.com/tools'
 
-// Use @vueuse/head for SEO meta tags
 useHead(computed(() => {
   if (!post.value) {
     return {
@@ -83,12 +59,10 @@ useHead(computed(() => {
 
   const fullTitle = `${post.value.title} - ${siteName}`
   const url = `${baseUrl}/blogs/${post.value.slug}`
-  // Fix: Check if image is already an absolute URL before concatenating
-  const image = post.value.image 
+  const image = post.value.image
     ? (post.value.image.startsWith('http') ? post.value.image : `${baseUrl}${post.value.image}`)
     : `${baseUrl}/logo.png`
 
-  // JSON-LD Structured Data for Article Schema
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -140,233 +114,246 @@ useHead(computed(() => {
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-12">
-    <!-- Breadcrumb -->
-    <nav class="flex items-center space-x-2 text-sm text-muted-foreground mb-8">
-      <RouterLink to="/" class="hover:text-gray-900 transition-colors">Home</RouterLink>
-      <span>/</span>
-      <RouterLink to="/blogs" class="hover:text-gray-900 transition-colors">Blog</RouterLink>
-      <span v-if="post">/</span>
-      <span v-if="post" class="text-gray-900 line-clamp-1">{{ post.title }}</span>
-    </nav>
-    
-    <!-- Back Link -->
-    <RouterLink
-      to="/blogs"
-      class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-gray-900 transition-colors mb-8"
-    >
-      <ArrowLeft class="w-4 h-4" />
-      Back to all articles
-    </RouterLink>
-
-    <!-- Article Not Found -->
-    <div v-if="!post" class="text-center py-16">
-      <h1 class="text-4xl font-bold mb-4">Article Not Found</h1>
-      <p class="text-muted-foreground mb-8">The article you're looking for doesn't exist.</p>
-      <RouterLink
-        to="/blogs"
-        class="btn-primary px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
-      >
-        Browse all articles
-      </RouterLink>
+  <div class="min-h-screen overflow-x-hidden">
+    <!-- Back Navigation -->
+    <div class="border-b border-foreground/10">
+      <div class="container mx-auto px-4 md:px-8 py-4">
+        <RouterLink
+          to="/blogs"
+          class="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft class="w-3 h-3" />
+          Back to Index
+        </RouterLink>
+      </div>
     </div>
 
-    <!-- Article Content -->
-    <article v-else class="max-w-4xl mx-auto">
-      <!-- Header -->
-      <header
-        class="mb-8"
-        data-aos="fade-up"
-        data-aos-duration="400"
-      >
-        <!-- Meta -->
-        <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
-          <div class="flex items-center gap-1">
-            <Calendar class="w-4 h-4" />
-            {{ formatDate(post.date) }}
-          </div>
-          <div class="flex items-center gap-1">
-            <Clock class="w-4 h-4" />
-            {{ post.readTime }} read
-          </div>
-        </div>
+    <!-- Not Found -->
+    <div v-if="!post" class="flex items-center justify-center min-h-[60vh]">
+      <div class="text-center">
+        <h1 class="text-8xl font-black tracking-tighter leading-none text-foreground/10 mb-4">404</h1>
+        <p class="text-xs tracking-widest text-muted-foreground mb-8">ARTICLE NOT FOUND</p>
+        <RouterLink
+          to="/blogs"
+          class="text-xs tracking-widest uppercase text-foreground hover:text-muted-foreground transition-colors"
+        >
+          Return to Index →
+        </RouterLink>
+      </div>
+    </div>
 
-        <!-- Title -->
-        <h1 class="text-4xl font-bold mb-4 leading-tight">{{ post.title }}</h1>
+    <!-- Article -->
+    <template v-else>
+      <!-- ============================================ -->
+      <!-- HEADER: Dominant Title                        -->
+      <!-- ============================================ -->
+      <header class="min-h-[50vh] flex flex-col justify-end border-b border-foreground/10">
+        <div class="container mx-auto px-4 md:px-8 pb-12 md:pb-20">
+          <!-- Meta -->
+          <div class="flex items-center gap-6 mb-8">
+            <p class="text-xs tracking-widest text-muted-foreground uppercase">
+              {{ formatDate(post.date) }}
+            </p>
+            <p class="text-xs tracking-widest text-muted-foreground uppercase">
+              {{ post.readTime }}
+            </p>
+          </div>
 
-        <!-- Tags -->
-        <div class="flex flex-wrap gap-2 mb-6">
-          <span
-            v-for="tag in post.tags"
-            :key="tag"
-            class="text-gray-900"
-          >
-            <Tag class="w-3 h-3" />
-            {{ tag }}
-          </span>
+          <!-- Title -->
+          <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none max-w-5xl">
+            {{ post.title }}
+          </h1>
+
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-4 mt-8">
+            <span
+              v-for="tag in post.tags"
+              :key="tag"
+              class="text-xs tracking-widest uppercase text-muted-foreground"
+            >
+              {{ tag }}
+            </span>
+          </div>
         </div>
       </header>
 
-      <!-- Featured Image -->
-      <div
-        v-if="post.image"
-        class="mb-8 rounded-xl overflow-hidden"
-        data-aos="fade-up"
-        data-aos-duration="400"
-        data-aos-delay="100"
-      >
-        <img
-          :src="post.image"
-          :alt="post.imageAlt || post.title"
-          class="w-full h-auto object-cover"
-          loading="lazy"
-        />
-        <p v-if="post.imageAlt" class="text-xs text-muted-foreground mt-2 text-center">
-          {{ post.imageAlt }}
-        </p>
-      </div>
-
-      <!-- Article Body -->
-      <div
-        class="prose prose-lg max-w-none dark:prose-invert"
-        data-aos="fade-up"
-        data-aos-duration="400"
-        data-aos-delay="200"
-      >
-        <div v-html="post.content"></div>
-      </div>
-
-      <!-- Newsletter Signup -->
-      <div
-        class="mt-12"
-        data-aos="fade-up"
-        data-aos-duration="400"
-        data-aos-delay="250"
-      >
-        <EmailCapture
-          source="blog"
-          variant="card"
-          title="Enjoyed this article?"
-          subtitle="Subscribe to get more tutorials, tips, and developer insights delivered to your inbox."
-          placeholder="your@email.com"
-          buttonText="Subscribe"
-        />
-      </div>
-
-      <!-- CTA Section -->
-      <div
-        v-if="post.cta"
-        class="mt-12 p-6 glass-card border-primary/30 bg-primary/5"
-        data-aos="fade-up"
-        data-aos-duration="400"
-        data-aos-delay="300"
-      >
-        <h3 class="text-xl font-bold mb-3">{{ post.cta.title }}</h3>
-        <p class="text-muted-foreground mb-4">{{ post.cta.description }}</p>
-        <RouterLink
-          :to="post.cta.link"
-          class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium"
-        >
-          {{ post.cta.buttonText }}
-          <ExternalLink class="w-4 h-4" />
-        </RouterLink>
-      </div>
-
-      <!-- Related Tools -->
-      <div
-        v-if="post.relatedTools && post.relatedTools.length > 0"
-        class="mt-12"
-        data-aos="fade-up"
-        data-aos-duration="400"
-        data-aos-delay="400"
-      >
-        <h3 class="text-2xl font-bold mb-6">Related Tools</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <RouterLink
-            v-for="(tool, index) in post.relatedTools"
-            :key="tool.link"
-            :to="tool.link"
-            class="p-4 glass-card hover:border-primary/50 transition-all group"
-            data-aos="fade-up"
-            data-aos-duration="400"
-            :data-aos-delay="400 + (index * 50)"
-          >
-            <h4 class="font-semibold group-hover:text-gray-900 transition-colors">
-              {{ tool.name }}
-            </h4>
-            <p class="text-sm text-muted-foreground">{{ tool.description }}</p>
-          </RouterLink>
+      <!-- ============================================ -->
+      <!-- FEATURED IMAGE                                -->
+      <!-- ============================================ -->
+      <div v-if="post.image" class="border-b border-foreground/10">
+        <div class="container mx-auto px-4 md:px-8 py-8 md:py-12">
+          <img
+            :src="post.image"
+            :alt="post.imageAlt || post.title"
+            class="w-full max-h-[60vh] object-cover grayscale"
+            loading="lazy"
+          />
         </div>
       </div>
 
-      <!-- Share & Navigation -->
-      <div
-        class="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
-        data-aos="fade-up"
-        data-aos-duration="400"
-        data-aos-delay="500"
-      >
-        <RouterLink
-          to="/blogs"
-          class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-gray-900 transition-colors"
-        >
-          <ArrowLeft class="w-4 h-4" />
-          Back to all articles
-        </RouterLink>
+      <!-- ============================================ -->
+      <!-- CONTENT: Narrow Prose Column + Grid Quotes    -->
+      <!-- ============================================ -->
+      <div class="container mx-auto px-4 md:px-8 py-12 md:py-24">
+        <article class="max-w-prose mx-auto">
+          <div
+            class="prose-editorial"
+            v-html="post.content"
+          ></div>
+        </article>
       </div>
-    </article>
+
+      <!-- ============================================ -->
+      <!-- NEWSLETTER                                    -->
+      <!-- ============================================ -->
+      <div class="border-t border-foreground/10">
+        <div class="container mx-auto px-4 md:px-8 py-12 md:py-20">
+          <div class="max-w-prose mx-auto">
+            <EmailCapture
+              source="blog"
+              variant="card"
+              title="Enjoyed this article?"
+              subtitle="Subscribe to get more tutorials, tips, and developer insights delivered to your inbox."
+              placeholder="your@email.com"
+              buttonText="Subscribe"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================ -->
+      <!-- CTA                                           -->
+      <!-- ============================================ -->
+      <div v-if="post.cta" class="border-t border-foreground/10">
+        <div class="container mx-auto px-4 md:px-8 py-12 md:py-20">
+          <div class="max-w-prose mx-auto">
+            <h3 class="text-2xl md:text-3xl font-black tracking-tighter leading-none mb-4">{{ post.cta.title }}</h3>
+            <p class="text-muted-foreground leading-relaxed mb-8">{{ post.cta.description }}</p>
+            <RouterLink
+              :to="post.cta.link"
+              class="inline-flex items-center justify-center bg-foreground px-8 py-4 text-sm font-medium tracking-widest text-background hover:bg-foreground/90 transition-colors"
+            >
+              {{ post.cta.buttonText }} →
+            </RouterLink>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================ -->
+      <!-- RELATED TOOLS                                 -->
+      <!-- ============================================ -->
+      <div v-if="post.relatedTools && post.relatedTools.length > 0" class="border-t border-foreground/10">
+        <div class="container mx-auto px-4 md:px-8 py-12 md:py-20">
+          <p class="text-xs tracking-widest text-muted-foreground mb-8 uppercase">Related Tools</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-foreground/10">
+            <RouterLink
+              v-for="tool in post.relatedTools"
+              :key="tool.link"
+              :to="tool.link"
+              class="p-8 bg-background hover:bg-muted/50 transition-colors group"
+            >
+              <h4 class="text-lg font-bold tracking-tight group-hover:translate-x-2 transition-transform duration-200">
+                {{ tool.name }} <span class="inline-block opacity-0 group-hover:opacity-100 transition-opacity ml-1">→</span>
+              </h4>
+              <p class="text-sm text-muted-foreground mt-2">{{ tool.description }}</p>
+            </RouterLink>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================ -->
+      <!-- FOOTER NAV                                    -->
+      <!-- ============================================ -->
+      <div class="border-t border-foreground/10">
+        <div class="container mx-auto px-4 md:px-8 py-8">
+          <RouterLink
+            to="/blogs"
+            class="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft class="w-3 h-3" />
+            Back to Index
+          </RouterLink>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
 <style scoped>
-.prose :deep(h2) {
-  @apply text-2xl font-bold mt-8 mb-4;
-}
-.prose :deep(h3) {
-  @apply text-xl font-semibold mt-6 mb-3;
-}
-.prose :deep(p) {
-  @apply mb-4 leading-relaxed text-muted-foreground;
-}
-.prose :deep(ul),
-.prose :deep(ol) {
-  @apply my-4 pl-6;
-}
-.prose :deep(li) {
-  @apply mb-2 text-muted-foreground;
-}
-.prose :deep(code) {
-  @apply px-1.5 py-0.5 bg-muted rounded text-sm font-mono;
-}
-.prose :deep(pre) {
-  @apply p-4 bg-muted rounded-lg overflow-x-auto my-4;
-}
-.prose :deep(pre code) {
-  @apply p-0 bg-transparent;
-}
-.prose :deep(blockquote) {
-  @apply pl-4 border-l-4 border-primary italic my-4 text-muted-foreground;
-}
-.prose :deep(a) {
-  @apply text-gray-900 hover:underline;
-}
-.prose :deep(table) {
-  @apply w-full border-collapse my-4;
-}
-.prose :deep(th),
-.prose :deep(td) {
-  @apply border border-border p-2 text-left;
-}
-.prose :deep(th) {
-  @apply bg-muted font-semibold;
+/* Editorial prose styles */
+.prose-editorial :deep(h2) {
+  @apply text-2xl md:text-3xl font-black tracking-tight leading-tight mt-16 mb-6;
 }
 
-/* Mobile: Ensure Related Tools grid stacks on mobile */
+.prose-editorial :deep(h3) {
+  @apply text-xl md:text-2xl font-bold tracking-tight leading-tight mt-12 mb-4;
+}
+
+.prose-editorial :deep(p) {
+  @apply text-base md:text-lg leading-relaxed text-muted-foreground mb-6;
+}
+
+.prose-editorial :deep(ul),
+.prose-editorial :deep(ol) {
+  @apply my-6 pl-6 space-y-2;
+}
+
+.prose-editorial :deep(li) {
+  @apply text-base md:text-lg leading-relaxed text-muted-foreground;
+}
+
+.prose-editorial :deep(code) {
+  @apply px-1.5 py-0.5 bg-muted text-sm font-mono;
+}
+
+.prose-editorial :deep(pre) {
+  @apply p-6 bg-muted my-8 overflow-x-auto;
+}
+
+.prose-editorial :deep(pre code) {
+  @apply p-0 bg-transparent;
+}
+
+/* Grid-breaking blockquotes */
+.prose-editorial :deep(blockquote) {
+  @apply my-12 py-6 border-l-2 border-foreground text-2xl md:text-3xl font-bold tracking-tight leading-snug;
+  margin-left: -3rem;
+  margin-right: -3rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
 @media (max-width: 768px) {
-  .prose :deep(.grid) {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
+  .prose-editorial :deep(blockquote) {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 1.5rem;
+    padding-right: 0;
   }
+}
+
+.prose-editorial :deep(a) {
+  @apply text-foreground hover:underline underline-offset-4;
+}
+
+.prose-editorial :deep(table) {
+  @apply w-full my-8;
+}
+
+.prose-editorial :deep(th),
+.prose-editorial :deep(td) {
+  @apply border border-foreground/10 p-3 text-left text-sm;
+}
+
+.prose-editorial :deep(th) {
+  @apply bg-muted font-bold tracking-widest text-xs uppercase;
+}
+
+.prose-editorial :deep(img) {
+  @apply my-8 w-full;
+}
+
+.prose-editorial :deep(strong) {
+  @apply text-foreground font-bold;
 }
 </style>

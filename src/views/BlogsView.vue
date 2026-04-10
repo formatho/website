@@ -1,22 +1,35 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useHead } from '@vueuse/head'
-import { Calendar, Clock, ArrowRight, Tag } from 'lucide-vue-next'
 import { blogMetadata } from '../data/blogMetadata'
-import EmailCapture from '@/components/EmailCapture.vue'
 
-// Note: AOS is initialized globally in main.ts to prevent scroll freezing conflicts
+const activeCategory = ref('ALL')
+
+const allTags = computed(() => {
+  const tags = new Set<string>()
+  blogMetadata.forEach(post => post.tags.forEach(tag => tags.add(tag)))
+  return ['ALL', ...Array.from(tags).slice(0, 8)]
+})
+
+const filteredPosts = computed(() => {
+  if (activeCategory.value === 'ALL') return blogMetadata
+  return blogMetadata.filter(post => post.tags.includes(activeCategory.value))
+})
 
 const formatDate = (dateString: string) => {
-  const date = new Date(dateString)
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
+  const d = new Date(dateString)
+  const day = String(d.getDate()).padStart(2, '0')
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const year = String(d.getFullYear()).slice(2)
+  return `${day}.${month}.${year}`
 }
 
-// SEO: Add structured data for blog listing
+const formatReadTime = (readTime: string) => {
+  const mins = readTime.replace(/\s*min.*/, '')
+  return mins
+}
+
 useHead({
   script: [
     {
@@ -45,108 +58,121 @@ useHead({
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-12">
-    <!-- Breadcrumb -->
-    <nav class="flex items-center space-x-2 text-sm text-muted-foreground mb-8">
-      <RouterLink to="/" class="hover:text-gray-900 transition-colors">Home</RouterLink>
-      <span>/</span>
-      <span class="text-gray-900">Blog</span>
-    </nav>
-    
-    <!-- Header -->
-    <div
-      class="text-center mb-12"
-      data-aos="fade-up"
-      data-aos-duration="400"
-    >
-      <h1 class="text-5xl font-bold mb-4">Blog</h1>
-      <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
-        Developer guides, tutorials, and insights from the Formatho team
-      </p>
-      <p class="text-sm text-muted-foreground mt-2">{{ blogMetadata.length }} articles</p>
-    </div>
+  <div class="min-h-screen overflow-x-hidden">
+    <!-- ============================================ -->
+    <!-- HERO: 50/50 SPLIT                             -->
+    <!-- ============================================ -->
+    <section class="grid grid-cols-1 md:grid-cols-2 min-h-[60vh] border-b border-foreground/10">
+      <!-- Left: Typography -->
+      <div class="flex flex-col justify-end p-8 md:p-16">
+        <p class="text-xs font-medium tracking-widest text-muted-foreground mb-6">
+          VOL. 01 — APR 2026
+        </p>
+        <h1 class="text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-none mb-8">
+          BLOG
+        </h1>
+        <p class="text-muted-foreground max-w-md leading-relaxed">
+          Developer guides, tutorials, and insights from the Formatho team. No fluff. Pure signal.
+        </p>
+      </div>
 
-    <!-- Blog Posts Grid -->
-    <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <article
-          v-for="(post, index) in blogMetadata"
-          :key="post.id"
-          class="glass-card-scale overflow-hidden hover:border-primary/50 transition-all group flex flex-col"
-          data-aos="fade-up"
-          data-aos-duration="400"
-          :data-aos-delay="(index % 3) * 50"
+      <!-- Right: Edge-to-edge greyscale image -->
+      <div class="relative min-h-[300px] md:min-h-0">
+        <div
+          class="absolute inset-0 bg-foreground/5 filter grayscale contrast-125"
         >
-          <!-- Image -->
-          <div v-if="post.image" class="aspect-video overflow-hidden">
-            <RouterLink :to="`/blogs/${post.slug}`" class="icon-wrapper w-full h-full">
+          <img
+            v-if="blogMetadata[0]?.image"
+            :src="blogMetadata[0].image"
+            :alt="blogMetadata[0].imageAlt || blogMetadata[0].title"
+            class="w-full h-full object-cover grayscale"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CATEGORY NAVIGATION: Sticky                    -->
+    <!-- ============================================ -->
+    <nav class="sticky top-0 z-30 bg-background border-b border-foreground/10">
+      <div class="container mx-auto px-4 md:px-8">
+        <div class="flex items-center gap-8 overflow-x-auto py-4 no-scrollbar">
+          <button
+            v-for="tag in allTags"
+            :key="tag"
+            @click="activeCategory = tag"
+            class="text-xs tracking-widest uppercase whitespace-nowrap transition-all pb-1"
+            :class="activeCategory === tag
+              ? 'text-foreground font-bold border-b-2 border-foreground'
+              : 'text-muted-foreground hover:text-foreground line-through decoration-foreground/20'"
+          >
+            {{ tag }}
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ============================================ -->
+    <!-- ARTICLE FEED: BRUTALIST LIST                   -->
+    <!-- ============================================ -->
+    <section class="container mx-auto px-4 md:px-8 py-0">
+      <div v-if="filteredPosts.length === 0" class="text-center py-24">
+        <p class="text-muted-foreground text-xs tracking-widest uppercase">No posts found</p>
+      </div>
+
+      <RouterLink
+        v-for="post in filteredPosts"
+        :key="post.id"
+        :to="`/blogs/${post.slug}`"
+        class="group block border-b border-foreground/10"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 py-8 md:py-12 items-center">
+          <!-- Left: Date -->
+          <div class="md:col-span-2">
+            <p class="text-lg md:text-xl font-bold tracking-tight text-muted-foreground">
+              {{ formatDate(post.date) }}
+            </p>
+          </div>
+
+          <!-- Center: Title + Meta -->
+          <div class="md:col-span-7">
+            <h2
+              class="text-2xl md:text-4xl font-black tracking-tight leading-tight group-hover:translate-x-2 transition-transform duration-200"
+            >
+              {{ post.title }}
+              <span class="inline-block opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-2">→</span>
+            </h2>
+            <p class="text-xs tracking-widest text-muted-foreground mt-3 uppercase">
+              [ MINUTE READ : {{ formatReadTime(post.readTime) }} ]<template v-if="post.tags.length"> [ TAG : {{ post.tags[0] }} ]</template>
+            </p>
+          </div>
+
+          <!-- Right: Thumbnail -->
+          <div class="md:col-span-3 flex justify-end">
+            <div class="w-20 h-20 md:w-24 md:h-24 aspect-square overflow-hidden">
               <img
+                v-if="post.image"
                 :src="post.image"
                 :alt="post.imageAlt || post.title"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                 loading="lazy"
               />
-            </RouterLink>
-          </div>
-
-          <!-- Content -->
-          <div class="flex-1 p-6 flex flex-col">
-            <!-- Meta -->
-            <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-3">
-              <div class="flex items-center gap-1">
-                <Calendar class="w-4 h-4" />
-                {{ formatDate(post.date) }}
-              </div>
-              <div class="flex items-center gap-1">
-                <Clock class="w-4 h-4" />
-                {{ post.readTime }}
-              </div>
+              <div v-else class="w-full h-full bg-foreground/5 grayscale"></div>
             </div>
-
-            <!-- Title -->
-            <RouterLink :to="`/blogs/${post.slug}`">
-              <h2 class="text-xl font-bold mb-2 group-hover:text-gray-900 transition-colors line-clamp-2">
-                {{ post.title }}
-              </h2>
-            </RouterLink>
-
-            <!-- Excerpt -->
-            <p class="text-muted-foreground mb-4 leading-relaxed line-clamp-3 flex-1">
-              {{ post.excerpt }}
-            </p>
-
-            <!-- Tags -->
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span
-                v-for="tag in post.tags.slice(0, 3)"
-                :key="tag"
-                class="text-gray-900"
-              >
-                <Tag class="w-3 h-3" />
-                {{ tag }}
-              </span>
-              <span v-if="post.tags.length > 3" class="text-xs text-muted-foreground">
-                +{{ post.tags.length - 3 }}
-              </span>
-            </div>
-
-            <!-- Read More Link -->
-            <RouterLink
-              :to="`/blogs/${post.slug}`"
-              class="btn-primary inline-flex items-center gap-2 text-sm font-medium mt-auto"
-            >
-              Read More
-              <ArrowRight class="w-4 h-4" />
-            </RouterLink>
           </div>
-        </article>
-      </div>
-
-      <!-- Empty State (if no posts) -->
-      <div v-if="blogMetadata.length === 0" class="text-center py-12">
-        <p class="text-muted-foreground">No blog posts yet. Check back soon!</p>
-      </div>
-    </div>
-
+        </div>
+      </RouterLink>
+    </section>
   </div>
 </template>
+
+<style scoped>
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>
