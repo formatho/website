@@ -103,7 +103,7 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
 </script>
 
 <template>
-  <nav class="sticky top-0 z-[100] bg-background border-b border-foreground">
+  <nav class="fixed top-0 left-0 right-0 z-[100] bg-background border-b border-foreground">
     <div class="container mx-auto px-4">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->

@@ -24,7 +24,7 @@ const showBreadcrumb = computed(() => route.path !== '/')
     
     <Navbar />
     <Breadcrumb v-if="showBreadcrumb" />
-    <main id="main-content" class="flex-1">
+    <main id="main-content" class="flex-1 pt-16">
       <RouterView />
     </main>
     <Footer />
