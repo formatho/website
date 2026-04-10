@@ -80,12 +80,18 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
     <section class="relative py-16 md:py-32 bg-muted/30 overflow-hidden">
       <div class="container mx-auto px-4 md:px-12">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
-          <!-- Left: Image -->
+          <!-- Left: Overlapping Images with Shadow -->
           <div class="relative md:col-span-7 min-h-[400px] md:min-h-[600px]">
             <img
               :src="cloudIsAtRisk"
               alt="Cloud AI is a Security Risk"
-              class="w-full h-full object-cover grayscale contrast-125 border border-foreground/10"
+              class="absolute top-0 left-0 w-3/4 h-3/4 object-cover grayscale contrast-125 border border-foreground/10"
+              loading="lazy"
+            />
+            <img
+              :src="cloudIsAtRisk"
+              alt="Cloud AI Security Shadow"
+              class="absolute bottom-0 right-0 w-3/4 h-3/4 object-cover grayscale contrast-125 border border-foreground/10 -z-10"
               loading="lazy"
             />
           </div>
