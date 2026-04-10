@@ -154,67 +154,69 @@ onMounted(() => {
     <!-- ============================================ -->
     <!-- ANTI-CARD GRID                                -->
     <!-- ============================================ -->
-    <section class="container mx-auto px-4 md:px-0">
-      <div class="grid grid-cols-1 md:grid-cols-3">
-        <div
-          v-for="(plan, index) in plans"
-          :key="plan.name"
-          :class="[
-            'flex flex-col p-8 md:p-12 border-b md:border-b-0',
-            plan.popular ? 'bg-foreground text-background' : 'bg-background text-foreground',
-          ]"
-          :style="{ borderRight: index < plans.length - 1 ? '1px solid var(--foreground)' : 'none', borderColor: plan.popular ? 'var(--background)' : '' }"
-        >
-          <!-- Plan Name -->
-          <p class="text-xs tracking-widest mb-2 opacity-60">
-            {{ planSpacing(plan.name.toUpperCase()) }}
-          </p>
-          <p class="text-sm opacity-60 mb-8">{{ plan.description }}</p>
+    <div class="border-t-2 border-b-2 border-foreground pricing-grid">
+      <div
+        v-for="(plan, index) in plans"
+        :key="plan.name"
+        :class="[
+          'flex flex-col p-8 md:p-10',
+          plan.popular ? 'bg-foreground text-background' : 'bg-background text-foreground',
+          // Mobile: border-b between plans
+          'border-b border-foreground last:border-b-0 md:border-b-0',
+          // Desktop: border-r between columns, last has no right border
+          'md:border-r',
+          index === plans.length - 1 ? 'md:border-r-0' : '',
+        ]"
+      >
+        <!-- Plan Name -->
+        <p class="text-xs tracking-widest mb-1 opacity-60">
+          {{ planSpacing(plan.name.toUpperCase()) }}
+        </p>
+        <p class="text-sm opacity-60 mb-2">{{ plan.description }}</p>
 
-          <!-- Price -->
-          <div class="mb-10">
-            <div class="flex items-baseline gap-1">
-              <span v-if="plan.monthlyPrice !== null" class="text-8xl md:text-9xl font-black tracking-tighter leading-none">
-                ${{ billingPeriod === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice }}
-              </span>
-              <span v-else class="text-5xl md:text-6xl font-black tracking-tighter leading-none">Custom</span>
-            </div>
-            <p v-if="plan.monthlyPrice !== null" class="text-xs tracking-widest mt-2 opacity-50">PER MONTH</p>
-            <p v-if="billingPeriod === 'yearly' && plan.monthlyPrice" class="text-xs tracking-widest mt-1 opacity-50">
-              BILLED ${{ plan.yearlyPrice! * 12 }}/YEAR
-            </p>
+        <!-- Price -->
+        <div class="mt-0 mb-8">
+          <div class="flex items-baseline gap-1">
+            <span v-if="plan.monthlyPrice !== null" class="text-8xl md:text-9xl font-black tracking-tighter leading-none mt-0">
+              ${{ billingPeriod === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice }}
+            </span>
+            <span v-else class="text-5xl md:text-6xl font-black tracking-tighter leading-none mt-0">Custom</span>
           </div>
+          <p v-if="plan.monthlyPrice !== null" class="text-xs tracking-widest mt-1 opacity-50">PER MONTH</p>
+          <p v-if="billingPeriod === 'yearly' && plan.monthlyPrice" class="text-xs tracking-widest mt-1 opacity-50">
+            BILLED ${{ plan.yearlyPrice! * 12 }}/YEAR
+          </p>
+        </div>
 
-          <!-- Features -->
-          <ul class="flex-1 mb-10">
-            <li
-              v-for="feature in plan.features"
-              :key="feature"
-              :class="[
-                'flex items-start gap-4 py-3 border-b',
-                plan.popular ? 'border-background/10' : 'border-foreground/10'
-              ]"
-            >
-              <span class="text-xs font-mono mt-0.5 opacity-40">+</span>
-              <span class="text-sm">{{ feature }}</span>
-            </li>
-          </ul>
-
-          <!-- CTA: Sharp buttons, harsh hover flip -->
-          <a
-            :href="plan.ctaLink"
+        <!-- Features -->
+        <ul class="flex-1 mt-0 mb-8 p-0">
+          <li
+            v-for="feature in plan.features"
+            :key="feature"
             :class="[
-              'block w-full text-center py-4 font-bold tracking-widest text-xs uppercase rounded-none cursor-pointer',
-              plan.popular
-                ? 'bg-background text-foreground border border-background hover:opacity-80'
-                : 'bg-foreground text-background border border-foreground hover:opacity-80'
+              'flex items-center gap-3 py-4 m-0 border-b',
+              plan.popular ? 'border-background/10' : 'border-foreground/10'
             ]"
           >
-            {{ plan.cta }}
-          </a>
-        </div>
+            <span class="text-xs font-mono opacity-40">+</span>
+            <span class="text-sm">{{ feature }}</span>
+          </li>
+        </ul>
+
+        <!-- CTA -->
+        <a
+          :href="plan.ctaLink"
+          :class="[
+            'block w-full text-center py-4 mt-8 font-bold tracking-widest text-xs uppercase rounded-none cursor-pointer',
+            plan.popular
+              ? 'bg-background text-foreground border border-background hover:opacity-80'
+              : 'bg-foreground text-background border border-foreground hover:opacity-80'
+          ]"
+        >
+          {{ plan.cta }}
+        </a>
       </div>
-    </section>
+    </div>
 
     <!-- Guarantee -->
     <section class="border-t-2 border-foreground">
@@ -290,3 +292,12 @@ onMounted(() => {
     </section>
   </div>
 </template>
+
+<style scoped>
+@media (min-width: 768px) {
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+</style>
