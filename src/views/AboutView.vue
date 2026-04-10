@@ -76,7 +76,7 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
 
           <!-- Left: Main Image -->
-          <div class="relative md:col-span-6 min-h-[400px] md:min-h-[600px]">
+          <div class="relative md:col-span-4 min-h-[400px] md:min-h-[600px]">
             <img
               :src="cloudIsAtRisk"
               alt="Cloud AI is a Security Risk"
@@ -98,12 +98,12 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
           </div>
 
           <!-- Text -->
-          <div class="md:col-span-3 relative">
+          <div class="md:col-span-5 relative">
             <p class="text-xs font-medium tracking-widest text-muted-foreground mb-4">
               THE PROBLEM
             </p>
-            <h3 class="text-3xl md:text-4xl font-black tracking-tighter leading-none mb-8">
-              Cloud AI is a Security Risk
+            <h3 class="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-8">
+              Cloud AI is a<br />Security Risk
             </h3>
             <p class="text-muted-foreground leading-relaxed mb-8">
               In the Web3 and enterprise space, data privacy isn't a feature; it's the foundation. Sending sensitive system architecture or decentralized application logic to a centralized LLM breaks the zero-trust model. You shouldn't have to compromise your proprietary data just to leverage the power of AI automation.
