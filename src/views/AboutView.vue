@@ -19,7 +19,7 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
         </h1>
       </div>
 
-      <!-- Layer 1: Secondary bleed text -->
+      <!-- Layer 0b: Secondary bleed text -->
       <div class="absolute bottom-0 left-0 right-0 pointer-events-none select-none z-0">
         <p
           class="text-[6vw] md:text-[4vw] font-black tracking-tighter leading-none text-foreground/[0.03] whitespace-nowrap -mb-4"
@@ -28,16 +28,10 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
         </p>
       </div>
 
-      <!-- Layer 2: Central Abstract 3D Placeholder -->
-      <div
-        class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
-      >
-        <div
-          class="w-48 h-48 md:w-72 md:h-72 border border-foreground/10 rounded-sm rotate-45 opacity-20"
-        ></div>
-        <div
-          class="absolute w-32 h-32 md:w-52 md:h-52 border border-foreground/5 rounded-sm rotate-12 opacity-10"
-        ></div>
+      <!-- Layer 1: Central Abstract 3D Placeholder -->
+      <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+        <div class="w-48 h-48 md:w-72 md:h-72 border border-foreground/10 rounded-sm rotate-45 opacity-20"></div>
+        <div class="absolute w-32 h-32 md:w-52 md:h-52 border border-foreground/5 rounded-sm rotate-12 opacity-10"></div>
       </div>
 
       <!-- Layer 3: Content Grid -->
@@ -48,9 +42,7 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
             <p class="text-xs font-medium tracking-widest text-muted-foreground mb-6">
               ABOUT FORMATHO
             </p>
-            <h2
-              class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none text-foreground"
-            >
+            <h2 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none text-foreground">
               The Privacy-First<br />Digital Twin OS
             </h2>
           </div>
@@ -76,28 +68,44 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
 
     <!-- ============================================ -->
     <!-- SECTION 2: PHILOSOPHY — ASYMMETRICAL LAYOUT   -->
+    <!-- Layout: Left overlapping images, right soft-  -->
+    <!-- focus image, center floating text              -->
     <!-- ============================================ -->
-    <section class="relative py-16 md:py-32 bg-muted/30 overflow-hidden">
+    <section class="relative py-16 md:py-32 bg-muted/30">
       <div class="container mx-auto px-4 md:px-12">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
-          <!-- Left: Overlapping Images with Shadow -->
-          <div class="relative md:col-span-7 min-h-[400px] md:min-h-[600px]">
+
+          <!-- Left: Overlapping Images -->
+          <div class="relative md:col-span-5 min-h-[400px] md:min-h-[600px]">
             <img
               :src="cloudIsAtRisk"
               alt="Cloud AI is a Security Risk"
-              class="absolute top-0 left-0 w-[80%] h-[80%] object-cover grayscale contrast-125 border border-foreground/10 z-10"
+              class="absolute top-0 left-0 w-3/4 h-3/4 object-cover border border-foreground/10"
+              style="filter: grayscale(100%) contrast(120%);"
               loading="lazy"
             />
             <img
               :src="cloudIsAtRisk"
               alt="Cloud AI Security Shadow"
-              class="absolute bottom-0 right-0 w-[80%] h-[80%] object-cover grayscale contrast-125 border border-foreground/10 opacity-40 z-0"
+              class="absolute bottom-0 right-0 w-3/4 h-3/4 object-cover border border-foreground/10"
+              style="filter: grayscale(100%) contrast(120%); opacity: 0.4;"
               loading="lazy"
             />
           </div>
 
-          <!-- Center Floating Text -->
-          <div class="md:col-span-5 relative">
+          <!-- Right: Soft-focus Image -->
+          <div class="relative md:col-span-3 min-h-[300px] hidden md:block">
+            <img
+              :src="cloudIsAtRisk"
+              alt="Privacy risk soft focus"
+              class="absolute inset-0 w-full h-full object-cover border border-foreground/10"
+              style="filter: grayscale(100%) contrast(120%); opacity: 0.3; filter: grayscale(100%) blur(4px);"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Center: Floating Text -->
+          <div class="md:col-span-4 relative">
             <p class="text-xs font-medium tracking-widest text-muted-foreground mb-4">
               THE PROBLEM
             </p>
@@ -107,7 +115,6 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
             <p class="text-muted-foreground leading-relaxed mb-8">
               In the Web3 and enterprise space, data privacy isn't a feature; it's the foundation. Sending sensitive system architecture or decentralized application logic to a centralized LLM breaks the zero-trust model. You shouldn't have to compromise your proprietary data just to leverage the power of AI automation.
             </p>
-            <!-- Floating Statement -->
             <div class="border-l-2 border-foreground pl-6 py-2">
               <p class="text-xl md:text-2xl font-black tracking-widest leading-none">
                 FORMATHO IS PRIVACY.
@@ -180,6 +187,7 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
 
     <!-- ============================================ -->
     <!-- SECTION 4: ECOSYSTEM — THE GRID BREAKER       -->
+    <!-- Central vertical line bleeds across horizontal -->
     <!-- ============================================ -->
     <section class="relative py-16 md:py-32 border-t border-b border-foreground/10">
       <div class="container mx-auto px-4 md:px-12">
@@ -192,12 +200,10 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
           </h3>
         </div>
 
-        <!-- Grid with Horizontal Dividers -->
+        <!-- Grid with Horizontal Dividers + Central Vertical Line -->
         <div class="relative">
           <!-- Grid Breaker: Vertical Line -->
-          <div
-            class="hidden md:block absolute top-0 bottom-0 left-1/2 w-px bg-foreground/10 -translate-x-1/2 z-10"
-          ></div>
+          <div class="hidden md:block absolute top-0 bottom-0 left-1/2 w-px bg-foreground/10 -translate-x-1/2 z-10"></div>
 
           <!-- Row 1 -->
           <div class="grid grid-cols-1 md:grid-cols-2 border-b border-foreground/10">
