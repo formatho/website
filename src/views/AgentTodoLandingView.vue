@@ -1,12 +1,14 @@
 <template>
   <div class="agent-todo-landing">
-    <!-- Hero Section -->
+    <!-- ============================================ -->
+    <!-- HERO — Brutalist, Left-aligned, Purple        -->
+    <!-- ============================================ -->
     <section class="hero">
       <div class="container">
-        <div class="hero-content">
+        <div class="hero-inner">
+          <p class="hero-eyebrow">AGENT-TODO</p>
           <h1 class="hero-title">
-            Task Management Built for
-            <span class="highlight">AI Agents</span>
+            Task Management<br />Built for <span class="highlight">AI Agents</span>
           </h1>
           <p class="hero-subtitle">
             The persistent TODO system your AI workforce deserves. Stop losing context between sessions.
@@ -20,41 +22,46 @@
               Watch Demo
             </a>
           </div>
-          <div class="hero-stats">
-            <div class="stat">
-              <div class="stat-number">1000+</div>
-              <div class="stat-label">Tasks Managed Daily</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number">50+</div>
-              <div class="stat-label">Active Agents</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number">99.9%</div>
-              <div class="stat-label">Uptime</div>
-            </div>
+        </div>
+
+        <!-- Stats: Bottom-anchored grid with vertical dividers -->
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-number">1000+</div>
+            <div class="stat-label">Tasks Managed Daily</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Active Agents</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">99.9%</div>
+            <div class="stat-label">Uptime</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Problem Section -->
+    <!-- ============================================ -->
+    <!-- PROBLEM — White bg, 3-col grid, no cards      -->
+    <!-- ============================================ -->
     <section class="problem">
       <div class="container">
+        <p class="section-eyebrow">THE PROBLEM</p>
         <h2>The Problem with AI Agents</h2>
         <div class="problems-grid">
-          <div class="problem-card">
-            <div class="problem-icon">🧠</div>
+          <div class="problem-item">
+            <span class="problem-index">01</span>
             <h3>Memory Loss</h3>
             <p>Agents forget tasks between sessions. No persistent memory = no accountability.</p>
           </div>
-          <div class="problem-card">
-            <div class="problem-icon">🔄</div>
+          <div class="problem-item">
+            <span class="problem-index">02</span>
             <h3>Context Switching</h3>
             <p>Traditional task managers aren't designed for autonomous AI workers.</p>
           </div>
-          <div class="problem-card">
-            <div class="problem-icon">📊</div>
+          <div class="problem-item">
+            <span class="problem-index">03</span>
             <h3>No Visibility</h3>
             <p>Can't see what your agents are working on or track their progress.</p>
           </div>
@@ -264,81 +271,111 @@ curl -X PATCH https://todo.formatho.com/api/tasks/{id}/status \
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+.agent-todo-landing * {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-/* Hero Section */
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #718096;
+  margin-bottom: 0.5rem;
+}
+
+/* ===== HERO ===== */
 .hero {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 6rem 0;
-  text-align: center;
+  padding: 6rem 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-inner {
+  max-width: 700px;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 1.5rem;
 }
 
 .hero-title {
-  font-size: 3.5rem;
-  font-weight: 800;
+  font-size: 4.5rem;
+  font-weight: 900;
   margin-bottom: 1.5rem;
-  line-height: 1.2;
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
 .highlight {
-  background: linear-gradient(90deg, #ffd700, #ff6b6b);
+  background: linear-gradient(90deg, #ff9a3c, #ff6b2b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .hero-subtitle {
-  font-size: 1.5rem;
-  opacity: 0.95;
-  max-width: 700px;
-  margin: 0 auto 2rem;
+  font-size: 1.25rem;
+  opacity: 0.9;
+  max-width: 600px;
   line-height: 1.6;
+  margin-bottom: 2.5rem;
 }
 
 .hero-cta {
   display: flex;
   gap: 1rem;
-  justify-content: center;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 .btn {
   display: inline-block;
   padding: 1rem 2rem;
-  border-radius: 8px;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
-  transition: all 0.3s ease;
+  font-size: 0.875rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: none;
+  cursor: pointer;
 }
 
 .btn-primary {
   background: white;
-  color: #667eea;
+  color: #764ba2;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  opacity: 0.85;
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.2);
+  background: transparent;
   color: white;
   border: 2px solid white;
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.3);
+  opacity: 0.85;
 }
 
 .btn-large {
   padding: 1.5rem 3rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .btn-outline {
@@ -352,71 +389,92 @@ curl -X PATCH https://todo.formatho.com/api/tasks/{id}/status \
   color: white;
 }
 
+/* Stats — bottom-anchored grid with vertical dividers */
 .hero-stats {
-  display: flex;
-  gap: 3rem;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: auto;
 }
 
 .stat {
-  text-align: center;
+  padding: 2rem;
+  text-align: left;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat:last-child {
+  border-right: none;
 }
 
 .stat-number {
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 900;
   display: block;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .stat-label {
-  font-size: 0.9rem;
-  opacity: 0.9;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-top: 0.5rem;
 }
 
-/* Problem Section */
+/* ===== PROBLEM ===== */
 .problem {
   padding: 5rem 0;
-  background: #f8f9fa;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .problem h2 {
-  text-align: center;
   font-size: 2.5rem;
+  font-weight: 900;
   margin-bottom: 3rem;
-  color: #2d3748;
+  color: #1a202c;
+  letter-spacing: -0.02em;
 }
 
 .problems-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
 }
 
-.problem-card {
-  background: white;
+.problem-item {
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  text-align: center;
+  border-right: 1px solid #2d3748;
 }
 
-.problem-icon {
+.problem-item:last-child {
+  border-right: none;
+}
+
+.problem-index {
   font-size: 3rem;
+  font-weight: 200;
+  font-family: 'Monaco', 'Menlo', monospace;
+  color: #cbd5e0;
+  display: block;
   margin-bottom: 1rem;
+  line-height: 1;
 }
 
-.problem-card h3 {
+.problem-item h3 {
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: #2d3748;
+  font-weight: 900;
+  margin-bottom: 0.75rem;
+  color: #1a202c;
 }
 
-.problem-card p {
+.problem-item p {
   color: #718096;
   line-height: 1.6;
 }
 
-/* Solution Section */
+/* ===== SOLUTION ===== */
 .solution {
   padding: 5rem 0;
 }
@@ -486,7 +544,6 @@ curl -X PATCH https://todo.formatho.com/api/tasks/{id}/status \
   height: 60px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -519,7 +576,6 @@ curl -X PATCH https://todo.formatho.com/api/tasks/{id}/status \
 
 .code-block {
   background: #1a202c;
-  border-radius: 12px;
   padding: 2rem;
   overflow-x: auto;
 }
@@ -558,27 +614,26 @@ curl -X PATCH https://todo.formatho.com/api/tasks/{id}/status \
 
 .pricing-card {
   background: white;
-  border-radius: 12px;
   padding: 2rem;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   position: relative;
+  border: 1px solid #e2e8f0;
 }
 
 .pricing-card.featured {
-  border: 3px solid #667eea;
-  transform: scale(1.05);
+  border: 2px solid #667eea;
 }
 
 .popular-badge {
   background: #667eea;
   color: white;
   padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   position: absolute;
-  top: -12px;
+  top: -14px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -634,8 +689,7 @@ curl -X PATCH https://todo.formatho.com/api/tasks/{id}/status \
 .testimonial {
   background: white;
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
 }
 
 .testimonial-text {
@@ -672,6 +726,7 @@ curl -X PATCH https://todo.formatho.com/api/tasks/{id}/status \
 .final-cta h2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  font-weight: 900;
 }
 
 .final-cta p {
@@ -686,28 +741,45 @@ curl -X PATCH https://todo.formatho.com/api/tasks/{id}/status \
   margin-top: 1rem;
 }
 
-/* Responsive */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
-  
+
   .hero-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
-  
-  .hero-stats {
-    flex-direction: column;
-    gap: 2rem;
-  }
-  
+
   .hero-cta {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
   }
-  
-  .pricing-card.featured {
-    transform: none;
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .stat:last-child {
+    border-bottom: none;
+  }
+
+  .problems-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .problem-item {
+    border-right: none;
+    border-bottom: 1px solid #2d3748;
+  }
+
+  .problem-item:last-child {
+    border-bottom: none;
   }
 }
 </style>
