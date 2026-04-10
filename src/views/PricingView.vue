@@ -6,6 +6,11 @@ import { useStructuredData } from '@/composables/useStructuredData'
 const { addFAQStructuredData, addBreadcrumbStructuredData } = useStructuredData()
 
 const billingPeriod = ref<'monthly' | 'yearly'>('monthly')
+const openFaq = ref<number | null>(null)
+
+const toggleFaq = (index: number) => {
+  openFaq.value = openFaq.value === index ? null : index
+}
 
 const plans = [
   {
@@ -123,7 +128,7 @@ onMounted(() => {
           <button
             @click="billingPeriod = 'monthly'"
             :class="[
-              'text-xs tracking-widest uppercase transition-all pb-1',
+              'text-xs tracking-widest uppercase transition-none pb-1',
               billingPeriod === 'monthly'
                 ? 'text-foreground font-bold border-b-2 border-foreground'
                 : 'text-muted-foreground hover:text-foreground line-through decoration-foreground/20'
@@ -134,7 +139,7 @@ onMounted(() => {
           <button
             @click="billingPeriod = 'yearly'"
             :class="[
-              'text-xs tracking-widest uppercase transition-all pb-1',
+              'text-xs tracking-widest uppercase transition-none pb-1',
               billingPeriod === 'yearly'
                 ? 'text-foreground font-bold border-b-2 border-foreground'
                 : 'text-muted-foreground hover:text-foreground line-through decoration-foreground/20'
@@ -155,12 +160,10 @@ onMounted(() => {
           v-for="(plan, index) in plans"
           :key="plan.name"
           :class="[
-            'flex flex-col p-8 md:p-12',
+            'flex flex-col p-8 md:p-12 border-b md:border-b-0',
             plan.popular ? 'bg-foreground text-background' : 'bg-background text-foreground',
-            index < plans.length - 1 ? 'md:border-r' : '',
-            plan.popular ? 'md:border-r' : '',
           ]"
-          :style="{ borderRight: index < plans.length - 1 && !plan.popular ? '1px solid var(--foreground)' : plan.popular ? '1px solid var(--foreground)' : 'none', borderColor: plan.popular ? 'var(--background)' : '' }"
+          :style="{ borderRight: index < plans.length - 1 ? '1px solid var(--foreground)' : 'none', borderColor: plan.popular ? 'var(--background)' : '' }"
         >
           <!-- Plan Name -->
           <p class="text-xs tracking-widest mb-2 opacity-60">
@@ -197,14 +200,14 @@ onMounted(() => {
             </li>
           </ul>
 
-          <!-- CTA -->
+          <!-- CTA: Sharp buttons, harsh hover flip -->
           <a
             :href="plan.ctaLink"
             :class="[
-              'block w-full text-center py-4 font-bold tracking-widest text-xs uppercase transition-all',
+              'block w-full text-center py-4 font-bold tracking-widest text-xs uppercase rounded-none transition-none',
               plan.popular
-                ? 'bg-background text-foreground hover:bg-background/90'
-                : 'bg-foreground text-background hover:bg-foreground/90'
+                ? 'bg-background text-foreground hover:bg-foreground hover:text-background border border-background'
+                : 'bg-transparent text-foreground border border-foreground hover:bg-foreground hover:text-background'
             ]"
           >
             {{ plan.cta }}
@@ -216,30 +219,51 @@ onMounted(() => {
     <!-- Guarantee -->
     <section class="border-t-2 border-foreground">
       <div class="container mx-auto px-4 md:px-12 py-8">
-        <div class="flex items-center gap-4">
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4">
           <span class="text-xs tracking-widest text-muted-foreground">30-DAY MONEY-BACK GUARANTEE</span>
-          <span class="text-muted-foreground">—</span>
+          <span class="text-muted-foreground hidden md:inline">—</span>
           <span class="text-xs text-muted-foreground">Not satisfied? Full refund, no questions asked.</span>
         </div>
       </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- FAQ: Brutalist spec sheet style               -->
+    <!-- FAQ: Brutalist Accordion                      -->
     <!-- ============================================ -->
     <section class="container mx-auto px-4 md:px-12 py-16 md:py-24">
       <h2 class="text-4xl md:text-5xl font-black tracking-tighter leading-none mb-12">
         FAQ
       </h2>
-      <div class="border-t border-foreground/10">
+      <div>
         <div
-          v-for="faq in faqs"
+          v-for="(faq, index) in faqs"
           :key="faq.question"
-          class="border-b border-foreground/10 py-8"
+          class="border-t-2 border-foreground"
         >
-          <h3 class="text-lg font-bold tracking-tight mb-3">{{ faq.question }}</h3>
-          <p class="text-sm text-muted-foreground leading-relaxed max-w-2xl">{{ faq.answer }}</p>
+          <!-- Question -->
+          <button
+            @click="toggleFaq(index)"
+            class="w-full flex items-start justify-between gap-8 py-8 text-left"
+          >
+            <h3 class="text-xl md:text-2xl font-bold tracking-tight leading-tight">
+              {{ faq.question }}
+            </h3>
+            <span
+              class="text-3xl font-thin leading-none mt-1 flex-shrink-0 select-none"
+              :class="openFaq === index ? 'rotate-45' : ''"
+            >+</span>
+          </button>
+
+          <!-- Answer -->
+          <div
+            v-show="openFaq === index"
+            class="pb-8 pl-6 border-b border-foreground/10"
+          >
+            <p class="text-sm text-muted-foreground leading-relaxed max-w-2xl">{{ faq.answer }}</p>
+          </div>
         </div>
+        <!-- Bottom border -->
+        <div class="border-t-2 border-foreground"></div>
       </div>
     </section>
 
@@ -253,7 +277,7 @@ onMounted(() => {
           <div class="md:text-right">
             <a
               href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=pricing_bottom_cta"
-              class="inline-block bg-foreground text-background px-10 py-4 text-xs font-bold tracking-widest uppercase hover:bg-foreground/90 transition-all"
+              class="inline-block bg-foreground text-background px-10 py-4 text-xs font-bold tracking-widest uppercase rounded-none hover:bg-background hover:text-foreground border border-foreground transition-none"
             >
               Start Free — No Credit Card
             </a>
