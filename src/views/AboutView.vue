@@ -80,33 +80,17 @@ import { Card, CardContent } from '@/components/ui/card'
       <div class="container mx-auto px-4 md:px-12">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
           <!-- Left: Image -->
-          <div class="relative md:col-span-5 min-h-[400px] md:min-h-[600px]">
+          <div class="relative md:col-span-7 min-h-[400px] md:min-h-[600px]">
             <img
               src="/images/cloud-is-at-risk.png"
               alt="Cloud AI is a Security Risk"
-              class="absolute top-0 left-0 w-3/4 h-3/4 object-cover grayscale contrast-125 border border-foreground/10"
-              loading="lazy"
-            />
-            <img
-              src="/images/cloud-is-at-risk.png"
-              alt="Cloud AI Security"
-              class="absolute bottom-0 right-0 w-3/4 h-3/4 object-cover grayscale contrast-125 border border-foreground/10 -z-10"
-              loading="lazy"
-            />
-          </div>
-
-          <!-- Right: Soft-focus image -->
-          <div class="relative md:col-span-3 min-h-[300px] hidden md:block">
-            <img
-              src="/images/cloud-is-at-risk.png"
-              alt="Privacy risk illustration"
-              class="absolute inset-0 w-full h-full object-cover blur-sm grayscale contrast-125 border border-foreground/10"
+              class="w-full h-full object-cover grayscale contrast-125 border border-foreground/10"
               loading="lazy"
             />
           </div>
 
           <!-- Center Floating Text -->
-          <div class="md:col-span-4 relative">
+          <div class="md:col-span-5 relative">
             <p class="text-xs font-medium tracking-widest text-muted-foreground mb-4">
               THE PROBLEM
             </p>
