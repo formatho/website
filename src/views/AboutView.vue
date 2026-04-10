@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { Card, CardContent } from '@/components/ui/card'
+import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
 </script>
 
 <template>
@@ -82,7 +83,7 @@ import { Card, CardContent } from '@/components/ui/card'
           <!-- Left: Image -->
           <div class="relative md:col-span-7 min-h-[400px] md:min-h-[600px]">
             <img
-              src="/images/cloud-is-at-risk.png"
+              :src="cloudIsAtRisk"
               alt="Cloud AI is a Security Risk"
               class="w-full h-full object-cover grayscale contrast-125 border border-foreground/10"
               loading="lazy"
