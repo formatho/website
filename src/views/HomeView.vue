@@ -203,25 +203,25 @@ const filteredTools = computed(() => {
         <h2 class="text-3xl md:text-4xl font-bold mb-4">Get Started in 2 Minutes</h2>
         <p class="text-muted-foreground mb-12 max-w-2xl mx-auto">Three steps to give your AI agents persistent task management.</p>
         <div class="grid md:grid-cols-3 gap-8">
-          <div class="glass-card p-8 text-center">
-            <div class="w-12 h-12 rounded-full bg-primary/10 text-primary font-bold text-xl flex items-center justify-center mx-auto mb-4">1</div>
+          <div class="p-8 text-center">
+            <div class="w-12 h-12 bg-foreground text-background font-bold text-xl flex items-center justify-center mx-auto mb-4">1</div>
             <h3 class="font-semibold text-lg mb-2">Get Your API Key</h3>
             <p class="text-sm text-muted-foreground">Sign up free at Agent Todo. Copy your API key. No credit card needed.</p>
           </div>
-          <div class="glass-card p-8 text-center">
-            <div class="w-12 h-12 rounded-full bg-primary/10 text-primary font-bold text-xl flex items-center justify-center mx-auto mb-4">2</div>
+          <div class="p-8 text-center">
+            <div class="w-12 h-12 bg-foreground text-background font-bold text-xl flex items-center justify-center mx-auto mb-4">2</div>
             <h3 class="font-semibold text-lg mb-2">Create Tasks via API</h3>
             <p class="text-sm text-muted-foreground">One curl command to create tasks. Your agents never lose context again.</p>
           </div>
-          <div class="glass-card p-8 text-center">
-            <div class="w-12 h-12 rounded-full bg-primary/10 text-primary font-bold text-xl flex items-center justify-center mx-auto mb-4">3</div>
+          <div class="p-8 text-center">
+            <div class="w-12 h-12 bg-foreground text-background font-bold text-xl flex items-center justify-center mx-auto mb-4">3</div>
             <h3 class="font-semibold text-lg mb-2">Ship Faster</h3>
             <p class="text-sm text-muted-foreground">Track progress, manage blockers, and keep your AI workforce productive 24/7.</p>
           </div>
         </div>
         <div class="mt-8">
           <a href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=how_it_works" target="_blank" rel="noopener">
-            <button class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg">
+            <button class="px-8 py-3 bg-foreground text-background font-semibold text-lg tracking-widest uppercase text-xs hover:opacity-80 transition-none">
               Try It Free Now
             </button>
           </a>
@@ -235,43 +235,43 @@ const filteredTools = computed(() => {
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Built for AI Agents, Not Humans</h2>
         <p class="text-muted-foreground text-center mb-10 max-w-2xl mx-auto">Todoist and Asana were built for people. Agent Todo is built for the agents that work for them.</p>
         <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse">
+          <table class="w-full text-left border-collapse comparison-matrix">
             <thead>
-              <tr class="border-b border-border">
-                <th class="py-3 px-4 font-semibold">Feature</th>
-                <th class="py-3 px-4 font-semibold text-center text-primary">Agent Todo</th>
-                <th class="py-3 px-4 font-semibold text-center text-muted-foreground">Todoist / Asana</th>
+              <tr>
+                <th class="py-3 px-4 font-bold border border-foreground text-xs tracking-widest uppercase">Feature</th>
+                <th class="py-3 px-4 font-bold border border-foreground text-xs tracking-widest uppercase text-center">Agent Todo</th>
+                <th class="py-3 px-4 font-bold border border-foreground text-xs tracking-widest uppercase text-center text-muted-foreground">Todoist / Asana</th>
               </tr>
             </thead>
             <tbody class="text-sm">
-              <tr class="border-b border-border/50">
-                <td class="py-3 px-4">REST API for agents</td>
-                <td class="py-3 px-4 text-center">✅ Native</td>
-                <td class="py-3 px-4 text-center text-muted-foreground">❌ Bolted on</td>
-              </tr>
-              <tr class="border-b border-border/50">
-                <td class="py-3 px-4">Agent identity & tracking</td>
-                <td class="py-3 px-4 text-center">✅ Built-in</td>
-                <td class="py-3 px-4 text-center text-muted-foreground">❌ No concept</td>
-              </tr>
-              <tr class="border-b border-border/50">
-                <td class="py-3 px-4">Priority queues for agents</td>
-                <td class="py-3 px-4 text-center">✅ Yes</td>
-                <td class="py-3 px-4 text-center text-muted-foreground">❌ Manual</td>
-              </tr>
-              <tr class="border-b border-border/50">
-                <td class="py-3 px-4">Status lifecycle (pending → blocked → done)</td>
-                <td class="py-3 px-4 text-center">✅ Full workflow</td>
-                <td class="py-3 px-4 text-center text-muted-foreground">⚠️ Basic</td>
-              </tr>
-              <tr class="border-b border-border/50">
-                <td class="py-3 px-4">Free tier</td>
-                <td class="py-3 px-4 text-center">✅ Free forever</td>
-                <td class="py-3 px-4 text-center text-muted-foreground">⚠️ Limited</td>
+              <tr>
+                <td class="py-3 px-4 border border-foreground">REST API for agents</td>
+                <td class="py-3 px-4 text-center border border-foreground font-mono text-xs">[ YES ] Native</td>
+                <td class="py-3 px-4 text-center border border-foreground font-mono text-xs text-muted-foreground">[ - ] Bolted on</td>
               </tr>
               <tr>
-                <td class="py-3 px-4">Setup time</td>
-                <td class="py-3 px-4 text-center">2 minutes</td>
+                <td class="py-3 px-4 border border-foreground">Agent identity &amp; tracking</td>
+                <td class="py-3 px-4 text-center border border-foreground font-mono text-xs">[ YES ] Built-in</td>
+                <td class="py-3 px-4 text-center border border-foreground font-mono text-xs text-muted-foreground">[ - ] No concept</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 border border-foreground">Priority queues for agents</td>
+                <td class="py-3 px-4 text-center border border-foreground font-mono text-xs">[ YES ]</td>
+                <td class="py-3 px-4 text-center border border-foreground font-mono text-xs text-muted-foreground">[ - ] Manual</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 border border-foreground">Status lifecycle (pending → blocked → done)</td>
+                <td class="py-3 px-4 text-center border border-foreground font-mono text-xs">[ YES ] Full workflow</td>
+                <td class="py-3 px-4 text-center border border-foreground font-mono text-xs text-muted-foreground">[ - ] Basic</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 border border-foreground">Free tier</td>
+                <td class="py-3 px-4 text-center border border-foreground font-mono text-xs">[ YES ] Free forever</td>
+                <td class="py-3 px-4 text-center border border-foreground font-mono text-xs text-muted-foreground">[ - ] Limited</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 border border-foreground">Setup time</td>
+                <td class="py-3 px-4 text-center border border-foreground font-mono text-xs">2 min</td>
                 <td class="py-3 px-4 text-center text-muted-foreground">30+ minutes</td>
               </tr>
             </tbody>
@@ -297,16 +297,16 @@ const filteredTools = computed(() => {
           class="space-y-6"
           data-v-8d4ed633=""
         >
-          <div class="flex items-center gap-4" data-v-8d4ed633="">
+          <div class="flex items-center gap-4 border-b-2 border-foreground pb-2" data-v-8d4ed633="">
             <h2
-              class="text-2xl md:text-3xl font-bold tracking-tight"
+              class="text-2xl md:text-3xl font-black tracking-tight uppercase"
               data-v-8d4ed633=""
             >
               {{ category.category }}
             </h2>
-            <div class="flex-1 h-px bg-gradient-to-r from-border to-transparent" data-v-8d4ed633=""></div>
-            <span class="text-sm text-muted-foreground font-medium" data-v-8d4ed633="">
-              {{ category.items.length }} tools
+            <div class="flex-1" data-v-8d4ed633=""></div>
+            <span class="text-xs font-mono tracking-widest text-muted-foreground" data-v-8d4ed633="">
+              [ {{ String(category.items.length).padStart(2, '0') }} TOOLS ]
             </span>
           </div>
           <div
@@ -322,7 +322,7 @@ const filteredTools = computed(() => {
               data-v-8d4ed633=""
             >
               <div
-                class="glass-card h-full p-6 cursor-pointer"
+                class="h-full p-6 cursor-pointer border border-foreground transition-all duration-150 ease-out hover:shadow-[4px_4px_0px_#000000] hover:-translate-y-[2px] hover:-translate-x-[2px]"
                 data-aos="fade-up"
                 :data-aos-delay="(toolIndex % 4) * 50"
                 data-v-8d4ed633=""
@@ -331,7 +331,7 @@ const filteredTools = computed(() => {
                   <!-- Icon with dynamic Lucide component -->
                   <div class="mb-4" data-v-8d4ed633="">
                     <div
-                      class="p-3 rounded-xl bg-primary/10 transition-all w-fit"
+                      class="p-3 border border-foreground/20 w-fit"
                       data-v-8d4ed633=""
                     >
                       <component
@@ -359,10 +359,10 @@ const filteredTools = computed(() => {
                   </div>
 
                   <!-- Arrow Icon -->
-                  <div class="flex items-center text-gray-900" data-v-8d4ed633="">
-                    <span>Open tool</span>
+                  <div class="flex items-center text-gray-900 mt-auto pt-4" data-v-8d4ed633="">
+                    <span class="text-xs tracking-widest uppercase font-semibold">EXECUTE</span>
                     <svg
-                      class="w-4 h-4 ml-1 hover:translate-x-1 transition-transform"
+                      class="w-4 h-4 ml-1"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -372,7 +372,7 @@ const filteredTools = computed(() => {
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M9 5l7 7-7 7"
+                        d="M7 17L17 7M17 7H7M17 7V17"
                       ></path>
                     </svg>
                   </div>
