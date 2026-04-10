@@ -79,21 +79,30 @@ import { Card, CardContent } from '@/components/ui/card'
     <section class="relative py-16 md:py-32 bg-muted/30 overflow-hidden">
       <div class="container mx-auto px-4 md:px-12">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
-          <!-- Left: Overlapping Image Placeholders -->
+          <!-- Left: Image -->
           <div class="relative md:col-span-5 min-h-[400px] md:min-h-[600px]">
-            <div
-              class="absolute top-0 left-0 w-3/4 h-3/4 bg-foreground/5 grayscale contrast-125 border border-foreground/10"
-            ></div>
-            <div
-              class="absolute bottom-0 right-0 w-3/4 h-3/4 bg-foreground/10 grayscale contrast-125 border border-foreground/10 -z-10"
-            ></div>
+            <img
+              src="/images/cloud-is-at-risk.png"
+              alt="Cloud AI is a Security Risk"
+              class="absolute top-0 left-0 w-3/4 h-3/4 object-cover grayscale contrast-125 border border-foreground/10"
+              loading="lazy"
+            />
+            <img
+              src="/images/cloud-is-at-risk.png"
+              alt="Cloud AI Security"
+              class="absolute bottom-0 right-0 w-3/4 h-3/4 object-cover grayscale contrast-125 border border-foreground/10 -z-10"
+              loading="lazy"
+            />
           </div>
 
-          <!-- Right: Soft-focus placeholder -->
+          <!-- Right: Soft-focus image -->
           <div class="relative md:col-span-3 min-h-[300px] hidden md:block">
-            <div
-              class="absolute inset-0 bg-foreground/5 blur-sm grayscale contrast-125 border border-foreground/10"
-            ></div>
+            <img
+              src="/images/cloud-is-at-risk.png"
+              alt="Privacy risk illustration"
+              class="absolute inset-0 w-full h-full object-cover blur-sm grayscale contrast-125 border border-foreground/10"
+              loading="lazy"
+            />
           </div>
 
           <!-- Center Floating Text -->
