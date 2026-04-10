@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
-import { Check } from 'lucide-vue-next'
 import { useStructuredData } from '@/composables/useStructuredData'
 
 const { addFAQStructuredData, addBreadcrumbStructuredData } = useStructuredData()
@@ -92,6 +91,10 @@ const faqs = [
   }
 ]
 
+const planSpacing = (name: string) => {
+  return name.split('').join(' ')
+}
+
 onMounted(() => {
   addBreadcrumbStructuredData([
     { name: 'Home', url: 'https://formatho.com' },
@@ -102,26 +105,28 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-b from-background to-muted/30">
-    <!-- Header -->
-    <section class="container mx-auto px-4 pt-16 pb-8">
-      <div class="max-w-3xl mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-          Simple, Transparent Pricing
+  <div class="min-h-screen overflow-x-hidden">
+    <!-- ============================================ -->
+    <!-- HEADER: Left-aligned, brutalist               -->
+    <!-- ============================================ -->
+    <section class="border-b-2 border-foreground">
+      <div class="container mx-auto px-4 md:px-12 py-16 md:py-24">
+        <h1 class="text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-none mb-6">
+          Pricing
         </h1>
-        <p class="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+        <p class="font-mono text-xs md:text-sm tracking-widest text-muted-foreground max-w-xl">
           Start free. Scale when you're ready. No hidden fees, no surprises.
         </p>
 
         <!-- Billing Toggle -->
-        <div class="inline-flex items-center gap-3 bg-muted/50 rounded-full p-1">
+        <div class="mt-10 flex items-center gap-6">
           <button
             @click="billingPeriod = 'monthly'"
             :class="[
-              'px-6 py-2 rounded-full text-sm font-medium transition-all',
+              'text-xs tracking-widest uppercase transition-all pb-1',
               billingPeriod === 'monthly'
-                ? 'bg-primary text-primary-foreground shadow-sm'
-                : 'text-muted-foreground hover:text-foreground'
+                ? 'text-foreground font-bold border-b-2 border-foreground'
+                : 'text-muted-foreground hover:text-foreground line-through decoration-foreground/20'
             ]"
           >
             Monthly
@@ -129,61 +134,65 @@ onMounted(() => {
           <button
             @click="billingPeriod = 'yearly'"
             :class="[
-              'px-6 py-2 rounded-full text-sm font-medium transition-all',
+              'text-xs tracking-widest uppercase transition-all pb-1',
               billingPeriod === 'yearly'
-                ? 'bg-primary text-primary-foreground shadow-sm'
-                : 'text-muted-foreground hover:text-foreground'
+                ? 'text-foreground font-bold border-b-2 border-foreground'
+                : 'text-muted-foreground hover:text-foreground line-through decoration-foreground/20'
             ]"
           >
-            Yearly
-            <span class="ml-1 text-xs opacity-70">Save 17%</span>
+            Yearly <span class="text-muted-foreground normal-case tracking-normal ml-1">Save 17%</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- Pricing Cards -->
-    <section class="container mx-auto px-4 pb-16">
-      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <!-- ============================================ -->
+    <!-- ANTI-CARD GRID                                -->
+    <!-- ============================================ -->
+    <section class="container mx-auto px-4 md:px-0">
+      <div class="grid grid-cols-1 md:grid-cols-3">
         <div
-          v-for="plan in plans"
+          v-for="(plan, index) in plans"
           :key="plan.name"
           :class="[
-            'glass-card p-8 flex flex-col relative',
-            plan.popular ? 'border-primary shadow-lg shadow-primary/10 ring-1 ring-primary/20' : 'border-border'
+            'flex flex-col p-8 md:p-12',
+            plan.popular ? 'bg-foreground text-background' : 'bg-background text-foreground',
+            index < plans.length - 1 ? 'md:border-r' : '',
+            plan.popular ? 'md:border-r' : '',
           ]"
+          :style="{ borderRight: index < plans.length - 1 && !plan.popular ? '1px solid var(--foreground)' : plan.popular ? '1px solid var(--foreground)' : 'none', borderColor: plan.popular ? 'var(--background)' : '' }"
         >
-          <!-- Popular Badge -->
-          <div v-if="plan.popular" class="absolute -top-3 left-1/2 -translate-x-1/2">
-            <span class="bg-primary text-primary-foreground text-xs font-bold px-4 py-1 rounded-full">
-              MOST POPULAR
-            </span>
-          </div>
-
-          <!-- Plan Info -->
-          <div class="mb-6">
-            <h3 class="text-2xl font-bold mb-1">{{ plan.name }}</h3>
-            <p class="text-sm text-muted-foreground">{{ plan.description }}</p>
-          </div>
+          <!-- Plan Name -->
+          <p class="text-xs tracking-widest mb-2 opacity-60">
+            {{ planSpacing(plan.name.toUpperCase()) }}
+          </p>
+          <p class="text-sm opacity-60 mb-8">{{ plan.description }}</p>
 
           <!-- Price -->
-          <div class="mb-8">
+          <div class="mb-10">
             <div class="flex items-baseline gap-1">
-              <span v-if="plan.monthlyPrice !== null" class="text-5xl font-bold">
+              <span v-if="plan.monthlyPrice !== null" class="text-8xl md:text-9xl font-black tracking-tighter leading-none">
                 ${{ billingPeriod === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice }}
               </span>
-              <span v-else class="text-3xl font-bold">Custom</span>
-              <span v-if="plan.monthlyPrice !== null" class="text-muted-foreground">/mo</span>
+              <span v-else class="text-5xl md:text-6xl font-black tracking-tighter leading-none">Custom</span>
             </div>
-            <p v-if="billingPeriod === 'yearly' && plan.monthlyPrice" class="text-sm text-muted-foreground mt-1">
-              Billed ${{ plan.yearlyPrice! * 12 }}/year
+            <p v-if="plan.monthlyPrice !== null" class="text-xs tracking-widest mt-2 opacity-50">PER MONTH</p>
+            <p v-if="billingPeriod === 'yearly' && plan.monthlyPrice" class="text-xs tracking-widest mt-1 opacity-50">
+              BILLED ${{ plan.yearlyPrice! * 12 }}/YEAR
             </p>
           </div>
 
           <!-- Features -->
-          <ul class="space-y-3 mb-8 flex-1">
-            <li v-for="feature in plan.features" :key="feature" class="flex items-start gap-3">
-              <Check class="w-5 h-5 text-primary shrink-0 mt-0.5" />
+          <ul class="flex-1 mb-10">
+            <li
+              v-for="feature in plan.features"
+              :key="feature"
+              :class="[
+                'flex items-start gap-4 py-3 border-b',
+                plan.popular ? 'border-background/10' : 'border-foreground/10'
+              ]"
+            >
+              <span class="text-xs font-mono mt-0.5 opacity-40">+</span>
               <span class="text-sm">{{ feature }}</span>
             </li>
           </ul>
@@ -192,64 +201,67 @@ onMounted(() => {
           <a
             :href="plan.ctaLink"
             :class="[
-              'block w-full text-center py-3 rounded-lg font-semibold transition-all text-lg',
+              'block w-full text-center py-4 font-bold tracking-widest text-xs uppercase transition-all',
               plan.popular
-                ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg'
-                : 'border border-primary/30 hover:bg-primary/5'
+                ? 'bg-background text-foreground hover:bg-background/90'
+                : 'bg-foreground text-background hover:bg-foreground/90'
             ]"
           >
             {{ plan.cta }}
           </a>
         </div>
       </div>
+    </section>
 
-      <!-- Money-Back Guarantee -->
-      <div class="max-w-2xl mx-auto mt-12 text-center">
-        <div class="inline-flex items-center gap-3 glass-card px-6 py-4">
-          <span class="text-2xl">🛡️</span>
-          <div class="text-left">
-            <div class="font-semibold">30-Day Money-Back Guarantee</div>
-            <div class="text-sm text-muted-foreground">Not satisfied? Full refund, no questions asked.</div>
-          </div>
+    <!-- Guarantee -->
+    <section class="border-t-2 border-foreground">
+      <div class="container mx-auto px-4 md:px-12 py-8">
+        <div class="flex items-center gap-4">
+          <span class="text-xs tracking-widest text-muted-foreground">30-DAY MONEY-BACK GUARANTEE</span>
+          <span class="text-muted-foreground">—</span>
+          <span class="text-xs text-muted-foreground">Not satisfied? Full refund, no questions asked.</span>
         </div>
       </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="container mx-auto px-4 py-16">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
-        <div class="space-y-4">
-          <div v-for="faq in faqs" :key="faq.question" class="glass-card p-6">
-            <h3 class="font-semibold text-lg mb-2">{{ faq.question }}</h3>
-            <p class="text-muted-foreground leading-relaxed">{{ faq.answer }}</p>
-          </div>
+    <!-- ============================================ -->
+    <!-- FAQ: Brutalist spec sheet style               -->
+    <!-- ============================================ -->
+    <section class="container mx-auto px-4 md:px-12 py-16 md:py-24">
+      <h2 class="text-4xl md:text-5xl font-black tracking-tighter leading-none mb-12">
+        FAQ
+      </h2>
+      <div class="border-t border-foreground/10">
+        <div
+          v-for="faq in faqs"
+          :key="faq.question"
+          class="border-b border-foreground/10 py-8"
+        >
+          <h3 class="text-lg font-bold tracking-tight mb-3">{{ faq.question }}</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed max-w-2xl">{{ faq.answer }}</p>
         </div>
       </div>
     </section>
 
     <!-- Bottom CTA -->
-    <section class="container mx-auto px-4 py-16">
-      <div class="max-w-2xl mx-auto text-center glass-card p-12">
-        <h2 class="text-3xl font-bold mb-4">Ready to Get Started?</h2>
-        <p class="text-muted-foreground mb-6">
-          Join developers who trust Agent Todo for their AI workflow management.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=pricing_bottom_cta"
-            class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-lg"
-          >
-            Start Free — No Credit Card
-          </a>
-          <RouterLink
-            to="/agent-todo"
-            class="px-8 py-3 border border-primary/30 rounded-lg font-medium hover:bg-primary/5 transition-colors"
-          >
-            Learn More
-          </RouterLink>
+    <section class="border-t-2 border-foreground">
+      <div class="container mx-auto px-4 md:px-12 py-16 md:py-24">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <h2 class="text-4xl md:text-6xl font-black tracking-tighter leading-none">
+            Ready to Get Started?
+          </h2>
+          <div class="md:text-right">
+            <a
+              href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=pricing_bottom_cta"
+              class="inline-block bg-foreground text-background px-10 py-4 text-xs font-bold tracking-widest uppercase hover:bg-foreground/90 transition-all"
+            >
+              Start Free — No Credit Card
+            </a>
+            <p class="text-xs text-muted-foreground mt-4 tracking-widest">
+              No credit card required · Setup in 2 minutes · Cancel anytime
+            </p>
+          </div>
         </div>
-        <p class="text-xs text-muted-foreground mt-4">No credit card required • Setup in 2 minutes • Cancel anytime</p>
       </div>
     </section>
   </div>
