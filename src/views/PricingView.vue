@@ -209,7 +209,7 @@ onMounted(() => {
           <a
             :href="plan.ctaLink"
             :class="[
-              'block w-full text-center py-4 mt-6 font-bold tracking-widest text-xs uppercase rounded-none cursor-pointer',
+              'block w-full text-center py-4 mt-6 font-bold tracking-widest text-xs uppercase rounded-xl cursor-pointer',
               plan.popular
                 ? 'bg-background text-foreground hover:opacity-80'
                 : 'bg-foreground text-background hover:opacity-80'
@@ -282,7 +282,7 @@ onMounted(() => {
           <div class="md:text-right">
             <a
               href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=pricing_bottom_cta"
-              class="inline-block bg-foreground text-background px-10 py-4 text-xs font-bold tracking-widest uppercase rounded-none border border-foreground hover:opacity-80"
+              class="inline-block bg-foreground text-background px-10 py-4 text-xs font-bold tracking-widest uppercase rounded-xl border border-foreground hover:opacity-80"
             >
               Start Free — No Credit Card
             </a>

@@ -137,7 +137,7 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
               class="absolute left-0 top-full pt-2 z-[9999]"
             >
               <div
-                class="bg-background border border-foreground rounded-none min-w-[600px] p-6 grid grid-cols-2 gap-6"
+                class="bg-background border border-foreground rounded-xl min-w-[600px] p-6 grid grid-cols-2 gap-6"
               >
                 <div v-for="category in categories" :key="category.name" class="space-y-2">
                   <h3 class="text-[11px] font-bold tracking-[2px] uppercase text-foreground mb-3 border-b border-foreground/10 pb-2">
@@ -178,11 +178,11 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
           <!-- Command Line Search -->
           <button
             @click="openSearchModal"
-            class="hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground border border-foreground rounded-none bg-transparent hover:bg-foreground/5 transition-colors"
+            class="hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground border border-foreground rounded-xl bg-transparent hover:bg-foreground/5 transition-colors"
           >
             <Search class="w-3.5 h-3.5" />
             <span class="font-mono text-xs">Search...</span>
-            <kbd class="hidden lg:inline-block ml-4 px-1.5 py-0.5 text-[10px] bg-foreground text-background font-mono font-bold rounded-none">
+            <kbd class="hidden lg:inline-block ml-4 px-1.5 py-0.5 text-[10px] bg-foreground text-background font-mono font-bold rounded-xl">
               ⌘K
             </kbd>
           </button>

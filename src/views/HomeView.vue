@@ -393,7 +393,5 @@ const filteredTools = computed(() => {
 .home-view *,
 .home-view *::before,
 .home-view *::after {
-  border-radius: 0px !important;
-  box-shadow: none !important;
 }
 </style>

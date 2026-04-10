@@ -290,7 +290,6 @@ curl -X PATCH https://todo.formatho.com/api/tasks/{id}/status \
 }
 
 .agent-todo-landing * {
-  border-radius: 0 !important;
 }
 
 .container {

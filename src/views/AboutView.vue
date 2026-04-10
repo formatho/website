@@ -275,13 +275,13 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
           <div class="flex flex-col sm:flex-row gap-4">
             <RouterLink
               to="/"
-              class="inline-flex items-center justify-center rounded-none bg-foreground px-8 py-4 text-sm font-medium tracking-widest text-background hover:bg-foreground/90 transition-colors"
+              class="inline-flex items-center justify-center rounded-xl bg-foreground px-8 py-4 text-sm font-medium tracking-widest text-background hover:bg-foreground/90 transition-colors"
             >
               EXPLORE TOOLS
             </RouterLink>
             <a
               href="mailto:support@formatho.com"
-              class="inline-flex items-center justify-center rounded-none border border-foreground/20 px-8 py-4 text-sm font-medium tracking-widest text-foreground hover:bg-muted transition-colors"
+              class="inline-flex items-center justify-center rounded-xl border border-foreground/20 px-8 py-4 text-sm font-medium tracking-widest text-foreground hover:bg-muted transition-colors"
             >
               CONTACT
             </a>
