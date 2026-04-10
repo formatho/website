@@ -49,7 +49,7 @@ const filteredTools = computed(() => {
 </script>
 
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen home-view">
     <!-- Hero Section -->
     <section
       class="relative overflow-hidden border-b border-border/50 bg-gradient-to-b from-primary/5 via-background to-background"
@@ -84,7 +84,7 @@ const filteredTools = computed(() => {
           </p>
           <div class="flex flex-wrap gap-4 justify-center items-center mt-6" data-v-8d4ed633="">
             <div
-              class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-primary/20 rounded-full"
+              class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
               data-aos="fade-up"
               data-aos-delay="0"
               data-v-8d4ed633=""
@@ -98,7 +98,7 @@ const filteredTools = computed(() => {
               <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Your data never leaves your browser </span>
             </div>
             <div
-              class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-primary/20 rounded-full"
+              class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
               data-aos="fade-up"
               data-aos-delay="50"
               data-v-8d4ed633=""
@@ -113,7 +113,7 @@ const filteredTools = computed(() => {
               <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Zero tracking, zero storage </span>
             </div>
             <div
-              class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-primary/20 rounded-full"
+              class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
               data-aos="fade-up"
               data-aos-delay="100"
               data-v-8d4ed633=""
@@ -155,17 +155,17 @@ const filteredTools = computed(() => {
               <div class="text-3xl font-bold text-primary">1,000+</div>
               <div class="text-xs text-muted-foreground">Tasks managed daily</div>
             </div>
-            <div class="w-px h-10 bg-border"></div>
+            <div class="w-px h-10 bg-foreground"></div>
             <div>
               <div class="text-3xl font-bold text-primary">50+</div>
               <div class="text-xs text-muted-foreground">Active AI agents</div>
             </div>
-            <div class="w-px h-10 bg-border"></div>
+            <div class="w-px h-10 bg-foreground"></div>
             <div>
               <div class="text-3xl font-bold text-primary">100+</div>
               <div class="text-xs text-muted-foreground">Free browser tools</div>
             </div>
-            <div class="w-px h-10 bg-border"></div>
+            <div class="w-px h-10 bg-foreground"></div>
             <div>
               <div class="text-3xl font-bold text-primary">99.9%</div>
               <div class="text-xs text-muted-foreground">Uptime</div>
@@ -175,10 +175,10 @@ const filteredTools = computed(() => {
           <div class="w-full max-w-2xl mt-6" data-v-8d4ed633="">
             <div class="relative" data-v-8d4ed633="">
               <Input
-                class="w-full pl-12 pr-4 py-6 text-lg glass-card border-primary/20 focus:border-primary/50 focus:ring-primary/20"
+                class="w-full pl-12 pr-4 py-6 text-lg font-mono border-2 border-foreground bg-transparent focus:border-foreground focus:ring-0"
                 type="text"
                 aria-label="Search developer tools"
-                placeholder="Search tools... (e.g., JSON, Base64, UUID)"
+                placeholder="> SEARCH_TOOLS [ e.g. json, base64 ] _"
                 v-model="searchQuery"
                 data-v-8d4ed633=""
               />
@@ -388,3 +388,12 @@ const filteredTools = computed(() => {
     <FloatingCTA />
   </div>
 </template>
+
+<style scoped>
+.home-view *,
+.home-view *::before,
+.home-view *::after {
+  border-radius: 0px !important;
+  box-shadow: none !important;
+}
+</style>
