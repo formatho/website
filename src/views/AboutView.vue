@@ -76,7 +76,7 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
 
           <!-- Left: Main Image -->
-          <div class="relative md:col-span-5 min-h-[400px] md:min-h-[600px]">
+          <div class="relative md:col-span-6 min-h-[400px] md:min-h-[600px]">
             <img
               :src="cloudIsAtRisk"
               alt="Cloud AI is a Security Risk"
@@ -92,13 +92,13 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
               :src="cloudIsAtRisk"
               alt="Privacy risk soft focus"
               class="absolute inset-0 w-full h-full object-cover border border-foreground/10"
-              style="filter: grayscale(100%) contrast(120%); opacity: 0.3; filter: grayscale(100%) blur(4px);"
+              style="filter: grayscale(100%) blur(4px); opacity: 0.3;"
               loading="lazy"
             />
           </div>
 
-          <!-- Center: Floating Text -->
-          <div class="md:col-span-4 relative">
+          <!-- Text -->
+          <div class="md:col-span-3 relative">
             <p class="text-xs font-medium tracking-widest text-muted-foreground mb-4">
               THE PROBLEM
             </p>
@@ -125,7 +125,7 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
       <div class="container mx-auto px-4 md:px-12">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16">
           <!-- Left: Large Statement -->
-          <div class="md:col-span-5">
+          <div class="md:col-span-4">
             <p class="text-xs font-medium tracking-widest text-muted-foreground mb-4">
               THE SOLUTION
             </p>
@@ -138,7 +138,7 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
           </div>
 
           <!-- Right: Agent Roles -->
-          <div class="md:col-span-7 md:border-l md:border-foreground/10 md:pl-16">
+          <div class="md:col-span-8 md:border-l md:border-foreground/10 md:pl-16">
             <p class="text-sm text-muted-foreground leading-relaxed mb-10">
               Instead of manually chaining tools together, you hand your payload to the Council, where agents take on dedicated roles:
             </p>
@@ -263,7 +263,7 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
     <section class="py-16 md:py-32">
       <div class="container mx-auto px-4 md:px-12">
         <div class="max-w-3xl">
-          <h2 class="text-5xl md:text-7xl font-black tracking-tighter leading-none mb-8">
+          <h2 class="text-5xl md:text-7xl lg:text-[8rem] font-black tracking-tighter leading-none mb-8">
             Build in<br />Private.
           </h2>
           <p class="text-muted-foreground leading-relaxed max-w-xl mb-10">
