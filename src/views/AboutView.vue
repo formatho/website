@@ -85,13 +85,13 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
             <img
               :src="cloudIsAtRisk"
               alt="Cloud AI is a Security Risk"
-              class="absolute top-0 left-0 w-3/4 h-3/4 object-cover grayscale contrast-125 border border-foreground/10"
+              class="absolute top-0 left-0 w-[80%] h-[80%] object-cover grayscale contrast-125 border border-foreground/10 z-10"
               loading="lazy"
             />
             <img
               :src="cloudIsAtRisk"
               alt="Cloud AI Security Shadow"
-              class="absolute bottom-0 right-0 w-3/4 h-3/4 object-cover grayscale contrast-125 border border-foreground/10 -z-10"
+              class="absolute bottom-0 right-0 w-[80%] h-[80%] object-cover grayscale contrast-125 border border-foreground/10 opacity-40 z-0"
               loading="lazy"
             />
           </div>
