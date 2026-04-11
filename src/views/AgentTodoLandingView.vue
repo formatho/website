@@ -317,10 +317,6 @@ curl -X PATCH https://todo.formatho.com/api/tasks/{id}/status \
   </div>
 </template>
 
-<script setup lang="ts">
-// Agent-Todo Landing Page — Brutalist Editorial Overhaul
-</script>
-
 <style scoped>
 .agent-todo-landing {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;

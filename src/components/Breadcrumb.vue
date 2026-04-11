@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { ChevronRight, Home } from 'lucide-vue-next'
 
@@ -9,6 +9,9 @@ interface BreadcrumbItem {
 }
 
 const route = useRoute()
+let structuredDataScript: HTMLScriptElement | null = null
+
+const baseUrl = 'https://formatho.com/tools'
 
 // Generate breadcrumb items based on route
 const breadcrumbs = computed<BreadcrumbItem[]>(() => {
@@ -21,10 +24,11 @@ const breadcrumbs = computed<BreadcrumbItem[]>(() => {
   
   // Add tool page to breadcrumbs if not on home
   if (path && path !== '/') {
-    // Extract tool name from path (e.g., '/json-yaml' -> 'JSON to YAML')
-    const toolName = path.slice(1).split('-').map(part => 
-      part.charAt(0).toUpperCase() + part.slice(1)
-    ).join(' ')
+    // Use route meta title if available, otherwise derive from path
+    const toolName = (route.meta?.title as string)?.replace(/\s*[-|]\s*Formatho.*$/, '')
+      || path.slice(1).split('-').map(part => 
+          part.charAt(0).toUpperCase() + part.slice(1)
+        ).join(' ')
     
     items.push({
       name: toolName,
@@ -34,6 +38,39 @@ const breadcrumbs = computed<BreadcrumbItem[]>(() => {
   
   return items
 })
+
+function injectBreadcrumbStructuredData() {
+  if (typeof document === 'undefined') return
+  removeStructuredData()
+
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.value.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: `${baseUrl}${item.path}`
+    }))
+  }
+
+  structuredDataScript = document.createElement('script')
+  structuredDataScript.type = 'application/ld+json'
+  structuredDataScript.setAttribute('data-breadcrumb', 'true')
+  structuredDataScript.textContent = JSON.stringify(structuredData)
+  document.head.appendChild(structuredDataScript)
+}
+
+function removeStructuredData() {
+  if (structuredDataScript?.parentNode) {
+    structuredDataScript.parentNode.removeChild(structuredDataScript)
+    structuredDataScript = null
+  }
+}
+
+onMounted(injectBreadcrumbStructuredData)
+watch(() => route.path, injectBreadcrumbStructuredData)
+onUnmounted(removeStructuredData)
 </script>
 
 <template>

@@ -83,6 +83,37 @@ function generateMetaTags(tool) {
 
   <!-- Canonical URL -->
   <link rel="canonical" href="${escapeHtml(url)}">
+
+  <!-- SoftwareApplication Structured Data -->
+  <script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": tool.title,
+    "url": url,
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": tool.description,
+    "publisher": {
+      "@type": "Organization",
+      "name": siteName,
+      "url": "https://formatho.com"
+    }
+  })}</script>
+
+  <!-- BreadcrumbList Structured Data -->
+  <script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://formatho.com/tools/" },
+      { "@type": "ListItem", "position": 2, "name": tool.title, "item": url }
+    ]
+  })}</script>
 `
 }
 

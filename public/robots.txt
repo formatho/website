@@ -4,7 +4,7 @@ Disallow: /admin/
 Disallow: /api/
 
 # Sitemaps
-Sitemap: https://formatho.com/sitemap.xml
+Sitemap: https://formatho.com/tools/sitemap.xml
 
 # Crawl-delay (respectful crawling)
 Crawl-delay: 1
