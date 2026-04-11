@@ -9,7 +9,7 @@ import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
     <!-- ============================================ -->
     <!-- SECTION 1: HERO — Z-INDEX STACKING           -->
     <!-- ============================================ -->
-    <section class="relative min-h-screen flex items-center overflow-hidden bg-background">
+    <section class="relative min-h-screen flex items-center overflow-hidden bg-background -mt-16">
       <!-- Layer 0: Massive Background Typography -->
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0">
         <h1
