@@ -66,6 +66,21 @@ const filteredTools = computed(() => {
     )
   )
 })
+
+const popularTools = [
+  { name: 'JSON ↔ YAML', path: '/json-yaml', tag: 'Convert', emoji: '🔄' },
+  { name: 'Base64', path: '/base64', tag: 'Encode', emoji: '🔐' },
+  { name: 'JWT Decoder', path: '/jwt', tag: 'Security', emoji: '🎫' },
+  { name: 'UUID Gen', path: '/uuid', tag: 'Generate', emoji: '🆔' },
+  { name: 'SQL Format', path: '/sql', tag: 'Format', emoji: '🗃️' },
+  { name: 'Regex Test', path: '/regex-tester', tag: 'Test', emoji: '🔍' },
+  { name: 'Hash Gen', path: '/hash-text', tag: 'Crypto', emoji: '🔒' },
+  { name: 'QR Code', path: '/qr-code-generator', tag: 'Generate', emoji: '📱' },
+  { name: 'Crontab', path: '/crontab-generator', tag: 'Schedule', emoji: '⏰' },
+  { name: 'Markdown', path: '/markdown', tag: 'Editor', emoji: '📝' },
+  { name: 'Color Pick', path: '/color-converter', tag: 'Design', emoji: '🎨' },
+  { name: 'Diff Tool', path: '/diff', tag: 'Compare', emoji: '📊' },
+]
 </script>
 
 <template>
@@ -214,6 +229,29 @@ const filteredTools = computed(() => {
             <TrustBadges />
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Popular Tools Quick Strip -->
+    <section class="container mx-auto px-4 py-8 md:py-10">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight">⚡ Most Popular Tools</h2>
+        <RouterLink to="/tools" class="text-sm font-semibold uppercase tracking-widest hover:opacity-70 transition-opacity">
+          View All →
+        </RouterLink>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+        <RouterLink
+          v-for="tool in popularTools"
+          :key="tool.path"
+          :to="tool.path"
+          class="group p-4 border-2 border-foreground/10 hover:border-foreground bg-background transition-all"
+          @mouseenter="prefetchRoute(tool.path)"
+        >
+          <span class="text-xl mb-2 block">{{ tool.emoji }}</span>
+          <h3 class="font-semibold text-sm leading-tight">{{ tool.name }}</h3>
+          <p class="text-xs text-muted-foreground mt-1">{{ tool.tag }}</p>
+        </RouterLink>
       </div>
     </section>
 
