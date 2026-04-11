@@ -47,12 +47,12 @@ export function useStructuredData() {
         name: 'Formatho',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://formatho.com/tools/logo.png'
+          url: 'https://formatho.com/tools/og-image.png'
         }
       },
       datePublished: data.datePublished,
       dateModified: data.dateModified || data.datePublished,
-      image: data.image || 'https://formatho.com/tools/logo.png',
+      image: data.image || 'https://formatho.com/tools/og-image.png',
       url: data.url,
       mainEntityOfPage: {
         '@type': 'WebPage',
