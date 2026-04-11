@@ -2,6 +2,14 @@
 import { RouterLink } from 'vue-router'
 import { Card, CardContent } from '@/components/ui/card'
 import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
+import { useSEO } from '@/composables/useSEO'
+
+useSEO({
+  title: 'About Formatho - Privacy-First Developer Tools',
+  description: 'Learn about Formatho: building free, privacy-first developer tools that run entirely in your browser. No tracking, no data collection, no server-side processing.',
+  keywords: ['about formatho', 'privacy first', 'developer tools company', 'open source', 'client-side tools'],
+  ogType: 'website'
+})
 </script>
 
 <template>

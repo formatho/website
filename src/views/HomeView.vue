@@ -1,6 +1,26 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
+import { useSEO } from '@/composables/useSEO'
+
+useSEO({
+  title: 'Formatho - Free Developer Tools & AI Agent Platform',
+  description: '100+ free developer tools that run entirely in your browser. Privacy-first, no data leaves your machine. AI agent orchestration, task management, and more.',
+  keywords: ['developer tools', 'free online tools', 'privacy tools', 'AI agents', 'agent orchestration', 'formatho', 'client-side tools', 'browser tools'],
+  ogType: 'website',
+  jsonLd: {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Formatho',
+    url: 'https://formatho.com',
+    logo: 'https://formatho.com/tools/logo.png',
+    description: 'Free developer tools and AI agent platform. Privacy-first, client-side processing.',
+    sameAs: [
+      'https://twitter.com/formatho',
+      'https://github.com/formatho'
+    ]
+  }
+})
 import { Input } from '@/components/ui/input'
 import { Search, Sparkles } from 'lucide-vue-next'
 import * as LucideIcons from 'lucide-vue-next'

@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /api/
 
-Sitemap: https://formatho.com/tools/sitemap.xml
+# Sitemaps
+Sitemap: https://formatho.com/sitemap.xml
+
+# Crawl-delay (respectful crawling)
+Crawl-delay: 1

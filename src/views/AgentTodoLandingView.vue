@@ -1,3 +1,40 @@
+<script setup lang="ts">
+import { useSEO } from '@/composables/useSEO'
+import { useStructuredData } from '@/composables/useStructuredData'
+
+useSEO({
+  title: 'Agent-Todo: Task Management Built for AI Agents | Formatho',
+  description: 'Persistent TODO system for AI agents. Stop losing context between sessions. Keep your AI workforce organized with task queues, priority management, and real-time tracking. Free to start.',
+  keywords: ['AI agent tasks', 'agent todo', 'AI task management', 'agent orchestration', 'persistent task queue', 'AI workflow', 'agent productivity'],
+  ogType: 'website',
+  jsonLd: {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Agent-Todo by Formatho',
+    description: 'Persistent task management system built specifically for AI agents. Task queues, priority management, real-time tracking.',
+    url: 'https://formatho.com/tools/agent-todo',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Web Browser',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD'
+    },
+    creator: {
+      '@type': 'Organization',
+      name: 'Formatho',
+      url: 'https://formatho.com'
+    }
+  }
+})
+
+const { addBreadcrumbStructuredData } = useStructuredData()
+addBreadcrumbStructuredData([
+  { name: 'Home', url: 'https://formatho.com/tools/' },
+  { name: 'Agent-Todo', url: 'https://formatho.com/tools/agent-todo' }
+])
+</script>
+
 <template>
   <div class="agent-todo-landing">
     <!-- ============================================ -->

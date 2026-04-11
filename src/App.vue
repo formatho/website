@@ -1,6 +1,10 @@
 <script setup>
 // Main application container - uses Vue Router for navigation
 import ExitIntentPopup from '@/components/ExitIntentPopup.vue'
+import { useSEO } from '@/composables/useSEO'
+
+// Initialize per-page SEO (auto-updates on route change)
+useSEO()
 </script>
 
 <template>
