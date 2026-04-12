@@ -42,6 +42,10 @@ const getEthAddress = (publicKey: Uint8Array) => {
 
 const generateMnemonic = () => {
   try {
+    if (typeof window === 'undefined' || !window.crypto) {
+      error.value = 'Crypto API not available. Please use a modern browser over HTTPS.'
+      return
+    }
     mnemonic.value = bip39.generateMnemonic(wordlist, 128)
     error.value = ''
     generateKeys()
