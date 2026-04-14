@@ -5,7 +5,7 @@ import './style.css'
 import App from './App.vue'
 import { routes } from './router'
 
-const baseUrl = 'https://formatho.com/tools'
+const baseUrl = 'https://formatho.com'
 const siteName = 'Formatho'
 const defaultImage = `${baseUrl}/logo.png`
 const twitterHandle = '@heyformatho'
@@ -113,7 +113,7 @@ export const createApp = ViteSSG(
   App,
   {
     routes,
-    base: '/tools/'
+    base: '/'
   },
   ({ router, isClient }) => {
     // SSR: Set meta tags before rendering during build
