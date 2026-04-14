@@ -112,10 +112,10 @@ const popularTools = [
             </h1>
           </div>
           <p class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight" data-aos="fade-down" data-aos-delay="100" data-v-8d4ed633="">
-            Stop Losing Money on Forgotten Agent Tasks
+            100+ Free Developer Tools. Zero Tracking.
           </p>
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="200" data-v-8d4ed633="">
-            Your AI agents forget tasks between sessions. <strong class="text-foreground">Agent Todo</strong> gives them persistent memory — try it free in 2 minutes. Plus 100+ privacy-first browser tools.
+            JSON formatter, Base64 encoder, JWT debugger, hash generator, and more. <strong class="text-foreground">Everything runs in your browser.</strong> No server uploads. No sign-up. No data collection.
           </p>
           <div class="flex flex-wrap gap-4 justify-center items-center mt-6" data-v-8d4ed633="">
             <div
@@ -174,12 +174,12 @@ const popularTools = [
           <div class="flex flex-col sm:flex-row gap-4 items-center mt-4" data-v-8d4ed633="">
             <RouterLink to="/agent-orchestrator" data-v-8d4ed633="">
               <button class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg" data-v-8d4ed633="">
-                🚀 Get Agent Todo Free — 2 Min Setup
+                ⚡ Explore All Tools
               </button>
             </RouterLink>
-            <RouterLink to="/agent-todo" data-v-8d4ed633="">
+            <RouterLink to="/agent-orchestrator" data-v-8d4ed633="">
               <button class="px-8 py-3 border border-primary/30 rounded-lg font-medium text-lg hover:bg-primary/5 transition-colors" data-v-8d4ed633="">
-                📋 Explore 100+ Free Tools
+                🤖 Agent Orchestrator
               </button>
             </RouterLink>
           </div>
@@ -187,23 +187,23 @@ const popularTools = [
           <!-- Social Proof Stats -->
           <div class="flex flex-wrap gap-8 justify-center items-center mt-8 text-center" data-aos="fade-up" data-aos-delay="150">
             <div>
-              <div class="text-3xl font-bold text-primary">1,000+</div>
-              <div class="text-xs text-muted-foreground">Tasks managed daily</div>
-            </div>
-            <div class="w-px h-10 bg-foreground"></div>
-            <div>
-              <div class="text-3xl font-bold text-primary">50+</div>
-              <div class="text-xs text-muted-foreground">Active AI agents</div>
-            </div>
-            <div class="w-px h-10 bg-foreground"></div>
-            <div>
               <div class="text-3xl font-bold text-primary">100+</div>
-              <div class="text-xs text-muted-foreground">Free browser tools</div>
+              <div class="text-xs text-muted-foreground">Free developer tools</div>
             </div>
             <div class="w-px h-10 bg-foreground"></div>
             <div>
-              <div class="text-3xl font-bold text-primary">99.9%</div>
-              <div class="text-xs text-muted-foreground">Uptime</div>
+              <div class="text-3xl font-bold text-primary">Zero</div>
+              <div class="text-xs text-muted-foreground">Data collected</div>
+            </div>
+            <div class="w-px h-10 bg-foreground"></div>
+            <div>
+              <div class="text-3xl font-bold text-primary">0</div>
+              <div class="text-xs text-muted-foreground">Sign-ups needed</div>
+            </div>
+            <div class="w-px h-10 bg-foreground"></div>
+            <div>
+              <div class="text-3xl font-bold text-primary">100%</div>
+              <div class="text-xs text-muted-foreground">Client-side</div>
             </div>
           </div>
 
