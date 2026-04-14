@@ -4,7 +4,7 @@ import { resolve } from 'path'
 
 const routes = [
   // Home - highest priority
-  { path: '/', priority: '1.0', changefreq: 'weekly' },
+  { path: '/tools', priority: '1.0', changefreq: 'weekly' },
 
   // Main site pages
   { path: '/about', priority: '0.9', changefreq: 'monthly' },
@@ -53,7 +53,6 @@ const routes = [
   { path: '/blogs/when-ai-stops-feeling-like-software-and-starts-feeling-like-a-real-employee', priority: '0.8', changefreq: 'monthly' },
 
   // Tools listing
-  { path: '/tools', priority: '0.9', changefreq: 'weekly' },
 
   // Document tools
   { path: '/tools/markdown', priority: '0.9', changefreq: 'monthly' },

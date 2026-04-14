@@ -24,6 +24,10 @@ export const routes = [
     children: [
       {
         path: '',
+        redirect: '/tools'
+      },
+      {
+        path: 'tools',
         name: 'home',
         component: HomeView,
         meta: {
@@ -214,8 +218,8 @@ export const routes = [
         }
       },
       {
-        path: 'tools',
-        name: 'tools',
+        path: 'tools/all',
+        name: 'tools-all',
         component: () => import('../views/ToolsView.vue'),
         meta: {
           title: 'All Developer Tools - Formatho',
