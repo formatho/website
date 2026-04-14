@@ -402,7 +402,7 @@ const decode = (token) => {
     '<h3>Best Practices</h3>' +
     '<ol><li><strong>Format before reviewing</strong>  Always format SQL before code review</li><li><strong>Use parameterized queries</strong>  The only reliable defense</li><li><strong>Highlight dynamic values</strong>  Make interpolation obvious</li><li><strong>Review in isolation</strong>  Format and review SQL separately from application code</li></ol>' +
     '<h3>Parameterized vs Concatenated</h3>' +
-    '<pre><code>// Vulnerable (string concatenation)\nconst query = `SELECT * FROM users WHERE id = ${userId}`;\n\n// Safe (parameterized)\nconst query = \'SELECT * FROM users WHERE id = ?\';\ndb.query(query, [userId]);</code></pre>' +
+    '<pre><code>// Vulnerable (string concatenation)\nconst query = `SELECT * FROM users WHERE id = \${userId}`;\n\n// Safe (parameterized)\nconst query = \'SELECT * FROM users WHERE id = ?\';\ndb.query(query, [userId]);</code></pre>' +
     '<h2>Formatting for Different SQL Dialects</h2>' +
     '<p>Different databases have different syntax quirks:</p>' +
     '<ul><li><strong>PostgreSQL:</strong> <code>$1, $2</code> parameter placeholders, <code>RETURNING</code> clause</li><li><strong>MySQL:</strong> <code>?</code> placeholders, backtick identifiers</li><li><strong>SQL Server:</strong> <code>@param</code> named parameters, square bracket identifiers</li><li><strong>Oracle:</strong> <code>:param</code> bind variables, <code>DUAL</code> table</li></ul>' +
