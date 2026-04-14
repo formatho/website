@@ -384,10 +384,10 @@ const decode = (token) => {
     '<h2>The Security Case for SQL Formatting</h2>' +
     '<p>Compare these two versions of the same query:</p>' +
     '<h3>Unformatted (danger hides)</h3>' +
-    '<pre><code>SELECT u.id, u.name, u.email FROM users u WHERE u.role = \'admin\' AND u.id IN (SELECT user_id FROM permissions WHERE resource_id = \${req.params.id}) AND u.active = 1</code></pre>' +
+    '<pre><code>SELECT u.id, u.name, u.email FROM users u WHERE u.role = \'admin\' AND u.id IN (SELECT user_id FROM permissions WHERE resource_id = \\${req.params.id}) AND u.active = 1</code></pre>' +
     '<h3>Formatted (danger is obvious)</h3>' +
-    '<pre><code>SELECT\n  u.id,\n  u.name,\n  u.email\nFROM users u\nWHERE u.role = \'admin\'\n  AND u.id IN (\n    SELECT user_id\n    FROM permissions\n    WHERE resource_id = \${req.params.id}\n  )\n  AND u.active = 1</code></pre>' +
-    '<p>See it now? <code>\${req.params.id}</code> is a direct string interpolation  a textbook SQL injection vulnerability. In the unformatted version, it\'s buried in a wall of text. In the formatted version, it jumps out.</p>' +
+    '<pre><code>SELECT\n  u.id,\n  u.name,\n  u.email\nFROM users u\nWHERE u.role = \'admin\'\n  AND u.id IN (\n    SELECT user_id\n    FROM permissions\n    WHERE resource_id = \\${req.params.id}\n  )\n  AND u.active = 1</code></pre>' +
+    '<p>See it now? <code>\\${req.params.id}</code> is a direct string interpolation  a textbook SQL injection vulnerability. In the unformatted version, it\'s buried in a wall of text. In the formatted version, it jumps out.</p>' +
     '<h2>What Formatting Reveals</h2>' +
     '<h3>1. String Concatenation</h3>' +
     '<pre><code>-- Dangerous: formatted, the concatenation is obvious\nSELECT *\nFROM users\nWHERE email = \'" + userEmail + "\'\n  AND password = \'" + userPassword + "\'</code></pre>' +
@@ -396,13 +396,13 @@ const decode = (token) => {
     '<p>Multiple concatenated values = multiple injection points.</p>' +
     '<h3>3. Nested Subqueries</h3>' +
     '<p>Deep nesting often means complex logic that\'s hard to audit unformatted:</p>' +
-    '<pre><code>SELECT *\nFROM orders\nWHERE customer_id IN (\n  SELECT id\n  FROM customers\n  WHERE region IN (\n    SELECT region_id\n    FROM user_regions\n    WHERE user_id = \${userId}\n  )\n)</code></pre>' +
+    '<pre><code>SELECT *\nFROM orders\nWHERE customer_id IN (\n  SELECT id\n  FROM customers\n  WHERE region IN (\n    SELECT region_id\n    FROM user_regions\n    WHERE user_id = \\${userId}\n  )\n)</code></pre>' +
     '<h2>SQL Injection Prevention Through Readability</h2>' +
     '<p>Code that\'s easy to read is code that\'s easy to review. And code review is your last line of defense against SQL injection.</p>' +
     '<h3>Best Practices</h3>' +
     '<ol><li><strong>Format before reviewing</strong>  Always format SQL before code review</li><li><strong>Use parameterized queries</strong>  The only reliable defense</li><li><strong>Highlight dynamic values</strong>  Make interpolation obvious</li><li><strong>Review in isolation</strong>  Format and review SQL separately from application code</li></ol>' +
     '<h3>Parameterized vs Concatenated</h3>' +
-    '<pre><code>// Vulnerable (string concatenation)\nconst query = `SELECT * FROM users WHERE id = \${userId}`;\n\n// Safe (parameterized)\nconst query = \'SELECT * FROM users WHERE id = ?\';\ndb.query(query, [userId]);</code></pre>' +
+    '<pre><code>// Vulnerable (string concatenation)\nconst query = `SELECT * FROM users WHERE id = \\${userId}`;\n\n// Safe (parameterized)\nconst query = \'SELECT * FROM users WHERE id = ?\';\ndb.query(query, [userId]);</code></pre>' +
     '<h2>Formatting for Different SQL Dialects</h2>' +
     '<p>Different databases have different syntax quirks:</p>' +
     '<ul><li><strong>PostgreSQL:</strong> <code>$1, $2</code> parameter placeholders, <code>RETURNING</code> clause</li><li><strong>MySQL:</strong> <code>?</code> placeholders, backtick identifiers</li><li><strong>SQL Server:</strong> <code>@param</code> named parameters, square bracket identifiers</li><li><strong>Oracle:</strong> <code>:param</code> bind variables, <code>DUAL</code> table</li></ul>' +
