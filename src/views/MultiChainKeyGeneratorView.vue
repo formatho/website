@@ -231,35 +231,35 @@ const reset = () => {
               {{ chain.name }}
               <span class="text-xs bg-black/10 px-2 py-0.5 rounded">{{ chain.ticker }}</span>
             </h3>
-            <p class="text-sm opacity-80 mt-1">{{ chain.algo }}</p>
+            <p class="text-sm text-slate-700 dark:text-slate-300 mt-1">{{ chain.algo }}</p>
           </div>
         </div>
 
         <div class="space-y-3 text-sm font-mono break-all">
           <div>
-            <div class="text-xs uppercase font-bold opacity-60 mb-1">Address</div>
+            <div class="text-xs uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">Address</div>
             <div class="bg-white/50 dark:bg-black/20 p-2 rounded select-all">
               {{ chain.address }}
             </div>
           </div>
           <div>
-            <div class="text-xs uppercase font-bold opacity-60 mb-1">Private Key</div>
+            <div class="text-xs uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">Private Key</div>
             <div class="bg-white/50 dark:bg-black/20 p-2 rounded blur-sm hover:blur-none transition-all select-all">
               {{ chain.privateKey }}
             </div>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <div class="text-xs uppercase font-bold opacity-60 mb-1">Derivation Path</div>
+              <div class="text-xs uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">Derivation Path</div>
               <div class="bg-white/50 dark:bg-black/20 p-1.5 rounded">{{ chain.path }}</div>
             </div>
             <div>
-              <div class="text-xs uppercase font-bold opacity-60 mb-1">Public Key</div>
+              <div class="text-xs uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">Public Key</div>
               <div class="bg-white/50 dark:bg-black/20 p-1.5 rounded truncate">{{ chain.publicKey }}</div>
             </div>
           </div>
           <div class="mt-3 pt-3 border-t border-black/10 dark:border-white/10">
-            <p class="text-xs font-sans opacity-90 leading-relaxed">
+            <p class="text-xs font-sans text-slate-600 dark:text-slate-400 leading-relaxed">
               <strong>Algorithm:</strong> {{ chain.algoDesc }}
             </p>
           </div>
