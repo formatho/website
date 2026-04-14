@@ -137,6 +137,5 @@ onUnmounted(removeToolSchema)
       <RouterView v-show="!isLoading" @vue:mounted="onComponentReady" />
     </main>
     <Footer />
-    <LiveSiteAnalytics />
   </div>
 </template>
