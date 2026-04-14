@@ -86,7 +86,7 @@ const currentYear = new Date().getFullYear()
           <ul class="space-y-2">
             <li>
               <RouterLink
-                to="/json-lint"
+                to="/tools/json-lint"
                 class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
               >
                 JSON Linter
@@ -94,7 +94,7 @@ const currentYear = new Date().getFullYear()
             </li>
             <li>
               <RouterLink
-                to="/uuid"
+                to="/tools/uuid"
                 class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
               >
                 UUID Generator
@@ -102,7 +102,7 @@ const currentYear = new Date().getFullYear()
             </li>
             <li>
               <RouterLink
-                to="/base64"
+                to="/tools/base64"
                 class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
               >
                 Base64 Encoder
@@ -110,7 +110,7 @@ const currentYear = new Date().getFullYear()
             </li>
             <li>
               <RouterLink
-                to="/jwt"
+                to="/tools/jwt"
                 class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
               >
                 JWT Debugger

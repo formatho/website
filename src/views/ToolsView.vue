@@ -15,70 +15,70 @@ const tools: Tool[] = [
   // Text & String Tools
   {
     name: 'UUID Generator',
-    path: '/uuid',
+    path: '/tools/uuid',
     description: 'Generate UUIDs (v1, v4, and more)',
     category: 'Text & String',
     icon: '🔑'
   },
   {
     name: 'Lorem Ipsum Generator',
-    path: '/lorem',
+    path: '/tools/lorem',
     description: 'Generate placeholder text',
     category: 'Text & String',
     icon: '📝'
   },
   {
     name: 'Case Converter',
-    path: '/case-converter',
+    path: '/tools/case-converter',
     description: 'Convert text case formats',
     category: 'Text & String',
     icon: '🔤'
   },
   {
     name: 'Text Statistics',
-    path: '/text-statistics',
+    path: '/tools/text-statistics',
     description: 'Analyze text statistics',
     category: 'Text & String',
     icon: '📊'
   },
   {
     name: 'Text to Binary',
-    path: '/text-to-binary',
+    path: '/tools/text-to-binary',
     description: 'Convert text to binary and back',
     category: 'Text & String',
     icon: '🔢'
   },
   {
     name: 'List Converter',
-    path: '/list-converter',
+    path: '/tools/list-converter',
     description: 'Convert list formats',
     category: 'Text & String',
     icon: '📋'
   },
   {
     name: 'Numeronym Generator',
-    path: '/numeronym-generator',
+    path: '/tools/numeronym-generator',
     description: 'Generate numeronyms (i18n, a11y)',
     category: 'Text & String',
     icon: '🔢'
   },
   {
     name: 'Sluginator',
-    path: '/sluginator',
+    path: '/tools/sluginator',
     description: 'Generate URL-friendly slugs',
     category: 'Text & String',
     icon: '🔗'
   },
   {
     name: 'Emoji Picker',
-    path: '/emoji-picker',
+    path: '/tools/emoji-picker',
     description: 'Search and copy emojis',
     category: 'Text & String',
     icon: '😀'
   },
   {
     name: 'ASCII Art Drawer',
-    path: '/ascii-drawer',
+    path: '/tools/ascii-drawer',
     description: 'Convert text to ASCII art',
     category: 'Text & String',
     icon: '🎨'
@@ -87,70 +87,70 @@ const tools: Tool[] = [
   // JSON & Data Tools
   {
     name: 'JSON Linter',
-    path: '/json-lint',
+    path: '/tools/json-lint',
     description: 'Validate and lint JSON',
     category: 'JSON & Data',
     icon: '📋'
   },
   {
     name: 'JSON Viewer',
-    path: '/json-viewer',
+    path: '/tools/json-viewer',
     description: 'Format and view JSON',
     category: 'JSON & Data',
     icon: '👁️'
   },
   {
     name: 'JSON Diff',
-    path: '/json-diff',
+    path: '/tools/json-diff',
     description: 'Compare two JSON documents',
     category: 'JSON & Data',
     icon: '🔍'
   },
   {
     name: 'JSON Minify',
-    path: '/json-minify',
+    path: '/tools/json-minify',
     description: 'Minify JSON',
     category: 'JSON & Data',
     icon: '🗜️'
   },
   {
     name: 'JSON to CSV',
-    path: '/json-csv',
+    path: '/tools/json-csv',
     description: 'Convert JSON to CSV and back',
     category: 'JSON & Data',
     icon: '📊'
   },
   {
     name: 'JSON to XML',
-    path: '/json-to-xml',
+    path: '/tools/json-to-xml',
     description: 'Convert JSON to XML',
     category: 'JSON & Data',
     icon: '📄'
   },
   {
     name: 'JSON to YAML',
-    path: '/json-yaml',
+    path: '/tools/json-yaml',
     description: 'Convert JSON to YAML',
     category: 'JSON & Data',
     icon: '📄'
   },
   {
     name: 'JSON to TOML',
-    path: '/json-to-toml',
+    path: '/tools/json-to-toml',
     description: 'Convert JSON to TOML',
     category: 'JSON & Data',
     icon: '📄'
   },
   {
     name: 'XML to JSON',
-    path: '/xml-to-json',
+    path: '/tools/xml-to-json',
     description: 'Convert XML to JSON',
     category: 'JSON & Data',
     icon: '📄'
   },
   {
     name: 'XML Formatter',
-    path: '/xml-formatter',
+    path: '/tools/xml-formatter',
     description: 'Format and beautify XML',
     category: 'JSON & Data',
     icon: '📐'
@@ -159,42 +159,42 @@ const tools: Tool[] = [
   // YAML & Config Tools
   {
     name: 'YAML Linter',
-    path: '/yaml-lint',
+    path: '/tools/yaml-lint',
     description: 'Validate and lint YAML',
     category: 'YAML & Config',
     icon: '📋'
   },
   {
     name: 'YAML Viewer',
-    path: '/yaml-viewer',
+    path: '/tools/yaml-viewer',
     description: 'Format and view YAML',
     category: 'YAML & Config',
     icon: '👁️'
   },
   {
     name: 'YAML to TOML',
-    path: '/yaml-to-toml',
+    path: '/tools/yaml-to-toml',
     description: 'Convert YAML to TOML',
     category: 'YAML & Config',
     icon: '📄'
   },
   {
     name: 'TOML to JSON',
-    path: '/toml-to-json',
+    path: '/tools/toml-to-json',
     description: 'Convert TOML to JSON',
     category: 'YAML & Config',
     icon: '📄'
   },
   {
     name: 'TOML to YAML',
-    path: '/toml-to-yaml',
+    path: '/tools/toml-to-yaml',
     description: 'Convert TOML to YAML',
     category: 'YAML & Config',
     icon: '📄'
   },
   {
     name: 'SQL Formatter',
-    path: '/sql-formatter',
+    path: '/tools/sql-formatter',
     description: 'Format SQL queries',
     category: 'YAML & Config',
     icon: '🗃️'
@@ -203,56 +203,56 @@ const tools: Tool[] = [
   // Encoding & Hashing
   {
     name: 'Base64 Encoder',
-    path: '/base64',
+    path: '/tools/base64',
     description: 'Encode and decode Base64',
     category: 'Encoding & Hashing',
     icon: '🔐'
   },
   {
     name: 'Base64 File Converter',
-    path: '/base64-file-converter',
+    path: '/tools/base64-file-converter',
     description: 'Convert files to Base64',
     category: 'Encoding & Hashing',
     icon: '📁'
   },
   {
     name: 'URL Encoder',
-    path: '/url-encoder',
+    path: '/tools/url-encoder',
     description: 'Encode and decode URLs',
     category: 'Encoding & Hashing',
     icon: '🔗'
   },
   {
     name: 'HTML Entities',
-    path: '/html-entities',
+    path: '/tools/html-entities',
     description: 'Encode and decode HTML entities',
     category: 'Encoding & Hashing',
     icon: '🌐'
   },
   {
     name: 'Hash Generator',
-    path: '/hash-text',
+    path: '/tools/hash-text',
     description: 'Generate MD5, SHA hashes',
     category: 'Encoding & Hashing',
     icon: '#️⃣'
   },
   {
     name: 'Bcrypt Hasher',
-    path: '/bcrypt',
+    path: '/tools/bcrypt',
     description: 'Generate bcrypt password hashes',
     category: 'Encoding & Hashing',
     icon: '🔒'
   },
   {
     name: 'HMAC Generator',
-    path: '/hmac-generator',
+    path: '/tools/hmac-generator',
     description: 'Generate HMAC signatures',
     category: 'Encoding & Hashing',
     icon: '🔑'
   },
   {
     name: 'Keccak-256',
-    path: '/keccak256',
+    path: '/tools/keccak256',
     description: 'Generate Keccak-256 hashes',
     category: 'Encoding & Hashing',
     icon: '💎'
@@ -261,63 +261,63 @@ const tools: Tool[] = [
   // Crypto & Keys
   {
     name: 'JWT Debugger',
-    path: '/jwt',
+    path: '/tools/jwt',
     description: 'Decode and debug JWTs',
     category: 'Crypto & Keys',
     icon: '🎫'
   },
   {
     name: 'RSA Key Generator',
-    path: '/rsa-key-generator',
+    path: '/tools/rsa-key-generator',
     description: 'Generate RSA key pairs',
     category: 'Crypto & Keys',
     icon: '🗝️'
   },
   {
     name: 'BIP39 Mnemonic',
-    path: '/bip39-generator',
+    path: '/tools/bip39-generator',
     description: 'Generate BIP39 mnemonics',
     category: 'Crypto & Keys',
     icon: '📝'
   },
   {
     name: 'Multi-Chain Keys',
-    path: '/multi-chain-keys',
+    path: '/tools/multi-chain-keys',
     description: 'Generate keys for multiple blockchains',
     category: 'Crypto & Keys',
     icon: '⛓️'
   },
   {
     name: 'Address from Key',
-    path: '/address-from-key',
+    path: '/tools/address-from-key',
     description: 'Derive addresses from private keys',
     category: 'Crypto & Keys',
     icon: '📍'
   },
   {
     name: 'Address Checksum',
-    path: '/address-checksum',
+    path: '/tools/address-checksum',
     description: 'Validate Ethereum address checksums',
     category: 'Crypto & Keys',
     icon: '✅'
   },
   {
     name: 'Token Generator',
-    path: '/token-generator',
+    path: '/tools/token-generator',
     description: 'Generate secure random tokens',
     category: 'Crypto & Keys',
     icon: '🎰'
   },
   {
     name: 'ULID Generator',
-    path: '/ulid-generator',
+    path: '/tools/ulid-generator',
     description: 'Generate ULIDs',
     category: 'Crypto & Keys',
     icon: '🆔'
   },
   {
     name: 'Encryption',
-    path: '/encryption',
+    path: '/tools/encryption',
     description: 'Encrypt and decrypt text',
     category: 'Crypto & Keys',
     icon: '🔐'
@@ -326,63 +326,63 @@ const tools: Tool[] = [
   // Web & Network
   {
     name: 'URL Parser',
-    path: '/url-parser',
+    path: '/tools/url-parser',
     description: 'Parse and analyze URLs',
     category: 'Web & Network',
     icon: '🔗'
   },
   {
     name: 'QR Code Generator',
-    path: '/qr-code',
+    path: '/tools/qr-code',
     description: 'Generate QR codes',
     category: 'Web & Network',
     icon: '📱'
   },
   {
     name: 'WiFi QR Code',
-    path: '/wifi-qr-code',
+    path: '/tools/wifi-qr-code',
     description: 'Generate WiFi QR codes',
     category: 'Web & Network',
     icon: '📶'
   },
   {
     name: 'Meta Tag Generator',
-    path: '/meta-tag-generator',
+    path: '/tools/meta-tag-generator',
     description: 'Generate HTML meta tags',
     category: 'Web & Network',
     icon: '🏷️'
   },
   {
     name: 'Diff Checker',
-    path: '/diff',
+    path: '/tools/diff',
     description: 'Compare text differences',
     category: 'Web & Network',
     icon: '🔍'
   },
   {
     name: 'Markdown to HTML',
-    path: '/markdown-to-html',
+    path: '/tools/markdown-to-html',
     description: 'Convert Markdown to HTML',
     category: 'Web & Network',
     icon: '📝'
   },
   {
     name: 'HTML WYSIWYG Editor',
-    path: '/html-wysiwyg-editor',
+    path: '/tools/html-wysiwyg-editor',
     description: 'Visual HTML editor',
     category: 'Web & Network',
     icon: '✏️'
   },
   {
     name: 'Docker to Compose',
-    path: '/docker-run-to-compose',
+    path: '/tools/docker-run-to-compose',
     description: 'Convert docker run to compose',
     category: 'Web & Network',
     icon: '🐳'
   },
   {
     name: 'Git Memo',
-    path: '/git-memo',
+    path: '/tools/git-memo',
     description: 'Git command reference',
     category: 'Web & Network',
     icon: '📚'
@@ -391,28 +391,28 @@ const tools: Tool[] = [
   // Time & Date
   {
     name: 'Date Time Converter',
-    path: '/date-time-converter',
+    path: '/tools/date-time-converter',
     description: 'Convert date and time formats',
     category: 'Time & Date',
     icon: '📅'
   },
   {
     name: 'Cron Generator',
-    path: '/crontab-generator',
+    path: '/tools/crontab-generator',
     description: 'Generate cron expressions',
     category: 'Time & Date',
     icon: '⏰'
   },
   {
     name: 'Chronometer',
-    path: '/chronometer',
+    path: '/tools/chronometer',
     description: 'Online stopwatch',
     category: 'Time & Date',
     icon: '⏱️'
   },
   {
     name: 'ETA Calculator',
-    path: '/eta-calculator',
+    path: '/tools/eta-calculator',
     description: 'Calculate estimated time',
     category: 'Time & Date',
     icon: '⏳'
@@ -421,28 +421,28 @@ const tools: Tool[] = [
   // Blockchain
   {
     name: 'EVM Unit Converter',
-    path: '/evm-converter',
+    path: '/tools/evm-converter',
     description: 'Convert Wei, Gwei, Ether',
     category: 'Blockchain',
     icon: '⟠'
   },
   {
     name: 'Solidity to Opcodes',
-    path: '/solidity-to-opcodes',
+    path: '/tools/solidity-to-opcodes',
     description: 'Compile Solidity to opcodes',
     category: 'Blockchain',
     icon: '⚙️'
   },
   {
     name: 'Gas Estimator',
-    path: '/gas-estimator',
+    path: '/tools/gas-estimator',
     description: 'Estimate gas costs',
     category: 'Blockchain',
     icon: '⛽'
   },
   {
     name: 'Multi-Chain Address',
-    path: '/multi-chain-keys',
+    path: '/tools/multi-chain-keys',
     description: 'Generate addresses for multiple chains',
     category: 'Blockchain',
     icon: '⛓️'
@@ -451,28 +451,28 @@ const tools: Tool[] = [
   // Math & Numbers
   {
     name: 'Math Evaluator',
-    path: '/math-evaluator',
+    path: '/tools/math-evaluator',
     description: 'Evaluate math expressions',
     category: 'Math & Numbers',
     icon: '🧮'
   },
   {
     name: 'Number Base Converter',
-    path: '/base-converter',
+    path: '/tools/base-converter',
     description: 'Convert between number bases',
     category: 'Math & Numbers',
     icon: '🔢'
   },
   {
     name: 'Roman Numeral Converter',
-    path: '/roman-numeral-converter',
+    path: '/tools/roman-numeral-converter',
     description: 'Convert Roman numerals',
     category: 'Math & Numbers',
     icon: '🏛️'
   },
   {
     name: 'Color Converter',
-    path: '/color-converter',
+    path: '/tools/color-converter',
     description: 'Convert color formats',
     category: 'Math & Numbers',
     icon: '🎨'
@@ -481,21 +481,21 @@ const tools: Tool[] = [
   // Images
   {
     name: 'Image Compressor',
-    path: '/image',
+    path: '/tools/image',
     description: 'Compress images',
     category: 'Images',
     icon: '🖼️'
   },
   {
     name: 'BPMN Viewer',
-    path: '/bpmn',
+    path: '/tools/bpmn',
     description: 'View BPMN diagrams',
     category: 'Images',
     icon: '📊'
   },
   {
     name: 'BPMN to Visio',
-    path: '/bpmn-to-visio',
+    path: '/tools/bpmn-to-visio',
     description: 'Convert BPMN to Visio',
     category: 'Images',
     icon: '📊'
@@ -504,42 +504,42 @@ const tools: Tool[] = [
   // Network
   {
     name: 'IP Address Converter',
-    path: '/ipv4-address-converter',
+    path: '/tools/ipv4-address-converter',
     description: 'Convert IP addresses',
     category: 'Network',
     icon: '🌐'
   },
   {
     name: 'IPv4 Range Expander',
-    path: '/ipv4-range-expander',
+    path: '/tools/ipv4-range-expander',
     description: 'Expand IPv4 ranges',
     category: 'Network',
     icon: '📊'
   },
   {
     name: 'IPv6 ULA Generator',
-    path: '/ipv6-ula-generator',
+    path: '/tools/ipv6-ula-generator',
     description: 'Generate IPv6 ULA',
     category: 'Network',
     icon: '🌐'
   },
   {
     name: 'MAC Address Generator',
-    path: '/mac-address-generator',
+    path: '/tools/mac-address-generator',
     description: 'Generate MAC addresses',
     category: 'Network',
     icon: '💻'
   },
   {
     name: 'Random Port Generator',
-    path: '/random-port-generator',
+    path: '/tools/random-port-generator',
     description: 'Generate random ports',
     category: 'Network',
     icon: '🚪'
   },
   {
     name: 'CIDR Calculator',
-    path: '/cidr-calculator',
+    path: '/tools/cidr-calculator',
     description: 'Calculate CIDR notation',
     category: 'Network',
     icon: '🌐'
@@ -548,56 +548,56 @@ const tools: Tool[] = [
   // Developer Utilities
   {
     name: 'Regex Tester',
-    path: '/regex-tester',
+    path: '/tools/regex-tester',
     description: 'Test regular expressions',
     category: 'Developer Utilities',
     icon: '🔎'
   },
   {
     name: 'Chmod Calculator',
-    path: '/chmod-calculator',
+    path: '/tools/chmod-calculator',
     description: 'Calculate chmod permissions',
     category: 'Developer Utilities',
     icon: '🔐'
   },
   {
     name: 'Basic Auth Generator',
-    path: '/basic-auth-generator',
+    path: '/tools/basic-auth-generator',
     description: 'Generate Basic Auth headers',
     category: 'Developer Utilities',
     icon: '🔑'
   },
   {
     name: 'OTP Code Generator',
-    path: '/otp-code-generator',
+    path: '/tools/otp-code-generator',
     description: 'Generate TOTP codes',
     category: 'Developer Utilities',
     icon: '📲'
   },
   {
     name: 'Email Normalizer',
-    path: '/email-normalizer',
+    path: '/tools/email-normalizer',
     description: 'Normalize email addresses',
     category: 'Developer Utilities',
     icon: '📧'
   },
   {
     name: 'Phone Parser',
-    path: '/phone-number-parser',
+    path: '/tools/phone-number-parser',
     description: 'Parse phone numbers',
     category: 'Developer Utilities',
     icon: '📞'
   },
   {
     name: 'User Agent Parser',
-    path: '/user-agent-parser',
+    path: '/tools/user-agent-parser',
     description: 'Parse user agent strings',
     category: 'Developer Utilities',
     icon: '🤖'
   },
   {
     name: 'Local Token Counter',
-    path: '/local-token-counter',
+    path: '/tools/local-token-counter',
     description: 'Count tokens locally',
     category: 'Developer Utilities',
     icon: '🔢'
@@ -606,14 +606,14 @@ const tools: Tool[] = [
   // AI & Automation
   {
     name: 'Agent Identity Generator',
-    path: '/agent-identity-generator',
+    path: '/tools/agent-identity-generator',
     description: 'Generate AI agent identities',
     category: 'AI & Automation',
     icon: '🤖'
   },
   {
     name: 'Benchmark Builder',
-    path: '/benchmark-builder',
+    path: '/tools/benchmark-builder',
     description: 'Build performance benchmarks',
     category: 'AI & Automation',
     icon: '📈'
