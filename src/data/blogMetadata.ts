@@ -12,6 +12,114 @@ export interface BlogMetadata {
 
 export const blogMetadata: BlogMetadata[] = [
   {
+    id: 50,
+    title: 'Privacy-First Developer Tools: Why Your Data Should Never Leave Your Browser',
+    excerpt:
+      'The data harvesting problem in developer tooling is real. Learn why privacy-first tools matter in 2026 and how client-side processing protects your code, configs, and credentials.',
+    date: '2026-03-18',
+    readTime: '8 min',
+    tags: ['Privacy', 'Security', 'Developer Tools', 'Open Source', 'Best Practices'],
+    slug: 'privacy-first-developer-tools-2026',
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=225&fit=crop',
+    imageAlt: 'Privacy shield representing data protection in developer tools'
+  },
+  {
+    id: 49,
+    title: 'JSON to YAML Converter: A Practical Guide for DevOps Engineers',
+    excerpt:
+      'Master JSON to YAML conversion for Docker Compose, Kubernetes, and CI/CD configs. Learn when to use each format and avoid common conversion pitfalls.',
+    date: '2026-03-17',
+    readTime: '7 min',
+    tags: ['JSON', 'YAML', 'DevOps', 'Tutorial', 'Developer Tools'],
+    slug: 'json-to-yaml-converter-tools',
+    image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&h=225&fit=crop',
+    imageAlt: 'Data format conversion between JSON and YAML'
+  },
+  {
+    id: 48,
+    title: 'JWT Decoder Security Guide: Inspect Tokens Without Risk',
+    excerpt:
+      'Deep dive into JWT structure, common vulnerabilities, and why you should never paste tokens into online decoders. Learn to inspect JWTs safely.',
+    date: '2026-03-16',
+    readTime: '8 min',
+    tags: ['JWT', 'Security', 'Authentication', 'Tutorial', 'Developer Tools'],
+    slug: 'jwt-decoder-security-guide',
+    image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=225&fit=crop',
+    imageAlt: 'JWT token security and authentication'
+  },
+  {
+    id: 47,
+    title: 'SQL Formatter for Security: Spot Vulnerabilities in Plain Sight',
+    excerpt:
+      'Unformatted SQL is a security blind spot. Learn how proper formatting reveals injection vulnerabilities, improves code reviews, and makes your database layer safer.',
+    date: '2026-03-15',
+    readTime: '7 min',
+    tags: ['SQL', 'Security', 'Database', 'Tutorial', 'Developer Tools'],
+    slug: 'sql-formatter-security',
+    image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=400&h=225&fit=crop',
+    imageAlt: 'SQL query formatting for security review'
+  },
+  {
+    id: 46,
+    title: 'Base64 Encoder/Decoder: The Complete Developer Guide',
+    excerpt:
+      'Everything you need to know about Base64 encoding — what it is, when to use it (and when not to), common pitfalls, and why your encoding tool should be client-side.',
+    date: '2026-03-14',
+    readTime: '8 min',
+    tags: ['Base64', 'Encoding', 'Tutorial', 'Security', 'Developer Tools'],
+    slug: 'base64-encoder-decoder-complete-guide',
+    image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=225&fit=crop',
+    imageAlt: 'Base64 encoding and decoding visualization'
+  },
+  {
+    id: 45,
+    title: 'We Built 100+ Privacy-First Developer Tools. Here\'s What We Learned.',
+    excerpt:
+      'The story behind Formatho\'s 100+ developer tools — the architecture decisions, the hard trade-offs, and why we chose client-side processing over data harvesting.',
+    date: '2026-03-13',
+    readTime: '9 min',
+    tags: ['Developer Tools', 'Launch', 'Privacy', 'Productivity', 'Open Source'],
+    slug: '100-plus-developer-tools-launch',
+    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=225&fit=crop',
+    imageAlt: '100+ privacy-first developer tools launch'
+  },
+  {
+    id: 44,
+    title: 'Regex Tester Security: Patterns That Protect and Patterns That Kill',
+    excerpt:
+      'Regular expressions can validate input or bring your server to its knees. Learn about ReDoS attacks, safe regex patterns, and why client-side testing matters.',
+    date: '2026-03-12',
+    readTime: '8 min',
+    tags: ['Regex', 'Security', 'Tutorial', 'Developer Tools', 'Testing'],
+    slug: 'regex-tester-security',
+    image: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&h=225&fit=crop',
+    imageAlt: 'Regular expression testing for security'
+  },
+  {
+    id: 43,
+    title: 'QR Codes Without Tracking: Privacy-First QR Generation',
+    excerpt:
+      'Most free QR code generators track your data. Learn the privacy risks of online QR tools and how client-side generation keeps your information safe.',
+    date: '2026-03-11',
+    readTime: '7 min',
+    tags: ['QR Codes', 'Privacy', 'Security', 'Tutorial', 'Developer Tools'],
+    slug: 'qr-codes-without-tracking',
+    image: 'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=400&h=225&fit=crop',
+    imageAlt: 'Privacy-first QR code generation without tracking'
+  },
+  {
+    id: 42,
+    title: 'UUID Generator Masterclass: Everything You Need to Know About Unique Identifiers',
+    excerpt:
+      'Complete guide to UUIDs — from v1 to v5, security implications of predictable IDs, and how to generate unique identifiers safely in JavaScript and Node.js.',
+    date: '2026-03-10',
+    readTime: '8 min',
+    tags: ['UUID', 'Security', 'JavaScript', 'Tutorial', 'Developer Tools'],
+    slug: 'uuid-generator-masterclass',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=225&fit=crop',
+    imageAlt: 'Unique identifier generation and UUID variants'
+  },
+  {
     id: 41,
     title: 'From Chaos to Order: Managing AI Agent Workloads',
     excerpt:

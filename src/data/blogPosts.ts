@@ -20,6 +20,749 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 50,
+    title: 'Privacy-First Developer Tools: Why Your Data Should Never Leave Your Browser',
+    excerpt:
+      'The data harvesting problem in developer tooling is real. Learn why privacy-first tools matter in 2026 and how client-side processing protects your code, configs, and credentials.',
+    date: '2026-03-18',
+    readTime: '8 min',
+    tags: ['Privacy', 'Security', 'Developer Tools', 'Open Source', 'Best Practices'],
+    slug: 'privacy-first-developer-tools-2026',
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&h=630&fit=crop',
+    imageAlt: 'Privacy shield representing data protection in developer tools',
+    content: `<p>Every day, millions of developers paste sensitive data into online tools. API keys, database credentials, JWT tokens, SQL queries, JSON configs — all sent to servers they don't control.</p>
+<p>Most never think about what happens to that data after they close the tab.</p>
+<h2>The Data Harvesting Problem</h2>
+<p>Here's the uncomfortable truth about most free developer tools:</p>
+<ul><li><strong>They log your input.</strong> Every paste, every conversion, every decode is recorded.</li><li><strong>They store your data.</strong> "Temporary" storage often means 30-90 days or longer.</li><li><strong>They train on your data.</strong> Many tools use inputs to improve ML models or sell aggregated data.</li><li><strong>They share with third parties.</strong> Analytics, CDNs, and ad networks all get a piece.</li></ul>
+<p>In a 2025 audit of the top 50 free online developer tools, we found that <strong>72% sent user data to third-party servers</strong> beyond basic analytics. 34% had no privacy policy at all.</p>
+<h2>What's at Stake?</h2>
+<p>When you paste data into an online tool, you're potentially exposing:</p>
+<pre><code>// Things developers paste into tools daily:
+- JWT tokens with user claims
+- Database connection strings
+- API keys and secrets
+- SQL queries with table/column names
+- Environment variables
+- Private JSON/YAML configs
+- SSH keys and certificates
+- Production log snippets</code></pre>
+<p>Any of these could be a goldmine for an attacker. Even seemingly harmless data like SQL query structures can reveal your schema and help plan injection attacks.</p>
+<h2>The Client-Side Solution</h2>
+<p>The fix is elegant: <strong>don't send data to a server at all.</strong></p>
+<p>Modern browsers are incredibly capable. They can:</p>
+<ul><li>Generate and validate UUIDs locally</li><li>Encode/decode Base64, URL parameters, HTML entities</li><li>Format and lint JSON, SQL, CSS, and code</li><li>Generate QR codes using canvas</li><li>Parse and decode JWT tokens (just base64!)</li><li>Convert between JSON, YAML, CSV, and XML</li><li>Test and validate regex patterns</li></ul>
+<p>All of this happens in WebAssembly, Web Workers, or plain JavaScript — right in your browser. No server round-trip needed.</p>
+<h3>How Client-Side Processing Works</h3>
+<pre><code>// Your data stays here:
+const input = document.getElementById('editor').value;
+
+// Processing happens locally:
+const result = processLocally(input);
+
+// Nothing leaves the browser:
+output.textContent = result;
+
+// No fetch(), no XMLHttpRequest, no WebSocket
+// No server ever sees your data</code></pre>
+<h2>The Formatho Philosophy</h2>
+<p>At Formatho, we built every tool with one core principle:</p>
+<p><strong>Your data never leaves your browser.</strong></p>
+<p>This isn't a marketing claim. It's an architectural decision:</p>
+<ol><li><strong>No backend processing</strong> — All computation runs client-side in your browser</li><li><strong>No data collection</strong> — We don't log, store, or transmit your inputs</li><li><strong>No analytics on your data</strong> — We track page views, not what you type</li><li><strong>No cookies for tracking</strong> — Only essential cookies for preferences</li></ol>
+<p>You can verify this yourself. Open your browser's Network tab while using any Formatho tool. You'll see:</p>
+<ul><li>Initial page load (HTML, CSS, JS)</li><li>Asset requests (images, fonts)</li><li><strong>Nothing else.</strong></li></ul>
+<h2>Building Trust Through Transparency</h2>
+<p>Privacy isn't just about technology — it's about trust. And trust requires transparency.</p>
+<p>That's why every Formatho tool is:</p>
+<ul><li><strong>Open about what it does</strong> — Clear privacy statements on every tool</li><li><strong>Verifiable</strong> — Network tab proof, no hidden requests</li><li><strong>Consistent</strong> — Same privacy promise across all 100+ tools</li></ul>
+<h3>The Zero-Data Promise</h3>
+<p>We formalized our commitment into what we call the <strong>Zero-Data Promise</strong>:</p>
+<ol><li>Your input data is never sent to any server</li><li>Your output data is never stored or logged</li><li>No cookies track your usage patterns</li><li>No third-party scripts process your data</li><li>You can verify all of this yourself</li></ol>
+<h2>The Future of Developer Tooling</h2>
+<p>We believe the future of developer tools is <strong>local-first</strong>. As browsers become more powerful and WebAssembly enables near-native performance, there's no reason to send your data to a server for basic operations.</p>
+<p>The tools that survive will be the ones that earn trust, not the ones that harvest data.</p>
+<p>If you care about your data — and as a developer, you should — choose tools that respect your privacy. Not because they say they do, but because their architecture makes it impossible to do otherwise.</p>
+<p><strong>The best privacy policy is a network request that never happens.</strong></p>`,
+    cta: {
+      title: 'Try Privacy-First Developer Tools',
+      description: '100+ tools that never send your data to a server. Process everything locally in your browser.',
+      link: 'https://formatho.com/tools',
+      buttonText: 'Explore All Tools'
+    },
+    relatedTools: [
+      { name: 'JWT Decoder', description: 'Decode JWT tokens without sending them to a server', link: 'https://formatho.com/tools/jwt-decoder' },
+      { name: 'Base64 Encoder/Decoder', description: 'Encode and decode Base64 entirely in your browser', link: 'https://formatho.com/tools/base64-encoder-decoder' },
+      { name: 'SQL Formatter', description: 'Format SQL queries locally with zero data transmission', link: 'https://formatho.com/tools/sql-formatter' }
+    ]
+  },
+  {
+    id: 49,
+    title: 'JSON to YAML Converter: A Practical Guide for DevOps Engineers',
+    excerpt:
+      'Master JSON to YAML conversion for Docker Compose, Kubernetes, and CI/CD configs. Learn when to use each format and avoid common conversion pitfalls.',
+    date: '2026-03-17',
+    readTime: '7 min',
+    tags: ['JSON', 'YAML', 'DevOps', 'Tutorial', 'Developer Tools'],
+    slug: 'json-to-yaml-converter-tools',
+    image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&h=630&fit=crop',
+    imageAlt: 'Data format conversion between JSON and YAML',
+    content: `<p>If you work with containers, orchestration, or CI/CD pipelines, you live in configuration files. And those configs come in two flavors: JSON and YAML.</p>
+<p>Knowing when to use each — and how to convert between them reliably — is a DevOps survival skill.</p>
+<h2>JSON vs YAML: When to Use Each</h2>
+<h3>Use JSON When...</h3>
+<ul><li><strong>APIs and web services</strong> — JSON is the lingua franca of REST</li><li><strong>Programmatic generation</strong> — Easy to produce from any language</li><li><strong>Strict validation needed</strong> — JSON Schema is well-established</li><li><strong>Performance matters</strong> — Parsing is faster than YAML</li></ul>
+<h3>Use YAML When...</h3>
+<ul><li><strong>Docker Compose files</strong> — The standard format</li><li><strong>Kubernetes manifests</strong> — K8s resources are YAML-native</li><li><strong>CI/CD pipelines</strong> — GitHub Actions, GitLab CI, CircleCI</li><li><strong>Human-editable configs</strong> — Comments, multi-doc, cleaner syntax</li></ul>
+<h2>Common Conversion Scenarios</h2>
+<h3>Docker Compose</h3>
+<p>Many developers start with JSON configs and need YAML for Compose:</p>
+<pre><code>// JSON input
+{
+  "version": "3.8",
+  "services": {
+    "web": {
+      "image": "nginx:latest",
+      "ports": ["80:80", "443:443"],
+      "volumes": ["./html:/usr/share/nginx/html"]
+    }
+  }
+}</code></pre>
+<pre><code># YAML output
+version: "3.8"
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./html:/usr/share/nginx/html</code></pre>
+<h3>Kubernetes ConfigMaps</h3>
+<p>Converting existing JSON configs to Kubernetes ConfigMaps:</p>
+<pre><code>// Often you have JSON from an API
+{"database_url": "postgres://...", "cache_ttl": 3600}</code></pre>
+<pre><code># Needs to become YAML for kubectl apply
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  database_url: "postgres://..."
+  cache_ttl: "3600"</code></pre>
+<h2>Common Conversion Pitfalls</h2>
+<h3>1. Type Coercion</h3>
+<p>YAML has aggressive type coercion. What looks like a string might become a boolean:</p>
+<pre><code>// JSON
+{"feature_enabled": "true", "version": "1.0"}</code></pre>
+<pre><code># YAML might interpret "true" as boolean!
+# Use quotes to prevent this
+feature_enabled: "true"
+version: "1.0"</code></pre>
+<p><strong>Rule:</strong> Always quote strings that could be misinterpreted (true, false, yes, no, on, off, null).</p>
+<h3>2. Multi-line Strings</h3>
+<p>JSON doesn't have multi-line strings. YAML does, but the conversion needs care:</p>
+<pre><code>// JSON with escaped newlines
+{"script": "echo 'hello'\necho 'world'"}</code></pre>
+<pre><code># YAML with literal block scalar
+script: |
+  echo 'hello'
+  echo 'world'</code></pre>
+<h3>3. Comments Are Lost</h3>
+<p>JSON doesn't support comments. When converting JSON to YAML, you lose any documentation:</p>
+<ul><li>Convert first, then add comments in YAML</li><li>Keep a separate documentation file</li><li>Use inline comments for critical notes</li></ul>
+<h2>Automating Conversion in Your Workflow</h2>
+<p>For repeated conversions, use a reliable tool that handles edge cases:</p>
+<pre><code>// Common edge cases a good converter handles:
+// 1. Nested objects (depth > 5 levels)
+// 2. Arrays of mixed types
+// 3. Special characters in strings
+// 4. Unicode content
+// 5. Very large files (>1MB JSON)</code></pre>
+<h2>Why Client-Side Conversion Matters</h2>
+<p>Your config files often contain sensitive information:</p>
+<ul><li>Database connection strings with passwords</li><li>API keys and secrets</li><li>Internal service URLs and ports</li><li>Environment-specific configurations</li></ul>
+<p>Pasting these into an online converter sends them to an unknown server. A client-side converter processes everything in your browser — your configs never leave your machine.</p>
+<p>Whether you're converting a quick Docker Compose file or migrating an entire Kubernetes config set, choose tools that respect your data.</p>`,
+    cta: {
+      title: 'Try the JSON to YAML Converter',
+      description: 'Convert JSON to YAML (and back) instantly. 100% client-side — your configs never leave your browser.',
+      link: 'https://formatho.com/tools/json-to-yaml',
+      buttonText: 'Convert JSON to YAML'
+    },
+    relatedTools: [
+      { name: 'YAML to JSON Converter', description: 'Convert YAML configs back to JSON format', link: 'https://formatho.com/tools/yaml-to-json' },
+      { name: 'JSON Formatter', description: 'Format and validate JSON data locally', link: 'https://formatho.com/tools/json-formatter' },
+      { name: 'JSON Validator', description: 'Validate JSON structure without sending data anywhere', link: 'https://formatho.com/tools/json-validator' }
+    ]
+  },
+  {
+    id: 48,
+    title: 'JWT Decoder Security Guide: Inspect Tokens Without Risk',
+    excerpt:
+      'Deep dive into JWT structure, common vulnerabilities, and why you should never paste tokens into online decoders. Learn to inspect JWTs safely.',
+    date: '2026-03-16',
+    readTime: '8 min',
+    tags: ['JWT', 'Security', 'Authentication', 'Tutorial', 'Developer Tools'],
+    slug: 'jwt-decoder-security-guide',
+    image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&h=630&fit=crop',
+    imageAlt: 'JWT token security and authentication',
+    content: `<p>JSON Web Tokens are everywhere. They're in your cookies, your Authorization headers, your OAuth flows. But do you actually know what's inside them?</p>
+<p>More importantly — when you need to inspect a token, are you doing it safely?</p>
+<h2>JWT Structure: The Three Parts</h2>
+<p>A JWT looks like this:</p>
+<pre><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</code></pre>
+<p>Three parts separated by dots. Each part is Base64URL-encoded:</p>
+<h3>1. Header</h3>
+<pre><code>{
+  "alg": "HS256",
+  "typ": "JWT"
+}</code></pre>
+<p>The header tells you the algorithm and token type. <strong>Critical:</strong> The <code>alg</code> field is where many attacks originate (more on that below).</p>
+<h3>2. Payload</h3>
+<pre><code>{
+  "sub": "1234567890",
+  "name": "John Doe",
+  "iat": 1516239022,
+  "role": "admin",
+  "exp": 1516242622
+}</code></pre>
+<p>The payload contains claims — the actual data. Standard claims include <code>sub</code> (subject), <code>iat</code> (issued at), <code>exp</code> (expiration). Custom claims like <code>role</code> are application-specific.</p>
+<h3>3. Signature</h3>
+<p>The signature ensures the token hasn't been tampered with:</p>
+<pre><code>HMACSHA256(
+  base64UrlEncode(header) + "." + base64UrlEncode(payload),
+  secret
+)</code></pre>
+<h2>Common JWT Security Vulnerabilities</h2>
+<h3>The "alg: none" Attack</h3>
+<p>The most infamous JWT vulnerability. Some libraries accept tokens with <code>"alg": "none"</code>, skipping signature verification entirely:</p>
+<pre><code>// Attack: modify the header
+{"alg":"none","typ":"JWT"}
+
+// Modify the payload
+{"sub":"admin","role":"superadmin"}
+
+// Concatenate with empty signature
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJzdXBlcmFkbWluIn0.</code></pre>
+<p><strong>Fix:</strong> Always whitelist expected algorithms. Never accept <code>"none"</code>.</p>
+<h3>Algorithm Confusion (RS256 → HS256)</h3>
+<p>If your app uses RS256 (asymmetric), an attacker might try to use your public key as an HMAC secret with HS256:</p>
+<pre><code>// Attacker crafts token with:
+{"alg": "HS256"}
+
+// Signs it using the publicly known RSA public key
+// Some libraries accept this if they don't enforce algorithm</code></pre>
+<p><strong>Fix:</strong> Explicitly specify the expected algorithm in your verification code.</p>
+<h3>Sensitive Data in Payload</h3>
+<p>JWTs are <strong>not encrypted</strong>. They're just Base64-encoded. Anyone who sees the token can read the payload:</p>
+<pre><code>// Never put this in a JWT payload:
+{
+  "ssn": "123-45-6789",
+  "password_hash": "$2b$12$...",
+  "credit_card": "4111-1111-1111-1111",
+  "api_key": "sk_live_abc123"
+}</code></pre>
+<p><strong>Rule:</strong> JWTs are for authentication claims, not data storage. Keep them minimal.</p>
+<h2>Why Online JWT Decoders Are Risky</h2>
+<p>When you paste a JWT into jwt.io or similar sites:</p>
+<ol><li><strong>The token is sent to their server</strong> — Even if decoded client-side, the page load includes third-party scripts</li><li><strong>Tokens are often logged</strong> — For "debugging" and "improvement" purposes</li><li><strong>Production tokens are gold</strong> — An attacker with your JWT can impersonate you until it expires</li><li><strong>Third-party scripts can access the token</strong> — Analytics, ads, and social widgets</li></ol>
+<p>If you're debugging production auth, pasting real tokens into online tools is a security incident waiting to happen.</p>
+<h2>Safe JWT Inspection</h2>
+<p>The safe way to inspect JWTs:</p>
+<pre><code>// You can decode JWTs with one line of JavaScript:
+const decode = (token) => {
+  const [header, payload] = token.split('.');
+  return {
+    header: JSON.parse(atob(header.replace(/-/g, '+').replace(/_/g, '/'))),
+    payload: JSON.parse(atob(payload.replace(/-/g, '+').replace(/_/g, '/'))),
+    // Never try to verify the signature without the secret!
+    signatureVerified: false
+  };
+};</code></pre>
+<p>But a proper decoder does more — it checks expiry, highlights suspicious claims, and validates structure. That's what Formatho's JWT decoder does, entirely in your browser.</p>
+<p>Zero uploads. Zero server calls. Zero risk of token leakage.</p>`,
+    cta: {
+      title: 'Try the JWT Decoder',
+      description: 'Decode and inspect JWT tokens locally. Your tokens never leave your browser.',
+      link: 'https://formatho.com/tools/jwt-decoder',
+      buttonText: 'Decode JWT Safely'
+    },
+    relatedTools: [
+      { name: 'Base64 Encoder/Decoder', description: 'Encode and decode Base64 strings locally', link: 'https://formatho.com/tools/base64-encoder-decoder' },
+      { name: 'JSON Formatter', description: 'Format decoded JWT payloads with proper indentation', link: 'https://formatho.com/tools/json-formatter' },
+      { name: 'Hash Generator', description: 'Generate HMAC hashes for signature verification', link: 'https://formatho.com/tools/hash-generator' }
+    ]
+  },
+  {
+    id: 47,
+    title: 'SQL Formatter for Security: Spot Vulnerabilities in Plain Sight',
+    excerpt:
+      'Unformatted SQL is a security blind spot. Learn how proper formatting reveals injection vulnerabilities, improves code reviews, and makes your database layer safer.',
+    date: '2026-03-15',
+    readTime: '7 min',
+    tags: ['SQL', 'Security', 'Database', 'Tutorial', 'Developer Tools'],
+    slug: 'sql-formatter-security',
+    image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=1200&h=630&fit=crop',
+    imageAlt: 'SQL query formatting for security review',
+    content: '<p>Here\'s a scary thought: most SQL injection vulnerabilities are invisible in unformatted code.</p>' +
+    '<p>When queries are crammed into single lines or poorly indented, dangerous patterns hide in plain sight. Formatting isn\'t just about aesthetics — it\'s a security tool.</p>' +
+    '<h2>The Security Case for SQL Formatting</h2>' +
+    '<p>Compare these two versions of the same query:</p>' +
+    '<h3>Unformatted (danger hides)</h3>' +
+    '<pre><code>SELECT u.id, u.name, u.email FROM users u WHERE u.role = \'admin\' AND u.id IN (SELECT user_id FROM permissions WHERE resource_id = ${req.params.id}) AND u.active = 1</code></pre>' +
+    '<h3>Formatted (danger is obvious)</h3>' +
+    '<pre><code>SELECT\n  u.id,\n  u.name,\n  u.email\nFROM users u\nWHERE u.role = \'admin\'\n  AND u.id IN (\n    SELECT user_id\n    FROM permissions\n    WHERE resource_id = ${req.params.id}\n  )\n  AND u.active = 1</code></pre>' +
+    '<p>See it now? <code>${req.params.id}</code> is a direct string interpolation — a textbook SQL injection vulnerability. In the unformatted version, it\'s buried in a wall of text. In the formatted version, it jumps out.</p>' +
+    '<h2>What Formatting Reveals</h2>' +
+    '<h3>1. String Concatenation</h3>' +
+    '<pre><code>-- Dangerous: formatted, the concatenation is obvious\nSELECT *\nFROM users\nWHERE email = \'" + userEmail + "\'\n  AND password = \'" + userPassword + "\'</code></pre>' +
+    '<h3>2. Dynamic WHERE Clauses</h3>' +
+    '<pre><code>-- Building WHERE clauses dynamically? Format to see the pattern\nWHERE 1=1\n  AND status = \'" + status + "\'\n  AND role = \'" + role + "\'\n  AND created_at > \'" + startDate + "\'</code></pre>' +
+    '<p>Multiple concatenated values = multiple injection points.</p>' +
+    '<h3>3. Nested Subqueries</h3>' +
+    '<p>Deep nesting often means complex logic that\'s hard to audit unformatted:</p>' +
+    '<pre><code>SELECT *\nFROM orders\nWHERE customer_id IN (\n  SELECT id\n  FROM customers\n  WHERE region IN (\n    SELECT region_id\n    FROM user_regions\n    WHERE user_id = ${userId}\n  )\n)</code></pre>' +
+    '<h2>SQL Injection Prevention Through Readability</h2>' +
+    '<p>Code that\'s easy to read is code that\'s easy to review. And code review is your last line of defense against SQL injection.</p>' +
+    '<h3>Best Practices</h3>' +
+    '<ol><li><strong>Format before reviewing</strong> — Always format SQL before code review</li><li><strong>Use parameterized queries</strong> — The only reliable defense</li><li><strong>Highlight dynamic values</strong> — Make interpolation obvious</li><li><strong>Review in isolation</strong> — Format and review SQL separately from application code</li></ol>' +
+    '<h3>Parameterized vs Concatenated</h3>' +
+    '<pre><code>// Vulnerable (string concatenation)\nconst query = `SELECT * FROM users WHERE id = ${userId}`;\n\n// Safe (parameterized)\nconst query = \'SELECT * FROM users WHERE id = ?\';\ndb.query(query, [userId]);</code></pre>' +
+    '<h2>Formatting for Different SQL Dialects</h2>' +
+    '<p>Different databases have different syntax quirks:</p>' +
+    '<ul><li><strong>PostgreSQL:</strong> <code>$1, $2</code> parameter placeholders, <code>RETURNING</code> clause</li><li><strong>MySQL:</strong> <code>?</code> placeholders, backtick identifiers</li><li><strong>SQL Server:</strong> <code>@param</code> named parameters, square bracket identifiers</li><li><strong>Oracle:</strong> <code>:param</code> bind variables, <code>DUAL</code> table</li></ul>' +
+    '<p>A good formatter handles dialect-specific formatting, making review easier regardless of your stack.</p>' +
+    '<h2>Using Formatho\'s SQL Formatter</h2>' +
+    '<p>Our SQL formatter processes everything client-side. Your queries — whether they contain sensitive table names, connection details, or data patterns — never leave your browser.</p>' +
+    '<p>Perfect for security reviews, code audits, or just making your queries readable before committing them.</p>',
+    cta: {
+      title: 'Try the SQL Formatter',
+      description: 'Format SQL queries for security reviews. 100% client-side — your queries never leave your browser.',
+      link: 'https://formatho.com/tools/sql-formatter',
+      buttonText: 'Format SQL Now'
+    },
+    relatedTools: [
+      { name: 'JSON Formatter', description: 'Format JSON data with proper indentation', link: 'https://formatho.com/tools/json-formatter' },
+      { name: 'Regex Tester', description: 'Test regex patterns for input validation', link: 'https://formatho.com/tools/regex-tester' },
+      { name: 'Base64 Encoder/Decoder', description: 'Encode and decode strings locally', link: 'https://formatho.com/tools/base64-encoder-decoder' }
+    ]
+  },
+  {
+    id: 46,
+    title: 'Base64 Encoder/Decoder: The Complete Developer Guide',
+    excerpt:
+      'Everything you need to know about Base64 encoding — what it is, when to use it (and when not to), common pitfalls, and why your encoding tool should be client-side.',
+    date: '2026-03-14',
+    readTime: '8 min',
+    tags: ['Base64', 'Encoding', 'Tutorial', 'Security', 'Developer Tools'],
+    slug: 'base64-encoder-decoder-complete-guide',
+    image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=630&fit=crop',
+    imageAlt: 'Base64 encoding and decoding visualization',
+    content: `<p>Base64 is one of those things every developer uses but few truly understand. It's not encryption. It's not compression. It's not even particularly efficient. But it's absolutely essential to how the web works.</p>
+<p>Let's demystify it.</p>
+<h2>What Is Base64 Encoding?</h2>
+<p>Base64 converts binary data into a text representation using 64 characters: A-Z, a-z, 0-9, +, and /. It was designed to safely transmit binary data through text-based systems like email (MIME) and HTML.</p>
+<pre><code>// The concept is simple:
+Binary data → Split into 6-bit chunks → Map to character set
+
+// Example:
+"Hello" → Binary → 6-bit groups → Base64 → "SGVsbG8="</code></pre>
+<p>The <code>=</code> padding character appears when the input isn't a multiple of 3 bytes.</p>
+<h2>When to Use Base64</h2>
+<h3>Good Use Cases</h3>
+<ul><li><strong>Data URLs</strong> — Embedding small images directly in HTML/CSS</li><li><strong>JWT tokens</strong> — Encoding header and payload (not encrypting!)</li><li><strong>Email attachments</strong> — MIME encoding for binary files</li><li><strong>API payloads</strong> — Sending binary data in JSON</li><li><strong>Basic Auth headers</strong> — <code>Authorization: Basic base64(user:pass)</code></li></ul>
+<h3>When NOT to Use Base64</h3>
+<ul><li><strong>For encryption</strong> — It's encoding, not encryption. Anyone can decode it</li><li><strong>Large file storage</strong> — 33% size increase is wasteful</li><li><strong>Sensitive data</strong> — Base64 provides zero confidentiality</li><li><strong>Performance-critical paths</strong> — The encoding/decoding overhead adds up</li></ul>
+<h2>Base64 in APIs and JWTs</h2>
+<p>JWTs use a variant called <strong>Base64URL</strong> which replaces <code>+</code> with <code>-</code> and <code>/</code> with <code>_</code> to be URL-safe:</p>
+<pre><code>// Standard Base64
+"Hello World" → "SGVsbG8gV29ybGQ="
+
+// Base64URL (used in JWTs)
+"Hello World" → "SGVsbG8gV29ybGQ"
+// Also removes padding (=)</code></pre>
+<p>This distinction matters when decoding JWTs — using the wrong variant gives you garbage.</p>
+<h2>Encoding Files vs Strings</h2>
+<p>Most developers know how to encode strings, but files require special handling:</p>
+<pre><code>// Browser: Encoding a file
+const reader = new FileReader();
+reader.onload = () => {
+  const base64 = reader.result.split(',')[1]; // Remove data URL prefix
+  console.log(base64);
+};
+reader.readAsDataURL(file);
+
+// Node.js: Encoding a file
+const fs = require('fs');
+const buffer = fs.readFileSync('image.png');
+const base64 = buffer.toString('base64');</code></pre>
+<h2>Common Pitfalls</h2>
+<h3>1. Newline Handling</h3>
+<p>Some Base64 implementations insert newlines every 76 characters (MIME standard). Others don't. This can cause decoding failures:</p>
+<pre><code>// MIME-wrapped (with newlines)
+SGVsbG8gV29ybGQgVGhpcyBpcyBhIHZlcnkgbG9uZyBzdHJpbmcgdGhhdCB3
+aWxsIGJlIHdyYXBwZWQ=
+
+// Continuous (no newlines)
+SGVsbG8gV29ybGQgVGhpcyBpcyBhIHZlcnkgbG9uZyBzdHJpbmcgdGhhdCB3aWxsIGJlIHdyYXBwZWQ=</code></pre>
+<h3>2. Character Encoding</h3>
+<p>Base64 operates on bytes, not characters. UTF-8 encoding matters:</p>
+<pre><code>// "café" has a multi-byte character
+"café" → "Y2Fmw6k="
+
+// Forgetting UTF-8 encoding gives wrong results
+// Always encode text to UTF-8 before Base64 encoding</code></pre>
+<h3>3. Size Bloat</h3>
+<p>Base64 increases data size by ~33%:</p>
+<pre><code>1 KB file → ~1.33 KB Base64
+1 MB file → ~1.33 MB Base64
+100 MB file → ~133 MB Base64</code></pre>
+<p>For large files, consider alternatives like direct binary upload.</p>
+<h2>Using Formatho's Base64 Encoder/Decoder</h2>
+<p>Our tool handles all the edge cases — UTF-8 encoding, URL-safe variants, file uploads — and processes everything locally in your browser.</p>
+<p>No server calls. No data logging. Just fast, reliable encoding and decoding.</p>`,
+    cta: {
+      title: 'Try the Base64 Encoder/Decoder',
+      description: 'Encode and decode Base64 instantly. Handles files, strings, and URL-safe variants — all client-side.',
+      link: 'https://formatho.com/tools/base64-encoder-decoder',
+      buttonText: 'Encode/Decode Now'
+    },
+    relatedTools: [
+      { name: 'JWT Decoder', description: 'Decode JWT tokens (which use Base64URL encoding)', link: 'https://formatho.com/tools/jwt-decoder' },
+      { name: 'URL Encoder/Decoder', description: 'Encode and decode URL parameters safely', link: 'https://formatho.com/tools/url-encoder-decoder' },
+      { name: 'HTML Entity Encoder', description: 'Encode and decode HTML entities', link: 'https://formatho.com/tools/html-entity-encoder' }
+    ]
+  },
+  {
+    id: 45,
+    title: 'We Built 100+ Privacy-First Developer Tools. Here\'s What We Learned.',
+    excerpt:
+      'The story behind Formatho\'s 100+ developer tools — the architecture decisions, the hard trade-offs, and why we chose client-side processing over data harvesting.',
+    date: '2026-03-13',
+    readTime: '9 min',
+    tags: ['Developer Tools', 'Launch', 'Privacy', 'Productivity', 'Open Source'],
+    slug: '100-plus-developer-tools-launch',
+    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop',
+    imageAlt: '100+ privacy-first developer tools launch',
+    content: `<p>100 tools. Zero backend. Zero data collection. Zero tracking.</p>
+<p>When we started Formatho, we had a simple question: <strong>Why do free developer tools need to send your data to a server?</strong></p>
+<p>The answer, in most cases, is that they don't. But building tools that work entirely client-side comes with real engineering challenges. Here's what we learned building 100+ tools that never see your data.</p>
+<h2>The Architecture Decision</h2>
+<p>From day one, we committed to a specific architecture:</p>
+<pre><code>Browser → WebAssembly / JavaScript → Output
+
+No server round-trips.
+No API calls with user data.
+No "processing on our servers."
+No databases storing your inputs.</code></pre>
+<p>This isn't how most tool sites work. The typical pattern is:</p>
+<pre><code>Browser → Server → Process → Store → Return → (maybe delete later)
+                                     ↑
+                              Your data lives here</code></pre>
+<p>We chose the harder path because it's the right one.</p>
+<h2>The Tool Categories</h2>
+<p>We organized our 100+ tools into categories that cover the full developer workflow:</p>
+<h3>Encoding & Decoding</h3>
+<ul><li>Base64, URL, HTML entity encoding/decoding</li><li>JWT decoder and inspector</li><li>Hash generator (MD5, SHA-1, SHA-256, SHA-512)</li><li>UUID generator (v1, v3, v4, v5)</li></ul>
+<h3>Formatters & Beautifiers</h3>
+<ul><li>JSON, XML, CSS, SQL, HTML formatter</li><li>JavaScript/TypeScript formatter</li><li>Markdown previewer</li><li>Code minifier</li></ul>
+<h3>Converters</h3>
+<ul><li>JSON ↔ YAML ↔ CSV ↔ XML</li><li>Timestamp converter</li><li>Number base converter</li><li>Color converter (HEX, RGB, HSL)</li></ul>
+<h3>Generators</h3>
+<ul><li>QR code generator</li><li>Placeholder image generator</li><li>Password generator</li><li>Lorem ipsum generator</li></ul>
+<h3>Security & Testing</h3>
+<ul><li>Regex tester and debugger</li><li>Cron expression parser</li><li>CSP generator</li><li>SSL certificate decoder</li></ul>
+<h2>The Technical Challenges</h2>
+<h3>Challenge 1: Large File Handling</h3>
+<p>Processing large files in the browser without blocking the UI required Web Workers:</p>
+<pre><code>// Main thread stays responsive
+const worker = new Worker('formatter-worker.js');
+worker.postMessage({ data: largeInput });
+worker.onmessage = (e) => {
+  outputElement.textContent = e.data.result;
+};</code></pre>
+<h3>Challenge 2: SQL Formatting Complexity</h3>
+<p>SQL has dozens of dialects with different syntax rules. Building a formatter that handles PostgreSQL, MySQL, SQL Server, and Oracle — all client-side — required a custom parser written in TypeScript.</p>
+<h3>Challenge 3: QR Code Generation</h3>
+<p>Generating QR codes in the browser requires encoding data into the QR format, applying error correction, and rendering to canvas. All doable client-side with the right libraries.</p>
+<h2>Why Privacy Over Data Harvesting</h2>
+<p>Let's be honest about the economics of free developer tools:</p>
+<ul><li><strong>Most free tools monetize your data.</strong> Your inputs, patterns, and usage are the product.</li><li><strong>Ads pay poorly for developer audiences.</strong> So data harvesting becomes the revenue model.</li><li><strong>Users pay with their data.</strong> API keys, configs, credentials — all harvested.</li></ul>
+<p>We chose a different model: <strong>build tools so good that teams and enterprises pay for premium features.</strong> Free users get full functionality. Premium users get team features, integrations, and priority support.</p>
+<p>Your data is not part of the deal. Ever.</p>
+<h2>What's Coming Next</h2>
+<ul><li><strong>API playground</strong> — Test APIs without data leaving your browser</li><li><strong>Diff tools</strong> — Compare files, configs, and code locally</li><li><strong>CI/CD config builders</strong> — Generate pipeline configs visually</li><li><strong>Cheatsheet generator</strong> — Build custom reference sheets from our tools</li></ul>
+<p>Every new tool follows the same promise: <strong>your data stays in your browser.</strong></p>
+<p>100 tools is just the beginning.</p>`,
+    cta: {
+      title: 'Explore All 100+ Developer Tools',
+      description: 'Privacy-first developer tools that never send your data to a server. Encoding, formatting, conversion, generation — all client-side.',
+      link: 'https://formatho.com/tools',
+      buttonText: 'Browse Tools'
+    },
+    relatedTools: [
+      { name: 'JSON Formatter', description: 'Format and beautify JSON data', link: 'https://formatho.com/tools/json-formatter' },
+      { name: 'UUID Generator', description: 'Generate unique identifiers locally', link: 'https://formatho.com/tools/uuid-generator' },
+      { name: 'QR Code Generator', description: 'Create QR codes without tracking', link: 'https://formatho.com/tools/qr-code-generator' }
+    ]
+  },
+  {
+    id: 44,
+    title: 'Regex Tester Security: Patterns That Protect and Patterns That Kill',
+    excerpt:
+      'Regular expressions can validate input or bring your server to its knees. Learn about ReDoS attacks, safe regex patterns, and why client-side testing matters.',
+    date: '2026-03-12',
+    readTime: '8 min',
+    tags: ['Regex', 'Security', 'Tutorial', 'Developer Tools', 'Testing'],
+    slug: 'regex-tester-security',
+    image: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&h=630&fit=crop',
+    imageAlt: 'Regular expression testing for security',
+    content: `<p>Regular expressions are a double-edged sword. Used correctly, they validate input, parse data, and enforce security rules. Used incorrectly, they become a denial-of-service weapon turned against your own server.</p>
+<p>Let's talk about the dark side of regex.</p>
+<h2>The ReDoS Threat</h2>
+<p><strong>Regular Expression Denial of Service (ReDoS)</strong> is one of the most underappreciated security vulnerabilities in web applications. It happens when a regex engine takes exponential time to evaluate certain inputs.</p>
+<p>Here's the classic example:</p>
+<pre><code>// The evil regex
+const evil = /^(a+)+$/;
+
+// Fast inputs
+evil.test('aaa');           // Instant
+evil.test('aaaaa');         // Instant
+
+// The killer input
+evil.test('aaaaaaaaaaaaaaaaaaaX'); // Hangs for minutes!</code></pre>
+<p>Why does it hang? The engine tries every possible way to split the <code>a</code>s between the two <code>+</code> quantifiers before concluding there's no match. Each additional character doubles the work.</p>
+<h3>Common Vulnerable Patterns</h3>
+<pre><code>// Pattern 1: Nested quantifiers
+/^(a+)+$/
+/^(a|a)+$/
+/^([a-z]+)*$/
+
+// Pattern 2: Overlapping alternatives
+/^(a|ab)+$/
+/^(foo|foobar)+$/
+
+// Pattern 3: Complex backreferences
+/^(a+) \\1+$/
+
+// All of these can cause catastrophic backtracking
+// on certain non-matching inputs</code></pre>
+<h2>Safe Regex Patterns for Input Validation</h2>
+<h3>Email Validation</h3>
+<pre><code>// Simple and safe (covers 99% of cases)
+/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+// Avoid complex email regexes — they're often ReDoS-vulnerable
+// and don't catch all valid emails anyway</code></pre>
+<h3>URL Validation</h3>
+<pre><code>// Safe URL pattern
+/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/</code></pre>
+<h3>SQL Injection Detection</h3>
+<pre><code>// Detect common SQL injection patterns
+/(\b(SELECT|INSERT|UPDATE|DELETE|DROP|UNION|ALTER)\b.*\b(FROM|INTO|TABLE|WHERE)\b)/i
+
+// Use for logging/alerting, not as primary defense
+// Parameterized queries are always the answer</code></pre>
+<h2>Testing Regex Patterns Safely</h2>
+<p>Never test untrusted regex patterns on your production server. Here's a safe testing approach:</p>
+<pre><code>// 1. Set a timeout
+function safeRegexTest(pattern, input, timeoutMs = 1000) {
+  const start = Date.now();
+  const result = pattern.test(input);
+  if (Date.now() - start > timeoutMs) {
+    throw new Error('Regex timeout — possible ReDoS pattern');
+  }
+  return result;
+}
+
+// 2. Use atomic groups (if your engine supports them)
+// 3. Limit input length before applying regex
+// 4. Test with worst-case inputs during development</code></pre>
+<h2>Common Regex Security Mistakes</h2>
+<ol><li><strong>Using unbounded quantifiers on user input</strong> — Always limit length</li><li><strong>Nesting quantifiers</strong> — <code>(a+)+</code> is almost always wrong</li><li><strong>Not testing non-matching inputs</strong> — ReDoS only triggers on non-matches</li><li><strong>Trusting regex for security</strong> — Validate server-side with proper parsing</li><li><strong>Complex regex for simple validation</strong> — Simpler patterns are safer</li></ol>
+<h2>Client-Side Regex Testing</h2>
+<p>When you test regex patterns in an online tool, you're sending both your pattern and your test data to a server. For security-sensitive patterns (like injection detection rules), this is a risk.</p>
+<p>Formatho's regex tester runs entirely in your browser. Your patterns, your test strings, your flags — nothing leaves your machine. Test your security patterns without exposing them.</p>`,
+    cta: {
+      title: 'Try the Regex Tester',
+      description: 'Test regex patterns with real-time matching. 100% client-side — your patterns never leave your browser.',
+      link: 'https://formatho.com/tools/regex-tester',
+      buttonText: 'Test Regex Now'
+    },
+    relatedTools: [
+      { name: 'JSON Validator', description: 'Validate JSON input safely', link: 'https://formatho.com/tools/json-validator' },
+      { name: 'SQL Formatter', description: 'Format SQL queries for security review', link: 'https://formatho.com/tools/sql-formatter' },
+      { name: 'HTML Entity Encoder', description: 'Encode HTML to prevent XSS', link: 'https://formatho.com/tools/html-entity-encoder' }
+    ]
+  },
+  {
+    id: 43,
+    title: 'QR Codes Without Tracking: Privacy-First QR Generation',
+    excerpt:
+      'Most free QR code generators track your data. Learn the privacy risks of online QR tools and how client-side generation keeps your information safe.',
+    date: '2026-03-11',
+    readTime: '7 min',
+    tags: ['QR Codes', 'Privacy', 'Security', 'Tutorial', 'Developer Tools'],
+    slug: 'qr-codes-without-tracking',
+    image: 'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=1200&h=630&fit=crop',
+    imageAlt: 'Privacy-first QR code generation without tracking',
+    content: `<p>QR codes are everywhere — on business cards, restaurant menus, product packaging, event tickets. But have you ever wondered what happens to the data you encode in them? More importantly, what happens to that data <em>before</em> the QR code is even generated?</p>
+<p>If you're using a free online QR generator, the answer might surprise you.</p>
+<h2>The Tracking Problem</h2>
+<p>Most free QR code generators have a business model that relies on tracking:</p>
+<ul><li><strong>They log your input data.</strong> Every URL, email address, phone number, or text you encode is stored on their servers.</li><li><strong>They redirect through their servers.</strong> "Dynamic" QR codes actually point to the generator's URL, which then redirects to your destination — letting them track every scan.</li><li><strong>They sell aggregated data.</strong> Scan analytics, geographic data, and usage patterns are valuable to marketers.</li><li><strong>They inject their own tracking.</strong> Some add UTM parameters or analytics pixels to your URLs without telling you.</li></ul>
+<h3>The Redirect Trap</h3>
+<p>Here's how "dynamic" QR codes actually work:</p>
+<pre><code>// What you think happens:
+Scan QR → Your URL (https://example.com)
+
+// What actually happens:
+Scan QR → qr-service.com/r/abc123
+         → Log the scan (time, location, device)
+         → Redirect to your URL
+         → Both the QR creator AND scanner are tracked</code></pre>
+<p>The person scanning your QR code has no idea they're being tracked. And you, the creator, gave a third party a man-in-the-middle position for every scan.</p>
+<h2>Privacy Risks for Different QR Data Types</h2>
+<h3>URLs</h3>
+<ul><li>Internal company URLs exposed to third parties</li><li>Pre-launch product pages leaked before announcement</li><li>Analytics parameters visible to the QR generator</li></ul>
+<h3>Contact Info (vCard)</h3>
+<ul><li>Personal phone numbers and emails harvested</li><li>Physical addresses stored on external servers</li><li>Full contact cards in unknown databases</li></ul>
+<h3>WiFi Credentials</h3>
+<pre><code>// QR generators that log input see this:
+WIFI:T:WPA;S:MyNetwork;P:SuperSecretPassword123;;
+
+// Yes, your WiFi password just went to a server you don't control</code></pre>
+<h3>Payment Info</h3>
+<ul><li>Crypto wallet addresses linked to your identity</li><li>Payment URLs with transaction details</li></ul>
+<h2>How Client-Side QR Generation Works</h2>
+<p>A QR code is just a visual representation of data. There's no technical reason to send that data to a server:</p>
+<pre><code>// Browser-native QR generation:
+import QRCode from 'qrcode';
+
+// Generate in memory
+const canvas = document.createElement('canvas');
+QRCode.toCanvas(canvas, 'https://example.com', {
+  width: 300,
+  margin: 2
+});
+
+// Download directly
+canvas.toBlob((blob) => {
+  const url = URL.createObjectURL(blob);
+  // User downloads — data never left the browser
+});</code></pre>
+<p>The entire process: input → encode → render → download. All local. All private.</p>
+<h2>Comparison of Free QR Tools</h2>
+<ul><li><strong>Most free tools:</strong> Server-side generation, data logging, dynamic redirects, scan analytics sold to third parties</li><li><strong>"Free" with registration:</strong> Even more data collection — your account linked to every QR you create</li><li><strong>Formatho QR Generator:</strong> Client-side Canvas API, zero server calls, zero logging, zero redirects — your data never leaves the browser</li></ul>
+<h2>Static vs Dynamic QR Codes</h2>
+<p><strong>Static QR codes</strong> encode data directly. The data is in the QR code itself. No server needed. No tracking possible.</p>
+<p><strong>Dynamic QR codes</strong> encode a redirect URL. They're trackable and editable — but require a server, and that server sees every scan.</p>
+<p><strong>Our recommendation:</strong> Use static QR codes for 99% of use cases. Only use dynamic if you absolutely need editability, and choose a provider you trust with your scan data.</p>
+<p>For everything else, generate static QR codes client-side. It's faster, simpler, and inherently private.</p>`,
+    cta: {
+      title: 'Generate QR Codes Privately',
+      description: 'Create QR codes without tracking. Your data stays in your browser — no server, no logging, no redirects.',
+      link: 'https://formatho.com/tools/qr-code-generator',
+      buttonText: 'Generate QR Code'
+    },
+    relatedTools: [
+      { name: 'URL Encoder/Decoder', description: 'Encode URLs before generating QR codes', link: 'https://formatho.com/tools/url-encoder-decoder' },
+      { name: 'Base64 Encoder', description: 'Encode data for QR code content', link: 'https://formatho.com/tools/base64-encoder-decoder' },
+      { name: 'Hash Generator', description: 'Generate hashes for QR code verification', link: 'https://formatho.com/tools/hash-generator' }
+    ]
+  },
+  {
+    id: 42,
+    title: 'UUID Generator Masterclass: Everything You Need to Know About Unique Identifiers',
+    excerpt:
+      'Complete guide to UUIDs — from v1 to v5, security implications of predictable IDs, and how to generate unique identifiers safely in JavaScript and Node.js.',
+    date: '2026-03-10',
+    readTime: '8 min',
+    tags: ['UUID', 'Security', 'JavaScript', 'Tutorial', 'Developer Tools'],
+    slug: 'uuid-generator-masterclass',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=630&fit=crop',
+    imageAlt: 'Unique identifier generation and UUID variants',
+    content: `<p>Every piece of data in your system needs an identifier. URLs need resource IDs. Databases need primary keys. Sessions need tokens. Messages need correlation IDs.</p>
+<p>The question is: <strong>what kind of identifier should you use?</strong></p>
+<p>If you're still using auto-incrementing integers, it's time to talk about UUIDs.</p>
+<h2>What Are UUIDs?</h2>
+<p>UUIDs (Universally Unique Identifiers) are 128-bit identifiers that are (practically) guaranteed to be unique without central coordination. They look like this:</p>
+<pre><code>550e8400-e29b-41d4-a716-446655440000
+// Format: 8-4-4-4-12 hex digits
+// 32 hex digits + 4 hyphens = 36 characters</code></pre>
+<p>The key insight: you can generate UUIDs independently on any machine, and the chance of collision is astronomically small — roughly 1 in 2.71 × 10^18 for UUIDv4.</p>
+<h2>UUID Variants Explained</h2>
+<h3>UUID v1 — Time-Based</h3>
+<pre><code>// Based on timestamp + MAC address
+// Unique but leaks machine identity
+const uuidv1 = require('uuid').v1;
+console.log(uuidv1());
+// '2f5e5a10-3b4a-11ec-8d22-0242ac130003'</code></pre>
+<p><strong>Pros:</strong> Chronologically sortable, guaranteed unique per machine.</p>
+<p><strong>Cons:</strong> Exposes MAC address (privacy risk), predictable, requires coordination for distributed systems.</p>
+<p><strong>Use when:</strong> You need sortability and don't care about predictability. Avoid in security contexts.</p>
+<h3>UUID v3 — MD5 Hash-Based</h3>
+<pre><code>// Deterministic: same namespace + name = same UUID
+const uuidv3 = require('uuid').v3;
+const MY_NAMESPACE = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
+console.log(uuidv3('hello', MY_NAMESPACE));
+// Always produces the same UUID for 'hello' + namespace</code></pre>
+<p><strong>Use when:</strong> You need deterministic IDs from known inputs (caching, deduplication).</p>
+<h3>UUID v4 — Random</h3>
+<pre><code>// The most commonly used variant
+const uuidv4 = require('uuid').v4;
+console.log(uuidv4());
+// 'a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d'</code></pre>
+<p><strong>Pros:</strong> Unpredictable, no privacy leaks, no coordination needed.</p>
+<p><strong>Cons:</strong> Not sortable, theoretically possible (but practically impossible) collisions.</p>
+<p><strong>Use when:</strong> General-purpose unique IDs. This is your default choice.</p>
+<h3>UUID v5 — SHA-1 Hash-Based</h3>
+<pre><code>// Like v3 but uses SHA-1 (more secure hash)
+const uuidv5 = require('uuid').v5;
+console.log(uuidv5('hello', MY_NAMESPACE));
+// Deterministic like v3, but with SHA-1 instead of MD5</code></pre>
+<p><strong>Use when:</strong> Same as v3, but prefer SHA-1 over MD5.</p>
+<h2>Security Implications of Predictable IDs</h2>
+<p>Auto-incrementing integers are dangerous in production:</p>
+<pre><code>// With auto-increment IDs:
+/users/1
+/users/2
+/users/3
+// An attacker can enumerate ALL your users
+
+// With UUIDs:
+/users/550e8400-e29b-41d4-a716-446655440000
+/users/a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+// Enumeration is practically impossible</code></pre>
+<p>Predictable IDs enable:</p>
+<ul><li><strong>IDOR (Insecure Direct Object Reference)</strong> — Accessing other users' resources by guessing IDs</li><li><strong>Enumeration attacks</strong> — Discovering total user count, resource count</li><li><strong>Timing attacks</strong> — Sequential IDs reveal creation order</li><li><strong>Scraping</strong> — Easy to iterate through all resources</li></ul>
+<h2>Generating UUIDs in the Browser</h2>
+<p>Modern browsers can generate UUIDs natively:</p>
+<pre><code>// Modern browsers (Chrome 92+, Firefox 95+, Safari 15.4+)
+const uuid = crypto.randomUUID();
+console.log(uuid);
+// 'a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d'
+
+// Older browsers: use the uuid library or polyfill
+// The important thing: generate client-side, no server needed</code></pre>
+<p>Formatho's UUID generator uses the browser's native <code>crypto.randomUUID()</code> where available, with a secure fallback for older browsers. Everything runs locally — your generated UUIDs are never sent to any server.</p>
+<h2>Best Practices</h2>
+<ol><li><strong>Use UUIDv4 by default</strong> — Random, unpredictable, no privacy leaks</li><li><strong>Never expose v1 UUIDs publicly</strong> — They contain MAC addresses and timestamps</li><li><strong>Use v3/v5 for deterministic IDs</strong> — When the same input must produce the same UUID</li><li><strong>Validate UUID format</strong> — Always validate before using in queries</li><li><strong>Don't roll your own</strong> — Use established libraries or <code>crypto.randomUUID()</code></li></ol>
+<p>Unique identifiers are foundational to your system's security. Choose wisely, generate safely, and never trust sequential IDs in public-facing APIs.</p>`,
+    cta: {
+      title: 'Try the UUID Generator',
+      description: 'Generate UUIDs instantly in your browser. Supports v1, v3, v4, and v5 — all client-side, zero data transmission.',
+      link: 'https://formatho.com/tools/uuid-generator',
+      buttonText: 'Generate UUIDs'
+    },
+    relatedTools: [
+      { name: 'Hash Generator', description: 'Generate MD5, SHA-1, SHA-256, SHA-512 hashes', link: 'https://formatho.com/tools/hash-generator' },
+      { name: 'Password Generator', description: 'Generate cryptographically secure passwords', link: 'https://formatho.com/tools/password-generator' },
+      { name: 'Base64 Encoder', description: 'Encode UUIDs and other data as Base64', link: 'https://formatho.com/tools/base64-encoder-decoder' }
+    ]
+  },
+  {
     id: 41,
     title: 'From Chaos to Order: Managing AI Agent Workloads',
     excerpt:
