@@ -36,18 +36,10 @@ useSEO({
         </p>
       </div>
 
-      <!-- Layer 1: Banner Image -->
-      <div class="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-        <!-- Gradient overlay banner matching page tone -->
-        <div class="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-muted/80"></div>
-        <!-- Abstract geometric mesh -->
-        <div class="absolute inset-0 opacity-[0.08]" style="background-image: radial-gradient(circle at 20% 50%, hsl(var(--foreground)) 1px, transparent 1px), radial-gradient(circle at 80% 20%, hsl(var(--foreground)) 1px, transparent 1px), radial-gradient(circle at 50% 80%, hsl(var(--foreground)) 0.5px, transparent 0.5px); background-size: 60px 60px, 80px 80px, 40px 40px;"></div>
-        <!-- Floating orbs -->
-        <div class="absolute top-[15%] left-[10%] w-64 h-64 rounded-full bg-foreground/[0.03] blur-3xl"></div>
-        <div class="absolute bottom-[20%] right-[15%] w-80 h-80 rounded-full bg-foreground/[0.02] blur-3xl"></div>
-        <div class="absolute top-[40%] left-[50%] w-96 h-96 rounded-full bg-muted-foreground/[0.03] blur-3xl -translate-x-1/2"></div>
-        <!-- Diagonal accent lines -->
-        <div class="absolute inset-0 opacity-[0.04]" style="background: repeating-linear-gradient(45deg, transparent, transparent 80px, hsl(var(--foreground)) 1px, transparent 81px);"></div>
+      <!-- Layer 1: Central Abstract 3D Placeholder -->
+      <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+        <div class="w-48 h-48 md:w-72 md:h-72 border border-foreground/10 rounded-sm rotate-45 opacity-20"></div>
+        <div class="absolute w-32 h-32 md:w-52 md:h-52 border border-foreground/5 rounded-sm rotate-12 opacity-10"></div>
       </div>
 
       <!-- Layer 3: Content Grid -->
