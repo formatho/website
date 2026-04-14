@@ -229,7 +229,17 @@ useHead(computed(() => {
           <div class="max-w-prose mx-auto">
             <h3 class="text-2xl md:text-3xl font-black tracking-tighter leading-none mb-4">{{ post.cta.title }}</h3>
             <p class="text-muted-foreground leading-relaxed mb-8">{{ post.cta.description }}</p>
+            <a
+              v-if="post.cta.link.startsWith('http')"
+              :href="post.cta.link"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center bg-foreground px-8 py-4 text-sm font-medium tracking-widest text-background hover:bg-foreground/90 transition-colors"
+            >
+              {{ post.cta.buttonText }} →
+            </a>
             <RouterLink
+              v-else
               :to="post.cta.link"
               class="inline-flex items-center justify-center bg-foreground px-8 py-4 text-sm font-medium tracking-widest text-background hover:bg-foreground/90 transition-colors"
             >
@@ -246,11 +256,24 @@ useHead(computed(() => {
         <div class="container mx-auto px-4 md:px-8 py-12 md:py-20">
           <p class="text-xs tracking-widest text-muted-foreground mb-8 uppercase">Related Tools</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-foreground/10">
+            <a
+              v-for="tool in post.relatedTools.filter(t => t.link.startsWith('http'))"
+              :key="tool.link"
+              :href="tool.link"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block p-8 bg-background hover:bg-muted/50 transition-colors group"
+            >
+              <h4 class="text-lg font-bold tracking-tight group-hover:translate-x-2 transition-transform duration-200">
+                {{ tool.name }} <span class="inline-block opacity-0 group-hover:opacity-100 transition-opacity ml-1">→</span>
+              </h4>
+              <p class="text-sm text-muted-foreground mt-2">{{ tool.description }}</p>
+            </a>
             <RouterLink
-              v-for="tool in post.relatedTools"
+              v-for="tool in post.relatedTools.filter(t => !t.link.startsWith('http'))"
               :key="tool.link"
               :to="tool.link"
-              class="p-8 bg-background hover:bg-muted/50 transition-colors group"
+              class="block p-8 bg-background hover:bg-muted/50 transition-colors group"
             >
               <h4 class="text-lg font-bold tracking-tight group-hover:translate-x-2 transition-transform duration-200">
                 {{ tool.name }} <span class="inline-block opacity-0 group-hover:opacity-100 transition-opacity ml-1">→</span>
