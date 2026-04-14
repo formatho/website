@@ -133,26 +133,26 @@ export const blogMetadata: BlogMetadata[] = [
   },
   {
     id: 40,
-    title: 'Building Battle-Tested Microservices: A Production Readiness Checklist',
+    title: 'Agent-Todo vs Traditional Task Managers: What\'s Different?',
     excerpt:
-      'Everything you need to ship microservices with confidence. From circuit breakers to observability, this checklist covers production readiness.',
-    date: '2026-03-27',
+      'Why AI agents need purpose-built task management. Compare Agent-Todo with Todoist, Asana, and Trello — API-first design, agent memory, and 10x better automation.',
+    date: '2026-03-26',
     readTime: '8 min',
-    tags: ['Microservices', 'Backend', 'Production', 'Checklist', 'Architecture'],
+    tags: ['AI Agents', 'Task Management', 'Comparison', 'Productivity', 'Automation'],
     slug: 'building-battle-tested-microservices-a-production-readiness-checklist',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=225&fit=crop',
-    imageAlt: 'Modern microservices architecture with interconnected services'
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=225&fit=crop',
+    imageAlt: 'Split screen showing traditional task manager UI versus API code interface'
   },
   {
     id: 39,
-    title: 'Privacy-First Development: Building User Trust in 2026',
+    title: 'Why AI Agents Need Their Own Task Management System',
     excerpt:
-      'Why privacy-first development is no longer optional. Learn how to build products that respect user data while delivering exceptional experiences.',
-    date: '2026-03-27',
+      'Your AI agents forget everything between sessions. Discover how persistent task management transforms agent productivity with 10x output gains.',
+    date: '2026-03-26',
     readTime: '7 min',
-    tags: ['Privacy', 'Security', 'Product Development', 'Trust', 'Best Practices'],
+    tags: ['AI Agents', 'Task Management', 'Productivity', 'Privacy', 'Automation'],
     slug: 'privacy-first-development-building-user-trust-in-2026',
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=225&fit=crop',
-    imageAlt: 'Privacy shield representing data protection and user trust'
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=225&fit=crop',
+    imageAlt: 'AI agents managing tasks in a persistent queue system'
   }
 ]

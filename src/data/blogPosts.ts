@@ -764,9 +764,9 @@ console.log(uuid);
   },
   {
     id: 41,
-    title: 'From Chaos to Order: Managing AI Agent Workloads',
+    title: 'From Chaos to Order: Managing AI Agent Workloads with Persistent Task Memory',
     excerpt:
-      'How persistent task management transformed our AI operations from scattered to systematic. Real results: 90% reduction in duplicate work, 3x faster task completion.',
+      'How persistent task management transformed our AI operations from scattered to systematic. Real results: 90% reduction in duplicate work, 3x faster task completion. Privacy-first AI agent tools.',
     date: '2026-03-25',
     readTime: '6 min',
     tags: ['AI Agents', 'Workflow Management', 'Task Management', 'Automation', 'Productivity'],
@@ -781,7 +781,7 @@ But by then, <strong>Agent A</strong> has already restarted, lost all context, a
 <p>This was our reality at Formatho. We were drowning in agent chaos:</p>
 <ul><li>Tasks vanished between sessions</li><li>Agents duplicated work they'd already done</li><li>Priority decisions were lost</li><li>Collaboration was impossible without memory</li><li>Deadlines slipped through the cracks</li></ul>
 <p>We needed order. We needed persistence. We needed a system.</p>
-<h2>The Traditional Solution (And Why It Failed)</h2>
+<h2>The Traditional Solution (And Why It Failed for AI Agents)</h2>
 <p>Our first attempt: Use existing tools.</p>
 <p><strong>Todoist?</strong> Built for humans, not APIs.<br/>
 <strong>Asana?</strong> Great for teams, terrible for agents.<br/>
@@ -791,9 +791,10 @@ But by then, <strong>Agent A</strong> has already restarted, lost all context, a
 <p>But AI agents work differently:</p>
 <ol><li><strong>Agents need API-first access</strong> — they can't click buttons</li><li><strong>Agents restart constantly</strong> — they lose in-memory state</li><li><strong>Agents work at machine speed</strong> — they need instant task creation/retrieval</li><li><strong>Agents collaborate asynchronously</strong> — one agent creates, another completes</li></ol>
 <p>The tools weren't broken. They were just built for the wrong user.</p>
-<h2>Building Agent-Todo: Our Solution</h2>
+<h2>Building Agent-Todo: Privacy-First AI Task Management</h2>
 <p>We built agent-todo from first principles with one question in mind:</p>
 <p><strong>What would a task system look like if it was designed for AI agents?</strong></p>
+<p>Like all <a href="https://formatho.com/tools/">Formatho developer tools</a>, agent-todo is built with a privacy-first philosophy — your task data stays under your control.</p>
 <h3>Core Design Principles</h3>
 <p><strong>1. API-First Architecture</strong></p>
 <ul><li>Every action available via REST API</li><li>No UI required (though we built one for debugging)</li><li>JSON responses for easy parsing</li><li>Batch operations for efficiency</li></ul>
@@ -810,7 +811,7 @@ curl -X POST https://todo.formatho.com/api/todos \\
 # Get pending tasks
 curl https://todo.formatho.com/api/todos?status=pending \\
   -H "X-API-Key: YOUR_KEY"</code></pre>
-<h2>The Transformation: Before vs After</h2>
+<h2>The Transformation: Before vs After Agent Task Memory</h2>
 <h3>Before Agent-Todo</h3>
 <pre><code>9:00 AM - Agent creates blog post outline
 9:30 AM - Agent restarts (loses context)
@@ -830,7 +831,7 @@ Result: Continuous progress, zero duplication</code></pre>
 <p><strong>Time saved:</strong> 2 hours<br/>
 <strong>Frustration eliminated:</strong> 100%<br/>
 <strong>Progress made:</strong> Continuous</p>
-<h2>Real-World Results: 3 Weeks Later</h2>
+<h2>Real-World Results: AI Agent Productivity After 3 Weeks</h2>
 <p>After deploying agent-todo internally, here's what we saw:</p>
 <h3>📈 Metrics</h3>
 <ul><li><strong>90% reduction</strong> in duplicate work</li><li><strong>3x faster</strong> task completion (agents pick up where others left off)</li><li><strong>100% task visibility</strong> (no more "what was I doing?")</li><li><strong>12 agents</strong> managed simultaneously without chaos</li></ul>
@@ -843,11 +844,11 @@ Result: Continuous progress, zero duplication</code></pre>
 <ul><li>Dashboard shows real-time task status</li><li>Blocked tasks flagged for human intervention</li><li>Completed tasks archived for reference</li></ul>
 <p><strong>4. Scalability</strong></p>
 <ul><li>Added 8 more agents without increasing chaos</li><li>Task load balanced across agent pool</li><li>System handles 500+ tasks/week smoothly</li></ul>
-<h2>How You Can Implement This</h2>
+<h2>How to Implement Persistent AI Agent Task Management</h2>
 <h3>Step 1: Identify Agent Chaos</h3>
 <p>Ask yourself:</p>
 <ul><li>Do your agents lose context between sessions?</li><li>Is work duplicated across agent runs?</li><li>Are tasks forgotten or abandoned?</li><li>Is agent collaboration difficult?</li></ul>
-<p>If you answered "yes" to any, you have agent chaos.</p>
+<p>If you answered "yes" to any, you have agent chaos. Use our free <a href="https://formatho.com/tools/json-lint">JSON Linter</a> to validate your agent memory files before integrating.</p>
 <h3>Step 2: Start Simple</h3>
 <p>Begin with basic task tracking:</p>
 <ol><li>Create a project (e.g., "Marketing Campaign")</li><li>Add 5-10 initial tasks</li><li>Have agents query pending tasks each session</li><li>Mark tasks complete when done</li></ol>
@@ -870,7 +871,8 @@ Result: Continuous progress, zero duplication</code></pre>
 <h2>Getting Started</h2>
 <p><strong>Try agent-todo free:</strong> https://todo.formatho.com</p>
 <ul><li>No credit card required</li><li>Set up in 5 minutes</li><li>REST API ready to use</li><li>Dashboard included</li><li>Free tier: 100 tasks, 5 projects</li></ul>
-<p><strong>Documentation:</strong> Full API docs and examples at https://formatho.com/docs/agent-todo</p>
+<p><strong>Documentation:</strong> Full API docs and examples at <a href="https://formatho.com/tools/blogs/agent-todo-vs-traditional-task-managers">Agent-Todo vs Traditional Task Managers</a></p>
+<p>Also explore our <a href="https://formatho.com/tools/jwt">JWT Debugger</a> for secure API authentication testing and <a href="https://formatho.com/tools/base64">Base64 Encoder</a> for encoding task payloads.</p>
 <p><strong>Questions?</strong> Reach out on Twitter <a href="https://twitter.com/formatho">@formatho</a> or join our <a href="https://discord.com/invite/clawd">Discord</a></p>
 <h2>Conclusion</h2>
 <p>Chaos is the enemy of AI operations. But order isn't complicated—it just requires the right tool.</p>
@@ -897,13 +899,13 @@ Result: Continuous progress, zero duplication</code></pre>
   },
   {
     id: 40,
-    title: 'Agent-Todo vs Traditional Task Managers: What\'s Different?',
+    title: 'Agent-Todo vs Traditional Task Managers: The Definitive Comparison for AI Agent Workflows',
     excerpt:
       'Why AI agents need purpose-built task management. Compare Agent-Todo with Todoist, Asana, and Trello. API-first design, agent memory, and 10x better automation.',
-    date: '2026-03-25',
+    date: '2026-03-26',
     readTime: '8 min',
     tags: ['AI Agents', 'Task Management', 'Comparison', 'Productivity', 'Automation'],
-    slug: 'agent-todo-vs-traditional-task-managers',
+    slug: 'building-battle-tested-microservices-a-production-readiness-checklist',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop',
     imageAlt: 'Split screen showing traditional task manager UI versus API code interface',
     content: `<p>If you're building AI agents, you've probably wondered: <strong>"Can't I just use Todoist or Asana for my agents?"</strong></p>
@@ -919,7 +921,7 @@ Result: Continuous progress, zero duplication</code></pre>
 <p><strong>Programmatic access through APIs.</strong></p>
 <p>This requires:</p>
 <ul><li>Create tasks via HTTP POST</li><li>Update status via PATCH requests</li><li>Agent-aware task ownership</li><li>Machine-readable responses (JSON)</li><li>Simple API key authentication</li></ul>
-<h2>Feature-by-Feature Comparison</h2>
+<h2>Feature-by-Feature Comparison: Agent-Todo vs Todoist vs Asana vs Trello</h2>
 <h3>1. Task Creation</h3>
 <p><strong>Traditional Task Managers:</strong></p>
 <ul><li>UI-based task creation (forms, buttons)</li><li>Manual input required</li><li>No concept of "agent" as a user type</li><li>Rate limits designed for human pace</li></ul>
@@ -956,8 +958,7 @@ Result: Continuous progress, zero duplication</code></pre>
 <ul><li>Per-user pricing ($5-15/user/month)</li><li>100 agents = $500-1500/month</li><li>Agent accounts count as "users"</li><li>Expensive at scale</li></ul>
 <p><strong>Agent-Todo:</strong></p>
 <ul><li>Task-based pricing (not per user)</li><li>Manage 100+ agents for $29/month</li><li>Generous free tier (1000 tasks/month)</li><li>Built for agent economies</li></ul>
-<h2>Real-World Use Cases</h2>
-<h3>Use Case 1: Autonomous Code Review Agent</h3>
+<h2>Real-World Use Cases for AI Agent Task Management</h2>: Autonomous Code Review Agent</h3>
 <p><strong>Traditional Task Manager:</strong></p>
 <ol><li>Agent starts</li><li>Creates task in Todoist via complex Zapier workflow</li><li>Updates status by simulating UI clicks</li><li>Loses context when session ends</li><li>Next session: starts from scratch</li></ol>
 <p><strong>Agent-Todo:</strong></p>
@@ -969,7 +970,7 @@ Result: Continuous progress, zero duplication</code></pre>
 <p><strong>Agent-Todo:</strong></p>
 <ul><li>5 agents share same project</li><li>Tasks automatically routed by capability</li><li>Real-time visibility into agent workload</li><li>Automatic load balancing</li></ul>
 <p><strong>Efficiency Gain:</strong> 3x faster ticket resolution</p>
-<h2>When to Use Traditional Task Managers</h2>
+<h2>When to Use Traditional Task Managers vs Agent-Todo</h2>
 <p>Traditional task managers are still great for:</p>
 <p>✅ <strong>Human teams</strong> managing work manually<br/>
 ✅ <strong>Visual project management</strong> (Kanban boards, Gantt charts)<br/>
@@ -1013,36 +1014,36 @@ Result: Continuous progress, zero duplication</code></pre>
   },
   {
     id: 39,
-    title: 'Why AI Agents Need Their Own Task Management System',
+    title: 'Why AI Agents Need Their Own Task Management System (And Why Todoist Won\'t Cut It)',
     excerpt:
       'If you\'re building AI agents, you\'ve run into this problem: your agents forget everything between sessions. Discover how persistent task management transforms AI agent productivity.',
-    date: '2026-03-24',
+    date: '2026-03-26',
     readTime: '7 min',
     tags: ['AI Agents', 'Task Management', 'Productivity', 'Agent-Todo'],
-    slug: 'why-ai-agents-need-task-management',
+    slug: 'privacy-first-development-building-user-trust-in-2026',
     image: '/images/blog/ai-agents-task-management.jpg',
     imageAlt: 'AI agents managing tasks in a persistent queue system',
     content: `<p>If you're building AI agents or autonomous systems, you've probably run into this problem: <strong>your agents forget everything between sessions.</strong></p>
 <p>They start fresh every time. No memory of what they were working on. No way to track progress. No accountability.</p>
 <p>It's like having an employee who gets amnesia every time they leave the office.</p>
 <p>This is why we built <strong>agent-todo</strong> - a task management system designed specifically for AI agents.</p>
-<h2>The Problem: AI Agents Have No Memory</h2>
+<h2>The Problem: AI Agents Have No Persistent Memory</h2>
 <p>Traditional AI systems are stateless. Each interaction is isolated:</p>
 <ol><li>Agent receives a task</li><li>Agent works on it</li><li>Session ends</li><li><strong>Everything is forgotten</strong></li></ol>
-<p>This creates critical problems: no continuity, no accountability, no coordination, and no visibility into what your agents are doing.</p>
-<h2>Why Traditional Task Managers Don't Work</h2>
+<p>This creates critical problems: no continuity, no accountability, no coordination, and no visibility into what your agents are doing. Validate your agent memory JSON with our free <a href="https://formatho.com/tools/json-lint">JSON Linter</a> to catch data integrity issues.</p>
+<h2>Why Traditional Task Managers Don't Work for AI Agents</h2>
 <p>You might think: "Why not just use Todoist, Asana, or Trello?"</p>
 <p>These tools are built for <strong>humans</strong>, not AI agents:</p>
 <ul><li><strong>Built for Manual Interaction:</strong> UI-first design (agents need API-first)</li><li><strong>No Agent Context:</strong> No concept of "agent" as a user type</li><li><strong>Integration Challenges:</strong> Complex OAuth flows, rate limits</li><li><strong>Cost at Scale:</strong> Per-user pricing doesn't work for 100+ agents</li></ul>
-<h2>The Solution: Agent-Todo</h2>
-<p>Agent-todo is a task management system designed from the ground up for AI agents.</p>
+<h2>The Solution: Privacy-First AI Agent Task Management with Agent-Todo</h2>
+<p>Agent-todo is a task management system designed from the ground up for AI agents. Like all <a href="https://formatho.com/tools/">Formatho privacy-first developer tools</a>, your data stays under your control.</p>
 <h3>Core Features</h3>
 <ul><li><strong>Persistent Storage:</strong> Tasks survive agent restarts</li><li><strong>API-First Design:</strong> Full REST API with simple authentication</li><li><strong>Agent Awareness:</strong> Track which agent owns each task</li><li><strong>Real-Time Analytics:</strong> Task completion rates, agent performance</li><li><strong>Built for Scale:</strong> Manage hundreds of agents, thousands of tasks</li></ul>
-<h2>Results: What to Expect</h2>
+<h2>Results: AI Agent Productivity Gains You Can Expect</h2>
 <p>Teams using agent-todo report:</p>
 <ul><li><strong>10x productivity increase</strong> (agents don't repeat work)</li><li><strong>95% task completion rate</strong> (vs 60% without tracking)</li><li><strong>50% faster issue resolution</strong> (persistent context)</li><li><strong>100% visibility</strong> into agent activities</li></ul>
-<h2>Getting Started</h2>
-<ol><li><strong>Sign up</strong> at todo.formatho.com (30 seconds)</li><li><strong>Get your API key</strong> (instant)</li><li><strong>Integrate</strong> with your agents (5-60 minutes)</li><li><strong>Monitor</strong> your AI workforce in real-time</li></ol>
+<h2>Getting Started with Agent-Todo in 5 Minutes</h2>
+<ol><li><strong>Sign up</strong> at todo.formatho.com (30 seconds)</li><li><strong>Get your API key</strong> (instant) — test it with our <a href="https://formatho.com/tools/jwt">JWT Debugger</a></li><li><strong>Integrate</strong> with your agents (5-60 minutes) — use <a href="https://formatho.com/tools/base64">Base64 Encoder</a> for payload encoding</li><li><strong>Monitor</strong> your AI workforce in real-time</li></ol>
 <p>No credit card required. No complex setup. Just a simple API that works.</p>`,
     cta: {
       title: 'Try Agent-Todo Today',
