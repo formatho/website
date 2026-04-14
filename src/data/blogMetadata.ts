@@ -12,6 +12,18 @@ export interface BlogMetadata {
 
 export const blogMetadata: BlogMetadata[] = [
   {
+    id: 51,
+    title: 'Beyond the Chatbot: The Rise of Agentic Orchestration and Digital Workforce',
+    excerpt:
+      'The chatbot era is ending. Discover how multi-agent orchestration, digital twins, and browser-native workflows are transforming enterprise AI from conversation tools to autonomous digital workforces.',
+    date: '2026-04-14',
+    readTime: '9 min',
+    tags: ['AI Agents', 'Orchestration', 'Productivity', 'Enterprise AI', 'Browser Automation'],
+    slug: 'beyond-the-chatbot-agentic-orchestration-digital-workforce',
+    image: 'https://images.unsplash.com/photo-1620712943543-bcc4686e08f?w=400&h=225&fit=crop',
+    imageAlt: 'Digital workforce coordination with multi-agent AI orchestration system'
+  },
+  {
     id: 50,
     title: 'Privacy-First Developer Tools: Why Your Data Should Never Leave Your Browser',
     excerpt:
