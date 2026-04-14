@@ -148,7 +148,7 @@ const escapeRegex = (string: string): string => {
         @keydown="handleKeydown"
       >
         <div
-          class="glass-panel w-full max-w-2xl mx-4 rounded-xl shadow-2xl overflow-hidden"
+          class="bg-white dark:bg-slate-900 w-full max-w-2xl mx-4 rounded-xl shadow-2xl overflow-hidden border border-border"
           @click.stop
         >
           <!-- Search Input -->
