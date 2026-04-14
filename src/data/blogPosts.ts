@@ -28,7 +28,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '9 min',
     tags: ['AI Agents', 'Orchestration', 'Productivity', 'Enterprise AI', 'Browser Automation'],
     slug: 'beyond-the-chatbot-agentic-orchestration-digital-workforce',
-    image: 'https://images.unsplash.com/photo-1620712943543-bcc4686e08f?w=1200&h=630&fit=crop',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop',
     imageAlt: 'Digital workforce coordination with multi-agent AI orchestration system',
     content: `<p>The tech world is currently witnessing a silent but violent shift. If you look at the headlines from the past few days, the narrative has fundamentally moved. We are no longer talking about "Generative AI" in the context of clever chatbots that write poems or summarize emails.</p>
 <p>We have entered the Era of Agentic Orchestration.</p>

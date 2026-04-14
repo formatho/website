@@ -20,7 +20,7 @@ export const blogMetadata: BlogMetadata[] = [
     readTime: '9 min',
     tags: ['AI Agents', 'Orchestration', 'Productivity', 'Enterprise AI', 'Browser Automation'],
     slug: 'beyond-the-chatbot-agentic-orchestration-digital-workforce',
-    image: 'https://images.unsplash.com/photo-1620712943543-bcc4686e08f?w=400&h=225&fit=crop',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=225&fit=crop',
     imageAlt: 'Digital workforce coordination with multi-agent AI orchestration system'
   },
   {
