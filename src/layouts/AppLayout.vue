@@ -4,14 +4,38 @@ import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
 import LiveSiteAnalytics from '@/components/LiveSiteAnalytics.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
-import { computed, watch, onMounted, onUnmounted } from 'vue'
+import { computed, watch, onMounted, onUnmounted, ref } from 'vue'
 import { tools } from '@/data/tools'
 
 const route = useRoute()
 const baseUrl = 'https://formatho.com/tools'
 
+// Loading state for route transitions
+const isLoading = ref(false)
+let loadingTimeout: ReturnType<typeof setTimeout> | null = null
+let isFirstLoad = ref(true)
+
 // Only show breadcrumb when not on home page
 const showBreadcrumb = computed(() => route.path !== '/')
+
+// Watch route changes to show skeleton during lazy-loaded navigation
+watch(() => route.path, (to, from) => {
+  if (to !== from && !isFirstLoad.value) {
+    isLoading.value = true
+    if (loadingTimeout) clearTimeout(loadingTimeout)
+    // Safety: auto-hide after 2s
+    loadingTimeout = setTimeout(() => {
+      isLoading.value = false
+    }, 2000)
+  }
+  isFirstLoad.value = false
+})
+
+// Called when the new route component mounts
+function onComponentReady() {
+  isLoading.value = false
+  if (loadingTimeout) clearTimeout(loadingTimeout)
+}
 
 // Find tool data for current route
 function findTool(path: string) {
@@ -85,8 +109,34 @@ onUnmounted(removeToolSchema)
     <Navbar />
     <Breadcrumb v-if="showBreadcrumb" />
     <main id="main-content" class="flex-1 pt-16" :class="{ 'pt-[104px]': showBreadcrumb }">
-      <RouterView />
+      <!-- Skeleton Loader Overlay -->
+      <Transition
+        enter-active-class="transition-opacity duration-150"
+        enter-from-class="opacity-100"
+        enter-to-class="opacity-0"
+        leave-active-class="hidden"
+      >
+        <div v-if="isLoading" class="animate-pulse p-6 space-y-6 max-w-5xl mx-auto">
+          <div class="h-8 bg-muted rounded-md w-56"></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div class="h-4 bg-muted rounded w-24"></div>
+              <div class="h-12 bg-muted rounded-md"></div>
+              <div class="h-4 bg-muted rounded w-32"></div>
+              <div class="h-12 bg-muted rounded-md"></div>
+              <div class="h-10 bg-muted rounded-md w-40"></div>
+            </div>
+            <div class="space-y-4">
+              <div class="h-4 bg-muted rounded w-20"></div>
+              <div class="h-32 bg-muted rounded-md"></div>
+              <div class="h-4 bg-muted rounded w-48"></div>
+            </div>
+          </div>
+        </div>
+      </Transition>
+      <RouterView v-show="!isLoading" @vue:mounted="onComponentReady" />
     </main>
     <Footer />
+    <LiveSiteAnalytics />
   </div>
 </template>
