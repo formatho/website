@@ -871,7 +871,7 @@ Result: Continuous progress, zero duplication</code></pre>
 <h2>Getting Started</h2>
 <p><strong>Try agent-todo free:</strong> https://todo.formatho.com</p>
 <ul><li>No credit card required</li><li>Set up in 5 minutes</li><li>REST API ready to use</li><li>Dashboard included</li><li>Free tier: 100 tasks, 5 projects</li></ul>
-<p><strong>Documentation:</strong> Full API docs and examples at <a href="https://formatho.com/tools/blogs/agent-todo-vs-traditional-task-managers">Agent-Todo vs Traditional Task Managers</a></p>
+<p><strong>Documentation:</strong> Full API docs and examples at <a href="https://formatho.com/tools/blogs/building-battle-tested-microservices-a-production-readiness-checklist">Agent-Todo vs Traditional Task Managers</a></p>
 <p>Also explore our <a href="https://formatho.com/tools/jwt">JWT Debugger</a> for secure API authentication testing and <a href="https://formatho.com/tools/base64">Base64 Encoder</a> for encoding task payloads.</p>
 <p><strong>Questions?</strong> Reach out on Twitter <a href="https://twitter.com/formatho">@formatho</a> or join our <a href="https://discord.com/invite/clawd">Discord</a></p>
 <h2>Conclusion</h2>
