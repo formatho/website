@@ -172,7 +172,7 @@ const popularTools = [
           </div>
           <!-- Conversion CTA -->
           <div class="flex flex-col sm:flex-row gap-4 items-center mt-4" data-v-8d4ed633="">
-            <RouterLink to="/agent-orchestrator" data-v-8d4ed633="">
+            <RouterLink to="/tools" data-v-8d4ed633="">
               <button class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg" data-v-8d4ed633="">
                 ⚡ Explore All Tools
               </button>
