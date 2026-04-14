@@ -9,6 +9,12 @@ export const tools = [
         iconName: 'Link'
       },
       {
+        name: 'Address Checksum (EIP-55)',
+        description: 'Validate and checksum Ethereum addresses. Prevent spoofed address attacks.',
+        route: '/tools/address-checksum',
+        iconName: 'Shield'
+      },
+      {
         name: 'EVM Unit Converter',
         description: 'Convert between Wei, Gwei, and Ether.',
         route: '/tools/evm-converter',
