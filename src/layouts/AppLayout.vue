@@ -84,7 +84,7 @@ onUnmounted(removeToolSchema)
     
     <Navbar />
     <Breadcrumb v-if="showBreadcrumb" />
-    <main id="main-content" class="flex-1 pt-16">
+    <main id="main-content" class="flex-1 pt-16" :class="{ 'pt-[104px]': showBreadcrumb }">
       <RouterView />
     </main>
     <Footer />
