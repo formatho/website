@@ -160,7 +160,7 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
           </div>
 
           <a
-            href="https://github.com/formatho/website"
+            href="https://github.com/formatho"
             target="_blank"
             rel="noopener noreferrer"
             :class="[navLinkClass, 'flex items-center gap-1']"
@@ -232,7 +232,7 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
 
           <div class="pt-2 border-t border-foreground mt-2">
             <a
-              href="https://github.com/formatho/website"
+              href="https://github.com/formatho"
               target="_blank"
               rel="noopener noreferrer"
               :class="[navLinkClass, 'flex items-center gap-2']"
