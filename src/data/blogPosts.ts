@@ -38,6 +38,7 @@ export const blogPosts: BlogPost[] = [
 <p>Most early AI implementations were essentially UI skins on top of LLMs. They were great for brainstorming, but they suffered from what we call the Execution Gap.</p>
 <p>You ask a chatbot for a market report; it gives you the text. You then have to manually copy that text, format it, find the relevant contact info on LinkedIn, and send the emails yourself. The AI was an advisor, not a doer.</p>
 <p>Agentic AI changes the equation. It doesn't just suggest an email; it navigates the browser, finds the lead, verifies the data, and executes a sequence. It moves from "Software as a Service" (SaaS) to "Agency as a Service."</p>
+<div style="margin: 2rem 0;"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop" alt="AI agent executing workflow through browser automation" style="width: 100%; height: auto; border-radius: 8px;" /></div>
 <h2>The "Council of Digital Twins"</h2>
 <p>The most significant architectural shift in 2026 is the move from single-agent interactions to Multi-Agent Orchestration.</p>
 <p>Instead of one massive model trying to do everything, we are seeing the rise of an Agentic OS. Think of it as a "Council of Digital Twins," where specialized agents operate in a coordinated workflow:</p>
@@ -46,6 +47,7 @@ export const blogPosts: BlogPost[] = [
 <p><strong>The Executor:</strong> Performs browser-native actions (clicking, typing, submitting).</p>
 <p><strong>The Auditor:</strong> Fact-checks the output against pre-defined constraints.</p>
 <p>This isn't just a feature; it's a digital workforce that operates at scale, 24/7, with perfect memory and zero fatigue.</p>
+<div style="margin: 2rem 0;"><img src="https://images.unsplash.com/photo-1551434678-e076c223a69?w=1200&h=630&fit=crop" alt="Multi-agent digital council coordinating workflows" style="width: 100%; height: auto; border-radius: 8px;" /></div>
 <h2>The Bangalore Angle: Prototype to Production</h2>
 <p>Nowhere is this shift more evident than in the tech hubs like Bangalore. The local ecosystem has moved past the "cool demo" phase. The focus has shifted entirely toward Production-Grade AI.</p>
 <p>The conversation in the boardrooms of Indiranagar and HSR Layout is no longer about which model has the highest context window. It's about:</p>
@@ -54,6 +56,7 @@ export const blogPosts: BlogPost[] = [
 <h2>Solving the "Execution Gap" with Browser-Native Workflows</h2>
 <p>The final frontier of Agentic AI is the ability to interact with the world exactly like a human does: through the browser.</p>
 <p>By utilizing browser-native workflows, Agentic AI bypasses the need for complex API integrations that don't always exist. If a human can do it in a Chrome tab, an Agentic OS can now do it too. This unlocks a level of automation previously thought impossiblefrom complex supply chain management to real-time customer success at an enterprise level.</p>
+<div style="margin: 2rem 0;"><img src="https://images.unsplash.com/photo-1486312338219-68e41ee6baf?w=1200&h=630&fit=crop" alt="Browser automation workflow execution" style="width: 100%; height: auto; border-radius: 8px;" /></div>
 <h2>The Path Forward</h2>
 <p>The transition from chatbots to an Agentic Digital Workforce is the most significant leap in productivity since the invention of the cloud. We are moving away from tools that require our constant supervision toward systems that require our direction.</p>
 <p>The question for every founder, developer, and enterprise leader is no longer "How can I use AI to talk?"</p>
