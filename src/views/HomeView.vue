@@ -43,12 +43,23 @@ const searchQuery = ref('')
 
 // Prefetch route chunk on hover for instant navigation
 const router = useRouter()
+const prefetchedRoutes = new Set<string>()
+
 const prefetchRoute = (route: string) => {
-  const resolved = router.resolve(route)
-  const matched = resolved.matched[0]
-  if (matched?.components?.default && typeof matched.components.default === 'function') {
-    matched.components.default()
-  }
+  if (prefetchedRoutes.has(route)) return
+  prefetchedRoutes.add(route)
+
+  setTimeout(() => {
+    try {
+      const resolved = router.resolve(route)
+      const matched = resolved.matched[resolved.matched.length - 1]
+      if (matched?.components?.default && typeof matched.components.default === 'function') {
+        ;(matched.components.default as Function)()
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, 100)
 }
 
 // Filter tools based on search query

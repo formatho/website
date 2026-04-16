@@ -15,8 +15,23 @@ interface Tool {
 }
 
 // Prefetch tool component on hover
+const prefetchedPaths = new Set<string>()
+
 const prefetchTool = (path: string) => {
-  router.resolve(path)
+  if (prefetchedPaths.has(path)) return
+  prefetchedPaths.add(path)
+
+  setTimeout(() => {
+    try {
+      const resolved = router.resolve(path)
+      const matched = resolved.matched[resolved.matched.length - 1]
+      if (matched?.components?.default && typeof matched.components.default === 'function') {
+        ;(matched.components.default as Function)()
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, 100)
 }
 
 const tools: Tool[] = [
