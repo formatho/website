@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import Breadcrumb from '@/components/Breadcrumb.vue'
+
+const router = useRouter()
 
 interface Tool {
   name: string
@@ -9,6 +12,11 @@ interface Tool {
   description: string
   category: string
   icon: string
+}
+
+// Prefetch tool component on hover
+const prefetchTool = (path: string) => {
+  router.resolve(path)
 }
 
 const tools: Tool[] = [
@@ -637,9 +645,7 @@ const getToolsByCategory = (category: string) => {
     <div class="container mx-auto px-4 py-8">
       <!-- Header -->
       <div class="text-center mb-12">
-        <h1 class="text-4xl font-bold tracking-tight mb-4">
-          All Developer Tools
-        </h1>
+        <h1 class="text-4xl font-bold tracking-tight mb-4">All Developer Tools</h1>
         <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
           Privacy-first tools that run entirely in your browser. No data sent to servers.
         </p>
@@ -647,11 +653,7 @@ const getToolsByCategory = (category: string) => {
 
       <!-- Tools by Category -->
       <div class="space-y-12">
-        <div
-          v-for="category in categories"
-          :key="category"
-          class="space-y-4"
-        >
+        <div v-for="category in categories" :key="category" class="space-y-4">
           <h2 class="text-2xl font-semibold border-b border-border pb-2">
             {{ category }}
           </h2>
@@ -662,6 +664,7 @@ const getToolsByCategory = (category: string) => {
               :key="tool.path"
               :to="tool.path"
               class="group"
+              @mouseenter="prefetchTool(tool.path)"
             >
               <Card class="h-full hover:border-primary hover:shadow-lg transition-all duration-200">
                 <CardHeader>

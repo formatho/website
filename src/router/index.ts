@@ -8,7 +8,7 @@ import { blogPosts } from '../data/blogPosts'
 const blogPostRoutes = blogPosts.map((post) => ({
   path: `blogs/${post.slug}`,
   name: `blog-post-${post.slug}`,
-  component: () => import('../views/BlogPostView.vue'),
+  component: () => import(/* webpackPrefetch: true */ '../views/BlogPostView.vue'),
   meta: {
     title: post.title,
     description: post.excerpt,
@@ -41,7 +41,7 @@ export const routes = [
       {
         path: 'about',
         name: 'about',
-        component: () => import('../views/AboutView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/AboutView.vue'),
         meta: {
           title: 'About Us - Formatho',
           description:
@@ -53,7 +53,7 @@ export const routes = [
       {
         path: 'docs/api',
         name: 'api-docs',
-        component: () => import('../views/docs/ApiDocsView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/docs/ApiDocsView.vue'),
         meta: {
           title: 'API Documentation - Agent Orchestrator | Formatho',
           description:
@@ -65,7 +65,7 @@ export const routes = [
       {
         path: 'beta',
         name: 'beta',
-        component: () => import('../views/BetaView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/BetaView.vue'),
         meta: {
           title: 'Beta Program - Agent Orchestrator | Formatho',
           description:
@@ -77,7 +77,7 @@ export const routes = [
       {
         path: 'compare',
         name: 'compare',
-        component: () => import('../views/CompareView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/CompareView.vue'),
         meta: {
           title: 'Agent-Todo vs Zapier, n8n, Make - Comparison | Formatho',
           description:
@@ -89,7 +89,7 @@ export const routes = [
       {
         path: 'blogs',
         name: 'blogs',
-        component: () => import('../views/BlogsView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/BlogsView.vue'),
         meta: {
           title: 'Blog - Formatho',
           description:
@@ -103,7 +103,7 @@ export const routes = [
       {
         path: 'blogs/:slug',
         name: 'blog-post-dynamic',
-        component: () => import('../views/BlogPostView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/BlogPostView.vue'),
         meta: {
           title: 'Blog Post - Formatho',
           description:
@@ -114,7 +114,7 @@ export const routes = [
       {
         path: 'privacy',
         name: 'privacy',
-        component: () => import('../views/PrivacyPolicyView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/PrivacyPolicyView.vue'),
         meta: {
           title: 'Privacy Policy - Formatho',
           description:
@@ -125,7 +125,7 @@ export const routes = [
       {
         path: 'contact',
         name: 'contact',
-        component: () => import('../views/ContactView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/ContactView.vue'),
         meta: {
           title: 'Contact Us - Formatho',
           description:
@@ -148,7 +148,7 @@ export const routes = [
       {
         path: 'tools/json-yaml',
         name: 'json-yaml',
-        component: () => import('../views/JsonYamlView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/JsonYamlView.vue'),
         meta: {
           title: 'JSON to YAML Converter',
           description:
@@ -160,7 +160,7 @@ export const routes = [
       {
         path: 'tools/json-csv',
         name: 'json-csv',
-        component: () => import('../views/JsonCsvView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/JsonCsvView.vue'),
         meta: {
           title: 'JSON to CSV Converter',
           description:
@@ -172,7 +172,7 @@ export const routes = [
       {
         path: 'tools/diff',
         name: 'diff',
-        component: () => import('../views/DiffView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/DiffView.vue'),
         meta: {
           title: 'Text Diff Tool',
           description:
@@ -184,7 +184,7 @@ export const routes = [
       {
         path: 'tools/base64',
         name: 'base64',
-        component: () => import('../views/Base64View.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/Base64View.vue'),
         meta: {
           title: 'Base64 Encoder & Decoder',
           description:
@@ -196,7 +196,7 @@ export const routes = [
       {
         path: 'tools/jwt',
         name: 'jwt',
-        component: () => import('../views/JwtView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/JwtView.vue'),
         meta: {
           title: 'JWT Decoder',
           description:
@@ -208,7 +208,7 @@ export const routes = [
       {
         path: 'tools/sql',
         name: 'sql',
-        component: () => import('../views/SqlFormatterView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/SqlFormatterView.vue'),
         meta: {
           title: 'SQL Formatter',
           description:
@@ -220,7 +220,7 @@ export const routes = [
       {
         path: 'tools/all',
         name: 'tools-all',
-        component: () => import('../views/ToolsView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/ToolsView.vue'),
         meta: {
           title: 'All Developer Tools - Formatho',
           description:
@@ -232,7 +232,7 @@ export const routes = [
       {
         path: 'tools/uuid',
         name: 'uuid',
-        component: () => import('../views/UuidGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/UuidGeneratorView.vue'),
         meta: {
           title: 'UUID Generator',
           description:
@@ -244,7 +244,7 @@ export const routes = [
       {
         path: 'tools/lorem',
         name: 'lorem',
-        component: () => import('../views/LoremIpsumView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/LoremIpsumView.vue'),
         meta: {
           title: 'Lorem Ipsum Generator',
           description:
@@ -256,7 +256,7 @@ export const routes = [
       {
         path: 'tools/image',
         name: 'image',
-        component: () => import('../views/ImageCompressorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/ImageCompressorView.vue'),
         meta: {
           title: 'Image Compressor',
           description:
@@ -268,7 +268,7 @@ export const routes = [
       {
         path: 'tools/json-lint',
         name: 'json-lint',
-        component: () => import('../views/JsonLintView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/JsonLintView.vue'),
         meta: {
           title: 'JSON Linter & Validator',
           description:
@@ -280,7 +280,7 @@ export const routes = [
       {
         path: 'tools/yaml-lint',
         name: 'yaml-lint',
-        component: () => import('../views/YamlLintView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/YamlLintView.vue'),
         meta: {
           title: 'YAML Linter & Validator',
           description:
@@ -292,7 +292,7 @@ export const routes = [
       {
         path: 'tools/bpmn',
         name: 'bpmn',
-        component: () => import('../views/BpmnView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/BpmnView.vue'),
         meta: {
           title: 'BPMN Viewer & PDF Exporter',
           description:
@@ -304,7 +304,8 @@ export const routes = [
       {
         path: 'tools/bpmn-to-visio',
         name: 'bpmn-to-visio',
-        component: () => import('../views/BpmnToVisioConverterView.vue'),
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/BpmnToVisioConverterView.vue'),
         meta: {
           title: 'BPMN to Visio Converter',
           description:
@@ -316,7 +317,7 @@ export const routes = [
       {
         path: 'tools/evm-converter',
         name: 'evm-converter',
-        component: () => import('../views/EvmUnitConverterView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/EvmUnitConverterView.vue'),
         meta: {
           title: 'EVM Unit Converter',
           description:
@@ -328,7 +329,7 @@ export const routes = [
       {
         path: 'tools/keccak256',
         name: 'keccak256',
-        component: () => import('../views/KeccakHasherView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/KeccakHasherView.vue'),
         meta: {
           title: 'Keccak-256 Hasher',
           description:
@@ -339,7 +340,7 @@ export const routes = [
       {
         path: 'tools/address-checksum',
         name: 'address-checksum',
-        component: () => import('../views/AddressChecksumView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/AddressChecksumView.vue'),
         meta: {
           title: 'Address Checksum (EIP-55)',
           description:
@@ -350,7 +351,8 @@ export const routes = [
       {
         path: 'tools/multi-chain-keys',
         name: 'multi-chain-keys',
-        component: () => import('../views/MultiChainKeyGeneratorView.vue'),
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/MultiChainKeyGeneratorView.vue'),
         meta: {
           title: 'Multi-Chain Key Generator',
           description:
@@ -362,7 +364,8 @@ export const routes = [
       {
         path: 'tools/address-from-key',
         name: 'address-from-key',
-        component: () => import('../views/AddressFromPrivateKeyView.vue'),
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/AddressFromPrivateKeyView.vue'),
         meta: {
           title: 'Address from Private Key (Multi-Chain)',
           description:
@@ -374,7 +377,7 @@ export const routes = [
       {
         path: 'tools/solidity-to-opcodes',
         name: 'solidity-to-opcodes',
-        component: () => import('../views/SolidityToOpcodesView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/SolidityToOpcodesView.vue'),
         meta: {
           title: 'Solidity to EVM Opcodes',
           description:
@@ -386,7 +389,7 @@ export const routes = [
       {
         path: 'agent-identity-generator',
         name: 'agent-identity-generator',
-        component: () => import('../views/tools/AgentIdentityView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/tools/AgentIdentityView.vue'),
         meta: {
           title: 'AI Agent Identity Generator',
           description:
@@ -398,7 +401,7 @@ export const routes = [
       {
         path: 'local-token-counter',
         name: 'local-token-counter',
-        component: () => import('../views/LocalTokenCounterView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/LocalTokenCounterView.vue'),
         meta: {
           title: 'Local Token Counter',
           description:
@@ -410,7 +413,7 @@ export const routes = [
       {
         path: 'agents',
         name: 'agents',
-        component: () => import('../views/AgentsView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/AgentsView.vue'),
         meta: {
           title: 'Agent Browser - Blockchain Agents with Reputation',
           description:
@@ -422,7 +425,7 @@ export const routes = [
       {
         path: 'agents/:address',
         name: 'agent-detail',
-        component: () => import('../views/AgentDetailView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/AgentDetailView.vue'),
         meta: {
           title: 'Agent Details - View Reputation History & Metadata',
           description:
@@ -434,7 +437,7 @@ export const routes = [
       {
         path: 'pricing',
         name: 'pricing',
-        component: () => import('../views/PricingView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/PricingView.vue'),
         meta: {
           title: 'Pricing - Formatho Agent Todo & Tools',
           description:
@@ -446,7 +449,7 @@ export const routes = [
       {
         path: 'agent-todo',
         name: 'agent-todo',
-        component: () => import('../views/AgentTodoLandingView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/AgentTodoLandingView.vue'),
         meta: {
           title: 'Agent-Todo - Task Management for AI Agents',
           description:
@@ -458,7 +461,7 @@ export const routes = [
       {
         path: 'agent-orchestrator',
         name: 'agent-orchestrator',
-        component: () => import('../views/AgentOrchestratorView.vue'), // Landing page
+        component: () => import(/* webpackPrefetch: true */ '../views/AgentOrchestratorView.vue'), // Landing page
         meta: {
           title: 'Agent Orchestrator - Local-First AI Agent Management',
           description:
@@ -470,17 +473,19 @@ export const routes = [
       {
         path: 'agent-orchestrator/dashboard',
         name: 'agent-orchestrator-dashboard',
-        component: () => import('../views/AgentOrchestratorDashboardView.vue'),
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/AgentOrchestratorDashboardView.vue'),
         meta: {
           title: 'Dashboard - Agent Orchestrator | Formatho',
-          description: 'Monitor and manage AI agents in real-time. View agent status, activity feed, and resource usage.',
+          description:
+            'Monitor and manage AI agents in real-time. View agent status, activity feed, and resource usage.',
           keywords: 'agent dashboard, ai monitoring, agent status, resource usage'
         }
       },
       {
         path: 'agent-orchestrator/:agentId',
         name: 'agent-detail',
-        component: () => import('../views/AgentDetailView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/AgentDetailView.vue'),
         meta: {
           title: 'Agent Detail - Agent Orchestrator | Formatho',
           description: 'View agent status, controls, live logs, and task history.',
@@ -490,7 +495,7 @@ export const routes = [
       {
         path: 'agent-orchestrator/todo',
         name: 'todo-queue',
-        component: () => import('../views/TODOQueueView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/TODOQueueView.vue'),
         meta: {
           title: 'TODO Queue - Agent Orchestrator | Formatho',
           description: 'Manage priority queue, track progress, and filter tasks.',
@@ -500,7 +505,7 @@ export const routes = [
       {
         path: 'agent-orchestrator/cron',
         name: 'cron-scheduler',
-        component: () => import('../views/CrontabGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/CrontabGeneratorView.vue'),
         meta: {
           title: 'Cron Scheduler - Agent Orchestrator | Formatho',
           description: 'Manage scheduled jobs and view run history.',
@@ -510,7 +515,7 @@ export const routes = [
       {
         path: 'agent-orchestrator/config',
         name: 'configuration',
-        component: () => import('../views/ConfigurationView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/ConfigurationView.vue'),
         meta: {
           title: 'Configuration - Agent Orchestrator | Formatho',
           description: 'Configure global settings, LLM providers, and skill permissions.',
@@ -520,18 +525,20 @@ export const routes = [
       {
         path: 'agent-orchestrator/analytics',
         name: 'analytics-dashboard',
-        component: () => import('../views/AnalyticsDashboardView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/AnalyticsDashboardView.vue'),
         meta: {
           title: 'Analytics Dashboard - Agent Orchestrator | Formatho (Pro)',
-          description: 'Advanced analytics dashboard for agent performance tracking, task completion trends, and team collaboration insights. Pro feature.',
-          keywords: 'analytics dashboard, agent performance, task analytics, export data, csv export, json export'
+          description:
+            'Advanced analytics dashboard for agent performance tracking, task completion trends, and team collaboration insights. Pro feature.',
+          keywords:
+            'analytics dashboard, agent performance, task analytics, export data, csv export, json export'
         }
       },
       // Crypto Tools
       {
         path: 'tools/bcrypt',
         name: 'bcrypt',
-        component: () => import('../views/BcryptView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/BcryptView.vue'),
         meta: {
           title: 'Bcrypt Hash Generator',
           description:
@@ -541,7 +548,7 @@ export const routes = [
       {
         path: 'tools/encryption',
         name: 'encryption',
-        component: () => import('../views/EncryptionView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/EncryptionView.vue'),
         meta: {
           title: 'Text Encryption/Decryption',
           description:
@@ -551,7 +558,7 @@ export const routes = [
       {
         path: 'tools/bip39-generator',
         name: 'bip39-generator',
-        component: () => import('../views/Bip39GeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/Bip39GeneratorView.vue'),
         meta: {
           title: 'BIP39 Mnemonic Generator',
           description:
@@ -561,7 +568,7 @@ export const routes = [
       {
         path: 'tools/crypto-forecasts',
         name: 'crypto-forecasts',
-        component: () => import('../views/CryptoForecastsView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/CryptoForecastsView.vue'),
         meta: {
           title: 'AI-Powered Crypto Price Forecasts',
           description:
@@ -571,7 +578,7 @@ export const routes = [
       {
         path: 'tools/hmac-generator',
         name: 'hmac-generator',
-        component: () => import('../views/HmacGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/HmacGeneratorView.vue'),
         meta: {
           title: 'HMAC Generator',
           description: 'Generate HMAC hashes using various algorithms. Privacy-first tool.'
@@ -580,7 +587,7 @@ export const routes = [
       {
         path: 'tools/rsa-key-pair-generator',
         name: 'rsa-key-pair-generator',
-        component: () => import('../views/RsaKeyPairGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/RsaKeyPairGeneratorView.vue'),
         meta: {
           title: 'RSA Key Pair Generator',
           description: 'Generate RSA public/private key pairs. Privacy-first crypto tool.'
@@ -589,7 +596,8 @@ export const routes = [
       {
         path: 'tools/password-strength-analyser',
         name: 'password-strength-analyser',
-        component: () => import('../views/PasswordStrengthAnalyserView.vue'),
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/PasswordStrengthAnalyserView.vue'),
         meta: {
           title: 'Password Strength Analyzer',
           description: 'Analyze password strength and security. Privacy-first tool.'
@@ -598,7 +606,7 @@ export const routes = [
       {
         path: 'tools/pdf-signature-checker',
         name: 'pdf-signature-checker',
-        component: () => import('../views/PdfSignatureCheckerView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/PdfSignatureCheckerView.vue'),
         meta: {
           title: 'PDF Signature Checker',
           description: 'Check and validate digital signatures in PDF files. Privacy-first tool.'
@@ -608,7 +616,8 @@ export const routes = [
       {
         path: 'tools/integer-base-converter',
         name: 'integer-base-converter',
-        component: () => import('../views/IntegerBaseConverterView.vue'),
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/IntegerBaseConverterView.vue'),
         meta: {
           title: 'Integer Base Converter',
           description: 'Convert numbers between binary, octal, decimal, and hexadecimal.'
@@ -617,7 +626,8 @@ export const routes = [
       {
         path: 'tools/roman-numeral-converter',
         name: 'roman-numeral-converter',
-        component: () => import('../views/RomanNumeralConverterView.vue'),
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/RomanNumeralConverterView.vue'),
         meta: {
           title: 'Roman Numeral Converter',
           description: 'Convert between Roman numerals and numbers.'
@@ -626,7 +636,7 @@ export const routes = [
       {
         path: 'tools/base64-file-converter',
         name: 'base64-file-converter',
-        component: () => import('../views/Base64FileConverterView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/Base64FileConverterView.vue'),
         meta: {
           title: 'Base64 File Converter',
           description: 'Convert files to and from Base64 format. Privacy-first tool.'
@@ -635,7 +645,7 @@ export const routes = [
       {
         path: 'tools/text-to-nato-alphabet',
         name: 'text-to-nato-alphabet',
-        component: () => import('../views/TextToNatoAlphabetView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/TextToNatoAlphabetView.vue'),
         meta: {
           title: 'Text to NATO Alphabet',
           description: 'Convert text to NATO phonetic alphabet.'
@@ -644,7 +654,7 @@ export const routes = [
       {
         path: 'tools/text-to-unicode',
         name: 'text-to-unicode',
-        component: () => import('../views/TextToUnicodeView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/TextToUnicodeView.vue'),
         meta: {
           title: 'Text to Unicode Converter',
           description: 'Convert text to Unicode code points and HTML entities.'
@@ -653,7 +663,7 @@ export const routes = [
       {
         path: 'tools/yaml-to-toml',
         name: 'yaml-to-toml',
-        component: () => import('../views/YamlToTomlView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/YamlToTomlView.vue'),
         meta: {
           title: 'YAML to TOML Converter',
           description: 'Convert YAML configuration files to TOML format.'
@@ -662,13 +672,13 @@ export const routes = [
       {
         path: 'tools/json-to-toml',
         name: 'json-to-toml',
-        component: () => import('../views/JsonToTomlView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/JsonToTomlView.vue'),
         meta: { title: 'JSON to TOML Converter', description: 'Convert JSON to TOML format.' }
       },
       {
         path: 'tools/list-converter',
         name: 'list-converter',
-        component: () => import('../views/ListConverterView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/ListConverterView.vue'),
         meta: {
           title: 'List Converter',
           description: 'Convert lists between different formats (comma, newline, JSON, etc).'
@@ -677,7 +687,7 @@ export const routes = [
       {
         path: 'tools/toml-to-json',
         name: 'toml-to-json',
-        component: () => import('../views/TomlToJsonView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/TomlToJsonView.vue'),
         meta: {
           title: 'TOML to JSON Converter',
           description: 'Convert TOML configuration files to JSON format.'
@@ -686,7 +696,7 @@ export const routes = [
       {
         path: 'tools/toml-to-yaml',
         name: 'toml-to-yaml',
-        component: () => import('../views/TomlToYamlView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/TomlToYamlView.vue'),
         meta: {
           title: 'TOML to YAML Converter',
           description: 'Convert TOML configuration files to YAML format.'
@@ -695,7 +705,7 @@ export const routes = [
       {
         path: 'tools/xml-json-converter',
         name: 'xml-json-converter',
-        component: () => import('../views/XmlJsonConverterView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/XmlJsonConverterView.vue'),
         meta: {
           title: 'XML ↔ JSON Converter',
           description: 'Convert XML to JSON and vice versa entirely client-side.'
@@ -704,7 +714,7 @@ export const routes = [
       {
         path: 'tools/xml-to-json',
         name: 'xml-to-json',
-        component: () => import('../views/XmlToJsonView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/XmlToJsonView.vue'),
         meta: {
           title: 'XML to JSON Converter',
           description: 'Convert XML documents to JSON format.'
@@ -713,13 +723,13 @@ export const routes = [
       {
         path: 'tools/json-to-xml',
         name: 'json-to-xml',
-        component: () => import('../views/JsonToXmlView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/JsonToXmlView.vue'),
         meta: { title: 'JSON to XML Converter', description: 'Convert JSON data to XML format.' }
       },
       {
         path: 'tools/markdown-to-html',
         name: 'markdown-to-html',
-        component: () => import('../views/MarkdownToHtmlView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/MarkdownToHtmlView.vue'),
         meta: {
           title: 'Markdown to HTML Converter',
           description: 'Convert Markdown to HTML with syntax highlighting.'
@@ -729,7 +739,7 @@ export const routes = [
       {
         path: 'tools/url-encoder',
         name: 'url-encoder',
-        component: () => import('../views/UrlEncoderView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/UrlEncoderView.vue'),
         meta: {
           title: 'URL Encoder/Decoder',
           description: 'Encode and decode URL strings. Privacy-first tool.'
@@ -738,7 +748,7 @@ export const routes = [
       {
         path: 'tools/html-entities',
         name: 'html-entities',
-        component: () => import('../views/HtmlEntitiesView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/HtmlEntitiesView.vue'),
         meta: {
           title: 'HTML Entities Encoder/Decoder',
           description: 'Encode and decode HTML entities.'
@@ -747,13 +757,13 @@ export const routes = [
       {
         path: 'tools/device-information',
         name: 'device-information',
-        component: () => import('../views/DeviceInformationView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/DeviceInformationView.vue'),
         meta: { title: 'Device Information', description: 'View browser and device information.' }
       },
       {
         path: 'tools/basic-auth-generator',
         name: 'basic-auth-generator',
-        component: () => import('../views/BasicAuthGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/BasicAuthGeneratorView.vue'),
         meta: {
           title: 'HTTP Basic Auth Generator',
           description: 'Generate HTTP Basic Authentication headers.'
@@ -762,7 +772,7 @@ export const routes = [
       {
         path: 'tools/meta-tag-generator',
         name: 'meta-tag-generator',
-        component: () => import('../views/MetaTagGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/MetaTagGeneratorView.vue'),
         meta: {
           title: 'Meta Tag Generator',
           description: 'Generate HTML meta tags for SEO and social sharing.'
@@ -771,7 +781,7 @@ export const routes = [
       {
         path: 'tools/otp-code-generator',
         name: 'otp-code-generator',
-        component: () => import('../views/OtpCodeGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/OtpCodeGeneratorView.vue'),
         meta: {
           title: 'OTP/TOTP Generator',
           description: 'Generate TOTP codes from secrets. Privacy-first tool.'
@@ -780,38 +790,38 @@ export const routes = [
       {
         path: 'tools/mime-types',
         name: 'mime-types',
-        component: () => import('../views/MimeTypesView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/MimeTypesView.vue'),
         meta: { title: 'MIME Type Lookup', description: 'Look up MIME types for file extensions.' }
       },
       {
         path: 'tools/keycode-info',
         name: 'keycode-info',
-        component: () => import('../views/KeycodeInfoView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/KeycodeInfoView.vue'),
         meta: { title: 'Keycode Info', description: 'Get keyboard keycode information.' }
       },
       {
         path: 'tools/slugify-string',
         name: 'slugify-string',
-        component: () => import('../views/SlugifyStringView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/SlugifyStringView.vue'),
         meta: { title: 'Slugify String', description: 'Convert text to URL-friendly slugs.' }
       },
 
       {
         path: 'tools/html-wysiwyg-editor',
         name: 'html-wysiwyg-editor',
-        component: () => import('../views/HtmlWysiwygEditorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/HtmlWysiwygEditorView.vue'),
         meta: { title: 'WYSIWYG HTML Editor', description: 'Rich text HTML editor.' }
       },
       {
         path: 'tools/user-agent-parser',
         name: 'user-agent-parser',
-        component: () => import('../views/UserAgentParserView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/UserAgentParserView.vue'),
         meta: { title: 'User Agent Parser', description: 'Parse and analyze user agent strings.' }
       },
       {
         path: 'tools/json-diff',
         name: 'json-diff',
-        component: () => import('../views/JsonDiffView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/JsonDiffView.vue'),
         meta: {
           title: 'JSON Diff',
           description: 'Compare and find differences between JSON objects.'
@@ -820,14 +830,14 @@ export const routes = [
       {
         path: 'tools/safelink-decoder',
         name: 'safelink-decoder',
-        component: () => import('../views/SafelinkDecoderView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/SafelinkDecoderView.vue'),
         meta: { title: 'Outlook Safelink Decoder', description: 'Decode Outlook safelink URLs.' }
       },
       // Images/Videos Tools
       {
         path: 'tools/wifi-qr-code-generator',
         name: 'wifi-qr-code-generator',
-        component: () => import('../views/WifiQrCodeGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/WifiQrCodeGeneratorView.vue'),
         meta: {
           title: 'WiFi QR Code Generator',
           description: 'Generate QR codes for WiFi network credentials.'
@@ -836,7 +846,8 @@ export const routes = [
       {
         path: 'tools/svg-placeholder-generator',
         name: 'svg-placeholder-generator',
-        component: () => import('../views/SvgPlaceholderGeneratorView.vue'),
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/SvgPlaceholderGeneratorView.vue'),
         meta: {
           title: 'SVG Placeholder Generator',
           description: 'Generate SVG placeholder images.'
@@ -845,7 +856,7 @@ export const routes = [
       {
         path: 'tools/camera-recorder',
         name: 'camera-recorder',
-        component: () => import('../views/CameraRecorderView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/CameraRecorderView.vue'),
         meta: {
           title: 'Camera Recorder',
           description: 'Record video from your camera in the browser.'
@@ -855,13 +866,13 @@ export const routes = [
       {
         path: 'tools/git-memo',
         name: 'git-memo',
-        component: () => import('../views/GitMemoView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/GitMemoView.vue'),
         meta: { title: 'Git Cheat Sheet', description: 'Common Git commands and their usage.' }
       },
       {
         path: 'tools/random-port-generator',
         name: 'random-port-generator',
-        component: () => import('../views/RandomPortGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/RandomPortGeneratorView.vue'),
         meta: {
           title: 'Random Port Generator',
           description: 'Generate random port numbers for development.'
@@ -870,25 +881,25 @@ export const routes = [
       {
         path: 'tools/json-viewer',
         name: 'json-viewer',
-        component: () => import('../views/JsonViewerView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/JsonViewerView.vue'),
         meta: { title: 'JSON Viewer/Formatter', description: 'Format and beautify JSON data.' }
       },
       {
         path: 'tools/json-minify',
         name: 'json-minify',
-        component: () => import('../views/JsonMinifyView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/JsonMinifyView.vue'),
         meta: { title: 'JSON Minifier', description: 'Minify JSON to reduce size.' }
       },
       {
         path: 'tools/chmod-calculator',
         name: 'chmod-calculator',
-        component: () => import('../views/ChmodCalculatorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/ChmodCalculatorView.vue'),
         meta: { title: 'Chmod Calculator', description: 'Calculate Unix file permissions.' }
       },
       {
         path: 'tools/docker-run-to-compose',
         name: 'docker-run-to-compose',
-        component: () => import('../views/DockerRunToComposeView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/DockerRunToComposeView.vue'),
         meta: {
           title: 'Docker Run to Compose',
           description: 'Convert docker run commands to docker-compose.yml.'
@@ -897,25 +908,25 @@ export const routes = [
       {
         path: 'tools/xml-formatter',
         name: 'xml-formatter',
-        component: () => import('../views/XmlFormatterView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/XmlFormatterView.vue'),
         meta: { title: 'XML Formatter', description: 'Format and beautify XML documents.' }
       },
       {
         path: 'tools/yaml-viewer',
         name: 'yaml-viewer',
-        component: () => import('../views/YamlViewerView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/YamlViewerView.vue'),
         meta: { title: 'YAML Viewer', description: 'Format and validate YAML documents.' }
       },
       {
         path: 'tools/email-normalizer',
         name: 'email-normalizer',
-        component: () => import('../views/EmailNormalizerView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/EmailNormalizerView.vue'),
         meta: { title: 'Email Normalizer', description: 'Normalize and validate email addresses.' }
       },
       {
         path: 'tools/regex-memo',
         name: 'regex-memo',
-        component: () => import('../views/RegexMemoView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/RegexMemoView.vue'),
         meta: {
           title: 'Regex Cheat Sheet',
           description: 'Regular expression patterns and syntax reference.'
@@ -925,13 +936,15 @@ export const routes = [
       {
         path: 'tools/ipv4-subnet-calculator',
         name: 'ipv4-subnet-calculator',
-        component: () => import('../views/Ipv4SubnetCalculatorView.vue'),
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/Ipv4SubnetCalculatorView.vue'),
         meta: { title: 'IPv4 Subnet Calculator', description: 'Calculate IPv4 subnet information.' }
       },
       {
         path: 'tools/ipv4-address-converter',
         name: 'ipv4-address-converter',
-        component: () => import('../views/Ipv4AddressConverterView.vue'),
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/Ipv4AddressConverterView.vue'),
         meta: {
           title: 'IPv4 Address Converter',
           description: 'Convert IPv4 addresses to different formats.'
@@ -940,7 +953,7 @@ export const routes = [
       {
         path: 'tools/ipv4-range-expander',
         name: 'ipv4-range-expander',
-        component: () => import('../views/Ipv4RangeExpanderView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/Ipv4RangeExpanderView.vue'),
         meta: {
           title: 'IPv4 Range Expander',
           description: 'Expand IPv4 address ranges to individual IPs.'
@@ -949,7 +962,7 @@ export const routes = [
       {
         path: 'tools/mac-address-lookup',
         name: 'mac-address-lookup',
-        component: () => import('../views/MacAddressLookupView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/MacAddressLookupView.vue'),
         meta: {
           title: 'MAC Address Lookup',
           description: 'Look up MAC address vendor information.'
@@ -958,46 +971,47 @@ export const routes = [
       {
         path: 'tools/mac-address-generator',
         name: 'mac-address-generator',
-        component: () => import('../views/MacAddressGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/MacAddressGeneratorView.vue'),
         meta: { title: 'MAC Address Generator', description: 'Generate random MAC addresses.' }
       },
       {
         path: 'tools/ipv6-ula-generator',
         name: 'ipv6-ula-generator',
-        component: () => import('../views/Ipv6UlaGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/Ipv6UlaGeneratorView.vue'),
         meta: { title: 'IPv6 ULA Generator', description: 'Generate IPv6 Unique Local Addresses.' }
       },
       // Math Tools
       {
         path: 'tools/eta-calculator',
         name: 'eta-calculator',
-        component: () => import('../views/EtaCalculatorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/EtaCalculatorView.vue'),
         meta: { title: 'ETA Calculator', description: 'Calculate estimated time of arrival.' }
       },
       // Measurement Tools
       {
         path: 'tools/chronometer',
         name: 'chronometer',
-        component: () => import('../views/ChronometerView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/ChronometerView.vue'),
         meta: { title: 'Chronometer', description: 'Online stopwatch and timer.' }
       },
       {
         path: 'tools/temperature-converter',
         name: 'temperature-converter',
-        component: () => import('../views/TemperatureConverterView.vue'),
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/TemperatureConverterView.vue'),
         meta: { title: 'Temperature Converter', description: 'Convert between temperature units.' }
       },
       {
         path: 'tools/benchmark-builder',
         name: 'benchmark-builder',
-        component: () => import('../views/BenchmarkBuilderView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/BenchmarkBuilderView.vue'),
         meta: { title: 'Benchmark Builder', description: 'Benchmark JavaScript code performance.' }
       },
       // Text Tools
       {
         path: 'tools/text-statistics',
         name: 'text-statistics',
-        component: () => import('../views/TextStatisticsView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/TextStatisticsView.vue'),
         meta: {
           title: 'Text Statistics',
           description: 'Analyze text statistics (characters, words, etc).'
@@ -1006,51 +1020,51 @@ export const routes = [
       {
         path: 'tools/emoji-picker',
         name: 'emoji-picker',
-        component: () => import('../views/EmojiPickerView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/EmojiPickerView.vue'),
         meta: { title: 'Emoji Picker', description: 'Browse and copy emojis.' }
       },
       {
         path: 'tools/string-obfuscator',
         name: 'string-obfuscator',
-        component: () => import('../views/StringObfuscatorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/StringObfuscatorView.vue'),
         meta: { title: 'String Obfuscator', description: 'Obfuscate text with hidden characters.' }
       },
       {
         path: 'tools/numeronym-generator',
         name: 'numeronym-generator',
-        component: () => import('../views/NumeronymGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/NumeronymGeneratorView.vue'),
         meta: { title: 'Numeronym Generator', description: 'Generate numeronyms like i18n, k8s.' }
       },
       {
         path: 'tools/ascii-text-drawer',
         name: 'ascii-text-drawer',
-        component: () => import('../views/AsciiTextDrawerView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/AsciiTextDrawerView.vue'),
         meta: { title: 'ASCII Text Drawer', description: 'Generate ASCII art text.' }
       },
       // Data Tools
       {
         path: 'tools/phone-parser',
         name: 'phone-parser',
-        component: () => import('../views/PhoneParserView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/PhoneParserView.vue'),
         meta: { title: 'Phone Parser & Formatter', description: 'Parse and format phone numbers.' }
       },
       {
         path: 'tools/iban-validator',
         name: 'iban-validator',
-        component: () => import('../views/IbanValidatorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/IbanValidatorView.vue'),
         meta: { title: 'IBAN Validator & Parser', description: 'Validate and parse IBAN numbers.' }
       },
       // Additional missing routes
       {
         path: 'tools/qr-code-generator',
         name: 'qr-code-generator',
-        component: () => import('../views/QRCodeGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/QRCodeGeneratorView.vue'),
         meta: { title: 'QR Code Generator', description: 'Generate QR codes from text and URLs.' }
       },
       {
         path: 'tools/crontab-generator',
         name: 'crontab-generator',
-        component: () => import('../views/CrontabGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/CrontabGeneratorView.vue'),
         meta: {
           title: 'Crontab Generator',
           description: 'Generate cron expressions with visual builder.'
@@ -1059,19 +1073,20 @@ export const routes = [
       {
         path: 'tools/regex-tester',
         name: 'regex-tester',
-        component: () => import('../views/RegexTesterView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/RegexTesterView.vue'),
         meta: { title: 'Regex Tester', description: 'Test and debug regular expressions.' }
       },
       {
         path: 'tools/math-evaluator',
         name: 'math-evaluator',
-        component: () => import('../views/MathEvaluatorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/MathEvaluatorView.vue'),
         meta: { title: 'Math Evaluator', description: 'Evaluate mathematical expressions.' }
       },
       {
         path: 'tools/percentage-calculator',
         name: 'percentage-calculator',
-        component: () => import('../views/PercentageCalculatorView.vue'),
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/PercentageCalculatorView.vue'),
         meta: {
           title: 'Percentage Calculator',
           description: 'Calculate percentages, increases, and decreases.'
@@ -1080,28 +1095,29 @@ export const routes = [
       {
         path: 'tools/token-generator',
         name: 'token-generator',
-        component: () => import('../views/TokenGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/TokenGeneratorView.vue'),
         meta: { title: 'Token Generator', description: 'Generate secure random tokens.' }
       },
       {
         path: 'tools/hash-text',
         name: 'hash-text',
-        component: () => import('../views/HashTextView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/HashTextView.vue'),
         meta: { title: 'Hash Text', description: 'Generate MD5, SHA-1, SHA-256, SHA-512 hashes.' }
       },
       {
         path: 'tools/xml-json',
         name: 'xml-json',
-        component: () => import('../views/tools/XmlJsonConverter.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/tools/XmlJsonConverter.vue'),
         meta: {
           title: 'XML ↔ JSON Converter',
-          description: 'Bi-directional XML to JSON converter with real-time conversion and clipboard support. 100% client-side, zero server API calls.'
+          description:
+            'Bi-directional XML to JSON converter with real-time conversion and clipboard support. 100% client-side, zero server API calls.'
         }
       },
       {
         path: 'tools/ulid-generator',
         name: 'ulid-generator',
-        component: () => import('../views/ULIDGeneratorView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/ULIDGeneratorView.vue'),
         meta: {
           title: 'ULID Generator',
           description: 'Generate Universally Unique Lexicographically Sortable Identifiers.'
@@ -1110,7 +1126,7 @@ export const routes = [
       {
         path: 'tools/case-converter',
         name: 'case-converter',
-        component: () => import('../views/CaseConverterView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/CaseConverterView.vue'),
         meta: {
           title: 'Case Converter',
           description: 'Convert text between camelCase, snake_case, kebab-case, etc.'
@@ -1119,7 +1135,7 @@ export const routes = [
       {
         path: 'tools/date-time-converter',
         name: 'date-time-converter',
-        component: () => import('../views/DateTimeConverterView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/DateTimeConverterView.vue'),
         meta: {
           title: 'Date-Time Converter',
           description: 'Convert dates and times between formats.'
@@ -1128,7 +1144,7 @@ export const routes = [
       {
         path: 'tools/color-converter',
         name: 'color-converter',
-        component: () => import('../views/ColorConverterView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/ColorConverterView.vue'),
         meta: {
           title: 'Color Converter',
           description: 'Convert colors between HEX, RGB, HSL formats.'
@@ -1137,7 +1153,7 @@ export const routes = [
       {
         path: 'tools/text-to-binary',
         name: 'text-to-binary',
-        component: () => import('../views/TextToBinaryView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/TextToBinaryView.vue'),
         meta: {
           title: 'Text to Binary Converter',
           description: 'Convert text to binary and vice versa.'
@@ -1146,7 +1162,7 @@ export const routes = [
       {
         path: 'tools/http-status-codes',
         name: 'http-status-codes',
-        component: () => import('../views/HTTPStatusCodesView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/HTTPStatusCodesView.vue'),
         meta: {
           title: 'HTTP Status Codes',
           description: 'Reference for HTTP status codes and meanings.'
@@ -1155,7 +1171,7 @@ export const routes = [
       {
         path: 'tools/beta-feedback',
         name: 'beta-feedback',
-        component: () => import('../views/BetaFeedbackView.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/BetaFeedbackView.vue'),
         meta: {
           title: 'Beta Feedback - Formatho',
           description: 'Share your feedback to help us improve Formatho',
@@ -1165,7 +1181,7 @@ export const routes = [
       {
         path: 'tools/admin/beta-feedback',
         name: 'admin-beta-feedback',
-        component: () => import('../views/admin/BetaFeedbackAdmin.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/admin/BetaFeedbackAdmin.vue'),
         meta: {
           title: 'Beta Feedback Dashboard - Formatho Admin',
           description: 'Review and manage beta tester feedback'
@@ -1174,7 +1190,7 @@ export const routes = [
       {
         path: 'tools/admin/ab-tests',
         name: 'admin-ab-tests',
-        component: () => import('../views/admin/ABTestDashboard.vue'),
+        component: () => import(/* webpackPrefetch: true */ '../views/admin/ABTestDashboard.vue'),
         meta: {
           title: 'A/B Test Dashboard - Formatho Admin',
           description: 'Monitor and analyze A/B test results for landing page optimization'
@@ -1186,7 +1202,7 @@ export const routes = [
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
-    component: () => import('../views/NotFoundView.vue'),
+    component: () => import(/* webpackPrefetch: true */ '../views/NotFoundView.vue'),
     meta: {
       title: '404 - Page Not Found | Formatho',
       description: 'The page you are looking for does not exist.'
