@@ -113,7 +113,19 @@ export const createApp = ViteSSG(
   App,
   {
     routes,
-    base: '/'
+    base: '/',
+    scrollBehavior(to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition
+      }
+      if (to.hash) {
+        return {
+          el: to.hash,
+          behavior: 'smooth'
+        }
+      }
+      return { top: 0 }
+    }
   },
   ({ router, isClient }) => {
     // SSR: Set meta tags before rendering during build
