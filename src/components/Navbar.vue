@@ -124,7 +124,7 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
           <!-- Tools Dropdown -->
           <div class="relative pointer-events-auto" ref="toolsDropdownRef">
             <button
-              :class="[navLinkClass, 'flex items-center gap-1']"
+              :class="[navLinkClass, 'flex items-center gap-1 nav-btn']"
               @click="isToolsDropdownOpen = !isToolsDropdownOpen"
             >
               Tools
@@ -178,7 +178,7 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
           <!-- Command Line Search -->
           <button
             @click="openSearchModal"
-            class="hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground border border-foreground rounded-xl bg-transparent hover:bg-foreground/5 transition-colors"
+            class="nav-btn hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground border border-foreground rounded-xl bg-transparent hover:bg-foreground/5 transition-colors"
           >
             <Search class="w-3.5 h-3.5" />
             <span class="font-mono text-xs">Search...</span>
@@ -190,7 +190,7 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
           <!-- Mobile Menu Button -->
           <button
             @click="isMobileMenuOpen = !isMobileMenuOpen"
-            class="md:hidden p-2 text-foreground"
+            class="nav-btn md:hidden p-2 text-foreground"
           >
             <Menu v-if="!isMobileMenuOpen" class="w-5 h-5" />
             <X v-else class="w-5 h-5" />
@@ -208,7 +208,7 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
           <div class="pointer-events-auto">
             <button
               @click="toggleToolsDropdown"
-              :class="[navLinkClass, 'flex items-center justify-between w-full']"
+              :class="[navLinkClass, 'flex items-center justify-between w-full nav-btn']"
             >
               <span>Tools</span>
               <span class="text-[10px] font-mono" :class="{ 'rotate-45 inline-block': isToolsDropdownOpen }">+</span>

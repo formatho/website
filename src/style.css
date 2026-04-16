@@ -226,10 +226,10 @@
 
   /* Fix 5: Button Hover States (Smooth Transitions) */
   .button,
-  button,
+  button:not(.nav-btn),
   a.button,
   .glass-card a,
-  .glass-card button,
+  .glass-card button:not(.nav-btn),
   .glass-card RouterLink,
   a[class*="bg-primary"] {
     transition: all 0.3s ease-in-out;
@@ -237,10 +237,10 @@
   }
 
   .button:hover,
-  button:hover,
+  button:not(.nav-btn):hover,
   a.button:hover,
   .glass-card a:hover,
-  .glass-card button:hover,
+  .glass-card button:not(.nav-btn):hover,
   .glass-card RouterLink:hover,
   a[class*="bg-primary"]:hover {
     transform: translateY(-2px);
