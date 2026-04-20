@@ -178,5 +178,16 @@ export const blogMetadata: BlogMetadata[] = [
     slug: 'privacy-first-development-building-user-trust-in-2026',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=225&fit=crop',
     imageAlt: 'AI agents managing tasks in a persistent queue system'
+  },
+  {
+    id: 45,
+    title: 'From Dead Capital to Programmable Gold: 5 Shifts Redefining the Global Economy in 2026',
+    excerpt: 'The global financial architecture is currently undergoing its most significant structural upgrade since the advent of electronic trading. We have entered the era of The Great Migration, where trillions of dollars in "dead capital"—illiquid assets like private credit, commercial real estate, and bespoke commodities—are being liberated from the friction of analog, intermediary-centric systems.',
+    date: '2026-04-20',
+    readTime: '7 min',
+    tags: ['Blockchain', 'DeFi', 'Finance', 'AI', 'Tokenization', 'Global Economy'],
+    slug: 'from-dead-capital-to-programmable-gold-2026',
+    image: '/images/blog/blog-11/blockchain-settlement.jpg',
+    imageAlt: 'Financial transformation from traditional capital to programmable gold tokens'
   }
 ]
