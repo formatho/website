@@ -1382,6 +1382,111 @@ export const blogPosts: BlogPost[] = [
         link: '/docker-compose'
       }
     ]
+  },
+  {
+    id: 28,
+    title: 'Your AI Agents Keep Losing Tasks Between Sessions — Here\'s How to Fix It',
+    excerpt:
+      'Why AI agents need their own task management system, and how to set one up in 2 minutes',
+    date: '2026-04-28',
+    readTime: '6 min',
+    tags: ['AI Agents', 'Task Management', 'Productivity', 'Tutorial'],
+    slug: 'your-ai-agents-keep-losing-tasks-between-sessions',
+    image: '/images/blog/blog-01/developer-workspace.jpg',
+    imageAlt: 'AI Agent Task Management - Developer workspace with productivity tools',
+    content: `<p>If you\'re building with AI agents, you\'ve hit this wall:</p>
+<p><strong>Your agent starts a task in one session, and by the next session — it\'s forgotten everything.</strong></p>
+<p>No memory of what was pending. No idea what\'s blocked. No priority queue. Just a blank slate asking "How can I help you?" for the hundredth time.</p>
+<img src="/images/blog/blog-01/developer-workspace.jpg" alt="AI Agent Task Management" style="width: 100%; border-radius: 8px; margin: 1.5rem 0;" />
+<h2>The Problem</h2>
+<p>Traditional task managers (Todoist, Asana, Jira) were built for <em>humans</em>. They have GUIs, complex workflows, and APIs that feel bolted on as an afterthought.</p>
+<p>AI agents need something fundamentally different:</p>
+<ul><li><strong>API-first, not GUI-first</strong> — Agents don\'t click buttons</li><li><strong>Persistent memory across sessions</strong> — Task state must survive restarts</li><li><strong>Agent identity & tracking</strong> — Know which agent did what</li><li><strong>Simple status lifecycle</strong> — pending → in_progress → completed → blocked</li><li><strong>Priority queues</strong> — Agents should know what to work on first</li></ul>
+<img src="/images/blog/blog-01/coding-laptop.jpg" alt="API-first Task Management" style="width: 100%; border-radius: 8px; margin: 1.5rem 0;" />
+<h2>The Solution: Agent Todo</h2>
+<p>I built <a href="https://todo.formatho.com">Agent Todo</a> to solve this exact problem. It\'s a task management API designed specifically for AI agents.</p>
+<h3>Setup in 2 Minutes</h3>
+<pre><code class="language-bash"># 1. Get your API key at https://todo.formatho.com
+# 2. Create a task
+curl -X POST "https://todo.formatho.com/api/agent/tasks" \
+  -H "X-API-Key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d \'{
+    "title": "Analyze customer feedback",
+    "description": "Process Q1 feedback from all channels",
+    "priority": "high",
+    "agent_id": "data-agent-001"
+  }\'
+
+# 3. Update status
+curl -X PATCH "https://todo.formatho.com/api/agent/tasks/{task_id}/status" \
+  -H "X-API-Key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d \'{"status": "in_progress"}\'
+
+# 4. Complete it
+curl -X PATCH "https://todo.formatho.com/api/agent/tasks/{task_id}/status" \
+  -H "X-API-Key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d \'{"status": "completed"}\'</code></pre>
+<h3>Using with OpenAI Agents</h3>
+<pre><code class="language-python">import openai
+import requests
+
+API_KEY = "your-api-key"
+BASE_URL = "https://todo.formatho.com/api/agent/tasks"
+
+def get_next_task(agent_id):
+    """Get the highest priority pending task for this agent."""
+    response = requests.get(
+        f"{BASE_URL}?agent_id={agent_id}&status=pending&sort=priority",
+        headers={"X-API-Key": API_KEY}
+    )
+    tasks = response.json()
+    return tasks[0] if tasks else None
+
+def complete_task(task_id, result):
+    """Mark task as completed with results."""
+    requests.patch(
+        f"{BASE_URL}/{task_id}/status",
+        headers={"X-API-Key": API_KEY, "Content-Type": "application/json"},
+        json={"status": "completed"}
+    )
+
+# Your agent loop
+task = get_next_task("my-agent")
+if task:
+    # Process with LLM
+    result = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": task[\'description\']}]
+    )
+    complete_task(task[\'id\'], result)</code></pre>
+<img src="/images/blog/blog-01/tech-office.jpg" alt="Multi-Agent Orchestration" style="width: 100%; border-radius: 8px; margin: 1.5rem 0;" />
+<h2>Real-World Pattern: Multi-Agent Orchestration</h2>
+<p>Where Agent Todo really shines is coordinating multiple agents:</p>
+<pre><code>Agent A (Research) → Creates task: "Summarize findings"
+Agent B (Writer)   → Picks up task: "Write blog post from summary"
+Agent C (Reviewer) → Picks up task: "Review and approve"</code></pre>
+<p>Each agent checks for assigned tasks, processes them, and creates tasks for the next agent in the chain. No shared state needed — just the API.</p>
+<h2>Comparison</h2>
+<table><thead><tr><th>Feature</th><th>Agent Todo</th><th>Todoist</th><th>Asana</th></tr></thead><tbody><tr><td>REST API for agents</td><td>✅ Native</td><td>⚠️ Limited</td><td>⚠️ Limited</td></tr><tr><td>Agent identity</td><td>✅ Built-in</td><td>❌</td><td>❌</td></tr><tr><td>Priority queues</td><td>✅</td><td>❌ Manual</td><td>⚠️</td></tr><tr><td>Status lifecycle</td><td>✅ Full</td><td>⚠️ Basic</td><td>⚠️ Basic</td></tr><tr><td>Free tier</td><td>✅ Free forever</td><td>⚠️ Limited</td><td>❌ Trial</td></tr><tr><td>Setup time</td><td>2 minutes</td><td>30+ minutes</td><td>30+ minutes</td></tr></tbody></table>
+<img src="/images/blog/blog-01/programming.jpg" alt="Developer Productivity" style="width: 100%; border-radius: 8px; margin: 1.5rem 0;" />
+<h2>What\'s Next</h2>
+<p>Agent Todo is part of <a href="https://formatho.com">Formatho</a> — a suite of 100+ privacy-first developer tools. Everything runs client-side. Zero tracking, zero data storage.</p>
+<ul><li>🔗 <strong>Try it free</strong>: <a href="https://todo.formatho.com">todo.formatho.com</a></li><li>📖 <strong>GitHub</strong>: <a href="https://github.com/formatho/agent-orchestrator">github.com/formatho/agent-orchestrator</a></li><li>📚 <strong>Docs</strong>: <a href="https://todo.formatho.com/docs">todo.formatho.com/docs</a></li></ul>
+<p><em>Built by developers who got tired of agents forgetting what they were doing.</em> 🤖✅</p>`,
+    cta: {
+      title: 'Try Agent Todo Free',
+      description: 'Set up your AI agent task management in 2 minutes. No sign-up required.',
+      link: 'https://todo.formatho.com',
+      buttonText: 'Get Started Now'
+    },
+    relatedTools: [
+      { name: 'Agent Todo', description: 'Task management for AI agents', link: 'https://todo.formatho.com' },
+      { name: 'Agent Orchestrator', description: 'Manage AI agents', link: '/agent-orchestrator' },
+      { name: 'JSON Formatter', description: 'Format JSON data', link: '/json-viewer' }
+    ]
   }
 ]
 
