@@ -120,7 +120,7 @@ export const blogPosts: BlogPost[] = [
     id: 30,
     title: 'Generate QR Codes Without Tracking Pixels: The Privacy-First Guide',
     excerpt: 'Discover why most free QR generators track your users. Learn how client-side QR code generation protects user privacy and prevents data harvesting.',
-    date: '2026-03-11',
+    date: '2026-05-01',
     readTime: '7 min',
     tags: ['QR Codes', 'Privacy', 'Tracking', 'Security'],
     slug: 'generate-qr-codes-without-tracking-pixels',
@@ -130,17 +130,20 @@ export const blogPosts: BlogPost[] = [
 <p>However, a serious, systemic privacy vulnerability lies beneath the surface of most "free" online QR generators.</p>
 <p>If you search for a "Free QR Generator" and create a code that links to your company website, you likely haven't generated a simple image. Instead, you have created a "Dynamic" QR code. This means the QR code actually links to the third-party generator's server, which then captures your user's data (IP address, precise location, device fingerprint, and scan time) before redirecting them to your destination URL.</p>
 <p><strong>The generator is using your QR code to inject tracking pixels and harvest analytics from your users.</strong></p>
+<img src="/images/blog/blog-09/privacy-mobile.jpg" alt="Privacy-focused mobile device with QR code" style="width: 100%; border-radius: 8px; margin: 2rem 0;" />
 <h2>Part 1: The Anatomy of a QR Code and the Surveillance Trap</h2>
 <p>A QR code is a matrix barcode designed for rapid readability and massive storage capacity. But a standard, static QR code is just an image representing text encoded using complex mathematics. <strong>It is mathematically impossible for that static image to track a user.</strong></p>
 <h3>The Dynamics of Dynamic QR Codes</h3>
 <p>The tracking happens on the <strong>server</strong> of the utility provider. When you use a popular consumer QR generator to create a "Dynamic" QR code:</p>
 <ol><li>The generator creates a unique, short redirection URL on their server.</li><li>The QR code is generated using that short URL.</li><li>When a user scans it, their phone hits the generator's server.</li><li>The server instantly captures the user's data.</li><li>The server redirects the user to your final destination.</li></ol>
 <p>This is the hidden cost of "free" utilities. You are inadvertently cooperating with a surveillance network by allowing a third party to harvest user analytics from your physical traffic.</p>
+<img src="/images/blog/blog-09/barcode.jpg" alt="Barcode and QR code comparison showing tracking vulnerabilities" style="width: 100%; border-radius: 8px; margin: 2rem 0;" />
 <h2>Part 2: How Formatho Engineers Zero-Trust QR Generation</h2>
 <p>Formatho solves the QR utility crisis by fundamentally changing where the generation logic is executed. We have engineered a platform that brings the complex mathematical encoding and image rendering directly to your device.</p>
 <h3>Purely Static, Untracked QR Generation</h3>
 <p>When you load the Formatho QR tool, you are downloading a complete Progressive Web App (PWA) that functions independently of our servers.</p>
 <ul><li><strong>Memory-Safe Generation:</strong> Our client-side scripts use highly optimized libraries to generate the QR matrix entirely in your device's RAM.</li><li><strong>Native Image Rendering:</strong> The matrix is instantly rendered as an SVG or PNG image using your browser's local canvas APIs.</li><li><strong>Zero Network Traffic:</strong> Because the entire process happens on the client side, there is absolutely zero outbound network activity. No redirection servers, no tracking pixels, and no data harvesting.</li></ul>`,
+<img src="/images/blog/blog-09/mobile-scan.jpg" alt="Mobile phone scanning QR code showing secure client-side processing" style="width: 100%; border-radius: 8px; margin: 2rem 0;" />
     cta: {
       title: 'Generate Private QR Codes',
       description: 'Create QR codes locally without tracking pixels. Your data stays yours.',
