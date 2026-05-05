@@ -705,26 +705,17 @@ export const routes = [
       {
         path: 'tools/xml-json-converter',
         name: 'xml-json-converter',
-        component: () => import(/* webpackPrefetch: true */ '../views/XmlJsonConverterView.vue'),
-        meta: {
-          title: 'XML ↔ JSON Converter',
-          description: 'Convert XML to JSON and vice versa entirely client-side.'
-        }
+        redirect: '/tools/xml-json'
       },
       {
         path: 'tools/xml-to-json',
         name: 'xml-to-json',
-        component: () => import(/* webpackPrefetch: true */ '../views/XmlToJsonView.vue'),
-        meta: {
-          title: 'XML to JSON Converter',
-          description: 'Convert XML documents to JSON format.'
-        }
+        redirect: '/tools/xml-json'
       },
       {
         path: 'tools/json-to-xml',
         name: 'json-to-xml',
-        component: () => import(/* webpackPrefetch: true */ '../views/JsonToXmlView.vue'),
-        meta: { title: 'JSON to XML Converter', description: 'Convert JSON data to XML format.' }
+        redirect: '/tools/xml-json'
       },
       {
         path: 'tools/markdown-to-html',
@@ -1166,6 +1157,15 @@ export const routes = [
         meta: {
           title: 'HTTP Status Codes',
           description: 'Reference for HTTP status codes and meanings.'
+        }
+      },
+      {
+        path: 'tools/mermaid-viewer',
+        name: 'mermaid-viewer',
+        component: () => import(/* webpackPrefetch: true */ '../views/tools/MermaidViewer.vue'),
+        meta: {
+          title: 'Mermaid Diagram Viewer',
+          description: 'View and render Mermaid diagrams in real-time. Supports flowcharts, sequence diagrams, class diagrams, gantt charts, and more. 100% client-side.'
         }
       },
       {

@@ -368,6 +368,12 @@ export const tools = [
         description: 'Test and debug regular expressions.',
         route: '/tools/regex-tester',
         iconName: 'Regex'
+      },
+      {
+        name: 'Mermaid Diagram Viewer',
+        description: 'Render Mermaid diagrams in real-time. Flowcharts, sequence diagrams, class diagrams, gantt charts, and more.',
+        route: '/tools/mermaid-viewer',
+        iconName: 'GitBranch'
       }
     ]
   },
