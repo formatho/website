@@ -12,6 +12,17 @@ export interface BlogMetadata {
 
 export const blogMetadata: BlogMetadata[] = [
   {
+    id: 53,
+    title: 'ERC-7730: The Clear Signing Standard That Will Transform How You Verify Ethereum Transactions',
+    excerpt: 'Blind signing is the silent killer of Ethereum security. ERC-7730 introduces a structured, human-readable format for transaction display that makes hardware wallet verification actually reliable. Here is why it matters for every developer building on Ethereum.',
+    date: '2026-05-12',
+    readTime: '9 min',
+    tags: ['Blockchain', 'Ethereum', 'Security', 'ERC-7730', 'Wallets', 'Smart Contracts'],
+    slug: 'erc-7730-clear-signing-ethereum-standard',
+    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=225&fit=crop',
+    imageAlt: 'Ethereum transaction clear signing with ERC-7730 structured data display'
+  },
+  {
     id: 52,
     title: 'AI Meets Blockchain: How Agent Orchestration Could Transform Web3 Development',
     excerpt:

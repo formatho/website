@@ -2652,5 +2652,85 @@ class FormathoMemoryManager:
 
 ]
 
+  {
+    id: 53,
+    title: 'ERC-7730: The Clear Signing Standard That Will Transform How You Verify Ethereum Transactions',
+    excerpt: 'Blind signing is the silent killer of Ethereum security. ERC-7730 introduces a structured, human-readable format for transaction display that makes hardware wallet verification actually reliable. Here is why it matters for every developer building on Ethereum.',
+    date: '2026-05-12',
+    readTime: '9 min',
+    tags: ['Blockchain', 'Ethereum', 'Security', 'ERC-7730', 'Wallets', 'Smart Contracts'],
+    slug: 'erc-7730-clear-signing-ethereum-standard',
+    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=225&fit=crop',
+    imageAlt: 'Ethereum transaction clear signing with ERC-7730 structured data display',
+    content: `<p>Every time you sign an Ethereum transaction on a hardware wallet, you are making a security-critical decision. But for most smart contract interactions, the data displayed on your wallet screen is incomprehensible — a stream of hexadecimal addresses, raw uint256 values, and cryptic function selectors. You are not really verifying what you are signing. You are blind signing, and it is the single biggest security risk in Ethereum today.</p>
+
+<p>ERC-7730 is the Ethereum community's answer to this problem. It defines a structured, machine-readable JSON format that tells wallets exactly how to display transaction data in a way humans can actually understand. If you are building smart contracts, dApps, or wallet software, this standard will fundamentally change how your users interact with your application.</p>
+
+<h2>The Blind Signing Problem</h2>
+<p>When you trigger a smart contract interaction — swapping tokens on Uniswap, minting an NFT, staking ETH, or approving a spending allowance — your wallet needs you to sign the transaction. On a hardware wallet like a Ledger or Trezor, this means reviewing the transaction details on the device's small screen before confirming.</p>
+<p>The problem is that the raw transaction calldata is meaningless to humans. An ERC-20 transfer shows up as:</p>
+<ul>
+<li><strong>To:</strong> 0xdAC17F958D2ee523a2206206994597C13D831ec7</li>
+<li><strong>Data:</strong> 0xa9059cbb000000000000000000000000742d35Cc6634C0532925a3b844Bc9e7595f2bD180000000000000000000000000000000000000000000000000000000174876e800</li>
+</ul>
+<p>Is this a transfer? An approval? A swap? What amount? To whom? Without additional context, you simply cannot tell. And this is for a simple ERC-20 transfer — complex DeFi interactions involve nested contract calls with dozens of parameters.</p>
+<p>The result: most users blindly sign. They trust the frontend they are using and hope it is not compromised. When it is compromised — through phishing, frontend manipulation, or supply chain attacks — they lose everything.</p>
+
+<h2>How ERC-7730 Works</h2>
+<p>ERC-7730 provides a JSON schema that describes how to format and display transaction data for human review. The format is written by dApp developers and consumed by wallets. Here is how it works:</p>
+<h3>Context Section</h3>
+<p>The context section specifies which contract deployments the formatting file applies to. This ensures that the display rules are only used for the correct contract on the correct chain. A wallet verifies the context before applying any formatting.</p>
+<h3>Metadata Section</h3>
+<p>The metadata section provides trusted constants: the contract's display name, enumeration values, token decimals, and other information needed to format the display correctly.</p>
+<h3>Display Section</h3>
+<p>The display section is the core of the specification. For each function in the smart contract, it defines:</p>
+<ul>
+<li><strong>Intent:</strong> A human-readable description of what the function call does (e.g., "Send" for a transfer)</li>
+<li><strong>Interpolated Intent:</strong> A template string like "Send {value} to {to}" that wallets can use for a compact, one-line summary</li>
+<li><strong>Fields:</strong> Definitions for each parameter, specifying the label, format type (token amount, address name, percentage, date, etc.), and any additional parameters needed for formatting</li>
+</ul>
+<p>For example, a USDT transfer on Ethereum would be described as: intent "Send", with the value field formatted as a token amount (using USDT's 6 decimals) and the recipient field formatted as an address name (resolved via ENS or address book).</p>
+
+<h2>Why This Is a Game Changer</h2>
+<p>ERC-7730 solves several critical problems simultaneously:</p>
+<ul>
+<li><strong>Phishing resistance:</strong> Even if a malicious frontend tricks you into calling a function, your wallet will display the actual intent and parameters. If the display says "Approve spending of 10,000 USDT to 0xDeadBeef..." instead of "Claim airdrop," you can reject it.</li>
+<li><strong>Cross-wallet compatibility:</strong> One ERC-7730 file works with every wallet that supports the standard. DApp developers write it once; every hardware wallet, mobile wallet, and browser extension can use it.</li>
+<li><strong>EIP-712 support:</strong> The standard works not just for contract calls but also for EIP-712 typed data signing, covering off-chain messages, governance votes, and permit signatures.</li>
+<li><strong>Account Abstraction ready:</strong> ERC-7730 supports EIP-4337 User Operations, making it future-proof for smart contract wallets.</li>
+<li><strong>Encrypted value display:</strong> With FHE (Fully Homomorphic Encryption) gaining traction in confidential token standards, ERC-7730 can annotate encrypted fields with decryption context, enabling wallets to display plaintext values when appropriate.</li>
+</ul>
+
+<h2>For Developers: How to Implement ERC-7730</h2>
+<p>If you are a smart contract or dApp developer, you should start creating ERC-7730 files for your contracts. The process is straightforward:</p>
+<ol>
+<li><strong>Identify your contract's key functions:</strong> Focus on the functions users interact with most — transfers, approvals, staking, swaps, etc.</li>
+<li><strong>Define the context:</strong> Specify the chain IDs and contract addresses for all deployments.</li>
+<li><strong>Set metadata:</strong> Provide display names, token decimals, enumeration values, and other constants.</li>
+<li><strong>Write display formats:</strong> For each function, define the intent, field labels, and format types. Use the standard format types (tokenAmount, addressName, percentage, date, etc.) or define custom formats.</li>
+<li><strong>Validate against the schema:</strong> Use the official JSON schema to validate your file before distribution.</li>
+<li><strong>Host or register the file:</strong> Make the file available to wallets through your dApp, a registry, or the Clear Signing registry maintained by Ledger.</li>
+</ol>
+
+<h2>The Security Model</h2>
+<p>ERC-7730 files are not trustless — they are curated by developers and trusted by wallets. The security model relies on the context binding: a wallet only applies formatting from a file whose context matches the transaction being signed. This prevents a malicious ERC-7730 file from one contract being applied to a different contract.</p>
+<p>However, developers should be aware of registry poisoning risks. If an attacker can register a malicious ERC-7730 file for a contract, they could display misleading intent descriptions. Wallet implementations should curate their registry of ERC-7730 files carefully, preferring files from verified developers.</p>
+
+<h2>The Future of Transaction Security</h2>
+<p>ERC-7730 represents a fundamental shift in how Ethereum users verify transactions. Instead of trusting frontends and hoping they are not compromised, users will have clear, structured, human-readable transaction details displayed directly on their wallet screens. The standard is still in Draft status, but major wallet providers including Ledger are already implementing it.</p>
+<p>For developers, the message is clear: start preparing your ERC-7730 files now. As wallet adoption grows, dApps without clear signing support will offer a noticeably worse — and less secure — user experience. The era of blind signing is ending. ERC-7730 is how we end it.</p>`,
+    cta: {
+      title: 'Build Secure Ethereum Applications',
+      description: 'Explore Formatho's blockchain developer tools for the ERC-7730 era.',
+      link: '/',
+      buttonText: 'View Web3 Tools'
+    },
+    relatedTools: [
+      { name: 'Keccak-256 Hasher', description: 'Generate Ethereum-compatible hashes', link: '/tools/keccak256' },
+      { name: 'EVM Unit Converter', description: 'Convert between Wei, Gwei, and Ether', link: '/tools/evm-converter' },
+      { name: 'Address Checksum', description: 'Validate EIP-55 checksummed addresses', link: '/tools/address-checksum' }
+    ]
+  },
+
 // Sort by date descending
 blogPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
