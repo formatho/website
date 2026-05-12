@@ -906,7 +906,13 @@ export const routes = [
         path: 'tools/yaml-viewer',
         name: 'yaml-viewer',
         component: () => import(/* webpackPrefetch: true */ '../views/YamlViewerView.vue'),
-        meta: { title: 'YAML Viewer', description: 'Format and validate YAML documents.' }
+        meta: {
+          title: 'YAML Linter & Validator - Format, Validate, and Beautify YAML Online',
+          description:
+            'Free YAML linter and validator that formats, validates, and beautifies YAML documents instantly. Check YAML syntax errors, fix indentation issues, and format YAML files. 100% privacy-first - runs entirely in your browser with no server uploads.',
+          keywords:
+            'yaml lint, yaml validator, yaml linter online, yaml checker, yaml formatter, yaml beautifier, validate yaml, yaml syntax checker, yaml indentation fixer, online yaml linter, free yaml validator, yaml format, yaml viewer, yaml editor'
+        }
       },
       {
         path: 'tools/email-normalizer',

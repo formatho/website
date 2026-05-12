@@ -359,7 +359,7 @@ export const tools = [
       },
       {
         name: 'YAML Viewer',
-        description: 'Format and validate YAML documents.',
+        description: 'YAML linter and validator. Format, validate, and beautify YAML documents with real-time syntax checking.',
         route: '/tools/yaml-viewer',
         iconName: 'FileCode'
       },
