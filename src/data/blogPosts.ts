@@ -142,8 +142,8 @@ export const blogPosts: BlogPost[] = [
 <p>Formatho solves the QR utility crisis by fundamentally changing where the generation logic is executed. We have engineered a platform that brings the complex mathematical encoding and image rendering directly to your device.</p>
 <h3>Purely Static, Untracked QR Generation</h3>
 <p>When you load the Formatho QR tool, you are downloading a complete Progressive Web App (PWA) that functions independently of our servers.</p>
-<ul><li><strong>Memory-Safe Generation:</strong> Our client-side scripts use highly optimized libraries to generate the QR matrix entirely in your device's RAM.</li><li><strong>Native Image Rendering:</strong> The matrix is instantly rendered as an SVG or PNG image using your browser's local canvas APIs.</li><li><strong>Zero Network Traffic:</strong> Because the entire process happens on the client side, there is absolutely zero outbound network activity. No redirection servers, no tracking pixels, and no data harvesting.</li></ul>`,
-<img src="/images/blog/blog-09/mobile-scan.jpg" alt="Mobile phone scanning QR code showing secure client-side processing" style="width: 100%; border-radius: 8px; margin: 2rem 0;" />
+<ul><li><strong>Memory-Safe Generation:</strong> Our client-side scripts use highly optimized libraries to generate the QR matrix entirely in your device's RAM.</li><li><strong>Native Image Rendering:</strong> The matrix is instantly rendered as an SVG or PNG image using your browser's local canvas APIs.</li><li><strong>Zero Network Traffic:</strong> Because the entire process happens on the client side, there is absolutely zero outbound network activity. No redirection servers, no tracking pixels, and no data harvesting.</li></ul>
+<img src="/images/blog/blog-09/mobile-scan.jpg" alt="Mobile phone scanning QR code showing secure client-side processing" style="width: 100%; border-radius: 8px; margin: 2rem 0;" />`,
     cta: {
       title: 'Generate Private QR Codes',
       description: 'Create QR codes locally without tracking pixels. Your data stays yours.',
