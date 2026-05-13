@@ -2648,9 +2648,7 @@ class FormathoMemoryManager:
       { name: 'Diff Tool', description: 'Compare task state changes', link: '/tools/diff' },
       { name: 'Crontab Generator', description: 'Schedule agent task reviews', link: '/tools/crontab' }
     ]
-  }
-
-]
+  },
 
   {
     id: 53,
@@ -2721,7 +2719,7 @@ class FormathoMemoryManager:
 <p>For developers, the message is clear: start preparing your ERC-7730 files now. As wallet adoption grows, dApps without clear signing support will offer a noticeably worse — and less secure — user experience. The era of blind signing is ending. ERC-7730 is how we end it.</p>`,
     cta: {
       title: 'Build Secure Ethereum Applications',
-      description: 'Explore Formatho's blockchain developer tools for the ERC-7730 era.',
+      description: 'Explore Formatho\'s blockchain developer tools for the ERC-7730 era.',
       link: '/',
       buttonText: 'View Web3 Tools'
     },
@@ -2730,7 +2728,8 @@ class FormathoMemoryManager:
       { name: 'EVM Unit Converter', description: 'Convert between Wei, Gwei, and Ether', link: '/tools/evm-converter' },
       { name: 'Address Checksum', description: 'Validate EIP-55 checksummed addresses', link: '/tools/address-checksum' }
     ]
-  },
+  }
+]
 
 // Sort by date descending
 blogPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
