@@ -1,5 +1,6 @@
 import { writeFileSync } from 'fs'
 import { tools } from '../src/data/tools'
+import { blogPosts } from '../src/data/blogPosts'
 
 const BASE_URL = 'https://formatho.com'
 
@@ -12,6 +13,15 @@ function generateSitemap(): string {
     { url: '/beta', changefreq: 'monthly', priority: '0.7' },
     { url: '/beta-feedback', changefreq: 'monthly', priority: '0.5' },
     { url: '/about', changefreq: 'monthly', priority: '0.6' },
+    { url: '/compare', changefreq: 'monthly', priority: '0.7' },
+    { url: '/privacy', changefreq: 'yearly', priority: '0.5' },
+    { url: '/contact', changefreq: 'monthly', priority: '0.5' },
+    { url: '/markdown', changefreq: 'monthly', priority: '0.7' },
+    { url: '/agent-orchestrator', changefreq: 'weekly', priority: '0.9' },
+    { url: '/agent-orchestrator/dashboard', changefreq: 'monthly', priority: '0.8' },
+    { url: '/agent-todo', changefreq: 'weekly', priority: '0.9' },
+    { url: '/blogs', changefreq: 'weekly', priority: '0.8' },
+    { url: '/agents', changefreq: 'weekly', priority: '0.8' },
   ]
 
   const toolPages: Array<{ url: string; changefreq: string; priority: string }> = []
@@ -26,14 +36,21 @@ function generateSitemap(): string {
     }
   }
 
-  const allPages = [...staticPages, ...toolPages]
+  const blogPages = blogPosts.map((post) => ({
+    url: `/blogs/${post.slug}`,
+    lastmod: post.date,
+    changefreq: 'weekly',
+    priority: '0.8',
+  }))
+
+  const allPages = [...staticPages, ...toolPages, ...blogPages]
   const today = new Date().toISOString().split('T')[0]
 
   const urls = allPages
     .map(
       (page) => `  <url>
     <loc>${BASE_URL}${page.url}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${page.lastmod || today}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
   </url>`
