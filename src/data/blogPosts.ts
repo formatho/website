@@ -2718,10 +2718,10 @@ class FormathoMemoryManager:
 <p>ERC-7730 represents a fundamental shift in how Ethereum users verify transactions. Instead of trusting frontends and hoping they are not compromised, users will have clear, structured, human-readable transaction details displayed directly on their wallet screens. The standard is still in Draft status, but major wallet providers including Ledger are already implementing it.</p>
 <p>For developers, the message is clear: start preparing your ERC-7730 files now. As wallet adoption grows, dApps without clear signing support will offer a noticeably worse — and less secure — user experience. The era of blind signing is ending. ERC-7730 is how we end it.</p>`,
     cta: {
-      title: 'Build Secure Ethereum Applications',
-      description: 'Explore Formatho\'s blockchain developer tools for the ERC-7730 era.',
+      title: "Build Secure Ethereum Applications",
+      description: "Explore Formatho's blockchain developer tools for the ERC-7730 era.",
       link: '/',
-      buttonText: 'View Web3 Tools'
+      buttonText: "View Web3 Tools"
     },
     relatedTools: [
       { name: 'Keccak-256 Hasher', description: 'Generate Ethereum-compatible hashes', link: '/tools/keccak256' },
