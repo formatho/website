@@ -2728,6 +2728,139 @@ class FormathoMemoryManager:
       { name: 'EVM Unit Converter', description: 'Convert between Wei, Gwei, and Ether', link: '/tools/evm-converter' },
       { name: 'Address Checksum', description: 'Validate EIP-55 checksummed addresses', link: '/tools/address-checksum' }
     ]
+  },
+  {
+    id: 54,
+    title: 'EIP-7702: How Ethereum\'s Pectra Upgrade Finally Bridges EOAs and Smart Contracts',
+    excerpt: 'EIP-7702 is the most significant change to Ethereum accounts since the network launched. It lets regular wallets temporarily become smart contracts — enabling batching, sponsorship, and privilege de-escalation without migrating to a new address. Here is what every developer needs to know.',
+    date: '2026-05-18',
+    readTime: '10 min',
+    tags: ['Blockchain', 'Ethereum', 'EIP-7702', 'Account Abstraction', 'Smart Contracts', 'Pectra'],
+    slug: 'eip-7702-ethereum-pectra-eoa-smart-contract-upgrade',
+    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=225&fit=crop',
+    imageAlt: 'Ethereum EIP-7702 bridging EOAs and smart contracts in the Pectra upgrade',
+    content: `<p>On May 7, 2025, the Pectra upgrade activated on Ethereum mainnet, bringing the single largest batch of EIPs in the network's history. Buried among validator improvements and blob throughput increases was EIP-7702 — a proposal co-authored by Vitalik Buterin that quietly rewrites the rules of Ethereum accounts. It allows Externally Owned Accounts (EOAs) to set smart contract code on their address, permanently, without migrating to a new account.</p>
+
+<p>This is not incremental. This is the bridge between the EOA world and the smart contract wallet world that Ethereum has been trying to build for years. If you are a developer building on Ethereum, EIP-7702 will change how your users interact with your application.</p>
+
+<h2>The Problem: EOAs Are Stuck in 2015</h2>
+<p>Ethereum has two types of accounts. Smart contract accounts hold code and can execute arbitrary logic. Externally Owned Accounts (EOAs) are controlled by private keys and can only do one thing per transaction: send ETH, call a function, or deploy a contract. No batching. No sponsorship. No permissions. No recovery.</p>
+
+<p>This limitation has real consequences for every Ethereum user:</p>
+<ul>
+<li><strong>Batching:</strong> Want to approve USDT spending and then swap it on Uniswap? That is two separate transactions. You pay gas twice. You wait for confirmation twice. And if the first succeeds but the second fails, you are stuck with an approval you did not use.</li>
+<li><strong>Sponsorship:</strong> A new user with zero ETH cannot do anything on Ethereum. They cannot even receive their first tokens without someone paying gas for them. There is no way for Alice to pay for Bob's transaction natively.</li>
+<li><strong>Privilege de-escalation:</strong> Your private key controls everything. You cannot create a sub-key that only allows spending USDC up to $100 per day. You cannot give a session key that only interacts with one specific dApp. It is all or nothing.</li>
+</ul>
+
+<p>Smart contract wallets like those built on ERC-4337 solve all of these problems. But they require users to migrate to an entirely new address — losing their transaction history, token holdings, ENS names, and every approval they have ever made. Most users simply refuse.</p>
+
+<p>EIP-7702 eliminates this migration problem entirely.</p>
+
+<h2>How EIP-7702 Works</h2>
+<p>EIP-7702 introduces a new transaction type (type <code>0x04</code>) that carries an <strong>authorization list</strong> — a set of signed tuples that tell the protocol: "I, the owner of this EOA, want my account to execute the code at this address."</p>
+
+<p>Each authorization tuple contains:</p>
+<ul>
+<li><strong>chain_id:</strong> Which chain this delegation applies to (0 for all chains)</li>
+<li><strong>address:</strong> The address of the contract whose code you want to delegate to</li>
+<li><strong>nonce:</strong> The current nonce of the authorizing account</li>
+<li><strong>y_parity, r, s:</strong> A secp256k1 signature proving ownership</li>
+</ul>
+
+<p>When the transaction is processed, the protocol writes a <strong>delegation indicator</strong> (<code>0xef0100 || address</code>) to the EOA's code slot. From that point forward, every time the EOA is called — whether by a CALL, DELEGATECALL, STATICCALL, or as a transaction destination — the EVM follows the pointer and executes the delegated contract's code in the context of the EOA.</p>
+
+<p>The EOA keeps its address. It keeps its balance. It keeps its nonce. But now it also has code — code that can implement batching, sponsorship, permissions, and any other logic a smart contract wallet provides.</p>
+
+<h3>The Delegation Indicator</h3>
+<p>The delegation indicator uses the <code>0xef</code> prefix — a previously banned opcode reserved by EIP-3541. This is clever design: regular contracts cannot use <code>0xef</code> as their first byte, so there is no ambiguity between a normal contract and a delegated account. When the EVM encounters a delegation indicator, it knows to follow the pointer.</p>
+
+<p>Important detail: delegation indicators are persistent. Once set, the code stays on the account until explicitly changed or cleared (by delegating to the zero address). This was a deliberate design choice — persistent delegations create enough friction that users treat them as real wallet upgrades rather than disposable scripts, unifying the smart contract wallet and EOA improvement workstreams.</p>
+
+<h2>The Three Killer Features</h2>
+
+<h3>1. Transaction Batching</h3>
+<p>With EIP-7702, an EOA can delegate to a contract that accepts an array of operations and executes them atomically. Approve USDT spending and swap it in one transaction. Revoke all old approvals and set new ones in one transaction. Deposit into a vault and stake the receipt tokens in one transaction.</p>
+
+<p>This eliminates the "two-transaction dance" that plagues every DEX interaction today. Users save gas (one transaction instead of two), save time (one confirmation instead of two), and eliminate the risk of partial execution (if any step fails, the entire batch reverts).</p>
+
+<h3>2. Gas Sponsorship (Paymasters)</h3>
+<p>A dApp or protocol can pay gas on behalf of its users. A new user with zero ETH can interact with smart contracts because the protocol covers the gas cost. The sponsor can be paid in ERC-20 tokens, or simply absorb the cost as a user acquisition strategy.</p>
+
+<p>This is the unlock that onboarding has been waiting for. Today, every new Ethereum user needs to acquire ETH for gas before they can do anything. With sponsorship, a wallet can onboard a user with zero ETH and let them start transacting immediately.</p>
+
+<h3>3. Privilege De-escalation (Session Keys)</h3>
+<p>Users can sign sub-keys with limited permissions: spend up to $100 per day in USDC, interact only with Uniswap, or execute only specific function signatures. These session keys cannot drain the entire account — they are scoped to precisely defined operations.</p>
+
+<p>This has massive implications for security. Instead of connecting your full private key to every dApp, you authorize a session key that can only do what you explicitly permitted. If the dApp is compromised, the attacker gets access to a scoped key — not your entire wallet.</p>
+
+<h2>Security Considerations</h2>
+<p>EIP-7702 is powerful, but it demands caution. The code you delegate to has <strong>unrestricted access</strong> to your account. A malicious delegation can drain everything. This is why the EIP explicitly warns that wallets must not provide a generic interface for signing arbitrary authorizations — users should only delegate to well-known, audited implementations.</p>
+
+<h3>Key Security Properties</h3>
+<ul>
+<li><strong>Delegations are persistent but revocable:</strong> You can clear a delegation by authorizing the zero address. This means compromised delegations can be revoked, but you need to act fast.</li>
+<li><strong>No initcode:</strong> EIP-7702 does not run constructor code. The delegation is a simple pointer. Initialization happens via a regular call after the delegation is set. This eliminates an entire class of deployment attacks.</li>
+<li><strong>Template-based delegation:</strong> You delegate to an address, not arbitrary bytecode. This means you point to an existing, deployed contract — ideally one that has been audited and battle-tested.</li>
+<li><strong>Failed transactions do not roll back delegations:</strong> Even if the transaction execution fails, the delegation is already set. This prevents a class of griefing attacks where an attacker causes transaction failure to prevent a user from setting their delegation.</li>
+</ul>
+
+<h3>What Developers Must Do</h3>
+<p>Applications must never ask users to sign an EIP-7702 authorization directly. Instead, the delegation should happen through the wallet interface, with the wallet auditing the target code. If your dApp needs custom wallet functionality, build it on top of the delegated code using standardized module and extension systems — not by asking users to delegate to your custom contract.</p>
+
+<h2>Gas Costs</h2>
+<p>EIP-7702 adds gas costs proportional to the number of authorizations in the list:</p>
+<ul>
+<li><strong>Base cost per authorization:</strong> 12,500 gas</li>
+<li><strong>Additional cost for non-empty accounts:</strong> 25,000 gas per authorization</li>
+<li><strong>Cold account access during delegation resolution:</strong> +2,600 gas (EIP-2929)</li>
+</ul>
+
+<p>For a typical single-delegation transaction to a previously empty account, expect roughly 37,500 gas for the authorization processing on top of normal transaction costs. This is significantly cheaper than deploying a new smart contract wallet (which typically costs 200,000+ gas) and avoids the migration entirely.</p>
+
+<h2>EIP-7702 vs ERC-4337: Complementary, Not Competing</h2>
+<p>A common misconception is that EIP-7702 replaces ERC-4337 (Account Abstraction). It does not. They are complementary:</p>
+<ul>
+<li><strong>ERC-4337</strong> defines the UserOperation mempool, bundlers, and paymaster infrastructure — the "how" of account abstraction.</li>
+<li><strong>EIP-7702</strong> lets EOAs participate in that infrastructure without migrating to a new address — the "who" of account abstraction.</li>
+</ul>
+
+<p>An EOA with an EIP-7702 delegation can point to ERC-4337-compatible wallet code and immediately benefit from the entire ERC-4337 ecosystem: bundlers, paymasters, signature aggregators. The user keeps their existing address, keeps their existing assets, and gains all the capabilities of a smart contract wallet.</p>
+
+<p>EIP-7702 is also designed to be forward-compatible with RIP-7560 (native account abstraction), ensuring that the delegations set today will continue to work as Ethereum's account abstraction roadmap evolves.</p>
+
+<h2>Developer Guide: Building for EIP-7702</h2>
+<p>If you are building on Ethereum, here is what you should start doing today:</p>
+<ol>
+<li><strong>Update your smart contracts:</strong> Contracts that check <code>tx.origin</code> or make assumptions about EOAs not having code need to be updated. With EIP-7702, <code>tx.origin</code> can have delegation code. Use <code>msg.sender</code> for authorization checks.</li>
+<li><strong>Support EIP-7702 transactions in your SDK:</strong> If you build wallet SDKs or transaction builders, add support for the new type <code>0x04</code> transactions with authorization lists.</li>
+<li><strong>Build delegation-aware UIs:</strong> Your dApp should detect when a user's account has an active delegation and adjust the UI accordingly. Delegated accounts may support batching, sponsorship, and session keys — expose these capabilities.</li>
+<li><strong>Create audited delegation targets:</strong> If you are building a wallet implementation, create and audit the contract that users will delegate to. This is the code that runs with full access to their account — it must be bulletproof.</li>
+<li><strong>Test on testnets:</strong> Pectra is live on mainnet, but test your EIP-7702 flows thoroughly on testnets first. The interaction between delegation, batching, and your existing contract logic may have edge cases.</li>
+</ol>
+
+<h2>The Bigger Picture: Why EIP-7702 Matters</h2>
+<p>Ethereum's account model has been a bottleneck since 2015. Smart contract wallets have existed for years, but adoption has been blocked by the migration problem — users cannot abandon their existing addresses. EIP-7702 removes this barrier entirely. Every EOA on Ethereum can now opt in to smart contract wallet features without changing a single thing about their account.</p>
+
+<p>This is not just a technical upgrade. It is an adoption unlock:</p>
+<ul>
+<li><strong>For users:</strong> Batching, sponsorship, and session keys — immediately available on their existing address.</li>
+<li><strong>For dApps:</strong> Lower friction onboarding (gasless transactions) and better security (scoped permissions).</li>
+<li><strong>For the ecosystem:</strong> A unified path to account abstraction that bridges the EOA world and the smart contract wallet world without fragmentation.</li>
+</ul>
+
+<p>EIP-7702 is live on Ethereum mainnet right now. The question is not whether it will change Ethereum account interactions — it already has. The question is how quickly developers will build on top of it. If you are building on Ethereum, the time to start is now.</p>`,
+    cta: {
+      title: 'Build the Future of Ethereum Accounts',
+      description: 'Explore Formatho\'s blockchain developer tools for the EIP-7702 era — Keccak-256 hashing, address checksums, EVM unit conversion, and more.',
+      link: '/',
+      buttonText: 'View Web3 Tools'
+    },
+    relatedTools: [
+      { name: 'Keccak-256 Hasher', description: 'Generate Ethereum-compatible Keccak-256 hashes', link: '/tools/keccak256' },
+      { name: 'EVM Unit Converter', description: 'Convert between Wei, Gwei, and Ether', link: '/tools/evm-converter' },
+      { name: 'Address Checksum', description: 'Validate EIP-55 checksummed addresses', link: '/tools/address-checksum' }
+    ]
   }
 ]
 

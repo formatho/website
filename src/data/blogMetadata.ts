@@ -12,6 +12,17 @@ export interface BlogMetadata {
 
 export const blogMetadata: BlogMetadata[] = [
   {
+    id: 54,
+    title: 'EIP-7702: How Ethereum\'s Pectra Upgrade Finally Bridges EOAs and Smart Contracts',
+    excerpt: 'EIP-7702 is the most significant change to Ethereum accounts since the network launched. It lets regular wallets temporarily become smart contracts — enabling batching, sponsorship, and privilege de-escalation without migrating to a new address. Here is what every developer needs to know.',
+    date: '2026-05-18',
+    readTime: '10 min',
+    tags: ['Blockchain', 'Ethereum', 'EIP-7702', 'Account Abstraction', 'Smart Contracts', 'Pectra'],
+    slug: 'eip-7702-ethereum-pectra-eoa-smart-contract-upgrade',
+    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=225&fit=crop',
+    imageAlt: 'Ethereum EIP-7702 bridging EOAs and smart contracts in the Pectra upgrade'
+  },
+  {
     id: 53,
     title: 'ERC-7730: The Clear Signing Standard That Will Transform How You Verify Ethereum Transactions',
     excerpt: 'Blind signing is the silent killer of Ethereum security. ERC-7730 introduces a structured, human-readable format for transaction display that makes hardware wallet verification actually reliable. Here is why it matters for every developer building on Ethereum.',
