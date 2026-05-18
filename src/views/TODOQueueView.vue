@@ -76,10 +76,11 @@ const filteredTasks = computed(() => {
     let comparison = 0
     
     switch(sortBy.value) {
-      case 'priority':
+      case 'priority': {
         const priorityOrder: Record<string, number> = { critical: 0, high: 1, medium: 2, low: 3 }
         comparison = priorityOrder[a.priority] - priorityOrder[b.priority]
         break
+      }
       case 'dueDate':
         if (a.dueDate && b.dueDate) {
           comparison = new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()

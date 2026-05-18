@@ -81,10 +81,11 @@ const filteredMembers = computed(() => {
         return nameA.localeCompare(nameB)
       })
       break
-    case 'role':
+    case 'role': {
       const roleOrder: Role[] = ['owner', 'admin', 'member', 'viewer']
       result.sort((a, b) => roleOrder.indexOf(a.role) - roleOrder.indexOf(b.role))
       break
+    }
   }
 
   return result

@@ -98,13 +98,14 @@ const handleWebSocketMessage = (data: any) => {
     case 'activity_updated':
       activities.value = [data.payload, ...activities.value].slice(0, 50)
       break
-    case 'status_changed':
+    case 'status_changed': {
       const agentIndex = agents.value.findIndex(a => a.id === data.agentId)
       if (agentIndex !== -1) {
         agents.value[agentIndex].status = data.status as Agent['status']
         updateStats()
       }
       break
+    }
   }
 }
 

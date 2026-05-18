@@ -206,7 +206,7 @@ const compressionRatio = computed(() => {
           <div
             class="flex-1 bg-muted/20 relative m-2 border rounded-md overflow-hidden bg-checkerboard"
           >
-            <img :src="previewUrl" class="absolute inset-0 w-full h-full object-contain p-2" />
+            <img :src="previewUrl" alt="Image preview before compression" class="absolute inset-0 w-full h-full object-contain p-2" />
           </div>
         </Card>
         <Card class="flex flex-col overflow-hidden">
@@ -224,7 +224,7 @@ const compressionRatio = computed(() => {
             >
               <span class="text-sm font-medium animate-pulse">Processing...</span>
             </div>
-            <img :src="compressedUrl" class="absolute inset-0 w-full h-full object-contain p-2" />
+            <img :src="compressedUrl" alt="Compressed image preview" class="absolute inset-0 w-full h-full object-contain p-2" />
           </div>
         </Card>
       </div>

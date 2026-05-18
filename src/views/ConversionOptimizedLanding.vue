@@ -266,7 +266,7 @@ const faqs = [
 
         <!-- CTA After Features -->
         <div class="text-center mt-12">
-          <Button size="lg" class="bg-blue-600 hover:bg-blue-700 px-8" aria-label="Start building workflows"
+          <Button size="lg" class="bg-blue-600 hover:bg-blue-700 px-8" aria-label="Start building workflows">
             Start Using These Features →
           </Button>
         </div>

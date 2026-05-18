@@ -248,7 +248,7 @@ const popularTools = [
       <div class="space-y-12" data-v-8d4ed633="">
         <!-- Categories with tools -->
         <div
-          v-for="(category, categoryIndex) in filteredTools"
+          v-for="(category) in filteredTools"
           :key="category.category"
           class="space-y-6"
           data-v-8d4ed633=""

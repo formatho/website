@@ -117,14 +117,14 @@ const clearText = () => {
           <p class="text-sm text-muted-foreground">Analyze text with detailed statistics including reading time</p>
         </a>
         <a
-          href="/json-formatter"
+          href="/tools/json-viewer"
           class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
         >
           <h3 class="font-semibold mb-2">JSON Formatter</h3>
           <p class="text-sm text-muted-foreground">Format, validate, and minify JSON data</p>
         </a>
         <a
-          href="/text-transform"
+          href="/tools/case-converter"
           class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
         >
           <h3 class="font-semibold mb-2">Text Transform</h3>

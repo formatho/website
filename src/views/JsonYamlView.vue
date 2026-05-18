@@ -131,7 +131,7 @@ const fillSample = () => {
           <p class="text-sm text-muted-foreground">Convert JSON to CSV format</p>
         </a>
         <a
-          href="/json-xml"
+          href="/tools/xml-json"
           class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
         >
           <h3 class="font-semibold mb-2">JSON to XML</h3>
