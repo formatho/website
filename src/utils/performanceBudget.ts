@@ -11,7 +11,7 @@ interface PerformanceBudget {
   recommendation?: string
 }
 
-interface BundleAnalysis {
+interface _BundleAnalysis {
   name: string
   size: number
   gzipSize: number

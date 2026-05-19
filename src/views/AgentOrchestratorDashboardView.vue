@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { Heart, CpuIcon, ActivityIcon, ClockIcon, PlayCircleIcon, PauseCircleIcon, Square, TerminalIcon, LayoutDashboard } from 'lucide-vue-next'
+import { LayoutDashboard } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { InvitationModal, TeamMemberList } from '@/components/team'
 
@@ -145,7 +145,7 @@ const formatTime = (timestamp: string) => {
   return date.toLocaleTimeString()
 }
 
-const getAgentStatusIcon = (status: Agent['status']): string => {
+const _getAgentStatusIcon = (status: Agent['status']): string => {
   switch(status) {
     case 'running': return 'play-circle'
     case 'stopped': return 'stop'
@@ -258,7 +258,7 @@ const handleResendInvite = async (memberId: string) => {
   }
 }
 
-const handleMemberAdded = (member: any) => {
+const _handleMemberAdded = (member: any) => {
   console.log('New team member added:', member)
   // Refresh team members list
   fetchTeamMembers()

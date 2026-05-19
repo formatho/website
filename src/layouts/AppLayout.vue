@@ -2,7 +2,7 @@
 import { RouterView, useRoute } from 'vue-router'
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
-import LiveSiteAnalytics from '@/components/LiveSiteAnalytics.vue'
+// REMOVED: import LiveSiteAnalytics from '@/components/LiveSiteAnalytics.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 import { computed, watch, onMounted, onUnmounted, ref } from 'vue'
 import { tools } from '@/data/tools'

@@ -8,7 +8,7 @@ import { ripemd160 } from '@noble/hashes/ripemd160'
 import { keccak_256 } from '@noble/hashes/sha3'
 import { bech32 } from 'bech32'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import {  } from '@/components/ui/card'
 
 const mnemonic = ref('')
 const error = ref('')

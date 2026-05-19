@@ -22,7 +22,7 @@ useSEO({
   }
 })
 import { Input } from '@/components/ui/input'
-import { Search, Sparkles } from 'lucide-vue-next'
+import { Search } from 'lucide-vue-next'
 import * as LucideIcons from 'lucide-vue-next'
 import { tools } from '../data/tools'
 import TrustBadges from '@/components/TrustBadges.vue'
@@ -31,7 +31,7 @@ import FloatingCTA from '@/components/FloatingCTA.vue'
 import { useTwins } from '@/composables/useTwins'
 
 // Summon Halo for onboarding welcome
-const { summonTwin } = useTwins()
+const { summonTwin: _summonTwin } = useTwins()
 
 onMounted(() => {
   // Mascot welcome removed
@@ -78,7 +78,7 @@ const filteredTools = computed(() => {
   )
 })
 
-const popularTools = [
+const _popularTools = [
   { name: 'JSON ↔ YAML', path: '/json-yaml', tag: 'Convert', emoji: '🔄' },
   { name: 'Base64', path: '/base64', tag: 'Encode', emoji: '🔐' },
   { name: 'JWT Decoder', path: '/jwt', tag: 'Security', emoji: '🎫' },

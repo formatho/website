@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide, inject, ref, type Ref, type InjectionKey } from 'vue'
+import { provide, ref } from 'vue'
 
 interface TabsProps {
   defaultValue?: string

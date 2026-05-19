@@ -3,13 +3,13 @@
 // Displays the council handoff sequence in real-time
 // Version: 2.0.0 - Dark Theme Optimized for Sidebar
 
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { useAgentCouncil } from '@/store/useAgentCouncil'
 
 const { 
   messageQueue, 
   isRunning, 
-  currentPhase, 
+  _currentPhase, 
   generatedTaskData, 
   canGenerateTask,
   taskGenerated,

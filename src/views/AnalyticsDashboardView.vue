@@ -2,7 +2,7 @@
 import { ref, onMounted, computed } from 'vue'
 import Papa from 'papaparse'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {  } from '@/components/ui/card'
 
 // Time range selector
 const timeRange = ref<'7d' | '30d' | '90d'>('7d')

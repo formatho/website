@@ -73,7 +73,7 @@ const statusText = computed(() => {
   }
 })
 
-const canChangeRole = computed(() => {
+const _canChangeRole = computed(() => {
   return props.canManage && !props.isCurrentUser && props.member.role !== 'owner'
 })
 

@@ -1,20 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { 
-  PlusIcon, 
-  FilterIcon, 
-  SearchIcon,
-  ChevronUpIcon,
-  ChevronDownIcon,
-  CalendarIcon,
-  ClockIcon,
-  CheckCircle2Icon,
-  AlertCircleIcon,
-  CircleIcon,
-  PlayIcon,
-  Trash2Icon,
+import {  } from '@/components/ui/card'
+import { PlusIcon, FilterIcon, SearchIcon, CalendarIcon, ClockIcon, Trash2Icon,
   EditIcon
 } from 'lucide-vue-next'
 
@@ -122,7 +110,7 @@ const getPriorityColor = (priority: Task['priority']) => {
   }
 }
 
-const getStatusColor = (status: Task['status']) => {
+const _getStatusColor = (status: Task['status']) => {
   switch(status) {
     case 'pending': return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
     case 'in-progress': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'

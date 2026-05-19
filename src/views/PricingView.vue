@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { RouterLink } from 'vue-router'
+import {  } from 'vue-router'
 import { useStructuredData } from '@/composables/useStructuredData'
 
 const { addFAQStructuredData, addBreadcrumbStructuredData } = useStructuredData()

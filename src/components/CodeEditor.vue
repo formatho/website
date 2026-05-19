@@ -4,7 +4,7 @@
  * Lightweight textarea-based code editor for Formatho
  * Replaces Monaco Editor for reliability and performance
  */
-import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, watch, onMounted, nextTick } from 'vue'
 
 // ============================================================
 // Props

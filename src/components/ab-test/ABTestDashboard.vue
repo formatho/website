@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { abTestManager, landingPageTests, type ABTest, type ABTestVariant } from '@/utils/abTesting'
+import { abTestManager, type ABTest } from '@/utils/abTesting'
 
 const tests = ref<ABTest[]>([])
 const selectedTest = ref<ABTest | null>(null)

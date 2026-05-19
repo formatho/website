@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { X, Sparkles } from 'lucide-vue-next'
 
 const isVisible = ref(true)

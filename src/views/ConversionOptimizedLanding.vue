@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
-const showBeta = ref(false)
+const _showBeta = ref(false)
 const betaSpots = ref(8) // Out of 10
 
 const features = [

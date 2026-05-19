@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, nextTick, computed } from 'vue'
+import { ref, watch, onMounted, computed } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
@@ -201,7 +201,7 @@ const previewStyle = computed(() => ({
   transformOrigin: 'top center',
 }))
 
-const copySvgToClipboard = async () => {
+const _copySvgToClipboard = async () => {
   try {
     await navigator.clipboard.writeText(renderedSvg.value)
   } catch {

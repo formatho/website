@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import {  } from '@/components/ui/card'
 import { useTwins } from '@/composables/useTwins'
 import CodeEditor from '@/components/CodeEditor.vue'
 
@@ -69,7 +69,7 @@ const logs = ref<string[]>([])
 const taskComplete = ref(false)
 
 // Computed
-const currentStepData = computed(() => steps[currentStep.value])
+const _currentStepData = computed(() => steps[currentStep.value])
 const progressPercent = computed(() => ((currentStep.value + 1) / steps.length) * 100)
 
 // Navigation

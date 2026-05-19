@@ -9,7 +9,7 @@
  */
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import { Button } from '@/components/ui/button'
+import {  } from '@/components/ui/button'
 
 const showAllTools = ref(false)
 

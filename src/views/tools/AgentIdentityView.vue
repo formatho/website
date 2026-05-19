@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { Bot, Sparkles, Copy, RefreshCw, Shield } from 'lucide-vue-next'
+import { ref } from 'vue'
+import { Bot, Sparkles, Copy } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import {  } from '@/components/ui/card'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 
 // Large arrays for agent generation

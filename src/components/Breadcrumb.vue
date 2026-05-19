@@ -36,7 +36,7 @@ const segmentLabels: Record<string, string> = {
   colors: 'Colors'
 }
 
-function labelForSegment(segment: string, indexPath: string): string {
+function labelForSegment(segment: string, _indexPath: string): string {
   // Check known labels first
   if (segmentLabels[segment.toLowerCase()]) return segmentLabels[segment.toLowerCase()]
   // For tool slugs, use route meta title or pretty-case the slug

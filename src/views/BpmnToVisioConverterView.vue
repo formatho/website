@@ -157,7 +157,7 @@ const generateVisioXml = (data: { elements: BpmnElement[], sequenceFlows: Sequen
     })
   })
   
-  const now = new Date().toISOString()
+  const _now = new Date().toISOString()
   
   // Build shapes XML
   let shapesXml = ''

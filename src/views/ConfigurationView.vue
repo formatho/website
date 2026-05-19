@@ -271,7 +271,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Settings, AlertCircle, Bot, Wifi, Database as DatabaseIcon, RotateCcw as RefreshIcon, Save, CheckCircle } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import {  } from '@/components/ui/card'
 import CodeEditor from '@/components/CodeEditor.vue'
 
 const router = useRouter()
@@ -418,7 +418,7 @@ const testLLMConnection = async () => {
 }
 
 // Reset to defaults
-const resetToDefaults = () => {
+const _resetToDefaults = () => {
   config.value = {
     llm: {
       provider: 'openai',
@@ -448,11 +448,11 @@ const resetToDefaults = () => {
 }
 
 // Navigation handlers
-const handleGoHome = () => {
+const _handleGoHome = () => {
   router.push('/')
 }
 
-const handleGoDashboard = () => {
+const _handleGoDashboard = () => {
   router.push('/dashboard')
 }
 

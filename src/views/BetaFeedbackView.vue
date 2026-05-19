@@ -25,7 +25,7 @@ const files = ref<File[]>([])
 const isSubmitting = ref(false)
 const submitted = ref(false)
 const error = ref('')
-const showSteps = computed(() => feedbackType.value === 'bug')
+const _showSteps = computed(() => feedbackType.value === 'bug')
 
 // Auto-detect browser
 if (typeof navigator !== 'undefined') {

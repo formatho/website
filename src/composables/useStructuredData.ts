@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted } from 'vue'
+import { onUnmounted } from 'vue'
 
 interface BlogPostStructuredData {
   headline: string

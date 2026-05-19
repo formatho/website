@@ -1,5 +1,5 @@
 import { ref, computed, onMounted } from 'vue'
-import { abTestManager, landingPageTests } from '@/utils/abTesting'
+import { abTestManager } from '@/utils/abTesting'
 
 export function useABTesting(testId: string, userId?: string) {
   const variant = ref<any>(null)

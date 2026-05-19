@@ -32,7 +32,7 @@ interface AssetForecast {
 }
 
 const generatedAt = 'April 2, 2026'
-const modelName = 'Google TimesFM 2.5 (200M)'
+const _modelName = 'Google TimesFM 2.5 (200M)'
 
 const forecasts = ref<AssetForecast[]>([
   {

@@ -5,7 +5,7 @@ import { Github, ExternalLink } from 'lucide-vue-next'
 import { useAnalytics, type PlanType } from '@/composables/useAnalytics'
 
 const route = useRoute()
-const { trackContactFormSubmitted, trackPricingView } = useAnalytics()
+const { trackContactFormSubmitted, trackPricingView: _trackPricingView } = useAnalytics()
 
 // Get plan from query parameter if coming from pricing page
 const planFromQuery = computed(() => route.query.plan as string | undefined)

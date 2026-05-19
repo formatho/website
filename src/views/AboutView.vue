@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { Card, CardContent } from '@/components/ui/card'
+import {  } from '@/components/ui/card'
 import cloudIsAtRisk from '@/assets/cloud-is-at-risk.png'
 import { useSEO } from '@/composables/useSEO'
 

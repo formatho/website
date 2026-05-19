@@ -10,7 +10,7 @@ import AgentLog from '@/components/AgentLog.vue'
 
 // Agent Council Store Integration
 const council = useAgentCouncil()
-const { isRunning, triggerCouncil, stopCouncil, isAgentActive, messageQueue, currentPhase } = council
+const { isRunning, triggerCouncil, stopCouncil, isAgentActive, messageQueue: _messageQueue, currentPhase } = council
 
 // Command Center State
 const workflowPrompt = ref('')
@@ -30,7 +30,7 @@ interface Mascot {
   capabilities: string[]
 }
 
-const mascots: Mascot[] = [
+const _mascots: Mascot[] = [
   {
     name: 'Flowtho',
     role: 'Workflow Orchestrator',

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { Github, Heart, Shield, Zap } from 'lucide-vue-next'
+import { Heart, Shield, Zap } from 'lucide-vue-next'
 import EmailCapture from '@/components/EmailCapture.vue'
 
 const currentYear = new Date().getFullYear()

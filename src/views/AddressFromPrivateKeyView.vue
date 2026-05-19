@@ -10,7 +10,7 @@ import { Buffer } from 'buffer'
 import { bech32 } from 'bech32'
 import { Keypair } from '@solana/web3.js'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import {  } from '@/components/ui/card'
 
 // Polyfill Buffer
 if (typeof window !== 'undefined' && !window.Buffer) {

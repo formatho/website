@@ -35,11 +35,11 @@ watch(encodedText, (newValue) => {
   }
 })
 
-const handleRawInput = () => {
+const _handleRawInput = () => {
   isEncoding.value = true
 }
 
-const handleEncodedInput = () => {
+const _handleEncodedInput = () => {
   isEncoding.value = false
 }
 

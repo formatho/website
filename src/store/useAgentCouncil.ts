@@ -3,7 +3,7 @@
  * Manages council handoff simulation for the "Mission Control" experience
  * Version: 1.1.0 - Todo Sync Integration
  */
-import { reactive, computed, ref } from 'vue'
+import { reactive, computed } from 'vue'
 import { mascotMetadata, type MascotName } from '@/assets/mascot-assets'
 
 // ============================================================

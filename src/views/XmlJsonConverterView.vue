@@ -188,7 +188,7 @@ const copyOutput = async () => {
 }
 
 // Placeholder computed
-const inputPlaceholder = computed(() => {
+const _inputPlaceholder = computed(() => {
   return direction.value === 'xml-to-json'
     ? '<?xml version="1.0"?><root><item>Example</item></root>'
     : '{ "root": { "item": "Example" } }'

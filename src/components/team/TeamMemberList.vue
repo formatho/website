@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { SearchIcon, UsersIcon, Loader2Icon } from 'lucide-vue-next'
 import TeamMemberCard from './TeamMemberCard.vue'
 import { cn } from '@/lib/utils'

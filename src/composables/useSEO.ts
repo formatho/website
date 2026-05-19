@@ -67,7 +67,7 @@ export function useSEO(config?: SEOConfig) {
     return null
   }
 
-  function generateToolJsonLd(tool: any, category: any) {
+  function generateToolJsonLd(tool: any, _category: any) {
     return {
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
