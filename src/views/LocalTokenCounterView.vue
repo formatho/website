@@ -110,7 +110,7 @@ const clearText = () => {
       <h2 class="text-xl font-bold mb-4">Related Tools</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <a
-          href="/text-statistics"
+          href="/tools/text-statistics"
           class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
         >
           <h3 class="font-semibold mb-2">Text Statistics</h3>

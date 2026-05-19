@@ -245,7 +245,7 @@ const copySystemPrompt = async () => {
           <p class="text-sm text-muted-foreground">Manage and deploy AI agents locally</p>
         </a>
         <a
-          href="/text-statistics"
+          href="/tools/text-statistics"
           class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
         >
           <h3 class="font-semibold mb-2">Text Statistics</h3>

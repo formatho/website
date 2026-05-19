@@ -18,12 +18,12 @@ const distDir = path.join(__dirname, '..', 'dist')
 
 const pages = [
   {
-    path: 'about/index.html',
+    path: 'about.html',
     schema: {
       "@context": "https://schema.org",
       "@type": "AboutPage",
       "name": "About Formatho",
-      "url": "https://formatho.com/tools/about",
+      "url": "https://formatho.com/about",
       "description": "Learn about Formatho - our mission to build privacy-first developer tools and AI agent orchestration solutions.",
       "publisher": {
         "@type": "Organization",
@@ -36,36 +36,36 @@ const pages = [
     breadcrumbs: ["Home", "About"]
   },
   {
-    path: 'contact/index.html',
+    path: 'contact.html',
     schema: {
       "@context": "https://schema.org",
       "@type": "ContactPage",
       "name": "Contact Formatho",
-      "url": "https://formatho.com/tools/contact",
+      "url": "https://formatho.com/contact",
       "description": "Get in touch with the Formatho team for support, partnerships, or feedback.",
       "publisher": { "@type": "Organization", "name": "Formatho" }
     },
     breadcrumbs: ["Home", "Contact"]
   },
   {
-    path: 'pricing/index.html',
+    path: 'pricing.html',
     schema: {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Pricing - Formatho",
-      "url": "https://formatho.com/tools/pricing",
+      "url": "https://formatho.com/pricing",
       "description": "Formatho pricing plans. Free tools and Pro plans starting at $29/month for AI agent orchestration.",
       "publisher": { "@type": "Organization", "name": "Formatho" }
     },
     breadcrumbs: ["Home", "Pricing"]
   },
   {
-    path: 'agent-todo/index.html',
+    path: 'agent-todo.html',
     schema: {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Agent Todo - AI Task Management",
-      "url": "https://formatho.com/tools/agent-todo",
+      "url": "https://formatho.com/agent-todo",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Any",
       "description": "AI-powered task management for agent orchestration. Assign, track, and automate tasks across AI agents.",
@@ -75,12 +75,12 @@ const pages = [
     breadcrumbs: ["Home", "Agent Todo"]
   },
   {
-    path: 'agent-orchestrator/index.html',
+    path: 'agent-orchestrator.html',
     schema: {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Agent Orchestrator - AI Agent Management",
-      "url": "https://formatho.com/tools/agent-orchestrator",
+      "url": "https://formatho.com/agent-orchestrator",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Any",
       "description": "Enterprise-grade AI agent management platform. Orchestrate, monitor, and scale AI agent workflows for teams.",
@@ -90,12 +90,12 @@ const pages = [
     breadcrumbs: ["Home", "Agent Orchestrator"]
   },
   {
-    path: 'compare/index.html',
+    path: 'compare.html',
     schema: {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Agent-Todo vs Competitors",
-      "url": "https://formatho.com/tools/compare",
+      "url": "https://formatho.com/compare",
       "description": "Compare Agent-Todo with Zapier, n8n, and Make. Privacy-first, developer-friendly AI agent task management.",
       "publisher": { "@type": "Organization", "name": "Formatho" }
     },

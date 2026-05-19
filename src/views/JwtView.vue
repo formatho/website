@@ -110,28 +110,28 @@ const fillSample = () => {
       <h2 class="text-xl font-bold mb-4">Related Tools</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <a
-          href="/base64"
+          href="/tools/base64"
           class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
         >
           <h3 class="font-semibold mb-2">Base64 Encoder/Decoder</h3>
           <p class="text-sm text-muted-foreground">Encode and decode Base64 strings and files</p>
         </a>
         <a
-          href="/hash-text"
+          href="/tools/hash-text"
           class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
         >
           <h3 class="font-semibold mb-2">Hash Generator</h3>
           <p class="text-sm text-muted-foreground">Generate MD5, SHA-1, SHA-256, SHA-512 hashes</p>
         </a>
         <a
-          href="/token-generator"
+          href="/tools/token-generator"
           class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
         >
           <h3 class="font-semibold mb-2">Token Generator</h3>
           <p class="text-sm text-muted-foreground">Generate secure random tokens</p>
         </a>
         <a
-          href="/encryption"
+          href="/tools/encryption"
           class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
         >
           <h3 class="font-semibold mb-2">Text Encryption</h3>

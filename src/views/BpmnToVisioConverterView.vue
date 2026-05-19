@@ -575,21 +575,21 @@ const reset = () => {
       <h2 class="text-xl font-bold mb-4">Related Tools</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <a
-          href="/bpmn"
+          href="/tools/bpmn"
           class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
         >
           <h3 class="font-semibold mb-2">BPMN Viewer</h3>
           <p class="text-sm text-muted-foreground">View and export BPMN diagrams as PDF</p>
         </a>
         <a
-          href="/xml-json"
+          href="/tools/xml-json"
           class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
         >
           <h3 class="font-semibold mb-2">XML to JSON Converter</h3>
           <p class="text-sm text-muted-foreground">Convert XML documents to JSON format</p>
         </a>
         <a
-          href="/xml-formatter"
+          href="/tools/xml-formatter"
           class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
         >
           <h3 class="font-semibold mb-2">XML Formatter</h3>

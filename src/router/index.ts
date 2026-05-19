@@ -123,6 +123,17 @@ export const routes = [
         }
       },
       {
+        path: 'terms',
+        name: 'terms',
+        component: () => import(/* webpackPrefetch: true */ '../views/TermsOfServiceView.vue'),
+        meta: {
+          title: 'Terms of Service - Formatho',
+          description:
+            'Terms of service for Formatho developer tools and AI agent platform.',
+          keywords: 'terms of service, legal, usage terms'
+        }
+      },
+      {
         path: 'contact',
         name: 'contact',
         component: () => import(/* webpackPrefetch: true */ '../views/ContactView.vue'),
