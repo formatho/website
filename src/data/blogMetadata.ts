@@ -12,6 +12,17 @@ export interface BlogMetadata {
 
 export const blogMetadata: BlogMetadata[] = [
   {
+    id: 46,
+    title: 'CLARITY Act Victory: Regulatory Clarity for $3T Crypto Market',
+    excerpt: 'The cryptocurrency industry just achieved a monumental legislative breakthrough that could reshape the future of digital assets in the United States.',
+    date: '2026-05-20',
+    readTime: '8 min',
+    tags: ['Crypto', 'Legislation', 'Regulation', 'Developers', 'Blockchain'],
+    slug: 'clarity-act-victory-regulatory-clarity-3t-crypto-market',
+    image: '/images/blog/blog-38/blockchain-regulation.jpg',
+    imageAlt: 'Blockchain technology and regulatory framework for cryptocurrency'
+  },
+  {
     id: 54,
     title: 'EIP-7702: How Ethereum\'s Pectra Upgrade Finally Bridges EOAs and Smart Contracts',
     excerpt: 'EIP-7702 is the most significant change to Ethereum accounts since the network launched. It lets regular wallets temporarily become smart contracts — enabling batching, sponsorship, and privilege de-escalation without migrating to a new address. Here is what every developer needs to know.',
