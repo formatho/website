@@ -5,7 +5,7 @@ import { useSEO } from '@/composables/useSEO'
 import { useEmailCapture } from '@/composables/useEmailCapture'
 
 useSEO({
-  title: 'Get Verified — RWA Verification Engine | Formatho',
+  title: 'Get Verified - RWA Verification Engine | Formatho',
   description:
     'The new standard for Real World Asset verification. Privacy-first, trustless verification for RWA tokenization. Coming soon.',
   keywords: ['RWA verification', 'real world assets', 'tokenization', 'privacy-first', 'blockchain verification', 'get verified'],
@@ -24,7 +24,7 @@ const isSequenceComplete = ref(false)
 const revealStrings = [
   'Right now, we\'re building the bridge between the physical and the programmable...',
   'We\'re building a way to answer: Does the asset exist, and who actually owns it?',
-  'We\'re building systems to verify that a registry document exists in reality—and matches the metadata perfectly.',
+  'We\'re building systems to verify that a registry document exists in reality, and matches the metadata perfectly.',
   'We\'re building a way to answer: Is the code secure and compliant?',
   'We\'re building automated checks to ensure your smart contract code matches known, bulletproof secure standards.',
   'We\'re building a way to answer: Does the token match reality?',
@@ -116,7 +116,7 @@ onUnmounted(() => {
 <template>
   <div class="min-h-screen bg-background">
     <!-- ============================================ -->
-    <!-- 1. HERO SECTION — THE HOOK                   -->
+    <!-- 1. HERO SECTION - THE HOOK                   -->
     <!-- ============================================ -->
     <section class="relative min-h-[85vh] flex flex-col items-center justify-center px-6 overflow-hidden">
       <!-- Ambient background glow -->
@@ -169,7 +169,7 @@ onUnmounted(() => {
     </section>
 
     <!-- ============================================ -->
-    <!-- 2. SEQUENTIAL REVEAL — THE CORE TEASERS       -->
+    <!-- 2. SEQUENTIAL REVEAL - THE CORE TEASERS       -->
     <!-- ============================================ -->
     <section class="relative py-24 md:py-32 px-6">
       <div class="max-w-3xl mx-auto">
@@ -249,10 +249,10 @@ onUnmounted(() => {
 
         <div class="max-w-2xl">
           <p class="text-base md:text-lg text-muted-foreground leading-relaxed mb-6">
-            Our verification engine is built on a fundamental principle: sensitive information should never leave your control. We construct cryptographic proofs of validity — confirming identity, ownership, and compliance — without ever exposing the underlying data.
+            Our verification engine is built on a fundamental principle: sensitive information should never leave your control. We construct cryptographic proofs of validity, confirming identity, ownership, and compliance, without ever exposing the underlying data.
           </p>
           <p class="text-base md:text-lg text-muted-foreground leading-relaxed mb-10">
-            No centralized databases. No third-party custodians. No trust assumptions. Just math, verified on-chain, readable by anyone who needs to know — and invisible to everyone who doesn't.
+            No centralized databases. No third-party custodians. No trust assumptions. Just math, verified on-chain, readable by anyone who needs to know, and invisible to everyone who doesn't.
           </p>
         </div>
 
@@ -278,7 +278,7 @@ onUnmounted(() => {
     </section>
 
     <!-- ============================================ -->
-    <!-- 4. CALL TO ACTION — THE WAITLIST              -->
+    <!-- 4. CALL TO ACTION - THE WAITLIST              -->
     <!-- ============================================ -->
     <section id="cta-section" class="py-24 md:py-32 px-6">
       <div
@@ -299,7 +299,7 @@ onUnmounted(() => {
         </h2>
 
         <p class="text-sm text-muted-foreground mb-8">
-          Join the inner circle. Be the first to know when we launch — and shape how verification works for RWA.
+          Join the inner circle. Be the first to know when we launch, and shape how verification works for RWA.
         </p>
 
         <!-- Waitlist form -->
