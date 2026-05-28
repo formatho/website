@@ -15,6 +15,39 @@ useSEO({
 const { email, isValidEmail, submitEmail, isLoading, error, success } = useEmailCapture()
 const source = ref<'get-verified'>('get-verified' as any)
 
+// CTA form fields
+const fullName = ref('')
+const companyName = ref('')
+const lookingFor = ref('')
+const formError = ref('')
+const formSubmitting = ref(false)
+const formSuccess = ref(false)
+
+const isFormValid = () => {
+  return fullName.value.trim() && companyName.value.trim() && email.value.trim() && lookingFor.value.trim() && isValidEmail.value
+}
+
+const handleFormSubmit = async () => {
+  if (!isFormValid()) {
+    formError.value = 'All fields are required.'
+    return
+  }
+  formError.value = ''
+  formSubmitting.value = true
+  try {
+    await submitEmail(email.value, source.value)
+    if (error.value) {
+      formError.value = error.value
+    } else {
+      formSuccess.value = true
+    }
+  } catch {
+    formError.value = 'Something went wrong. Please try again.'
+  } finally {
+    formSubmitting.value = false
+  }
+}
+
 // Hero text stagger animation
 const heroLines = [
   { text: 'Reality', visible: false },
@@ -343,7 +376,7 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <!-- 4. CTA - WAITLIST -->
+    <!-- 4. CTA - APPLICATION FORM -->
     <section id="cta-section" class="relative z-10 py-32 md:py-40 px-6">
       <div
         class="max-w-xl mx-auto text-center transition-all duration-1000 ease-out"
@@ -360,37 +393,63 @@ onUnmounted(() => {
           <span class="gradient-text">verification engine.</span>
         </h2>
 
-        <p class="text-sm text-muted-foreground mb-10 leading-relaxed">
+        <p class="text-sm text-muted-foreground mb-12 leading-relaxed">
           Join the inner circle. Be the first to know when we launch, and shape how verification works for RWA.
         </p>
 
-        <div v-if="!success" class="max-w-md mx-auto mb-6">
-          <div class="flex flex-col sm:flex-row gap-0 border border-foreground/20 rounded-xl overflow-hidden focus-within:border-foreground/50 transition-colors">
-            <input
-              v-model="email"
-              type="email"
-              placeholder="your@email.com"
-              class="flex-1 px-5 py-4 bg-transparent text-sm font-mono focus:outline-none placeholder:text-muted-foreground/30"
-              @keyup.enter="handleSubmit"
-            />
-            <button
-              @click="handleSubmit"
-              :disabled="!isValidEmail || isLoading"
-              class="px-6 py-4 bg-foreground text-background text-[11px] font-bold tracking-[2px] uppercase hover:opacity-90 transition-opacity disabled:opacity-20 disabled:cursor-not-allowed whitespace-nowrap sm:border-l border-foreground/20"
-            >
-              {{ isLoading ? 'Joining...' : 'Join Waitlist' }}
-            </button>
+        <!-- Application form -->
+        <div v-if="!formSuccess" class="max-w-md mx-auto text-left">
+          <div class="space-y-4 mb-6">
+            <div class="border border-foreground/20 rounded-xl overflow-hidden focus-within:border-foreground/50 transition-colors">
+              <input
+                v-model="fullName"
+                type="text"
+                placeholder="Full Name *"
+                required
+                class="w-full px-5 py-4 bg-transparent text-sm font-mono focus:outline-none placeholder:text-muted-foreground/30 border-b border-foreground/10"
+              />
+              <input
+                v-model="companyName"
+                type="text"
+                placeholder="Company Name *"
+                required
+                class="w-full px-5 py-4 bg-transparent text-sm font-mono focus:outline-none placeholder:text-muted-foreground/30 border-b border-foreground/10"
+              />
+              <input
+                v-model="email"
+                type="email"
+                placeholder="Email Address *"
+                required
+                class="w-full px-5 py-4 bg-transparent text-sm font-mono focus:outline-none placeholder:text-muted-foreground/30 border-b border-foreground/10"
+              />
+              <textarea
+                v-model="lookingFor"
+                placeholder="What are you looking for? *"
+                required
+                rows="3"
+                class="w-full px-5 py-4 bg-transparent text-sm font-mono focus:outline-none placeholder:text-muted-foreground/30 resize-none"
+              ></textarea>
+            </div>
           </div>
+
+          <button
+            @click="handleFormSubmit"
+            :disabled="!isFormValid() || formSubmitting"
+            class="w-full px-6 py-4 bg-foreground text-background text-[11px] font-bold tracking-[2px] uppercase hover:opacity-90 transition-opacity disabled:opacity-20 disabled:cursor-not-allowed rounded-xl"
+          >
+            {{ formSubmitting ? 'Submitting...' : 'Submit' }}
+          </button>
         </div>
 
-        <div v-else class="mb-6">
+        <!-- Success state -->
+        <div v-else class="max-w-md mx-auto">
           <div class="inline-flex items-center gap-3 border border-foreground/30 rounded-full px-6 py-3">
             <span class="text-sm">&#x2713;</span>
             <span class="text-sm font-mono">You're on the list. We'll be in touch.</span>
           </div>
         </div>
 
-        <p v-if="error" class="text-xs text-red-500/70 font-mono">{{ error }}</p>
+        <p v-if="formError" class="text-xs text-red-500/70 font-mono mt-4">{{ formError }}</p>
 
         <p class="text-[9px] font-mono text-muted-foreground/25 tracking-[2px] uppercase mt-10">
           No spam. We respect your inbox like we respect your data.
