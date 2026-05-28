@@ -2983,7 +2983,8 @@ class FormathoMemoryManager:
 <p>These sectors are now outperforming Bitcoin and several traditional blue-chip crypto assets, signaling a broader shift in how investors evaluate value in digital markets.</p>
 <p>The next crypto cycle may not be driven by speculation alone.</p>
 <p>It may be driven by utility, infrastructure, and real-world adoption.</p>
-<img src="/images/blog/blog-12/header-image.jpg" alt="Crypto Market Evolution Chart showing RWA, AI, and privacy tokens outperforming Bitcoin in 2026" style="width: 100%; border-radius: 8px; margin: 2rem 0;" />
+<img src="/images/blog/blog-12/financial-chart.png" alt="Financial chart: RWA, AI, and privacy tokens outperforming Bitcoin" style="width: 100%; border-radius: 8px; margin: 2rem 0;" />
+<p class="text-sm text-center text-muted-foreground mt-2">Financial chart: RWA, AI, and privacy tokens outperforming Bitcoin</p>
 <h2>Investors Are Moving Beyond Bitcoin and Ethereum</h2>
 <p>Institutional demand for Bitcoin and Ethereum has started cooling.</p>
 <p>Last week alone:</p>
