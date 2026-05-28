@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, reactive } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useSEO } from '@/composables/useSEO'
 import { useEmailCapture } from '@/composables/useEmailCapture'
@@ -14,6 +14,13 @@ useSEO({
 
 const { email, isValidEmail, submitEmail, isLoading, error, success } = useEmailCapture()
 const source = ref<'get-verified'>('get-verified' as any)
+
+// Hero text stagger animation
+const heroLines = [
+  { text: 'Reality', visible: false },
+  { text: 'is about to', visible: false },
+  { text: 'get on-chain.', visible: false }
+]
 
 // Sequential reveal state
 const activeRevealIndex = ref(-1)
@@ -32,6 +39,19 @@ const revealStrings = [
   'We\'re building the new standard for RWA trust.'
 ]
 
+// Scroll-driven section visibility
+const sectionVisibility = reactive<Record<string, boolean>>({
+  hero: false,
+  reveal: false,
+  privacy: false,
+  pillars: false,
+  cta: false
+})
+
+// Floating shapes parallax offset
+const scrollY = ref(0)
+const mousePos = reactive({ x: 0, y: 0 })
+
 let sequenceTimer: ReturnType<typeof setTimeout> | null = null
 
 const typeText = (text: string, index: number, charIndex: number = 0) => {
@@ -40,11 +60,10 @@ const typeText = (text: string, index: number, charIndex: number = 0) => {
   if (charIndex <= text.length) {
     displayedText.value = text.slice(0, charIndex)
     revealPhase.value = 'typing'
-    sequenceTimer = setTimeout(() => typeText(text, index, charIndex + 1), 18)
+    sequenceTimer = setTimeout(() => typeText(text, index, charIndex + 1), 22)
   } else {
     revealPhase.value = 'visible'
-    // Hold for a beat, then fade and move to next
-    const holdTime = index === revealStrings.length - 1 ? 3000 : 2200
+    const holdTime = index === revealStrings.length - 1 ? 3000 : 2400
     sequenceTimer = setTimeout(() => {
       if (index !== activeRevealIndex.value) return
       revealPhase.value = 'fading'
@@ -55,12 +74,11 @@ const typeText = (text: string, index: number, charIndex: number = 0) => {
           displayedText.value = text
           return
         }
-        // Move to next string
         activeRevealIndex.value++
         displayedText.value = ''
         revealPhase.value = 'typing'
         typeText(revealStrings[activeRevealIndex.value], activeRevealIndex.value)
-      }, 600)
+      }, 500)
     }, holdTime)
   }
 }
@@ -72,22 +90,9 @@ const startSequence = () => {
   typeText(revealStrings[0], 0)
 }
 
-// Privacy section visibility
-const privacyVisible = ref(false)
-const ctaVisible = ref(false)
-
-const handleScroll = () => {
-  const privacyEl = document.getElementById('privacy-section')
-  const ctaEl = document.getElementById('cta-section')
-
-  if (privacyEl) {
-    const rect = privacyEl.getBoundingClientRect()
-    privacyVisible.value = rect.top < window.innerHeight * 0.85
-  }
-  if (ctaEl) {
-    const rect = ctaEl.getBoundingClientRect()
-    ctaVisible.value = rect.top < window.innerHeight * 0.85
-  }
+const handleRestart = () => {
+  isSequenceComplete.value = false
+  startSequence()
 }
 
 const handleSubmit = async () => {
@@ -95,127 +100,176 @@ const handleSubmit = async () => {
   await submitEmail(email.value, source.value)
 }
 
-const handleRestart = () => {
-  isSequenceComplete.value = false
-  startSequence()
+const handleScroll = () => {
+  scrollY.value = window.scrollY
+
+  const sections = ['hero', 'reveal', 'privacy', 'pillars', 'cta']
+  sections.forEach(id => {
+    const el = document.getElementById(`${id}-section`)
+    if (el) {
+      const rect = el.getBoundingClientRect()
+      sectionVisibility[id] = rect.top < window.innerHeight * 0.82
+    }
+  })
+}
+
+const handleMouseMove = (e: MouseEvent) => {
+  mousePos.x = (e.clientX / window.innerWidth - 0.5) * 2
+  mousePos.y = (e.clientY / window.innerHeight - 0.5) * 2
 }
 
 onMounted(() => {
-  // Small delay so the page renders first
-  setTimeout(startSequence, 800)
+  heroLines.forEach((_, i) => {
+    setTimeout(() => {
+      heroLines[i].visible = true
+    }, 300 + i * 200)
+  })
+
+  setTimeout(startSequence, 1400)
+
   window.addEventListener('scroll', handleScroll, { passive: true })
+  window.addEventListener('mousemove', handleMouseMove, { passive: true })
   handleScroll()
 })
 
 onUnmounted(() => {
   if (sequenceTimer) clearTimeout(sequenceTimer)
   window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('mousemove', handleMouseMove)
 })
 </script>
 
 <template>
-  <div class="min-h-screen bg-background">
-    <!-- ============================================ -->
-    <!-- 1. HERO SECTION - THE HOOK                   -->
-    <!-- ============================================ -->
-    <section class="relative min-h-[85vh] flex flex-col items-center justify-center px-6 overflow-hidden">
-      <!-- Ambient background glow -->
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-foreground/5 rounded-full blur-[120px]"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-foreground/3 rounded-full blur-[100px]"></div>
+  <div class="get-verified-page min-h-screen bg-background overflow-hidden">
+
+    <!-- Floating geometric shapes (Bullo-style) -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+      <div
+        class="floating-shape shape-ring-1 absolute -top-20 -right-20 w-[500px] h-[500px] border border-foreground/8 rounded-full"
+        :style="{ transform: `translate(${mousePos.x * -15}px, ${mousePos.y * -15 + scrollY * 0.05}px)` }"
+      ></div>
+      <div
+        class="floating-shape shape-dots absolute top-1/3 -left-10 w-[200px] h-[200px]"
+        :style="{ transform: `translate(${mousePos.x * 10}px, ${mousePos.y * 10 + scrollY * -0.08}px)` }"
+      >
+        <div class="absolute top-0 left-0 w-2 h-2 bg-foreground/10 rounded-full"></div>
+        <div class="absolute top-8 left-12 w-1.5 h-1.5 bg-foreground/8 rounded-full"></div>
+        <div class="absolute top-4 left-6 w-3 h-3 border border-foreground/10 rounded-full"></div>
+        <div class="absolute top-16 left-4 w-1 h-1 bg-foreground/15 rounded-full"></div>
+        <div class="absolute top-12 left-16 w-2 h-2 border border-foreground/6 rounded-full"></div>
+      </div>
+      <div
+        class="floating-shape shape-ring-2 absolute -bottom-40 -left-40 w-[400px] h-[400px] border border-foreground/6 rounded-full"
+        :style="{ transform: `translate(${mousePos.x * 8}px, ${mousePos.y * 8 + scrollY * -0.03}px)` }"
+      ></div>
+      <div
+        class="floating-shape shape-cross absolute top-2/3 right-[15%] opacity-[0.06]"
+        :style="{ transform: `translate(${mousePos.x * -12}px, ${mousePos.y * -12}px) rotate(45deg)` }"
+      >
+        <div class="w-16 h-px bg-foreground"></div>
+        <div class="w-px h-16 bg-foreground absolute top-0 left-1/2 -translate-x-1/2"></div>
+      </div>
+      <div
+        class="floating-shape shape-grid absolute bottom-[10%] right-[5%] opacity-[0.04]"
+        :style="{ transform: `translate(${mousePos.x * -8}px, ${mousePos.y * -8 + scrollY * 0.02}px)` }"
+      >
+        <div class="grid grid-cols-4 gap-4">
+          <div v-for="n in 16" :key="n" class="w-1 h-1 bg-foreground rounded-full"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. HERO SECTION -->
+    <section id="hero-section" class="relative z-10 min-h-screen flex flex-col items-center justify-center px-6">
+      <div
+        class="fixed top-20 left-1/2 -translate-x-1/2 z-50 inline-flex items-center gap-3 border border-foreground/20 rounded-full px-5 py-2 bg-background/80 backdrop-blur-sm"
+        data-aos="fade-down"
+      >
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-foreground/40"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-foreground"></span>
+        </span>
+        <span class="text-[10px] font-mono font-bold tracking-[3px] uppercase">Building</span>
       </div>
 
-      <!-- Top badge -->
-      <div class="inline-flex items-center gap-2 border border-foreground rounded-full px-4 py-2 mb-8" data-aos="fade-down">
-        <span class="inline-block w-1.5 h-1.5 rounded-full bg-foreground animate-pulse"></span>
-        <span class="text-[11px] font-bold tracking-[2px] uppercase">Under Development</span>
+      <div class="text-center max-w-5xl">
+        <h1 class="text-[clamp(2.5rem,8vw,7rem)] font-black tracking-tighter leading-[0.95] mb-8">
+          <span
+            v-for="(line, i) in heroLines"
+            :key="i"
+            class="hero-line block transition-all duration-700 ease-out"
+            :class="line.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
+          >
+            <span v-if="i === 2" class="gradient-text">{{ line.text }}</span>
+            <span v-else>{{ line.text }}</span>
+          </span>
+        </h1>
+
+        <p
+          class="text-base md:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed transition-all duration-700"
+          :class="heroLines[2]?.visible ? 'opacity-100 translate-y-0 delay-500' : 'opacity-0 translate-y-4'"
+        >
+          The ultimate verification standard for Real World Asset tokenization is loading.
+        </p>
       </div>
 
-      <!-- Headline -->
-      <h1
-        class="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight text-center max-w-4xl leading-[1.1] mb-6"
-        data-aos="fade-up"
-        data-aos-delay="100"
+      <div
+        class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 transition-opacity duration-1000"
+        :class="heroLines[2]?.visible ? 'opacity-40' : 'opacity-0'"
       >
-        Reality is about to get
-        <br class="hidden md:block" />
-        <span class="gradient-text">on-chain.</span>
-      </h1>
-
-      <!-- Sub-headline -->
-      <p
-        class="text-lg md:text-xl text-muted-foreground max-w-2xl text-center leading-relaxed mb-4"
-        data-aos="fade-up"
-        data-aos-delay="200"
-      >
-        The ultimate verification standard for Real World Asset tokenization is loading.
-      </p>
-
-      <p
-        class="text-sm font-mono text-muted-foreground/60 tracking-wider uppercase"
-        data-aos="fade-up"
-        data-aos-delay="300"
-      >
-        Bridging physical truth with on-chain data
-      </p>
-
-      <!-- Scroll hint -->
-      <div class="absolute bottom-8 flex flex-col items-center gap-2 text-muted-foreground/40 animate-bounce">
-        <span class="text-[10px] font-mono tracking-[3px] uppercase">Scroll</span>
-        <svg width="16" height="24" viewBox="0 0 16 24" fill="none" class="text-foreground/30">
-          <path d="M8 4L8 20M8 20L2 14M8 20L14 14" stroke="currentColor" stroke-width="1.5" />
-        </svg>
+        <span class="text-[9px] font-mono tracking-[4px] uppercase">Scroll</span>
+        <div class="w-px h-8 bg-foreground/30 relative overflow-hidden">
+          <div class="w-full h-3 bg-foreground animate-scroll-line"></div>
+        </div>
       </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- 2. SEQUENTIAL REVEAL - THE CORE TEASERS       -->
-    <!-- ============================================ -->
-    <section class="relative py-24 md:py-32 px-6">
+    <!-- 2. SEQUENTIAL REVEAL -->
+    <section id="reveal-section" class="relative z-10 py-32 md:py-40 px-6">
       <div class="max-w-3xl mx-auto">
-        <!-- Section marker -->
-        <div class="flex items-center gap-4 mb-16">
-          <div class="h-px flex-1 bg-foreground/15"></div>
-          <span class="text-[10px] font-mono tracking-[3px] uppercase text-muted-foreground">What we're building</span>
-          <div class="h-px flex-1 bg-foreground/15"></div>
+        <div
+          class="flex items-center gap-4 mb-20 transition-all duration-700"
+          :class="sectionVisibility.reveal ? 'opacity-100' : 'opacity-0'"
+        >
+          <div class="h-px w-8 bg-foreground/30"></div>
+          <span class="text-[10px] font-mono tracking-[3px] uppercase text-muted-foreground/60">What we're building</span>
         </div>
 
-        <!-- The reveal container -->
-        <div class="min-h-[180px] flex items-center justify-center">
+        <div class="min-h-[200px] flex items-start">
           <p
-            class="text-xl md:text-2xl lg:text-3xl font-semibold leading-relaxed text-center transition-all duration-500 ease-out"
+            class="text-lg md:text-2xl lg:text-[1.75rem] font-semibold leading-[1.5] tracking-tight transition-all duration-500 ease-out"
             :class="{
-              'opacity-0 translate-y-2': revealPhase === 'idle' || revealPhase === 'fading',
+              'opacity-0 translate-y-3': revealPhase === 'idle' || revealPhase === 'fading',
               'opacity-100 translate-y-0': revealPhase === 'typing' || revealPhase === 'visible',
             }"
           >
-            <span class="text-muted-foreground/50 font-mono text-sm mr-2 font-normal" v-if="revealPhase !== 'idle'">
+            <span class="text-muted-foreground/30 font-mono text-xs align-top mr-3 font-normal select-none">
               {{ activeRevealIndex >= 0 ? String(activeRevealIndex + 1).padStart(2, '0') : '' }}
             </span>
             <span>{{ displayedText }}</span>
             <span
               v-if="revealPhase === 'typing'"
-              class="inline-block w-0.5 h-6 bg-foreground ml-0.5 animate-pulse align-middle"
+              class="inline-block w-[2px] h-5 bg-foreground/70 ml-0.5 animate-pulse align-middle"
             ></span>
           </p>
         </div>
 
-        <!-- Progress dots -->
-        <div class="flex items-center justify-center gap-2 mt-12">
-          <button
-            v-for="(_, i) in revealStrings"
-            :key="i"
-            class="w-1.5 h-1.5 rounded-full transition-all duration-300"
-            :class="i === activeRevealIndex ? 'bg-foreground scale-150' : i < activeRevealIndex ? 'bg-foreground/40' : 'bg-foreground/10'"
-            @click="handleRestart"
-          ></button>
+        <div class="mt-16 flex items-center gap-3">
+          <div class="flex-1 h-px bg-foreground/10 relative overflow-hidden rounded-full">
+            <div
+              class="absolute left-0 top-0 h-full bg-foreground/40 transition-all duration-500 ease-out rounded-full"
+              :style="{ width: `${((activeRevealIndex + 1) / revealStrings.length) * 100}%` }"
+            ></div>
+          </div>
+          <span class="text-[10px] font-mono text-muted-foreground/40 tabular-nums">
+            {{ activeRevealIndex >= 0 ? `${activeRevealIndex + 1}/${revealStrings.length}` : '' }}
+          </span>
         </div>
 
-        <!-- Replay button -->
-        <div v-if="isSequenceComplete" class="flex justify-center mt-8">
+        <div v-if="isSequenceComplete" class="mt-8">
           <button
             @click="handleRestart"
-            class="text-[11px] font-mono tracking-[2px] uppercase text-muted-foreground hover:text-foreground transition-colors"
+            class="text-[10px] font-mono tracking-[3px] uppercase text-muted-foreground/40 hover:text-foreground transition-colors duration-300"
           >
             ↻ Replay
           </button>
@@ -223,129 +277,157 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- 3. PRIVACY-FIRST DECLARATION                  -->
-    <!-- ============================================ -->
-    <section id="privacy-section" class="py-24 md:py-32 px-6">
-      <div
-        class="max-w-3xl mx-auto transition-all duration-700 ease-out"
-        :class="privacyVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
-      >
-        <!-- Section marker -->
-        <div class="flex items-center gap-4 mb-16">
-          <div class="h-px flex-1 bg-foreground/15"></div>
-          <span class="text-[10px] font-mono tracking-[3px] uppercase text-muted-foreground">Privacy Architecture</span>
-          <div class="h-px flex-1 bg-foreground/15"></div>
-        </div>
-
-        <!-- Declaration blockquote -->
-        <div class="border-l-2 border-foreground pl-6 md:pl-8 mb-12">
-          <p class="text-xl md:text-2xl lg:text-3xl font-bold leading-snug tracking-tight mb-6">
-            We don't store your data.
-            <br />
-            <span class="text-muted-foreground">We verify its truth.</span>
-          </p>
-        </div>
-
-        <div class="max-w-2xl">
-          <p class="text-base md:text-lg text-muted-foreground leading-relaxed mb-6">
-            Our verification engine is built on a fundamental principle: sensitive information should never leave your control. We construct cryptographic proofs of validity, confirming identity, ownership, and compliance, without ever exposing the underlying data.
-          </p>
-          <p class="text-base md:text-lg text-muted-foreground leading-relaxed mb-10">
-            No centralized databases. No third-party custodians. No trust assumptions. Just math, verified on-chain, readable by anyone who needs to know, and invisible to everyone who doesn't.
-          </p>
-        </div>
-
-        <!-- Trust pillars -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="border border-foreground/15 rounded-xl p-5">
-            <div class="text-2xl mb-3">🔒</div>
-            <h3 class="text-sm font-bold tracking-wide uppercase mb-2">Zero-Knowledge Proofs</h3>
-            <p class="text-xs text-muted-foreground leading-relaxed">Verify without revealing. Prove existence without exposing contents.</p>
+    <!-- 3. PRIVACY-FIRST DECLARATION -->
+    <section id="privacy-section" class="relative z-10 py-32 md:py-40 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div
+          class="transition-all duration-1000 ease-out"
+          :class="sectionVisibility.privacy ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'"
+        >
+          <div class="flex items-center gap-4 mb-20">
+            <div class="h-px w-8 bg-foreground/30"></div>
+            <span class="text-[10px] font-mono tracking-[3px] uppercase text-muted-foreground/60">Privacy Architecture</span>
           </div>
-          <div class="border border-foreground/15 rounded-xl p-5">
-            <div class="text-2xl mb-3">🏗️</div>
-            <h3 class="text-sm font-bold tracking-wide uppercase mb-2">Client-Side First</h3>
-            <p class="text-xs text-muted-foreground leading-relaxed">All processing happens locally. Your data never touches our servers.</p>
+
+          <div class="mb-16">
+            <h2 class="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[1.05]">
+              We don't store
+              <br />your data.
+              <br />
+              <span class="text-muted-foreground/40">We verify its truth.</span>
+            </h2>
           </div>
-          <div class="border border-foreground/15 rounded-xl p-5">
-            <div class="text-2xl mb-3">📋</div>
-            <h3 class="text-sm font-bold tracking-wide uppercase mb-2">Audit-Ready</h3>
-            <p class="text-xs text-muted-foreground leading-relaxed">Every verification generates a tamper-proof record. Compliance, built in.</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-20">
+            <p class="text-base text-muted-foreground leading-[1.8]">
+              Our verification engine is built on a fundamental principle: sensitive information should never leave your control. We construct cryptographic proofs of validity, confirming identity, ownership, and compliance, without ever exposing the underlying data.
+            </p>
+            <p class="text-base text-muted-foreground leading-[1.8]">
+              No centralized databases. No third-party custodians. No trust assumptions. Just math, verified on-chain, readable by anyone who needs to know, and invisible to everyone who doesn't.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- 4. CALL TO ACTION - THE WAITLIST              -->
-    <!-- ============================================ -->
-    <section id="cta-section" class="py-24 md:py-32 px-6">
+    <!-- Trust Pillars -->
+    <section id="pillars-section" class="relative z-10 py-16 md:py-24 px-6">
       <div
-        class="max-w-lg mx-auto text-center transition-all duration-700 ease-out"
-        :class="ctaVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
+        class="max-w-5xl mx-auto transition-all duration-1000 ease-out"
+        :class="sectionVisibility.pillars ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'"
       >
-        <!-- Section marker -->
-        <div class="flex items-center gap-4 mb-12">
-          <div class="h-px flex-1 bg-foreground/15"></div>
-          <span class="text-[10px] font-mono tracking-[3px] uppercase text-muted-foreground">Early Access</span>
-          <div class="h-px flex-1 bg-foreground/15"></div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-foreground/10">
+          <div class="bg-background p-8 md:p-10 group hover:bg-foreground/[0.02] transition-colors duration-500">
+            <div class="w-10 h-10 border border-foreground/20 rounded-lg flex items-center justify-center mb-6 group-hover:border-foreground/40 transition-colors">
+              <span class="text-lg">ZK</span>
+            </div>
+            <h3 class="text-sm font-black tracking-wide uppercase mb-3">Zero-Knowledge Proofs</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">Verify without revealing. Prove existence without exposing contents.</p>
+          </div>
+          <div class="bg-background p-8 md:p-10 group hover:bg-foreground/[0.02] transition-colors duration-500">
+            <div class="w-10 h-10 border border-foreground/20 rounded-lg flex items-center justify-center mb-6 group-hover:border-foreground/40 transition-colors">
+              <span class="text-lg font-mono text-xs">&lt;/&gt;</span>
+            </div>
+            <h3 class="text-sm font-black tracking-wide uppercase mb-3">Client-Side First</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">All processing happens locally. Your data never touches our servers.</p>
+          </div>
+          <div class="bg-background p-8 md:p-10 group hover:bg-foreground/[0.02] transition-colors duration-500">
+            <div class="w-10 h-10 border border-foreground/20 rounded-lg flex items-center justify-center mb-6 group-hover:border-foreground/40 transition-colors">
+              <span class="text-lg">&#x2713;</span>
+            </div>
+            <h3 class="text-sm font-black tracking-wide uppercase mb-3">Audit-Ready</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">Every verification generates a tamper-proof record. Compliance, built in.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. CTA - WAITLIST -->
+    <section id="cta-section" class="relative z-10 py-32 md:py-40 px-6">
+      <div
+        class="max-w-xl mx-auto text-center transition-all duration-1000 ease-out"
+        :class="sectionVisibility.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'"
+      >
+        <div class="flex items-center justify-center gap-4 mb-16">
+          <div class="h-px w-8 bg-foreground/30"></div>
+          <span class="text-[10px] font-mono tracking-[3px] uppercase text-muted-foreground/60">Early Access</span>
+          <div class="h-px w-8 bg-foreground/30"></div>
         </div>
 
-        <h2 class="text-3xl md:text-4xl font-black tracking-tight mb-4">
+        <h2 class="text-3xl md:text-5xl font-black tracking-tighter mb-6 leading-[1.05]">
           Get early access to the
-          <br />
           <span class="gradient-text">verification engine.</span>
         </h2>
 
-        <p class="text-sm text-muted-foreground mb-8">
+        <p class="text-sm text-muted-foreground mb-10 leading-relaxed">
           Join the inner circle. Be the first to know when we launch, and shape how verification works for RWA.
         </p>
 
-        <!-- Waitlist form -->
-        <div v-if="!success" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-4">
-          <input
-            v-model="email"
-            type="email"
-            placeholder="your@email.com"
-            class="flex-1 px-4 py-3 bg-transparent border border-foreground rounded-xl text-sm font-mono focus:outline-none focus:ring-2 focus:ring-foreground/30 placeholder:text-muted-foreground/40"
-            @keyup.enter="handleSubmit"
-          />
-          <button
-            @click="handleSubmit"
-            :disabled="!isValidEmail || isLoading"
-            class="px-6 py-3 bg-foreground text-background text-[12px] font-bold tracking-[1.5px] uppercase rounded-xl hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed whitespace-nowrap"
-          >
-            {{ isLoading ? 'Joining...' : 'Join Waitlist' }}
-          </button>
+        <div v-if="!success" class="max-w-md mx-auto mb-6">
+          <div class="flex flex-col sm:flex-row gap-0 border border-foreground/20 rounded-xl overflow-hidden focus-within:border-foreground/50 transition-colors">
+            <input
+              v-model="email"
+              type="email"
+              placeholder="your@email.com"
+              class="flex-1 px-5 py-4 bg-transparent text-sm font-mono focus:outline-none placeholder:text-muted-foreground/30"
+              @keyup.enter="handleSubmit"
+            />
+            <button
+              @click="handleSubmit"
+              :disabled="!isValidEmail || isLoading"
+              class="px-6 py-4 bg-foreground text-background text-[11px] font-bold tracking-[2px] uppercase hover:opacity-90 transition-opacity disabled:opacity-20 disabled:cursor-not-allowed whitespace-nowrap sm:border-l border-foreground/20"
+            >
+              {{ isLoading ? 'Joining...' : 'Join Waitlist' }}
+            </button>
+          </div>
         </div>
 
-        <!-- Success state -->
-        <div v-else class="mb-4">
-          <div class="inline-flex items-center gap-2 border border-foreground rounded-full px-4 py-2">
-            <span class="text-green-500">✓</span>
+        <div v-else class="mb-6">
+          <div class="inline-flex items-center gap-3 border border-foreground/30 rounded-full px-6 py-3">
+            <span class="text-sm">&#x2713;</span>
             <span class="text-sm font-mono">You're on the list. We'll be in touch.</span>
           </div>
         </div>
 
-        <!-- Error -->
-        <p v-if="error" class="text-xs text-red-500 font-mono">{{ error }}</p>
+        <p v-if="error" class="text-xs text-red-500/70 font-mono">{{ error }}</p>
 
-        <!-- Subtle note -->
-        <p class="text-[10px] font-mono text-muted-foreground/40 tracking-wider mt-6">
-          No spam. Unsubscribe anytime. We respect your inbox like we respect your data.
+        <p class="text-[9px] font-mono text-muted-foreground/25 tracking-[2px] uppercase mt-10">
+          No spam. We respect your inbox like we respect your data.
         </p>
       </div>
     </section>
 
-    <!-- Footer nav -->
-    <div class="py-12 text-center border-t border-foreground/10">
+    <!-- Footer -->
+    <div class="relative z-10 py-16 text-center border-t border-foreground/8">
       <RouterLink
         to="/"
-        class="text-[11px] font-mono tracking-[2px] uppercase text-muted-foreground hover:text-foreground transition-colors"
+        class="text-[10px] font-mono tracking-[3px] uppercase text-muted-foreground/40 hover:text-foreground transition-colors duration-300"
       >
-        ← Back to Formatho
+        &#x2190; Back to Formatho
       </RouterLink>
     </div>
   </div>
 </template>
+
+<style scoped>
+@keyframes scroll-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
+.animate-scroll-line {
+  animation: scroll-line 2s ease-in-out infinite;
+}
+
+@keyframes float-bob {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+.floating-shape {
+  animation: float-bob 8s ease-in-out infinite;
+}
+.shape-ring-1 { animation-duration: 12s; }
+.shape-ring-2 { animation-duration: 10s; animation-delay: -3s; }
+.shape-dots { animation-duration: 9s; animation-delay: -5s; }
+.shape-cross { animation-duration: 11s; animation-delay: -2s; }
+.shape-grid { animation-duration: 14s; animation-delay: -7s; }
+</style>
