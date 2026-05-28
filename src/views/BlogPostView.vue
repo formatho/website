@@ -192,10 +192,10 @@ useHead(computed(() => {
       </div>
 
       <!-- ============================================ -->
-      <!-- CONTENT: Narrow Prose Column + Grid Quotes    -->
+      <!-- CONTENT: Wide Prose Column + Grid Quotes    -->
       <!-- ============================================ -->
       <div class="container mx-auto px-4 md:px-8 py-12 md:py-24">
-        <article class="max-w-prose mx-auto">
+        <article class="max-w-4xl mx-auto">
           <div
             class="prose-editorial"
             v-html="post.content"
@@ -208,7 +208,7 @@ useHead(computed(() => {
       <!-- ============================================ -->
       <div class="border-t border-foreground/10">
         <div class="container mx-auto px-4 md:px-8 py-12 md:py-20">
-          <div class="max-w-prose mx-auto">
+          <div class="max-w-4xl mx-auto">
             <EmailCapture
               source="blog"
               variant="card"
@@ -226,7 +226,7 @@ useHead(computed(() => {
       <!-- ============================================ -->
       <div v-if="post.cta" class="border-t border-foreground/10">
         <div class="container mx-auto px-4 md:px-8 py-12 md:py-20">
-          <div class="max-w-prose mx-auto">
+          <div class="max-w-4xl mx-auto">
             <h3 class="text-2xl md:text-3xl font-black tracking-tighter leading-none mb-4">{{ post.cta.title }}</h3>
             <p class="text-muted-foreground leading-relaxed mb-8">{{ post.cta.description }}</p>
             <a

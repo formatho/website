@@ -2983,7 +2983,7 @@ class FormathoMemoryManager:
 <p>These sectors are now outperforming Bitcoin and several traditional blue-chip crypto assets, signaling a broader shift in how investors evaluate value in digital markets.</p>
 <p>The next crypto cycle may not be driven by speculation alone.</p>
 <p>It may be driven by utility, infrastructure, and real-world adoption.</p>
-<p><strong>Image 1: Crypto Market Evolution</strong><br>*(Image showing financial chart with RWA, AI, and privacy tokens outperforming Bitcoin)*</p>
+<img src="/images/blog/blog-12/header-image.jpg" alt="Crypto Market Evolution Chart showing RWA, AI, and privacy tokens outperforming Bitcoin in 2026" style="width: 100%; border-radius: 8px; margin: 2rem 0;" />
 <h2>Investors Are Moving Beyond Bitcoin and Ethereum</h2>
 <p>Institutional demand for Bitcoin and Ethereum has started cooling.</p>
 <p>Last week alone:</p>
@@ -3006,7 +3006,7 @@ class FormathoMemoryManager:
 <ul><li>Tokenized stocks now exceed *$1.61 billion* in DAV</li><li>Monthly transfer volumes have crossed *$3.60 billion*</li></ul>
 <p>This trend is accelerating because tokenized markets offer advantages traditional systems struggle to provide:</p>
 <ul><li>24/7 market access</li><li>Faster settlement</li><li>Greater transparency</li><li>Lower operational friction</li><li>Global accessibility</li></ul>
-<p><strong>Image 2: RWA Tokenization Growth Chart</strong><br>*(Image showing growth of tokenized assets over time)*</p>
+<img src="/images/blog/blog-12/rwa-chart.jpg" alt="RWA Tokenization Growth Chart showing growth of tokenized assets over time" style="width: 100%; border-radius: 8px; margin: 2rem 0;" />
 <h2>Ondo Finance and the Institutional Push Toward Tokenization</h2>
 <p>One of the biggest winners in the RWA space is Ondo Finance.</p>
 <p>The token has surged more than 50% this month and has become one of the largest tokenizers of:</p>
@@ -3022,7 +3022,7 @@ class FormathoMemoryManager:
 <ul><li>McKinsey estimates the RWA market could reach *$4 trillion by 2030*</li><li>Ark Invest projects the sector could exceed *$11 trillion*</li><li>Standard Chartered predicts tokenized assets may surpass *$30 trillion by 2034*</li></ul>
 <p>The scale of these projections explains why investors are increasingly positioning themselves early in the sector.</p>
 <p>The infrastructure layer for tokenized finance is still being built — and many believe we are only in the early innings.</p>
-<p><strong>Image 3: AI Infrastructure Market Growth</strong><br>*(Image showing exponential growth in AI computing and related crypto tokens)*</p>
+<img src="/images/blog/blog-12/ai-tech.jpg" alt="AI Infrastructure Market Growth showing exponential growth in AI computing and related crypto tokens" style="width: 100%; border-radius: 8px; margin: 2rem 0;" />
 <h2>AI Tokens Are Riding the Global Chip Boom</h2>
 <p>Another major narrative outperforming Bitcoin is AI-focused crypto infrastructure.</p>
 <p>The rise of artificial intelligence has created unprecedented global demand for computing power.</p>
