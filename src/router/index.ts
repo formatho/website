@@ -446,6 +446,18 @@ export const routes = [
         }
       },
       {
+        path: 'get-verified',
+        name: 'get-verified',
+        component: () => import(/* webpackPrefetch: true */ '../views/GetVerifiedView.vue'),
+        meta: {
+          title: 'Get Verified - Formatho',
+          description:
+            'Privacy-first identity verification for developers. Coming soon from Formatho.',
+          keywords:
+            'identity verification, get verified, privacy-first, developer verification, trustless'
+        }
+      },
+      {
         path: 'pricing',
         name: 'pricing',
         component: () => import(/* webpackPrefetch: true */ '../views/PricingView.vue'),

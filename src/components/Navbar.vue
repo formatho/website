@@ -102,6 +102,17 @@ const categories = [
 const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-foreground hover:underline hover:underline-offset-[6px] decoration-2 hover:decoration-foreground py-2 px-1'
 </script>
 
+<style scoped>
+@keyframes coming-soon-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.coming-soon-badge {
+  animation: coming-soon-blink 2s ease-in-out infinite;
+}
+</style>
+
 <template>
   <nav class="fixed top-0 left-0 right-0 z-[100] bg-background border-b border-foreground">
     <div class="container mx-auto px-4">
@@ -171,6 +182,11 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
 
           <RouterLink to="/blogs" :class="navLinkClass">Blog</RouterLink>
           <RouterLink to="/pricing" :class="navLinkClass">Pricing</RouterLink>
+
+          <RouterLink to="/get-verified" :class="[navLinkClass, 'flex items-center gap-1.5']">
+            Get Verified
+            <span class="coming-soon-badge text-[9px] font-mono font-bold tracking-wider uppercase px-1.5 py-0.5 rounded bg-foreground text-background">coming soon</span>
+          </RouterLink>
         </div>
 
         <!-- Search & Mobile Menu Button -->
@@ -242,6 +258,10 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
             </a>
             <RouterLink to="/blogs" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'block']">Blog</RouterLink>
             <RouterLink to="/pricing" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'block']">Pricing</RouterLink>
+            <RouterLink to="/get-verified" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'flex items-center gap-1.5']">
+              Get Verified
+              <span class="coming-soon-badge text-[9px] font-mono font-bold tracking-wider uppercase px-1.5 py-0.5 rounded bg-foreground text-background">coming soon</span>
+            </RouterLink>
           </div>
         </div>
       </div>
