@@ -1,10 +1,8 @@
-# Why RWA, AI, and Privacy Tokens Are Outperforming Bitcoin in 2026
-
-**Author:** Nitin Gurbani  
-**Published:** May 28, 2026  
-**Reading Time:** 7 minutes  
-**Publisher:** Formatho
-
+---
+title: "Why RWA, AI, and Privacy Tokens Are Outperforming Bitcoin in 2026"
+date: "2026-05-28"
+author: "Nitin Gurbani"
+description: "Discover how institutional investors are shifting from Bitcoin to Real World Assets (RWA), AI infrastructure, and privacy tokens in the 2026 crypto cycle."
 ---
 
 For years, Bitcoin dominated every crypto cycle.
