@@ -181,17 +181,6 @@ onUnmounted(() => {
 
     <!-- 1. HERO SECTION -->
     <section id="hero-section" class="relative z-10 min-h-screen flex flex-col items-center justify-center px-6">
-      <div
-        class="fixed top-20 left-1/2 -translate-x-1/2 z-50 inline-flex items-center gap-3 border border-foreground/20 rounded-full px-5 py-2 bg-background/80 backdrop-blur-sm"
-        data-aos="fade-down"
-      >
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-foreground/40"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-foreground"></span>
-        </span>
-        <span class="text-[10px] font-mono font-bold tracking-[3px] uppercase">Building</span>
-      </div>
-
       <div class="text-center max-w-5xl">
         <h1 class="text-[clamp(2.5rem,8vw,7rem)] font-black tracking-tighter leading-[0.95] mb-8">
           <span
@@ -206,11 +195,23 @@ onUnmounted(() => {
         </h1>
 
         <p
-          class="text-base md:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed transition-all duration-700"
+          class="text-base md:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed transition-all duration-700 mb-8"
           :class="heroLines[2]?.visible ? 'opacity-100 translate-y-0 delay-500' : 'opacity-0 translate-y-4'"
         >
           The ultimate verification standard for Real World Asset tokenization is loading.
         </p>
+
+        <!-- Building badge -->
+        <div
+          class="inline-flex items-center gap-3 border border-foreground/20 rounded-full px-5 py-2 bg-background/80 backdrop-blur-sm transition-all duration-700"
+          :class="heroLines[2]?.visible ? 'opacity-60 translate-y-0 delay-700' : 'opacity-0 translate-y-4'"
+        >
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-foreground/40"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-foreground"></span>
+          </span>
+          <span class="text-[10px] font-mono font-bold tracking-[3px] uppercase">Building</span>
+        </div>
       </div>
 
       <div
