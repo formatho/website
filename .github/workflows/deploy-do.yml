@@ -51,8 +51,7 @@ jobs:
           script: |
             cd /home/${{ secrets.DO_USERNAME }}/formatho
             gunzip -c ${{ env.IMAGE_NAME }}.tar.gz | docker load
-            docker compose up -d --force-recreate nginx
-            docker compose up -d
+            docker compose up -d --force-recreate --remove-orphans
             docker compose restart wordpress
             docker exec nginx_proxy nginx -s reload || true
             rm ${{ env.IMAGE_NAME }}.tar.gz
