@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1200px; height: 630px; font-family: 'Inter', -apple-system, sans-serif; background: #0a0a0a; color: #fff; display: flex; align-items: center; justify-content: center; }
+.card {
+  width: 1200px; height: 630px; padding: 60px 80px;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+  display: flex; flex-direction: column; justify-content: center; position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.card::after {
+  content: ''; position: absolute; bottom: -80px; left: -80px; width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px;
+  font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 32px; width: fit-content;
+  background: rgba(255,255,255,0.03);
+}
+.badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+.title {
+  font-size: 72px; font-weight: 800; letter-spacing: -2px; line-height: 1.1;
+  margin-bottom: 20px; position: relative;
+}
+.title span { background: linear-gradient(135deg, #6366f1, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.subtitle {
+  font-size: 28px; color: rgba(255,255,255,0.6); line-height: 1.4; max-width: 800px;
+  margin-bottom: 40px;
+}
+.stats { display: flex; gap: 48px; position: relative; }
+.stat { display: flex; flex-direction: column; gap: 4px; }
+.stat-value { font-size: 36px; font-weight: 700; color: #6366f1; }
+.stat-label { font-size: 14px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
+.url { position: absolute; bottom: 40px; right: 80px; font-size: 18px; color: rgba(255,255,255,0.3); font-weight: 600; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="badge"><div class="dot"></div> Privacy-First Developer Tools</div>
+  <div class="title">100+ Free Tools.<br><span>Your Data Stays Local.</span></div>
+  <div class="subtitle">JSON converters, Base64, JWT decoder, SQL formatter, hash generators, QR codes, and more — all running 100% client-side.</div>
+  <div class="stats">
+    <div class="stat"><div class="stat-value">100+</div><div class="stat-label">Free Tools</div></div>
+    <div class="stat"><div class="stat-value">100%</div><div class="stat-label">Client-Side</div></div>
+    <div class="stat"><div class="stat-value">0</div><div class="stat-label">Data Leaks</div></div>
+  </div>
+  <div class="url">formatho.com</div>
+</div>
+</body>
+</html>

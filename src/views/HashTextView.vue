@@ -5,6 +5,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import CodeEditor from '@/components/CodeEditor.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
+import pkg from 'blakejs'
+const { blake2bInit, blake2bUpdate, blake2bFinal } = pkg
+import bcrypt from 'bcryptjs'
+import CryptoJS from 'crypto-js'
 
 const input = ref('')
 const hashResults = ref<Record<string, { hash: string; description: string }>>({})
@@ -193,16 +197,14 @@ const md5 = (str: string): string => {
 
 // BLAKE2b using blakejs
 const computeBLAKE2b = (text: string): string => {
-  const blake = require('blakejs')
-  const context = blake.blake2bInit(32, null)
-  blake.blake2bUpdate(context, new TextEncoder().encode(text))
-  const result = blake.blake2bFinal(context)
+  const context = blake2bInit(32, null)
+  blake2bUpdate(context, new TextEncoder().encode(text))
+  const result = blake2bFinal(context)
   return bytesToHex(result)
 }
 
 // bcrypt using bcryptjs
 const computeBcrypt = (text: string): string => {
-  const bcrypt = require('bcryptjs')
   const salt = bcrypt.genSaltSync(12)
   return bcrypt.hashSync(text, salt)
 }
@@ -239,7 +241,6 @@ const computeArgon2 = async (text: string): Promise<string> => {
 
 // PBKDF2 using crypto-js
 const computePBKDF2 = (text: string): string => {
-  const CryptoJS = require('crypto-js')
   const salt = CryptoJS.lib.WordArray.random(16)
   const key = CryptoJS.PBKDF2(text, salt, {
     keySize: 8,
