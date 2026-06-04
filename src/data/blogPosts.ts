@@ -27,12 +27,12 @@ export const blogPosts: BlogPost[] = [
     readTime: '14 min',
     tags: ['RWA', 'Tokenization', 'Blockchain', 'Finance', 'Institutional', 'IMF', 'Regulation'],
     slug: 'structural-reconfiguration-finance-rwa-tokenization-2026',
-    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&q=80&auto=format&fit=crop',
-    imageAlt: 'Blockchain network transforming traditional financial assets into digital tokens',
+    image: '/images/blog/blog-56/rwa-tokenization.jpg',
+    imageAlt: 'Real-World Asset tokenization — institutional finance meets blockchain',
     content: `<p>The global financial ecosystem is undergoing a fundamental paradigm shift. In April 2026, the International Monetary Fund (IMF) released a seminal note entitled "Tokenized Finance," explicitly arguing that the tokenization of Real-World Assets (RWAs) is not a marginal efficiency play or a minor upgrade to existing back-office rails. Instead, it constitutes a structural reconfiguration of how trust, settlement, liquidity, and risk management are organized across the global financial system.</p>
 <p>By transforming physical and traditional financial assets into programmable digital tokens on a blockchain, RWA tokenization bridges the multi-trillion-dollar traditional finance (TradFi) market with decentralized networks.</p>
 <p>This comprehensive guide analyzes the operational mechanics of RWA tokenization, current market metrics, evolving Western regulatory regimes, and the systemic risks institutions must navigate in 2026.</p>
-<img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=400&fit=crop" alt="Blockchain infrastructure enabling tokenized financial assets" style="width: 100%; border-radius: 8px; margin: 2rem 0;" />
+<img src="/images/blog/blog-56/rwa-tokenization.jpg" alt="Real-World Asset tokenization — institutional finance meets blockchain" style="width: 100%; border-radius: 8px; margin: 2rem 0;" />
 <h2>What is Real-World Asset (RWA) Tokenization?</h2>
 <p>At its core, Real-World Asset (RWA) tokenization is the process of converting the ownership rights of a tangible or intangible asset into a digital token on a distributed ledger. While the token exists, trades, and settles on a programmable blockchain, the underlying physical asset continues to exist within the traditional financial landscape.</p>
 <h3>The Practical Mechanics &amp; Architecture</h3>

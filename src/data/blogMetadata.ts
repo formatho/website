@@ -19,8 +19,8 @@ export const blogMetadata: BlogMetadata[] = [
     readTime: '14 min',
     tags: ['RWA', 'Tokenization', 'Blockchain', 'Finance', 'Institutional', 'IMF', 'Regulation'],
     slug: 'structural-reconfiguration-finance-rwa-tokenization-2026',
-    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&q=80&auto=format&fit=crop',
-    imageAlt: 'Blockchain network transforming traditional financial assets into digital tokens'
+    image: '/images/blog/blog-56/rwa-tokenization.jpg',
+    imageAlt: 'Real-World Asset tokenization — institutional finance meets blockchain'
   },
   {
     id: 55,
