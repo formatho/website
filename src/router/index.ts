@@ -1136,7 +1136,8 @@ export const routes = [
         meta: {
           title: 'Argon2id Hash Generator Online - Free Browser-Based Hashing Tool',
           description: 'Generate Argon2id, bcrypt, PBKDF2, MD5, SHA-1, SHA-256, SHA-384, SHA-512, BLAKE2b, and Poseidon hashes online. 100% client-side hashing - your data never leaves your browser. No signup, free forever.',
-          keywords: 'argon2id hash, argon2id online, argon2id browser, argon2id generator, bcrypt online, pbkdf2 online, sha256 generator, sha512 generator, md5 generator, blake2b online, poseidon hash, hash text, password hash, crypto hash, client-side hashing, privacy-first hash tool, free hash generator'
+          keywords: 'argon2id hash, argon2id online, argon2id browser, argon2id generator, bcrypt online, pbkdf2 online, sha256 generator, sha512 generator, md5 generator, blake2b online, poseidon hash, hash text, password hash, crypto hash, client-side hashing, privacy-first hash tool, free hash generator',
+          canonical: 'https://formatho.com/tools/hash-text'
         }
       },
       {

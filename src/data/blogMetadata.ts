@@ -12,6 +12,17 @@ export interface BlogMetadata {
 
 export const blogMetadata: BlogMetadata[] = [
   {
+    id: 58,
+    title: 'Real Estate Tokenization in 2026: Legal Frameworks, SM REITs, and Smart Contract Compliance',
+    excerpt: 'Explore how real estate tokenization works in 2026 — from SPV structures and SEBI SM REIT regulations to ERC-3643 compliance-by-design token standards. A practical guide to the legal architecture behind tokenized property.',
+    date: '2026-06-05',
+    readTime: '9 min',
+    tags: ['Real Estate', 'Tokenization', 'RWA', 'Legal', 'SM REIT', 'SEBI', 'Smart Contracts', 'ERC-3643'],
+    slug: 'real-estate-tokenization-legal-frameworks-sm-reits-2026',
+    image: '/images/blog/blog-58/real-estate-tokenization-1.jpg',
+    imageAlt: 'Real estate tokenization — legal frameworks and smart contract compliance in 2026'
+  },
+  {
     id: 56,
     title: 'The Structural Reconfiguration of Finance: Institutional Guide to Real-World Asset (RWA) Tokenization in 2026',
     excerpt: 'The IMF calls it a structural reconfiguration of global finance. With $441B in represented value and $27.65B actively trading on-chain, RWA tokenization is no longer theoretical. This institutional guide breaks down the mechanics, regulations, and systemic risks of tokenized finance in 2026.',
