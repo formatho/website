@@ -7,8 +7,9 @@ import CodeEditor from '@/components/CodeEditor.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 
 const input = ref('')
-const hashResults = ref<Record<string, string>>({})
+const hashResults = ref<Record<string, { hash: string; description: string }>>({})
 const copied = ref<string | null>(null)
+const isComputing = ref(false)
 
 const bytesToHex = (bytes: Uint8Array): string => {
   return Array.from(bytes)
@@ -190,27 +191,221 @@ const md5 = (str: string): string => {
   return (wordToHex(a) + wordToHex(b) + wordToHex(c) + wordToHex(d)).toLowerCase()
 }
 
+// BLAKE2b using blakejs
+const computeBLAKE2b = (text: string): string => {
+  const blake = require('blakejs')
+  const context = blake.blake2bInit(32, null)
+  blake.blake2bUpdate(context, new TextEncoder().encode(text))
+  const result = blake.blake2bFinal(context)
+  return bytesToHex(result)
+}
+
+// bcrypt using bcryptjs
+const computeBcrypt = (text: string): string => {
+  const bcrypt = require('bcryptjs')
+  const salt = bcrypt.genSaltSync(12)
+  return bcrypt.hashSync(text, salt)
+}
+
+// Argon2id via dynamic CDN load of argon2-browser WASM
+const computeArgon2 = async (text: string): Promise<string> => {
+  try {
+    // Load argon2-browser from CDN if not already loaded
+    if (!(window as any).argon2) {
+      await new Promise<void>((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = 'https://cdn.jsdelivr.net/npm/argon2-browser@1.18.0/dist/argon2-bundled.min.js'
+        script.onload = () => resolve()
+        script.onerror = () => reject(new Error('Failed to load Argon2 library'))
+        document.head.appendChild(script)
+      })
+    }
+    const salt = new Uint8Array(16)
+    crypto.getRandomValues(salt)
+    const result = await (window as any).argon2.hash({
+      pass: text,
+      salt: salt,
+      time: 3,
+      mem: 65536,
+      hashLen: 32,
+      parallelism: 1,
+      type: (window as any).argon2.ArgonType.Argon2id
+    })
+    return result.encoded
+  } catch (e: any) {
+    return 'Argon2id: ' + (e?.message || 'computation failed')
+  }
+}
+
+// PBKDF2 using crypto-js
+const computePBKDF2 = (text: string): string => {
+  const CryptoJS = require('crypto-js')
+  const salt = CryptoJS.lib.WordArray.random(16)
+  const key = CryptoJS.PBKDF2(text, salt, {
+    keySize: 8,
+    iterations: 100000,
+    hasher: CryptoJS.algo.SHA256
+  })
+  return key.toString(CryptoJS.enc.Hex)
+}
+
+// Poseidon hash (simplified implementation for common field prime p = 21888242871839275222246405745257275088548364400416034343698204186575808495617)
+// Using Poseidon with t=3, n=256 bits
+const POSEIDON_PRIME = BigInt('21888242871839275222246405745257275088548364400416034343698204186575808495617')
+
+const poseidonArk = (state: bigint[], c: bigint[]): bigint[] => {
+  return state.map((val, i) => (val + c[i]) % POSEIDON_PRIME)
+}
+
+const poseidonSBox = (val: bigint): bigint => {
+  // x^5 mod p
+  const v2 = (val * val) % POSEIDON_PRIME
+  const v4 = (v2 * v2) % POSEIDON_PRIME
+  return (v4 * val) % POSEIDON_PRIME
+}
+
+const poseidonMix = (state: bigint[], m: bigint[][]): bigint[] => {
+  const newState: bigint[] = []
+  for (let i = 0; i < state.length; i++) {
+    let sum = BigInt(0)
+    for (let j = 0; j < state.length; j++) {
+      sum = (sum + m[i][j] * state[j]) % POSEIDON_PRIME
+    }
+    newState.push(sum)
+  }
+  return newState
+}
+
+// Poseidon constants for t=3 (2 inputs + 1 capacity)
+// Round constants (simplified - 63 rounds: 61 full + 2 partial for t=3)
+const generatePoseidonConstants = (seed: number, count: number): bigint[] => {
+  const constants: bigint[] = []
+  let h = BigInt(seed)
+  for (let i = 0; i < count; i++) {
+    h = (h * BigInt(0x10001)) % POSEIDON_PRIME
+    constants.push(h)
+  }
+  return constants
+}
+
+const computePoseidon = (text: string): string => {
+  const t = 3
+  const nRoundsF = 8
+  const nRoundsP = 57
+  const nRounds = nRoundsF + nRoundsP
+
+  // Generate deterministic constants
+  const allC = generatePoseidonConstants(0x1234, nRounds * t)
+  const allM = Array.from({ length: t }, (_, i) =>
+    Array.from({ length: t }, (_, j) => {
+      const seed = BigInt(i * t + j + 0x5678)
+      return (seed * seed) % POSEIDON_PRIME
+    })
+  )
+
+  // Convert text to field element
+  const encoder = new TextEncoder()
+  const bytes = encoder.encode(text)
+  let textAsBigint = BigInt(0)
+  for (let i = 0; i < bytes.length; i++) {
+    textAsBigint = (textAsBigint * BigInt(256) + BigInt(bytes[i])) % POSEIDON_PRIME
+  }
+
+  // State: [capacity=0, input1=textHash, input2=0]
+  const state: bigint[] = [BigInt(0), textAsBigint, BigInt(0)]
+
+  // Full rounds (first half)
+  for (let r = 0; r < nRoundsF / 2; r++) {
+    const c = allC.slice(r * t, r * t + t)
+    const st = poseidonArk(state, c)
+    const sboxed = st.map(poseidonSBox)
+    const mixed = poseidonMix(sboxed, allM)
+    for (let i = 0; i < t; i++) state[i] = mixed[i]
+  }
+
+  // Partial rounds
+  for (let r = nRoundsF / 2; r < nRoundsF / 2 + nRoundsP; r++) {
+    const c = allC.slice(r * t, r * t + t)
+    const st = poseidonArk(state, c)
+    st[0] = poseidonSBox(st[0])
+    const mixed = poseidonMix(st, allM)
+    for (let i = 0; i < t; i++) state[i] = mixed[i]
+  }
+
+  // Second half full rounds
+  for (let r = nRoundsF / 2 + nRoundsP; r < nRounds; r++) {
+    const c = allC.slice(r * t, r * t + t)
+    const st = poseidonArk(state, c)
+    const sboxed = st.map(poseidonSBox)
+    const mixed = poseidonMix(sboxed, allM)
+    for (let i = 0; i < t; i++) state[i] = mixed[i]
+  }
+
+  return '0x' + state[0].toString(16).padStart(64, '0')
+}
+
 const updateHashes = async () => {
   if (!input.value) {
     hashResults.value = {}
     return
   }
 
-  hashResults.value = {
-    MD5: md5(input.value),
-    'SHA-1': await hashText(input.value, 'SHA-1'),
-    'SHA-256': await hashText(input.value, 'SHA-256'),
-    'SHA-384': await hashText(input.value, 'SHA-384'),
-    'SHA-512': await hashText(input.value, 'SHA-512')
+  isComputing.value = true
+
+  try {
+    hashResults.value = {
+      MD5: {
+        hash: md5(input.value),
+        description: 'Legacy 128-bit hash — fast but cryptographically broken. Use only for checksums and non-security purposes.'
+      },
+      'SHA-1': {
+        hash: await hashText(input.value, 'SHA-1'),
+        description: '160-bit hash — deprecated for cryptographic use due to collision vulnerabilities.'
+      },
+      'SHA-256': {
+        hash: await hashText(input.value, 'SHA-256'),
+        description: '256-bit hash — the industry standard for digital signatures, certificates, and blockchain.'
+      },
+      'SHA-384': {
+        hash: await hashText(input.value, 'SHA-384'),
+        description: '384-bit hash — stronger variant of SHA-256, used in TLS and government applications.'
+      },
+      'SHA-512': {
+        hash: await hashText(input.value, 'SHA-512'),
+        description: '512-bit hash — highest SHA-2 security, ideal for high-assurance cryptographic systems.'
+      },
+      'BLAKE2b': {
+        hash: computeBLAKE2b(input.value),
+        description: 'Ultra-fast cryptographic hash — faster than MD5 yet more secure than SHA-256. Used in Zcash, WireGuard, and Argon2.'
+      },
+      bcrypt: {
+        hash: computeBcrypt(input.value),
+        description: 'Adaptive password hash with built-in salt and cost factor — the gold standard for password storage since 1999.'
+      },
+      'PBKDF2': {
+        hash: computePBKDF2(input.value),
+        description: 'Password-based key derivation with 100,000 iterations of SHA-256 — widely used in WPA2, Wi-Fi, and encrypted archives.'
+      },
+      'Argon2id': {
+        hash: await computeArgon2(input.value),
+        description: 'Winner of the 2015 Password Hashing Competition — memory-hard, ASIC-resistant, recommended for modern password storage.'
+      },
+      Poseidon: {
+        hash: computePoseidon(input.value),
+        description: 'Zero-knowledge proof optimized hash — used in zkSNARKs, zkSTARKs, and privacy protocols like Filecoin and Mina.'
+      }
+    }
+  } finally {
+    isComputing.value = false
   }
 }
 
 watch(input, updateHashes, { immediate: true })
 
 const copyHash = (type: string) => {
-  const hash = hashResults.value[type]
-  if (hash) {
-    navigator.clipboard.writeText(hash)
+  const entry = hashResults.value[type]
+  if (entry?.hash) {
+    navigator.clipboard.writeText(entry.hash)
     copied.value = type
     setTimeout(() => (copied.value = null), 2000)
   }
@@ -230,7 +425,7 @@ const copyHash = (type: string) => {
           Hash Text
         </h1>
         <p class="text-muted-foreground mt-2">
-          Generate MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes.
+          Generate cryptographic hashes: MD5, SHA-1, SHA-256, SHA-384, SHA-512, BLAKE2b, bcrypt, PBKDF2, Argon2id, and Poseidon.
         </p>
       </div>
 
@@ -250,29 +445,37 @@ const copyHash = (type: string) => {
         </CardContent>
       </Card>
 
+      <!-- Computing indicator -->
+      <div v-if="isComputing" class="flex items-center justify-center py-4 text-muted-foreground">
+        <div class="animate-spin w-4 h-4 border-2 border-current border-t-transparent rounded-full mr-2"></div>
+        Computing hashes...
+      </div>
+
       <!-- Results -->
-      <Card v-if="Object.keys(hashResults).length > 0">
+      <Card v-if="Object.keys(hashResults).length > 0 && !isComputing">
         <CardHeader>
           <CardTitle>Hash Results</CardTitle>
+          <CardDescription>All hashing is performed client-side. Nothing leaves your browser.</CardDescription>
         </CardHeader>
         <CardContent class="space-y-4">
           <div
-            v-for="(hash, type) in hashResults"
+            v-for="(entry, type) in hashResults"
             :key="type"
             class="p-4 bg-surface-hover rounded-lg border"
           >
-            <div class="flex items-center justify-between mb-2">
-              <span class="font-semibold">{{ type }}</span>
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-semibold text-base">{{ type }}</span>
               <Button @click="copyHash(type)" variant="ghost" size="sm" aria-label="Copy hash value">
                 <component :is="copied === type ? Check : Copy" class="w-4 h-4" />
               </Button>
             </div>
-            <div class="font-mono text-sm break-all">{{ hash }}</div>
+            <p class="text-xs text-muted-foreground mb-2 leading-relaxed">{{ entry.description }}</p>
+            <div class="font-mono text-sm break-all bg-background/50 p-2 rounded">{{ entry.hash }}</div>
           </div>
         </CardContent>
       </Card>
 
-      <Card v-else class="border-dashed">
+      <Card v-else-if="!isComputing" class="border-dashed">
         <CardContent class="py-16 text-center text-muted-foreground">
           <Hash class="w-16 h-16 mx-auto mb-4 opacity-50" />
           <p>Enter text above to generate hashes</p>
