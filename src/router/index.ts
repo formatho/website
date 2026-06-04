@@ -338,6 +338,17 @@ export const routes = [
         }
       },
       {
+        path: 'tools/bls-signature',
+        name: 'bls-signature',
+        component: () => import(/* webpackPrefetch: true */ '../views/BlsSignatureView.vue'),
+        meta: {
+          title: 'BLS Signatures — Generate, Verify & Aggregate',
+          description:
+            'Generate BLS12-381 signatures, verify signatures, and aggregate multiple signatures into one. 100% client-side, privacy-first.',
+          keywords: 'bls signature, bls12-381, aggregate signatures, threshold signatures, boneh lynn shacham, ethereum consensus'
+        }
+      },
+      {
         path: 'tools/keccak256',
         name: 'keccak256',
         component: () => import(/* webpackPrefetch: true */ '../views/KeccakHasherView.vue'),
@@ -1122,7 +1133,11 @@ export const routes = [
         path: 'tools/hash-text',
         name: 'hash-text',
         component: () => import(/* webpackPrefetch: true */ '../views/HashTextView.vue'),
-        meta: { title: 'Hash Text', description: 'Generate MD5, SHA-1, SHA-256, SHA-512 hashes.' }
+        meta: {
+          title: 'Argon2id Hash Generator Online - Free Browser-Based Hashing Tool',
+          description: 'Generate Argon2id, bcrypt, PBKDF2, MD5, SHA-1, SHA-256, SHA-384, SHA-512, BLAKE2b, and Poseidon hashes online. 100% client-side hashing - your data never leaves your browser. No signup, free forever.',
+          keywords: 'argon2id hash, argon2id online, argon2id browser, argon2id generator, bcrypt online, pbkdf2 online, sha256 generator, sha512 generator, md5 generator, blake2b online, poseidon hash, hash text, password hash, crypto hash, client-side hashing, privacy-first hash tool, free hash generator'
+        }
       },
       {
         path: 'tools/xml-json',

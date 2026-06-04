@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { privateKeyToAccount } from 'viem/accounts'
-import { secp256k1 } from '@noble/curves/secp256k1'
+import { secp256k1 } from '@noble/curves/secp256k1.js'
 // @ts-ignore
 import { ripemd160 } from '@noble/hashes/legacy.js'
 // @ts-ignore

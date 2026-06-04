@@ -45,7 +45,7 @@ export const tools = [
       },
       {
         name: 'Hash Text',
-        description: 'Generate MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes.',
+        description: 'Generate Argon2id, bcrypt, PBKDF2, MD5, SHA-1, SHA-256, SHA-384, SHA-512, BLAKE2b, and Poseidon hashes online. 100% client-side Argon2id password hashing for maximum security.',
         route: '/tools/hash-text',
         iconName: 'Hash'
       },

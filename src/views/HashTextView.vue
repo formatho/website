@@ -9,6 +9,41 @@ import pkg from 'blakejs'
 const { blake2bInit, blake2bUpdate, blake2bFinal } = pkg
 import bcrypt from 'bcryptjs'
 import CryptoJS from 'crypto-js'
+import { onMounted } from 'vue'
+
+// Add structured data for SEO
+onMounted(() => {
+  const script = document.createElement('script')
+  script.type = 'application/ld+json'
+  script.text = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    'name': 'Argon2id Hash Generator',
+    'applicationCategory': 'DeveloperApplication',
+    'operatingSystem': 'Any',
+    'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+    'description': 'Generate Argon2id, bcrypt, PBKDF2, MD5, SHA-1, SHA-256, SHA-384, SHA-512, BLAKE2b, and Poseidon hashes online. 100% client-side hashing for password storage and cryptographic applications.',
+    'keywords': 'argon2id hash, argon2id online, argon2id browser, argon2id generator, bcrypt online, pbkdf2 online, sha256 generator, sha512 generator, md5 generator, blake2b online, poseidon hash, hash text, password hash, crypto hash',
+    'browserRequirements': 'JavaScript enabled',
+    'featureList': [
+      'Argon2id password hashing',
+      'bcrypt password hashing',
+      'PBKDF2 key derivation',
+      'SHA-256, SHA-384, SHA-512 cryptographic hashes',
+      'BLAKE2b fast hashing',
+      'Poseidon zero-knowledge proof hashing',
+      '100% client-side - no server uploads',
+      'Instant hash generation',
+      'Copy to clipboard functionality'
+    ],
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'Formatho',
+      'url': 'https://formatho.com'
+    }
+  })
+  document.head.appendChild(script)
+})
 
 const input = ref('')
 const hashResults = ref<Record<string, { hash: string; description: string }>>({})
@@ -423,10 +458,10 @@ const copyHash = (type: string) => {
       <div class="mb-8">
         <h1 class="text-3xl font-bold flex items-center gap-3">
           <Hash class="w-8 h-8" />
-          Hash Text
+          Argon2id Hash Generator & Online Hashing Tool
         </h1>
         <p class="text-muted-foreground mt-2">
-          Generate cryptographic hashes: MD5, SHA-1, SHA-256, SHA-384, SHA-512, BLAKE2b, bcrypt, PBKDF2, Argon2id, and Poseidon.
+          Generate Argon2id, bcrypt, PBKDF2, MD5, SHA-1, SHA-256, SHA-384, SHA-512, BLAKE2b, and Poseidon hashes. 100% client-side - your data never leaves your browser.
         </p>
       </div>
 
@@ -480,6 +515,48 @@ const copyHash = (type: string) => {
         <CardContent class="py-16 text-center text-muted-foreground">
           <Hash class="w-16 h-16 mx-auto mb-4 opacity-50" />
           <p>Enter text above to generate hashes</p>
+        </CardContent>
+      </Card>
+
+      <!-- FAQ Section for SEO -->
+      <Card class="mt-8">
+        <CardHeader>
+          <CardTitle>Frequently Asked Questions</CardTitle>
+          <CardDescription>Learn about Argon2id and password hashing</CardDescription>
+        </CardHeader>
+        <CardContent class="space-y-4">
+          <div class="border-b pb-4">
+            <h3 class="font-semibold mb-2">What is Argon2id and why is it the best password hash?</h3>
+            <p class="text-sm text-muted-foreground">Argon2id is the winner of the 2015 Password Hashing Competition. It's memory-hard, ASIC-resistant, and specifically designed for password storage. Unlike bcrypt or PBKDF2, Argon2id requires significant memory to compute, making it extremely resistant to GPU and ASIC attacks. The "id" variant combines data-independent and data-dependent hashing for maximum security against both side-channel and brute-force attacks.</p>
+          </div>
+          <div class="border-b pb-4">
+            <h3 class="font-semibold mb-2">Is this Argon2id hash generator secure and private?</h3>
+            <p class="text-sm text-muted-foreground">Yes! All hashing happens 100% client-side in your browser using the argon2-browser library (WASM). Your passwords are never sent to any server. The Argon2id computation runs entirely in your browser's JavaScript engine, ensuring maximum privacy. We use WebAssembly for performance - the same technology used by modern web apps.</p>
+          </div>
+          <div class="border-b pb-4">
+            <h3 class="font-semibold mb-2">How does Argon2id compare to bcrypt and PBKDF2?</h3>
+            <p class="text-sm text-muted-foreground">Argon2id is the modern recommendation (NIST SP 800-63B) for password storage. Bcrypt has been the standard since 1999 but is vulnerable to GPU attacks. PBKDF2 is widely used but slower and less secure than memory-hard algorithms. Argon2id combines the best of both - it's memory-hard (resists GPU/ASIC attacks) and data-dependent (resists side-channel attacks). For new applications, always use Argon2id.</p>
+          </div>
+          <div class="border-b pb-4">
+            <h3 class="font-semibold mb-2">What are the recommended Argon2id parameters?</h3>
+            <p class="text-sm text-muted-foreground">Our tool uses secure defaults: timeCost=3, memoryCost=64MB, parallelism=1, hashLength=32 bytes. For production use, adjust based on your security requirements. Higher memory usage provides better GPU resistance but takes longer. The OWASP Password Storage Cheat Sheet provides detailed guidance on parameter selection.</p>
+          </div>
+          <div class="border-b pb-4">
+            <h3 class="font-semibold mb-2">Can I use this for hashing passwords in production?</h3>
+            <p class="text-sm text-muted-foreground">Yes! This tool produces valid Argon2id hashes that can be verified using any Argon2 library (argon2-cffi for Python, argon2 for Node.js, etc.). The output is in the PHC format: <code>$argon2id$v=19$m=65536,t=3,p=1$...</code> This is the standard format compatible with most password verification libraries.</p>
+          </div>
+          <div class="border-b pb-4">
+            <h3 class="font-semibold mb-2">What is BLAKE2b and why is it faster than SHA-256?</h3>
+            <p class="text-sm text-muted-foreground">BLAKE2b is a cryptographic hash algorithm that's faster than MD5 yet more secure than SHA-256. It was designed in 2012 as a successor to BLAKE (a SHA-3 finalist). BLAKE2b is used in Zcash, WireGuard, and as the internal hash for Argon2. It's perfect for checksums and hashing when performance matters but you still need cryptographic security.</p>
+          </div>
+          <div class="border-b pb-4">
+            <h3 class="font-semibold mb-2">What is Poseidon hash and where is it used?</h3>
+            <p class="text-sm text-muted-foreground">Poseidon is a zero-knowledge proof (ZKP) optimized hash function. It uses the Hades permutation design to minimize the number of multiplications in finite fields, making it ideal for zkSNARKs and zkSTARKs. Poseidon is used in privacy protocols like Filecoin, Mina, and StarkNet where efficient hashing within zero-knowledge proofs is critical.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-2">Why are MD5 and SHA-1 included if they're cryptographically broken?</h3>
+            <p class="text-sm text-muted-foreground">MD5 and SHA-1 are included for legacy compatibility and checksum purposes only. Never use them for password storage or cryptographic applications. MD5 has known collision vulnerabilities since 2004, and SHA-1 has been deprecated since 2017. Use Argon2id for passwords, and SHA-256 or BLAKE2b for other cryptographic needs.</p>
+          </div>
         </CardContent>
       </Card>
     </div>
