@@ -80,7 +80,6 @@ export const blogPosts: BlogPost[] = [
 <ol><li>Anchoring on-chain settlement in safe, stable money (such as Central Bank Digital Currencies - CBDCs).</li><li>Enforcing a philosophy of "same activity, same risk, same regulation."</li><li>Establishing ironclad legal certainty for digital asset ownership across borders.</li><li>Enforcing global interoperability and technical standards.</li><li>Adapting central bank liquidity tools to handle automated, instantaneous market shocks.</li></ol>
 <h2>Conclusion</h2>
 <p>Real-World Asset tokenization has moved well past the theoretical proof-of-concept phase. With hundreds of billions of dollars in represented value already moving through on-chain frameworks, the technology is actively rewiring the mechanics of global capital. For institutional participants, success will require balancing the undeniable capital efficiencies of programmatic finance against the operational, technical, and regulatory realities of a fractured global landscape.</p>
-<p><em>About the Author: Nitin Gurbani is a financial technology strategist and thought leader exploring the intersection of AI, blockchain, and traditional finance in the digital age.</em></p>`,
     cta: {
       title: 'Explore Privacy-First Financial Tools',
       description: 'Build the future of decentralized finance with client-side developer tools that keep your data private.',
@@ -3142,7 +3141,6 @@ class FormathoMemoryManager:
 <p>That is why RWAs, AI tokens, and privacy-focused cryptocurrencies are outperforming traditional market leaders today.</p>
 <p>The next phase of crypto may belong to projects that solve real problems — not just those that capture attention.</p>
 <p>And right now, these three narratives are leading that shift.</p>
-<p><em>About the Author: Nitin Gurbani is a financial technology strategist and thought leader exploring the intersection of AI, blockchain, and traditional finance in the digital age.</em></p>`
   },
   {
     id: 42,
