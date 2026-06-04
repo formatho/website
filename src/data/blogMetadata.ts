@@ -12,6 +12,17 @@ export interface BlogMetadata {
 
 export const blogMetadata: BlogMetadata[] = [
   {
+    id: 57,
+    title: 'The Future of RWA Tokenization: 5 Megatrends Reshaping Finance by 2030',
+    excerpt: 'Discover how Real World Asset (RWA) tokenization is bridging the gap between traditional finance and blockchain. Explore 2030 market predictions for real estate, institutional adoption, and fractional ownership.',
+    date: '2026-06-06',
+    readTime: '10 min',
+    tags: ['RWA', 'Tokenization', 'Blockchain', 'Finance', 'Real Estate', 'Institutional', 'DeFi'],
+    slug: 'future-of-rwa-tokenization-5-megatrends-reshaping-finance-2030',
+    image: '/images/blog/blog-57/rwa-megatrends-1.jpg',
+    imageAlt: 'The future of RWA tokenization — 5 megatrends reshaping global finance by 2030'
+  },
+  {
     id: 56,
     title: 'The Structural Reconfiguration of Finance: Institutional Guide to Real-World Asset (RWA) Tokenization in 2026',
     excerpt: 'The IMF calls it a structural reconfiguration of global finance. With $441B in represented value and $27.65B actively trading on-chain, RWA tokenization is no longer theoretical. This institutional guide breaks down the mechanics, regulations, and systemic risks of tokenized finance in 2026.',
