@@ -103,6 +103,12 @@ export const tools = [
     category: 'Converters',
     items: [
       {
+        name: 'Unix Timestamp Converter',
+        description: 'Convert Unix timestamps to human-readable dates. Live clock with seconds-since counter and current time in both formats.',
+        route: '/tools/unix-timestamp',
+        iconName: 'Timer'
+      },
+      {
         name: 'Date-Time Converter',
         description: 'Convert dates and times between different formats and timezones.',
         route: '/tools/date-time-converter',

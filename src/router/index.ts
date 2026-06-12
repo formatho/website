@@ -1178,6 +1178,15 @@ export const routes = [
         }
       },
       {
+        path: 'tools/unix-timestamp',
+        name: 'unix-timestamp',
+        component: () => import(/* webpackPrefetch: true */ '../views/UnixTimestampView.vue'),
+        meta: {
+          title: 'Unix Timestamp Converter',
+          description: 'Convert Unix timestamps to human-readable dates and vice versa. Live clock with current time in both formats.'
+        }
+      },
+      {
         path: 'tools/color-converter',
         name: 'color-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/ColorConverterView.vue'),
