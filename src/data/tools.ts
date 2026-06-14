@@ -270,12 +270,6 @@ export const tools = [
         iconName: 'GitCompare'
       },
       {
-        name: 'URL Parser',
-        description: 'Parse URLs into components and safely encode/decode query strings.',
-        route: '/tools/url-parser',
-        iconName: 'Link'
-      },
-      {
         name: 'User Agent Parser',
         description: 'Parse and analyze user agent strings.',
         route: '/tools/user-agent-parser',

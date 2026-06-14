@@ -157,6 +157,18 @@ export const routes = [
         }
       },
       {
+        path: 'tools/markdown',
+        name: 'tools-markdown',
+        component: MarkdownView,
+        meta: {
+          title: 'Markdown Editor',
+          description:
+            'Edit and preview Markdown files in real-time. Privacy-first markdown editor that runs 100% client-side in your browser.',
+          keywords:
+            'markdown editor, markdown preview, markdown viewer, github markdown, privacy-first'
+        }
+      },
+      {
         path: 'tools/json-yaml',
         name: 'json-yaml',
         component: () => import(/* webpackPrefetch: true */ '../views/JsonYamlView.vue'),
@@ -768,6 +780,15 @@ export const routes = [
         meta: {
           title: 'URL Encoder/Decoder',
           description: 'Encode and decode URL strings. Privacy-first tool.'
+        }
+      },
+      {
+        path: 'tools/url-parser',
+        name: 'url-parser',
+        component: () => import(/* webpackPrefetch: true */ '../views/URLParserView.vue'),
+        meta: {
+          title: 'URL Parser',
+          description: 'Parse and analyze URLs to extract components.'
         }
       },
       {
