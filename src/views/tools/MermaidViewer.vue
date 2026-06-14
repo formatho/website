@@ -261,7 +261,10 @@ onMounted(() => {
   <div class="h-full flex flex-col p-4 gap-4 bg-muted/30">
     <!-- Header -->
     <div class="flex items-center justify-between flex-wrap gap-2">
-      <h1 class="text-3xl font-bold tracking-tight">Mermaid Diagram Viewer</h1>
+      <div>
+        <h1 class="text-3xl font-bold tracking-tight">Mermaid Diagram Viewer</h1>
+        <p class="text-sm text-muted-foreground mt-1">Render diagrams from Mermaid.js syntax — the same format AI tools like ChatGPT, Claude &amp; Copilot use natively</p>
+      </div>
       <div class="flex items-center gap-2 flex-wrap">
         <select
           v-model="currentTheme"
@@ -272,6 +275,15 @@ onMounted(() => {
           </option>
         </select>
       </div>
+    </div>
+
+    <!-- AI Context Banner -->
+    <div class="flex flex-wrap items-center gap-2 p-3 rounded-lg bg-foreground/5 border border-foreground/10">
+      <span class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">🤖 AI Diagram Tips</span>
+      <span class="px-2.5 py-1 rounded-md bg-background text-[11px] text-muted-foreground font-medium border border-foreground/10">Paste ChatGPT/Claude Mermaid output directly</span>
+      <span class="px-2.5 py-1 rounded-md bg-background text-[11px] text-muted-foreground font-medium border border-foreground/10">Ask AI: "draw a flowchart using mermaid"</span>
+      <span class="px-2.5 py-1 rounded-md bg-background text-[11px] text-muted-foreground font-medium border border-foreground/10">Ask AI: "create an ER diagram in mermaid syntax"</span>
+      <span class="px-2.5 py-1 rounded-md bg-background text-[11px] text-muted-foreground font-medium border border-foreground/10">100% client-side</span>
     </div>
 
     <!-- Sample Diagrams -->

@@ -1259,8 +1259,8 @@ export const routes = [
         component: () => import(/* webpackPrefetch: true */ '../views/tools/MermaidViewer.vue'),
         meta: {
           title: 'Mermaid Diagram Viewer - Free Online Markdown to Diagram Tool',
-          description: 'Free online Mermaid diagram viewer and editor. Render flowcharts, sequence diagrams, ER diagrams, Gantt charts, pie charts, and state diagrams from Markdown syntax. No signup, 100% client-side, zero tracking. Export as SVG or PNG. Perfect for developers, architects, and technical writers.',
-          keywords: 'mermaid viewer, mermaid diagram, mermaid online, flowchart maker, sequence diagram, er diagram, gantt chart, markdown diagram, free diagram tool, mermaid js, architecture diagram, uml diagram, privacy-first'
+          description: 'Free online Mermaid diagram viewer and editor. Paste Mermaid.js code from ChatGPT, Claude, or Copilot and render flowcharts, sequence diagrams, ER diagrams, Gantt charts instantly. The easiest way to visualize AI-generated diagrams. No signup, 100% client-side.',
+          keywords: 'mermaid viewer, mermaid diagram, mermaid online, ai diagram tool, chatgpt diagram, claude mermaid, copilot diagram, flowchart maker, sequence diagram, er diagram, gantt chart, markdown diagram, free diagram tool, mermaid js, architecture diagram, privacy-first'
         }
       },
       {
