@@ -1,4 +1,4 @@
-import { watch, ref } from 'vue'
+import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { tools } from '@/data/tools'
 
@@ -23,31 +23,10 @@ for (const category of tools) {
   }
 }
 
-// Cache to avoid unnecessary DOM updates
-const lastAppliedSEO = ref({
-  title: '',
-  description: '',
-  keywords: '',
-  canonical: '',
-  ogTitle: '',
-  ogDescription: '',
-  ogUrl: '',
-  jsonLd: ''
-})
-
 export function useSEO(config?: SEOConfig) {
   const route = useRoute()
 
   function updateMeta(name: string, content: string) {
-    // Only update if content has changed
-    if (
-      (name === 'title' && lastAppliedSEO.value.title === content) ||
-      (name === 'description' && lastAppliedSEO.value.description === content) ||
-      (name === 'keywords' && lastAppliedSEO.value.keywords === content)
-    ) {
-      return
-    }
-
     let el = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null
     if (!el) {
       el = document.createElement('meta')
@@ -55,11 +34,6 @@ export function useSEO(config?: SEOConfig) {
       document.head.appendChild(el)
     }
     el.setAttribute('content', content)
-
-    // Update cache
-    if (name === 'title') lastAppliedSEO.value.title = content
-    if (name === 'description') lastAppliedSEO.value.description = content
-    if (name === 'keywords') lastAppliedSEO.value.keywords = content
   }
 
   function updateProperty(prop: string, content: string) {
@@ -70,17 +44,9 @@ export function useSEO(config?: SEOConfig) {
       document.head.appendChild(el)
     }
     el.setAttribute('content', content)
-
-    // Update cache
-    if (prop === 'og:title') lastAppliedSEO.value.ogTitle = content
-    if (prop === 'og:description') lastAppliedSEO.value.ogDescription = content
-    if (prop === 'og:url') lastAppliedSEO.value.ogUrl = content
   }
 
   function setCanonical(url: string) {
-    // Only update if URL has changed
-    if (lastAppliedSEO.value.canonical === url) return
-
     let el = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null
     if (!el) {
       el = document.createElement('link')
@@ -88,22 +54,16 @@ export function useSEO(config?: SEOConfig) {
       document.head.appendChild(el)
     }
     el.setAttribute('href', url)
-    lastAppliedSEO.value.canonical = url
   }
 
   function setJsonLd(data: Record<string, unknown>) {
-    const jsonString = JSON.stringify(data)
-    // Only update if JSON-LD has changed
-    if (lastAppliedSEO.value.jsonLd === jsonString) return
-
     let el = document.getElementById('json-ld-page') as HTMLScriptElement | null
     if (el) el.remove()
     el = document.createElement('script')
     el.type = 'application/ld+json'
     el.id = 'json-ld-page'
-    el.textContent = jsonString
+    el.textContent = JSON.stringify(data)
     document.head.appendChild(el)
-    lastAppliedSEO.value.jsonLd = jsonString
   }
 
   function getToolByRoute(path: string) {
