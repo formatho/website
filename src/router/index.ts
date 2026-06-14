@@ -281,11 +281,9 @@ export const routes = [
         name: 'image',
         component: () => import(/* webpackPrefetch: true */ '../views/ImageCompressorView.vue'),
         meta: {
-          title: 'Image Compressor',
-          description:
-            'Compress and optimize images instantly. Reduce image file size while maintaining quality. Privacy-first tool that processes images in your browser.',
-          keywords:
-            'image compressor, compress image, image optimizer, reduce image size, image compression, privacy-first'
+          title: 'Image Compressor - Reduce Image Size Free Online | Formatho',
+          description: 'Compress JPG, PNG, and WebP images by up to 80% without quality loss. Perfect for reducing AI-generated image sizes, optimizing web performance, and saving storage. Resize, convert, and batch process images — all in your browser, 100% private.',
+          keywords: 'image compressor, compress image online, reduce image size, optimize images, ai image compressor, webp compressor, png optimizer, jpg reducer, batch image compression, free image tool, privacy-first'
         }
       },
       {
@@ -900,8 +898,9 @@ export const routes = [
         name: 'wifi-qr-code-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/WifiQrCodeGeneratorView.vue'),
         meta: {
-          title: 'WiFi QR Code Generator',
-          description: 'Generate QR codes for WiFi network credentials.'
+          title: 'WiFi QR Code Generator - Share WiFi Password via QR Code | Formatho',
+          description: 'Generate QR codes for WiFi network credentials instantly. Share your WiFi password with guests without typing — scan and connect. Supports WPA, WEP, and open networks with hidden SSID. 100% client-side, no data sent to any server.',
+          keywords: 'wifi qr code generator, wifi password qr, qr code wifi, share wifi, wifi qr code, wifi network qr, free wifi qr generator, scan wifi qr, guest wifi qr code, privacy-first'
         }
       },
       {
@@ -919,8 +918,9 @@ export const routes = [
         name: 'camera-recorder',
         component: () => import(/* webpackPrefetch: true */ '../views/CameraRecorderView.vue'),
         meta: {
-          title: 'Camera Recorder',
-          description: 'Record video from your camera in the browser.'
+          title: 'Webcam Recorder - Record Video & Audio in Browser | Formatho',
+          description: 'Record video and audio directly from your webcam — no software install needed. Capture HD video, take snapshots, and download as WebM. Perfect for quick video messages, screen recordings, and content creation. 100% private, all processing in your browser.',
+          keywords: 'webcam recorder, record video online, browser camera, video capture, webm recorder, online video recorder, camera snapshot, screen recording, free webcam tool, privacy-first'
         }
       },
       // Development Tools
@@ -1126,7 +1126,11 @@ export const routes = [
         path: 'tools/qr-code-generator',
         name: 'qr-code-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/QRCodeGeneratorView.vue'),
-        meta: { title: 'QR Code Generator', description: 'Generate QR codes from text and URLs.' }
+        meta: {
+          title: 'QR Code Generator - Free Online QR Code Maker | Formatho',
+          description: 'Create custom QR codes for URLs, text, WiFi, email, phone numbers, and more. Free online QR code generator with customizable size, colors, and error correction. Download as PNG or SVG. No signup, 100% client-side, zero tracking.',
+          keywords: 'qr code generator, free qr code, create qr code, qr code maker, online qr generator, custom qr code, url qr code, qr code download, qr code png, qr code svg, privacy-first'
+        }
       },
       {
         path: 'tools/crontab-generator',
@@ -1254,8 +1258,9 @@ export const routes = [
         name: 'mermaid-viewer',
         component: () => import(/* webpackPrefetch: true */ '../views/tools/MermaidViewer.vue'),
         meta: {
-          title: 'Mermaid Diagram Viewer',
-          description: 'View and render Mermaid diagrams in real-time. Supports flowcharts, sequence diagrams, class diagrams, gantt charts, and more. 100% client-side.'
+          title: 'Mermaid Diagram Viewer - Free Online Markdown to Diagram Tool',
+          description: 'Free online Mermaid diagram viewer and editor. Render flowcharts, sequence diagrams, ER diagrams, Gantt charts, pie charts, and state diagrams from Markdown syntax. No signup, 100% client-side, zero tracking. Export as SVG or PNG. Perfect for developers, architects, and technical writers.',
+          keywords: 'mermaid viewer, mermaid diagram, mermaid online, flowchart maker, sequence diagram, er diagram, gantt chart, markdown diagram, free diagram tool, mermaid js, architecture diagram, uml diagram, privacy-first'
         }
       },
       {

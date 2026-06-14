@@ -123,6 +123,23 @@ const compressionRatio = computed(() => {
             @change="handleFileUpload"
           />
         </Button>
+        <div class="flex flex-wrap justify-center gap-2 pt-2">
+          <span class="px-2.5 py-1 rounded-md bg-foreground/5 text-[11px] text-muted-foreground font-medium">JPG</span>
+          <span class="px-2.5 py-1 rounded-md bg-foreground/5 text-[11px] text-muted-foreground font-medium">PNG</span>
+          <span class="px-2.5 py-1 rounded-md bg-foreground/5 text-[11px] text-muted-foreground font-medium">WebP</span>
+          <span class="px-2.5 py-1 rounded-md bg-foreground/5 text-[11px] text-muted-foreground font-medium">100% Private</span>
+        </div>
+      </div>
+
+      <!-- AI Image Tips -->
+      <div class="mt-8 max-w-lg space-y-2">
+        <p class="text-xs font-semibold text-muted-foreground uppercase tracking-wider text-center">💡 Great for AI-generated images</p>
+        <div class="flex flex-wrap justify-center gap-2 text-xs text-muted-foreground">
+          <span class="px-3 py-1.5 rounded-lg bg-foreground/5 border border-foreground/10">Shrink Midjourney outputs</span>
+          <span class="px-3 py-1.5 rounded-lg bg-foreground/5 border border-foreground/10">Compress DALL·E images</span>
+          <span class="px-3 py-1.5 rounded-lg bg-foreground/5 border border-foreground/10">Optimize Stable Diffusion renders</span>
+          <span class="px-3 py-1.5 rounded-lg bg-foreground/5 border border-foreground/10">Reduce Flux image sizes</span>
+        </div>
       </div>
     </div>
 
