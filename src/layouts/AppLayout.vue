@@ -18,15 +18,19 @@ let isFirstLoad = ref(true)
 // Only show breadcrumb when not on home page
 const showBreadcrumb = computed(() => route.path !== '/')
 
+// Detect page type for contextual skeleton loaders
+const isToolPage = computed(() => route.path.startsWith('/tools/') && route.path !== '/tools/')
+const isBlogPage = computed(() => route.path.startsWith('/blogs'))
+
 // Watch route changes to show skeleton during lazy-loaded navigation
 watch(() => route.path, (to, from) => {
   if (to !== from && !isFirstLoad.value) {
     isLoading.value = true
     if (loadingTimeout) clearTimeout(loadingTimeout)
-    // Safety: auto-hide after 2s
+    // Safety: auto-hide after 800ms
     loadingTimeout = setTimeout(() => {
       isLoading.value = false
-    }, 2000)
+    }, 800)
   }
   isFirstLoad.value = false
 })
@@ -109,14 +113,80 @@ onUnmounted(removeToolSchema)
     <Navbar />
     <Breadcrumb v-if="showBreadcrumb" />
     <main id="main-content" class="flex-1 pt-16" :class="{ 'pt-[104px]': showBreadcrumb }">
-      <!-- Skeleton Loader Overlay -->
+      <!-- Skeleton Loader: Tool Pages (2-col editor layout) -->
       <Transition
         enter-active-class="transition-opacity duration-150"
         enter-from-class="opacity-100"
         enter-to-class="opacity-0"
         leave-active-class="hidden"
       >
-        <div v-if="isLoading" class="animate-pulse p-6 space-y-6 max-w-5xl mx-auto">
+        <div v-if="isLoading && isToolPage" class="animate-pulse p-4 gap-4 flex flex-col bg-muted/30" style="min-height: calc(100vh - 8rem)">
+          <!-- Title bar -->
+          <div class="flex items-center justify-between">
+            <div class="h-8 bg-muted-foreground/15 rounded-md w-64"></div>
+            <div class="h-9 bg-muted-foreground/15 rounded-md w-28"></div>
+          </div>
+          <!-- Two-column editor grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 min-h-0">
+            <div class="border border-muted-foreground/10 rounded-xl p-4 space-y-3 flex flex-col">
+              <div class="h-4 bg-muted-foreground/15 rounded w-32"></div>
+              <div class="flex-1 space-y-2">
+                <div class="h-3 bg-muted-foreground/10 rounded w-full"></div>
+                <div class="h-3 bg-muted-foreground/10 rounded w-3/4"></div>
+                <div class="h-3 bg-muted-foreground/10 rounded w-5/6"></div>
+                <div class="h-3 bg-muted-foreground/10 rounded w-2/3"></div>
+              </div>
+            </div>
+            <div class="border border-muted-foreground/10 rounded-xl p-4 space-y-3 flex flex-col">
+              <div class="h-4 bg-muted-foreground/15 rounded w-28"></div>
+              <div class="flex-1 space-y-2">
+                <div class="h-3 bg-muted-foreground/10 rounded w-full"></div>
+                <div class="h-3 bg-muted-foreground/10 rounded w-4/5"></div>
+                <div class="h-3 bg-muted-foreground/10 rounded w-3/5"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Transition>
+
+      <!-- Skeleton Loader: Blog Pages -->
+      <Transition
+        enter-active-class="transition-opacity duration-150"
+        enter-from-class="opacity-100"
+        enter-to-class="opacity-0"
+        leave-active-class="hidden"
+      >
+        <div v-if="isLoading && isBlogPage" class="animate-pulse max-w-3xl mx-auto p-6 space-y-6">
+          <div class="h-6 bg-muted rounded w-24"></div>
+          <div class="h-10 bg-muted-foreground/15 rounded-lg w-3/4"></div>
+          <div class="flex items-center gap-3">
+            <div class="h-4 bg-muted rounded w-32"></div>
+            <div class="h-4 bg-muted rounded w-20"></div>
+          </div>
+          <div class="space-y-3 pt-4">
+            <div class="h-4 bg-muted-foreground/10 rounded w-full"></div>
+            <div class="h-4 bg-muted-foreground/10 rounded w-full"></div>
+            <div class="h-4 bg-muted-foreground/10 rounded w-5/6"></div>
+            <div class="h-4 bg-muted-foreground/10 rounded w-full"></div>
+            <div class="h-4 bg-muted-foreground/10 rounded w-3/4"></div>
+          </div>
+          <div class="h-48 bg-muted-foreground/10 rounded-xl"></div>
+          <div class="space-y-3">
+            <div class="h-4 bg-muted-foreground/10 rounded w-full"></div>
+            <div class="h-4 bg-muted-foreground/10 rounded w-full"></div>
+            <div class="h-4 bg-muted-foreground/10 rounded w-2/3"></div>
+          </div>
+        </div>
+      </Transition>
+
+      <!-- Skeleton Loader: Generic Pages -->
+      <Transition
+        enter-active-class="transition-opacity duration-150"
+        enter-from-class="opacity-100"
+        enter-to-class="opacity-0"
+        leave-active-class="hidden"
+      >
+        <div v-if="isLoading && !isToolPage && !isBlogPage" class="animate-pulse max-w-5xl mx-auto p-6 space-y-6">
           <div class="h-8 bg-muted rounded-md w-56"></div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="space-y-4">
@@ -134,6 +204,7 @@ onUnmounted(removeToolSchema)
           </div>
         </div>
       </Transition>
+
       <RouterView v-show="!isLoading" @vue:mounted="onComponentReady" />
     </main>
     <Footer />
