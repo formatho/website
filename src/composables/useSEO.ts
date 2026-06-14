@@ -1,4 +1,4 @@
-import { watch } from 'vue'
+import { watch, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { tools } from '@/data/tools'
 
@@ -15,10 +15,39 @@ interface SEOConfig {
 const BASE_URL = 'https://formatho.com'
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.png`
 
+// Create a map for O(1) tool lookups instead of O(n) scanning
+const toolMap = new Map<string, { tool: any; category: any }>()
+for (const category of tools) {
+  for (const tool of category.items) {
+    toolMap.set(tool.route, { tool, category })
+  }
+}
+
+// Cache to avoid unnecessary DOM updates
+const lastAppliedSEO = ref({
+  title: '',
+  description: '',
+  keywords: '',
+  canonical: '',
+  ogTitle: '',
+  ogDescription: '',
+  ogUrl: '',
+  jsonLd: ''
+})
+
 export function useSEO(config?: SEOConfig) {
   const route = useRoute()
 
   function updateMeta(name: string, content: string) {
+    // Only update if content has changed
+    if (
+      (name === 'title' && lastAppliedSEO.value.title === content) ||
+      (name === 'description' && lastAppliedSEO.value.description === content) ||
+      (name === 'keywords' && lastAppliedSEO.value.keywords === content)
+    ) {
+      return
+    }
+
     let el = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null
     if (!el) {
       el = document.createElement('meta')
@@ -26,6 +55,11 @@ export function useSEO(config?: SEOConfig) {
       document.head.appendChild(el)
     }
     el.setAttribute('content', content)
+
+    // Update cache
+    if (name === 'title') lastAppliedSEO.value.title = content
+    if (name === 'description') lastAppliedSEO.value.description = content
+    if (name === 'keywords') lastAppliedSEO.value.keywords = content
   }
 
   function updateProperty(prop: string, content: string) {
@@ -36,9 +70,17 @@ export function useSEO(config?: SEOConfig) {
       document.head.appendChild(el)
     }
     el.setAttribute('content', content)
+
+    // Update cache
+    if (prop === 'og:title') lastAppliedSEO.value.ogTitle = content
+    if (prop === 'og:description') lastAppliedSEO.value.ogDescription = content
+    if (prop === 'og:url') lastAppliedSEO.value.ogUrl = content
   }
 
   function setCanonical(url: string) {
+    // Only update if URL has changed
+    if (lastAppliedSEO.value.canonical === url) return
+
     let el = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null
     if (!el) {
       el = document.createElement('link')
@@ -46,25 +88,27 @@ export function useSEO(config?: SEOConfig) {
       document.head.appendChild(el)
     }
     el.setAttribute('href', url)
+    lastAppliedSEO.value.canonical = url
   }
 
   function setJsonLd(data: Record<string, unknown>) {
+    const jsonString = JSON.stringify(data)
+    // Only update if JSON-LD has changed
+    if (lastAppliedSEO.value.jsonLd === jsonString) return
+
     let el = document.getElementById('json-ld-page') as HTMLScriptElement | null
     if (el) el.remove()
     el = document.createElement('script')
     el.type = 'application/ld+json'
     el.id = 'json-ld-page'
-    el.textContent = JSON.stringify(data)
+    el.textContent = jsonString
     document.head.appendChild(el)
+    lastAppliedSEO.value.jsonLd = jsonString
   }
 
   function getToolByRoute(path: string) {
-    for (const category of tools) {
-      for (const tool of category.items) {
-        if (tool.route === path) return { tool, category }
-      }
-    }
-    return null
+    // O(1) lookup instead of O(n) scanning
+    return toolMap.get(path) || null
   }
 
   function generateToolJsonLd(tool: any, _category: any) {
@@ -79,18 +123,18 @@ export function useSEO(config?: SEOConfig) {
       offers: {
         '@type': 'Offer',
         price: '0',
-        priceCurrency: 'USD',
+        priceCurrency: 'USD'
       },
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: '4.8',
-        ratingCount: '150',
+        ratingCount: '150'
       },
       creator: {
         '@type': 'Organization',
         name: 'Formatho',
-        url: BASE_URL,
-      },
+        url: BASE_URL
+      }
     }
   }
 
@@ -110,7 +154,7 @@ export function useSEO(config?: SEOConfig) {
         'online tool',
         'free tool',
         'privacy',
-        'client-side',
+        'client-side'
       ]
       const canonical = `${BASE_URL}${path}`
 

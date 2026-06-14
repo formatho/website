@@ -16,10 +16,8 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(() => {
-  // Add a small delay to ensure smooth UI transition
-  setTimeout(() => {
-    isLoading.value = false
-  }, 100)
+  // Remove artificial delay for faster navigation
+  isLoading.value = false
 })
 
 router.onError(() => {
@@ -70,9 +68,15 @@ useSEO()
 }
 
 @keyframes indeterminateAnimation {
-  0% { transform: translateX(0) scaleX(0); }
-  40% { transform: translateX(0) scaleX(0.4); }
-  100% { transform: translateX(100%) scaleX(0.5); }
+  0% {
+    transform: translateX(0) scaleX(0);
+  }
+  40% {
+    transform: translateX(0) scaleX(0.4);
+  }
+  100% {
+    transform: translateX(100%) scaleX(0.5);
+  }
 }
 
 body {
