@@ -31,6 +31,12 @@ export const tools = [
         description: 'Compile Solidity to EVM opcodes.',
         route: '/tools/solidity-to-opcodes',
         iconName: 'Code'
+      },
+      {
+        name: 'ABI Encoder & Decoder',
+        description: 'Encode/decode Solidity ABI parameters, function selectors, and transaction calldata.',
+        route: '/tools/abi-encoder',
+        iconName: 'Binary'
       }
     ]
   },

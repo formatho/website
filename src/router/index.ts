@@ -459,6 +459,16 @@ export const routes = [
         }
       },
       {
+        path: 'tools/abi-encoder',
+        name: 'abi-encoder',
+        component: () => import(/* webpackPrefetch: true */ '../views/AbiEncoderView.vue'),
+        meta: {
+          title: 'ABI Encoder & Decoder - Solidity Smart Contract ABI Tool | Formatho',
+          description: 'Encode and decode Solidity ABI parameters, function calls, and constructor arguments. Generate function selectors and calldata for Foundry/Cast. Decode transaction input data. Supports all Solidity types. Free, 100% client-side.',
+          keywords: 'abi encoder, abi decoder, solidity abi, abi encode online, function selector, calldata encoder, solidity encode, erc20 encode, foundry cast, ethers abi, viem abi, smart contract debugging, free abi tool, privacy-first'
+        }
+      },
+      {
         path: 'agent-identity-generator',
         name: 'agent-identity-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/tools/AgentIdentityView.vue'),
