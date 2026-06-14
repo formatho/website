@@ -424,6 +424,11 @@ export const routes = [
         path: 'agent-identity-generator',
         name: 'agent-identity-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/tools/AgentIdentityView.vue'),
+      },
+      {
+        path: 'tools/agent-identity-generator',
+        name: 'tools-agent-identity-generator',
+        component: () => import(/* webpackPrefetch: true */ '../views/tools/AgentIdentityView.vue'),
         meta: {
           title: 'AI Agent Identity Generator',
           description:
@@ -435,6 +440,11 @@ export const routes = [
       {
         path: 'local-token-counter',
         name: 'local-token-counter',
+        component: () => import(/* webpackPrefetch: true */ '../views/LocalTokenCounterView.vue'),
+      },
+      {
+        path: 'tools/local-token-counter',
+        name: 'tools-local-token-counter',
         component: () => import(/* webpackPrefetch: true */ '../views/LocalTokenCounterView.vue'),
         meta: {
           title: 'Local Token Counter',
@@ -508,6 +518,11 @@ export const routes = [
         path: 'agent-orchestrator',
         name: 'agent-orchestrator',
         component: () => import(/* webpackPrefetch: true */ '../views/AgentOrchestratorView.vue'), // Landing page
+      },
+      {
+        path: 'tools/agent-orchestrator',
+        name: 'tools-agent-orchestrator',
+        component: () => import(/* webpackPrefetch: true */ '../views/AgentOrchestratorView.vue'),
         meta: {
           title: 'Agent Orchestrator - Local-First AI Agent Management',
           description:
