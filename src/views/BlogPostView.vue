@@ -45,7 +45,7 @@ const formatDate = (dateString: string) => {
 }
 
 const siteName = 'Formatho'
-const baseUrl = 'https://formatho.com/tools'
+const baseUrl = 'https://formatho.com'
 
 useHead(computed(() => {
   if (!post.value) {
