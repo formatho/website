@@ -241,6 +241,46 @@ export const routes = [
         }
       },
       {
+        path: 'tools/sql-to-er-diagram',
+        name: 'sql-to-er-diagram',
+        component: () => import(/* webpackPrefetch: true */ '../views/SqlToErDiagramView.vue'),
+        meta: {
+          title: 'SQL to ER Diagram Converter - Visualize Database Schema | Formatho',
+          description: 'Convert CREATE TABLE SQL statements into interactive ER diagrams instantly. Visualize tables, columns, primary keys, and foreign key relationships. Export as Mermaid for AI tools. Free, 100% client-side.',
+          keywords: 'sql to er diagram, erd generator, database schema visualizer, create table to erd, entity relationship diagram, sql schema visualizer, free erd tool, mermaid er diagram, privacy-first'
+        }
+      },
+      {
+        path: 'tools/sql-query-plan-visualizer',
+        name: 'sql-query-plan-visualizer',
+        component: () => import(/* webpackPrefetch: true */ '../views/SqlQueryPlanVisualizerView.vue'),
+        meta: {
+          title: 'SQL Query Plan Visualizer - Analyze & Optimize Queries | Formatho',
+          description: 'Visualize SQL execution plans step by step. Understand table scans, joins, sorts, and aggregates. Get actionable optimization tips for PostgreSQL, MySQL, and more. Free, 100% client-side.',
+          keywords: 'sql query plan, execution plan visualizer, sql optimizer, query analysis, explain plan, sql performance, database optimization, free sql tool, privacy-first'
+        }
+      },
+      {
+        path: 'tools/sql-dialect-converter',
+        name: 'sql-dialect-converter',
+        component: () => import(/* webpackPrefetch: true */ '../views/SqlDialectConverterView.vue'),
+        meta: {
+          title: 'SQL Dialect Converter - PostgreSQL, MySQL, SQLite, T-SQL | Formatho',
+          description: 'Convert SQL queries between PostgreSQL, MySQL, SQLite, SQL Server, BigQuery, Snowflake, and more. Handles syntax differences, data types, and dialect-specific functions. Free, 100% client-side.',
+          keywords: 'sql dialect converter, postgresql to mysql, mysql to postgresql, sql converter, tsql converter, sql translation, database migration tool, free sql converter, privacy-first'
+        }
+      },
+      {
+        path: 'tools/foreign-key-visualizer',
+        name: 'foreign-key-visualizer',
+        component: () => import(/* webpackPrefetch: true */ '../views/FkVisualizerView.vue'),
+        meta: {
+          title: 'Foreign Key Visualizer - Map Database Relationships | Formatho',
+          description: 'Visualize foreign key relationships in your SQL schema. See how tables connect, find orphaned tables, and export relationship diagrams as Mermaid. Free, 100% client-side.',
+          keywords: 'foreign key visualizer, fk relationships, database relationships, schema relationships, sql fk mapper, table relationships visualizer, free database tool, privacy-first'
+        }
+      },
+      {
         path: 'tools/all',
         name: 'tools-all',
         component: () => import(/* webpackPrefetch: true */ '../views/ToolsView.vue'),

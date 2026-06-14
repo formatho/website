@@ -340,6 +340,30 @@ export const tools = [
         iconName: 'Database'
       },
       {
+        name: 'SQL to ER Diagram',
+        description: 'Convert CREATE TABLE SQL into interactive ER diagrams with relationship mapping.',
+        route: '/tools/sql-to-er-diagram',
+        iconName: 'Table2'
+      },
+      {
+        name: 'SQL Query Plan',
+        description: 'Visualize SQL execution plans and get optimization tips.',
+        route: '/tools/sql-query-plan-visualizer',
+        iconName: 'Zap'
+      },
+      {
+        name: 'SQL Dialect Converter',
+        description: 'Convert SQL between PostgreSQL, MySQL, SQLite, T-SQL, BigQuery, and more.',
+        route: '/tools/sql-dialect-converter',
+        iconName: 'Repeat'
+      },
+      {
+        name: 'Foreign Key Visualizer',
+        description: 'Map foreign key relationships and find orphaned tables in your schema.',
+        route: '/tools/foreign-key-visualizer',
+        iconName: 'Link2'
+      },
+      {
         name: 'Chmod Calculator',
         description: 'Calculate Unix file permissions.',
         route: '/tools/chmod-calculator',
