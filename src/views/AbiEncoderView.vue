@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { encodeFunctionParameters, decodeAbiParameters } from 'viem'
+import { encodeAbiParameters, decodeAbiParameters } from 'viem'
 
 type ParamType = 'address' | 'uint256' | 'uint8' | 'uint16' | 'uint32' | 'uint64' | 'uint128' | 'int256' | 'int128' | 'int64' | 'int32' | 'int8' | 'bool' | 'string' | 'bytes' | 'bytes32' | 'bytes4'
 
@@ -47,7 +47,7 @@ const encodeAbi = () => {
   }
 
   try {
-    const types = encodeParams.value.map(p => p.type)
+    const types = encodeParams.value.map(p => ({ type: p.type }))
     const values = encodeParams.value.map(p => {
       if (p.type === 'bool') return p.value === 'true' || p.value === '1'
       if (p.type.startsWith('uint') || p.type.startsWith('int')) return BigInt(p.value || '0')
@@ -57,7 +57,7 @@ const encodeAbi = () => {
       return p.value
     })
 
-    const encoded = encodeFunctionParameters(types as any, values as any)
+    const encoded = encodeAbiParameters(types as any, values as any)
     encodeResult.value = encoded
   } catch (e: any) {
     encodeError.value = e.shortMessage || e.message || 'Failed to encode parameters'
@@ -88,10 +88,11 @@ const decodeAbi = () => {
   }
 
   try {
-    const types = decodeTypes.value.split(',').map(t => t.trim()).filter(Boolean)
+    const typeStrings = decodeTypes.value.split(',').map(t => t.trim()).filter(Boolean)
+    const types = typeStrings.map(t => ({ type: t }))
     const decoded = decodeAbiParameters(types as any, decodeInput.value as any)
 
-    decodeResult.value = types.map((type, i) => ({
+    decodeResult.value = typeStrings.map((type, i) => ({
       type,
       value: typeof decoded[i] === 'bigint' ? decoded[i].toString() : String(decoded[i])
     }))
@@ -116,7 +117,7 @@ const encodeFunction = () => {
   funcSelector.value = ''
 
   try {
-    const types = funcParams.value.map(p => p.type)
+    const types = funcParams.value.map(p => ({ type: p.type }))
     const values = funcParams.value.map(p => {
       if (p.type === 'bool') return p.value === 'true' || p.value === '1'
       if (p.type.startsWith('uint') || p.type.startsWith('int')) return BigInt(p.value || '0')
@@ -127,8 +128,9 @@ const encodeFunction = () => {
     })
 
     // Build canonical signature
-    const sig = `${funcSig.value.split('(')[0]}(${types.join(',')})`
-    const encoded = encodeFunctionParameters(types as any, values as any)
+    const sigTypes = funcParams.value.map(p => p.type)
+    const sig = `${funcSig.value.split('(')[0]}(${sigTypes.join(',')})`
+    const encoded = encodeAbiParameters(types as any, values as any)
 
     // Selector is first 4 bytes (10 chars including 0x)
     funcSelector.value = encoded.substring(0, 10)
