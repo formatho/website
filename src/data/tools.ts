@@ -354,7 +354,7 @@ export const tools = [
       {
         name: 'Docker to Compose',
         description: 'Convert docker run commands to docker-compose.',
-        route: '/tools/docker-run-to-compose-converter',
+        route: '/tools/docker-run-to-compose',
         iconName: 'Container'
       },
       {
