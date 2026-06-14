@@ -29,7 +29,7 @@ generate()
 <template>
   <div class="h-full flex flex-col p-4 gap-4 bg-muted/30">
     <div class="flex items-center justify-between">
-      <h1 class="text-3xl font-bold tracking-tight">UUID Generator</h1>
+      <h1 class="text-3xl font-bold tracking-tight">UUID Generator Online</h1>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1 min-h-0">

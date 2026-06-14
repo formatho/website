@@ -60,7 +60,7 @@ watch(base64Text, decodeFromBase64)
     <Breadcrumb />
     
     <div class="flex items-center justify-between">
-      <h1 class="text-3xl font-bold tracking-tight">Base64 Encoder/Decoder</h1>
+      <h1 class="text-3xl font-bold tracking-tight">Base64 Encoder &amp; Decoder Online</h1>
       <Button variant="ghost" @click="fillSample" aria-label="Load sample Base64 data">Load Sample</Button>
     </div>
 

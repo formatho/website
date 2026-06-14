@@ -40,7 +40,7 @@ formatSql()
 <template>
   <div class="h-full flex flex-col p-4 gap-4 bg-muted/30">
     <div class="flex items-center justify-between">
-      <h1 class="text-3xl font-bold tracking-tight">SQL Formatter</h1>
+      <h1 class="text-3xl font-bold tracking-tight">SQL Formatter Online</h1>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 min-h-0">

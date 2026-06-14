@@ -173,11 +173,11 @@ export const routes = [
         name: 'json-yaml',
         component: () => import(/* webpackPrefetch: true */ '../views/JsonYamlView.vue'),
         meta: {
-          title: 'JSON to YAML Converter',
+          title: 'JSON to YAML Converter Online - Free | Formatho',
           description:
-            'Convert JSON to YAML and YAML to JSON instantly. Free, privacy-first converter that processes data entirely in your browser.',
+            'Convert JSON to YAML and YAML to JSON online instantly. Free converter for config files, Kubernetes manifests, docker-compose, and CI/CD configs. 100% client-side — your data never leaves your browser.',
           keywords:
-            'json to yaml, yaml to json, json converter, yaml converter, json yaml, privacy-first'
+            'json to yaml converter, yaml to json, convert json yaml online, json yaml converter free, kubernetes yaml converter, docker compose converter, json yaml online tool, privacy-first'
         }
       },
       {
@@ -185,11 +185,11 @@ export const routes = [
         name: 'json-csv',
         component: () => import(/* webpackPrefetch: true */ '../views/JsonCsvView.vue'),
         meta: {
-          title: 'JSON to CSV Converter',
+          title: 'JSON to CSV Converter Online - Free | Formatho',
           description:
-            'Convert JSON to CSV and CSV to JSON format instantly. Free, client-side converter that keeps your data private.',
+            'Convert JSON to CSV and CSV to JSON online instantly. Free converter for data export, spreadsheet import, and API data transformation. Handles nested objects and arrays. 100% client-side, no upload.',
           keywords:
-            'json to csv, csv to json, json converter, csv converter, json csv, privacy-first'
+            'json to csv converter, csv to json, convert json csv online, json csv free tool, csv json transformer, excel json converter, data conversion tool, privacy-first'
         }
       },
       {
@@ -197,11 +197,11 @@ export const routes = [
         name: 'diff',
         component: () => import(/* webpackPrefetch: true */ '../views/DiffView.vue'),
         meta: {
-          title: 'Text Diff Tool',
+          title: 'Text Diff Checker Online - Free File Comparison Tool | Formatho',
           description:
-            'Compare two texts and see the differences highlighted. Free diff tool that runs entirely in your browser.',
+            'Compare two texts online and highlight differences instantly. Free diff checker for code review, document comparison, and version tracking. Shows additions, deletions, and changes side-by-side. 100% client-side.',
           keywords:
-            'diff tool, text diff, compare text, diff checker, text comparison, privacy-first'
+            'text diff online, diff checker, compare text online, file comparison tool, text difference, code diff, diff tool free, online text compare, privacy-first'
         }
       },
       {
@@ -209,11 +209,11 @@ export const routes = [
         name: 'base64',
         component: () => import(/* webpackPrefetch: true */ '../views/Base64View.vue'),
         meta: {
-          title: 'Base64 Encoder & Decoder',
+          title: 'Base64 Encoder & Decoder Online - Free | Formatho',
           description:
-            'Encode and decode Base64 strings instantly. Free, privacy-first Base64 tool that processes data entirely in your browser.',
+            'Encode text to Base64 or decode Base64 to text online instantly. Free Base64 converter supports UTF-8, files, and URLs. No signup, 100% client-side — your data never leaves your browser.',
           keywords:
-            'base64 encoder, base64 decoder, base64 encode, base64 decode, base64 converter, privacy-first'
+            'base64 encoder online, base64 decoder online, base64 converter, decode base64, encode base64, base64 to text, text to base64, base64 online tool, free base64, privacy-first'
         }
       },
       {
@@ -221,11 +221,11 @@ export const routes = [
         name: 'jwt',
         component: () => import(/* webpackPrefetch: true */ '../views/JwtView.vue'),
         meta: {
-          title: 'JWT Decoder',
+          title: 'JWT Decoder Online - Decode JSON Web Tokens Free | Formatho',
           description:
-            'Decode and inspect JWT tokens instantly. View JWT header, payload, and signature. Privacy-first tool that runs in your browser.',
+            'Decode JWT (JSON Web Tokens) online instantly. Inspect JWT header, payload, and signature. Check expiry, validate claims, and debug auth tokens. Free JWT debugger — 100% client-side, tokens never leave your browser.',
           keywords:
-            'jwt decoder, jwt decode, jwt token decoder, jwt inspector, json web token, privacy-first'
+            'jwt decoder online, decode jwt, jwt debugger, jwt inspector, json web token decoder, jwt payload viewer, jwt validator, jwt expiry checker, free jwt tool, privacy-first'
         }
       },
       {
@@ -233,11 +233,11 @@ export const routes = [
         name: 'sql',
         component: () => import(/* webpackPrefetch: true */ '../views/SqlFormatterView.vue'),
         meta: {
-          title: 'SQL Formatter',
+          title: 'SQL Formatter Online - Free SQL Beautifier | Formatho',
           description:
-            'Format and beautify SQL queries instantly. Free SQL formatter that runs entirely in your browser. Supports multiple SQL dialects.',
+            'Format and beautify SQL queries online instantly. Free SQL formatter supporting PostgreSQL, MySQL, SQLite, T-SQL, and more. Beautify minified SQL, validate syntax, and improve readability. 100% client-side.',
           keywords:
-            'sql formatter, sql beautifier, sql prettifier, format sql, sql formatter online, privacy-first'
+            'sql formatter online, sql beautifier, format sql online, sql prettifier, sql format tool, free sql formatter, postgresql formatter, mysql formatter, sqlite formatter, privacy-first'
         }
       },
       {
@@ -297,11 +297,11 @@ export const routes = [
         name: 'uuid',
         component: () => import(/* webpackPrefetch: true */ '../views/UuidGeneratorView.vue'),
         meta: {
-          title: 'UUID Generator',
+          title: 'UUID Generator Online - Free UUID v4 & v1 | Formatho',
           description:
-            'Generate UUIDs (Universally Unique Identifiers) instantly. Free UUID generator that creates v1, v4, and other UUID formats.',
+            'Generate UUIDs online instantly — UUID v4, v1, v3, and v5. Create single or batch unique identifiers for databases, APIs, and distributed systems. Free, 100% client-side, no signup required.',
           keywords:
-            'uuid generator, generate uuid, uuid v4, uuid v1, unique identifier generator, privacy-first'
+            'uuid generator online, uuid v4 generator, generate uuid online, guid generator, unique id generator, uuid v1, uuid v5, random uuid, batch uuid generator, free uuid tool, privacy-first'
         }
       },
       {
@@ -309,9 +309,9 @@ export const routes = [
         name: 'lorem',
         component: () => import(/* webpackPrefetch: true */ '../views/LoremIpsumView.vue'),
         meta: {
-          title: 'Lorem Ipsum Generator',
+          title: 'Lorem Ipsum Generator Online - Free Placeholder Text | Formatho',
           description:
-            'Generate Lorem Ipsum placeholder text instantly. Customize paragraphs, words, and sentences. Free text generator.',
+            'Generate Lorem Ipsum placeholder text online instantly. Create paragraphs, sentences, and words for mockups, wireframes, and design templates. Free dummy text generator — 100% client-side.',
           keywords:
             'lorem ipsum generator, placeholder text, dummy text generator, lorem ipsum, privacy-first'
         }
@@ -331,11 +331,11 @@ export const routes = [
         name: 'json-lint',
         component: () => import(/* webpackPrefetch: true */ '../views/JsonLintView.vue'),
         meta: {
-          title: 'JSON Linter & Validator',
+          title: 'JSON Validator Online - Free JSON Formatter & Linter | Formatho',
           description:
-            'Validate and lint JSON code instantly. Find syntax errors and format JSON. Free JSON validator that runs entirely in your browser.',
+            'Free online JSON validator and formatter. Check JSON syntax errors, beautify minified JSON, and validate API responses instantly in your browser. No upload, 100% private. Supports JSON5 comments.',
           keywords:
-            'json linter, json validator, json formatter, validate json, json checker, privacy-first'
+            'json validator online, json formatter online, json linter, validate json, json checker, json beautifier, json parser online, json syntax checker, json to pretty, free json tool, privacy-first'
         }
       },
       {
@@ -343,9 +343,9 @@ export const routes = [
         name: 'yaml-lint',
         component: () => import(/* webpackPrefetch: true */ '../views/YamlLintView.vue'),
         meta: {
-          title: 'YAML Linter & Validator',
+          title: 'YAML Validator Online - Free YAML Linter & Formatter | Formatho',
           description:
-            'Validate and lint YAML code instantly. Find syntax errors and format YAML. Free YAML validator that runs entirely in your browser.',
+            'Free online YAML validator and formatter. Check YAML syntax errors, format and beautify YAML instantly. Validate docker-compose, Kubernetes configs, CI/CD pipelines, and more. 100% client-side, no data uploaded.',
           keywords:
             'yaml linter, yaml validator, yaml formatter, validate yaml, yaml checker, privacy-first'
         }
@@ -380,7 +380,7 @@ export const routes = [
         name: 'evm-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/EvmUnitConverterView.vue'),
         meta: {
-          title: 'EVM Unit Converter',
+          title: 'Ethereum Unit Converter Online - Wei, Gwei, Ether | Formatho',
           description:
             'Convert between Wei, Gwei, and Ether instantly. Essential tool for Ethereum developers.',
           keywords:
@@ -403,7 +403,7 @@ export const routes = [
         name: 'keccak256',
         component: () => import(/* webpackPrefetch: true */ '../views/KeccakHasherView.vue'),
         meta: {
-          title: 'Keccak-256 Hasher',
+          title: 'Keccak-256 Hash Generator Online - Free | Formatho',
           description:
             'Generate Keccak-256 hashes online. Secure, client-side hashing for Ethereum development.',
           keywords: 'keccak256 hash, keccak256 online, ethereum hash, solidity keccak256'
@@ -649,9 +649,9 @@ export const routes = [
         name: 'bcrypt',
         component: () => import(/* webpackPrefetch: true */ '../views/BcryptView.vue'),
         meta: {
-          title: 'Bcrypt Hash Generator',
+          title: 'Bcrypt Hash Generator Online - Free Password Hasher | Formatho',
           description:
-            'Generate and verify bcrypt password hashes. Privacy-first tool that runs entirely in your browser.'
+            'Generate bcrypt password hashes online with custom cost factors (4-31). Compare and verify bcrypt hashes. Free tool for Node.js and Python password hashing. 100% client-side — passwords never leave your browser.'
         }
       },
       {
@@ -659,9 +659,9 @@ export const routes = [
         name: 'encryption',
         component: () => import(/* webpackPrefetch: true */ '../views/EncryptionView.vue'),
         meta: {
-          title: 'Text Encryption/Decryption',
+          title: 'AES Encryption Tool Online - Encrypt Text Free | Formatho',
           description:
-            'Encrypt and decrypt text using AES, DES, and other algorithms. Privacy-first tool.'
+            'Encrypt and decrypt text online with AES-256, DES, and TripleDES. Free client-side encryption tool — your text and keys never leave your browser. Perfect for encrypting sensitive messages and API keys.'
         }
       },
       {
@@ -1195,7 +1195,11 @@ export const routes = [
         path: 'tools/regex-tester',
         name: 'regex-tester',
         component: () => import(/* webpackPrefetch: true */ '../views/RegexTesterView.vue'),
-        meta: { title: 'Regex Tester', description: 'Test and debug regular expressions.' }
+        meta: {
+          title: 'Regex Tester Online - Free Regular Expression Tester | Formatho',
+          description: 'Test and debug regular expressions online instantly. Match patterns, capture groups, flags (global, case-insensitive), and see results in real-time. Free regex tester for JavaScript, Python, and PCRE. 100% client-side.',
+          keywords: 'regex tester online, regular expression tester, regex checker, regex validator, test regex online, regex matcher, regex debugger, free regex tool, privacy-first'
+        }
       },
       {
         path: 'tools/math-evaluator',
@@ -1254,8 +1258,8 @@ export const routes = [
         name: 'case-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/CaseConverterView.vue'),
         meta: {
-          title: 'Case Converter',
-          description: 'Convert text between camelCase, snake_case, kebab-case, etc.'
+          title: 'Case Converter Online - Free Text Case Changer | Formatho',
+          description: 'Convert text case online instantly — UPPER, lower, Title Case, camelCase, snake_case, kebab-case, CONSTANT_CASE, and more. Free text transformer for developers and writers. 100% client-side.'
         }
       },
       {

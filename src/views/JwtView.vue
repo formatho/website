@@ -47,7 +47,7 @@ const fillSample = () => {
     <!-- Breadcrumb Navigation -->
     <Breadcrumb />
     <div class="flex items-center justify-between">
-      <h1 class="text-3xl font-bold tracking-tight">JWT Debugger</h1>
+      <h1 class="text-3xl font-bold tracking-tight">JWT Decoder Online</h1>
       <Button variant="ghost" @click="fillSample" aria-label="Load sample JWT token">Load Sample</Button>
     </div>
 
