@@ -82,7 +82,7 @@ function parseBlogPosts(content) {
 const blogPosts = parseBlogPosts(blogPostsContent)
 
 const siteName = 'Formatho'
-const baseUrl = 'https://formatho.com/tools'
+const baseUrl = 'https://formatho.com'
 const twitterHandle = '@heyformatho'
 
 /**
