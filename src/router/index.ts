@@ -403,10 +403,10 @@ export const routes = [
         name: 'keccak256',
         component: () => import(/* webpackPrefetch: true */ '../views/KeccakHasherView.vue'),
         meta: {
-          title: 'Keccak-256 Hash Generator Online - Free | Formatho',
+          title: 'Keccak-256 Hash Generator Online - Free & Privacy-First | Formatho',
           description:
-            'Generate Keccak-256 hashes online. Secure, client-side hashing for Ethereum development.',
-          keywords: 'keccak256 hash, keccak256 online, ethereum hash, solidity keccak256'
+            'Calculate Keccak-256 hashes instantly online. Supports UTF-8, UTF-16, Hex, Base64. 100% client-side, no data leaves your browser. Free tool for Ethereum and blockchain developers.',
+          keywords: 'keccak-256 hash generator, keccak256 online, ethereum hash, solidity keccak256, blockchain hash, client-side hash, privacy-first, utf-8 hashing, utf-16 hashing, hex hashing, base64 hashing'
         }
       },
       {
