@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { getAddress, isAddress, keccak256 } from 'viem'
+import { getAddress, isAddress } from 'viem'
+import { keccak256 } from 'ethereum-cryptography/keccak'
+import { bytesToHex } from 'ethereum-cryptography'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -11,47 +13,53 @@ const address = ref('')
 
 // Calculate character-by-character checksum details
 const checksumDetails = computed(() => {
-  if (!address.value || !isAddress(address.value)) return null
+  try {
+    if (!address.value || !isAddress(address.value)) return null
 
-  const lowerAddress = address.value.toLowerCase()
-  const hash = keccak256(lowerAddress as `0x${string}`)
-  const checksummed = getAddress(address.value)
+    const lowerAddress = address.value.toLowerCase().replace('0x', '')
+    const hashBytes = keccak256(Buffer.from(lowerAddress, 'utf-8'))
+    const hash = '0x' + bytesToHex(hashBytes)
+    const checksummed = getAddress(address.value)
 
-  const details = []
-  for (let i = 0; i < 40; i++) {
-    const char = lowerAddress[2 + i] // Skip '0x'
-    const hashIndex = Math.floor(i / 2)
-    const hashByte = parseInt(hash[2 + hashIndex], 16)
-    const isHighNibble = i % 2 === 1
-    const threshold = isHighNibble ? hashByte & 0xF : (hashByte >> 4) & 0xF
-    const shouldBeUppercase = threshold >= 8
-    const actualInputChar = address.value[2 + i] || char
-    const actualIsUppercase = actualInputChar !== char
+    const details = []
+    for (let i = 0; i < 40; i++) {
+      const char = lowerAddress[i]
+      const hashIndex = Math.floor(i / 2)
+      const hashByte = parseInt(hash[2 + hashIndex], 16)
+      const isHighNibble = i % 2 === 1
+      const threshold = isHighNibble ? hashByte & 0xF : (hashByte >> 4) & 0xF
+      const shouldBeUppercase = threshold >= 8
+      const actualInputChar = (address.value.replace('0x', ''))[i] || char
+      const actualIsUppercase = actualInputChar !== char
 
-    details.push({
-      position: i,
-      character: char,
-      checksumChar: checksummed[2 + i],
-      inputChar: actualInputChar,
-      hashValue: hash.slice(2, 2 + Math.ceil(40 / 2)),
-      hashIndex,
-      hashByte: hash[2 + hashIndex],
-      isHighNibble,
-      threshold,
-      shouldBeUppercase,
-      actualIsUppercase,
-      isCorrect: shouldBeUppercase === actualIsUppercase
-    })
-  }
+      details.push({
+        position: i,
+        character: char,
+        checksumChar: (checksummed.replace('0x', ''))[i],
+        inputChar: actualInputChar,
+        hashValue: hash.slice(2),
+        hashIndex,
+        hashByte: hash[2 + hashIndex],
+        isHighNibble,
+        threshold,
+        shouldBeUppercase,
+        actualIsUppercase,
+        isCorrect: shouldBeUppercase === actualIsUppercase
+      })
+    }
 
-  // Check if input address matches the correct checksum
-  const isSpoofed = address.value !== checksummed && address.value !== lowerAddress
+    // Check if input address matches the correct checksum
+    const isSpoofed = address.value !== checksummed && address.value !== address.value.toLowerCase()
 
-  return {
-    hash,
-    checksummed,
-    details,
-    isSpoofed
+    return {
+      hash,
+      checksummed,
+      details,
+      isSpoofed
+    }
+  } catch (error) {
+    console.error('Checksum details error:', error)
+    return null
   }
 })
 
@@ -154,7 +162,7 @@ const exampleAddress = '0xa1b2c3d4e5f67890abcdef1234567890abcdef12'
     </div>
 
     <!-- Checksum Visualization -->
-    <div v-if="checksumDetails" class="max-w-5xl mx-auto w-full">
+    <div v-if="checksumDetails && checksumDetails.details && checksumDetails.details.length > 0" class="max-w-5xl mx-auto w-full">
       <Card>
         <CardHeader>
           <div class="flex items-start justify-between">
