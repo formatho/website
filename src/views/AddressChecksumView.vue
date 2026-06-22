@@ -21,19 +21,21 @@ const checksumDetails = computed(() => {
   for (let i = 0; i < 40; i++) {
     const char = lowerAddress[2 + i] // Skip '0x'
     const hashIndex = Math.floor(i / 2)
-    const hashNibble = parseInt(hash[2 + hashIndex], 16)
+    const hashByte = parseInt(hash[2 + hashIndex], 16)
     const isHighNibble = i % 2 === 1
-    const threshold = isHighNibble ? hashNibble & 0xF : (hashNibble >> 4) & 0xF
+    const threshold = isHighNibble ? hashByte & 0xF : (hashByte >> 4) & 0xF
     const shouldBeUppercase = threshold >= 8
-    const actualIsUppercase = checksummed[2 + i] !== char
+    const actualInputChar = address.value[2 + i] || char
+    const actualIsUppercase = actualInputChar !== char
 
     details.push({
       position: i,
       character: char,
       checksumChar: checksummed[2 + i],
+      inputChar: actualInputChar,
       hashValue: hash.slice(2, 2 + Math.ceil(40 / 2)),
       hashIndex,
-      hashNibble: hash[2 + hashIndex],
+      hashByte: hash[2 + hashIndex],
       isHighNibble,
       threshold,
       shouldBeUppercase,
@@ -42,11 +44,14 @@ const checksumDetails = computed(() => {
     })
   }
 
+  // Check if input address matches the correct checksum
+  const isSpoofed = address.value !== checksummed && address.value !== lowerAddress
+
   return {
     hash,
     checksummed,
     details,
-    isMatch: address.value.toLowerCase() === lowerAddress
+    isSpoofed
   }
 })
 
@@ -56,7 +61,7 @@ const validationResult = computed(() => {
   if (isAddress(address.value)) {
     const checksummed = getAddress(address.value)
     const isMixedCase = address.value !== address.value.toLowerCase() && address.value !== address.value.toUpperCase()
-    const isSpoofed = checksumDetails.value ? checksumDetails.value.details.some(d => !d.isCorrect) : false
+    const isSpoofed = checksumDetails.value ? checksumDetails.value.isSpoofed : false
     return {
       status: 'valid',
       checksum: checksummed,
@@ -214,15 +219,16 @@ const exampleAddress = '0xa1b2c3d4e5f67890abcdef1234567890abcdef12'
                               'uppercase': detail.actualIsUppercase,
                               'text-red-600 dark:text-red-400': !detail.isCorrect
                             }">
-                        {{ detail.checksumChar }}
+                        {{ detail.inputChar }}
                       </span>
                       <span class="text-muted-foreground">→</span>
-                      <span class="font-mono text-muted-foreground">{{ detail.character }}</span>
+                      <span class="font-mono text-muted-foreground">{{ detail.checksumChar }}</span>
+                      <span class="text-muted-foreground">({{ detail.character }})</span>
                     </div>
                   </td>
                   <td class="p-2 font-mono text-muted-foreground">
                     <span class="font-bold">{{ detail.hashIndex }}</span>
-                    = {{ detail.hashNibble }}
+                    = {{ detail.hashByte }}
                   </td>
                   <td class="p-2 font-mono">{{ detail.isHighNibble ? 'right' : 'left' }}</td>
                   <td class="p-2">
