@@ -26,55 +26,110 @@ watch(conversionSuccess, (success) => {
   }
 })
 
-// BPMN element type mapping to Visio shapes
+// Enhanced BPMN element type mapping to Visio shapes
 const bpmnToVisioMap: Record<string, string> = {
-  'task': 'Process',
-  'userTask': 'Process',
-  'serviceTask': 'Process',
-  'scriptTask': 'Process',
-  'businessRuleTask': 'Decision',
-  'manualTask': 'Process',
-  'sendTask': 'Process',
-  'receiveTask': 'Process',
-  'startEvent': 'Terminator',
-  'endEvent': 'Terminator',
-  'intermediateCatchEvent': 'Process',
-  'intermediateThrowEvent': 'Process',
-  'exclusiveGateway': 'Decision',
-  'parallelGateway': 'Process',
-  'inclusiveGateway': 'Decision',
-  'eventBasedGateway': 'Decision',
-  'complexGateway': 'Decision',
-  'subProcess': 'Process',
-  'callActivity': 'Process'
+  // Tasks (Activities)
+  task: 'Process',
+  userTask: 'Process',
+  serviceTask: 'Process',
+  scriptTask: 'Process',
+  businessRuleTask: 'Decision',
+  manualTask: 'Process',
+  sendTask: 'Process',
+  receiveTask: 'Process',
+  multiInstanceTask: 'Process',
+  adHocTask: 'Process',
+
+  // Events
+  startEvent: 'Terminator',
+  endEvent: 'Terminator',
+  intermediateCatchEvent: 'Process',
+  intermediateThrowEvent: 'Process',
+  boundaryEvent: 'Process',
+  compensateEvent: 'Process',
+  conditionalEvent: 'Process',
+  errorEvent: 'Process',
+  escalationEvent: 'Process',
+  messageEvent: 'Process',
+  signalEvent: 'Process',
+  timerEvent: 'Process',
+
+  // Gateways
+  exclusiveGateway: 'Decision',
+  parallelGateway: 'Process',
+  inclusiveGateway: 'Decision',
+  eventBasedGateway: 'Decision',
+  complexGateway: 'Decision',
+
+  // Subprocesses
+  subProcess: 'Process',
+  adHocSubProcess: 'Process',
+  transaction: 'Process',
+  callActivity: 'Process',
+  callChoreography: 'Process',
+
+  // Data Objects
+  dataObject: 'Document',
+  dataInput: 'Document',
+  dataOutput: 'Document',
+  dataStoreReference: 'Database',
+  dataObjectReference: 'Document',
+
+  // Artifacts
+  group: 'Process',
+  textAnnotation: 'Comment',
+  association: 'Process',
+
+  // Lanes and Pools
+  lane: 'Process',
+  pool: 'Process'
+}
+
+// Enhanced shape properties for better visual mapping
+const bpmnShapeProperties: Record<string, { width: number; height: number; master?: string }> = {
+  startEvent: { width: 1.5, height: 1.5, master: 'Rounded rectangle' },
+  endEvent: { width: 1.5, height: 1.5, master: 'Rounded rectangle' },
+  task: { width: 3, height: 1.5, master: 'Process' },
+  userTask: { width: 3, height: 1.5, master: 'Process' },
+  serviceTask: { width: 3, height: 1.5, master: 'Process' },
+  exclusiveGateway: { width: 1.5, height: 1.5, master: 'Decision' },
+  parallelGateway: { width: 1.5, height: 1.5, master: 'Decision' },
+  dataObject: { width: 2.5, height: 1.5, master: 'Document' },
+  textAnnotation: { width: 3, height: 1.5, master: 'Comment' }
 }
 
 // Parse BPMN XML and extract elements
 const parseBpmn = (xml: string) => {
   const parser = new DOMParser()
   const doc = parser.parseFromString(xml, 'text/xml')
-  
+
   // Check for parsing errors
   const parseError = doc.querySelector('parsererror')
   if (parseError) {
     throw new Error('Invalid XML format: ' + parseError.textContent?.substring(0, 100))
   }
-  
+
   // Verify it's a BPMN file
   const definitions = doc.querySelector('definitions, bpmn\\:definitions')
   if (!definitions) {
     throw new Error('Invalid BPMN format: No BPMN definitions found')
   }
-  
+
   const elements: BpmnElement[] = []
-  
+
   // Extract tasks
   const taskTypes = [
-    'task', 'userTask', 'serviceTask', 'scriptTask', 
-    'businessRuleTask', 'manualTask', 'sendTask', 'receiveTask'
+    'task',
+    'userTask',
+    'serviceTask',
+    'scriptTask',
+    'businessRuleTask',
+    'manualTask',
+    'sendTask',
+    'receiveTask'
   ]
-  
-  taskTypes.forEach(type => {
+
+  taskTypes.forEach((type) => {
     const tasks = doc.querySelectorAll(type + ', bpmn\\:' + type)
     tasks.forEach((task, index) => {
       elements.push({
@@ -85,10 +140,10 @@ const parseBpmn = (xml: string) => {
       })
     })
   })
-  
+
   // Extract events
   const eventTypes = ['startEvent', 'endEvent', 'intermediateCatchEvent', 'intermediateThrowEvent']
-  eventTypes.forEach(type => {
+  eventTypes.forEach((type) => {
     const events = doc.querySelectorAll(type + ', bpmn\\:' + type)
     events.forEach((event, index) => {
       elements.push({
@@ -99,10 +154,16 @@ const parseBpmn = (xml: string) => {
       })
     })
   })
-  
+
   // Extract gateways
-  const gatewayTypes = ['exclusiveGateway', 'parallelGateway', 'inclusiveGateway', 'eventBasedGateway', 'complexGateway']
-  gatewayTypes.forEach(type => {
+  const gatewayTypes = [
+    'exclusiveGateway',
+    'parallelGateway',
+    'inclusiveGateway',
+    'eventBasedGateway',
+    'complexGateway'
+  ]
+  gatewayTypes.forEach((type) => {
     const gateways = doc.querySelectorAll(type + ', bpmn\\:' + type)
     gateways.forEach((gateway, index) => {
       elements.push({
@@ -113,7 +174,7 @@ const parseBpmn = (xml: string) => {
       })
     })
   })
-  
+
   // Extract sequence flows
   const flows = doc.querySelectorAll('sequenceFlow, bpmn\\:sequenceFlow')
   const sequenceFlows: SequenceFlow[] = []
@@ -125,7 +186,7 @@ const parseBpmn = (xml: string) => {
       targetRef: flow.getAttribute('targetRef') || ''
     })
   })
-  
+
   return { elements, sequenceFlows, processName: extractProcessName(doc) }
 }
 
@@ -141,24 +202,90 @@ const extractProcessName = (doc: Document): string => {
 }
 
 // Generate Visio VDX XML
-const generateVisioXml = (data: { elements: BpmnElement[], sequenceFlows: SequenceFlow[], processName: string }): string => {
+const generateVisioXml = (data: {
+  elements: BpmnElement[]
+  sequenceFlows: SequenceFlow[]
+  processName: string
+}): string => {
   const { elements, sequenceFlows, processName } = data
-  
-  // Calculate positions for elements in a flow layout
-  const elementPositions = new Map<string, { x: number, y: number }>()
-  const cols = Math.ceil(Math.sqrt(elements.length))
-  
-  elements.forEach((el, index) => {
-    const row = Math.floor(index / cols)
-    const col = index % cols
-    elementPositions.set(el.id, {
-      x: 1.5 + col * 2,
-      y: 8 - row * 1.5
-    })
+
+  // Enhanced shape properties for better visual mapping
+  const bpmnShapeProperties: Record<string, { width: number; height: number; master?: string }> = {
+    startEvent: { width: 1.5, height: 1.5, master: 'Rounded rectangle' },
+    endEvent: { width: 1.5, height: 1.5, master: 'Rounded rectangle' },
+    task: { width: 3, height: 1.5, master: 'Process' },
+    userTask: { width: 3, height: 1.5, master: 'Process' },
+    serviceTask: { width: 3, height: 1.5, master: 'Process' },
+    exclusiveGateway: { width: 1.5, height: 1.5, master: 'Decision' },
+    parallelGateway: { width: 1.5, height: 1.5, master: 'Decision' },
+    dataObject: { width: 2.5, height: 1.5, master: 'Document' },
+    textAnnotation: { width: 3, height: 1.5, master: 'Comment' }
+  }
+
+  // Enhanced layout algorithm - flow-based positioning
+  const elementPositions = new Map<string, { x: number; y: number }>()
+
+  // Group elements by type for better organization
+  const startEvents = elements.filter((el) => el.type === 'startEvent')
+  const endEvents = elements.filter((el) => el.type === 'endEvent')
+  const tasks = elements.filter((el) => el.type.includes('Task'))
+  const gateways = elements.filter((el) => el.type.includes('Gateway'))
+  const otherElements = elements.filter(
+    (el) =>
+      !startEvents.includes(el) &&
+      !endEvents.includes(el) &&
+      !tasks.includes(el) &&
+      !gateways.includes(el)
+  )
+
+  // Position elements in logical flow order
+  let yPos = 8
+
+  // Position start events at the left
+  startEvents.forEach((el, index) => {
+    elementPositions.set(el.id, { x: 1, y: yPos - (startEvents.length - 1 - index) * 2 })
   })
-  
+
+  // Position tasks in the middle columns
+  tasks.forEach((el, index) => {
+    const row = Math.floor(index / 3)
+    const col = index % 3
+    elementPositions.set(el.id, { x: 4 + col * 3, y: 8 - row * 2 })
+  })
+
+  // Position gateways
+  gateways.forEach((el, index) => {
+    const row = Math.floor(index / 2)
+    const col = index % 2
+    elementPositions.set(el.id, { x: 7 + col * 3, y: 8 - row * 2 })
+  })
+
+  // Position end events at the right
+  endEvents.forEach((el, index) => {
+    elementPositions.set(el.id, { x: 13, y: yPos - (endEvents.length - 1 - index) * 2 })
+  })
+
+  // Position other elements
+  otherElements.forEach((el, index) => {
+    const row = Math.floor(index / 3)
+    const col = index % 3
+    elementPositions.set(el.id, { x: 10 + col * 1.5, y: 4 - row * 1.5 })
+  })
+
+  // Fallback for any unpositioned elements
+  elements.forEach((el, index) => {
+    if (!elementPositions.has(el.id)) {
+      const row = Math.floor(index / 4)
+      const col = index % 4
+      elementPositions.set(el.id, {
+        x: 1 + col * 3,
+        y: 8 - row * 2
+      })
+    }
+  })
+
   const _now = new Date().toISOString()
-  
+
   // Build shapes XML
   let shapesXml = ''
   elements.forEach((el, index) => {
@@ -168,12 +295,60 @@ const generateVisioXml = (data: { elements: BpmnElement[], sequenceFlows: Sequen
       <Shape ID="${shapeId}" Type="${el.visioType}" LineStyle="3" FillStyle="3" TextStyle="3">
         <Cell N="PinX" V="${pos.x}"/>
         <Cell N="PinY" V="${pos.y}"/>
-        <Cell N="Width" V="1.5"/>
-        <Cell N="Height" V="0.75"/>
-        <Cell N="FillForegnd" V="#FFFFFF"/>
-        <Cell N="FillBkgnd" V="#F8FAFC"/>
+        <Cell N="Width" V="${bpmnShapeProperties[el.type]?.width || 1.5}"/>
+        <Cell N="Height" V="${bpmnShapeProperties[el.type]?.height || 0.75}"/>
+        <Cell N="FillForegnd" V="${
+          el.type === 'startEvent'
+            ? '#10B981'
+            : el.type === 'endEvent'
+              ? '#EF4444'
+              : el.type === 'exclusiveGateway'
+                ? '#3B82F6'
+                : el.type === 'parallelGateway'
+                  ? '#8B5CF6'
+                  : el.type === 'task'
+                    ? '#F59E0B'
+                    : el.type === 'userTask'
+                      ? '#06B6D4'
+                      : el.type === 'serviceTask'
+                        ? '#84CC16'
+                        : '#FFFFFF'
+        }"/>
+        <Cell N="FillBkgnd" V="${
+          el.type === 'startEvent'
+            ? '#10B981'
+            : el.type === 'endEvent'
+              ? '#EF4444'
+              : el.type === 'exclusiveGateway'
+                ? '#3B82F6'
+                : el.type === 'parallelGateway'
+                  ? '#8B5CF6'
+                  : el.type === 'task'
+                    ? '#F59E0B'
+                    : el.type === 'userTask'
+                      ? '#06B6D4'
+                      : el.type === 'serviceTask'
+                        ? '#84CC16'
+                        : '#F8FAFC'
+        }"/>
         <Cell N="LineWeight" V="0.01041666666666667"/>
-        <Cell N="LineColor" V="#94A3B8"/>
+        <Cell N="LineColor" V="${
+          el.type === 'startEvent'
+            ? '#059669'
+            : el.type === 'endEvent'
+              ? '#DC2626'
+              : el.type === 'exclusiveGateway'
+                ? '#2563EB'
+                : el.type === 'parallelGateway'
+                  ? '#7C3AED'
+                  : el.type === 'task'
+                    ? '#D97706'
+                    : el.type === 'userTask'
+                      ? '#0891B2'
+                      : el.type === 'serviceTask'
+                        ? '#65A30D'
+                        : '#94A3B8'
+        }"/>
         <Text><cp IX="0"/><pp IX="0/>${escapeXml(el.name)}</Text>
         <Section N="Geometry" IX="0">
           <Row T="RelMoveTo"><Cell N="X" V="0"/><Cell N="Y" V="0"/></Row>
@@ -184,13 +359,13 @@ const generateVisioXml = (data: { elements: BpmnElement[], sequenceFlows: Sequen
         </Section>
       </Shape>`
   })
-  
+
   // Build connectors XML for sequence flows
   let connectorsXml = ''
   sequenceFlows.forEach((flow, index) => {
     const sourcePos = elementPositions.get(flow.sourceRef)
     const targetPos = elementPositions.get(flow.targetRef)
-    
+
     if (sourcePos && targetPos) {
       const connectorId = elements.length + index + 1
       connectorsXml += `
@@ -209,7 +384,7 @@ const generateVisioXml = (data: { elements: BpmnElement[], sequenceFlows: Sequen
       </Shape>`
     }
   })
-  
+
   return `<?xml version="1.0" encoding="UTF-8"?>
 <VisioDocument xmlns="http://schemas.microsoft.com/visio/2003/core" 
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -349,28 +524,27 @@ const handleConvert = () => {
   error.value = ''
   conversionSuccess.value = false
   visioBlob.value = null
-  
+
   if (!bpmnInput.value.trim()) {
     error.value = 'Please enter BPMN XML or upload a .bpmn file'
     return
   }
-  
+
   isConverting.value = true
-  
+
   try {
     const parsedData = parseBpmn(bpmnInput.value)
-    
+
     if (parsedData.elements.length === 0) {
       throw new Error('No BPMN elements found. Please check your BPMN XML.')
     }
-    
+
     const visioXml = generateVisioXml(parsedData)
-    
+
     // Create blob
     visioBlob.value = new Blob([visioXml], { type: 'application/vnd.ms-visio' })
     fileName.value = parsedData.processName.replace(/[^a-zA-Z0-9_-]/g, '_') || 'diagram'
     conversionSuccess.value = true
-    
   } catch (err: any) {
     error.value = err.message || 'Failed to convert BPMN to Visio format'
     console.error('Conversion error:', err)
@@ -382,14 +556,14 @@ const handleConvert = () => {
 const handleFileUpload = (e: Event) => {
   const target = e.target as HTMLInputElement
   const file = target.files?.[0]
-  
+
   if (!file) return
-  
+
   if (!file.name.endsWith('.bpmn') && !file.name.endsWith('.xml')) {
     error.value = 'Please upload a valid BPMN file (.bpmn or .xml)'
     return
   }
-  
+
   const reader = new FileReader()
   reader.onload = (event) => {
     const content = event.target?.result as string
@@ -406,7 +580,7 @@ const handleFileUpload = (e: Event) => {
 
 const handleDownload = () => {
   if (!visioBlob.value) return
-  
+
   const url = URL.createObjectURL(visioBlob.value)
   const a = document.createElement('a')
   a.href = url
@@ -458,7 +632,7 @@ const reset = () => {
   <div class="h-full flex flex-col p-4 gap-4 bg-muted/30">
     <!-- Breadcrumb Navigation -->
     <Breadcrumb />
-    
+
     <div class="flex items-center justify-between">
       <div>
         <h1 class="text-3xl font-bold tracking-tight">BPMN to Visio Converter</h1>
@@ -467,8 +641,12 @@ const reset = () => {
         </p>
       </div>
       <div class="flex gap-2">
-        <Button variant="ghost" @click="fillSample" aria-label="Load sample BPMN XML">Load Sample</Button>
-        <Button v-if="bpmnInput" variant="outline" @click="reset" aria-label="Reset BPMN input">Reset</Button>
+        <Button variant="ghost" @click="fillSample" aria-label="Load sample BPMN XML"
+          >Load Sample</Button
+        >
+        <Button v-if="bpmnInput" variant="outline" @click="reset" aria-label="Reset BPMN input"
+          >Reset</Button
+        >
       </div>
     </div>
 
@@ -483,16 +661,16 @@ const reset = () => {
               BPMN XML Input
             </CardTitle>
             <label class="cursor-pointer">
-              <Button variant="secondary" size="sm" aria-label="Upload BPMN file" class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md rounded-lg">
+              <Button
+                variant="secondary"
+                size="sm"
+                aria-label="Upload BPMN file"
+                class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md rounded-lg"
+              >
                 <Upload class="mr-2 h-4 w-4" />
                 Upload .bpmn File
               </Button>
-              <input
-                type="file"
-                accept=".bpmn,.xml"
-                class="hidden"
-                @change="handleFileUpload"
-              />
+              <input type="file" accept=".bpmn,.xml" class="hidden" @change="handleFileUpload" />
             </label>
           </div>
         </CardHeader>
@@ -517,8 +695,8 @@ const reset = () => {
 
     <!-- Action Bar -->
     <div class="flex justify-center py-2">
-      <Button 
-        @click="handleConvert" 
+      <Button
+        @click="handleConvert"
         :disabled="isConverting || !bpmnInput.trim()"
         size="lg"
         aria-label="Convert BPMN to Visio"
@@ -540,7 +718,7 @@ const reset = () => {
               <p class="text-xs text-green-600">Your Visio file is ready for download</p>
             </div>
           </div>
-          <Button 
+          <Button
             @click="handleDownload"
             aria-label="Download Visio file"
             class="transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md rounded-lg bg-green-600 hover:bg-green-700"

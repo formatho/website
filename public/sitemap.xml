@@ -55,6 +55,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://formatho.com/blogs/quantum-computing-reshaping-digital-world</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/blogs/optimizing-agent-workflows-task-orchestration-productivity</loc>
     <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
@@ -112,7 +118,7 @@
     <loc>https://formatho.com/blogs/encode-decode-base64-files-never-leave-browser</loc>
     <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/blogs/format-sql-queries-without-cloud-uploads</loc>
