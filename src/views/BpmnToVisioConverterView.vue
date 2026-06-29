@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { Button } from '@/components/ui/button'
 import CodeEditor from '@/components/CodeEditor.vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
@@ -15,6 +15,11 @@ const isConverting = ref(false)
 const conversionSuccess = ref(false)
 const visioBlob = ref<Blob | null>(null)
 const fileName = ref('diagram')
+
+// Auto-load comprehensive example BPMN on page load
+onMounted(() => {
+  fillSample()
+})
 
 // Summon Flowtho on successful conversion
 watch(conversionSuccess, (success) => {
@@ -596,22 +601,127 @@ const fillSample = () => {
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              targetNamespace="http://formatho.com/bpmn/sample">
-  <process id="OrderProcess" name="Order Processing">
-    <startEvent id="start" name="Order Received"/>
-    <sequenceFlow id="flow1" sourceRef="start" targetRef="validate"/>
-    <userTask id="validate" name="Validate Order"/>
-    <sequenceFlow id="flow2" sourceRef="validate" targetRef="decision"/>
-    <exclusiveGateway id="decision" name="Valid?"/>
-    <sequenceFlow id="flow3" sourceRef="decision" targetRef="process_payment">Order Approved</sequenceFlow>
-    <sequenceFlow id="flow4" sourceRef="decision" targetRef="notify_rejection">Order Rejected</sequenceFlow>
-    <serviceTask id="process_payment" name="Process Payment"/>
-    <sequenceFlow id="flow5" sourceRef="process_payment" targetRef="ship"/>
-    <userTask id="ship" name="Ship Order"/>
-    <sequenceFlow id="flow6" sourceRef="ship" targetRef="end_success"/>
+  <!-- Enhanced BPMN showcasing all Phase 1 features -->
+  <process id="CustomerOrderWorkflow" name="Customer Order Processing System">
+    
+    <!-- === START EVENTS === -->
+    <startEvent id="start_order" name="New Order Received"/>
+    <startEvent id="start_emergency" name="Emergency Order">
+      <timerEventDefinition/>
+    </startEvent>
+    
+    <!-- === DATA OBJECTS (demonstrates Phase 1 enhancements) -->
+    <dataObject id="order_data" name="Order Details"/>
+    <dataObject id="customer_data" name="Customer Information"/>
+    <dataObject id="inventory_data" name="Inventory Data"/>
+    <dataStoreReference id="database" name="Customer Database"/>
+    
+    <!-- === TASKS (multiple types to showcase color coding) -->
+    <userTask id="validate_order" name="Validate Customer Order"/>
+    <serviceTask id="check_inventory" name="Check Inventory"/>
+    <scriptTask id="calculate_total" name="Calculate Total Cost"/>
+    <businessRuleTask id="apply_discount" name="Apply Business Rules"/>
+    <manualTask id="manual_review" name="Manual Review Required"/>
+    <sendTask id="send_confirmation" name="Send Order Confirmation"/>
+    <receiveTask id="receive_payment" name="Receive Payment"/>
+    
+    <!-- === GATEWAYS (multiple types to showcase layout) -->
+    <exclusiveGateway id="inventory_decision" name="In Stock?"/>
+    <parallelGateway id="parallel_process" name="Parallel Processing"/>
+    <inclusiveGateway id="approval_decision" name="Approval Decision"/>
+    <eventBasedGateway id="payment_gateway" name="Payment Method"/>
+    <complexGateway id="complex_validation" name="Complex Validation"/>
+    
+    <!-- === INTERMEDIATE EVENTS (showcasing event support) -->
+    <intermediateCatchEvent id="payment_timeout" name="Payment Timeout">
+      <timerEventDefinition/>
+    </intermediateCatchEvent>
+    <intermediateThrowEvent id="notification_sent" name="Notification Sent"/>
+    <boundaryEvent id="cancel_event" name="Order Cancelled" attachedToRef="validate_order">
+      <errorEventDefinition/>
+    </boundaryEvent>
+    <intermediateCatchEvent id="escalation_event" name="Escalation Required">
+      <escalationEventDefinition/>
+    </intermediateCatchEvent>
+    <intermediateThrowEvent id="message_event" name="Order Shipped">
+      <messageEventDefinition/>
+    </intermediateThrowEvent>
+    <intermediateCatchEvent id="signal_event" name="Signal Received">
+      <signalEventDefinition/>
+    </intermediateCatchEvent>
+    
+    <!-- === SUBPROCESS (demonstrating extended element support) -->
+    <subProcess id="fulfillment_process" name="Order Fulfillment">
+      <startEvent id="fulfillment_start" name="Start Fulfillment"/>
+      <serviceTask id="pick_items" name="Pick Items"/>
+      <serviceTask id="pack_items" name="Pack Items"/>
+      <endEvent id="fulfillment_end" name="Fulfillment Complete"/>
+      <sequenceFlow id="flow_fulfillment_1" sourceRef="fulfillment_start" targetRef="pick_items"/>
+      <sequenceFlow id="flow_fulfillment_2" sourceRef="pick_items" targetRef="pack_items"/>
+      <sequenceFlow id="flow_fulfillment_3" sourceRef="pack_items" targetRef="fulfillment_end"/>
+    </subProcess>
+    
+    <callActivity id="call_shipping" name="Call Shipping Service"/>
+    
+    <!-- === SEQUENCE FLOWS (with names to showcase flow layout) -->
+    <sequenceFlow id="flow_start" sourceRef="start_order" targetRef="validate_order"/>
+    <sequenceFlow id="flow_emergency" sourceRef="start_emergency" targetRef="manual_review"/>
+    <sequenceFlow id="flow_1" sourceRef="validate_order" targetRef="check_inventory"/>
+    <sequenceFlow id="flow_2" sourceRef="check_inventory" targetRef="calculate_total"/>
+    <sequenceFlow id="flow_3" sourceRef="calculate_total" targetRef="apply_discount"/>
+    <sequenceFlow id="flow_4" sourceRef="apply_discount" targetRef="inventory_decision"/>
+    <sequenceFlow id="flow_in_stock" sourceRef="inventory_decision" targetRef="parallel_process">In Stock</sequenceFlow>
+    <sequenceFlow id="flow_out_of_stock" sourceRef="inventory_decision" targetRef="notification_sent">Out of Stock</sequenceFlow>
+    <sequenceFlow id="flow_parallel_1" sourceRef="parallel_process" targetRef="receive_payment"/>
+    <sequenceFlow id="flow_parallel_2" sourceRef="parallel_process" targetRef="send_confirmation"/>
+    <sequenceFlow id="flow_5" sourceRef="receive_payment" targetRef="approval_decision"/>
+    <sequenceFlow id="flow_6" sourceRef="send_confirmation" targetRef="approval_decision"/>
+    <sequenceFlow id="flow_approved" sourceRef="approval_decision" targetRef="call_shipping">Approved</sequenceFlow>
+    <sequenceFlow id="flow_rejected" sourceRef="approval_decision" targetRef="manual_review">Needs Review</sequenceFlow>
+    <sequenceFlow id="flow_7" sourceRef="call_shipping" targetRef="notification_sent"/>
+    <sequenceFlow id="flow_8" sourceRef="manual_review" targetRef="complex_validation"/>
+    <sequenceFlow id="flow_9" sourceRef="complex_validation" targetRef="payment_gateway"/>
+    <sequenceFlow id="flow_card" sourceRef="payment_gateway" targetRef="receive_payment">Card Payment</sequenceFlow>
+    <sequenceFlow id="flow_cash" sourceRef="payment_gateway" targetRef="manual_review">Cash Payment</sequenceFlow>
+    
+    <!-- === END EVENTS (demonstrating multiple end points) -->
     <endEvent id="end_success" name="Order Completed"/>
-    <userTask id="notify_rejection" name="Notify Customer"/>
-    <sequenceFlow id="flow7" sourceRef="notify_rejection" targetRef="end_failed"/>
-    <endEvent id="end_failed" name="Order Cancelled"/>
+    <endEvent id="end_failed" name="Order Failed"/>
+    <endEvent id="end_cancelled" name="Order Cancelled"/>
+    
+    <!-- === TEXT ANNOTATION (showcasing artifact support) -->
+    <textAnnotation id="note1" textFormat="text/plain">Note: Emergency orders skip validation and go directly to manual review.</textAnnotation>
+    <textAnnotation id="note2" textFormat="text/plain">Parallel processing: payment and confirmation can happen simultaneously.</textAnnotation>
+    
+    <!-- === ASSOCIATIONS (connecting annotations to elements) -->
+    <association id="assoc1" sourceRef="note1" targetRef="manual_review"/>
+    <association id="assoc2" sourceRef="note2" targetRef="parallel_process"/>
+    
+    <!-- === GROUPS (demonstrating group support) -->
+    <group id="validation_group" name="Validation Group">
+      <!-- Group contains related elements visually -->
+    </group>
+    <group id="fulfillment_group" name="Fulfillment Group">
+      <!-- Group contains fulfillment-related elements -->
+    </group>
+    
+  </process>
+  
+  <!-- Additional process to demonstrate lane support -->
+  <process id="SupportProcess" name="Customer Support Process" isExecutable="false">
+    <laneSet>
+      <lane id="customer_lane" name="Customer">
+        <startEvent id="support_start" name="Support Request"/>
+        <userTask id="customer_task" name="Provide Details"/>
+        <sequenceFlow id="support_flow_1" sourceRef="support_start" targetRef="customer_task"/>
+      </lane>
+      <lane id="support_lane" name="Support Agent">
+        <serviceTask id="support_agent" name="Review Request"/>
+        <endEvent id="support_end" name="Issue Resolved"/>
+        <sequenceFlow id="support_flow_2" sourceRef="customer_task" targetRef="support_agent"/>
+        <sequenceFlow id="support_flow_3" sourceRef="support_agent" targetRef="support_end"/>
+      </lane>
+    </laneSet>
   </process>
 </definitions>`
   error.value = ''
