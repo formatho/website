@@ -1208,6 +1208,18 @@ export const routes = [
         meta: { title: 'Math Evaluator', description: 'Evaluate mathematical expressions.' }
       },
       {
+        path: 'tools/quantum-circuit-simulator',
+        name: 'quantum-circuit-simulator',
+        component: () => import(/* webpackPrefetch: true */ '../views/QuantumCircuitSimulatorView.vue'),
+        meta: {
+          title: 'Quantum Circuit Simulator - Design & Simulate Quantum Circuits | Formatho',
+          description:
+            'Design and simulate quantum circuits with real quantum gates. Build circuits with Hadamard, Pauli gates, CNOT, and measurements. Perfect for learning quantum computing concepts. Free, 100% client-side simulator.',
+          keywords:
+            'quantum circuit simulator, quantum computing, quantum gates, hadamard gate, cnot gate, quantum simulator, qubits, superposition, entanglement, quantum learning, free quantum tool, privacy-first'
+        }
+      },
+      {
         path: 'tools/percentage-calculator',
         name: 'percentage-calculator',
         component: () =>

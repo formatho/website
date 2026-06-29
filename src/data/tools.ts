@@ -458,6 +458,12 @@ export const tools = [
         iconName: 'Calculator'
       },
       {
+        name: 'Quantum Circuit Simulator',
+        description: 'Design and simulate quantum circuits with real quantum gates. Perfect for learning quantum computing concepts.',
+        route: '/tools/quantum-circuit-simulator',
+        iconName: 'Calculator'
+      },
+      {
         name: 'ETA Calculator',
         description: 'Calculate estimated time of arrival.',
         route: '/tools/eta-calculator',
