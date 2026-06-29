@@ -12,6 +12,17 @@ export interface BlogMetadata {
 
 export const blogMetadata: BlogMetadata[] = [
   {
+    id: 60,
+    title: 'Quantum Computing: The Next Frontier That Will Reshape Our Digital World',
+    excerpt: 'Explore the quantum revolution - from IBM, Google, and Microsoft\'s race to breakthroughs, to how quantum computing threatens current encryption, SSH keys, and blockchain infrastructure.',
+    date: '2026-06-29',
+    readTime: '15 min',
+    tags: ['Quantum Computing', 'Cryptography', 'Technology', 'Security', 'Future Tech', 'Innovation'],
+    slug: 'quantum-computing-reshaping-digital-world',
+    image: '/images/blog/blog-60/quantum-computing.jpg',
+    imageAlt: 'Quantum computing visualization showing qubits and quantum circuits'
+  },
+  {
     id: 58,
     title: 'Real Estate Tokenization in 2026: Legal Frameworks, SM REITs, and Smart Contract Compliance',
     excerpt: 'Explore how real estate tokenization works in 2026 — from SPV structures and SEBI SM REIT regulations to ERC-3643 compliance-by-design token standards. A practical guide to the legal architecture behind tokenized property.',
