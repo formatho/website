@@ -1,2 +1,1 @@
-npx lint-staged
-npm run build # Using build for full type check as vue-tsc --noEmit is part of it
+./scripts/pre-commit-check.sh
