@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import { ref, computed, reactive } from 'vue'
-import { Calculator, Copy, Check, Trash2, Play, RotateCcw, Plus, Minus } from 'lucide-vue-next'
+import {
+  Calculator,
+  Copy,
+  Check,
+  Trash2,
+  Play,
+  RotateCcw,
+  Plus,
+  Minus,
+  BookOpen,
+  Download
+} from 'lucide-vue-next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
@@ -23,6 +34,122 @@ const circuit = ref<CircuitStep[]>([{ gates: [] }])
 const copied = ref(false)
 const measurementResults = ref<number[]>([])
 const isSimulating = ref(false)
+const showExamples = ref(false)
+
+// Example quantum circuits
+interface ExampleCircuit {
+  name: string
+  description: string
+  difficulty: 'beginner' | 'intermediate' | 'advanced'
+  qubits: number
+  circuit: CircuitStep[]
+}
+
+const exampleCircuits: ExampleCircuit[] = [
+  {
+    name: 'Bell State',
+    description: 'Creates entangled qubits (maximal correlation)',
+    difficulty: 'beginner',
+    qubits: 2,
+    circuit: [
+      {
+        gates: [{ type: 'H', target: 0 }]
+      },
+      {
+        gates: [{ type: 'CNOT', target: 1, control: 0 }]
+      }
+    ]
+  },
+  {
+    name: 'GHZ State',
+    description: '3-qubit Greenberger-Horne-Zeilinger state',
+    difficulty: 'intermediate',
+    qubits: 3,
+    circuit: [
+      {
+        gates: [{ type: 'H', target: 0 }]
+      },
+      {
+        gates: [{ type: 'CNOT', target: 1, control: 0 }]
+      },
+      {
+        gates: [{ type: 'CNOT', target: 2, control: 0 }]
+      }
+    ]
+  },
+  {
+    name: 'Quantum Teleportation',
+    description: 'Teleport quantum state using entanglement',
+    difficulty: 'advanced',
+    qubits: 3,
+    circuit: [
+      {
+        gates: [{ type: 'H', target: 1 }]
+      },
+      {
+        gates: [{ type: 'CNOT', target: 2, control: 1 }]
+      },
+      {
+        gates: [
+          { type: 'CNOT', target: 1, control: 0 },
+          { type: 'H', target: 0 }
+        ]
+      },
+      {
+        gates: [
+          { type: 'MEASURE', target: 0 },
+          { type: 'MEASURE', target: 1 }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Superposition',
+    description: 'Put all qubits in superposition state',
+    difficulty: 'beginner',
+    qubits: 3,
+    circuit: [
+      {
+        gates: [
+          { type: 'H', target: 0 },
+          { type: 'H', target: 1 },
+          { type: 'H', target: 2 }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Quantum Fourier Transform',
+    description: 'Simple QFT on 3 qubits',
+    difficulty: 'advanced',
+    qubits: 3,
+    circuit: [
+      {
+        gates: [{ type: 'H', target: 0 }]
+      },
+      {
+        gates: [
+          { type: 'H', target: 1 },
+          { type: 'RX', target: 0, parameter: Math.PI / 4 }
+        ]
+      },
+      {
+        gates: [
+          { type: 'H', target: 2 },
+          { type: 'RX', target: 1, parameter: Math.PI / 2 },
+          { type: 'RX', target: 0, parameter: Math.PI / 4 }
+        ]
+      }
+    ]
+  }
+]
+
+const loadExampleCircuit = (example: ExampleCircuit) => {
+  numQubits.value = example.qubits
+  circuit.value = JSON.parse(JSON.stringify(example.circuit)) // Deep copy
+  measurementResults.value = []
+  showExamples.value = false
+}
 
 // Complex number class for quantum state
 class Complex {
@@ -454,10 +581,59 @@ const currentResults = computed(() => {
                     <Play class="w-4 h-4 mr-2" />
                     {{ isSimulating ? 'Simulating...' : 'Run Simulation' }}
                   </Button>
+                  <Button @click="showExamples = true" variant="outline">
+                    <BookOpen class="w-4 h-4 mr-2" />
+                    Examples
+                  </Button>
                   <Button @click="clearCircuit" variant="outline">
                     <RotateCcw class="w-4 h-4 mr-2" />
                     Clear
                   </Button>
+                </div>
+
+                <!-- Examples Modal -->
+                <div
+                  v-if="showExamples"
+                  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+                  @click="showExamples = false"
+                >
+                  <div
+                    class="bg-white rounded-lg p-6 max-w-2xl max-h-[80vh] overflow-y-auto"
+                    @click.stop
+                  >
+                    <div class="flex justify-between items-center mb-4">
+                      <h3 class="text-xl font-bold">Example Quantum Circuits</h3>
+                      <Button @click="showExamples = false" variant="ghost" size="sm">✕</Button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div
+                        v-for="example in exampleCircuits"
+                        :key="example.name"
+                        class="p-4 border rounded-lg hover:bg-surface-hover cursor-pointer transition-colors"
+                        @click="loadExampleCircuit(example)"
+                      >
+                        <div class="flex items-center gap-2 mb-2">
+                          <h4 class="font-semibold">{{ example.name }}</h4>
+                          <span
+                            class="text-xs px-2 py-1 rounded-full"
+                            :class="{
+                              'bg-green-100 text-green-800': example.difficulty === 'beginner',
+                              'bg-yellow-100 text-yellow-800':
+                                example.difficulty === 'intermediate',
+                              'bg-red-100 text-red-800': example.difficulty === 'advanced'
+                            }"
+                          >
+                            {{ example.difficulty }}
+                          </span>
+                        </div>
+                        <p class="text-sm text-muted-foreground mb-2">{{ example.description }}</p>
+                        <div class="text-xs text-muted-foreground">
+                          <span class="font-medium">{{ example.qubits }}</span> qubits
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </CardContent>
