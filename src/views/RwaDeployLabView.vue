@@ -28,6 +28,7 @@ const provider = ref<Eip1193Provider | null>(null)
 const walletType = ref<'metamask' | 'rabby' | null>(null)
 const account = ref('')
 const chainId = ref('')
+const balance = ref('')
 const isConnecting = ref(false)
 const walletError = ref('')
 
@@ -79,6 +80,7 @@ async function connectWallet() {
     if (accounts?.length) account.value = accounts[0]
     const cid = await eth.request({ method: 'eth_chainId' }) as string
     chainId.value = cid
+    await fetchBalance()
     if (eth.on) {
       eth.on('accountsChanged', handleAccountsChanged)
       eth.on('chainChanged', handleChainChanged)
@@ -93,16 +95,48 @@ async function connectWallet() {
 function handleAccountsChanged(...args: unknown[]) {
   const accounts = args[0] as string[]
   if (!accounts?.length) disconnectWallet()
-  else account.value = accounts[0]
+  else {
+    account.value = accounts[0]
+    fetchBalance()
+  }
 }
 
 function handleChainChanged(...args: unknown[]) {
   chainId.value = args[0] as string
+  fetchBalance()
+}
+
+async function fetchBalance() {
+  if (!provider.value || !account.value || !chainId.value) {
+    balance.value = ''
+    return
+  }
+  try {
+    const result = await provider.value.request({
+      method: 'eth_getBalance',
+      params: [account.value, 'latest'],
+    }) as string
+    // Result is hex wei
+    const wei = BigInt(result)
+    const eth = Number(wei) / 1e18
+    const chain = SUPPORTED_CHAINS[chainId.value]
+    const symbol = chain?.symbol ?? 'ETH'
+    if (eth >= 0.01) {
+      balance.value = `${eth.toFixed(4)} ${symbol}`
+    } else if (eth > 0) {
+      balance.value = `${eth.toFixed(6)} ${symbol}`
+    } else {
+      balance.value = `0 ${symbol}`
+    }
+  } catch {
+    balance.value = ''
+  }
 }
 
 function disconnectWallet() {
   account.value = ''
   chainId.value = ''
+  balance.value = ''
   walletType.value = null
   if (provider.value?.removeListener) {
     provider.value.removeListener('accountsChanged', handleAccountsChanged)
@@ -315,6 +349,7 @@ onMounted(() => {
         provider.value = injectedProvider.value
         injectedProvider.value!.request({ method: 'eth_chainId' }).then((cid: unknown) => {
           chainId.value = cid as string
+          fetchBalance()
         })
         if (injectedProvider.value!.on) {
           injectedProvider.value!.on('accountsChanged', handleAccountsChanged)
@@ -372,15 +407,26 @@ const activeTab = ref<Tab>('erc20')
               <Wallet v-if="!isWalletConnected" class="w-6 h-6 text-muted-foreground" />
               <CheckCircle2 v-else class="w-6 h-6 text-green-600" />
             </div>
-            <div v-if="isWalletConnected">
-              <p class="font-mono text-sm font-semibold">{{ shortAddr(account) }}</p>
-              <p class="text-xs text-muted-foreground flex items-center gap-1">
-                <span class="capitalize">{{ walletType }}</span>
+            <div v-if="isWalletConnected" class="space-y-1">
+              <div class="flex items-center gap-2">
+                <p class="font-mono text-sm font-semibold">{{ shortAddr(account) }}</p>
+                <span v-if="balance" class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">{{ balance }}</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                <span class="inline-flex items-center gap-1">
+                  <span class="capitalize font-medium">{{ walletType }}</span>
+                </span>
                 <span>·</span>
-                <span>{{ currentChain?.name ?? chainName }}</span>
-                <span v-if="chainId" class="inline-block w-2 h-2 rounded-full ml-1"
-                  :style="{ backgroundColor: currentChain?.color ?? '#999' }" />
-              </p>
+                <span v-if="currentChain" class="inline-flex items-center gap-1">
+                  <span class="inline-block w-2 h-2 rounded-full" :style="{ backgroundColor: currentChain.color }" />
+                  <span class="font-medium">{{ currentChain.name }}</span>
+                </span>
+                <span v-else>{{ chainName }}</span>
+                <span>·</span>
+                <span class="font-mono">Chain ID: {{ parseInt(chainId, 16) }}</span>
+                <span>·</span>
+                <span v-if="currentChain" class="font-mono text-blue-600">{{ currentChain.symbol }}</span>
+              </div>
             </div>
             <div v-else>
               <p class="font-semibold">No wallet connected</p>
