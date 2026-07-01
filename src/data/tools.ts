@@ -45,8 +45,8 @@ export const tools = [
         iconName: 'Binary'
       },
       {
-        name: 'RWA Deployment Lab',
-        description: 'Deploy ERC-20 mirror tokens, real estate NFTs, permission lists, oracle mocks, and fractional ownership contracts for RWA POC projects.',
+        name: 'RWA Tokenization Lab',
+        description: 'Deploy ERC-20 mirror tokens for stocks (AAPL, AMZN), fractional ownership contracts, and custom tokenization contracts on-chain via MetaMask or Rabby.',
         route: '/tools/rwa-deploy-lab',
         iconName: 'Building2'
       }

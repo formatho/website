@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import {
   Wallet, AlertTriangle, CheckCircle2, ExternalLink, Copy, Trash2,
-  Plus, Building2, Coins, Shield, FileText, Loader2, ChevronRight,
+  Plus, Building2, Coins, FileText, Loader2, ChevronRight,
   ArrowRight, X, Rocket, Code2, Info
 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
@@ -122,7 +122,7 @@ function explorerTx(hash: string) {
 }
 
 // ============ Contract Templates ============
-type ContractType = 'erc20' | 'permissionlist' | 'fractional'
+type ContractType = 'erc20' | 'fractional'
 
 interface ContractDef {
   type: ContractType
@@ -142,14 +142,6 @@ const CONTRACT_DEFS: Record<ContractType, ContractDef> = {
     description: 'Fungible token mirroring off-chain assets (AAPL, AMZN, gold)',
     useCase: 'Mirror asset prices as tradeable ERC-20 tokens for POC trading simulations.',
   },
-  permissionlist: {
-    type: 'permissionlist',
-    label: 'Permission List (KYC/AML)',
-    icon: Shield,
-    color: '#10B981',
-    description: 'Whitelist contract for compliance gating',
-    useCase: 'Restrict token transfers to verified addresses — simulate regulated markets.',
-  },
   fractional: {
     type: 'fractional',
     label: 'Fractional Ownership',
@@ -168,9 +160,6 @@ const erc20Name = ref('Mirror AAPL')
 const erc20Symbol = ref('mAAPL')
 const erc20Decimals = ref(18)
 const erc20Supply = ref('1000000')
-
-// Permission List
-const permName = ref('KYC Whitelist')
 
 // Fractional
 const fracName = ref('Property Shares')
@@ -274,7 +263,7 @@ async function deployContract() {
         }
       }
     } else {
-      // For PermissionList, Fractional — guide user to paste compiled bytecode
+      // For Fractional — guide user to paste compiled bytecode
       throw new Error(`Compile the ${def.label} contract in Remix or Hardhat, then use the "Custom Bytecode" tab to deploy.`)
     }
 
@@ -341,7 +330,7 @@ onUnmounted(() => {
 })
 
 // Tabs
-type Tab = 'erc20' | 'permissionlist' | 'fractional' | 'custom'
+type Tab = 'erc20' | 'fractional' | 'custom'
 const activeTab = ref<Tab>('erc20')
 </script>
 
@@ -351,7 +340,7 @@ const activeTab = ref<Tab>('erc20')
     <div class="mb-8">
       <h1 class="text-4xl font-bold mb-2 flex items-center gap-3">
         <Building2 class="w-9 h-9 text-primary" />
-        RWA Deployment Lab
+        RWA Tokenization Lab
       </h1>
       <p class="text-lg text-muted-foreground">
         Deploy smart contracts for Real-World Asset (RWA) POC projects. Connect your wallet, choose a contract template, and deploy on-chain.
@@ -512,31 +501,6 @@ const activeTab = ref<Tab>('erc20')
           </CardContent>
         </Card>
 
-        <!-- Permission List Form -->
-        <Card v-if="activeTab === 'permissionlist'">
-          <CardHeader><CardTitle>Configure Permission List</CardTitle></CardHeader>
-          <CardContent class="space-y-4">
-            <div>
-              <Label>Contract Name</Label>
-              <Input v-model="permName" placeholder="KYC Whitelist" />
-            </div>
-            <div class="p-4 bg-muted rounded-lg">
-              <p class="text-sm font-semibold mb-1">Suggested Solidity:</p>
-              <pre class="text-xs overflow-x-auto bg-gray-900 text-green-400 p-3 rounded">pragma solidity ^0.8.0;
-contract PermissionList {
-  mapping(address => bool) public isWhitelisted;
-  address public admin;
-  constructor() { admin = msg.sender; }
-  function add(address user) external {
-    require(msg.sender == admin);
-    isWhitelisted[user] = true;
-  }
-}</pre>
-              <p class="text-xs text-muted-foreground mt-2">Compile in Remix and deploy via Custom Bytecode tab.</p>
-            </div>
-          </CardContent>
-        </Card>
-
         <!-- Fractional Form -->
         <Card v-if="activeTab === 'fractional'">
           <CardHeader><CardTitle>Configure Fractional Ownership</CardTitle></CardHeader>
@@ -648,39 +612,143 @@ contract PermissionList {
       </CardContent>
     </Card>
 
-    <!-- Educational Content (SEO) -->
+    <!-- SEO Content Section -->
     <div class="mt-8 prose prose-sm max-w-none text-muted-foreground">
-      <h2 class="text-2xl font-bold text-foreground mb-4">RWA Smart Contract Templates</h2>
+      <h2 class="text-2xl font-bold text-foreground mb-4">RWA Tokenization — Deploy Smart Contracts On-Chain</h2>
       <p>
-        Real-World Asset (RWA) tokenization bridges physical assets — real estate, stocks, commodities, art —
-        with blockchain infrastructure. This lab provides POC templates for the key contract types needed
-        in an RWA project:
+        Real-World Asset (RWA) tokenization is the process of representing physical and financial assets —
+        real estate, stocks, commodities, bonds, art — as blockchain tokens. The global RWA market is
+        projected to reach $16 trillion by 2030, driven by DeFi protocols, institutional adoption, and
+        regulatory clarity. This lab lets you deploy the core smart contracts needed for an RWA project
+        directly from your browser, with no backend or server required.
       </p>
-      <div class="grid gap-4 mt-4">
-        <div>
-          <h3 class="text-lg font-semibold text-foreground">ERC-20 Mirror Tokens for Stocks & Commodities</h3>
-          <p>
-            Mirror tokens represent off-chain assets like AAPL, AMZN, or gold on-chain. Each token maps 1:1
-            to a real-world asset price. For POC, integrate with Chainlink price feeds for live data.
-          </p>
+
+      <h3 class="text-lg font-semibold text-foreground mt-6 mb-2">ERC-20 Mirror Tokens for Stocks & Commodities</h3>
+      <p>
+        Mirror tokens are ERC-20 fungible tokens that track the price of off-chain assets. For example,
+        you can create mAAPL (Mirror AAPL), mAMZN (Mirror Amazon), mTSLA (Mirror Tesla), or mGOLD tokens.
+        Each token is deployed with configurable parameters — name, symbol, decimals (6, 8, or 18), and
+        initial supply. The deployer receives the full token supply and can distribute it to simulate
+        trading, market making, or portfolio tracking.
+      </p>
+      <p>
+        In a production RWA system, mirror tokens integrate with oracle networks like Chainlink to fetch
+        real-time price feeds, and compliance layers to enforce KYC/AML transfer restrictions. This POC
+        tool handles the contract deployment so you can focus on building the trading and compliance logic.
+      </p>
+
+      <h3 class="text-lg font-semibold text-foreground mt-6 mb-2">Fractional Ownership Contracts</h3>
+      <p>
+        High-value assets — commercial real estate, fine art, private equity — are typically inaccessible
+        to retail investors. Fractional ownership solves this by splitting an asset into thousands of
+        fungible ERC-20 shares. For example, a $5M property can be split into 50,000 shares at $100 each,
+        enabling micro-investment with low minimums.
+      </p>
+      <p>
+        This lab supports deploying fractional ownership contracts with configurable share token name,
+        symbol, and total supply. In production, combine with governance contracts (like Snapshot or
+        OpenZeppelin Governor) so shareholders can vote on property management decisions, sale events,
+        and dividend distribution.
+      </p>
+
+      <h3 class="text-lg font-semibold text-foreground mt-6 mb-2">Custom Contract Deployment</h3>
+      <p>
+        Beyond the built-in templates, the Custom Bytecode tab lets you deploy any compiled smart contract.
+        Compile your Solidity in Remix, Hardhat, or Foundry, then paste the bytecode and constructor
+        arguments. The tool ABI-encodes the constructor arguments automatically using viem and sends the
+        deployment transaction through your connected wallet.
+      </p>
+
+      <h2 class="text-2xl font-bold text-foreground mt-8 mb-4">Supported Blockchains & Wallets</h2>
+      <p>
+        The RWA Tokenization Lab supports deployment to all major EVM-compatible blockchains:
+      </p>
+      <ul class="text-sm">
+        <li><strong>Ethereum Mainnet</strong> and Sepolia testnet</li>
+        <li><strong>Polygon</strong> and Mumbai testnet</li>
+        <li><strong>Arbitrum One</strong> and Arbitrum Sepolia</li>
+        <li><strong>Base</strong> and Base Sepolia</li>
+        <li><strong>Optimism</strong></li>
+      </ul>
+      <p>
+        Wallet connections are handled via the EIP-1193 standard, supporting <strong>MetaMask</strong> and
+        <strong>Rabby Wallet</strong>. The tool auto-detects installed wallets, displays the connected chain,
+        and shows deployed contract addresses with direct links to block explorers (Etherscan, Polygonscan,
+        Arbiscan, Basescan, OP Scan).
+      </p>
+
+      <h2 class="text-2xl font-bold text-foreground mt-8 mb-4">How RWA Tokenization Works</h2>
+      <div class="grid gap-4 mt-4 md:grid-cols-2">
+        <div class="p-4 border rounded-lg">
+          <h4 class="font-semibold text-foreground mb-1">1. Asset Selection</h4>
+          <p class="text-xs">Choose a real-world asset to tokenize — stocks (AAPL, TSLA, AMZN), real estate,
+            commodities (gold, silver), or bonds.</p>
         </div>
-        <div>
-          <h3 class="text-lg font-semibold text-foreground">Permission Lists for KYC/AML Compliance</h3>
-          <p>
-            Regulated RWA transfers require verified participants. A permission list contract acts as an
-            on-chain whitelist — only KYC'd addresses can receive tokens. This simulates the compliance
-            layer that real RWA platforms (like Securitize, Polymath) implement.
-          </p>
+        <div class="p-4 border rounded-lg">
+          <h4 class="font-semibold text-foreground mb-1">2. Contract Deployment</h4>
+          <p class="text-xs">Deploy an ERC-20 mirror token or fractional ownership contract on your chosen
+            blockchain using this lab.</p>
         </div>
-        <div>
-          <h3 class="text-lg font-semibold text-foreground">Fractional Ownership for High-Value Assets</h3>
-          <p>
-            A $5M property is inaccessible to most investors. Fractional ownership splits the asset into
-            fungible ERC-20 shares, enabling micro-investment. Governance mechanisms determine how the
-            underlying asset is managed and eventually sold.
-          </p>
+        <div class="p-4 border rounded-lg">
+          <h4 class="font-semibold text-foreground mb-1">3. Price Oracle Integration</h4>
+          <p class="text-xs">Connect the token to a price feed (Chainlink, Pyth Network, API3) so the on-chain
+            token reflects real-world market prices.</p>
+        </div>
+        <div class="p-4 border rounded-lg">
+          <h4 class="font-semibold text-foreground mb-1">4. Trading & Liquidity</h4>
+          <p class="text-xs">List the token on a DEX (Uniswap, SushiSwap) or create an order book for POC
+            trading simulation.</p>
         </div>
       </div>
+
+      <h2 class="text-2xl font-bold text-foreground mt-8 mb-4">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-semibold text-foreground text-base">What is RWA tokenization?</h3>
+          <p>RWA tokenization is the process of issuing blockchain tokens that represent ownership or rights
+            to real-world assets like real estate, stocks, commodities, and bonds. These tokens can be
+            traded, transferred, and programmed with smart contract logic.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-foreground text-base">Is this tool safe to use?</h3>
+          <p>This tool deploys minimal smart contracts that are not audited. It is intended for POC
+            (proof of concept) development only. For production deployments, always use professionally
+            audited contracts from OpenZeppelin or similar libraries.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-foreground text-base">Which wallets are supported?</h3>
+          <p>The tool supports any EIP-1193 compatible wallet including MetaMask and Rabby. It auto-detects
+            the installed wallet and connects with a single click.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-foreground text-base">Can I deploy on any blockchain?</h3>
+          <p>Yes — any EVM-compatible chain works. The tool shows the connected chain name and provides
+            block explorer links for deployed contracts on Ethereum, Polygon, Arbitrum, Base, and Optimism.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-foreground text-base">What is a mirror token?</h3>
+          <p>A mirror token is an ERC-20 token that tracks the price of an off-chain asset. For example,
+            mAAPL mirrors Apple stock price. Mirror tokens are used in synthetic asset protocols and
+            RWA trading simulations.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-foreground text-base">What is fractional ownership?</h3>
+          <p>Fractional ownership splits a high-value asset into smaller, tradeable shares. For example,
+            a $1M property can be split into 10,000 ERC-20 tokens at $100 each, allowing multiple investors
+            to own a fraction of the asset.</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-foreground mt-8 mb-4">RWA Tokenization Use Cases</h2>
+      <ul class="text-sm">
+        <li><strong>Stock mirroring</strong> — Create ERC-20 tokens that track AAPL, TSLA, AMZN, GOOGL prices for POC trading</li>
+        <li><strong>Real estate tokenization</strong> — Represent property deeds as tokens with fractional ownership</li>
+        <li><strong>Commodity tokens</strong> — Tokenize gold, silver, oil, or agricultural products</li>
+        <li><strong>Bond tokenization</strong> — Issue tokenized bonds with programmable coupon payments</li>
+        <li><strong>Invoice financing</strong> — Tokenize outstanding invoices for DeFi lending protocols</li>
+        <li><strong>Carbon credits</strong> — Tokenize verified carbon offsets for transparent trading</li>
+        <li><strong>Private equity</strong> — Tokenize fund shares for simplified investor onboarding</li>
+      </ul>
     </div>
   </div>
 </template>

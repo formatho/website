@@ -478,11 +478,11 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/RwaDeployLabView.vue'),
         meta: {
-          title: 'RWA Deployment Lab - Deploy Smart Contracts for Real-World Assets | Formatho',
+          title: 'RWA Tokenization Lab - Deploy ERC-20 Mirror Tokens & Fractional Assets On-Chain | Formatho',
           description:
-            'Deploy RWA smart contracts on-chain with MetaMask or Rabby wallet. ERC-20 mirror tokens for stocks (AAPL, AMZN), real estate NFTs, permission lists for KYC/AML, price oracle mocks, and fractional ownership. POC development tool for Real-World Asset projects.',
+            'Deploy real-world asset (RWA) smart contracts directly from your browser. Create ERC-20 mirror tokens for stocks like AAPL and AMZN, fractional ownership contracts, and custom tokenization contracts. Connect MetaMask or Rabby wallet, configure parameters, and deploy on Ethereum, Polygon, Arbitrum, Base, and Optimism. Free POC tool for RWA and DeFi developers.',
           keywords:
-            'rwa deployment, real world asset, erc20 mirror token, real estate nft, erc721 property, permission list kyc, price oracle mock, fractional ownership, tokenization, smart contract deployment, metamask deploy, rabby wallet, blockchain poc, asset tokenization, rwa poc, decentralized finance, defi tools'
+            'rwa tokenization, real world asset tokenization, rwa deployment tool, erc20 mirror token deploy, fractional ownership contract, asset tokenization platform, rwa smart contract, tokenize real estate, tokenize stocks, aapl mirror token, amzn mirror token, rwa defi, real world asset blockchain, metamask smart contract deploy, rabby wallet deploy, deploy erc20 browser, tokenization poc, rwa lab, blockchain asset tokenization, on-chain rwa, erc20 deployment tool, fractional nft shares, rwa project builder, defi poc tool'
         }
       },
       {
