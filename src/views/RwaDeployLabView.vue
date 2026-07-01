@@ -122,7 +122,7 @@ function explorerTx(hash: string) {
 }
 
 // ============ Contract Templates ============
-type ContractType = 'erc20' | 'nft' | 'permissionlist' | 'fractional'
+type ContractType = 'erc20' | 'permissionlist' | 'fractional'
 
 interface ContractDef {
   type: ContractType
@@ -141,14 +141,6 @@ const CONTRACT_DEFS: Record<ContractType, ContractDef> = {
     color: '#3B82F6',
     description: 'Fungible token mirroring off-chain assets (AAPL, AMZN, gold)',
     useCase: 'Mirror asset prices as tradeable ERC-20 tokens for POC trading simulations.',
-  },
-  nft: {
-    type: 'nft',
-    label: 'Real Estate NFT (ERC-721)',
-    icon: Building2,
-    color: '#8B5CF6',
-    description: 'Non-fungible token representing unique real-world property',
-    useCase: 'Tokenize property deeds with metadata — address, valuation, images.',
   },
   permissionlist: {
     type: 'permissionlist',
@@ -176,10 +168,6 @@ const erc20Name = ref('Mirror AAPL')
 const erc20Symbol = ref('mAAPL')
 const erc20Decimals = ref(18)
 const erc20Supply = ref('1000000')
-
-// NFT
-const nftName = ref('Property Deed Registry')
-const nftSymbol = ref('PROP')
 
 // Permission List
 const permName = ref('KYC Whitelist')
@@ -286,7 +274,7 @@ async function deployContract() {
         }
       }
     } else {
-      // For NFT, PermissionList, Fractional — guide user to paste compiled bytecode
+      // For PermissionList, Fractional — guide user to paste compiled bytecode
       throw new Error(`Compile the ${def.label} contract in Remix or Hardhat, then use the "Custom Bytecode" tab to deploy.`)
     }
 
@@ -353,7 +341,7 @@ onUnmounted(() => {
 })
 
 // Tabs
-type Tab = 'erc20' | 'nft' | 'permissionlist' | 'fractional' | 'custom'
+type Tab = 'erc20' | 'permissionlist' | 'fractional' | 'custom'
 const activeTab = ref<Tab>('erc20')
 </script>
 
@@ -524,37 +512,6 @@ const activeTab = ref<Tab>('erc20')
           </CardContent>
         </Card>
 
-        <!-- NFT Form -->
-        <Card v-if="activeTab === 'nft'">
-          <CardHeader><CardTitle>Configure Real Estate NFT (ERC-721)</CardTitle></CardHeader>
-          <CardContent class="space-y-4">
-            <div class="grid gap-4 md:grid-cols-2">
-              <div>
-                <Label>Collection Name</Label>
-                <Input v-model="nftName" placeholder="Property Deed Registry" />
-              </div>
-              <div>
-                <Label>Symbol</Label>
-                <Input v-model="nftSymbol" placeholder="PROP" />
-              </div>
-            </div>
-            <div class="p-4 bg-muted rounded-lg space-y-3">
-              <div class="flex items-start gap-2">
-                <Info class="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
-                <div>
-                  <p class="text-sm font-semibold">How to deploy an NFT contract:</p>
-                  <ol class="text-sm text-muted-foreground mt-1 space-y-1 list-decimal list-inside">
-                    <li>Go to <a href="https://remix.ethereum.org" target="_blank" class="text-blue-600 underline">Remix IDE</a></li>
-                    <li>Use OpenZeppelin's ERC721 template</li>
-                    <li>Compile with Solidity 0.8.x</li>
-                    <li>Copy the bytecode and paste it in the "Custom Bytecode" tab</li>
-                  </ol>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
         <!-- Permission List Form -->
         <Card v-if="activeTab === 'permissionlist'">
           <CardHeader><CardTitle>Configure Permission List</CardTitle></CardHeader>
@@ -705,16 +662,6 @@ contract PermissionList {
           <p>
             Mirror tokens represent off-chain assets like AAPL, AMZN, or gold on-chain. Each token maps 1:1
             to a real-world asset price. For POC, integrate with Chainlink price feeds for live data.
-            simulate trading. Real implementations would integrate Chainlink price feeds and compliance checks.
-          </p>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold text-foreground">Real Estate NFTs (ERC-721)</h3>
-          <p>
-            Each property is unique — making ERC-721 NFTs the natural choice for real estate tokenization.
-            The NFT metadata stores property details (address, legal description, valuation, images) while
-            the smart contract handles ownership transfer. NFTs can be listed on marketplaces and transferred
-            peer-to-peer (subject to regulatory compliance).
           </p>
         </div>
         <div>
@@ -728,7 +675,7 @@ contract PermissionList {
         <div>
           <h3 class="text-lg font-semibold text-foreground">Fractional Ownership for High-Value Assets</h3>
           <p>
-            A $5M property is inaccessible to most investors. Fractional ownership splits the NFT into
+            A $5M property is inaccessible to most investors. Fractional ownership splits the asset into
             fungible ERC-20 shares, enabling micro-investment. Governance mechanisms determine how the
             underlying asset is managed and eventually sold.
           </p>
