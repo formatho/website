@@ -473,6 +473,19 @@ export const routes = [
         }
       },
       {
+        path: 'tools/rwa-deploy-lab',
+        name: 'rwa-deploy-lab',
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/RwaDeployLabView.vue'),
+        meta: {
+          title: 'RWA Deployment Lab - Deploy Smart Contracts for Real-World Assets | Formatho',
+          description:
+            'Deploy RWA smart contracts on-chain with MetaMask or Rabby wallet. ERC-20 mirror tokens for stocks (AAPL, AMZN), real estate NFTs, permission lists for KYC/AML, price oracle mocks, and fractional ownership. POC development tool for Real-World Asset projects.',
+          keywords:
+            'rwa deployment, real world asset, erc20 mirror token, real estate nft, erc721 property, permission list kyc, price oracle mock, fractional ownership, tokenization, smart contract deployment, metamask deploy, rabby wallet, blockchain poc, asset tokenization, rwa poc, decentralized finance, defi tools'
+        }
+      },
+      {
         path: 'tools/solidity-to-opcodes',
         name: 'solidity-to-opcodes',
         component: () => import(/* webpackPrefetch: true */ '../views/SolidityToOpcodesView.vue'),

@@ -43,6 +43,12 @@ export const tools = [
         description: 'Encode/decode Solidity ABI parameters, function selectors, and transaction calldata.',
         route: '/tools/abi-encoder',
         iconName: 'Binary'
+      },
+      {
+        name: 'RWA Deployment Lab',
+        description: 'Deploy ERC-20 mirror tokens, real estate NFTs, permission lists, oracle mocks, and fractional ownership contracts for RWA POC projects.',
+        route: '/tools/rwa-deploy-lab',
+        iconName: 'Building2'
       }
     ]
   },
