@@ -3,7 +3,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import {
   Wallet, AlertTriangle, CheckCircle2, ExternalLink, Copy, Trash2,
   Plus, Building2, Coins, Shield, FileText, Loader2, ChevronRight,
-  Network, ArrowRight, X, Rocket, Code2, Info
+  ArrowRight, X, Rocket, Code2, Info
 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
@@ -122,7 +122,7 @@ function explorerTx(hash: string) {
 }
 
 // ============ Contract Templates ============
-type ContractType = 'erc20' | 'nft' | 'permissionlist' | 'oracle' | 'fractional'
+type ContractType = 'erc20' | 'nft' | 'permissionlist' | 'fractional'
 
 interface ContractDef {
   type: ContractType
@@ -158,14 +158,6 @@ const CONTRACT_DEFS: Record<ContractType, ContractDef> = {
     description: 'Whitelist contract for compliance gating',
     useCase: 'Restrict token transfers to verified addresses — simulate regulated markets.',
   },
-  oracle: {
-    type: 'oracle',
-    label: 'Price Oracle Mock',
-    icon: Network,
-    color: '#F59E0B',
-    description: 'On-chain price feed you can update manually',
-    useCase: 'Push mock prices for AAPL, BTC, gold without real Chainlink integration.',
-  },
   fractional: {
     type: 'fractional',
     label: 'Fractional Ownership',
@@ -191,10 +183,6 @@ const nftSymbol = ref('PROP')
 
 // Permission List
 const permName = ref('KYC Whitelist')
-
-// Oracle
-const oracleAsset = ref('AAPL')
-const oracleSymbol = ref('AAPL')
 
 // Fractional
 const fracName = ref('Property Shares')
@@ -298,7 +286,7 @@ async function deployContract() {
         }
       }
     } else {
-      // For NFT, PermissionList, Oracle, Fractional — guide user to paste compiled bytecode
+      // For NFT, PermissionList, Fractional — guide user to paste compiled bytecode
       throw new Error(`Compile the ${def.label} contract in Remix or Hardhat, then use the "Custom Bytecode" tab to deploy.`)
     }
 
@@ -365,7 +353,7 @@ onUnmounted(() => {
 })
 
 // Tabs
-type Tab = 'erc20' | 'nft' | 'permissionlist' | 'oracle' | 'fractional' | 'custom'
+type Tab = 'erc20' | 'nft' | 'permissionlist' | 'fractional' | 'custom'
 const activeTab = ref<Tab>('erc20')
 </script>
 
@@ -592,41 +580,6 @@ contract PermissionList {
           </CardContent>
         </Card>
 
-        <!-- Oracle Form -->
-        <Card v-if="activeTab === 'oracle'">
-          <CardHeader><CardTitle>Configure Price Oracle Mock</CardTitle></CardHeader>
-          <CardContent class="space-y-4">
-            <div class="grid gap-4 md:grid-cols-2">
-              <div>
-                <Label>Asset Name</Label>
-                <Input v-model="oracleAsset" placeholder="AAPL" />
-              </div>
-              <div>
-                <Label>Asset Symbol</Label>
-                <Input v-model="oracleSymbol" placeholder="AAPL" />
-              </div>
-            </div>
-            <div class="p-4 bg-muted rounded-lg">
-              <p class="text-sm font-semibold mb-1">Suggested Solidity:</p>
-              <pre class="text-xs overflow-x-auto bg-gray-900 text-green-400 p-3 rounded">pragma solidity ^0.8.0;
-contract MockOracle {
-  string public asset;
-  uint256 public price;
-  uint256 public lastUpdate;
-  constructor(string memory _asset) {
-    asset = _asset;
-    price = 0;
-  }
-  function setPrice(uint256 _price) external {
-    price = _price;
-    lastUpdate = block.timestamp;
-  }
-}</pre>
-              <p class="text-xs text-muted-foreground mt-2">Compile in Remix and deploy via Custom Bytecode tab.</p>
-            </div>
-          </CardContent>
-        </Card>
-
         <!-- Fractional Form -->
         <Card v-if="activeTab === 'fractional'">
           <CardHeader><CardTitle>Configure Fractional Ownership</CardTitle></CardHeader>
@@ -751,7 +704,7 @@ contract MockOracle {
           <h3 class="text-lg font-semibold text-foreground">ERC-20 Mirror Tokens for Stocks & Commodities</h3>
           <p>
             Mirror tokens represent off-chain assets like AAPL, AMZN, or gold on-chain. Each token maps 1:1
-            to a real-world asset price. In a POC, combine with the Oracle Mock contract to push prices and
+            to a real-world asset price. For POC, integrate with Chainlink price feeds for live data.
             simulate trading. Real implementations would integrate Chainlink price feeds and compliance checks.
           </p>
         </div>
@@ -770,14 +723,6 @@ contract MockOracle {
             Regulated RWA transfers require verified participants. A permission list contract acts as an
             on-chain whitelist — only KYC'd addresses can receive tokens. This simulates the compliance
             layer that real RWA platforms (like Securitize, Polymath) implement.
-          </p>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold text-foreground">Price Oracle Mocks for Testing</h3>
-          <p>
-            Oracles connect smart contracts to off-chain data. For POC development, a mock oracle lets you
-            manually set prices without deploying real Chainlink integrations. Test trading bots, liquidation
-            logic, and portfolio tracking with controlled price inputs.
           </p>
         </div>
         <div>
