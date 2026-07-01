@@ -890,6 +890,436 @@ contract TokenizationFactory {
         gas costs, ensures consistent deployment, and gives you a single on-chain registry of
         all your tokenized assets.
       </p>
+
+      <!-- RWA Architecture -->
+      <h2 class="text-2xl font-bold text-foreground mt-10 mb-4" id="rwa-architecture">Complete RWA Architecture — Contract Stack</h2>
+      <p>
+        A production-grade RWA tokenization platform requires more than just token contracts.
+        Below is the full contract stack, from asset onboarding to user trading, with each contract's
+        role explained. Use this as a blueprint for your POC project.
+      </p>
+
+      <!-- Architecture Flow Diagram -->
+      <div class="mt-6 p-6 bg-muted rounded-lg overflow-x-auto">
+        <pre class="text-xs font-mono leading-relaxed text-foreground" style="white-space: pre">
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │                        RWA TOKENIZATION STACK                       │
+  └─────────────────────────────────────────────────────────────────────┘
+
+  Real-World Asset (AAPL stock, Property, Gold, Bond)
+    │
+    ▼
+  ┌──────────────────┐
+  │  AssetRegistry    │  ← Registers asset metadata, status, valuation
+  └────────┬─────────┘
+    │
+    ▼
+  ┌──────────────────┐
+  │  AssetNFT (721)   │  ← Mints unique NFT representing ownership deed
+  └────────┬─────────┘
+    │
+    │ Fractionalize
+    ▼
+  ┌──────────────────┐
+  │ FractionalToken   │  ← ERC-20 shares representing fractional ownership
+  │    (ERC-20)       │
+  └────────┬─────────┘
+    │
+    │ Users Buy / Sell
+    ▼
+  ┌──────────────────┐
+  │  Vault            │  ← Custody contract — holds assets & settles trades
+  └────────┬─────────┘
+    │
+    ├──────────────────┬───────────────────┬────────────────────┐
+    ▼                  ▼                   ▼                    ▼
+  ┌──────────┐  ┌──────────────┐  ┌───────────────┐  ┌──────────────┐
+  │Compliance│  │   Transfer   │  │   Identity    │  │  Treasury   │
+  │ Manager  │  │   Manager   │  │   Registry    │  │              │
+  │ KYC/AML  │  │  Restricts  │  │  Maps wallets │  │  Collects   │
+  │ Sanctions│  │  transfers  │  │  to verified  │  │  protocol   │
+  │ Jurisdict│  │  to approved│  │  identities   │  │  fees       │
+  └────┬─────┘  │   wallets   │  └───────────────┘  └──────┬───────┘
+       │        └──────────────┘                            │
+       └────────────┬───────────────────────────────────────┘
+                    ▼
+              ┌───────────┐
+              │ Governance│  ← DAO / admin controls protocol parameters
+              │  +Timelock│     All admin actions delayed by timelock
+              └───────────┘
+        </pre>
+      </div>
+
+      <!-- Contract Details -->
+      <div class="grid gap-6 mt-8">
+
+        <!-- AssetRegistry -->
+        <div class="p-5 border rounded-lg">
+          <h3 class="text-lg font-semibold text-foreground mb-2">1. AssetRegistry — Asset Onboarding</h3>
+          <p class="text-sm mb-3">
+            The entry point for any RWA project. When a real-world asset is brought on-chain, the AssetRegistry
+            stores its metadata — asset name, ISIN/CUSIP identifier, description, valuation, legal docs URI,
+            and status (pending, active, frozen, delisted). It acts as the source of truth for what assets exist
+            and whether they're tradeable.
+          </p>
+          <div class="bg-gray-900 rounded p-3 overflow-x-auto">
+            <pre class="text-xs text-green-400">contract AssetRegistry {
+  struct Asset {
+    string name;        // "Apple Inc. Common Stock"
+    string symbol;      // "AAPL"
+    string isin;        // "US0378331005"
+    uint256 valuation;  // in USD (oracle-updated)
+    AssetStatus status; // Pending, Active, Frozen, Delisted
+    string metadataURI; // IPFS/Arweave link to legal docs
+  }
+
+  mapping(uint256 => Asset) public assets;
+  uint256 public assetCount;
+
+  function registerAsset(
+    string memory name, string memory symbol,
+    string memory isin, uint256 valuation, string memory uri
+  ) external onlyAdmin returns (uint256 assetId);
+
+  function updateValuation(uint256 assetId, uint256 newValuation) external onlyOracle;
+  function freezeAsset(uint256 assetId) external onlyAdmin;
+}</pre>
+          </div>
+        </div>
+
+        <!-- AssetNFT -->
+        <div class="p-5 border rounded-lg">
+          <h3 class="text-lg font-semibold text-foreground mb-2">2. AssetNFT (ERC-721) — Ownership Deed</h3>
+          <p class="text-sm mb-3">
+            Once an asset is registered, an NFT is minted representing the ownership deed. For a property, this
+            is the digital title. For a stock mirror, it represents the basket backing. Each NFT links back to
+            the AssetRegistry via its <code>assetId</code> and stores a token URI with full metadata — property
+            address, photos, legal description, appraisal reports.
+          </p>
+          <div class="bg-gray-900 rounded p-3 overflow-x-auto">
+            <pre class="text-xs text-green-400">contract AssetNFT is ERC721 {
+  uint256 public nextTokenId;
+  mapping(uint256 => uint256) public tokenToAssetId; // NFT → AssetRegistry ID
+
+  function mint(address to, uint256 assetId, string memory tokenURI)
+    external onlyAssetRegistry returns (uint256);
+
+  function burn(uint256 tokenId) external onlyVault; // redeem/burn on exit
+}</pre>
+          </div>
+        </div>
+
+        <!-- FractionalToken -->
+        <div class="p-5 border rounded-lg">
+          <h3 class="text-lg font-semibold text-foreground mb-2">3. FractionalToken (ERC-20) — Fractional Ownership</h3>
+          <p class="text-sm mb-3">
+            High-value NFTs are illiquid. Fractionalization wraps the NFT and issues fungible ERC-20 shares
+            against it. A $5M property NFT can be split into 50,000 tokens at $100 each. Shareholders can
+            trade on DEXs, and governance decides when to sell the underlying asset and distribute proceeds.
+          </p>
+          <div class="bg-gray-900 rounded p-3 overflow-x-auto">
+            <pre class="text-xs text-green-400">contract FractionalToken is ERC20 {
+  uint256 public nftTokenId;     // The NFT this token fractionalizes
+  address public nftContract;    // AssetNFT address
+
+  constructor(
+    string memory name, string memory symbol,
+    uint256 totalShares, address _nftContract, uint256 _nftTokenId
+  ) {
+    _mint(msg.sender, totalShares);
+    nftContract = _nftContract;
+    nftTokenId = _nftTokenId;
+  }
+
+  // Override transfer to check compliance
+  function _update(address from, address to, uint256 amount)
+    internal override(IERC20, ERC20) {
+    require(IComplianceManager(compliance).canTransfer(from, to), "Transfer not allowed");
+    super._update(from, to, amount);
+  }
+}</pre>
+          </div>
+        </div>
+
+        <!-- Vault -->
+        <div class="p-5 border rounded-lg">
+          <h3 class="text-lg font-semibold text-foreground mb-2">4. Vault — Asset Custody & Settlement</h3>
+          <p class="text-sm mb-3">
+            The Vault is the custody contract. It holds the actual NFTs and tokenized assets. When users buy
+            fractional tokens, payment flows through the Vault. When an asset is sold or redeemed, the Vault
+            distributes proceeds. It's the financial backbone — all value flows through it.
+          </p>
+          <div class="bg-gray-900 rounded p-3 overflow-x-auto">
+            <pre class="text-xs text-green-400">contract Vault {
+  address public governance;
+  address public treasury;
+  uint256 public protocolFeeBps = 50; // 0.5%
+
+  mapping(address => uint256) public balances;
+
+  function deposit(address token, uint256 amount) external payable;
+  function withdraw(address token, uint256 amount) external onlyGovernance;
+
+  // Buy fractional tokens: payment in → tokens out
+  function buyShares(address fractionalToken, uint256 shareAmount)
+    external returns (bool);
+
+  // Sell fractional tokens: tokens in → payment out (minus fee)
+  function sellShares(address fractionalToken, uint256 shareAmount)
+    external returns (bool);
+
+  // Redeem: burn tokens, claim proportional asset proceeds
+  function redeem(address fractionalToken, uint256 shareAmount)
+    external returns (uint256 payout);
+}</pre>
+          </div>
+        </div>
+
+        <!-- ComplianceManager -->
+        <div class="p-5 border rounded-lg">
+          <h3 class="text-lg font-semibold text-foreground mb-2">5. ComplianceManager — KYC/AML, Sanctions, Jurisdiction</h3>
+          <p class="text-sm mb-3">
+            The ComplianceManager enforces regulatory rules on every transfer. It checks three things:
+            <strong>(a) KYC/AML status</strong> — are both sender and receiver verified?
+            <strong>(b) Sanctions screening</strong> — is either address on a sanctions list (OFAC, UN, EU)?
+            <strong>(c) Jurisdiction rules</strong> — are cross-border transfers between these jurisdictions allowed?
+            Every token transfer calls <code>canTransfer()</code> before executing.
+          </p>
+          <div class="bg-gray-900 rounded p-3 overflow-x-auto">
+            <pre class="text-xs text-green-400">contract ComplianceManager {
+  enum KYCStatus { None, Pending, Verified, Rejected, Revoked }
+
+  mapping(address => KYCStatus) public kycStatus;
+  mapping(address => bool) public isSanctioned;
+  mapping(address => bytes2) public jurisdiction; // country code
+  mapping(bytes2 => mapping(bytes2 => bool)) public allowedCorridors;
+
+  // Called by token contracts before transfer
+  function canTransfer(address from, address to)
+    external view returns (bool)
+  {
+    if (isSanctioned[from] || isSanctioned[to]) return false;
+    if (kycStatus[from] != KYCStatus.Verified) return false;
+    if (kycStatus[to] != KYCStatus.Verified) return false;
+
+    bytes2 fromCountry = jurisdiction[from];
+    bytes2 toCountry = jurisdiction[to];
+    if (!allowedCorridors[fromCountry][toCountry]) return false;
+
+    return true;
+  }
+
+  function setKYC(address user, KYCStatus status) external onlyAdmin;
+  function setSanctioned(address user, bool sanctioned) external onlyAdmin;
+  function setJurisdiction(address user, bytes2 country) external onlyAdmin;
+  function allowCorridor(bytes2 from, bytes2 to) external onlyAdmin;
+}</pre>
+          </div>
+        </div>
+
+        <!-- TransferManager -->
+        <div class="p-5 border rounded-lg">
+          <h3 class="text-lg font-semibold text-foreground mb-2">6. TransferManager — Transfer Restrictions</h3>
+          <p class="text-sm mb-3">
+            While ComplianceManager checks <em>who</em> can transact, TransferManager restricts <em>how</em> tokens
+            move. It enforces transfer limits (max tokens per transaction), lock-up periods (vesting),
+            allowlists/blocklists, and per-token transfer rules. Think of it as the traffic controller for
+            token movements.
+          </p>
+          <div class="bg-gray-900 rounded p-3 overflow-x-auto">
+            <pre class="text-xs text-green-400">contract TransferManager {
+  mapping(address => bool) public isApprovedWallet; // allowlist
+  mapping(address => uint256) public maxTransferAmount;
+  mapping(address => uint256) public lockupUntil;   // timestamp
+
+  struct TransferRule {
+    bool requireAllowlist;
+    bool requireCompliance;
+    uint256 maxPerTx;
+    uint256 cooldownPeriod;
+  }
+
+  mapping(address => TransferRule) public tokenRules; // per-token config
+
+  function validateTransfer(
+    address token, address from, address to, uint256 amount
+  ) external view returns (bool) {
+    TransferRule memory rule = tokenRules[token];
+    if (rule.requireAllowlist) {
+      require(isApprovedWallet[from] && isApprovedWallet[to], "Not approved");
+    }
+    if (rule.maxPerTx > 0 && amount > rule.maxPerTx) return false;
+    if (block.timestamp < lockupUntil[from]) return false;
+    return true;
+  }
+
+  function approveWallet(address wallet) external onlyAdmin;
+  function setTokenRules(address token, TransferRule memory rules) external onlyAdmin;
+}</pre>
+          </div>
+        </div>
+
+        <!-- IdentityRegistry -->
+        <div class="p-5 border rounded-lg">
+          <h3 class="text-lg font-semibold text-foreground mb-2">7. IdentityRegistry — Wallet-to-Identity Mapping</h3>
+          <p class="text-sm mb-3">
+            Maps each wallet address to a verified identity record — legal name, entity type (individual,
+            corporate, institutional), jurisdiction, accreditation status, and a hash of off-chain KYC documents.
+            This is the bridge between on-chain addresses and real-world legal entities, required for
+            regulated RWA transfers.
+          </p>
+          <div class="bg-gray-900 rounded p-3 overflow-x-auto">
+            <pre class="text-xs text-green-400">contract IdentityRegistry {
+  enum EntityType { Individual, Corporate, Institutional, Government }
+
+  struct Identity {
+    bytes32 identityHash;     // hash of legal documents (stored off-chain)
+    EntityType entityType;
+    bytes2 jurisdiction;      // country code
+    bool isAccredited;        // accredited investor status
+    uint256 verifiedAt;       // timestamp of KYC verification
+    address delegate;         // authorized delegate (e.g., fund manager)
+  }
+
+  mapping(address => Identity) public identities;
+  mapping(bytes32 => address) public hashToWallet; // prevent duplicate identities
+
+  function registerIdentity(
+    bytes32 identityHash, EntityType entityType,
+    bytes2 jurisdiction, bool isAccredited
+  ) external onlyKYCAuthority returns (bool);
+
+  function getIdentity(address wallet)
+    external view returns (Identity memory);
+
+  function isVerified(address wallet) external view returns (bool);
+}</pre>
+          </div>
+        </div>
+
+        <!-- Treasury -->
+        <div class="p-5 border rounded-lg">
+          <h3 class="text-lg font-semibold text-foreground mb-2">8. Treasury — Protocol Fee Collection</h3>
+          <p class="text-sm mb-3">
+            Collects protocol fees from every trade, redemption, and asset registration. Fees are configurable
+            by Governance and can be routed to a treasury multisig, DAO treasury, or used for token buybacks.
+            The Treasury contract is where protocol revenue accumulates.
+          </p>
+          <div class="bg-gray-900 rounded p-3 overflow-x-auto">
+            <pre class="text-xs text-green-400">contract Treasury {
+  address public governance;
+  address public multisig;           // where funds are sent
+  uint256 public tradeFeeBps = 30;   // 0.3% per trade
+  uint256 public redemptionFeeBps = 50; // 0.5% on redemption
+
+  mapping(address => uint256) public collectedByToken; // fee tracking
+
+  function collectFee(address token, uint256 amount, address payer)
+    external onlyVault {
+    collectedByToken[token] += amount;
+    // Transfer fee to treasury multisig
+    IERC20(token).transfer(multisig, amount);
+  }
+
+  function setTradeFee(uint256 bps) external onlyGovernance;
+  function withdraw(address token, uint256 amount) external onlyMultisig;
+}</pre>
+          </div>
+        </div>
+
+        <!-- Governance -->
+        <div class="p-5 border rounded-lg">
+          <h3 class="text-lg font-semibold text-foreground mb-2">9. Governance + Timelock — DAO / Admin Controls</h3>
+          <p class="text-sm mb-3">
+            Governance controls protocol parameters — fee rates, compliance rules, allowed jurisdictions,
+            sanctioned addresses, and asset listings. It can be a simple multisig for POC or a full DAO with
+            token-weighted voting for production. The <strong>Timelock</strong> ensures no admin action takes
+            effect immediately — every change has a delay (e.g., 48 hours), giving users time to react or
+            exit if they disagree with a decision.
+          </p>
+          <div class="bg-gray-900 rounded p-3 overflow-x-auto">
+            <pre class="text-xs text-green-400">contract Governance {
+  address[] public admins;
+  uint256 public requiredSignatures; // multisig threshold
+  mapping(bytes32 => uint256) public proposalVotes;
+  mapping(bytes32 => bool) public executed;
+
+  function propose(bytes32 proposalId, address target, bytes memory callData)
+    external onlyAdmin;
+
+  function vote(bytes32 proposalId) external onlyAdmin;
+  function execute(bytes32 proposalId) external onlyAfterTimelock;
+}
+
+contract Timelock {
+  uint256 public delay = 2 days; // all actions wait 48 hours
+
+  mapping(bytes32 => uint256) public queuedAt; // when was action queued
+
+  function queue(address target, bytes memory data)
+    external onlyGovernance returns (bytes32 txId);
+
+  function execute(address target, bytes memory data)
+    external returns (bytes memory result)
+  {
+    bytes32 txId = keccak256(abi.encode(target, data));
+    require(block.timestamp >= queuedAt[txId] + delay, "Timelock not expired");
+    (bool ok, bytes memory result) = target.call(data);
+    require(ok, "Execution failed");
+  }
+}</pre>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Step-by-step flow -->
+      <h2 class="text-2xl font-bold text-foreground mt-10 mb-4">End-to-End RWA Tokenization Flow</h2>
+      <p>The full lifecycle of a real-world asset on-chain, step by step:</p>
+      <div class="mt-4 space-y-3">
+        <div class="flex items-start gap-3 p-3 border rounded-lg">
+          <span class="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">1</span>
+          <div>
+            <strong>Asset Onboarding:</strong> Admin registers the real-world asset in <code>AssetRegistry</code> with name, ISIN, valuation, and legal docs. The asset goes through off-chain verification.
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-3 border rounded-lg">
+          <span class="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">2</span>
+          <div>
+            <strong>NFT Minting:</strong> <code>AssetNFT</code> mints a unique ERC-721 token representing ownership. The NFT's metadata links to the asset's legal documents and appraisal.
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-3 border rounded-lg">
+          <span class="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">3</span>
+          <div>
+            <strong>Fractionalization:</strong> The NFT is deposited into <code>FractionalToken</code> contract, which issues ERC-20 shares. A $5M property becomes 50,000 tradeable tokens.
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-3 border rounded-lg">
+          <span class="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">4</span>
+          <div>
+            <strong>Identity & Compliance Check:</strong> Users complete KYC via <code>IdentityRegistry</code>. <code>ComplianceManager</code> verifies jurisdiction and sanctions status. Only approved wallets can receive tokens.
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-3 border rounded-lg">
+          <span class="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">5</span>
+          <div>
+            <strong>Trading:</strong> Users buy/sell fractional tokens through the <code>Vault</code>. <code>TransferManager</code> validates each transfer against rules. <code>Treasury</code> collects protocol fees.
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-3 border rounded-lg">
+          <span class="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">6</span>
+          <div>
+            <strong>Governance:</strong> <code>Governance + Timelock</code> manages protocol — adding assets, updating fees, freezing compromised positions, adjusting compliance rules. All changes have a timelock delay.
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-3 border rounded-lg">
+          <span class="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">7</span>
+          <div>
+            <strong>Redemption:</strong> If the asset is sold (e.g., property sold at auction), the Vault burns fractional tokens and distributes proportional proceeds to shareholders.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
