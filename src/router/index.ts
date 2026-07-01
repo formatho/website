@@ -376,6 +376,19 @@ export const routes = [
         }
       },
       {
+        path: 'tools/visio-viewer',
+        name: 'visio-viewer',
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/tools/VisioViewer.vue'),
+        meta: {
+          title: 'Visio File Viewer',
+          description:
+            'View Microsoft Visio diagrams (.vsdx, .vsd) directly in your browser. Free, privacy-first Visio viewer that runs entirely client-side.',
+          keywords:
+            'visio viewer, visio file viewer, vsdx viewer, vsd viewer, microsoft visio, diagram viewer, visio online, privacy-first'
+        }
+      },
+      {
         path: 'tools/evm-converter',
         name: 'evm-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/EvmUnitConverterView.vue'),
@@ -444,6 +457,19 @@ export const routes = [
             'Derive addresses for Ethereum, Bitcoin, Solana, and more from a private key. Runs entirely in browser.',
           keywords:
             'private key to address, eth address, btc address, solana address, multi chain tool'
+        }
+      },
+      {
+        path: 'tools/cosmos-address-generator',
+        name: 'cosmos-address-generator',
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/CosmosAddressGeneratorView.vue'),
+        meta: {
+          title: 'Cosmos Address Generator - Create Cosmos Blockchain Addresses | Formatho',
+          description:
+            'Generate Cosmos blockchain addresses from seed phrases. See how BIP39 mnemonics become Cosmos addresses across multiple chains like Cosmos Hub, Osmosis, Juno, and Secret Network. 100% client-side, privacy-first.',
+          keywords:
+            'cosmos address generator, cosmos wallet, bip39 mnemonic, blockchain address, osmosis address, juno address, secret network address, bech32 address, cosmos seed phrase, multi-chain wallet'
         }
       },
       {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { getAddress, isAddress, bytesToHex } from 'viem'
-import { keccak256 } from 'ethereum-cryptography/keccak'
+import { keccak_256 as keccak256 } from '@noble/hashes/sha3'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -16,7 +16,7 @@ const checksumDetails = computed(() => {
     if (!address.value || !isAddress(address.value)) return null
 
     const lowerAddress = address.value.toLowerCase().replace('0x', '')
-    const hashBytes = keccak256(Buffer.from(lowerAddress, 'utf-8'))
+    const hashBytes = keccak256(new TextEncoder().encode(lowerAddress))
     const hash = '0x' + bytesToHex(hashBytes)
     const checksummed = getAddress(address.value)
 

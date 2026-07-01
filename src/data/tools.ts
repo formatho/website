@@ -3,6 +3,12 @@ export const tools = [
     category: 'Blockchain',
     items: [
       {
+        name: 'Cosmos Address Generator',
+        description: 'Generate Cosmos blockchain addresses from seed phrases. See how BIP39 mnemonics become addresses across multiple chains.',
+        route: '/tools/cosmos-address-generator',
+        iconName: 'Globe'
+      },
+      {
         name: 'Multi-Chain Wallet',
         description: 'Generate keys & addresses for multiple blockchains from one mnemonic, derive addresses from keys, and validate checksums.',
         route: '/tools/multi-chain-keys',
@@ -197,6 +203,12 @@ export const tools = [
         description: 'Convert BPMN process diagrams into Microsoft Visio compatible formats.',
         route: '/tools/bpmn-to-visio',
         iconName: 'Workflow'
+      },
+      {
+        name: 'Visio File Viewer',
+        description: 'View Microsoft Visio diagrams (.vsdx, .vsd) directly in your browser.',
+        route: '/tools/visio-viewer',
+        iconName: 'FileImage'
       }
     ]
   },
