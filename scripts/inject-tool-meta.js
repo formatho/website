@@ -15,7 +15,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const siteName = 'Formatho'
-const baseUrl = 'https://formatho.com/tools'
+const baseUrl = 'https://formatho.com'
 const twitterHandle = '@heyformatho'
 
 /**
@@ -56,7 +56,7 @@ function extractToolRoutes() {
 function generateMetaTags(tool) {
   const fullTitle = tool.title ? `${tool.title} - ${siteName}` : `${siteName} - Privacy-First Developer Tools`
   const url = `${baseUrl}/${tool.path}`
-  const image = `${baseUrl}/logo.png`
+  const image = `${baseUrl}/tools/logo.png`
 
   return `
   <!-- Tool Page Meta Tags -->
@@ -110,7 +110,7 @@ function generateMetaTags(tool) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://formatho.com/tools/" },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://formatho.com/" },
       { "@type": "ListItem", "position": 2, "name": tool.title, "item": url }
     ]
   })}</script>
