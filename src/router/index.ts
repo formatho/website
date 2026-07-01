@@ -482,7 +482,7 @@ export const routes = [
           description:
             'Deploy real-world asset (RWA) smart contracts directly from your browser. Create ERC-20 mirror tokens for stocks like AAPL and AMZN, fractional ownership contracts, and custom tokenization contracts. Connect MetaMask or Rabby wallet, configure parameters, and deploy on Ethereum, Polygon, Arbitrum, Base, and Optimism. Free POC tool for RWA and DeFi developers.',
           keywords:
-            'rwa tokenization, real world asset tokenization, rwa deployment tool, erc20 mirror token deploy, fractional ownership contract, asset tokenization platform, rwa smart contract, tokenize real estate, tokenize stocks, aapl mirror token, amzn mirror token, rwa defi, real world asset blockchain, metamask smart contract deploy, rabby wallet deploy, deploy erc20 browser, tokenization poc, rwa lab, blockchain asset tokenization, on-chain rwa, erc20 deployment tool, fractional nft shares, rwa project builder, defi poc tool'
+            'rwa tokenization, real world asset tokenization, rwa deployment tool, tokenization factory, erc20 mirror token deploy, fractional ownership contract, asset tokenization platform, rwa smart contract, tokenize real estate, tokenize stocks, aapl mirror token, amzn mirror token, create tokenized asset, factory pattern solidity, rwa defi, real world asset blockchain, metamask smart contract deploy, rabby wallet deploy, deploy erc20 browser, tokenization poc, rwa lab, blockchain asset tokenization, on-chain rwa, erc20 deployment tool, fractional shares, rwa project builder, defi poc tool, createasset, batch token deployment'
         }
       },
       {

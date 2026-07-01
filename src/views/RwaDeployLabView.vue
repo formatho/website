@@ -795,6 +795,101 @@ const activeTab = ref<Tab>('erc20')
         <li><strong>Carbon credits</strong> — Tokenize verified carbon offsets for transparent trading</li>
         <li><strong>Private equity</strong> — Tokenize fund shares for simplified investor onboarding</li>
       </ul>
+
+      <h2 class="text-2xl font-bold text-foreground mt-8 mb-4" id="tokenization-factory">TokenizationFactory — The Factory Pattern for RWA Contracts</h2>
+      <p>
+        A <strong>TokenizationFactory</strong> is a smart contract that deploys new tokenized assets on-demand.
+        Instead of manually deploying individual ERC-20, fractional ownership, or custom tokenization contracts
+        each time, a factory contract lets you call a single function like <code>createAsset("AAPL", "mAAPL", 1000000)</code>
+        and it deploys a new token contract, registers it, and returns the address — all in one transaction.
+      </p>
+
+      <div class="p-4 bg-muted rounded-lg mt-4">
+        <p class="text-sm font-semibold mb-2">How a TokenizationFactory Works:</p>
+        <pre class="text-xs overflow-x-auto bg-gray-900 text-green-400 p-3 rounded">pragma solidity ^0.8.0;
+
+interface IERC20 {
+    function name() external view returns (string memory);
+    function symbol() external view returns (string memory);
+    function totalSupply() external view returns (uint256);
+}
+
+contract MirrorToken {
+    // ... ERC-20 implementation ...
+    constructor(string memory _name, string memory _symbol, uint256 _supply, address _creator) {
+        // Mint tokens to creator
+    }
+}
+
+contract TokenizationFactory {
+    address[] public deployedTokens;
+    mapping(address => string[]) public creatorAssets;
+
+    event TokenCreated(address indexed token, address indexed creator, string name, string symbol);
+
+    function createAsset(
+        string memory name,
+        string memory symbol,
+        uint256 supply
+    ) external returns (address) {
+        MirrorToken newToken = new MirrorToken(name, symbol, supply, msg.sender);
+        address tokenAddr = address(newToken);
+        deployedTokens.push(tokenAddr);
+        creatorAssets[msg.sender].push(name);
+        emit TokenCreated(tokenAddr, msg.sender, name, symbol);
+        return tokenAddr;
+    }
+
+    function getDeployedTokens() external view returns (address[] memory) {
+        return deployedTokens;
+    }
+
+    function getTokenCount() external view returns (uint256) {
+        return deployedTokens.length;
+    }
+}</pre>
+      </div>
+
+      <div class="grid gap-4 mt-4 md:grid-cols-2">
+        <div class="p-4 border rounded-lg">
+          <h4 class="font-semibold text-foreground mb-1">Factory Benefits</h4>
+          <ul class="text-xs space-y-1">
+            <li>• Deploy new tokens in a single transaction</li>
+            <li>• Track all deployed assets on-chain</li>
+            <li>• Consistent contract initialization</li>
+            <li>• Lower gas vs multiple separate deploys</li>
+            <li>• Indexable event logs for UI integration</li>
+          </ul>
+        </div>
+        <div class="p-4 border rounded-lg">
+          <h4 class="font-semibold text-foreground mb-1">Factory Use Cases</h4>
+          <ul class="text-xs space-y-1">
+            <li>• Launch a basket of mirror tokens (AAPL, AMZN, TSLA)</li>
+            <li>• Create fractional shares for multiple properties</li>
+            <li>• Batch-deploy commodity tokens (gold, silver, oil)</li>
+            <li>• Spin up tokenized bond series</li>
+            <li>• Onboard new assets without writing more code</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="mt-4">
+        To deploy a TokenizationFactory using this lab, compile the Solidity above in
+        <a href="https://remix.ethereum.org" target="_blank" class="text-blue-600 underline">Remix IDE</a>
+        or Hardhat, then paste the bytecode into the <strong>Custom Bytecode</strong> tab.
+        Once deployed, call <code>createAsset()</code> from your wallet to launch new tokenized assets
+        without deploying separate contracts each time.
+      </p>
+
+      <h3 class="text-lg font-semibold text-foreground mt-6 mb-2">Factory Pattern vs Individual Deployment</h3>
+      <p>
+        This lab supports both approaches. For a single mirror token, deploy directly using the
+        <strong>ERC-20 Mirror Token</strong> template. For projects that need multiple tokenized assets
+        — say a basket of 10 stocks or a portfolio of 5 properties — deploy a TokenizationFactory
+        once, then call <code>createAsset()</code> for each new token. The factory pattern reduces
+        gas costs, ensures consistent deployment, and gives you a single on-chain registry of
+        all your tokenized assets.
+      </p>
     </div>
   </div>
 </template>
