@@ -465,11 +465,11 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/CosmosAddressGeneratorView.vue'),
         meta: {
-          title: 'Cosmos Address Generator - Create Cosmos Blockchain Addresses | Formatho',
+          title: 'Cosmos Address Generator - ATOM, OSMO, JUNO, AKT, INJ & More | Formatho',
           description:
-            'Generate Cosmos blockchain addresses from seed phrases. See how BIP39 mnemonics become Cosmos addresses across multiple chains like Cosmos Hub, Osmosis, Juno, and Secret Network. 100% client-side, privacy-first.',
+            'Free Cosmos address generator for Cosmos Hub (ATOM), Osmosis (OSMO), Juno (JUNO), Secret Network (SCRT), Stargaze (STARS), Akash (AKT), Kava (KAVA), Injective (INJ), Crescent (CRE), and Umee (UMEE). Generate Bech32 addresses from BIP39 seed phrases with real BIP32/BIP44 derivation. 100% client-side, privacy-first.',
           keywords:
-            'cosmos address generator, cosmos wallet, bip39 mnemonic, blockchain address, osmosis address, juno address, secret network address, bech32 address, cosmos seed phrase, multi-chain wallet'
+            'cosmos address generator, cosmos hub address, atom address generator, osmosis address generator, osmo address, juno address generator, secret network address, scrt address, stargaze address, stars address, akash address generator, akt address, kava address, injective address, inj address, crescent address, cre address, umee address, bech32 address generator, bip39 cosmos, bip44 cosmos, cosmos wallet generator, cosmos seed phrase, cosmos mnemonic, multi chain wallet, secp256k1, blockchain address tool'
         }
       },
       {

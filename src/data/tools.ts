@@ -4,7 +4,7 @@ export const tools = [
     items: [
       {
         name: 'Cosmos Address Generator',
-        description: 'Generate Cosmos blockchain addresses from seed phrases. See how BIP39 mnemonics become addresses across multiple chains.',
+        description: 'Generate addresses for Cosmos Hub (ATOM), Osmosis (OSMO), Juno (JUNO), Akash (AKT), Injective (INJ), Kava, Stargaze, Secret Network and more from BIP39 seed phrases.',
         route: '/tools/cosmos-address-generator',
         iconName: 'Globe'
       },

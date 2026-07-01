@@ -434,5 +434,86 @@ onMounted(() => {
         </div>
       </CardContent>
     </Card>
+
+    <!-- SEO Content Section -->
+    <div class="mt-6 prose prose-sm max-w-none text-muted-foreground">
+      <h2 class="text-2xl font-bold text-foreground mb-4">Cosmos Address Generator — Supported Chains</h2>
+      <p>
+        This tool generates wallet addresses for the entire Cosmos ecosystem using a single BIP39 seed phrase.
+        Each chain uses the same underlying cryptography (secp256k1 elliptic curve) but applies a different
+        Bech32 human-readable prefix (HRP), producing unique addresses per chain from the same private key.
+      </p>
+
+      <h3 class="text-lg font-semibold text-foreground mt-4 mb-2">Cosmos Hub (ATOM)</h3>
+      <p>
+        The flagship chain of the Cosmos network. ATOS addresses use the <code>cosmos1...</code> prefix with
+        BIP-44 coin type 118. The Cosmos Hub is the interchain routing center powered by the IBC protocol,
+        enabling transfers between Cosmos Hub, Osmosis, Juno, Akash, and 90+ other chains.
+      </p>
+
+      <h3 class="text-lg font-semibold text-foreground mt-4 mb-2">Osmosis (OSMO)</h3>
+      <p>
+        The leading DEX in the Cosmos ecosystem. Osmosis addresses use the <code>osmo1...</code> prefix with
+        BIP-44 coin type 100118. OSMO tokens are used for governance and liquidity mining on the Osmosis
+        decentralized exchange.
+      </p>
+
+      <h3 class="text-lg font-semibold text-foreground mt-4 mb-2">Injective (INJ)</h3>
+      <p>
+        A DeFi-specific blockchain using Ethereum-style key derivation (coin type 60). Injective addresses
+        use the <code>inj1...</code> prefix but are derived using keccak256 hashing instead of the standard
+        Cosmos ripemd160(sha256) approach, making them compatible with EVM tooling.
+      </p>
+
+      <h3 class="text-lg font-semibold text-foreground mt-4 mb-2">Juno (JUNO)</h3>
+      <p>
+        A smart contract platform in the Cosmos ecosystem. Juno addresses use the <code>juno1...</code> prefix
+        with BIP-44 coin type 118. JUNO powers CosmWasm smart contracts and cross-chain dApps.
+      </p>
+
+      <h3 class="text-lg font-semibold text-foreground mt-4 mb-2">Akash Network (AKT)</h3>
+      <p>
+        A decentralized cloud computing marketplace. Akash addresses use the <code>akash1...</code> prefix
+        with coin type 118. AKT is used to lease compute resources from decentralized providers.
+      </p>
+
+      <h3 class="text-lg font-semibold text-foreground mt-4 mb-2">Secret Network (SCRT)</h3>
+      <p>
+        A privacy-focused blockchain with encrypted smart contracts. Secret Network addresses use the
+        <code>secret1...</code> prefix with BIP-44 coin type 529.
+      </p>
+
+      <h3 class="text-lg font-semibold text-foreground mt-4 mb-2">Stargaze (STARS)</h3>
+      <p>
+        An NFT marketplace and creation platform in the Cosmos ecosystem. Stargaze addresses use the
+        <code>stars1...</code> prefix with coin type 118.
+      </p>
+
+      <h3 class="text-lg font-semibold text-foreground mt-4 mb-2">Kava (KAVA)</h3>
+      <p>
+        A Layer-1 blockchain combining Cosmos SDK and EVM compatibility. Kava addresses use the
+        <code>kava1...</code> prefix with BIP-44 coin type 459.
+      </p>
+
+      <h3 class="text-lg font-semibold text-foreground mt-4 mb-2">Crescent (CRE) & Umee (UMEE)</h3>
+      <p>
+        Crescent is a DeFi hub with liquidity routing and AMM features, using the <code>cre1...</code> prefix.
+        Umee is an interchain money market protocol using the <code>umee1...</code> prefix. Both use coin type 118.
+      </p>
+
+      <h2 class="text-2xl font-bold text-foreground mt-6 mb-4">Why Use a Cosmos Multi-Chain Address Generator?</h2>
+      <p>
+        The Cosmos ecosystem's unique architecture means a single seed phrase can manage assets across
+        dozens of blockchains. Whether you're setting up a wallet for Cosmos Hub (ATOM), trading on Osmosis
+        (OSMO), deploying contracts on Juno (JUNO), or using Akash (AKT) for decentralized hosting,
+        understanding how your addresses are derived helps you verify transactions and manage security.
+      </p>
+      <p>
+        This generator uses the same cryptographic libraries as production wallets: <strong>BIP32</strong>
+        hierarchical deterministic key derivation, <strong>BIP44</strong> multi-account structure,
+        <strong>secp256k1</strong> elliptic curve cryptography, and <strong>Bech32</strong> encoding.
+        Everything runs client-side in your browser — no data is ever transmitted.
+      </p>
+    </div>
   </div>
 </template>
