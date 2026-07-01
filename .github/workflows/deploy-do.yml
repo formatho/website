@@ -21,6 +21,8 @@ jobs:
 
       - name: Build and Save Docker image
         run: |
+          # Inject LI.FI API key into nginx.conf before building
+          sed -i "s/__LIFI_API_KEY__/${{ secrets.LIFI_API_KEY }}/g" nginx.conf
           docker build -t ${{ env.IMAGE_NAME }}:latest .
           docker save ${{ env.IMAGE_NAME }}:latest | gzip > ${{ env.IMAGE_NAME }}.tar.gz
 
@@ -50,13 +52,6 @@ jobs:
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
             cd /home/${{ secrets.DO_USERNAME }}/formatho
-            # Ensure .env exists with required keys (merge, don't overwrite)
-            if [ ! -f .env ]; then touch .env; fi
-            if ! grep -q '^LIFI_API_KEY=' .env; then
-              echo 'LIFI_API_KEY=${{ secrets.LIFI_API_KEY }}' >> .env
-            else
-              sed -i "s|^LIFI_API_KEY=.*|LIFI_API_KEY=${{ secrets.LIFI_API_KEY }}|" .env
-            fi
             gunzip -c ${{ env.IMAGE_NAME }}.tar.gz | docker load
             docker compose up -d --force-recreate --remove-orphans
             docker compose restart wordpress

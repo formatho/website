@@ -4,8 +4,6 @@ services:
     image: formatho:latest
     container_name: formatho_app
     restart: unless-stopped
-    environment:
-      - LIFI_API_KEY=${LIFI_API_KEY}
     networks:
       - app-network
     # volumes:
