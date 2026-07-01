@@ -473,6 +473,19 @@ export const routes = [
         }
       },
       {
+        path: 'tools/rwa-swap',
+        name: 'rwa-swap',
+        component: () =>
+          import(/* webpackPrefetch: true */ '../views/RwaSwapView.vue'),
+        meta: {
+          title: 'RWA Asset Swap - Cross-Chain Token Swap for Real-World Assets | Formatho',
+          description:
+            'Swap RWA tokens, stablecoins (USDC, USDT, DAI), and native assets across 15+ EVM chains. Cross-chain routing powered by LI.FI. Transfer RWA tokens between Ethereum, Arbitrum, Base, Optimism, Polygon, Avalanche and more. Connect MetaMask or Rabby.',
+          keywords:
+            'rwa swap, cross-chain swap, real world asset swap, li.fi swap, erc20 bridge, stablecoin swap, usdc cross-chain, usdt bridge, rwa token exchange, tokenized asset swap, multi-chain swap, ethereum arbitrum swap, base polygon bridge, metamask swap, rabby wallet swap, defi swap tool'
+        }
+      },
+      {
         path: 'tools/rwa-deploy-lab',
         name: 'rwa-deploy-lab',
         component: () =>

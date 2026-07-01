@@ -45,6 +45,12 @@ export const tools = [
         iconName: 'Binary'
       },
       {
+        name: 'RWA Asset Swap',
+        description: 'Swap RWA tokens, stablecoins, and native assets across 15+ EVM chains. Cross-chain routing via LI.FI.',
+        route: '/tools/rwa-swap',
+        iconName: 'Zap'
+      },
+      {
         name: 'RWA Tokenization Lab',
         description: 'Deploy ERC-20 mirror tokens for stocks (AAPL, AMZN), fractional ownership contracts, and custom tokenization contracts on-chain via MetaMask or Rabby.',
         route: '/tools/rwa-deploy-lab',

@@ -22,10 +22,10 @@ FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Copy nginx configuration for SPA routing
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/templates/default.conf.template
 
 # Expose port 80
 EXPOSE 80
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# nginx:alpine auto-runs envsubst on files in /etc/nginx/templates/
+# $LIFI_API_KEY will be substituted from environment at startup
