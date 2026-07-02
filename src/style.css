@@ -225,11 +225,12 @@
   }
 
   /* Fix 5: Button Hover States (Smooth Transitions) */
+  /* Exclude radix select trigger/buttons and their children from global hover overrides */
   .button,
-  button:not(.nav-btn),
+  button:not(.nav-btn):not([role="combobox"]):not([data-radix-collection-item]),
   a.button,
   .glass-card a,
-  .glass-card button:not(.nav-btn),
+  .glass-card button:not(.nav-btn):not([role="combobox"]):not([data-radix-collection-item]),
   .glass-card RouterLink,
   a[class*="bg-primary"] {
     transition: all 0.3s ease-in-out;
@@ -237,15 +238,34 @@
   }
 
   .button:hover,
-  button:not(.nav-btn):hover,
+  button:not(.nav-btn):not([role="combobox"]):not([data-radix-collection-item]):hover,
   a.button:hover,
   .glass-card a:hover,
-  .glass-card button:not(.nav-btn):hover,
+  .glass-card button:not(.nav-btn):not([role="combobox"]):not([data-radix-collection-item]):hover,
   .glass-card RouterLink:hover,
   a[class*="bg-primary"]:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background-color: rgb(23, 23, 23) !important;
+  }
+
+  /* Ensure radix select triggers are never affected by global hover overrides */
+  [role="combobox"],
+  [role="combobox"]:hover,
+  [data-radix-select-trigger],
+  [data-radix-select-trigger]:hover {
+    background-color: inherit !important;
+    transform: none !important;
+  }
+
+  /* Ensure radix popper wrapper is transparent and non-blocking */
+  [data-radix-popper-content-wrapper] {
+    background: transparent !important;
+    pointer-events: none;
+  }
+
+  [data-radix-popper-content-wrapper] > * {
+    pointer-events: auto;
   }
 
   /* Fix 6: Link Hover Effects - Premium Sweeping Underline */
@@ -279,8 +299,8 @@
     transform-origin: bottom left;
   }
 
-  /* Default nav link color on hover */
-  a:hover,
+  /* Default nav link color on hover (exclude radix/contenteditable elements) */
+  a:hover:not([data-radix-collection-item] *):not([contenteditable]),
   RouterLink:hover,
   .nav-link:hover {
     color: rgb(23, 23, 23) !important;
