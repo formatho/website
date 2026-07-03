@@ -13,8 +13,13 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      // Force pngjs to use Node.js entry instead of browser.js with CommonJS loader
+      'pngjs': 'pngjs/lib/png.js'
     }
+  },
+  optimizeDeps: {
+    include: ['qrcode', 'pngjs'],
   },
   define: {
     'global': 'globalThis',
