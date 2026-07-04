@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
 // REMOVED: import LiveSiteAnalytics from '@/components/LiveSiteAnalytics.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
+import QABadge from '@/components/QABadge.vue'
 import { computed, watch, onMounted, onUnmounted, ref } from 'vue'
 import { tools } from '@/data/tools'
 
@@ -23,17 +24,20 @@ const isToolPage = computed(() => route.path.startsWith('/tools/') && route.path
 const isBlogPage = computed(() => route.path.startsWith('/blogs'))
 
 // Watch route changes to show skeleton during lazy-loaded navigation
-watch(() => route.path, (to, from) => {
-  if (to !== from && !isFirstLoad.value) {
-    isLoading.value = true
-    if (loadingTimeout) clearTimeout(loadingTimeout)
-    // Safety: auto-hide after 800ms
-    loadingTimeout = setTimeout(() => {
-      isLoading.value = false
-    }, 800)
+watch(
+  () => route.path,
+  (to, from) => {
+    if (to !== from && !isFirstLoad.value) {
+      isLoading.value = true
+      if (loadingTimeout) clearTimeout(loadingTimeout)
+      // Safety: auto-hide after 800ms
+      loadingTimeout = setTimeout(() => {
+        isLoading.value = false
+      }, 800)
+    }
+    isFirstLoad.value = false
   }
-  isFirstLoad.value = false
-})
+)
 
 // Called when the new route component mounts
 function onComponentReady() {
@@ -109,7 +113,7 @@ onUnmounted(removeToolSchema)
     >
       Skip to main content
     </a>
-    
+
     <Navbar />
     <Breadcrumb v-if="showBreadcrumb" />
     <main id="main-content" class="flex-1 pt-16" :class="{ 'pt-[104px]': showBreadcrumb }">
@@ -120,7 +124,11 @@ onUnmounted(removeToolSchema)
         enter-to-class="opacity-0"
         leave-active-class="hidden"
       >
-        <div v-if="isLoading && isToolPage" class="animate-pulse p-4 gap-4 flex flex-col bg-muted/30" style="min-height: calc(100vh - 8rem)">
+        <div
+          v-if="isLoading && isToolPage"
+          class="animate-pulse p-4 gap-4 flex flex-col bg-muted/30"
+          style="min-height: calc(100vh - 8rem)"
+        >
           <!-- Title bar -->
           <div class="flex items-center justify-between">
             <div class="h-8 bg-muted-foreground/15 rounded-md w-64"></div>
@@ -186,7 +194,10 @@ onUnmounted(removeToolSchema)
         enter-to-class="opacity-0"
         leave-active-class="hidden"
       >
-        <div v-if="isLoading && !isToolPage && !isBlogPage" class="animate-pulse max-w-5xl mx-auto p-6 space-y-6">
+        <div
+          v-if="isLoading && !isToolPage && !isBlogPage"
+          class="animate-pulse max-w-5xl mx-auto p-6 space-y-6"
+        >
           <div class="h-8 bg-muted rounded-md w-56"></div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="space-y-4">
@@ -208,5 +219,6 @@ onUnmounted(removeToolSchema)
       <RouterView v-show="!isLoading" @vue:mounted="onComponentReady" />
     </main>
     <Footer />
+    <QABadge />
   </div>
 </template>
