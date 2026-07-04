@@ -1,3 +1,4 @@
+/* eslint-env node */
 const fs = require('fs');
 
 const content = fs.readFileSync('blogPosts.ts', 'utf8');

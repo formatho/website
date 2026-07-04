@@ -17,8 +17,9 @@ const API_ROUTES = [
   '/api/analytics',
 ]
 
-// Cache strategies
-const CACHE_STRATEGIES = {
+// Cache strategies (reserved for future use)
+// eslint-disable-next-line no-unused-vars
+const _CACHE_STRATEGIES = {
   NETWORK_FIRST: 'network-first',
   CACHE_FIRST: 'cache-first',
   STALE_WHILE_REVALIDATE: 'stale-while-revalidate',
@@ -212,6 +213,7 @@ self.addEventListener('push', (event) => {
   )
 })
 
+/* eslint-disable no-undef */
 // Notification click handler
 self.addEventListener('notificationclick', (event) => {
   console.log('[Service Worker] Notification clicked')
@@ -222,5 +224,6 @@ self.addEventListener('notificationclick', (event) => {
     clients.openWindow('/')
   )
 })
+/* eslint-enable no-undef */
 
 console.log('[Service Worker] Enterprise service worker loaded')

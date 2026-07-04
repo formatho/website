@@ -806,7 +806,7 @@ const activeTab = ref<Tab>('erc20')
 
       <div class="p-4 bg-muted rounded-lg mt-4">
         <p class="text-sm font-semibold mb-2">How a TokenizationFactory Works:</p>
-        <pre class="text-xs overflow-x-auto bg-gray-900 text-green-400 p-3 rounded">pragma solidity ^0.8.0;
+        <pre v-pre class="text-xs overflow-x-auto bg-gray-900 text-green-400 p-3 rounded">pragma solidity ^0.8.0;
 
 interface IERC20 {
     function name() external view returns (string memory);
@@ -901,7 +901,7 @@ contract TokenizationFactory {
 
       <!-- Architecture Flow Diagram -->
       <div class="mt-6 p-6 bg-muted rounded-lg overflow-x-auto">
-        <pre class="text-xs font-mono leading-relaxed text-foreground" style="white-space: pre">
+        <pre v-pre class="text-xs font-mono leading-relaxed text-foreground" style="white-space: pre">
   ┌─────────────────────────────────────────────────────────────────────┐
   │                        RWA TOKENIZATION STACK                       │
   └─────────────────────────────────────────────────────────────────────┘
@@ -963,7 +963,7 @@ contract TokenizationFactory {
             and whether they're tradeable.
           </p>
           <div class="bg-gray-900 rounded p-3 overflow-x-auto">
-            <pre class="text-xs text-green-400">contract AssetRegistry {
+            <pre v-pre class="text-xs text-green-400">contract AssetRegistry {
   struct Asset {
     string name;        // "Apple Inc. Common Stock"
     string symbol;      // "AAPL"
@@ -997,7 +997,7 @@ contract TokenizationFactory {
             address, photos, legal description, appraisal reports.
           </p>
           <div class="bg-gray-900 rounded p-3 overflow-x-auto">
-            <pre class="text-xs text-green-400">contract AssetNFT is ERC721 {
+            <pre v-pre class="text-xs text-green-400">contract AssetNFT is ERC721 {
   uint256 public nextTokenId;
   mapping(uint256 => uint256) public tokenToAssetId; // NFT → AssetRegistry ID
 
@@ -1018,7 +1018,7 @@ contract TokenizationFactory {
             trade on DEXs, and governance decides when to sell the underlying asset and distribute proceeds.
           </p>
           <div class="bg-gray-900 rounded p-3 overflow-x-auto">
-            <pre class="text-xs text-green-400">contract FractionalToken is ERC20 {
+            <pre v-pre class="text-xs text-green-400">contract FractionalToken is ERC20 {
   uint256 public nftTokenId;     // The NFT this token fractionalizes
   address public nftContract;    // AssetNFT address
 
@@ -1050,7 +1050,7 @@ contract TokenizationFactory {
             distributes proceeds. It's the financial backbone — all value flows through it.
           </p>
           <div class="bg-gray-900 rounded p-3 overflow-x-auto">
-            <pre class="text-xs text-green-400">contract Vault {
+            <pre v-pre class="text-xs text-green-400">contract Vault {
   address public governance;
   address public treasury;
   uint256 public protocolFeeBps = 50; // 0.5%
@@ -1086,7 +1086,7 @@ contract TokenizationFactory {
             Every token transfer calls <code>canTransfer()</code> before executing.
           </p>
           <div class="bg-gray-900 rounded p-3 overflow-x-auto">
-            <pre class="text-xs text-green-400">contract ComplianceManager {
+            <pre v-pre class="text-xs text-green-400">contract ComplianceManager {
   enum KYCStatus { None, Pending, Verified, Rejected, Revoked }
 
   mapping(address => KYCStatus) public kycStatus;
@@ -1127,7 +1127,7 @@ contract TokenizationFactory {
             token movements.
           </p>
           <div class="bg-gray-900 rounded p-3 overflow-x-auto">
-            <pre class="text-xs text-green-400">contract TransferManager {
+            <pre v-pre class="text-xs text-green-400">contract TransferManager {
   mapping(address => bool) public isApprovedWallet; // allowlist
   mapping(address => uint256) public maxTransferAmount;
   mapping(address => uint256) public lockupUntil;   // timestamp
@@ -1149,7 +1149,7 @@ contract TokenizationFactory {
       require(isApprovedWallet[from] && isApprovedWallet[to], "Not approved");
     }
     if (rule.maxPerTx > 0 && amount > rule.maxPerTx) return false;
-    if (block.timestamp < lockupUntil[from]) return false;
+    if (block.timestamp &lt; lockupUntil[from]) return false;
     return true;
   }
 
@@ -1169,7 +1169,7 @@ contract TokenizationFactory {
             regulated RWA transfers.
           </p>
           <div class="bg-gray-900 rounded p-3 overflow-x-auto">
-            <pre class="text-xs text-green-400">contract IdentityRegistry {
+            <pre v-pre class="text-xs text-green-400">contract IdentityRegistry {
   enum EntityType { Individual, Corporate, Institutional, Government }
 
   struct Identity {
@@ -1206,7 +1206,7 @@ contract TokenizationFactory {
             The Treasury contract is where protocol revenue accumulates.
           </p>
           <div class="bg-gray-900 rounded p-3 overflow-x-auto">
-            <pre class="text-xs text-green-400">contract Treasury {
+            <pre v-pre class="text-xs text-green-400">contract Treasury {
   address public governance;
   address public multisig;           // where funds are sent
   uint256 public tradeFeeBps = 30;   // 0.3% per trade
@@ -1238,7 +1238,7 @@ contract TokenizationFactory {
             exit if they disagree with a decision.
           </p>
           <div class="bg-gray-900 rounded p-3 overflow-x-auto">
-            <pre class="text-xs text-green-400">contract Governance {
+            <pre v-pre class="text-xs text-green-400">contract Governance {
   address[] public admins;
   uint256 public requiredSignatures; // multisig threshold
   mapping(bytes32 => uint256) public proposalVotes;

@@ -25,15 +25,8 @@ const blogPostsContent = fs.readFileSync(blogPostsPath, 'utf8')
 function parseBlogPosts(content) {
   const posts = []
   
-  // Match each blog post object
-  const postRegex = /{\s*id:\s*(\d+),\s*title:\s*`([^`]+)`|'([^']+)'|"([^"]+)",\s*excerpt:\s*`([^`]+)`|'([^']+)'|"([^"]+)",\s*date:\s*'([^']+)',\s*readTime:\s*'([^']+)',\s*tags:\s*\[([^\]]+)\],\s*slug:\s*'([^']+)',\s*image:\s*(?:`([^`]+)`|'([^']+)'|"([^"]+)")/g
-  
   // Simpler approach: extract slugs and map to known data
   const slugRegex = /slug:\s*'([^']+)'/g
-  const titleRegex = /title:\s*`([^`]+)`/g
-  const excerptRegex = /excerpt:\s*`([^`]+)`/g
-  const dateRegex = /date:\s*'([^']+)'/g
-  const tagsRegex = /tags:\s*\[([^\]]+)\]/g
   
   // Extract all slugs
   const slugs = []

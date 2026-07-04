@@ -173,7 +173,7 @@ const convert = () => {
 const copyConverted = async () => {
   try {
     await navigator.clipboard.writeText(convertedSql.value)
-  } catch {}
+  } catch { /* noop */ }
 }
 
 const swapDialects = () => {

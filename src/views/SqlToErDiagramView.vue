@@ -215,7 +215,7 @@ const downloadMermaid = () => {
 const copyMermaid = async () => {
   try {
     await navigator.clipboard.writeText(erMermaid.value)
-  } catch {}
+  } catch { /* noop */ }
 }
 
 const relatedTables = (tableName: string): string[] => {
