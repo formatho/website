@@ -139,6 +139,15 @@ jobs:
             git log --pretty=format:"- %s (%h)" "${PREV_TAG}..${{ needs.generate-version.outputs.version }}" > release-notes.md
           fi
           
+          # Append image info
+          echo "" >> release-notes.md
+          echo "" >> release-notes.md
+          echo "## Docker Image" >> release-notes.md
+          echo "" >> release-notes.md
+          echo "\`ghcr.io/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.image-tag }}\`" >> release-notes.md
+          echo "" >> release-notes.md
+          echo "[View on GitHub Container Registry](https://github.com/${{ env.IMAGE_NAME }}/pkgs/container/website)" >> release-notes.md
+          
           echo "--- Release notes ---"
           cat release-notes.md
 
