@@ -19,13 +19,15 @@ jobs:
       - name: Download image metadata
         uses: actions/download-artifact@v4
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
-          pattern: image-metadata
+          name: image-metadata
           path: ./metadata
 
       - name: Read image metadata
         id: image
         run: |
+          ls -la ./metadata
           IMAGE_TAG=$(cat ./metadata/image-tag.txt)
           IMAGE_DIGEST=$(cat ./metadata/image-digest.txt)
           echo "tag=${IMAGE_TAG}" >> $GITHUB_OUTPUT
