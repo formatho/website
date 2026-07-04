@@ -64,3 +64,12 @@ jobs:
           echo "Image built successfully!"
           echo "Digest: ${{ steps.build.outputs.digest }}"
           echo "Tags: ${{ steps.meta.outputs.tags }}"
+
+      - name: Set output tag
+        id: tag
+        if: github.event_name != 'pull_request'
+        run: |
+          # Extract the main-<sha> tag from the tags list
+          TAG=$(echo "${{ steps.meta.outputs.tags }}" | tr ',' '\n' | grep "main-" | head -1)
+          echo "tag=${TAG}" >> $GITHUB_OUTPUT
+          echo "Image tag: ${TAG}"

@@ -1,30 +1,38 @@
-name: Deploy to DigitalOcean (No Registry)
+name: Deploy to DigitalOcean
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Build Docker Image"]
+    types: [completed]
     branches: ["main"]
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: formatho
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-and-transfer:
+  deploy:
     runs-on: ubuntu-latest
     environment: digital_ocean_formatho
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build and Save Docker image
+      - name: Set image tag
+        id: image
         run: |
-          # Inject LI.FI API key into nginx.conf before building
-          sed -i "s/__LIFI_API_KEY__/${{ secrets.LIFI_API_KEY }}/g" nginx.conf
-          docker build -t ${{ env.IMAGE_NAME }}:latest .
-          docker save ${{ env.IMAGE_NAME }}:latest | gzip > ${{ env.IMAGE_NAME }}.tar.gz
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "tag=latest" >> $GITHUB_OUTPUT
+            echo "Using latest tag (manual trigger)"
+          else
+            # Get the commit SHA from the workflow run
+            SHA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}" |
+              jq -r '.head_sha')
+            echo "tag=main-${SHA:0:7}" >> $GITHUB_OUTPUT
+            echo "Using tag: main-${SHA:0:7}"
+          fi
 
       - name: Clean up Theme Directory
         uses: appleboy/ssh-action@v1.0.3
@@ -41,7 +49,7 @@ jobs:
           host: ${{ secrets.DO_HOST }}
           username: ${{ secrets.DO_USERNAME }}
           key: ${{ secrets.DO_SSH_KEY }}
-          source: "${{ env.IMAGE_NAME }}.tar.gz,docker-compose.yml,nginx-proxy.conf,formatho-theme,wordpress"
+          source: "docker-compose.yml,nginx-proxy.conf,formatho-theme,wordpress"
           target: "/home/${{ secrets.DO_USERNAME }}/formatho"
 
       - name: Deploy via SSH
@@ -52,9 +60,29 @@ jobs:
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
             cd /home/${{ secrets.DO_USERNAME }}/formatho
-            gunzip -c ${{ env.IMAGE_NAME }}.tar.gz | docker load
+
+            # Update image tag in docker-compose.yml
+            sed -i "s|ghcr.io/formatho/website:.*|ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.image.outputs.tag }}|g" docker-compose.yml
+
+            # Login to GHCR
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            # Inject LI.FI API key into nginx.conf
+            sed -i "s/__LIFI_API_KEY__/${{ secrets.LIFI_API_KEY }}/g" nginx.conf
+
+            # Pull new image
+            docker pull ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.image.outputs.tag }}
+
+            # Deploy
             docker compose up -d --force-recreate --remove-orphans
             docker compose restart wordpress
             docker exec nginx_proxy nginx -s reload || true
-            rm ${{ env.IMAGE_NAME }}.tar.gz
+
+            # Cleanup
             docker image prune -f
+
+      - name: Verify deployment
+        run: |
+          echo "Deployment completed successfully!"
+          echo "Image: ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.image.outputs.tag }}"
+          echo "Commit: ${{ github.sha }}"

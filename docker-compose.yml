@@ -1,7 +1,7 @@
 services:
   app:
-    build: .
-    image: formatho:latest
+    # Image tag will be replaced by deploy workflow
+    image: ghcr.io/formatho/website:latest
     container_name: formatho_app
     restart: unless-stopped
     networks:
