@@ -1,10 +1,10 @@
 name: Deploy to DigitalOcean
 
+# Deploy ONLY on push to prod branch or manual trigger
+# main branch builds but does NOT deploy — it's the dev/testing branch
 on:
-  workflow_run:
-    workflows: ["Build Docker Image"]
-    types: [completed]
-    branches: ["main"]
+  push:
+    branches: ["prod"]
   workflow_dispatch:
 
 env:
@@ -14,20 +14,18 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: digital_ocean_formatho
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     steps:
       - name: Download image metadata
         uses: actions/download-artifact@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.workflow_run.id }}
-          name: image-metadata
+          run-id: ${{ github.run_id }}
+          name: image-metadata-prod
           path: ./metadata
 
       - name: Read image metadata
         id: image
         run: |
-          ls -la ./metadata
           IMAGE_TAG=$(cat ./metadata/image-tag.txt)
           IMAGE_DIGEST=$(cat ./metadata/image-digest.txt)
           echo "tag=${IMAGE_TAG}" >> $GITHUB_OUTPUT
@@ -38,23 +36,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Clean up Theme Directory
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.DO_HOST }}
-          username: ${{ secrets.DO_USERNAME }}
-          key: ${{ secrets.DO_SSH_KEY }}
-          script: |
-            rm -rf /home/${{ secrets.DO_USERNAME }}/formatho/formatho-theme
-
-      - name: Copy Files to Droplet
+      - name: Copy Files to Droplet (temp dir for atomic swap)
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.DO_HOST }}
           username: ${{ secrets.DO_USERNAME }}
           key: ${{ secrets.DO_SSH_KEY }}
           source: "docker-compose.yml,nginx-proxy.conf,formatho-theme,wordpress"
-          target: "/home/${{ secrets.DO_USERNAME }}/formatho"
+          target: "/home/${{ secrets.DO_USERNAME }}/formatho-staging"
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -63,16 +52,30 @@ jobs:
           username: ${{ secrets.DO_USERNAME }}
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
-            cd /home/${{ secrets.DO_USERNAME }}/formatho
+            set -e
+            DEPLOY_DIR="/home/${{ secrets.DO_USERNAME }}/formatho"
+            STAGING_DIR="/home/${{ secrets.DO_USERNAME }}/formatho-staging"
+
+            # Atomic swap of theme files
+            mv "$DEPLOY_DIR/formatho-theme" "$DEPLOY_DIR/formatho-theme.bak" 2>/dev/null || true
+            cp -r "$STAGING_DIR/formatho-theme" "$DEPLOY_DIR/formatho-theme"
+            rm -rf "$DEPLOY_DIR/formatho-theme.bak"
+
+            # Copy updated config files
+            cp "$STAGING_DIR/docker-compose.yml" "$DEPLOY_DIR/docker-compose.yml"
+            cp "$STAGING_DIR/nginx-proxy.conf" "$DEPLOY_DIR/nginx-proxy.conf"
+            cp -r "$STAGING_DIR/wordpress" "$DEPLOY_DIR/wordpress"
+
+            # Clean up staging
+            rm -rf "$STAGING_DIR"
+
+            cd "$DEPLOY_DIR"
 
             # Update docker-compose.yml to pin by digest (immutable)
             sed -i "s|ghcr.io/formatho/website:.*|ghcr.io/${{ env.IMAGE_NAME }}@${{ steps.image.outputs.digest }}|g" docker-compose.yml
 
             # Login to GHCR
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-            # Inject LI.FI API key into nginx.conf
-            sed -i "s/__LIFI_API_KEY__/${{ secrets.LIFI_API_KEY }}/g" nginx.conf
 
             # Pull image by digest (guaranteed to be exact image built)
             docker pull ghcr.io/${{ env.IMAGE_NAME }}@${{ steps.image.outputs.digest }}
@@ -82,14 +85,28 @@ jobs:
 
             # Deploy
             docker compose up -d --force-recreate --remove-orphans
-            docker compose restart wordpress
             docker exec nginx_proxy nginx -s reload || true
 
-            # Cleanup
+            # Cleanup old images
             docker image prune -f
 
-      - name: Verify deployment
+      - name: Health check
         run: |
-          echo "Deployment completed successfully!"
-          echo "Image: ghcr.io/${{ env.IMAGE_NAME }}@${{ steps.image.outputs.digest }}"
-          echo "Tag: ${{ steps.image.outputs.tag }}"
+          sleep 10
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://formatho.com || echo "000")
+          if [ "$HTTP_STATUS" != "200" ]; then
+            echo "::error::Health check failed! HTTP status: $HTTP_STATUS"
+            exit 1
+          fi
+          echo "✅ Health check passed — formatho.com returned 200"
+
+      - name: Deployment summary
+        run: |
+          echo "## Deployment Successful ✅" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Detail | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Image | \`ghcr.io/${{ env.IMAGE_NAME }}@${{ steps.image.outputs.digest }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Tag | \`${{ steps.image.outputs.tag }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Branch | \`prod\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Health | formatho.com → 200 OK |" >> $GITHUB_STEP_SUMMARY
