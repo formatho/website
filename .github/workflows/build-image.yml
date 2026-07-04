@@ -78,7 +78,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Copy config files to Droplet
+      - name: Copy compose file to Droplet
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.DO_HOST }}
@@ -87,7 +87,7 @@ jobs:
           source: "docker-compose.yml,nginx-proxy.conf"
           target: "/home/${{ secrets.DO_USERNAME }}/formatho-staging"
 
-      - name: Deploy via SSH
+      - name: Deploy via SSH (Docker Swarm)
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.DO_HOST }}
@@ -98,30 +98,38 @@ jobs:
             DEPLOY_DIR="/home/${{ secrets.DO_USERNAME }}/formatho"
             STAGING_DIR="/home/${{ secrets.DO_USERNAME }}/formatho-staging"
 
-            # Copy updated config files
+            # Initialize Swarm if not already active
+            docker swarm init 2>/dev/null || true
+
+            # Sync config files
             cp "$STAGING_DIR/docker-compose.yml" "$DEPLOY_DIR/docker-compose.yml"
             cp "$STAGING_DIR/nginx-proxy.conf" "$DEPLOY_DIR/nginx-proxy.conf"
-
-            # Clean up staging
             rm -rf "$STAGING_DIR"
 
             cd "$DEPLOY_DIR"
 
-            # Update docker-compose.yml to pin by digest (immutable)
-            sed -i "s|ghcr.io/formatho/website:.*|ghcr.io/${{ env.IMAGE_NAME }}@${{ needs.build.outputs.image-digest }}|g" docker-compose.yml
-
             # Login to GHCR
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-            # Pull image by digest
+            # Pull the exact image by digest
             docker pull ghcr.io/${{ env.IMAGE_NAME }}@${{ needs.build.outputs.image-digest }}
 
-            # Tag it for docker-compose reference
+            # Tag it so docker-compose can reference it
             docker tag ghcr.io/${{ env.IMAGE_NAME }}@${{ needs.build.outputs.image-digest }} ghcr.io/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.image-tag }}
 
-            # Deploy
-            docker compose up -d --force-recreate --remove-orphans
-            docker exec nginx_proxy nginx -s reload || true
+            # Update image in compose file
+            sed -i "s|ghcr.io/formatho/website:.*|ghcr.io/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.image-tag }}|g" docker-compose.yml
+
+            # Deploy via Swarm (creates or updates the stack)
+            docker stack deploy -c docker-compose.yml formatho --with-registry-auth
+
+            # Wait for service to be ready
+            echo "Waiting for service to converge..."
+            sleep 5
+            docker service ls --filter name=formatho
+
+            # Reload nginx
+            docker exec $(docker ps -q -f name=formatho_nginx) nginx -s reload || true
 
             # Cleanup old images
             docker image prune -f
