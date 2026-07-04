@@ -210,7 +210,7 @@ onUnmounted(() => {
       
       <!-- Add Task Button -->
       <Button 
-        @click="$router.push(`/agent-orchestrator/config`)" aria-label="Add new task"
+        @click="$router.push(`/tools`)" aria-label="Add new task"
         class="flex items-center gap-2"
       >
         <PlusIcon class="w-5 h-5" />
@@ -446,7 +446,7 @@ onUnmounted(() => {
           <!-- Actions -->
           <div class="flex items-center gap-2 ml-4">
             <Button 
-              @click="$router.push(`/agent-orchestrator/${task.agentId}`)"
+              @click="$router.push(`/tools`)"
               v-if="task.agentId"
               variant="ghost"
               size="icon"

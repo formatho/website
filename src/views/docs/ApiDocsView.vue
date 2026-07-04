@@ -824,7 +824,7 @@ onMounted(() => {
             <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               API Documentation
             </h1>
-            <p class="text-slate-400 mt-1">Agent Orchestrator REST API Reference</p>
+            <p class="text-slate-400 mt-1">Formatho REST API Reference</p>
           </div>
           <div class="flex items-center gap-4">
             <div class="flex items-center gap-2">

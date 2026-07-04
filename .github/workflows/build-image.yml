@@ -99,6 +99,8 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            GIT_COMMIT=${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -139,6 +141,15 @@ jobs:
             git log --pretty=format:"- %s (%h)" "${PREV_TAG}..${{ needs.generate-version.outputs.version }}" > release-notes.md
           fi
           
+          # Append image info
+          echo "" >> release-notes.md
+          echo "" >> release-notes.md
+          echo "## Docker Image" >> release-notes.md
+          echo "" >> release-notes.md
+          echo "\`ghcr.io/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.image-tag }}\`" >> release-notes.md
+          echo "" >> release-notes.md
+          echo "[View on GitHub Container Registry](https://github.com/${{ env.IMAGE_NAME }}/pkgs/container/website)" >> release-notes.md
+          
           echo "--- Release notes ---"
           cat release-notes.md
 
@@ -152,6 +163,26 @@ jobs:
           prerelease: ${{ contains(needs.generate-version.outputs.version, '-') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy-qa:
+    needs: [build]
+    runs-on: ubuntu-latest
+    environment: digital_ocean_formatho
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Deploy QA via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USERNAME }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          script: |
+            set -e
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker pull ghcr.io/${{ env.IMAGE_NAME }}:main
+            docker tag ghcr.io/${{ env.IMAGE_NAME }}:main ghcr.io/${{ env.IMAGE_NAME }}:qa
+            docker service update --force --image ghcr.io/${{ env.IMAGE_NAME }}:qa qa_qa-app
+            echo "QA updated to main branch image"
 
   deploy:
     needs: [generate-version, build]

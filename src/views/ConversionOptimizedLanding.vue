@@ -53,7 +53,7 @@ const pricingPlans = [
   {
     name: 'Free',
     price: 0,
-    description: 'Perfect for trying out Agent Orchestrator',
+    description: 'Perfect for trying out our tools',
     features: [
       '5 AI agents',
       'Basic support',
@@ -100,12 +100,12 @@ const pricingPlans = [
 
 const faqs = [
   {
-    question: 'What makes Agent Orchestrator different from other AI tools?',
-    answer: 'Agent Orchestrator runs entirely on your machine with zero cloud dependency. Your code, data, and conversations never leave your infrastructure. Plus, our agent pools feature lets you run multiple AI agents in parallel, dramatically increasing productivity.'
+    question: 'What makes Formatho different from other AI tools?',
+    answer: 'Formatho runs entirely on your machine with zero cloud dependency. Your code, data, and conversations never leave your infrastructure. Plus, our agent pools feature lets you run multiple AI agents in parallel, dramatically increasing productivity.'
   },
   {
     question: 'Do I need to be technical to use it?',
-    answer: 'Agent Orchestrator is designed for developers, but we also provide a user-friendly web interface. If you can use ChatGPT, you can use Agent Orchestrator. For advanced features, some technical knowledge helps but isn\'t required.'
+    answer: 'Formatho is designed for developers, but we also provide a user-friendly web interface. If you can use ChatGPT, you can use our tools. For advanced features, some technical knowledge helps but isn\'t required.'
   },
   {
     question: 'What AI models are supported?',
@@ -116,8 +116,8 @@ const faqs = [
     answer: 'Yes! Our Free tier includes 5 agents forever at no cost. Pro tier comes with a 14-day free trial with full feature access. No credit card required to start.'
   },
   {
-    question: 'Can I self-host Agent Orchestrator?',
-    answer: 'Absolutely. Agent Orchestrator is designed to run on your infrastructure. Download the binary, run it locally or on your servers, and maintain complete control over your data. Enterprise plans include on-premise deployment support.'
+    question: 'Can I self-host Formatho?',
+    answer: 'Absolutely. Formatho is designed to run on your infrastructure. Download the binary, run it locally or on your servers, and maintain complete control over your data. Enterprise plans include on-premise deployment support.'
   },
   {
     question: 'What happens if I go over the agent limit?',
@@ -221,7 +221,7 @@ const faqs = [
           <div class="bg-slate-950 rounded-lg p-6 aspect-video flex items-center justify-center">
             <div class="text-center text-slate-500">
               <div class="text-6xl mb-4">🤖</div>
-              <div class="text-lg font-medium">Agent Orchestrator Dashboard</div>
+              <div class="text-lg font-medium">Formatho Dashboard</div>
               <div class="text-sm mt-2">Screenshot preview coming soon</div>
             </div>
           </div>
@@ -278,7 +278,7 @@ const faqs = [
       <div class="max-w-7xl mx-auto">
         <div class="text-center mb-16">
           <h2 class="text-4xl font-bold mb-4">Loved by Developers</h2>
-          <p class="text-xl text-slate-400">See what early users are saying about Agent Orchestrator</p>
+          <p class="text-xl text-slate-400">See what early users are saying about Formatho</p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
@@ -388,7 +388,7 @@ const faqs = [
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-5xl font-bold mb-6">Ready to Orchestrate?</h2>
         <p class="text-xl text-slate-400 mb-8">
-          Join 50+ developers already using Agent Orchestrator to ship faster.
+          Join 50+ developers already using Formatho to ship faster.
         </p>
 
         <!-- Urgency Indicator -->

@@ -15,7 +15,7 @@ const isAnimating = ref(false)
 const steps = [
   {
     id: 0,
-    title: 'Welcome to Agent Orchestrator',
+    title: 'Welcome to Formatho',
     description: 'Learn how to create and manage AI agents that work autonomously on your machine.',
     icon: '🏠',
     component: 'welcome'
@@ -201,7 +201,7 @@ onUnmounted(() => {
           <div class="flex items-center gap-4">
             <RouterLink to="/" class="flex items-center gap-2">
               <img src="/logo.png" alt="Formatho" class="h-8 w-8 rounded-lg" />
-              <span class="font-bold text-lg">Agent Orchestrator</span>
+              <span class="font-bold text-lg">Formatho</span>
             </RouterLink>
             <span class="text-muted-foreground">|</span>
             <span class="text-sm text-muted-foreground">Interactive Tutorial</span>
@@ -263,7 +263,7 @@ onUnmounted(() => {
         <!-- Welcome Step -->
         <div v-if="currentStep === 0" class="text-center space-y-8">
           <div class="text-8xl mb-6">🚀</div>
-          <h1 class="text-4xl font-bold">Welcome to Agent Orchestrator</h1>
+          <h1 class="text-4xl font-bold">Welcome to Formatho</h1>
           <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
             In this interactive tutorial, you'll learn how to create AI agents that work autonomously on your machine.
           </p>
@@ -509,7 +509,7 @@ onUnmounted(() => {
           <div class="text-8xl mb-6">🎉</div>
           <h1 class="text-4xl font-bold">Tutorial Complete!</h1>
           <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
-            You've learned the basics of Agent Orchestrator. Now you're ready to create your own AI workforce!
+            You've learned the basics. Now you're ready to create your own AI workforce!
           </p>
 
           <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto mt-8">
@@ -534,12 +534,6 @@ onUnmounted(() => {
           </div>
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <RouterLink
-              to="/agent-orchestrator"
-              class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all shadow-lg"
-            >
-              Launch Agent Orchestrator
-            </RouterLink>
             <Button
               @click="resetTutorial"
               variant="secondary"

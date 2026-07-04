@@ -2126,11 +2126,10 @@ export const blogPosts: BlogPost[] = [
     cta: {
       title: 'Explore AI Agent Tools',
       description: 'Discover tools for building and managing AI agents in your workflow.',
-      link: '/agent-orchestrator',
-      buttonText: 'Try Agent Orchestrator'
+      link: '/tools',
+      buttonText: 'Explore Tools'
     },
     relatedTools: [
-      { name: 'Agent Orchestrator', description: 'Manage AI agents', link: '/agent-orchestrator' },
       { name: 'OpenClaw', description: 'Local AI agent platform', link: 'https://openclaw.ai' },
       {
         name: 'Docker Compose Generator',
@@ -2230,7 +2229,7 @@ Agent C (Reviewer) → Picks up task: "Review and approve"</code></pre>
 <img src="/images/blog/blog-01/programming.jpg" alt="Developer Productivity" style="width: 100%; border-radius: 8px; margin: 1.5rem 0;" />
 <h2>What's Next</h2>
 <p>Agent Todo is part of <a href="https://formatho.com">Formatho</a> — a suite of 100+ privacy-first developer tools. Everything runs client-side. Zero tracking, zero data storage.</p>
-<ul><li>🔗 <strong>Try it free</strong>: <a href="https://todo.formatho.com">todo.formatho.com</a></li><li>📖 <strong>GitHub</strong>: <a href="https://github.com/formatho/agent-orchestrator">github.com/formatho/agent-orchestrator</a></li><li>📚 <strong>Docs</strong>: <a href="https://todo.formatho.com/docs">todo.formatho.com/docs</a></li></ul>
+<ul><li>🔗 <strong>Try it free</strong>: <a href="https://todo.formatho.com">todo.formatho.com</a></li><li>📖 <strong>GitHub</strong>: <a href="https://github.com/formatho">github.com/formatho</a></li><li>📚 <strong>Docs</strong>: <a href="https://todo.formatho.com/docs">todo.formatho.com/docs</a></li></ul>
 <p><em>Built by developers who got tired of agents forgetting what they were doing.</em> 🤖✅</p>`,
     cta: {
       title: 'Try Agent Todo Free',
@@ -2244,7 +2243,6 @@ Agent C (Reviewer) → Picks up task: "Review and approve"</code></pre>
         description: 'Task management for AI agents',
         link: 'https://todo.formatho.com'
       },
-      { name: 'Agent Orchestrator', description: 'Manage AI agents', link: '/agent-orchestrator' },
       { name: 'JSON Formatter', description: 'Format JSON data', link: '/json-viewer' }
     ]
   },
@@ -2733,7 +2731,6 @@ class FormathoMemoryManager:
         description: 'Task management for AI agents',
         link: 'https://todo.formatho.com'
       },
-      { name: 'Agent Orchestrator', description: 'Manage AI agents', link: '/agent-orchestrator' },
       { name: 'JSON Formatter', description: 'Format JSON data', link: '/json-viewer' }
     ]
   },

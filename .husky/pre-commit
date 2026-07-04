@@ -1,1 +1,26 @@
-./scripts/pre-commit-check.sh
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running QA pre-commit checks..."
+
+# Run linter
+echo "📋 Running ESLint..."
+npm run lint
+LINT_EXIT=$?
+
+if [ $LINT_EXIT -ne 0 ]; then
+  echo "❌ Linting failed. Please fix linting errors before committing."
+  exit 1
+fi
+
+# Run build
+echo "🏗️  Running build verification..."
+npm run build
+BUILD_EXIT=$?
+
+if [ $BUILD_EXIT -ne 0 ]; then
+  echo "❌ Build failed. Please fix build errors before committing."
+  exit 1
+fi
+
+echo "✅ All checks passed. Proceeding with commit..."

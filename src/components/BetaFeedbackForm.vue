@@ -89,7 +89,7 @@ const resetForm = () => {
         Share Your Feedback
       </CardTitle>
       <CardDescription>
-        Help us improve Agent Orchestrator by sharing your experience
+        Help us improve our products by sharing your experience
       </CardDescription>
     </CardHeader>
 

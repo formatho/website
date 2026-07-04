@@ -42,7 +42,7 @@ function labelForSegment(segment: string, _indexPath: string): string {
   // For tool slugs, use route meta title or pretty-case the slug
   const metaTitle = route.meta?.title as string | undefined
   if (metaTitle) {
-    const cleaned = metaTitle.replace(/\s*[-|–—]\s*(Formatho|Agent Orchestrator|Formatho).*$/i, '').trim()
+    const cleaned = metaTitle.replace(/\s*[-|–—]\s*(Formatho).*$/i, '').trim()
     if (cleaned && cleaned.length < 60) return cleaned
   }
   // Pretty-case: base64-encoder → Base64 Encoder

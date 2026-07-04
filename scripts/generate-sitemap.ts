@@ -17,8 +17,6 @@ function generateSitemap(): string {
     { url: '/privacy', changefreq: 'yearly', priority: '0.5' },
     { url: '/contact', changefreq: 'monthly', priority: '0.5' },
     { url: '/markdown', changefreq: 'monthly', priority: '0.7' },
-    { url: '/agent-orchestrator', changefreq: 'weekly', priority: '0.9' },
-    { url: '/agent-orchestrator/dashboard', changefreq: 'monthly', priority: '0.8' },
     { url: '/agent-todo', changefreq: 'weekly', priority: '0.9' },
     { url: '/blogs', changefreq: 'weekly', priority: '0.8' },
     { url: '/agents', changefreq: 'weekly', priority: '0.8' },

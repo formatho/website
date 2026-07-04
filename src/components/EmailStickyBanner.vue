@@ -48,8 +48,8 @@ onMounted(() => {
 
 const copyTitle = computed(() => {
   return abVariant.value === 'A'
-    ? '🚀 Agent Orchestrator Beta: Get early access'
-    : '⚡ Privacy-first tools + AI orchestration (beta access)'
+    ? '🚀 Formatho Beta: Get early access'
+    : '⚡ Privacy-first developer tools (beta access)'
 })
 
 const dismissBanner = () => {
@@ -73,7 +73,7 @@ const handleSubmit = async () => {
 
   const result = await submitEmail(email.value, 'banner', {
     variant: abVariant.value,
-    interested_in: 'orchestrator'
+    interested_in: 'tools'
   })
 
   if (result.success) {

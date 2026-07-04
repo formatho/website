@@ -188,11 +188,6 @@ const _popularTools = [
                 ⚡ Explore All Tools
               </button>
             </RouterLink>
-            <RouterLink to="/agent-orchestrator" data-v-8d4ed633="">
-              <button class="px-8 py-3 border border-primary/30 rounded-lg font-medium text-lg hover:bg-primary/5 transition-colors" data-v-8d4ed633="">
-                🤖 Agent Orchestrator
-              </button>
-            </RouterLink>
           </div>
 
           <!-- Social Proof Stats -->

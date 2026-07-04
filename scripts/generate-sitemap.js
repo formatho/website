@@ -49,7 +49,6 @@ const staticRoutes = [
   { path: '/privacy', priority: '0.5', changefreq: 'yearly' },
   { path: '/terms', priority: '0.5', changefreq: 'yearly' },
   { path: '/contact', priority: '0.7', changefreq: 'monthly' },
-  { path: '/agent-orchestrator', priority: '0.9', changefreq: 'monthly' },
   { path: '/agent-identity-generator', priority: '0.8', changefreq: 'monthly' },
   { path: '/agents', priority: '0.8', changefreq: 'monthly' },
 ]

@@ -13,6 +13,8 @@ RUN npm ci
 COPY . .
 
 # Build the application
+ARG GIT_COMMIT=unknown
+ENV VITE_GIT_COMMIT=$GIT_COMMIT
 RUN npm run build
 
 # Production stage
