@@ -86,7 +86,7 @@ jobs:
           host: ${{ secrets.DO_HOST }}
           username: ${{ secrets.DO_USERNAME }}
           key: ${{ secrets.DO_SSH_KEY }}
-          source: "docker-compose.yml,nginx-proxy.conf"
+          source: "docker-compose.yml"
           target: "/home/${{ secrets.DO_USERNAME }}/formatho-staging"
 
       - name: Deploy via SSH (Docker Swarm)
@@ -105,7 +105,6 @@ jobs:
 
             # Sync config files
             cp "$STAGING_DIR/docker-compose.yml" "$DEPLOY_DIR/docker-compose.yml"
-            cp "$STAGING_DIR/nginx-proxy.conf" "$DEPLOY_DIR/nginx-proxy.conf"
             rm -rf "$STAGING_DIR"
 
             cd "$DEPLOY_DIR"
