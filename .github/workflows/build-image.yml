@@ -11,7 +11,47 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  generate-version:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/prod' && github.event_name == 'push'
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate next semver tag
+        id: version
+        run: |
+          # Get latest version tag
+          LATEST_TAG=$(git describe --tags --match "v[0-9]*" --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "Latest tag: $LATEST_TAG"
+          
+          # Strip 'v' prefix and bump patch
+          VERSION="${LATEST_TAG#v}"
+          MAJOR=$(echo "$VERSION" | cut -d. -f1)
+          MINOR=$(echo "$VERSION" | cut -d. -f2)
+          PATCH=$(echo "$VERSION" | cut -d. -f3)
+          NEW_PATCH=$((PATCH + 1))
+          NEW_TAG="v${MAJOR}.${MINOR}.${NEW_PATCH}"
+          
+          echo "New tag: $NEW_TAG"
+          echo "version=${NEW_TAG}" >> $GITHUB_OUTPUT
+
+      - name: Create and push tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag ${{ steps.version.outputs.version }}
+          git push origin ${{ steps.version.outputs.version }}
+
   build:
+    needs: [generate-version]
+    if: always()
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -19,9 +59,12 @@ jobs:
     outputs:
       image-tag: ${{ steps.tag.outputs.tag }}
       image-digest: ${{ steps.build.outputs.digest }}
+      version: ${{ needs.generate-version.outputs.version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -64,15 +107,54 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           BRANCH="${{ github.ref_name }}"
-          # Extract just the short tag (e.g. prod-2acaf47) from the full ref
           FULL_REF=$(echo "${{ steps.meta.outputs.tags }}" | tr ',' '\n' | grep "${BRANCH}-" | head -1)
           SHORT_TAG=$(echo "$FULL_REF" | sed 's|.*:||')
           echo "tag=${SHORT_TAG}" >> $GITHUB_OUTPUT
           echo "Image tag: ${SHORT_TAG}"
           echo "Image digest: ${{ steps.build.outputs.digest }}"
 
+  create-release:
+    needs: [generate-version, build]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/prod' && github.event_name == 'push'
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref }}
+
+      - name: Fetch tag
+        run: git fetch --tags
+
+      - name: Generate release notes
+        run: |
+          PREV_TAG=$(git describe --tags --match "v[0-9]*" --abbrev=0 ${{ needs.generate-version.outputs.version }}^ 2>/dev/null || echo "")
+          
+          if [ -z "$PREV_TAG" ]; then
+            git log --pretty=format:"- %s (%h)" > release-notes.md
+          else
+            git log --pretty=format:"- %s (%h)" "${PREV_TAG}..${{ needs.generate-version.outputs.version }}" > release-notes.md
+          fi
+          
+          echo "--- Release notes ---"
+          cat release-notes.md
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.generate-version.outputs.version }}
+          name: Release ${{ needs.generate-version.outputs.version }}
+          body_path: release-notes.md
+          draft: false
+          prerelease: ${{ contains(needs.generate-version.outputs.version, '-') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   deploy:
-    needs: build
+    needs: [generate-version, build]
     runs-on: ubuntu-latest
     environment: digital_ocean_formatho
     if: github.ref == 'refs/heads/prod' && github.event_name == 'push'
@@ -100,36 +182,26 @@ jobs:
             DEPLOY_DIR="/home/${{ secrets.DO_USERNAME }}/formatho"
             STAGING_DIR="/home/${{ secrets.DO_USERNAME }}/formatho-staging"
 
-            # Initialize Swarm if not already active
             docker swarm init 2>/dev/null || true
 
-            # Sync config files
             cp "$STAGING_DIR/docker-compose.yml" "$DEPLOY_DIR/docker-compose.yml"
             rm -rf "$STAGING_DIR"
 
             cd "$DEPLOY_DIR"
 
-            # Login to GHCR
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-            # Pull the exact image by digest
             docker pull ghcr.io/${{ env.IMAGE_NAME }}@${{ needs.build.outputs.image-digest }}
-
-            # Tag it so docker-compose can reference it
             docker tag ghcr.io/${{ env.IMAGE_NAME }}@${{ needs.build.outputs.image-digest }} ghcr.io/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.image-tag }}
 
-            # Update image in compose file
             sed -i "s|ghcr.io/formatho/website:.*|ghcr.io/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.image-tag }}|g" docker-compose.yml
 
-            # Deploy via Swarm (creates or updates the stack)
             docker stack deploy -c docker-compose.yml formatho --with-registry-auth
 
-            # Wait for service to be ready
             echo "Waiting for service to converge..."
             sleep 5
             docker service ls --filter name=formatho
 
-            # Cleanup old images
             docker image prune -f
 
       - name: Health check
@@ -144,9 +216,9 @@ jobs:
 
       - name: Deployment summary
         run: |
-          echo "## Deployment Successful ✅" >> $GITHUB_STEP_SUMMARY
+          echo "## Release ${{ needs.generate-version.outputs.version }} ✅" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Image: ghcr.io/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.image-tag }}" >> $GITHUB_STEP_SUMMARY
           echo "Digest: ${{ needs.build.outputs.image-digest }}" >> $GITHUB_STEP_SUMMARY
-          echo "Branch: prod" >> $GITHUB_STEP_SUMMARY
+          echo "Version: ${{ needs.generate-version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
           echo "Health: formatho.com responded OK" >> $GITHUB_STEP_SUMMARY
