@@ -65,11 +65,22 @@ jobs:
           echo "Digest: ${{ steps.build.outputs.digest }}"
           echo "Tags: ${{ steps.meta.outputs.tags }}"
 
-      - name: Set output tag
-        id: tag
+      - name: Write image metadata
         if: github.event_name != 'pull_request'
         run: |
           # Extract the main-<sha> tag from the tags list
           TAG=$(echo "${{ steps.meta.outputs.tags }}" | tr ',' '\n' | grep "main-" | head -1)
-          echo "tag=${TAG}" >> $GITHUB_OUTPUT
+          echo "${TAG}" > image-tag.txt
+          echo "${{ steps.build.outputs.digest }}" > image-digest.txt
           echo "Image tag: ${TAG}"
+          echo "Image digest: ${{ steps.build.outputs.digest }}"
+
+      - name: Upload image metadata artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-metadata
+          path: |
+            image-tag.txt
+            image-digest.txt
+          retention-days: 1

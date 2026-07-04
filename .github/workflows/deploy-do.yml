@@ -16,21 +16,25 @@ jobs:
     environment: digital_ocean_formatho
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Download image metadata
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ github.event.workflow_run.id }}
+          pattern: image-metadata
+          path: ./metadata
 
-      - name: Set image tag
+      - name: Read image metadata
         id: image
         run: |
-          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            echo "tag=latest" >> $GITHUB_OUTPUT
-            echo "Using latest tag (manual trigger)"
-          else
-            # SHA is available in github.event.workflow_run.head_sha
-            SHA="${{ github.event.workflow_run.head_sha }}"
-            echo "tag=main-${SHA:0:7}" >> $GITHUB_OUTPUT
-            echo "Using tag: main-${SHA:0:7}"
-          fi
+          IMAGE_TAG=$(cat ./metadata/image-tag.txt)
+          IMAGE_DIGEST=$(cat ./metadata/image-digest.txt)
+          echo "tag=${IMAGE_TAG}" >> $GITHUB_OUTPUT
+          echo "digest=${IMAGE_DIGEST}" >> $GITHUB_OUTPUT
+          echo "Image tag: ${IMAGE_TAG}"
+          echo "Image digest: ${IMAGE_DIGEST}"
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Clean up Theme Directory
         uses: appleboy/ssh-action@v1.0.3
@@ -68,8 +72,16 @@ jobs:
             # Inject LI.FI API key into nginx.conf
             sed -i "s/__LIFI_API_KEY__/${{ secrets.LIFI_API_KEY }}/g" nginx.conf
 
-            # Pull new image
+            # Pull new image (with digest verification for security)
             docker pull ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.image.outputs.tag }}
+
+            # Verify digest matches
+            PULLED_DIGEST=$(docker image inspect ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.image.outputs.tag }} --format '{{index .RepoDigests 0}}' | cut -d'@' -f2)
+            if [ "${PULLED_DIGEST}" != "${{ steps.image.outputs.digest }}" ]; then
+              echo "ERROR: Digest mismatch! Expected: ${{ steps.image.outputs.digest }}, Got: ${PULLED_DIGEST}"
+              exit 1
+            fi
+            echo "Digest verified: ${PULLED_DIGEST}"
 
             # Deploy
             docker compose up -d --force-recreate --remove-orphans
@@ -83,4 +95,4 @@ jobs:
         run: |
           echo "Deployment completed successfully!"
           echo "Image: ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.image.outputs.tag }}"
-          echo "Commit: ${{ github.sha }}"
+          echo "Digest: ${{ steps.image.outputs.digest }}"
