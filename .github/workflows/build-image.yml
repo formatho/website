@@ -164,6 +164,26 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  deploy-qa:
+    needs: [build]
+    runs-on: ubuntu-latest
+    environment: digital_ocean_formatho
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Deploy QA via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USERNAME }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          script: |
+            set -e
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker pull ghcr.io/${{ env.IMAGE_NAME }}:main
+            docker tag ghcr.io/${{ env.IMAGE_NAME }}:main ghcr.io/${{ env.IMAGE_NAME }}:qa
+            docker service update --force --image ghcr.io/${{ env.IMAGE_NAME }}:qa qa_qa-app
+            echo "QA updated to main branch image"
+
   deploy:
     needs: [generate-version, build]
     runs-on: ubuntu-latest
