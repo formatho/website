@@ -129,9 +129,6 @@ jobs:
             sleep 5
             docker service ls --filter name=formatho
 
-            # Reload nginx
-            docker exec $(docker ps -q -f name=formatho_nginx) nginx -s reload || true
-
             # Cleanup old images
             docker image prune -f
 
