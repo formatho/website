@@ -7,8 +7,8 @@
           
           <div class="popup-content">
             <div class="emoji">🚀</div>
-            <h2>Wait! Don't Miss Agent Orchestrator Launch</h2>
-            <p class="subtext">Be the first to try <strong>Agent Orchestrator</strong> - our new AI-powered automation platform</p>
+            <h2>Wait! Don't Miss Our Latest Tools</h2>
+            <p class="subtext">Be the first to try <strong>Formatho's</strong> new AI-powered developer tools and utilities</p>
             
             <!-- Success State -->
             <div v-if="isSubmitted" class="success-state">
@@ -42,7 +42,7 @@
               <div class="benefits">
                 <div class="benefit">
                   <span class="check">✓</span>
-                  <span>Early access to Agent Orchestrator</span>
+                  <span>Early access to new tools</span>
                 </div>
                 <div class="benefit">
                   <span class="check">✓</span>
@@ -151,7 +151,7 @@ const handleSubmit = async () => {
     
     // Submit using the composable
     const result = await submitEmail(email.value, 'popup', {
-      interested_in: 'orchestrator',
+      interested_in: 'tools',
       offer: '50_percent_off'
     })
     

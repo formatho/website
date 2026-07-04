@@ -581,12 +581,6 @@ export const tools = [
     category: 'Artificial Intelligence',
     items: [
       {
-        name: 'Agent Orchestrator',
-        description: 'Spin up AI workers with text. Manage AI agents locally.',
-        route: '/tools/agent-orchestrator',
-        iconName: 'Bot'
-      },
-      {
         name: 'Agent Identity Generator',
         description: 'Instantly generate unique personas, traits, and system prompts for AI agents.',
         route: '/tools/agent-identity-generator',

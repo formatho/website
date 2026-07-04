@@ -55,7 +55,7 @@ const handleSubmit = async () => {
           Become a Founding Beta Tester
         </h1>
         <p class="text-xl text-slate-400 max-w-2xl mx-auto">
-          Agent Orchestrator is looking for 10 early adopters to test our AI agent platform and shape the future of the product.
+          We're looking for 10 early adopters to test our platform and shape the future of the product.
         </p>
       </div>
 
@@ -193,7 +193,7 @@ const handleSubmit = async () => {
             </div>
 
             <div>
-              <label class="block text-sm font-medium mb-2">What would you use Agent Orchestrator for? (optional)</label>
+              <label class="block text-sm font-medium mb-2">What would you use our tools for? (optional)</label>
               <textarea
                 v-model="useCase"
                 aria-label="Use case description"

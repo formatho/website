@@ -146,7 +146,7 @@ function disconnectWallet() {
 }
 
 const currentChain = computed(() => SUPPORTED_CHAINS[chainId.value] ?? null)
-const explorerBase = computed(() => currentChain?.explorer ?? '')
+const explorerBase = computed(() => currentChain.value?.explorer ?? '')
 
 function explorerAddress(addr: string) {
   return `${explorerBase.value}/address/${addr}`

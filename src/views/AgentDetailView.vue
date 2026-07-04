@@ -161,7 +161,7 @@ onMounted(() => {
 
     <!-- Footer -->
     <footer class="detail-footer">
-      <p>Formatho Agent Orchestrator - Building tools that make money 💰🚀</p>
+      <p>Formatho - Building tools that make money 💰🚀</p>
     </footer>
   </div>
 </template>

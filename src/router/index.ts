@@ -33,9 +33,9 @@ export const routes = [
         meta: {
           title: 'Formatho - 100+ Free Privacy-First Developer Tools & AI Agent Platform',
           description:
-            '100+ free online developer tools that run in your browser. JSON formatter, Base64, UUID, and more. Plus Agent Orchestrator for AI-powered workflows. Zero tracking, 100% client-side.',
+            '100+ free online developer tools that run in your browser. JSON formatter, Base64, UUID, and more. Zero tracking, 100% client-side.',
           keywords:
-            'developer tools, json formatter, base64 encoder, uuid generator, privacy-first tools, ai agent orchestrator, agent todo, online utilities, free developer tools, client-side tools'
+            'developer tools, json formatter, base64 encoder, uuid generator, privacy-first tools, agent todo, online utilities, free developer tools, client-side tools'
         }
       },
       {
@@ -47,7 +47,7 @@ export const routes = [
           description:
             'Learn about Formatho - our mission to build privacy-first developer tools and AI agent orchestration solutions.',
           keywords:
-            'about formatho, privacy-first tools, developer tools, ai agent orchestrator, open source'
+            'about formatho, privacy-first tools, developer tools, open source'
         }
       },
       {
@@ -55,11 +55,11 @@ export const routes = [
         name: 'api-docs',
         component: () => import(/* webpackPrefetch: true */ '../views/docs/ApiDocsView.vue'),
         meta: {
-          title: 'API Documentation - Agent Orchestrator | Formatho',
+          title: 'API Documentation | Formatho',
           description:
-            'Comprehensive REST API documentation for Agent Orchestrator. Interactive examples, authentication guides, and code snippets in JavaScript, Python, and Go.',
+            'Comprehensive REST API documentation. Interactive examples, authentication guides, and code snippets in JavaScript, Python, and Go.',
           keywords:
-            'api documentation, rest api, agent orchestrator api, developer docs, interactive api, code examples'
+            'api documentation, rest api, developer docs, interactive api, code examples'
         }
       },
       {
@@ -67,11 +67,11 @@ export const routes = [
         name: 'beta',
         component: () => import(/* webpackPrefetch: true */ '../views/BetaView.vue'),
         meta: {
-          title: 'Beta Program - Agent Orchestrator | Formatho',
+          title: 'Beta Program | Formatho',
           description:
-            'Become a founding beta tester for Agent Orchestrator. Get 6 months free Pro tier ($294 value) and shape the future of AI agent automation.',
+            'Become a founding beta tester. Get 6 months free Pro tier ($294 value) and shape the future of AI agent automation.',
           keywords:
-            'beta tester, agent orchestrator beta, early access, free pro tier, ai agents, developer tools beta'
+            'beta tester, early access, free pro tier, ai agents, developer tools beta'
         }
       },
       {
@@ -614,87 +614,7 @@ export const routes = [
             'ai agent tasks, agent todo, task management for ai, persistent tasks, agent memory, ai workforce'
         }
       },
-      {
-        path: 'agent-orchestrator',
-        name: 'agent-orchestrator',
-        component: () => import(/* webpackPrefetch: true */ '../views/AgentOrchestratorView.vue'), // Landing page
-      },
-      {
-        path: 'tools/agent-orchestrator',
-        name: 'tools-agent-orchestrator',
-        component: () => import(/* webpackPrefetch: true */ '../views/AgentOrchestratorView.vue'),
-        meta: {
-          title: 'Agent Orchestrator - Local-First AI Agent Management',
-          description:
-            'Spin up AI workers with text, let them run autonomously, check results later. A desktop app for managing AI agents locally. Open source, privacy-first.',
-          keywords:
-            'ai agent orchestrator, autonomous agents, local ai, agent management, llm orchestration, open source, privacy-first'
-        }
-      },
-      {
-        path: 'agent-orchestrator/dashboard',
-        name: 'agent-orchestrator-dashboard',
-        component: () =>
-          import(/* webpackPrefetch: true */ '../views/AgentOrchestratorDashboardView.vue'),
-        meta: {
-          title: 'Dashboard - Agent Orchestrator | Formatho',
-          description:
-            'Monitor and manage AI agents in real-time. View agent status, activity feed, and resource usage.',
-          keywords: 'agent dashboard, ai monitoring, agent status, resource usage'
-        }
-      },
-      {
-        path: 'agent-orchestrator/:agentId',
-        name: 'agent-detail',
-        component: () => import(/* webpackPrefetch: true */ '../views/AgentDetailView.vue'),
-        meta: {
-          title: 'Agent Detail - Agent Orchestrator | Formatho',
-          description: 'View agent status, controls, live logs, and task history.',
-          keywords: 'agent detail, agent log, task history'
-        }
-      },
-      {
-        path: 'agent-orchestrator/todo',
-        name: 'todo-queue',
-        component: () => import(/* webpackPrefetch: true */ '../views/TODOQueueView.vue'),
-        meta: {
-          title: 'TODO Queue - Agent Orchestrator | Formatho',
-          description: 'Manage priority queue, track progress, and filter tasks.',
-          keywords: 'task queue, todo list, task management, priorities'
-        }
-      },
-      {
-        path: 'agent-orchestrator/cron',
-        name: 'cron-scheduler',
-        component: () => import(/* webpackPrefetch: true */ '../views/CrontabGeneratorView.vue'),
-        meta: {
-          title: 'Cron Scheduler - Agent Orchestrator | Formatho',
-          description: 'Manage scheduled jobs and view run history.',
-          keywords: 'cron scheduler, job scheduling, automated tasks'
-        }
-      },
-      {
-        path: 'agent-orchestrator/config',
-        name: 'configuration',
-        component: () => import(/* webpackPrefetch: true */ '../views/ConfigurationView.vue'),
-        meta: {
-          title: 'Configuration - Agent Orchestrator | Formatho',
-          description: 'Configure global settings, LLM providers, and skill permissions.',
-          keywords: 'settings, configuration, LLM config, API keys'
-        }
-      },
-      {
-        path: 'agent-orchestrator/analytics',
-        name: 'analytics-dashboard',
-        component: () => import(/* webpackPrefetch: true */ '../views/AnalyticsDashboardView.vue'),
-        meta: {
-          title: 'Analytics Dashboard - Agent Orchestrator | Formatho (Pro)',
-          description:
-            'Advanced analytics dashboard for agent performance tracking, task completion trends, and team collaboration insights. Pro feature.',
-          keywords:
-            'analytics dashboard, agent performance, task analytics, export data, csv export, json export'
-        }
-      },
+
       // Crypto Tools
       {
         path: 'tools/bcrypt',

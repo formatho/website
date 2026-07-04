@@ -75,21 +75,6 @@ const pages = [
     breadcrumbs: ["Home", "Agent Todo"]
   },
   {
-    path: 'agent-orchestrator.html',
-    schema: {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Agent Orchestrator - AI Agent Management",
-      "url": "https://formatho.com/agent-orchestrator",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Any",
-      "description": "Enterprise-grade AI agent management platform. Orchestrate, monitor, and scale AI agent workflows for teams.",
-      "offers": { "@type": "Offer", "price": "29", "priceCurrency": "USD" },
-      "publisher": { "@type": "Organization", "name": "Formatho" }
-    },
-    breadcrumbs: ["Home", "Agent Orchestrator"]
-  },
-  {
     path: 'compare.html',
     schema: {
       "@context": "https://schema.org",

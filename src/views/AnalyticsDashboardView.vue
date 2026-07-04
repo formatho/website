@@ -404,7 +404,7 @@ const recentActivity = computed(() => [...analyticsData.value].reverse().slice(0
 
       <!-- Footer info -->
       <div class="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
-        Data is refreshed automatically every 5 minutes | Pro features available in Agent Orchestrator
+        Data is refreshed automatically every 5 minutes | Pro features available
       </div>
     </main>
   </div>
