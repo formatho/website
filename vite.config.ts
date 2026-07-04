@@ -17,6 +17,8 @@ const gitCommit = process.env.VITE_GIT_COMMIT || (() => {
 export default defineConfig({
   define: {
     __GIT_COMMIT__: JSON.stringify(gitCommit),
+    'global': 'globalThis',
+    'process.env': '{}',
   },
   plugins: [
     vue(),
@@ -33,10 +35,6 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['qrcode', 'pngjs'],
-  },
-  define: {
-    'global': 'globalThis',
-    'process.env': '{}',
   },
   build: {
     rollupOptions: {
