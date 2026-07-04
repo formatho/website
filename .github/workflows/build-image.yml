@@ -1,4 +1,4 @@
-name: Build Docker Image
+name: Build and Deploy
 
 on:
   push:
@@ -11,13 +11,13 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
     outputs:
-      image-tag: ${{ steps.meta.outputs.tags }}
+      image-tag: ${{ steps.tag.outputs.tag }}
       image-digest: ${{ steps.build.outputs.digest }}
     steps:
       - name: Checkout repository
@@ -59,29 +59,88 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Image digest
-        run: |
-          echo "Image built successfully!"
-          echo "Digest: ${{ steps.build.outputs.digest }}"
-          echo "Tags: ${{ steps.meta.outputs.tags }}"
-
-      - name: Write image metadata
+      - name: Set image tag output
+        id: tag
         if: github.event_name != 'pull_request'
         run: |
-          # Extract the branch-<sha> tag from the tags list
-          BRANCH=$(echo "${{ github.ref_name }}")
+          BRANCH="${{ github.ref_name }}"
           TAG=$(echo "${{ steps.meta.outputs.tags }}" | tr ',' '\n' | grep "${BRANCH}-" | head -1)
-          echo "${TAG}" > image-tag.txt
-          echo "${{ steps.build.outputs.digest }}" > image-digest.txt
+          echo "tag=${TAG}" >> $GITHUB_OUTPUT
           echo "Image tag: ${TAG}"
           echo "Image digest: ${{ steps.build.outputs.digest }}"
 
-      - name: Upload image metadata artifact
-        if: github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: digital_ocean_formatho
+    if: github.ref == 'refs/heads/prod' && github.event_name == 'push'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Copy config files to Droplet
+        uses: appleboy/scp-action@v0.1.7
         with:
-          name: image-metadata-${{ github.ref_name }}
-          path: |
-            image-tag.txt
-            image-digest.txt
-          retention-days: 7
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USERNAME }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          source: "docker-compose.yml,nginx-proxy.conf"
+          target: "/home/${{ secrets.DO_USERNAME }}/formatho-staging"
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USERNAME }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          script: |
+            set -e
+            DEPLOY_DIR="/home/${{ secrets.DO_USERNAME }}/formatho"
+            STAGING_DIR="/home/${{ secrets.DO_USERNAME }}/formatho-staging"
+
+            # Copy updated config files
+            cp "$STAGING_DIR/docker-compose.yml" "$DEPLOY_DIR/docker-compose.yml"
+            cp "$STAGING_DIR/nginx-proxy.conf" "$DEPLOY_DIR/nginx-proxy.conf"
+
+            # Clean up staging
+            rm -rf "$STAGING_DIR"
+
+            cd "$DEPLOY_DIR"
+
+            # Update docker-compose.yml to pin by digest (immutable)
+            sed -i "s|ghcr.io/formatho/website:.*|ghcr.io/${{ env.IMAGE_NAME }}@${{ needs.build.outputs.image-digest }}|g" docker-compose.yml
+
+            # Login to GHCR
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            # Pull image by digest
+            docker pull ghcr.io/${{ env.IMAGE_NAME }}@${{ needs.build.outputs.image-digest }}
+
+            # Tag it for docker-compose reference
+            docker tag ghcr.io/${{ env.IMAGE_NAME }}@${{ needs.build.outputs.image-digest }} ghcr.io/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.image-tag }}
+
+            # Deploy
+            docker compose up -d --force-recreate --remove-orphans
+            docker exec nginx_proxy nginx -s reload || true
+
+            # Cleanup old images
+            docker image prune -f
+
+      - name: Health check
+        run: |
+          sleep 10
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://formatho.com || echo "000")
+          if [ "$HTTP_STATUS" != "200" ]; then
+            echo "::error::Health check failed! HTTP status: $HTTP_STATUS"
+            exit 1
+          fi
+          echo "✅ Health check passed — formatho.com returned 200"
+
+      - name: Deployment summary
+        run: |
+          echo "## Deployment Successful ✅" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Image: ghcr.io/${{ env.IMAGE_NAME }}@${{ needs.build.outputs.image-digest }}" >> $GITHUB_STEP_SUMMARY
+          echo "Tag: ${{ needs.build.outputs.image-tag }}" >> $GITHUB_STEP_SUMMARY
+          echo "Branch: prod" >> $GITHUB_STEP_SUMMARY
+          echo "Health: formatho.com → 200 OK" >> $GITHUB_STEP_SUMMARY
