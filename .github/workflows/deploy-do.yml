@@ -63,8 +63,8 @@ jobs:
           script: |
             cd /home/${{ secrets.DO_USERNAME }}/formatho
 
-            # Update image tag in docker-compose.yml
-            sed -i "s|ghcr.io/formatho/website:.*|ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.image.outputs.tag }}|g" docker-compose.yml
+            # Update docker-compose.yml to pin by digest (immutable)
+            sed -i "s|ghcr.io/formatho/website:.*|ghcr.io/${{ env.IMAGE_NAME }}@${{ steps.image.outputs.digest }}|g" docker-compose.yml
 
             # Login to GHCR
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
@@ -72,16 +72,11 @@ jobs:
             # Inject LI.FI API key into nginx.conf
             sed -i "s/__LIFI_API_KEY__/${{ secrets.LIFI_API_KEY }}/g" nginx.conf
 
-            # Pull new image (with digest verification for security)
-            docker pull ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.image.outputs.tag }}
+            # Pull image by digest (guaranteed to be exact image built)
+            docker pull ghcr.io/${{ env.IMAGE_NAME }}@${{ steps.image.outputs.digest }}
 
-            # Verify digest matches
-            PULLED_DIGEST=$(docker image inspect ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.image.outputs.tag }} --format '{{index .RepoDigests 0}}' | cut -d'@' -f2)
-            if [ "${PULLED_DIGEST}" != "${{ steps.image.outputs.digest }}" ]; then
-              echo "ERROR: Digest mismatch! Expected: ${{ steps.image.outputs.digest }}, Got: ${PULLED_DIGEST}"
-              exit 1
-            fi
-            echo "Digest verified: ${PULLED_DIGEST}"
+            # Tag it for docker-compose reference
+            docker tag ghcr.io/${{ env.IMAGE_NAME }}@${{ steps.image.outputs.digest }} ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.image.outputs.tag }}
 
             # Deploy
             docker compose up -d --force-recreate --remove-orphans
@@ -94,5 +89,5 @@ jobs:
       - name: Verify deployment
         run: |
           echo "Deployment completed successfully!"
-          echo "Image: ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.image.outputs.tag }}"
-          echo "Digest: ${{ steps.image.outputs.digest }}"
+          echo "Image: ghcr.io/${{ env.IMAGE_NAME }}@${{ steps.image.outputs.digest }}"
+          echo "Tag: ${{ steps.image.outputs.tag }}"
