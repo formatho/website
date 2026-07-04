@@ -4,7 +4,8 @@
  */
 
 const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || 'https://cms.formatho.com'
-const STRAPI_TOKEN = import.meta.env.VITE_STRAPI_TOKEN || 'eb5e06ed2756c4e93425e38cfdefd452b50603c6415cc02006329d692c0b14a04ba98a113b220415ac106fc926b85f390c841d7aec18e3745b4f06186efc9bc011cd1439a3ac406e1daf6219d42274bc24651abf649f0378f4730cf340c169991b38f021f585c480fd736180aa85af32fd038565c3eb4567843deb8630987226'
+
+// No token needed — public role has find/findOne permissions
 
 export interface StrapiBlogPost {
   id: number
@@ -98,12 +99,7 @@ function mapStrapiPost(s: StrapiBlogPost): BlogPost {
  */
 export async function fetchBlogMetadata(): Promise<BlogMetadata[]> {
   const res = await fetch(
-    `${STRAPI_URL}/api/blog-posts?fields[0]=title&fields[1]=slug&fields[2]=excerpt&fields[3]=date&fields[4]=readTime&fields[5]=tags&fields[6]=image&fields[7]=imageAlt&pagination[pageSize]=100&sort=date:desc`,
-    {
-      headers: {
-        Authorization: `Bearer ${STRAPI_TOKEN}`,
-      },
-    }
+    `${STRAPI_URL}/api/blog-posts?fields[0]=title&fields[1]=slug&fields[2]=excerpt&fields[3]=date&fields[4]=readTime&fields[5]=tags&fields[6]=image&fields[7]=imageAlt&pagination[pageSize]=100&sort=date:desc`
   )
 
   if (!res.ok) {
@@ -134,12 +130,7 @@ export async function fetchBlogMetadata(): Promise<BlogMetadata[]> {
  */
 export async function fetchBlogPost(slug: string): Promise<BlogPost | null> {
   const res = await fetch(
-    `${STRAPI_URL}/api/blog-posts?filters[slug][$eq]=${encodeURIComponent(slug)}&pagination[pageSize]=1`,
-    {
-      headers: {
-        Authorization: `Bearer ${STRAPI_TOKEN}`,
-      },
-    }
+    `${STRAPI_URL}/api/blog-posts?filters[slug][$eq]=${encodeURIComponent(slug)}&pagination[pageSize]=1`
   )
 
   if (!res.ok) {
@@ -162,12 +153,7 @@ export async function fetchBlogPost(slug: string): Promise<BlogPost | null> {
  */
 export async function fetchAllSlugs(): Promise<string[]> {
   const res = await fetch(
-    `${STRAPI_URL}/api/blog-posts?fields[0]=slug&pagination[pageSize]=200`,
-    {
-      headers: {
-        Authorization: `Bearer ${STRAPI_TOKEN}`,
-      },
-    }
+    `${STRAPI_URL}/api/blog-posts?fields[0]=slug&pagination[pageSize]=200`
   )
 
   if (!res.ok) {
