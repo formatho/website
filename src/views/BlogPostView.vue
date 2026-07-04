@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import { useHead } from '@vueuse/head'
 import { ArrowLeft } from 'lucide-vue-next'
-import { blogPosts } from '../data/blogPosts'
+import { fetchBlogPost, type BlogPost } from '../data/strapi'
 import EmailCapture from '@/components/EmailCapture.vue'
 
 const props = defineProps<{
@@ -11,6 +11,8 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
+const post = ref<BlogPost | null>(null)
+const loading = ref(true)
 
 const slug = computed(() => {
   if (route.meta?.slug) return route.meta.slug as string
@@ -28,11 +30,16 @@ const slug = computed(() => {
   return ''
 })
 
-const post = computed(() => {
-  if (route.meta?.postData) {
-    return route.meta.postData as (typeof blogPosts)[0]
+onMounted(async () => {
+  if (slug.value) {
+    try {
+      post.value = await fetchBlogPost(slug.value)
+    } catch (e) {
+      console.error('Failed to fetch blog post:', e)
+    } finally {
+      loading.value = false
+    }
   }
-  return blogPosts.find((p) => p.slug === slug.value)
 })
 
 const formatDate = (dateString: string) => {
@@ -128,8 +135,15 @@ useHead(computed(() => {
       </div>
     </div>
 
+    <!-- Loading -->
+    <div v-if="loading" class="flex items-center justify-center min-h-[60vh]">
+      <div class="text-center">
+        <div class="animate-pulse text-xs tracking-widest text-muted-foreground uppercase">Loading...</div>
+      </div>
+    </div>
+
     <!-- Not Found -->
-    <div v-if="!post" class="flex items-center justify-center min-h-[60vh]">
+    <div v-else-if="!post" class="flex items-center justify-center min-h-[60vh]">
       <div class="text-center">
         <h1 class="text-8xl font-black tracking-tighter leading-none text-foreground/10 mb-4">404</h1>
         <p class="text-xs tracking-widest text-muted-foreground mb-8">ARTICLE NOT FOUND</p>

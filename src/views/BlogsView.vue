@@ -1,20 +1,33 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useHead } from '@vueuse/head'
-import { blogMetadata } from '../data/blogMetadata'
+import { fetchBlogMetadata, type BlogMetadata } from '../data/strapi'
 
 const activeCategory = ref('ALL')
+const blogMetadata = ref<BlogMetadata[]>([])
+const loading = ref(true)
+const error = ref(false)
+
+onMounted(async () => {
+  try {
+    blogMetadata.value = await fetchBlogMetadata()
+  } catch (e) {
+    error.value = true
+  } finally {
+    loading.value = false
+  }
+})
 
 const allTags = computed(() => {
   const tags = new Set<string>()
-  blogMetadata.forEach(post => post.tags.forEach(tag => tags.add(tag)))
+  blogMetadata.value.forEach(post => post.tags.forEach(tag => tags.add(tag)))
   return ['ALL', ...Array.from(tags).slice(0, 8)]
 })
 
 const filteredPosts = computed(() => {
-  if (activeCategory.value === 'ALL') return blogMetadata
-  return blogMetadata.filter(post => post.tags.includes(activeCategory.value))
+  if (activeCategory.value === 'ALL') return blogMetadata.value
+  return blogMetadata.value.filter(post => post.tags.includes(activeCategory.value))
 })
 
 const formatDate = (dateString: string) => {
@@ -45,12 +58,7 @@ useHead({
           name: 'Formatho',
           url: 'https://formatho.com'
         },
-        blogPost: blogMetadata.slice(0, 10).map(post => ({
-          '@type': 'BlogPosting',
-          headline: post.title,
-          datePublished: post.date,
-          url: `https://formatho.com/blogs/${post.slug}`
-        }))
+        blogPost: [] // Populated client-side after Strapi fetch
       })
     }
   ]
