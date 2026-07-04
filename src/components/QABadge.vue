@@ -7,7 +7,7 @@ const isVisible = computed(() => {
   return window.location.hostname === 'qa.formatho.com'
 })
 
-const commit = __GIT_COMMIT__
+const commit = __GIT_COMMIT__.slice(0, 7)
 const commitUrl = `https://github.com/formatho/website/commit/${commit}`
 </script>
 
