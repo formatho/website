@@ -42,7 +42,7 @@ jobs:
           host: ${{ secrets.DO_HOST }}
           username: ${{ secrets.DO_USERNAME }}
           key: ${{ secrets.DO_SSH_KEY }}
-          source: "docker-compose.yml,nginx-proxy.conf,formatho-theme,wordpress"
+          source: "docker-compose.yml,nginx-proxy.conf"
           target: "/home/${{ secrets.DO_USERNAME }}/formatho-staging"
 
       - name: Deploy via SSH
@@ -56,15 +56,9 @@ jobs:
             DEPLOY_DIR="/home/${{ secrets.DO_USERNAME }}/formatho"
             STAGING_DIR="/home/${{ secrets.DO_USERNAME }}/formatho-staging"
 
-            # Atomic swap of theme files
-            mv "$DEPLOY_DIR/formatho-theme" "$DEPLOY_DIR/formatho-theme.bak" 2>/dev/null || true
-            cp -r "$STAGING_DIR/formatho-theme" "$DEPLOY_DIR/formatho-theme"
-            rm -rf "$DEPLOY_DIR/formatho-theme.bak"
-
             # Copy updated config files
             cp "$STAGING_DIR/docker-compose.yml" "$DEPLOY_DIR/docker-compose.yml"
             cp "$STAGING_DIR/nginx-proxy.conf" "$DEPLOY_DIR/nginx-proxy.conf"
-            cp -r "$STAGING_DIR/wordpress" "$DEPLOY_DIR/wordpress"
 
             # Clean up staging
             rm -rf "$STAGING_DIR"

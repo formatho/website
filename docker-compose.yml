@@ -6,8 +6,6 @@ services:
     restart: unless-stopped
     networks:
       - app-network
-    # volumes:
-    #   - ./nginx.conf:/etc/nginx/conf.d/default.conf
 
   nginx:
     image: nginx:stable-alpine
@@ -16,7 +14,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro # overwrite default.conf correctly
+      - ./nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     restart: unless-stopped
@@ -79,14 +77,7 @@ services:
             $$_SERVER['REQUEST_URI'] = '/insights' . $$_SERVER['REQUEST_URI'];
         }
     volumes:
-      # Persist WordPress content: themes, plugins, uploads, and customizations
       - wordpress_data:/var/www/html/wp-content
-      # Mount custom theme
-      - ./formatho-theme:/var/www/html/wp-content/themes/formatho-theme
-      # Mount proper .htaccess for proxy header handling
-      - ./wordpress/.htaccess:/var/www/html/.htaccess
-      # Optionally persist wp-config.php if you make custom changes
-      # - wordpress_config:/var/www/html/wp-config.php
     networks:
       - app-network
 
