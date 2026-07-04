@@ -26,10 +26,8 @@ jobs:
             echo "tag=latest" >> $GITHUB_OUTPUT
             echo "Using latest tag (manual trigger)"
           else
-            # Get the commit SHA from the workflow run
-            SHA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}" |
-              jq -r '.head_sha')
+            # SHA is available in github.event.workflow_run.head_sha
+            SHA="${{ github.event.workflow_run.head_sha }}"
             echo "tag=main-${SHA:0:7}" >> $GITHUB_OUTPUT
             echo "Using tag: main-${SHA:0:7}"
           fi
