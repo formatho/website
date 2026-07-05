@@ -3,25 +3,28 @@ import { writeFileSync, readFileSync } from 'fs'
 import { resolve } from 'path'
 
 const domain = 'https://formatho.com'
+const strapiUrl = process.env.VITE_STRAPI_URL || 'https://cms.formatho.com'
 const currentDate = new Date().toISOString().split('T')[0]
 
 /**
- * Parse blog post slugs from src/data/blogPosts.ts
+ * Fetch blog post slugs from Strapi CMS
  */
-function parseBlogSlugs() {
-  const blogPostsPath = resolve(process.cwd(), 'src', 'data', 'blogPosts.ts')
-  const content = readFileSync(blogPostsPath, 'utf8')
-
-  const slugs = []
-  const slugRegex = /slug:\s*'([^']+)'/g
-  let match
-  while ((match = slugRegex.exec(content)) !== null) {
-    // Skip type definition lines
-    if (match[1] === 'string') continue
-    slugs.push(match[1])
+async function fetchBlogSlugs() {
+  try {
+    const res = await fetch(
+      `${strapiUrl}/api/blog-posts?fields[0]=slug&pagination[pageSize]=200`
+    )
+    if (!res.ok) {
+      console.warn(`⚠️  Strapi returned ${res.status}, falling back to empty blog list`)
+      return []
+    }
+    const data = await res.json()
+    const posts = Array.isArray(data) ? data : data.data || []
+    return posts.map((p) => p.slug).filter(Boolean)
+  } catch (err) {
+    console.warn(`⚠️  Failed to fetch blog slugs from Strapi: ${err.message}`)
+    return []
   }
-
-  return slugs
 }
 
 /**
@@ -53,8 +56,9 @@ const staticRoutes = [
   { path: '/agents', priority: '0.8', changefreq: 'monthly' },
 ]
 
+async function main() {
 // Dynamically generate blog routes
-const blogSlugs = parseBlogSlugs()
+const blogSlugs = await fetchBlogSlugs()
 const blogRoutes = blogSlugs.map((slug, i) => ({
   path: `/blogs/${slug}`,
   priority: i < 10 ? '0.8' : '0.7',
@@ -90,6 +94,12 @@ writeFileSync(outputPath, sitemap, 'utf-8')
 
 console.log(`✅ Sitemap generated at ${outputPath}`)
 console.log(`   ${staticRoutes.length} static pages`)
-console.log(`   ${blogRoutes.length} blog posts (auto-detected from blogPosts.ts)`)
+console.log(`   ${blogRoutes.length} blog posts (fetched from Strapi)`)
 console.log(`   ${toolRoutes.length} tool routes (auto-detected from router)`)
 console.log(`   Total: ${routes.length} URLs`)
+}
+
+main().catch((err) => {
+  console.error('Fatal error:', err)
+  process.exit(1)
+})

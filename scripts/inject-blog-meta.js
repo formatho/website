@@ -1,10 +1,11 @@
 #!/usr/bin/env node
+/* eslint-env node */
 
 /**
  * Post-build script to inject blog-specific meta tags into generated HTML files
  * 
  * This script runs after vite-ssg build to add proper SEO meta tags to blog pages.
- * It imports blog post data directly from blogPosts.ts and updates the HTML files.
+ * It fetches blog post data from Strapi CMS and updates the HTML files.
  * 
  * IMPORTANT: This script must be run AFTER vite-ssg build
  */
@@ -16,63 +17,34 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-// Import blog posts from TypeScript (we'll parse the file since TS imports are complex in Node)
-const blogPostsPath = path.join(__dirname, '..', 'src', 'data', 'blogPosts.ts')
-const blogPostsContent = fs.readFileSync(blogPostsPath, 'utf8')
+const STRAPI_URL = process.env.VITE_STRAPI_URL || 'https://cms.formatho.com'
 
-// Parse blog posts from TypeScript file
-// Extract the blogPosts array using regex (simple approach, works for this format)
-function parseBlogPosts(content) {
-  const posts = []
-  
-  // Simpler approach: extract slugs and map to known data
-  const slugRegex = /slug:\s*'([^']+)'/g
-  
-  // Extract all slugs
-  const slugs = []
-  let match
-  while ((match = slugRegex.exec(content)) !== null) {
-    slugs.push(match[1])
+/**
+ * Fetch all blog posts from Strapi CMS
+ */
+async function fetchBlogPosts() {
+  const res = await fetch(
+    `${STRAPI_URL}/api/blog-posts?fields[0]=title&fields[1]=slug&fields[2]=excerpt&fields[3]=date&fields[4]=tags&fields[5]=image&fields[6]=imageAlt&pagination[pageSize]=200&sort=date:desc`
+  )
+
+  if (!res.ok) {
+    throw new Error(`Strapi returned ${res.status}: ${res.statusText}`)
   }
-  
-  // For each slug, extract corresponding data
-  // Reset regex indexes
-  slugRegex.lastIndex = 0
-  
-  // Use a different approach - split by post objects
-  const postBlocks = content.split(/{\s*id:/).slice(1)
-  
-  for (const block of postBlocks) {
-    try {
-      const idMatch = block.match(/^(\d+)/)
-      const titleMatch = block.match(/title:\s*`([^`]+)`/)
-      const excerptMatch = block.match(/excerpt:\s*`([^`]+)`/)
-      const dateMatch = block.match(/date:\s*'([^']+)'/)
-      const slugMatch = block.match(/slug:\s*'([^']+)'/)
-      const imageMatch = block.match(/image:\s*(?:`([^`]+)`|'([^']+)'|"([^"]+)")/)
-      const tagsMatch = block.match(/tags:\s*\[([^\]]+)\]/)
-      
-      if (idMatch && titleMatch && slugMatch) {
-        posts.push({
-          id: parseInt(idMatch[1]),
-          title: titleMatch[1],
-          excerpt: excerptMatch ? excerptMatch[1] : '',
-          date: dateMatch ? dateMatch[1] : '',
-          slug: slugMatch[1],
-          image: imageMatch ? (imageMatch[1] || imageMatch[2] || imageMatch[3] || '') : '',
-          tags: tagsMatch ? tagsMatch[1].split(',').map(t => t.trim().replace(/['"]/g, '')) : []
-        })
-      }
-    } catch (e) {
-      // Skip malformed blocks
-      continue
-    }
-  }
-  
-  return posts
+
+  const data = await res.json()
+  const posts = Array.isArray(data) ? data : data.data || []
+
+  // Normalize tags from comma-separated string to array
+  return posts.map((s) => ({
+    title: s.title,
+    slug: s.slug,
+    excerpt: s.excerpt || '',
+    date: s.date || '',
+    image: s.image || '',
+    imageAlt: s.imageAlt || '',
+    tags: s.tags ? s.tags.split(',').map((t) => t.trim()).filter(Boolean) : [],
+  }))
 }
-
-const blogPosts = parseBlogPosts(blogPostsContent)
 
 const siteName = 'Formatho'
 const baseUrl = 'https://formatho.com'
@@ -161,7 +133,7 @@ function generateMetaTags(post) {
 /**
  * Generate meta tags for the blog listing page
  */
-function generateBlogListingMetaTags() {
+function generateBlogListingMetaTags(blogPosts) {
   const title = 'Blog - Formatho'
   const description = 'Developer guides, tutorials, and insights from the Formatho team. Learn about privacy-first development, AI agents, and more.'
   const url = `${baseUrl}/blogs`
@@ -306,9 +278,18 @@ function updateHtml(htmlPath, metaTags, customTitle = null) {
 /**
  * Main function
  */
-function main() {
+async function main() {
   console.log('🔧 Injecting blog meta tags into built HTML files...\n')
-  console.log(`📚 Found ${blogPosts.length} blog posts to process\n`)
+  
+  let blogPosts
+  try {
+    blogPosts = await fetchBlogPosts()
+    console.log(`📚 Fetched ${blogPosts.length} blog posts from Strapi\n`)
+  } catch (error) {
+    console.error(`❌ Failed to fetch blog posts from Strapi: ${error.message}`)
+    console.error('   Cannot continue without blog data. Aborting.')
+    process.exit(1)
+  }
   
   const distDir = path.join(__dirname, '..', 'dist', 'blogs')
   let updatedCount = 0
@@ -318,7 +299,7 @@ function main() {
   const indexHtmlPath = path.join(distDir, 'index.html')
   if (fs.existsSync(indexHtmlPath)) {
     const listingTitle = 'Blog - Formatho'
-    const listingMetaTags = generateBlogListingMetaTags()
+    const listingMetaTags = generateBlogListingMetaTags(blogPosts)
     
     if (updateHtml(indexHtmlPath, listingMetaTags, listingTitle)) {
       console.log(`✅ Updated blog listing: ${indexHtmlPath}`)
@@ -332,7 +313,7 @@ function main() {
   }
   
   // Update individual blog post pages
-  blogPosts.forEach(post => {
+  for (const post of blogPosts) {
     // Primary path structure (flat HTML files in /blogs/ directory)
     const htmlPath = path.join(distDir, `${post.slug}.html`)
     
@@ -359,9 +340,8 @@ function main() {
       }
     } else {
       console.log(`⚠️  HTML not found for: ${post.slug}`)
-      console.log(`   Expected: ${htmlPath} or ${altHtmlPath}`)
     }
-  })
+  }
   
   console.log(`\n📊 Summary:`)
   console.log(`   ✅ Updated: ${updatedCount} files`)
@@ -374,4 +354,7 @@ function main() {
   }
 }
 
-main()
+main().catch((err) => {
+  console.error('Fatal error:', err)
+  process.exit(1)
+})
