@@ -148,7 +148,7 @@ const mermaidOutput = computed(() => {
 const copyMermaid = async () => {
   try {
     await navigator.clipboard.writeText(mermaidOutput.value)
-  } catch {}
+  } catch { /* noop */ }
 }
 
 parseForeignKeys()

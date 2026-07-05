@@ -79,7 +79,7 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
-            type=sha,prefix={{branch}}-
+            type=sha,prefix={{branch}}-,enable=${{ github.event_name != 'pull_request' }}
             type=raw,value=dev,enable=${{ github.ref == 'refs/heads/main' }}
             type=raw,value=prod,enable=${{ github.ref == 'refs/heads/prod' }}
 
@@ -168,7 +168,7 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     environment: digital_ocean_formatho
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: always() && github.ref == 'refs/heads/main' && github.event_name == 'push' && needs.build.result == 'success'
     steps:
       - name: Deploy QA via SSH
         uses: appleboy/ssh-action@v1.0.3

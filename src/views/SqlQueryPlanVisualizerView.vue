@@ -195,7 +195,7 @@ const optimizationTips = computed(() => {
 const copyFormatted = async () => {
   try {
     await navigator.clipboard.writeText(formattedSql.value)
-  } catch {}
+  } catch { /* noop */ }
 }
 
 analyzeQuery()

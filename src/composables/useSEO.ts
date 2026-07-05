@@ -25,8 +25,10 @@ for (const category of tools) {
 
 export function useSEO(config?: SEOConfig) {
   const route = useRoute()
+  const isBrowser = typeof document !== 'undefined'
 
   function updateMeta(name: string, content: string) {
+    if (!isBrowser) return
     let el = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null
     if (!el) {
       el = document.createElement('meta')
@@ -37,6 +39,7 @@ export function useSEO(config?: SEOConfig) {
   }
 
   function updateProperty(prop: string, content: string) {
+    if (!isBrowser) return
     let el = document.querySelector(`meta[property="${prop}"]`) as HTMLMetaElement | null
     if (!el) {
       el = document.createElement('meta')
@@ -47,6 +50,7 @@ export function useSEO(config?: SEOConfig) {
   }
 
   function setCanonical(url: string) {
+    if (!isBrowser) return
     let el = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null
     if (!el) {
       el = document.createElement('link')
@@ -57,6 +61,7 @@ export function useSEO(config?: SEOConfig) {
   }
 
   function setJsonLd(data: Record<string, unknown>) {
+    if (!isBrowser) return
     let el = document.getElementById('json-ld-page') as HTMLScriptElement | null
     if (el) el.remove()
     el = document.createElement('script')
@@ -99,6 +104,7 @@ export function useSEO(config?: SEOConfig) {
   }
 
   function applySEO() {
+    if (!isBrowser) return
     const path = route.path
     const toolInfo = getToolByRoute(path)
 

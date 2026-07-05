@@ -17,68 +17,7 @@ services:
         limits:
           memory: 512M
 
-  db:
-    image: mariadb:10.11
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
-    volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - app-network
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: any
-      placement:
-        constraints:
-          - node.role == manager
-
-  wordpress:
-    image: wordpress:latest
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: ${MYSQL_USER}
-      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
-      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
-      WORDPRESS_CONFIG_EXTRA: |
-        define('WP_SITEURL', 'https://formatho.com/insights');
-        define('WP_HOME', 'https://formatho.com/insights');
-
-         $$proto = $$_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '';
-        if ($$proto && strpos($$proto, 'https') !== false) {
-            $$_SERVER['HTTPS'] = 'on';
-        }
-
-        $$fwdHost = $$_SERVER['HTTP_X_FORWARDED_HOST'] ?? '';
-        if ($$fwdHost) {
-            $$_SERVER['HTTP_HOST'] = $$fwdHost;
-        }
-
-        if (isset($$_SERVER['REQUEST_URI']) && strpos($$_SERVER['REQUEST_URI'], '/insights') !== 0) {
-            $$_SERVER['REQUEST_URI'] = '/insights' . $$_SERVER['REQUEST_URI'];
-        }
-    volumes:
-      - wordpress_data:/var/www/html/wp-content
-    networks:
-      - app-network
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: any
-      placement:
-        constraints:
-          - node.role == manager
-
 networks:
   app-network:
     driver: overlay
     attachable: true
-
-volumes:
-  db_data:
-    driver: local
-  wordpress_data:
-    driver: local

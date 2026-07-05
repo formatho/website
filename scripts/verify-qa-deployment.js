@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-env node */
 
 /**
  * QA Deployment Verification Script
@@ -12,7 +13,7 @@ const QA_URL = 'https://qa.formatho.com';
 const TIMEOUT_MS = 5000;
 
 function verifyDeployment(url) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const startTime = Date.now();
     const urlObj = new URL(url);
 

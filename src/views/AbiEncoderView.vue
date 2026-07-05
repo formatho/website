@@ -151,7 +151,7 @@ const removeFuncParam = (index: number) => {
 const copyText = async (text: string) => {
   try {
     await navigator.clipboard.writeText(text)
-  } catch {}
+  } catch { /* noop */ }
 }
 
 // Common function signatures for quick fill
