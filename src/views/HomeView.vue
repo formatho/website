@@ -123,7 +123,7 @@ const _popularTools = [
             </h1>
           </div>
           <p class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight" data-aos="fade-down" data-aos-delay="100" data-v-8d4ed633="">
-            100+ Free Developer Tools. Zero Tracking.
+            Developer Tools: 100+ Free. Zero Tracking. Fully Private.
           </p>
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="200" data-v-8d4ed633="">
             JSON formatter, Base64 encoder, JWT debugger, hash generator, and more. <strong class="text-foreground">Everything runs in your browser.</strong> No server uploads. No sign-up. No data collection.
