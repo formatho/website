@@ -286,9 +286,9 @@ async function main() {
     blogPosts = await fetchBlogPosts()
     console.log(`📚 Fetched ${blogPosts.length} blog posts from Strapi\n`)
   } catch (error) {
-    console.error(`❌ Failed to fetch blog posts from Strapi: ${error.message}`)
-    console.error('   Cannot continue without blog data. Aborting.')
-    process.exit(1)
+    console.warn(`⚠️  Failed to fetch blog posts from Strapi: ${error.message}`)
+    console.warn('   Skipping blog meta injection. Build continues.')
+    return
   }
   
   const distDir = path.join(__dirname, '..', 'dist', 'blogs')
