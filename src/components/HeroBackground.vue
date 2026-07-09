@@ -6,7 +6,10 @@
  * - SVG feTurbulence fractal noise (4 iterations, baseFrequency 0.005)
  * - feColorMatrix maps to indigo/teal/cyan ramp
  * - CSS keyframe animation: 120s diagonal drift, scale to 150%
- * - Performance budgets enforced via IntersectionObserver, Page Visibility, Network Information
+ * - Performance budgets: IntersectionObserver, Page Visibility, Network Information
+ * - Memory lifecycle: explicit teardown of all observers, listeners, DOM refs
+ * - Vestibular safety: respects prefers-reduced-motion
+ * - Hostile recovery: static fallback crossfade on render failure
  * - SSG-safe: flat white fallback, hydrates on client over 1200ms linear
  * - Uses shallowRef for all DOM refs (no deep reactivity overhead)
  */
@@ -16,13 +19,16 @@ const container = shallowRef<HTMLElement | null>(null)
 const heroSection = shallowRef<HTMLElement | null>(null)
 const isHydrated = shallowRef(false)
 const isPaused = shallowRef(false)
-const isHidden = shallowRef(false)
 const isReducedData = shallowRef(false)
+const isReducedMotion = shallowRef(false)
+const isFallbackImage = shallowRef(false)
 
 let rafId: number | null = null
 let startTime = 0
 let intersectionObserver: IntersectionObserver | null = null
 let visibilityHandler: ((e: Event) => void) | null = null
+let motionHandler: ((e: MediaQueryListEvent) => void) | null = null
+let renderCheckTimer: ReturnType<typeof setTimeout> | null = null
 
 // Orb parameters for disorderly drift
 interface OrbParams {
@@ -111,7 +117,7 @@ function animateOrbs(timestamp: number) {
 }
 
 function startAnimation() {
-  if (rafId === null) {
+  if (rafId === null && !isReducedMotion.value && !isReducedData.value) {
     rafId = requestAnimationFrame(animateOrbs)
   }
 }
@@ -125,11 +131,35 @@ function stopAnimation() {
 
 function setPaused(paused: boolean) {
   isPaused.value = paused
-  if (paused) {
+  if (paused || isReducedMotion.value || isReducedData.value) {
     stopAnimation()
-  } else if (!isHidden.value && !isReducedData.value) {
+  } else {
     startAnimation()
   }
+}
+
+/**
+ * Hostile Environment Recovery
+ * Detects if the device is too underpowered to render SVG filters.
+ * Uses a simple render timing check — if a single rAF takes >100ms,
+ * the device is struggling. Falls back to static image.
+ */
+function checkRenderPerformance() {
+  const start = performance.now()
+  requestAnimationFrame(() => {
+    const duration = performance.now() - start
+    // If frame time exceeds 100ms (less than 10fps), device is underpowered
+    if (duration > 100) {
+      triggerFallbackImage()
+    }
+  })
+}
+
+function triggerFallbackImage() {
+  if (isFallbackImage.value) return
+  isFallbackImage.value = true
+  stopAnimation()
+  // Crossfade handled by CSS transition on the fallback image
 }
 
 onMounted(() => {
@@ -144,8 +174,24 @@ onMounted(() => {
     isReducedData.value = true
   }
 
-  // Only start heavy animations if not on reduced data
-  if (!isReducedData.value) {
+  // Check vestibular motion safety (prefers-reduced-motion)
+  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+  isReducedMotion.value = motionQuery.matches
+
+  // Listen for changes to reduced motion preference
+  motionHandler = (e: MediaQueryListEvent) => {
+    isReducedMotion.value = e.matches
+    if (e.matches) {
+      // Freeze: stop all animation, show static first frame
+      stopAnimation()
+    } else if (!isReducedData.value) {
+      startAnimation()
+    }
+  }
+  motionQuery.addEventListener('change', motionHandler)
+
+  // Only start heavy animations if not reduced data/motion
+  if (!isReducedData.value && !isReducedMotion.value) {
     startAnimation()
   }
 
@@ -155,7 +201,6 @@ onMounted(() => {
     intersectionObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          // Calculate if we're more than 200px past the hero
           const rect = entry.boundingClientRect
           const pastHero = rect.bottom < -200
           setPaused(pastHero || !entry.isIntersecting)
@@ -175,18 +220,46 @@ onMounted(() => {
     }
   }
   document.addEventListener('visibilitychange', visibilityHandler)
+
+  // Hostile environment check: after 2s, test render performance
+  renderCheckTimer = setTimeout(() => {
+    if (!isReducedData.value && !isReducedMotion.value) {
+      checkRenderPerformance()
+    }
+  }, 2000)
 })
 
 onBeforeUnmount(() => {
+  // === TEARDOWN PROTOCOL ===
+  // Explicitly disconnect IntersectionObserver
   stopAnimation()
   if (intersectionObserver) {
     intersectionObserver.disconnect()
     intersectionObserver = null
   }
+
+  // Remove tab visibility listener
   if (visibilityHandler) {
     document.removeEventListener('visibilitychange', visibilityHandler)
     visibilityHandler = null
   }
+
+  // Remove reduced motion listener
+  if (motionHandler) {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    motionQuery.removeEventListener('change', motionHandler)
+    motionHandler = null
+  }
+
+  // Clear render check timer
+  if (renderCheckTimer) {
+    clearTimeout(renderCheckTimer)
+    renderCheckTimer = null
+  }
+
+  // Nullify all DOM references for garbage collection
+  container.value = null
+  heroSection.value = null
 })
 </script>
 
@@ -194,7 +267,6 @@ onBeforeUnmount(() => {
   <!--
     SSG fallback: solid white background
     On hydration: fades from opacity 0 → 1 over 1200ms linear
-    Performance: pauses when out of viewport, hidden tab, or reduced data
   -->
   <div
     ref="container"
@@ -205,11 +277,7 @@ onBeforeUnmount(() => {
       backgroundColor: '#ffffff'
     }"
   >
-    <!--
-      SVG Fractal Noise Filter (inline, invisible definitions)
-      feTurbulence: 4 octaves, baseFrequency 0.005
-      feColorMatrix: maps noise to indigo → teal → cyan ramp
-    -->
+    <!-- Inline SVG fractal noise filter definitions -->
     <svg class="absolute w-0 h-0 overflow-hidden" aria-hidden="true">
       <defs>
         <filter id="hero-noise" x="0%" y="0%" width="100%" height="100%">
@@ -237,7 +305,8 @@ onBeforeUnmount(() => {
     </svg>
 
     <!--
-      Reduced data mode: static gradient fallback (no SVG noise, no orbs)
+      Reduced data mode: static gradient fallback
+      Ethical data constraint: no SVG noise, no orbs, no JS animation
     -->
     <div
       v-if="isReducedData"
@@ -246,74 +315,91 @@ onBeforeUnmount(() => {
     ></div>
 
     <!--
-      Normal mode: SVG noise layer with CSS-only 120s diagonal drift animation
-      Pauses/resumes via play-state binding
+      Normal / reduced-motion / fallback modes
     -->
     <template v-else>
+      <!-- SVG noise layer: frozen if reduced motion, animated otherwise -->
       <div
+        v-if="!isFallbackImage"
         class="absolute inset-0 hero-noise-layer"
         :style="{
-          animationPlayState: isPaused ? 'paused' : 'running',
+          animationPlayState: isPaused || isReducedMotion ? 'paused' : 'running',
           filter: 'url(#hero-noise)'
         }"
       ></div>
 
-      <!-- Orb drift layer (#C4F4FF, disorderly motion via rAF) -->
+      <!--
+        Hostile Environment Recovery: ultra-optimized static fallback
+        Crossfades in over 400ms when device is underpowered
+      -->
       <div
-        data-orb="0"
-        class="absolute rounded-full blur-3xl"
+        v-if="isFallbackImage"
+        class="absolute inset-0 hero-fallback-image"
         style="
-          top: 15%;
-          left: 20%;
-          width: 480px;
-          height: 480px;
-          background: radial-gradient(circle, #c4f4ff 0%, transparent 70%);
+          background: linear-gradient(135deg, #ffffff 0%, #c4f4ff 30%, #e0f7ff 60%, #ffffff 100%);
+          opacity: 0;
+          animation: hero-fallback-fade 400ms ease-out forwards;
         "
       ></div>
-      <div
-        data-orb="1"
-        class="absolute rounded-full blur-3xl"
-        style="
-          top: 60%;
-          left: 70%;
-          width: 420px;
-          height: 420px;
-          background: radial-gradient(circle, #c4f4ff 0%, transparent 70%);
-        "
-      ></div>
-      <div
-        data-orb="2"
-        class="absolute rounded-full blur-3xl"
-        style="
-          top: 40%;
-          left: 45%;
-          width: 360px;
-          height: 360px;
-          background: radial-gradient(circle, #c4f4ff 0%, transparent 70%);
-        "
-      ></div>
-      <div
-        data-orb="3"
-        class="absolute rounded-full blur-3xl"
-        style="
-          top: 20%;
-          left: 85%;
-          width: 380px;
-          height: 380px;
-          background: radial-gradient(circle, #c4f4ff 0%, transparent 70%);
-        "
-      ></div>
-      <div
-        data-orb="4"
-        class="absolute rounded-full blur-3xl"
-        style="
-          top: 75%;
-          left: 10%;
-          width: 340px;
-          height: 340px;
-          background: radial-gradient(circle, #c4f4ff 0%, transparent 70%);
-        "
-      ></div>
+
+      <!-- Orb drift layer — hidden if reduced motion or fallback -->
+      <template v-if="!isReducedMotion && !isFallbackImage">
+        <div
+          data-orb="0"
+          class="absolute rounded-full blur-3xl"
+          style="
+            top: 15%;
+            left: 20%;
+            width: 480px;
+            height: 480px;
+            background: radial-gradient(circle, #c4f4ff 0%, transparent 70%);
+          "
+        ></div>
+        <div
+          data-orb="1"
+          class="absolute rounded-full blur-3xl"
+          style="
+            top: 60%;
+            left: 70%;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, #c4f4ff 0%, transparent 70%);
+          "
+        ></div>
+        <div
+          data-orb="2"
+          class="absolute rounded-full blur-3xl"
+          style="
+            top: 40%;
+            left: 45%;
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, #c4f4ff 0%, transparent 70%);
+          "
+        ></div>
+        <div
+          data-orb="3"
+          class="absolute rounded-full blur-3xl"
+          style="
+            top: 20%;
+            left: 85%;
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, #c4f4ff 0%, transparent 70%);
+          "
+        ></div>
+        <div
+          data-orb="4"
+          class="absolute rounded-full blur-3xl"
+          style="
+            top: 75%;
+            left: 10%;
+            width: 340px;
+            height: 340px;
+            background: radial-gradient(circle, #c4f4ff 0%, transparent 70%);
+          "
+        ></div>
+      </template>
     </template>
   </div>
 </template>

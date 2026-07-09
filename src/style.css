@@ -853,3 +853,21 @@
   pointer-events: none;
   z-index: 1;
 }
+
+/* ============================================
+   HOSTILE ENVIRONMENT RECOVERY
+   Static fallback crossfade for underpowered devices
+   ============================================ */
+
+@keyframes hero-fallback-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-fallback-image {
+  will-change: opacity;
+}
