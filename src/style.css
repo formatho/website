@@ -719,3 +719,63 @@
 .hero-cta-gap {
   margin-top: 32px;
 }
+
+/* ============================================
+   CALL-TO-ACTION OPTICAL PHYSICS
+   Tactile button with physical feedback
+   ============================================ */
+
+.cta-btn {
+  /* Button geometry: 48px height, 28px padding, 8px radius */
+  height: 48px;
+  padding-left: 28px;
+  padding-right: 28px;
+  border-radius: 8px;
+
+  /* Visual base */
+  background-color: hsl(0 0% 9%);
+  color: hsl(0 0% 100%);
+  font-weight: 600;
+  font-size: 1.125rem;
+  border: none;
+  cursor: pointer;
+
+  /* Base shadow: none at rest */
+  box-shadow: none;
+
+  /* Hover transition: 150ms lift */
+  transition:
+    transform 150ms ease-out,
+    box-shadow 150ms ease-out;
+}
+
+/* Hover: lift 2px + indigo luminescent glow */
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.4);
+}
+
+/* Active (click): compress to 0px, sharp 4px blur, 80% opacity */
+.cta-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 4px rgba(79, 70, 229, 0.8);
+  /* Instant response */
+  transition:
+    transform 0ms,
+    box-shadow 0ms;
+}
+
+/* Release: spring back with elastic overshoot over 400ms */
+.cta-btn {
+  /* This transition applies on release (active → hover/idle) */
+  transition:
+    transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Hover transition overrides the release for faster entry */
+.cta-btn:hover {
+  transition:
+    transform 150ms ease-out,
+    box-shadow 150ms ease-out;
+}

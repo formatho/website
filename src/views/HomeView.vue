@@ -217,12 +217,7 @@ const _popularTools = [
               <!-- Conversion CTA -->
               <div class="flex flex-col sm:flex-row gap-4 items-center mt-4" data-v-8d4ed633="">
                 <RouterLink to="/tools" data-v-8d4ed633="">
-                  <button
-                    class="px-8 py-3 bg-enterprise-primary text-enterprise-bg rounded-xl font-semibold text-lg hover:bg-enterprise-primary/90 transition-all shadow-lg hover:shadow-enterprise-primary/25 hover:scale-105"
-                    data-v-8d4ed633=""
-                  >
-                    ⚡ Explore All Tools
-                  </button>
+                  <button class="cta-btn" data-v-8d4ed633="">⚡ Explore All Tools</button>
                 </RouterLink>
               </div>
 
