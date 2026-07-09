@@ -8,62 +8,72 @@
 @layer base {
   :root {
     /* ============================================
-       LIGHT MODE - Premium Monochromatic Theme
-       Strictly maintained: Black, White, Grays
+       MODERN DEVELOPER THEME - Premium Dark
+       Ultra-dark background, vibrant cyan/mint accents
        ============================================ */
 
-    /* Background: Pure white (#ffffff) */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 9%; /* #171717 - Premium black */
+    /* Background: Ultra-dark charcoal/black (#0a0a0a) */
+    --background: 0 0% 4%; /* #0a0a0a - Ultra-dark near-black */
+    --foreground: 0 0% 98%; /* #fafafa - Near-white for contrast */
 
-    /* Card/Surface: Very subtle grey (#f9fafb - Slate-50) */
-    --card: 220 20% 97%; /* #f9fafb - Soft grey surface */
-    --card-foreground: 0 0% 9%; /* #171717 */
+    /* Card/Surface: Dark slate with subtle blue-grey (#121212) */
+    --card: 220 20% 8%; /* #121212 - Dark slate surface */
+    --card-foreground: 0 0% 98%; /* #fafafa */
 
-    --popover: 220 20% 97%;
-    --popover-foreground: 0 0% 9%;
+    --popover: 220 20% 8%;
+    --popover-foreground: 0 0% 98%;
 
-    /* Primary: Stark black for CTAs and interactive elements */
-    --primary: 0 0% 9%; /* #171717 - Premium black */
-    --primary-foreground: 0 0% 100%;
+    /* Primary: Vibrant cyan/teal (#06b6d4) */
+    --primary: 189 94% 48%; /* #06b6d4 - Vibrant cyan */
+    --primary-foreground: 0 0% 4%; /* #0a0a0a - Dark contrast */
 
-    /* Secondary: Soft grey matching card surface */
-    --secondary: 220 20% 97%; /* #f9fafb */
-    --secondary-foreground: 0 0% 9%;
+    /* Secondary: Dark grey-blue surface (#1e1e1e) */
+    --secondary: 220 15% 12%; /* #1e1e1e - Dark secondary surface */
+    --secondary-foreground: 0 0% 98%;
 
-    /* Muted: Soft grey backgrounds */
-    --muted: 220 20% 97%; /* #f9fafb */
-    --muted-foreground: 215 16% 47%; /* #64748b - Slate-500 */
+    /* Muted: Subtle grey for less important elements (#2a2a2a) */
+    --muted: 220 10% 15%; /* #2a2a2a - Muted grey */
+    --muted-foreground: 220 10% 60%; /* #888888 - Muted text */
 
-    /* Accent: Stark black for consistency */
-    --accent: 0 0% 9%; /* #171717 - Same as primary */
-    --accent-foreground: 0 0% 100%;
+    /* Accent: Electric mint/cyan for highlights (#00e5ff) */
+    --accent: 189 100% 50%; /* #00e5ff - Electric cyan */
+    --accent-foreground: 0 0% 4%;
 
-    /* Destructive: Red for errors */
-    --destructive: 0 84% 60%; /* #ef4444 - Red-500 */
-    --destructive-foreground: 0 0% 100%;
+    /* Destructive: Vibrant coral-red (#ff5252) */
+    --destructive: 350 90% 60%; /* #ff5252 - Coral-red */
+    --destructive-foreground: 0 0% 98%;
 
-    /* Semantic colors */
-    --success: 142 76% 36%; /* #10b981 - Green */
-    --success-foreground: 0 0% 100%;
+    /* Semantic colors - enhanced for dark mode */
+    --success: 142 76% 45%; /* #22c55e - Emerald green */
+    --success-foreground: 0 0% 4%;
 
-    --warning: 38 92% 50%; /* Orange */
-    --warning-foreground: 0 0% 100%;
+    --warning: 35 95% 50%; /* #f59e0b - Amber */
+    --warning-foreground: 0 0% 4%;
 
-    --info: 0 0% 45%; /* #737373 - Neutral gray */
-    --info-foreground: 0 0% 100%;
+    --info: 210 100% 50%; /* #3b82f6 - Royal blue */
+    --info-foreground: 0 0% 4%;
 
-    /* Borders: Subtle light grey */
-    --border: 214 32% 91%; /* #e2e8f0 - Slate-200 */
-    --input: 214 32% 91%;
-    --ring: 0 0% 9%; /* Black focus ring */
+    /* Borders: Ultra-subtle with slight transparency */
+    --border: 220 15% 15%; /* #262626 - Subtle border */
+    --input: 220 15% 15%;
+    --ring: 189 94% 48%; /* Cyan focus ring */
 
-    --radius: 0.5rem;
+    /* Additional design tokens */
+    --radius: 0.5rem; /* Modern subtle radius */
+    --ground: 0 0% 4%; /* Match background */
+    --surface-1: 220 20% 8%; /* Card surface */
+    --surface-2: 220 15% 12%; /* Secondary surface */
+    --surface-3: 220 10% 15%; /* Tertiary surface */
+
+    /* Text colors for hierarchy */
+    --text: 0 0% 98%;
+    --text-muted: 220 10% 60%;
+    --text-muted-foreground: 220 10% 40%;
   }
 
   /* ============================================
-     DARK MODE REMOVED
-     Strictly maintaining light-mode only
+     DARK MODE ONLY
+     Strictly maintaining dark-mode only
      ============================================ */
 }
 
@@ -102,16 +112,17 @@
     outline: none;
   }
 
-  /* Enhanced Accessibility Focus Ring - Vibrant Cyan with Ultra-Dark Slate Gap */
+  /* Modern Focus Ring - Enhanced Cyan with Glow Effect */
   :focus-visible {
     @apply outline-none;
     box-shadow:
       0 0 0 2px var(--background),
-      0 0 0 6px rgba(6, 182, 212, 0.8);
-    transition: box-shadow 0.1s ease-in-out;
+      0 0 0 4px rgba(6, 182, 212, 0.6),
+      0 0 20px rgba(6, 182, 212, 0.3);
+    transition: box-shadow 0.15s ease-out;
   }
 
-  /* Premium focus states with custom cyan focus ring */
+  /* Premium focus states with modern glow effect */
   button:focus-visible,
   [role='button']:focus-visible,
   a:focus-visible,
@@ -124,8 +135,9 @@
     @apply outline-none;
     box-shadow:
       0 0 0 2px var(--background),
-      0 0 0 6px rgba(6, 182, 212, 0.8);
-    transition: box-shadow 0.1s ease-in-out;
+      0 0 0 4px rgba(6, 182, 212, 0.6),
+      0 0 20px rgba(6, 182, 212, 0.3);
+    transition: box-shadow 0.15s ease-out;
   }
 
   /* Skip link enhanced visibility with indigo background */
@@ -237,7 +249,7 @@
     }
   }
 
-  /* Fix 5: Button Hover States (Smooth Transitions) */
+  /* Fix 5: Button Hover States (Dark Mode Mint Glow) */
   .button,
   button:not(.nav-btn),
   a.button,
@@ -257,8 +269,9 @@
   .glass-card RouterLink:hover,
   a[class*='bg-primary']:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    background-color: rgb(23, 23, 23) !important;
+    box-shadow:
+      0 4px 12px rgba(0, 229, 163, 0.3),
+      0 2px 4px rgba(0, 0, 0, 0.2);
   }
 
   /* Fix 6: Link Hover Effects - Premium Sweeping Underline */
@@ -292,11 +305,11 @@
     transform-origin: bottom left;
   }
 
-  /* Default nav link color on hover */
+  /* Default nav link color on hover - Mint green accent */
   a:hover,
   RouterLink:hover,
   .nav-link:hover {
-    color: rgb(23, 23, 23) !important;
+    color: hsl(var(--primary)) !important;
   }
 
   /* Fix 7: AOS Reverse Scroll Animation */
@@ -441,56 +454,71 @@
   }
 }
 
-/* Glassmorphism effect */
+/* Glassmorphism effect - Dark Mode Enterprise SaaS */
 @layer components {
   .glass {
-    background: hsl(var(--card) / 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid hsl(var(--border));
+    background: hsl(var(--card) / 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(var(--border) / 0.6);
   }
 
   .glass-card {
-    @apply glass rounded-lg;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    @apply glass rounded-xl;
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.4),
+      0 1px 3px 0 rgba(0, 0, 0, 0.2);
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 
   .glass-card:hover {
     transform: translateY(-4px);
-    border-color: hsl(var(--primary) / 0.6);
+    border-color: hsl(var(--primary) / 0.4);
     box-shadow:
-      0 20px 25px -5px rgba(0, 0, 0, 0.15),
-      0 10px 10px -5px rgba(0, 0, 0, 0.08);
+      0 20px 25px -5px rgba(0, 0, 0, 0.5),
+      0 10px 10px -5px rgba(0, 229, 163, 0.15),
+      0 0 20px rgba(0, 229, 163, 0.1);
   }
 
   /* Glass card with scale hover for premium feel */
   .glass-card-scale {
-    @apply glass rounded-lg;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    @apply glass rounded-xl;
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.4),
+      0 1px 3px 0 rgba(0, 0, 0, 0.2);
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 
   .glass-card-scale:hover {
     transform: scale(1.02) translateY(-4px);
-    border-color: hsl(var(--primary) / 0.6);
+    border-color: hsl(var(--primary) / 0.4);
     box-shadow:
-      0 20px 25px -5px rgba(0, 0, 0, 0.15),
-      0 10px 10px -5px rgba(0, 0, 0, 0.08);
+      0 20px 25px -5px rgba(0, 0, 0, 0.5),
+      0 10px 10px -5px rgba(0, 229, 163, 0.15),
+      0 0 20px rgba(0, 229, 163, 0.1);
   }
 
-  /* Button styling for blog and sub-pages */
+  /* Button styling - Mint green primary buttons */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2;
     @apply px-6 py-3;
     @apply bg-primary text-primary-foreground;
-    @apply rounded-lg font-medium;
+    @apply rounded-xl font-semibold;
     @apply transition-all duration-300;
     @apply hover:bg-primary/90 hover:scale-105;
+    box-shadow:
+      0 4px 12px rgba(0, 229, 163, 0.3),
+      0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-primary:hover {
+    box-shadow:
+      0 8px 20px rgba(0, 229, 163, 0.4),
+      0 4px 8px rgba(0, 0, 0, 0.3);
   }
 
   /* ============================================
-     Premium Tool Card Hover - Entire Block Lift
+     Premium Tool Card Hover - Dark Mode Enterprise Style
      ============================================ */
 
   .premium-card-hover {
@@ -503,9 +531,10 @@
   .premium-card-hover:hover {
     transform: translateY(-6px);
     box-shadow:
-      0 20px 25px -5px rgba(0, 0, 0, 0.1),
-      0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    border-color: rgba(156, 163, 175, 0.5);
+      0 25px 30px -5px rgba(0, 0, 0, 0.5),
+      0 15px 15px -5px rgba(0, 229, 163, 0.2),
+      0 0 25px rgba(0, 229, 163, 0.1);
+    border-color: hsl(var(--primary) / 0.3);
     z-index: 10;
   }
   .blog-card {
@@ -515,11 +544,12 @@
   }
 
   .blog-card:hover {
-    border-color: hsl(var(--primary) / 0.6);
+    border-color: hsl(var(--primary) / 0.4);
     transform: translateY(-4px);
     box-shadow:
-      0 20px 25px -5px rgba(0, 0, 0, 0.15),
-      0 10px 10px -5px rgba(0, 0, 0, 0.08);
+      0 25px 30px -5px rgba(0, 0, 0, 0.5),
+      0 15px 15px -5px rgba(0, 229, 163, 0.2),
+      0 0 25px rgba(0, 229, 163, 0.1);
   }
 
   /* Icon container for consistent centering */
@@ -684,4 +714,286 @@ svg[aria-label],
     padding: 14px 18px;
     margin: 2px 0;
   }
+}
+
+/* ============================================
+   MODERN THEME ENHANCEMENTS
+   Glassmorphism, gradients, and contemporary styling
+   ============================================ */
+
+/* Glassmorphism effect for modern cards and surfaces */
+.glass-card {
+  background: rgba(18, 18, 18, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Modern gradient buttons with hover effects */
+.btn-primary {
+  background: linear-gradient(135deg, hsl(189 94% 48%) 0%, hsl(189 100% 50%) 100%);
+  color: hsl(0 0% 4%);
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+  filter: brightness(1.1);
+}
+
+/* Enhanced navigation styling */
+nav {
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Modern dropdown menu styling */
+av .dropdown-menu {
+  background: rgba(18, 18, 18, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Tool card enhancements */
+.tool-card {
+  background: rgba(30, 30, 30, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tool-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(6, 182, 212, 0.1);
+}
+
+/* Hero section with modern gradient */
+.hero-section {
+  background:
+    radial-gradient(ellipse at top, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+    linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(220 20% 8%) 100%);
+}
+
+/* Text gradient for branding */
+.gradient-text {
+  background: linear-gradient(135deg, hsl(0 0% 98%) 0%, hsl(189 94% 48%) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Enhanced input styling */
+input,
+textarea,
+select {
+  background: rgba(30, 30, 30, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: hsl(0 0% 98%);
+  transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  background: rgba(35, 35, 35, 0.9);
+  border-color: hsl(189 94% 48%);
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+}
+
+/* Modern scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(0 0% 4%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(220 15% 20%);
+  border-radius: 5px;
+  border: 2px solid hsl(0 0% 4%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(220 15% 25%);
+}
+
+/* Loading/skeleton animations */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Modern badge styling */
+.badge {
+  background: rgba(6, 182, 212, 0.15);
+  color: hsl(189 94% 48%);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  font-weight: 500;
+}
+
+/* Enhanced code blocks */
+pre,
+code {
+  background: rgba(30, 30, 30, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Modern table styling */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(30, 30, 30, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+th,
+td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+tr:hover td {
+  background: rgba(6, 182, 212, 0.05);
+}
+
+/* Enhanced card borders with subtle glow */
+.card-glow {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Modern link styling */
+a {
+  color: hsl(189 94% 48%);
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: hsl(189 100% 60%);
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+}
+
+/* Enhanced search input */
+.search-input {
+  background: rgba(30, 30, 30, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: hsl(189 94% 48%);
+  box-shadow:
+    0 0 0 4px rgba(6, 182, 212, 0.2),
+    0 0 20px rgba(6, 182, 212, 0.15);
+}
+
+/* Modern modal overlay */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Enhance button active states */
+button:active {
+  transform: scale(0.98);
+}
+
+/* Progress bar styling */
+.progress-bar {
+  background: rgba(6, 182, 212, 0.2);
+  border-radius: 9999px;
+}
+
+.progress-bar-value {
+  background: linear-gradient(90deg, hsl(189 94% 48%), hsl(189 100% 60%));
+  border-radius: 9999px;
+  transition: width 0.5s ease;
+}
+
+/* Modern tooltip styling */
+.tooltip {
+  background: rgba(18, 18, 18, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Enhanced selection styling */
+::selection {
+  background: rgba(6, 182, 212, 0.3);
+  color: hsl(0 0% 98%);
+}
+
+/* Modern notification styling */
+.notification {
+  background: rgba(18, 18, 18, 0.95);
+  border-left: 4px solid hsl(189 94% 48%);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.notification.success {
+  border-left-color: hsl(142 76% 45%);
+}
+
+.notification.warning {
+  border-left-color: hsl(35 95% 50%);
+}
+
+.notification.error {
+  border-left-color: hsl(350 90% 60%);
+}
+
+/* Enhanced category badges */
+.category-badge {
+  background: rgba(6, 182, 212, 0.1);
+  color: hsl(189 94% 48%);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+
+/* Modern divider styling */
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
 }

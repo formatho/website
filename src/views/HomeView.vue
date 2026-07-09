@@ -5,8 +5,18 @@ import { useSEO } from '@/composables/useSEO'
 
 useSEO({
   title: 'Formatho - Free Developer Tools & AI Agent Platform',
-  description: '100+ free developer tools that run entirely in your browser. Privacy-first, no data leaves your machine. AI agent orchestration, task management, and more.',
-  keywords: ['developer tools', 'free online tools', 'privacy tools', 'AI agents', 'agent orchestration', 'formatho', 'client-side tools', 'browser tools'],
+  description:
+    '100+ free developer tools that run entirely in your browser. Privacy-first, no data leaves your machine. AI agent orchestration, task management, and more.',
+  keywords: [
+    'developer tools',
+    'free online tools',
+    'privacy tools',
+    'AI agents',
+    'agent orchestration',
+    'formatho',
+    'client-side tools',
+    'browser tools'
+  ],
   ogType: 'website',
   jsonLd: {
     '@context': 'https://schema.org',
@@ -14,11 +24,9 @@ useSEO({
     name: 'Formatho',
     url: 'https://formatho.com',
     logo: 'https://formatho.com/tools/logo.png',
-    description: 'Free developer tools and AI agent platform. Privacy-first, client-side processing.',
-    sameAs: [
-      'https://twitter.com/formatho',
-      'https://github.com/formatho'
-    ]
+    description:
+      'Free developer tools and AI agent platform. Privacy-first, client-side processing.',
+    sameAs: ['https://twitter.com/formatho', 'https://github.com/formatho']
   }
 })
 import { Input } from '@/components/ui/input'
@@ -69,11 +77,12 @@ const filteredTools = computed(() => {
   }
 
   const query = searchQuery.value.toLowerCase()
-  return tools.filter(category =>
-    category.items.some(tool =>
-      tool.name.toLowerCase().includes(query) ||
-      tool.description.toLowerCase().includes(query) ||
-      category.category.toLowerCase().includes(query)
+  return tools.filter((category) =>
+    category.items.some(
+      (tool) =>
+        tool.name.toLowerCase().includes(query) ||
+        tool.description.toLowerCase().includes(query) ||
+        category.category.toLowerCase().includes(query)
     )
   )
 })
@@ -90,7 +99,7 @@ const _popularTools = [
   { name: 'Crontab', path: '/crontab-generator', tag: 'Schedule', emoji: '⏰' },
   { name: 'Markdown', path: '/markdown', tag: 'Editor', emoji: '📝' },
   { name: 'Color Pick', path: '/color-converter', tag: 'Design', emoji: '🎨' },
-  { name: 'Diff Tool', path: '/diff', tag: 'Compare', emoji: '📊' },
+  { name: 'Diff Tool', path: '/diff', tag: 'Compare', emoji: '📊' }
 ]
 </script>
 
@@ -98,73 +107,120 @@ const _popularTools = [
   <div class="min-h-screen home-view">
     <!-- Hero Section -->
     <section
-      class="relative overflow-hidden border-b border-border/50 bg-gradient-to-b from-primary/5 via-background to-background"
+      class="relative overflow-hidden border-b border-border/30 bg-enterprise-bg"
       data-v-8d4ed633=""
     >
-      <div class="absolute inset-0 bg-grid-pattern opacity-5" data-v-8d4ed633=""></div>
-      
-      <!-- Animated Gradient Background -->
+      <!-- Circuit Pattern Background -->
+      <div
+        class="absolute inset-0 bg-circuit-pattern opacity-30"
+        style="background-size: 40px 40px"
+        data-v-8d4ed633=""
+      ></div>
+
+      <!-- Mint Ambient Glow/Spotlight Effect -->
+      <div class="absolute inset-0 bg-mint-spotlight pointer-events-none" data-v-8d4ed633=""></div>
+      <div class="absolute inset-0 bg-mint-gradient pointer-events-none" data-v-8d4ed633=""></div>
+
+      <!-- Animated Glow Effects -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div
+          class="absolute -top-40 -right-40 w-96 h-96 bg-enterprise-primary/10 rounded-full blur-3xl animate-pulse"
+        ></div>
+        <div
+          class="absolute -bottom-40 -left-40 w-80 h-80 bg-enterprise-primary/5 rounded-full blur-3xl animate-pulse delay-1000"
+        ></div>
       </div>
-      
+
+      <!-- Crosshair Grid Lines (Futuristic Tech Touch) -->
+      <div
+        class="absolute inset-0 bg-crosshair-grid opacity-20 pointer-events-none"
+        style="background-size: 100px 100px"
+        data-v-8d4ed633=""
+      ></div>
+
       <div class="container mx-auto px-4 py-12 md:py-16 relative" data-v-8d4ed633="">
-            <div class="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto" data-v-8d4ed633="">
-          <div class="flex items-center gap-4" data-aos="fade-down" data-aos-delay="0" data-v-8d4ed633="">
+        <div
+          class="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto"
+          data-v-8d4ed633=""
+        >
+          <div
+            class="flex items-center gap-4"
+            data-aos="fade-down"
+            data-aos-delay="0"
+            data-v-8d4ed633=""
+          >
             <img
               src="/logo.png"
               alt="Formatho"
-              class="h-20 w-20 rounded-xl shadow-2xl ring-2 ring-primary/20"
+              class="h-20 w-20 rounded-xl shadow-2xl ring-2 ring-enterprise-primary/30"
               data-v-8d4ed633=""
             />
-            <h1 class="text-5xl md:text-7xl font-bold tracking-tight gradient-text" data-v-8d4ed633="">
+            <h1
+              class="text-5xl md:text-7xl font-bold tracking-tight gradient-text"
+              data-v-8d4ed633=""
+            >
               Formatho
             </h1>
           </div>
-          <p class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight" data-aos="fade-down" data-aos-delay="100" data-v-8d4ed633="">
+          <p
+            class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight"
+            data-aos="fade-down"
+            data-aos-delay="100"
+            data-v-8d4ed633=""
+          >
             100+ Free Developer Tools. Zero Tracking.
           </p>
-          <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="200" data-v-8d4ed633="">
-            JSON formatter, Base64 encoder, JWT debugger, hash generator, and more. <strong class="text-foreground">Everything runs in your browser.</strong> No server uploads. No sign-up. No data collection.
+          <p
+            class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed"
+            data-aos="fade-down"
+            data-aos-delay="200"
+            data-v-8d4ed633=""
+          >
+            JSON formatter, Base64 encoder, JWT debugger, hash generator, and more.
+            <strong class="text-foreground">Everything runs in your browser.</strong> No server
+            uploads. No sign-up. No data collection.
           </p>
           <div class="flex flex-wrap gap-4 justify-center items-center mt-6" data-v-8d4ed633="">
             <div
-              class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
+              class="flex items-center gap-2 px-4 py-2 bg-enterprise-card/80 border border-border/50 backdrop-blur-sm rounded-lg"
               data-aos="fade-up"
               data-aos-delay="0"
               data-v-8d4ed633=""
             >
-              <span class="text-gray-900" data-v-8d4ed633="">
+              <span class="text-enterprise-primary" data-v-8d4ed633="">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                   <path d="M9 12l2 2 4-4"></path>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Your data never leaves your browser </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633="">
+                Your data never leaves your browser
+              </span>
             </div>
             <div
-              class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
+              class="flex items-center gap-2 px-4 py-2 bg-enterprise-card/80 border border-border/50 backdrop-blur-sm rounded-lg"
               data-aos="fade-up"
               data-aos-delay="50"
               data-v-8d4ed633=""
             >
-              <span class="text-gray-900" data-v-8d4ed633="">
+              <span class="text-enterprise-primary" data-v-8d4ed633="">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <circle cx="12" cy="5" r="3"></circle>
                   <line x1="12" y1="8" x2="12" y2="16"></line>
                   <line x1="12" y1="8" x2="12" y2="12"></line>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Zero tracking, zero storage </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633="">
+                Zero tracking, zero storage
+              </span>
             </div>
             <div
-              class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
+              class="flex items-center gap-2 px-4 py-2 bg-enterprise-card/80 border border-border/50 backdrop-blur-sm rounded-lg"
               data-aos="fade-up"
               data-aos-delay="100"
               data-v-8d4ed633=""
             >
-              <span class="text-gray-900" data-v-8d4ed633="">
+              <span class="text-enterprise-primary" data-v-8d4ed633="">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
                   <rect x="9" y="9" width="6" height="6"></rect>
@@ -178,25 +234,37 @@ const _popularTools = [
                   <line x1="1" y1="14" x2="4" y2="14"></line>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> 100% client-side processing </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633="">
+                100% client-side processing
+              </span>
             </div>
           </div>
           <!-- Conversion CTA -->
           <div class="flex flex-col sm:flex-row gap-4 items-center mt-4" data-v-8d4ed633="">
             <RouterLink to="/tools" data-v-8d4ed633="">
-              <button class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg" data-v-8d4ed633="">
+              <button
+                class="px-8 py-3 bg-enterprise-primary text-enterprise-bg rounded-xl font-semibold text-lg hover:bg-enterprise-primary/90 transition-all shadow-lg hover:shadow-enterprise-primary/25 hover:scale-105"
+                data-v-8d4ed633=""
+              >
                 ⚡ Explore All Tools
               </button>
             </RouterLink>
             <RouterLink to="/agent-orchestrator" data-v-8d4ed633="">
-              <button class="px-8 py-3 border border-primary/30 rounded-lg font-medium text-lg hover:bg-primary/5 transition-colors" data-v-8d4ed633="">
+              <button
+                class="px-8 py-3 border border-enterprise-primary/30 rounded-xl font-medium text-lg hover:bg-enterprise-primary/10 transition-all hover:border-enterprise-primary/50"
+                data-v-8d4ed633=""
+              >
                 🤖 Agent Orchestrator
               </button>
             </RouterLink>
           </div>
 
           <!-- Social Proof Stats -->
-          <div class="flex flex-wrap gap-8 justify-center items-center mt-8 text-center" data-aos="fade-up" data-aos-delay="150">
+          <div
+            class="flex flex-wrap gap-8 justify-center items-center mt-8 text-center"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
             <div>
               <div class="text-3xl font-bold text-primary">100+</div>
               <div class="text-xs text-muted-foreground">Free developer tools</div>
@@ -234,7 +302,7 @@ const _popularTools = [
               />
             </div>
           </div>
-          
+
           <!-- Trust Badges -->
           <div class="w-full mt-8">
             <TrustBadges />
@@ -248,20 +316,20 @@ const _popularTools = [
       <div class="space-y-12" data-v-8d4ed633="">
         <!-- Categories with tools -->
         <div
-          v-for="(category) in filteredTools"
+          v-for="category in filteredTools"
           :key="category.category"
           class="space-y-6"
           data-v-8d4ed633=""
         >
           <div class="flex items-center gap-4 border-b-2 border-foreground pb-2" data-v-8d4ed633="">
-            <h2
-              class="text-2xl md:text-3xl font-black tracking-tight uppercase"
-              data-v-8d4ed633=""
-            >
+            <h2 class="text-2xl md:text-3xl font-black tracking-tight uppercase" data-v-8d4ed633="">
               {{ category.category }}
             </h2>
             <div class="flex-1" data-v-8d4ed633=""></div>
-            <span class="text-xs font-mono tracking-widest text-muted-foreground" data-v-8d4ed633="">
+            <span
+              class="text-xs font-mono tracking-widest text-muted-foreground"
+              data-v-8d4ed633=""
+            >
               [ {{ String(category.items.length).padStart(2, '0') }} TOOLS ]
             </span>
           </div>
@@ -286,10 +354,7 @@ const _popularTools = [
                 <div class="flex flex-col h-full" data-v-8d4ed633="">
                   <!-- Icon with dynamic Lucide component -->
                   <div class="mb-4" data-v-8d4ed633="">
-                    <div
-                      class="p-3 border border-foreground/20 w-fit"
-                      data-v-8d4ed633=""
-                    >
+                    <div class="p-3 border border-foreground/20 w-fit" data-v-8d4ed633="">
                       <component
                         :is="LucideIcons[tool.iconName] || LucideIcons.Wrench"
                         class="w-6 h-6 text-gray-900"
@@ -300,16 +365,10 @@ const _popularTools = [
 
                   <!-- Content -->
                   <div class="flex-1" data-v-8d4ed633="">
-                    <h3
-                      class="text-lg font-semibold mb-2 transition-colors"
-                      data-v-8d4ed633=""
-                    >
+                    <h3 class="text-lg font-semibold mb-2 transition-colors" data-v-8d4ed633="">
                       {{ tool.name }}
                     </h3>
-                    <p
-                      class="text-sm text-muted-foreground leading-relaxed"
-                      data-v-8d4ed633=""
-                    >
+                    <p class="text-sm text-muted-foreground leading-relaxed" data-v-8d4ed633="">
                       {{ tool.description }}
                     </p>
                   </div>

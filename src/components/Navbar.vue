@@ -121,7 +121,7 @@ const navLinkClass =
 
 <template>
   <nav
-    class="fixed top-0 left-0 right-0 z-[100] bg-background border-b border-foreground"
+    class="fixed top-0 left-0 right-0 z-[100] bg-background/95 backdrop-blur-md border-b border-border/50"
     role="navigation"
     aria-label="Main Navigation"
   >
@@ -174,11 +174,11 @@ const navLinkClass =
                 Tools menu {{ isToolsDropdownOpen ? 'expanded' : 'collapsed' }}
               </div>
               <div
-                class="bg-background border border-foreground rounded-xl min-w-[600px] p-6 grid grid-cols-2 gap-6"
+                class="bg-enterprise-card/95 backdrop-blur-md border border-border/50 rounded-xl min-w-[600px] p-6 grid grid-cols-2 gap-6 shadow-xl"
               >
                 <div v-for="category in categories" :key="category.name" class="space-y-2">
                   <h3
-                    class="text-[11px] font-bold tracking-[2px] uppercase text-foreground mb-3 border-b border-foreground/10 pb-2"
+                    class="text-[11px] font-bold tracking-[2px] uppercase text-enterprise-primary mb-3 border-b border-border/30 pb-2"
                   >
                     {{ category.name }}
                   </h3>
@@ -188,7 +188,7 @@ const navLinkClass =
                       :key="item.name"
                       :to="item.route"
                       @click="handleToolLinkClick"
-                      class="block px-2 py-2 text-sm text-muted-foreground hover:text-foreground hover:pl-4 transition-all border-b border-foreground/5"
+                      class="block px-2 py-2 text-sm text-muted-foreground hover:text-enterprise-primary hover:pl-4 transition-all border-b border-border/20"
                     >
                       {{ item.name }}
                     </RouterLink>
@@ -225,7 +225,7 @@ const navLinkClass =
           <!-- Command Line Search -->
           <button
             @click="openSearchModal"
-            class="nav-btn hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground border border-foreground rounded-xl bg-transparent hover:bg-foreground/5 transition-colors"
+            class="nav-btn hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground border border-border/50 rounded-xl bg-transparent hover:bg-enterprise-card/50 hover:border-enterprise-primary/30 transition-colors"
             aria-label="Open search modal"
           >
             <Search class="w-3.5 h-3.5" aria-hidden="true" />
@@ -252,7 +252,10 @@ const navLinkClass =
       </div>
 
       <!-- Mobile Menu -->
-      <div v-if="isMobileMenuOpen" class="md:hidden py-4 border-t border-foreground">
+      <div
+        v-if="isMobileMenuOpen"
+        class="md:hidden py-4 border-t border-border/50 bg-enterprise-card/50 backdrop-blur-sm"
+      >
         <div class="space-y-1">
           <RouterLink to="/" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'block']"
             >Home</RouterLink
@@ -285,7 +288,7 @@ const navLinkClass =
                   :key="item.name"
                   :to="item.route"
                   @click="handleToolLinkClick"
-                  class="block px-2 py-2 text-sm text-muted-foreground border-b border-foreground/5"
+                  class="block px-2 py-2 text-sm text-muted-foreground border-b border-border/20 hover:text-enterprise-primary"
                 >
                   {{ item.name }}
                 </RouterLink>
@@ -293,7 +296,7 @@ const navLinkClass =
             </div>
           </div>
 
-          <div class="pt-2 border-t border-foreground mt-2">
+          <div class="pt-2 border-t border-border/50 mt-2">
             <a
               href="https://github.com/formatho"
               target="_blank"

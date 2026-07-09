@@ -25,6 +25,19 @@ module.exports = {
         mono: ['JetBrains Mono', 'Fira Code', 'Courier New', 'monospace']
       },
       colors: {
+        'enterprise-bg': '#0B0E11',
+        'enterprise-card': '#162024',
+        'enterprise-primary': '#00E5A3',
+        'enterprise-border': '#2d3748',
+        'enterprise-muted': '#9ca3af'
+      },
+      backgroundImage: {
+        'mint-gradient': 'radial-gradient(circle at 50% 50%, rgba(0, 229, 163, 0.15) 0%, transparent 70%)',
+        'mint-spotlight': 'radial-gradient(circle at 30% 20%, rgba(0, 229, 163, 0.12) 0%, transparent 50%)',
+        'circuit-pattern': 'radial-gradient(circle at 1px 1px, rgba(0, 229, 163, 0.05) 1px, transparent 0)',
+        'crosshair-grid': 'linear-gradient(to right, rgba(0, 229, 163, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 229, 163, 0.03) 1px, transparent 1px)'
+      },
+      colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
