@@ -121,7 +121,7 @@ const navLinkClass =
 
 <template>
   <nav
-    class="fixed top-0 left-0 right-0 z-[100] bg-background/95 backdrop-blur-md border-b border-border/50"
+    class="fixed top-0 left-0 right-0 z-[100] glass-nav border-b border-white/10"
     role="navigation"
     aria-label="Main Navigation"
   >

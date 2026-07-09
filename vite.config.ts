@@ -2,6 +2,16 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
+import { execSync } from 'node:child_process'
+
+// Get git commit SHA at build time
+const gitCommitSha = (() => {
+  try {
+    return execSync('git rev-parse --short HEAD').toString().trim()
+  } catch {
+    return 'unknown'
+  }
+})()
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,6 +29,7 @@ export default defineConfig({
   define: {
     'global': 'globalThis',
     'process.env': '{}',
+    __GIT_COMMIT_SHA__: JSON.stringify(gitCommitSha),
   },
   build: {
     rollupOptions: {

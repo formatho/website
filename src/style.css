@@ -586,3 +586,33 @@
     animation-delay: 200ms;
   }
 }
+
+/* ============================================
+   GLASSMORPHIC NAVIGATION SYSTEM
+   Frosted glass material with HSL token integration
+   ============================================ */
+
+.glass-nav {
+  /* Deep navy at 50% transparency using HSL tokens */
+  background-color: hsl(222 47% 11% / 0.5);
+
+  /* Gaussian blur — 16px radius on everything beneath */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  /* Hardware hints: tell browser these will change */
+  will-change: background-color, backdrop-filter;
+
+  /* Specular highlight: 1px solid white at 10% opacity on bottom edge */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  /* Drop shadow: 4px down, 12px blur, pure black at 15% opacity */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Graceful degradation: if backdrop-filter unsupported, solid dark slate at 95% */
+@supports not ((backdrop-filter: blur(16px)) or (-webkit-backdrop-filter: blur(16px))) {
+  .glass-nav {
+    background-color: hsl(222 47% 11% / 0.95);
+  }
+}
