@@ -34,6 +34,7 @@ import { Search } from 'lucide-vue-next'
 import * as LucideIcons from 'lucide-vue-next'
 import { tools } from '../data/tools'
 import TrustBadges from '@/components/TrustBadges.vue'
+import HeroBackground from '@/components/HeroBackground.vue'
 
 import FloatingCTA from '@/components/FloatingCTA.vue'
 import { useTwins } from '@/composables/useTwins'
@@ -117,25 +118,8 @@ const _popularTools = [
         data-v-8d4ed633=""
       ></div>
 
-      <!-- Ambient Lightest-Blue Glow Effect -->
-      <div class="absolute inset-0 bg-mint-spotlight pointer-events-none" data-v-8d4ed633=""></div>
-      <div class="absolute inset-0 bg-mint-gradient pointer-events-none" data-v-8d4ed633=""></div>
-
-      <!-- Slow Moving Lightest Blue (#d1f7ff) Glow Orbs -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          class="absolute w-[500px] h-[500px] rounded-full blur-3xl hero-glow-orb"
-          style="background: radial-gradient(circle, #d1f7ff 0%, transparent 70%)"
-        ></div>
-        <div
-          class="absolute w-[400px] h-[400px] rounded-full blur-3xl hero-glow-orb-2"
-          style="background: radial-gradient(circle, #d1f7ff 0%, transparent 70%)"
-        ></div>
-        <div
-          class="absolute w-[350px] h-[350px] rounded-full blur-3xl hero-glow-orb-3"
-          style="background: radial-gradient(circle, #d1f7ff 0%, transparent 70%)"
-        ></div>
-      </div>
+      <!-- Isolated Procedural Background (SSG-safe, hydrates on client) -->
+      <HeroBackground />
 
       <!-- Crosshair Grid Lines (Futuristic Tech Touch) -->
       <div
