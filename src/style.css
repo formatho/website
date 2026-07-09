@@ -8,55 +8,55 @@
 @layer base {
   :root {
     /* ============================================
-       MODERN DEVELOPER THEME - Premium Dark
-       Ultra-dark background, vibrant cyan/mint accents
+       SOPHISTICATED DARK THEME - Premium UI/UX
+       Ultra-deep black, vibrant gradient accents, modern glassmorphism
        ============================================ */
 
-    /* Background: Ultra-dark charcoal/black (#0a0a0a) */
-    --background: 0 0% 4%; /* #0a0a0a - Ultra-dark near-black */
-    --foreground: 0 0% 98%; /* #fafafa - Near-white for contrast */
+    /* Background: Ultra-deep rich black (#080808) */
+    --background: 0 0% 3%; /* #080808 - Ultra-deep near-black */
+    --foreground: 0 0% 97%; /* #f7f7f7 - Premium off-white */
 
-    /* Card/Surface: Dark slate with subtle blue-grey (#121212) */
-    --card: 220 20% 8%; /* #121212 - Dark slate surface */
-    --card-foreground: 0 0% 98%; /* #fafafa */
+    /* Card/Surface: Rich dark charcoal with subtle warmth (#0f0f0f) */
+    --card: 220 15% 6%; /* #0f0f0f - Rich dark surface */
+    --card-foreground: 0 0% 97%; /* #f7f7f7 */
 
-    --popover: 220 20% 8%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 220 15% 6%;
+    --popover-foreground: 0 0% 97%;
 
-    /* Primary: Vibrant cyan/teal (#06b6d4) */
-    --primary: 189 94% 48%; /* #06b6d4 - Vibrant cyan */
-    --primary-foreground: 0 0% 4%; /* #0a0a0a - Dark contrast */
+    /* Primary: Vibrant gradient base - electric blue (#3b82f6) */
+    --primary: 221 83% 53%; /* #3b82f6 - Electric blue */
+    --primary-foreground: 0 0% 3%; /* #080808 - Dark contrast */
 
-    /* Secondary: Dark grey-blue surface (#1e1e1e) */
-    --secondary: 220 15% 12%; /* #1e1e1e - Dark secondary surface */
-    --secondary-foreground: 0 0% 98%;
+    /* Secondary: Deep charcoal with purple tint (#1a1a2e) */
+    --secondary: 240 15% 10%; /* #1a1a2e - Deep purple-tinged surface */
+    --secondary-foreground: 0 0% 97%;
 
-    /* Muted: Subtle grey for less important elements (#2a2a2a) */
-    --muted: 220 10% 15%; /* #2a2a2a - Muted grey */
-    --muted-foreground: 220 10% 60%; /* #888888 - Muted text */
+    /* Muted: Sophisticated medium-dark grey (#252525) */
+    --muted: 220 10% 12%; /* #252525 - Refined dark grey */
+    --muted-foreground: 220 10% 55%; /* #757575 - Sophisticated muted */
 
-    /* Accent: Electric mint/cyan for highlights (#00e5ff) */
-    --accent: 189 100% 50%; /* #00e5ff - Electric cyan */
-    --accent-foreground: 0 0% 4%;
+    /* Accent: Vibrant purple-pink gradient highlight (#a855f7) */
+    --accent: 270 65% 65%; /* #a855f7 - Vibrant purple */
+    --accent-foreground: 0 0% 3%;
 
-    /* Destructive: Vibrant coral-red (#ff5252) */
-    --destructive: 350 90% 60%; /* #ff5252 - Coral-red */
-    --destructive-foreground: 0 0% 98%;
+    /* Destructive: Modern coral-red gradient (#ef4444) */
+    --destructive: 0 84% 60%; /* #ef4444 - Modern red */
+    --destructive-foreground: 0 0% 97%;
 
-    /* Semantic colors - enhanced for dark mode */
-    --success: 142 76% 45%; /* #22c55e - Emerald green */
-    --success-foreground: 0 0% 4%;
+    /* Semantic colors - premium dark mode palette */
+    --success: 142 70% 50%; /* #22c55e - Vibrant emerald */
+    --success-foreground: 0 0% 3%;
 
-    --warning: 35 95% 50%; /* #f59e0b - Amber */
-    --warning-foreground: 0 0% 4%;
+    --warning: 45 93% 47%; /* #f59e0b - Warm amber */
+    --warning-foreground: 0 0% 3%;
 
-    --info: 210 100% 50%; /* #3b82f6 - Royal blue */
-    --info-foreground: 0 0% 4%;
+    --info: 217 91% 60%; /* #3b82f6 - Electric blue */
+    --info-foreground: 0 0% 3%;
 
-    /* Borders: Ultra-subtle with slight transparency */
-    --border: 220 15% 15%; /* #262626 - Subtle border */
-    --input: 220 15% 15%;
-    --ring: 189 94% 48%; /* Cyan focus ring */
+    /* Borders: Premium subtle with warmth */
+    --border: 220 15% 12%; /* #1f1f1f - Premium border */
+    --input: 220 15% 12%;
+    --ring: 221 83% 53%; /* Electric blue focus ring */
 
     /* Additional design tokens */
     --radius: 0.5rem; /* Modern subtle radius */
