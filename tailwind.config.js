@@ -32,8 +32,8 @@ module.exports = {
         'enterprise-muted': '#9ca3af'
       },
       backgroundImage: {
-        'mint-gradient': 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.12) 0%, transparent 70%)',
-        'mint-spotlight': 'radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.10) 0%, transparent 50%)',
+        'mint-gradient': 'radial-gradient(circle at 50% 50%, rgba(209, 247, 255, 0.15) 0%, transparent 70%)',
+        'mint-spotlight': 'radial-gradient(circle at 30% 20%, rgba(209, 247, 255, 0.12) 0%, transparent 50%)',
         'circuit-pattern': 'radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.04) 1px, transparent 0)',
         'crosshair-grid': 'linear-gradient(to right, rgba(59, 130, 246, 0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(59, 130, 246, 0.025) 1px, transparent 1px)'
       },

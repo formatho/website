@@ -117,17 +117,23 @@ const _popularTools = [
         data-v-8d4ed633=""
       ></div>
 
-      <!-- Mint Ambient Glow/Spotlight Effect -->
+      <!-- Ambient Lightest-Blue Glow Effect -->
       <div class="absolute inset-0 bg-mint-spotlight pointer-events-none" data-v-8d4ed633=""></div>
       <div class="absolute inset-0 bg-mint-gradient pointer-events-none" data-v-8d4ed633=""></div>
 
-      <!-- Animated Glow Effects -->
+      <!-- Slow Moving Lightest Blue (#d1f7ff) Glow Orbs -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div
-          class="absolute -top-40 -right-40 w-96 h-96 bg-enterprise-primary/10 rounded-full blur-3xl animate-pulse"
+          class="absolute w-[500px] h-[500px] rounded-full blur-3xl hero-glow-orb"
+          style="background: radial-gradient(circle, #d1f7ff 0%, transparent 70%)"
         ></div>
         <div
-          class="absolute -bottom-40 -left-40 w-80 h-80 bg-enterprise-primary/5 rounded-full blur-3xl animate-pulse delay-1000"
+          class="absolute w-[400px] h-[400px] rounded-full blur-3xl hero-glow-orb-2"
+          style="background: radial-gradient(circle, #d1f7ff 0%, transparent 70%)"
+        ></div>
+        <div
+          class="absolute w-[350px] h-[350px] rounded-full blur-3xl hero-glow-orb-3"
+          style="background: radial-gradient(circle, #d1f7ff 0%, transparent 70%)"
         ></div>
       </div>
 
