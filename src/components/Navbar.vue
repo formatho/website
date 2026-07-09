@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, shallowRef, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Menu, X, Github, Search } from 'lucide-vue-next'
 import GlobalSearchModal from './GlobalSearchModal.vue'
@@ -8,6 +8,50 @@ const isMobileMenuOpen = ref(false)
 const isToolsDropdownOpen = ref(false)
 const isSearchModalOpen = ref(false)
 const toolsDropdownRef = ref<HTMLElement | null>(null)
+
+// Scroll-reactive state
+const isScrolled = shallowRef(false) // true after 64px scroll
+const isHidden = shallowRef(false) // true when scrolling down past 300px
+const navTranslate = shallowRef('translateY(0)')
+
+// Throttled scroll handler using rAF
+let ticking = false
+let lastScrollY = 0
+let resizeTimer: ReturnType<typeof setTimeout> | null = null
+
+const handleScroll = () => {
+  if (ticking) return
+  ticking = true
+
+  requestAnimationFrame(() => {
+    const currentY = window.scrollY
+
+    // Morphing: condense nav after 64px scroll
+    isScrolled.value = currentY > 64
+
+    // Scroll direction awareness
+    if (currentY > 300 && currentY > lastScrollY) {
+      // Scrolling down past 300px → hide nav
+      isHidden.value = true
+      navTranslate.value = 'translateY(-100%)'
+    } else if (currentY < lastScrollY - 5 || currentY <= 300) {
+      // Scrolling up by 5px+ or near top → show nav
+      isHidden.value = false
+      navTranslate.value = 'translateY(0)'
+    }
+
+    lastScrollY = currentY
+    ticking = false
+  })
+}
+
+// Debounced resize handler (200ms)
+const handleResize = () => {
+  if (resizeTimer) clearTimeout(resizeTimer)
+  resizeTimer = setTimeout(() => {
+    // Recalculate if needed — nav dimensions are CSS-driven
+  }, 200)
+}
 
 const closeToolsDropdown = () => {
   isToolsDropdownOpen.value = false
@@ -48,13 +92,21 @@ const handleToolLinkClick = () => {
 }
 
 onMounted(() => {
+  // SSG-safe: only attach window listeners after mount (browser-only)
   document.addEventListener('click', handleClickOutside)
   window.addEventListener('keydown', handleGlobalKeydown)
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  window.addEventListener('resize', handleResize, { passive: true })
+  // Initialize scroll state
+  handleScroll()
 })
 
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
   window.removeEventListener('keydown', handleGlobalKeydown)
+  window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('resize', handleResize)
+  if (resizeTimer) clearTimeout(resizeTimer)
 })
 
 const categories = [
@@ -121,12 +173,17 @@ const navLinkClass =
 
 <template>
   <nav
-    class="fixed top-0 left-0 right-0 z-[100] glass-nav border-b border-white/10"
+    class="fixed top-0 left-0 right-0 z-[100] scroll-nav"
+    :class="{
+      'scroll-nav--top': !isScrolled,
+      'scroll-nav--scrolled': isScrolled
+    }"
+    :style="{ transform: navTranslate }"
     role="navigation"
     aria-label="Main Navigation"
   >
     <div class="container mx-auto px-4">
-      <div class="flex items-center justify-between h-16">
+      <div class="flex items-center justify-between h-full">
         <!-- Logo -->
         <RouterLink to="/" class="flex items-center gap-3 group nav-btn" aria-label="Formatho Home">
           <img

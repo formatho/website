@@ -124,8 +124,8 @@ onUnmounted(removeToolSchema)
     <main
       id="main-content"
       role="main"
-      class="flex-1 pt-16"
-      :class="{ 'pt-[104px]': showBreadcrumb }"
+      class="flex-1 pt-20"
+      :class="{ 'pt-[124px]': showBreadcrumb }"
     >
       <!-- Skeleton Loader: Tool Pages (2-col editor layout) -->
       <Transition
