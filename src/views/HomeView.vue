@@ -107,26 +107,9 @@ const _popularTools = [
 <template>
   <div class="min-h-screen home-view">
     <!-- Hero Section -->
-    <section
-      class="relative overflow-hidden border-b border-border/30 bg-enterprise-bg"
-      data-v-8d4ed633=""
-    >
-      <!-- Circuit Pattern Background -->
-      <div
-        class="absolute inset-0 bg-circuit-pattern opacity-30"
-        style="background-size: 40px 40px"
-        data-v-8d4ed633=""
-      ></div>
-
+    <section class="relative overflow-hidden border-b border-border/30 bg-white" data-v-8d4ed633="">
       <!-- Isolated Procedural Background (SSG-safe, hydrates on client) -->
       <HeroBackground />
-
-      <!-- Crosshair Grid Lines (Futuristic Tech Touch) -->
-      <div
-        class="absolute inset-0 bg-crosshair-grid opacity-20 pointer-events-none"
-        style="background-size: 100px 100px"
-        data-v-8d4ed633=""
-      ></div>
 
       <!-- Master Grid: 1440px max, centered. Padding: 24px mobile / 48px tablet / 96px desktop -->
       <div class="hero-grid-wrapper relative" data-v-8d4ed633="">
