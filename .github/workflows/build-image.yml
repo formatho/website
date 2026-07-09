@@ -166,7 +166,7 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     environment: digital_ocean_formatho
-    if: github.ref == 'refs/heads/main'
+    if: always() && github.ref == 'refs/heads/main' && needs.build.result == 'success'
     steps:
       - name: Deploy QA via SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -186,7 +186,7 @@ jobs:
   verify-qa:
     needs: [deploy-qa]
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: always() && github.ref == 'refs/heads/main' && needs.deploy-qa.result == 'success'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
