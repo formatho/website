@@ -99,13 +99,19 @@ const categories = [
 ]
 
 // Shared nav link classes — brutalist editorial style
-const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-foreground hover:underline hover:underline-offset-[6px] decoration-2 hover:decoration-foreground py-2 px-1'
+const navLinkClass =
+  'text-[13px] font-semibold tracking-[1.5px] uppercase text-foreground hover:underline hover:underline-offset-[6px] decoration-2 hover:decoration-foreground py-2 px-1'
 </script>
 
 <style scoped>
 @keyframes coming-soon-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 
 .coming-soon-badge {
@@ -114,15 +120,20 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
 </style>
 
 <template>
-  <nav class="fixed top-0 left-0 right-0 z-[100] bg-background border-b border-foreground">
+  <nav
+    class="fixed top-0 left-0 right-0 z-[100] bg-background border-b border-foreground"
+    role="navigation"
+    aria-label="Main Navigation"
+  >
     <div class="container mx-auto px-4">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
-        <RouterLink to="/" class="flex items-center gap-3 group">
+        <RouterLink to="/" class="flex items-center gap-3 group nav-btn" aria-label="Formatho Home">
           <img
             src="/logo.png"
-            alt="Formatho"
+            alt=""
             class="h-8 w-8 transition-transform group-hover:scale-110"
+            aria-hidden="true"
           />
           <span class="text-lg font-black tracking-tight gradient-text">FORMATHO</span>
         </RouterLink>
@@ -137,21 +148,38 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
             <button
               :class="[navLinkClass, 'flex items-center gap-1 nav-btn']"
               @click="isToolsDropdownOpen = !isToolsDropdownOpen"
+              :aria-expanded="isToolsDropdownOpen"
+              aria-controls="tools-dropdown-menu"
             >
               Tools
-              <span class="text-[10px] font-mono ml-0.5 transition-transform inline-block" :class="{ 'rotate-45': isToolsDropdownOpen }">+</span>
+              <span
+                class="text-[10px] font-mono ml-0.5 transition-transform inline-block"
+                :class="{ 'rotate-45': isToolsDropdownOpen }"
+                aria-hidden="true"
+                >+</span
+              >
             </button>
 
             <!-- Dropdown Menu -->
             <div
               v-show="isToolsDropdownOpen"
+              id="tools-dropdown-menu"
+              role="menu"
               class="absolute left-0 top-full pt-2 z-[9999]"
+              :aria-label="'Tools menu - ' + (isToolsDropdownOpen ? 'expanded' : 'collapsed')"
+              @keydown.esc="closeToolsDropdown"
             >
+              <!-- Screen reader announcement for dropdown state -->
+              <div class="sr-only-only" :aria-live="'polite'" aria-atomic="true">
+                Tools menu {{ isToolsDropdownOpen ? 'expanded' : 'collapsed' }}
+              </div>
               <div
                 class="bg-background border border-foreground rounded-xl min-w-[600px] p-6 grid grid-cols-2 gap-6"
               >
                 <div v-for="category in categories" :key="category.name" class="space-y-2">
-                  <h3 class="text-[11px] font-bold tracking-[2px] uppercase text-foreground mb-3 border-b border-foreground/10 pb-2">
+                  <h3
+                    class="text-[11px] font-bold tracking-[2px] uppercase text-foreground mb-3 border-b border-foreground/10 pb-2"
+                  >
                     {{ category.name }}
                   </h3>
                   <div class="space-y-0">
@@ -185,7 +213,10 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
 
           <RouterLink to="/get-verified" :class="[navLinkClass, 'flex items-center gap-1.5']">
             Get Verified
-            <span class="coming-soon-badge text-[9px] font-mono font-bold tracking-wider uppercase px-1.5 py-0.5 rounded bg-foreground text-background">coming soon</span>
+            <span
+              class="coming-soon-badge text-[9px] font-mono font-bold tracking-wider uppercase px-1.5 py-0.5 rounded bg-foreground text-background"
+              >coming soon</span
+            >
           </RouterLink>
         </div>
 
@@ -195,10 +226,14 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
           <button
             @click="openSearchModal"
             class="nav-btn hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground border border-foreground rounded-xl bg-transparent hover:bg-foreground/5 transition-colors"
+            aria-label="Open search modal"
           >
-            <Search class="w-3.5 h-3.5" />
+            <Search class="w-3.5 h-3.5" aria-hidden="true" />
             <span class="font-mono text-xs">Search...</span>
-            <kbd class="hidden lg:inline-block ml-4 px-1.5 py-0.5 text-[10px] bg-foreground text-background font-mono font-bold rounded-xl">
+            <kbd
+              class="hidden lg:inline-block ml-4 px-1.5 py-0.5 text-[10px] bg-foreground text-background font-mono font-bold rounded-xl"
+              aria-hidden="true"
+            >
               ⌘K
             </kbd>
           </button>
@@ -206,10 +241,12 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
           <!-- Mobile Menu Button -->
           <button
             @click="isMobileMenuOpen = !isMobileMenuOpen"
-            class="nav-btn md:hidden p-2 text-foreground"
+            class="nav-btn md:hidden p-2 text-foreground min-w-[48px] min-h-[48px] flex items-center justify-center"
+            :aria-expanded="isMobileMenuOpen"
+            :aria-label="isMobileMenuOpen ? 'Close mobile menu' : 'Open mobile menu'"
           >
-            <Menu v-if="!isMobileMenuOpen" class="w-5 h-5" />
-            <X v-else class="w-5 h-5" />
+            <Menu v-if="!isMobileMenuOpen" class="w-5 h-5" aria-hidden="true" />
+            <X v-else class="w-5 h-5" aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -217,8 +254,12 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
       <!-- Mobile Menu -->
       <div v-if="isMobileMenuOpen" class="md:hidden py-4 border-t border-foreground">
         <div class="space-y-1">
-          <RouterLink to="/" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'block']">Home</RouterLink>
-          <RouterLink to="/about" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'block']">About</RouterLink>
+          <RouterLink to="/" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'block']"
+            >Home</RouterLink
+          >
+          <RouterLink to="/about" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'block']"
+            >About</RouterLink
+          >
 
           <!-- Mobile Tools Dropdown -->
           <div class="pointer-events-auto">
@@ -227,12 +268,18 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
               :class="[navLinkClass, 'flex items-center justify-between w-full nav-btn']"
             >
               <span>Tools</span>
-              <span class="text-[10px] font-mono" :class="{ 'rotate-45 inline-block': isToolsDropdownOpen }">+</span>
+              <span
+                class="text-[10px] font-mono"
+                :class="{ 'rotate-45 inline-block': isToolsDropdownOpen }"
+                >+</span
+              >
             </button>
 
             <div v-show="isToolsDropdownOpen" class="space-y-3 mt-2 pl-4">
               <div v-for="category in categories" :key="category.name" class="space-y-1">
-                <h3 class="text-[11px] font-bold tracking-[2px] uppercase text-foreground py-2">{{ category.name }}</h3>
+                <h3 class="text-[11px] font-bold tracking-[2px] uppercase text-foreground py-2">
+                  {{ category.name }}
+                </h3>
                 <RouterLink
                   v-for="item in category.items"
                   :key="item.name"
@@ -256,11 +303,28 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
               <Github class="w-3.5 h-3.5" />
               GitHub
             </a>
-            <RouterLink to="/blogs" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'block']">Blog</RouterLink>
-            <RouterLink to="/pricing" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'block']">Pricing</RouterLink>
-            <RouterLink to="/get-verified" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'flex items-center gap-1.5']">
+            <RouterLink
+              to="/blogs"
+              @click="isMobileMenuOpen = false"
+              :class="[navLinkClass, 'block']"
+              >Blog</RouterLink
+            >
+            <RouterLink
+              to="/pricing"
+              @click="isMobileMenuOpen = false"
+              :class="[navLinkClass, 'block']"
+              >Pricing</RouterLink
+            >
+            <RouterLink
+              to="/get-verified"
+              @click="isMobileMenuOpen = false"
+              :class="[navLinkClass, 'flex items-center gap-1.5']"
+            >
               Get Verified
-              <span class="coming-soon-badge text-[9px] font-mono font-bold tracking-wider uppercase px-1.5 py-0.5 rounded bg-foreground text-background">coming soon</span>
+              <span
+                class="coming-soon-badge text-[9px] font-mono font-bold tracking-wider uppercase px-1.5 py-0.5 rounded bg-foreground text-background"
+                >coming soon</span
+              >
             </RouterLink>
           </div>
         </div>

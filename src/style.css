@@ -96,32 +96,44 @@
      UUPM: Premium Focus Indicators (A11y)
      Custom brand-aligned focus rings
      ============================================ */
-  
+
   /* Remove default browser outlines */
   :focus {
     outline: none;
   }
-  
-  /* Premium focus-visible ring for all interactive elements */
+
+  /* Enhanced Accessibility Focus Ring - Vibrant Cyan with Ultra-Dark Slate Gap */
   :focus-visible {
-    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
-    transition: box-shadow 0.15s ease-in-out;
+    @apply outline-none;
+    box-shadow:
+      0 0 0 2px var(--background),
+      0 0 0 6px rgba(6, 182, 212, 0.8);
+    transition: box-shadow 0.1s ease-in-out;
   }
-  
-  /* Button focus states */
+
+  /* Premium focus states with custom cyan focus ring */
   button:focus-visible,
-  [role="button"]:focus-visible,
+  [role='button']:focus-visible,
   a:focus-visible,
   [href]:focus-visible,
   input:focus-visible,
   textarea:focus-visible,
-  select:focus-visible {
-    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  select:focus-visible,
+  .nav-btn:focus-visible,
+  .router-link-active:focus-visible {
+    @apply outline-none;
+    box-shadow:
+      0 0 0 2px var(--background),
+      0 0 0 6px rgba(6, 182, 212, 0.8);
+    transition: box-shadow 0.1s ease-in-out;
   }
-  
-  /* Skip link enhanced visibility when focused */
+
+  /* Skip link enhanced visibility with indigo background */
   .sr-only:focus:not(.sr-only) {
-    @apply ring-2 ring-primary ring-offset-2;
+    @apply outline-none;
+    box-shadow:
+      0 0 0 2px var(--background),
+      0 0 0 4px rgba(99, 102, 241, 0.8);
   }
 
   /* Monospace fonts for code and inputs */
@@ -137,7 +149,8 @@
      ============================================ */
 
   /* Fix 1: Eliminate Horizontal Scrollbars on Mobile & Prevent Scroll Freezing */
-  html, body {
+  html,
+  body {
     /* Prevent horizontal scrollbar */
     overflow-x: hidden;
     /* Ensure vertical scrolling is NOT blocked */
@@ -155,7 +168,7 @@
   /* Fix 2: SVG Icon Centering with Flexbox */
   .icon-container,
   .tool-icon,
-  [class*="icon"] {
+  [class*='icon'] {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -167,7 +180,7 @@
     .button,
     .tool-link,
     button,
-    a[class*="px"],
+    a[class*='px'],
     .glass-card a,
     .glass-card button,
     .glass-card RouterLink {
@@ -192,8 +205,8 @@
     }
 
     /* Newsletter signup input and button */
-    input[type="email"],
-    input[type="text"] {
+    input[type='email'],
+    input[type='text'] {
       min-height: 44px;
       padding: 12px 16px;
     }
@@ -231,7 +244,7 @@
   .glass-card a,
   .glass-card button:not(.nav-btn),
   .glass-card RouterLink,
-  a[class*="bg-primary"] {
+  a[class*='bg-primary'] {
     transition: all 0.3s ease-in-out;
     cursor: pointer;
   }
@@ -242,7 +255,7 @@
   .glass-card a:hover,
   .glass-card button:not(.nav-btn):hover,
   .glass-card RouterLink:hover,
-  a[class*="bg-primary"]:hover {
+  a[class*='bg-primary']:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background-color: rgb(23, 23, 23) !important;
@@ -297,12 +310,12 @@
   }
 
   /* Fix 7.1: Ensure AOS-initialized elements are visible */
-  [data-aos][data-aos="fade-up"],
-  [data-aos][data-aos="fade-down"],
-  [data-aos][data-aos="fade-left"],
-  [data-aos][data-aos="fade-right"],
-  [data-aos][data-aos="fade-up"],
-  [data-aos][data-aos="zoom-in"] {
+  [data-aos][data-aos='fade-up'],
+  [data-aos][data-aos='fade-down'],
+  [data-aos][data-aos='fade-left'],
+  [data-aos][data-aos='fade-right'],
+  [data-aos][data-aos='fade-up'],
+  [data-aos][data-aos='zoom-in'] {
     /* Reset opacity to ensure elements don't stay hidden */
     opacity: 1 !important;
   }
@@ -316,20 +329,20 @@
     opacity: 1 !important;
   }
 
-  [data-aos="fade-up"] {
+  [data-aos='fade-up'] {
     transition-duration: 0.4s;
   }
 
-  [data-aos="fade-right"] {
+  [data-aos='fade-right'] {
     transition-duration: 0.4s;
   }
 
-  [data-aos="fade-left"] {
+  [data-aos='fade-left'] {
     transition-duration: 0.4s;
   }
 
   /* Fix 8: Ensure dropdowns are not affected by overflow settings */
-  nav [data-aos="no-animation"] {
+  nav [data-aos='no-animation'] {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
@@ -344,19 +357,21 @@
   button,
   a,
   .pointer-events-auto,
-  [data-aos="no-animation"] {
+  [data-aos='no-animation'] {
     pointer-events: auto !important;
   }
 
   /* Fix 11: Ensure proper stacking context without breaking layout */
-  nav, footer {
+  nav,
+  footer {
     /* Allow these elements to participate in normal flow */
     position: relative;
     /* Do NOT set overflow to avoid conflicts with global settings */
   }
 
   /* Fix 11.1: Ensure main element uses proper overflow */
-  main, [role="main"] {
+  main,
+  [role='main'] {
     position: relative;
     /* Let global overflow rules handle this */
     /* Do NOT override overflow to prevent layout collapse */
@@ -377,7 +392,7 @@
   }
 
   /* Fix 14: Prevent modal/overlay scroll locking issues */
-  [aria-hidden="true"] {
+  [aria-hidden='true'] {
     /* Don't hide these from screen readers */
     visibility: hidden;
     opacity: 0;
@@ -389,7 +404,10 @@
     /* Ensure high z-index to escape stacking context */
     z-index: 50;
     /* Smooth slide-down animation */
-    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    transition:
+      opacity 0.2s ease-in-out,
+      transform 0.2s ease-in-out,
+      visibility 0.2s ease-in-out;
   }
 
   /* Ensure dropdown items have proper touch targets (44px+) */
@@ -417,7 +435,9 @@
   }
 
   nav .absolute .bg-white:hover {
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    box-shadow:
+      0 10px 25px -5px rgba(0, 0, 0, 0.1),
+      0 8px 10px -6px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -474,15 +494,17 @@
      ============================================ */
 
   .premium-card-hover {
-    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
-                box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
-                border-color 0.4s ease;
+    transition:
+      transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+      box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+      border-color 0.4s ease;
   }
 
   .premium-card-hover:hover {
     transform: translateY(-6px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    box-shadow:
+      0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
     border-color: rgba(156, 163, 175, 0.5);
     z-index: 10;
   }
@@ -566,5 +588,100 @@
 
   .stagger-200 {
     animation-delay: 200ms;
+  }
+}
+
+/* ============================================
+   ENHANCED ACCESSIBILITY IMPLEMENTATION
+   Semantic Landmarks & Assistive Tech Architecture
+   ============================================ */
+
+/* Enhanced 48px touch targets for all interactive elements - Accessibility Compliance */
+.nav-btn,
+button,
+a[class*='px'],
+input[type='submit'],
+input[type='button'],
+.tool-execute-btn,
+.router-link-exact-active,
+.router-link-active {
+  min-height: 48px;
+  min-width: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 18px;
+  position: relative;
+}
+
+/* Hide decorative icons from screen readers while keeping them visible */
+[aria-hidden='true'],
+.lucide:not([role='img']):not([aria-label]),
+svg:not([role='img']):not([aria-label]),
+.icon-container:not([role='img']):not([aria-label]) {
+  @apply sr-only;
+}
+
+/* Exception: Icons that convey meaning should have proper ARIA labels */
+svg[role='img'],
+svg[aria-label],
+.lucide[role='img'],
+.lucide[aria-label] {
+  @apply not-sr-only;
+}
+
+/* Enhanced skip link with high-contrast indigo background */
+.sr-only:focus:not(.sr-only) {
+  @apply outline-none;
+  position: absolute !important;
+  top: 16px !important;
+  left: 16px !important;
+  z-index: 9999 !important;
+  background: rgb(79 70 229) !important;
+  color: rgb(255 255 255) !important;
+  padding: 12px 24px !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  box-shadow:
+    0 0 0 2px rgb(255 255 255),
+    0 0 0 4px rgba(79, 70, 229, 0.5) !important;
+  transform: translateY(0) !important;
+  transition: all 0.1s ease-in-out !important;
+}
+
+/* Screen reader announcements for dropdown state changes */
+.sr-only-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Enhanced focus management for keyboard users */
+:focus-visible:not([disabled]) {
+  @apply outline-none;
+  box-shadow:
+    0 0 0 2px var(--background),
+    0 0 0 6px rgba(6, 182, 212, 0.8);
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+/* Ensure proper touch target spacing for mobile devices */
+@media (max-width: 768px) {
+  .nav-btn,
+  button,
+  a[class*='px'],
+  .router-link-exact-active,
+  .router-link-active {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 14px 18px;
+    margin: 2px 0;
   }
 }

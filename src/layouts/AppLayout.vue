@@ -23,17 +23,20 @@ const isToolPage = computed(() => route.path.startsWith('/tools/') && route.path
 const isBlogPage = computed(() => route.path.startsWith('/blogs'))
 
 // Watch route changes to show skeleton during lazy-loaded navigation
-watch(() => route.path, (to, from) => {
-  if (to !== from && !isFirstLoad.value) {
-    isLoading.value = true
-    if (loadingTimeout) clearTimeout(loadingTimeout)
-    // Safety: auto-hide after 800ms
-    loadingTimeout = setTimeout(() => {
-      isLoading.value = false
-    }, 800)
+watch(
+  () => route.path,
+  (to, from) => {
+    if (to !== from && !isFirstLoad.value) {
+      isLoading.value = true
+      if (loadingTimeout) clearTimeout(loadingTimeout)
+      // Safety: auto-hide after 800ms
+      loadingTimeout = setTimeout(() => {
+        isLoading.value = false
+      }, 800)
+    }
+    isFirstLoad.value = false
   }
-  isFirstLoad.value = false
-})
+)
 
 // Called when the new route component mounts
 function onComponentReady() {
@@ -102,17 +105,27 @@ onUnmounted(removeToolSchema)
 
 <template>
   <div class="min-h-screen flex flex-col bg-background">
-    <!-- Skip to Content Link - Accessibility -->
+    <!-- Skip to Content Link - Accessibility - Enhanced Indigo Background -->
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200"
+      class="sr-only absolute top-0 left-0 z-[9999] bg-indigo-600 text-white px-4 py-3 font-semibold focus:not-sr-only focus:top-4 focus:left-4 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition-all duration-100"
+      aria-label="Skip to main content"
     >
       Skip to main content
     </a>
-    
-    <Navbar />
+
+    <!-- Primary Header Landmark for Navigation Area -->
+    <header role="banner">
+      <Navbar />
+    </header>
     <Breadcrumb v-if="showBreadcrumb" />
-    <main id="main-content" class="flex-1 pt-16" :class="{ 'pt-[104px]': showBreadcrumb }">
+    <!-- Main Content Landmark -->
+    <main
+      id="main-content"
+      role="main"
+      class="flex-1 pt-16"
+      :class="{ 'pt-[104px]': showBreadcrumb }"
+    >
       <!-- Skeleton Loader: Tool Pages (2-col editor layout) -->
       <Transition
         enter-active-class="transition-opacity duration-150"
@@ -120,7 +133,11 @@ onUnmounted(removeToolSchema)
         enter-to-class="opacity-0"
         leave-active-class="hidden"
       >
-        <div v-if="isLoading && isToolPage" class="animate-pulse p-4 gap-4 flex flex-col bg-muted/30" style="min-height: calc(100vh - 8rem)">
+        <div
+          v-if="isLoading && isToolPage"
+          class="animate-pulse p-4 gap-4 flex flex-col bg-muted/30"
+          style="min-height: calc(100vh - 8rem)"
+        >
           <!-- Title bar -->
           <div class="flex items-center justify-between">
             <div class="h-8 bg-muted-foreground/15 rounded-md w-64"></div>
@@ -186,7 +203,10 @@ onUnmounted(removeToolSchema)
         enter-to-class="opacity-0"
         leave-active-class="hidden"
       >
-        <div v-if="isLoading && !isToolPage && !isBlogPage" class="animate-pulse max-w-5xl mx-auto p-6 space-y-6">
+        <div
+          v-if="isLoading && !isToolPage && !isBlogPage"
+          class="animate-pulse max-w-5xl mx-auto p-6 space-y-6"
+        >
           <div class="h-8 bg-muted rounded-md w-56"></div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="space-y-4">
