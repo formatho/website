@@ -616,3 +616,86 @@
     background-color: hsl(222 47% 11% / 0.95);
   }
 }
+
+/* ============================================
+   RESPONSIVE GRID & VIEWPORT LAYOUT ENGINE
+   Modern grid-based hero layout
+   ============================================ */
+
+/* Master wrapper: 1440px max, centered, responsive padding */
+.hero-grid-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .hero-grid-wrapper {
+    padding: 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-grid-wrapper {
+    padding: 96px;
+  }
+}
+
+/* Hero grid: background and content share same grid cell to overlap */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  position: relative;
+}
+
+.hero-bg-cell,
+.hero-content-cell {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+/* Text content: 3-column fractional grid, center max 1024px */
+.hero-content-cell {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 1024px) 1fr;
+  justify-items: center;
+}
+
+.hero-text-container {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* Hardware compositing layer promotion */
+  transform: translate3d(0, 0, 0);
+
+  /* Entrance animation: start 24px below, glide up over 800ms */
+  animation: hero-entrance 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes hero-entrance {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Vertical spacing: heading→paragraph 24px, paragraph→buttons 32px */
+.hero-heading-gap {
+  margin-top: 24px;
+}
+
+.hero-paragraph-gap {
+  margin-top: 24px;
+}
+
+.hero-cta-gap {
+  margin-top: 32px;
+}

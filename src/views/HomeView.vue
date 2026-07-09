@@ -128,169 +128,177 @@ const _popularTools = [
         data-v-8d4ed633=""
       ></div>
 
-      <div class="container mx-auto px-4 py-12 md:py-16 relative" data-v-8d4ed633="">
-        <div
-          class="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto"
-          data-v-8d4ed633=""
-        >
-          <div
-            class="flex items-center gap-4"
-            data-aos="fade-down"
-            data-aos-delay="0"
-            data-v-8d4ed633=""
-          >
-            <img
-              src="/logo.png"
-              alt="Formatho"
-              class="h-20 w-20 rounded-xl shadow-2xl ring-2 ring-enterprise-primary/30"
-              data-v-8d4ed633=""
-            />
-            <h1
-              class="text-5xl md:text-7xl font-bold tracking-tight gradient-text"
-              data-v-8d4ed633=""
-            >
-              Formatho
-            </h1>
+      <!-- Master Grid: 1440px max, centered. Padding: 24px mobile / 48px tablet / 96px desktop -->
+      <div class="hero-grid-wrapper relative" data-v-8d4ed633="">
+        <!-- Hero CSS Grid: background and content overlap in same row/column -->
+        <div class="hero-grid" data-v-8d4ed633="">
+          <!-- Background container occupies same grid cell as content -->
+          <div class="hero-bg-cell" data-v-8d4ed633="">
+            <!-- (HeroBackground component already rendered above outside grid) -->
           </div>
-          <p
-            class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight"
-            data-aos="fade-down"
-            data-aos-delay="100"
-            data-v-8d4ed633=""
-          >
-            100+ Free Developer Tools. Zero Tracking.
-          </p>
-          <p
-            class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed"
-            data-aos="fade-down"
-            data-aos-delay="200"
-            data-v-8d4ed633=""
-          >
-            JSON formatter, Base64 encoder, JWT debugger, hash generator, and more.
-            <strong class="text-foreground">Everything runs in your browser.</strong> No server
-            uploads. No sign-up. No data collection.
-          </p>
-          <div class="flex flex-wrap gap-4 justify-center items-center mt-6" data-v-8d4ed633="">
-            <div
-              class="flex items-center gap-2 px-4 py-2 bg-enterprise-card/80 border border-border/50 backdrop-blur-sm rounded-lg"
-              data-aos="fade-up"
-              data-aos-delay="0"
-              data-v-8d4ed633=""
-            >
-              <span class="text-enterprise-primary" data-v-8d4ed633="">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                  <path d="M9 12l2 2 4-4"></path>
-                </svg>
-              </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633="">
-                Your data never leaves your browser
-              </span>
-            </div>
-            <div
-              class="flex items-center gap-2 px-4 py-2 bg-enterprise-card/80 border border-border/50 backdrop-blur-sm rounded-lg"
-              data-aos="fade-up"
-              data-aos-delay="50"
-              data-v-8d4ed633=""
-            >
-              <span class="text-enterprise-primary" data-v-8d4ed633="">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <circle cx="12" cy="5" r="3"></circle>
-                  <line x1="12" y1="8" x2="12" y2="16"></line>
-                  <line x1="12" y1="8" x2="12" y2="12"></line>
-                </svg>
-              </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633="">
-                Zero tracking, zero storage
-              </span>
-            </div>
-            <div
-              class="flex items-center gap-2 px-4 py-2 bg-enterprise-card/80 border border-border/50 backdrop-blur-sm rounded-lg"
-              data-aos="fade-up"
-              data-aos-delay="100"
-              data-v-8d4ed633=""
-            >
-              <span class="text-enterprise-primary" data-v-8d4ed633="">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-                  <rect x="9" y="9" width="6" height="6"></rect>
-                  <line x1="9" y1="1" x2="9" y2="4"></line>
-                  <line x1="15" y1="1" x2="15" y2="4"></line>
-                  <line x1="9" y1="20" x2="9" y2="23"></line>
-                  <line x1="15" y1="20" x2="15" y2="23"></line>
-                  <line x1="20" y1="9" x2="23" y2="9"></line>
-                  <line x1="20" y1="14" x2="23" y2="14"></line>
-                  <line x1="1" y1="9" x2="4" y2="9"></line>
-                  <line x1="1" y1="14" x2="4" y2="14"></line>
-                </svg>
-              </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633="">
-                100% client-side processing
-              </span>
-            </div>
-          </div>
-          <!-- Conversion CTA -->
-          <div class="flex flex-col sm:flex-row gap-4 items-center mt-4" data-v-8d4ed633="">
-            <RouterLink to="/tools" data-v-8d4ed633="">
-              <button
-                class="px-8 py-3 bg-enterprise-primary text-enterprise-bg rounded-xl font-semibold text-lg hover:bg-enterprise-primary/90 transition-all shadow-lg hover:shadow-enterprise-primary/25 hover:scale-105"
+          <!-- Text content cell — fractional 3-col grid, center max 1024px -->
+          <div class="hero-content-cell" data-v-8d4ed633="">
+            <div class="hero-text-container" data-v-8d4ed633="">
+              <div class="flex items-center gap-4 justify-center" data-v-8d4ed633="">
+                <img
+                  src="/logo.png"
+                  alt="Formatho"
+                  class="h-20 w-20 rounded-xl shadow-2xl ring-2 ring-enterprise-primary/30"
+                  data-v-8d4ed633=""
+                />
+                <h1
+                  class="text-5xl md:text-7xl font-bold tracking-tight gradient-text"
+                  data-v-8d4ed633=""
+                >
+                  Formatho
+                </h1>
+              </div>
+              <!-- Heading to paragraph: 24px gap -->
+              <p
+                class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight text-center hero-heading-gap"
                 data-v-8d4ed633=""
               >
-                ⚡ Explore All Tools
-              </button>
-            </RouterLink>
-          </div>
-
-          <!-- Social Proof Stats -->
-          <div
-            class="flex flex-wrap gap-8 justify-center items-center mt-8 text-center"
-            data-aos="fade-up"
-            data-aos-delay="150"
-          >
-            <div>
-              <div class="text-3xl font-bold text-primary">100+</div>
-              <div class="text-xs text-muted-foreground">Free developer tools</div>
-            </div>
-            <div class="w-px h-10 bg-foreground"></div>
-            <div>
-              <div class="text-3xl font-bold text-primary">Zero</div>
-              <div class="text-xs text-muted-foreground">Data collected</div>
-            </div>
-            <div class="w-px h-10 bg-foreground"></div>
-            <div>
-              <div class="text-3xl font-bold text-primary">0</div>
-              <div class="text-xs text-muted-foreground">Sign-ups needed</div>
-            </div>
-            <div class="w-px h-10 bg-foreground"></div>
-            <div>
-              <div class="text-3xl font-bold text-primary">100%</div>
-              <div class="text-xs text-muted-foreground">Client-side</div>
-            </div>
-          </div>
-
-          <div class="w-full max-w-2xl mt-6" data-v-8d4ed633="">
-            <div class="relative" data-v-8d4ed633="">
-              <Input
-                class="w-full pl-12 pr-4 py-6 text-lg font-mono border-2 border-foreground bg-transparent focus:border-foreground focus:ring-0"
-                type="text"
-                aria-label="Search developer tools"
-                placeholder="> SEARCH_TOOLS [ e.g. json, base64 ] _"
-                v-model="searchQuery"
+                100+ Free Developer Tools. Zero Tracking.
+              </p>
+              <!-- Paragraph to buttons: 32px gap -->
+              <p
+                class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed text-center hero-paragraph-gap"
                 data-v-8d4ed633=""
-              />
-              <Search
-                class="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-muted-foreground"
+              >
+                JSON formatter, Base64 encoder, JWT debugger, hash generator, and more.
+                <strong class="text-foreground">Everything runs in your browser.</strong> No server
+                uploads. No sign-up. No data collection.
+              </p>
+              <div
+                class="flex flex-wrap gap-4 justify-center items-center hero-cta-gap"
                 data-v-8d4ed633=""
-              />
-            </div>
-          </div>
+              >
+                <div
+                  class="flex items-center gap-2 px-4 py-2 bg-enterprise-card/80 border border-border/50 backdrop-blur-sm rounded-lg"
+                  data-aos="fade-up"
+                  data-aos-delay="0"
+                  data-v-8d4ed633=""
+                >
+                  <span class="text-enterprise-primary" data-v-8d4ed633="">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      <path d="M9 12l2 2 4-4"></path>
+                    </svg>
+                  </span>
+                  <span class="text-sm font-medium text-foreground" data-v-8d4ed633="">
+                    Your data never leaves your browser
+                  </span>
+                </div>
+                <div
+                  class="flex items-center gap-2 px-4 py-2 bg-enterprise-card/80 border border-border/50 backdrop-blur-sm rounded-lg"
+                  data-aos="fade-up"
+                  data-aos-delay="50"
+                  data-v-8d4ed633=""
+                >
+                  <span class="text-enterprise-primary" data-v-8d4ed633="">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <circle cx="12" cy="5" r="3"></circle>
+                      <line x1="12" y1="8" x2="12" y2="16"></line>
+                      <line x1="12" y1="8" x2="12" y2="12"></line>
+                    </svg>
+                  </span>
+                  <span class="text-sm font-medium text-foreground" data-v-8d4ed633="">
+                    Zero tracking, zero storage
+                  </span>
+                </div>
+                <div
+                  class="flex items-center gap-2 px-4 py-2 bg-enterprise-card/80 border border-border/50 backdrop-blur-sm rounded-lg"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                  data-v-8d4ed633=""
+                >
+                  <span class="text-enterprise-primary" data-v-8d4ed633="">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                      <rect x="9" y="9" width="6" height="6"></rect>
+                      <line x1="9" y1="1" x2="9" y2="4"></line>
+                      <line x1="15" y1="1" x2="15" y2="4"></line>
+                      <line x1="9" y1="20" x2="9" y2="23"></line>
+                      <line x1="15" y1="20" x2="15" y2="23"></line>
+                      <line x1="20" y1="9" x2="23" y2="9"></line>
+                      <line x1="20" y1="14" x2="23" y2="14"></line>
+                      <line x1="1" y1="9" x2="4" y2="9"></line>
+                      <line x1="1" y1="14" x2="4" y2="14"></line>
+                    </svg>
+                  </span>
+                  <span class="text-sm font-medium text-foreground" data-v-8d4ed633="">
+                    100% client-side processing
+                  </span>
+                </div>
+              </div>
+              <!-- Conversion CTA -->
+              <div class="flex flex-col sm:flex-row gap-4 items-center mt-4" data-v-8d4ed633="">
+                <RouterLink to="/tools" data-v-8d4ed633="">
+                  <button
+                    class="px-8 py-3 bg-enterprise-primary text-enterprise-bg rounded-xl font-semibold text-lg hover:bg-enterprise-primary/90 transition-all shadow-lg hover:shadow-enterprise-primary/25 hover:scale-105"
+                    data-v-8d4ed633=""
+                  >
+                    ⚡ Explore All Tools
+                  </button>
+                </RouterLink>
+              </div>
 
-          <!-- Trust Badges -->
-          <div class="w-full mt-8">
-            <TrustBadges />
+              <!-- Social Proof Stats -->
+              <div
+                class="flex flex-wrap gap-8 justify-center items-center mt-8 text-center"
+                data-aos="fade-up"
+                data-aos-delay="150"
+              >
+                <div>
+                  <div class="text-3xl font-bold text-primary">100+</div>
+                  <div class="text-xs text-muted-foreground">Free developer tools</div>
+                </div>
+                <div class="w-px h-10 bg-foreground"></div>
+                <div>
+                  <div class="text-3xl font-bold text-primary">Zero</div>
+                  <div class="text-xs text-muted-foreground">Data collected</div>
+                </div>
+                <div class="w-px h-10 bg-foreground"></div>
+                <div>
+                  <div class="text-3xl font-bold text-primary">0</div>
+                  <div class="text-xs text-muted-foreground">Sign-ups needed</div>
+                </div>
+                <div class="w-px h-10 bg-foreground"></div>
+                <div>
+                  <div class="text-3xl font-bold text-primary">100%</div>
+                  <div class="text-xs text-muted-foreground">Client-side</div>
+                </div>
+              </div>
+
+              <div class="w-full max-w-2xl mt-6" data-v-8d4ed633="">
+                <div class="relative" data-v-8d4ed633="">
+                  <Input
+                    class="w-full pl-12 pr-4 py-6 text-lg font-mono border-2 border-foreground bg-transparent focus:border-foreground focus:ring-0"
+                    type="text"
+                    aria-label="Search developer tools"
+                    placeholder="> SEARCH_TOOLS [ e.g. json, base64 ] _"
+                    v-model="searchQuery"
+                    data-v-8d4ed633=""
+                  />
+                  <Search
+                    class="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-muted-foreground"
+                    data-v-8d4ed633=""
+                  />
+                </div>
+              </div>
+
+              <!-- Trust Badges -->
+              <div class="w-full mt-8">
+                <TrustBadges />
+              </div>
+            </div>
+            <!-- /hero-text-container -->
           </div>
+          <!-- /hero-content-cell -->
         </div>
+        <!-- /hero-grid -->
       </div>
+      <!-- /hero-grid-wrapper -->
     </section>
 
     <!-- Tools Grid -->

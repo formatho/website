@@ -27,15 +27,15 @@ module.exports = {
       colors: {
         'enterprise-bg': '#0B0E11',
         'enterprise-card': '#162024',
-        'enterprise-primary': '#3b82f6',
+        'enterprise-primary': '#C4F4FF',
         'enterprise-border': '#2d3748',
         'enterprise-muted': '#9ca3af'
       },
       backgroundImage: {
-        'mint-gradient': 'radial-gradient(circle at 50% 50%, rgba(209, 247, 255, 0.15) 0%, transparent 70%)',
-        'mint-spotlight': 'radial-gradient(circle at 30% 20%, rgba(209, 247, 255, 0.12) 0%, transparent 50%)',
-        'circuit-pattern': 'radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.04) 1px, transparent 0)',
-        'crosshair-grid': 'linear-gradient(to right, rgba(59, 130, 246, 0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(59, 130, 246, 0.025) 1px, transparent 1px)'
+        'mint-gradient': 'radial-gradient(circle at 50% 50%, rgba(196, 244, 255, 0.15) 0%, transparent 70%)',
+        'mint-spotlight': 'radial-gradient(circle at 30% 20%, rgba(196, 244, 255, 0.12) 0%, transparent 50%)',
+        'circuit-pattern': 'radial-gradient(circle at 1px 1px, rgba(196, 244, 255, 0.04) 1px, transparent 0)',
+        'crosshair-grid': 'linear-gradient(to right, rgba(196, 244, 255, 0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(196, 244, 255, 0.025) 1px, transparent 1px)'
       },
       colors: {
         border: 'hsl(var(--border))',

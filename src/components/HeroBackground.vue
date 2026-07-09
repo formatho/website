@@ -6,7 +6,7 @@
  * - Uses shallowRef for all DOM refs to bypass deep reactivity overhead
  * - SSG-safe: renders flat ultra-dark slate background during static build
  * - On client hydration: fades in opacity 0→100% over 1200ms linear
- * - Three #d1f7ff orbs drift slowly and disorderly (20s/25s/30s cycles)
+ * - Three #C4F4FF orbs drift slowly and disorderly (20s/25s/30s cycles)
  */
 import { shallowRef, onMounted, onBeforeUnmount } from 'vue'
 
@@ -78,7 +78,7 @@ onBeforeUnmount(() => {
       backgroundColor: '#0f172a'
     }"
   >
-    <!-- Ambient spotlight overlays (lightest blue #d1f7ff) -->
+    <!-- Ambient spotlight overlays (lightest blue #C4F4FF) -->
     <div
       class="absolute inset-0"
       style="
@@ -100,7 +100,7 @@ onBeforeUnmount(() => {
       "
     ></div>
 
-    <!-- Three drifting orbs — lightest blue #d1f7ff -->
+    <!-- Three drifting orbs — lightest blue #C4F4FF -->
     <div
       data-orb="0"
       class="absolute rounded-full blur-3xl"
@@ -109,7 +109,7 @@ onBeforeUnmount(() => {
         right: -5%;
         width: 500px;
         height: 500px;
-        background: radial-gradient(circle, #d1f7ff 0%, transparent 70%);
+        background: radial-gradient(circle, #c4f4ff 0%, transparent 70%);
       "
     ></div>
     <div
@@ -120,7 +120,7 @@ onBeforeUnmount(() => {
         left: -8%;
         width: 400px;
         height: 400px;
-        background: radial-gradient(circle, #d1f7ff 0%, transparent 70%);
+        background: radial-gradient(circle, #c4f4ff 0%, transparent 70%);
       "
     ></div>
     <div
@@ -131,7 +131,7 @@ onBeforeUnmount(() => {
         left: 40%;
         width: 350px;
         height: 350px;
-        background: radial-gradient(circle, #d1f7ff 0%, transparent 70%);
+        background: radial-gradient(circle, #c4f4ff 0%, transparent 70%);
       "
     ></div>
   </div>
