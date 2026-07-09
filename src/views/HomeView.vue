@@ -111,6 +111,9 @@ const _popularTools = [
       <!-- Isolated Procedural Background (SSG-safe, hydrates on client) -->
       <HeroBackground />
 
+      <!-- Contrast vignette: radial black 60% → 0% at 75% width -->
+      <div class="hero-vignette"></div>
+
       <!-- Master Grid: 1440px max, centered. Padding: 24px mobile / 48px tablet / 96px desktop -->
       <div class="hero-grid-wrapper relative" data-v-8d4ed633="">
         <!-- Hero CSS Grid: background and content overlap in same row/column -->

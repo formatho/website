@@ -779,3 +779,77 @@
     transform 150ms ease-out,
     box-shadow 150ms ease-out;
 }
+
+/* ============================================
+   PROCEDURAL SVG NOISE BACKGROUND
+   120s diagonal drift, scale to 150%
+   ============================================ */
+
+.hero-noise-layer {
+  animation: hero-noise-drift 120s linear infinite;
+  will-change: transform;
+}
+
+@keyframes hero-noise-drift {
+  0% {
+    transform: scale(100%) translate(0, 0);
+  }
+  25% {
+    transform: scale(120%) translate(-5%, 3%);
+  }
+  50% {
+    transform: scale(135%) translate(3%, -5%);
+  }
+  75% {
+    transform: scale(145%) translate(-3%, -3%);
+  }
+  100% {
+    transform: scale(150%) translate(0, 0);
+  }
+}
+
+/* ============================================
+   MATHEMATICAL TYPOGRAPHY & CONTRAST
+   Fluid scaling, optical adjustments, sub-pixel AA
+   ============================================ */
+
+/* Hero heading: fluid 36px → 72px, negative tracking -0.04em */
+.hero-text-container h1 {
+  font-size: clamp(36px, 8vw, 72px);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  color: hsl(0 0% 97%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hero paragraph: muted gray, looser tracking 0.01em */
+.hero-text-container p {
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Primary heading uses UI font; dev accent words use monospace */
+.hero-text-container h1 .mono-accent {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Sub-heading paragraph color: muted gray */
+.hero-paragraph-gap {
+  color: hsl(215 16% 47%);
+}
+
+/* ============================================
+   CONTRAST VIGNETTE
+   Radial gradient: black 60% at center → 0% at 75% width
+   ============================================ */
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 75%);
+  pointer-events: none;
+  z-index: 1;
+}
