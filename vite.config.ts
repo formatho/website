@@ -5,11 +5,12 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import { execSync } from 'node:child_process'
 
 // Get git commit SHA at build time
+// Priority: 1) CI_GIT_COMMIT env var (from GitHub Actions), 2) git rev-parse, 3) 'unknown'
 const gitCommitSha = (() => {
   try {
-    return execSync('git rev-parse --short HEAD').toString().trim()
+    return process.env.CI_GIT_COMMIT || execSync('git rev-parse --short HEAD').toString().trim()
   } catch {
-    return 'unknown'
+    return process.env.CI_GIT_COMMIT || 'unknown'
   }
 })()
 

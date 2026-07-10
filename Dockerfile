@@ -12,7 +12,9 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build the application
+# Build the application (CI_GIT_COMMIT passed from GitHub Actions)
+ARG CI_GIT_COMMIT=unknown
+ENV CI_GIT_COMMIT=$CI_GIT_COMMIT
 RUN npm run build
 
 # Production stage
