@@ -125,96 +125,94 @@ const _popularTools = [
           <!-- Text content cell — fractional 3-col grid, center max 1024px -->
           <div class="hero-content-cell" data-v-8d4ed633="">
             <div class="hero-text-container" data-v-8d4ed633="">
-              <div class="flex items-center gap-4 justify-center" data-v-8d4ed633="">
-                <img
-                  src="/logo.png"
-                  alt="Formatho"
-                  class="h-20 w-20 rounded-xl shadow-2xl ring-2 ring-enterprise-primary/30"
-                  data-v-8d4ed633=""
-                />
+              <!-- Clean, centered hero layout -->
+              <div class="flex flex-col items-center text-center" data-v-8d4ed633="">
                 <h1
-                  class="text-5xl md:text-7xl font-bold tracking-tight gradient-text"
+                  class="text-6xl md:text-8xl font-bold tracking-tight text-gray-900 mb-6"
                   data-v-8d4ed633=""
                 >
                   Formatho
                 </h1>
-              </div>
-              <!-- Heading to paragraph: 24px gap -->
-              <p
-                class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight text-center hero-heading-gap"
-                data-v-8d4ed633=""
-              >
-                100+ Free Developer Tools. Zero Tracking.
-              </p>
-              <!-- Paragraph to buttons: 32px gap -->
-              <p
-                class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed text-center hero-paragraph-gap"
-                data-v-8d4ed633=""
-              >
-                JSON formatter, Base64 encoder, JWT debugger, hash generator, and more.
-                <strong class="text-foreground">Everything runs in your browser.</strong> No server
-                uploads. No sign-up. No data collection.
-              </p>
-              <div
-                class="flex flex-wrap gap-4 justify-center items-center hero-cta-gap"
-                data-v-8d4ed633=""
-              >
-                <div
-                  class="flex items-center gap-2 px-4 py-2 bg-enterprise-card/80 border border-border/50 backdrop-blur-sm rounded-lg"
-                  data-aos="fade-up"
-                  data-aos-delay="0"
+                <!-- Subheading -->
+                <h2
+                  class="text-2xl md:text-4xl font-semibold text-gray-700 max-w-3xl leading-tight mb-6"
                   data-v-8d4ed633=""
                 >
-                  <span class="text-enterprise-primary" data-v-8d4ed633="">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  100+ Free Developer Tools. Zero Tracking.
+                </h2>
+                <!-- Description -->
+                <p
+                  class="text-base md:text-xl text-gray-600 max-w-2xl leading-relaxed mb-10"
+                  data-v-8d4ed633=""
+                >
+                  JSON formatter, Base64 encoder, JWT debugger, hash generator, and more.
+                  <strong class="text-gray-900">Everything runs in your browser.</strong> No server
+                  uploads. No sign-up. No data collection.
+                </p>
+                <!-- Trust Badges - cleaner horizontal layout -->
+                <div
+                  class="flex flex-wrap gap-4 justify-center items-center"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                >
+                  <div
+                    class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm"
+                    data-v-8d4ed633=""
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      class="w-5 h-5 text-blue-600"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                       <path d="M9 12l2 2 4-4"></path>
                     </svg>
-                  </span>
-                  <span class="text-sm font-medium text-foreground" data-v-8d4ed633="">
-                    Your data never leaves your browser
-                  </span>
-                </div>
-                <div
-                  class="flex items-center gap-2 px-4 py-2 bg-enterprise-card/80 border border-border/50 backdrop-blur-sm rounded-lg"
-                  data-aos="fade-up"
-                  data-aos-delay="50"
-                  data-v-8d4ed633=""
-                >
-                  <span class="text-enterprise-primary" data-v-8d4ed633="">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                      <circle cx="12" cy="5" r="3"></circle>
-                      <line x1="12" y1="8" x2="12" y2="16"></line>
-                      <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <span class="text-sm font-medium text-gray-700" data-v-8d4ed633="">
+                      Data never leaves browser
+                    </span>
+                  </div>
+                  <div
+                    class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm"
+                    data-aos="fade-up"
+                    data-aos-delay="150"
+                    data-v-8d4ed633=""
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      class="w-5 h-5 text-blue-600"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M12 6v6l4 2"></path>
                     </svg>
-                  </span>
-                  <span class="text-sm font-medium text-foreground" data-v-8d4ed633="">
-                    Zero tracking, zero storage
-                  </span>
-                </div>
-                <div
-                  class="flex items-center gap-2 px-4 py-2 bg-enterprise-card/80 border border-border/50 backdrop-blur-sm rounded-lg"
-                  data-aos="fade-up"
-                  data-aos-delay="100"
-                  data-v-8d4ed633=""
-                >
-                  <span class="text-enterprise-primary" data-v-8d4ed633="">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                      <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-                      <rect x="9" y="9" width="6" height="6"></rect>
-                      <line x1="9" y1="1" x2="9" y2="4"></line>
-                      <line x1="15" y1="1" x2="15" y2="4"></line>
-                      <line x1="9" y1="20" x2="9" y2="23"></line>
-                      <line x1="15" y1="20" x2="15" y2="23"></line>
-                      <line x1="20" y1="9" x2="23" y2="9"></line>
-                      <line x1="20" y1="14" x2="23" y2="14"></line>
-                      <line x1="1" y1="9" x2="4" y2="9"></line>
-                      <line x1="1" y1="14" x2="4" y2="14"></line>
+                    <span class="text-sm font-medium text-gray-700" data-v-8d4ed633="">
+                      Zero tracking, zero storage
+                    </span>
+                  </div>
+                  <div
+                    class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                    data-v-8d4ed633=""
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      class="w-5 h-5 text-blue-600"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                      <path d="M3 9h18M9 21V9"></path>
                     </svg>
-                  </span>
-                  <span class="text-sm font-medium text-foreground" data-v-8d4ed633="">
-                    100% client-side processing
-                  </span>
+                    <span class="text-sm font-medium text-gray-700" data-v-8d4ed633="">
+                      100% client-side processing
+                    </span>
+                  </div>
                 </div>
               </div>
               <!-- Conversion CTA -->

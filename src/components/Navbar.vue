@@ -13,6 +13,7 @@ const toolsDropdownRef = ref<HTMLElement | null>(null)
 const isScrolled = shallowRef(false) // true after 64px scroll
 const isHidden = shallowRef(false) // true when scrolling down past 300px
 const navTranslate = shallowRef('translateY(0)')
+const isAtTop = shallowRef(true) // true when at absolute top of page
 
 // Throttled scroll handler using rAF
 let ticking = false
@@ -25,6 +26,9 @@ const handleScroll = () => {
 
   requestAnimationFrame(() => {
     const currentY = window.scrollY
+
+    // Track if at absolute top
+    isAtTop.value = currentY === 0
 
     // Morphing: condense nav after 64px scroll
     isScrolled.value = currentY > 64
@@ -176,7 +180,8 @@ const navLinkClass =
     class="fixed top-0 left-0 right-0 z-[100] scroll-nav"
     :class="{
       'scroll-nav--top': !isScrolled,
-      'scroll-nav--scrolled': isScrolled
+      'scroll-nav--scrolled': isScrolled,
+      'scroll-nav--at-top': isAtTop
     }"
     :style="{ transform: navTranslate }"
     role="navigation"
@@ -186,19 +191,18 @@ const navLinkClass =
       <div class="flex items-center justify-between h-full">
         <!-- Logo -->
         <RouterLink to="/" class="flex items-center gap-3 group nav-btn" aria-label="Formatho Home">
-          <img
-            src="/logo.png"
-            alt=""
-            class="h-8 w-8 transition-transform group-hover:scale-110"
-            aria-hidden="true"
-          />
-          <span class="text-lg font-black tracking-tight gradient-text">FORMATHO</span>
+          <div
+            class="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow"
+          >
+            <span class="text-white font-bold text-lg">F</span>
+          </div>
+          <span class="text-xl font-bold tracking-tight text-foreground">Formatho</span>
         </RouterLink>
 
         <!-- Desktop Navigation -->
-        <div class="hidden md:flex items-center gap-6">
-          <RouterLink to="/" :class="navLinkClass">Home</RouterLink>
-          <RouterLink to="/about" :class="navLinkClass">About</RouterLink>
+        <div class="hidden md:flex items-center gap-1">
+          <RouterLink to="/" class="nav-link">Home</RouterLink>
+          <RouterLink to="/about" class="nav-link">About</RouterLink>
 
           <!-- Tools Dropdown -->
           <div class="relative pointer-events-auto" ref="toolsDropdownRef">
@@ -259,21 +263,21 @@ const navLinkClass =
             href="https://github.com/formatho"
             target="_blank"
             rel="noopener noreferrer"
-            :class="[navLinkClass, 'flex items-center gap-1']"
+            class="nav-link flex items-center gap-1.5"
           >
-            <Github class="w-3.5 h-3.5" />
+            <Github class="w-4 h-4" />
             GitHub
           </a>
+          <RouterLink to="/blogs" class="nav-link">Blog</RouterLink>
+          <RouterLink to="/pricing" class="nav-link">Pricing</RouterLink>
 
-          <RouterLink to="/blogs" :class="navLinkClass">Blog</RouterLink>
-          <RouterLink to="/pricing" :class="navLinkClass">Pricing</RouterLink>
-
-          <RouterLink to="/get-verified" :class="[navLinkClass, 'flex items-center gap-1.5']">
+          <RouterLink to="/get-verified" class="nav-link flex items-center gap-1.5">
             Get Verified
             <span
-              class="coming-soon-badge text-[9px] font-mono font-bold tracking-wider uppercase px-1.5 py-0.5 rounded bg-foreground text-background"
-              >coming soon</span
+              class="text-[9px] font-mono font-bold tracking-wider uppercase px-1.5 py-0.5 rounded bg-blue-100 text-blue-700"
             >
+              coming soon
+            </span>
           </RouterLink>
         </div>
 
@@ -282,13 +286,13 @@ const navLinkClass =
           <!-- Command Line Search -->
           <button
             @click="openSearchModal"
-            class="nav-btn hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground border border-border/50 rounded-xl bg-transparent hover:bg-enterprise-card/50 hover:border-enterprise-primary/30 transition-colors"
+            class="nav-btn hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg transition-all"
             aria-label="Open search modal"
           >
-            <Search class="w-3.5 h-3.5" aria-hidden="true" />
-            <span class="font-mono text-xs">Search...</span>
+            <Search class="w-4 h-4" aria-hidden="true" />
+            <span class="text-sm">Search...</span>
             <kbd
-              class="hidden lg:inline-block ml-4 px-1.5 py-0.5 text-[10px] bg-foreground text-background font-mono font-bold rounded-xl"
+              class="hidden lg:inline-block ml-2 px-1.5 py-0.5 text-[10px] bg-gray-200 text-gray-600 font-mono font-medium rounded"
               aria-hidden="true"
             >
               ⌘K
@@ -298,7 +302,7 @@ const navLinkClass =
           <!-- Mobile Menu Button -->
           <button
             @click="isMobileMenuOpen = !isMobileMenuOpen"
-            class="nav-btn md:hidden p-2 text-foreground min-w-[48px] min-h-[48px] flex items-center justify-center"
+            class="nav-btn md:hidden p-2 text-foreground min-w-[44px] min-h-[44px] flex items-center justify-center bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg transition-all"
             :aria-expanded="isMobileMenuOpen"
             :aria-label="isMobileMenuOpen ? 'Close mobile menu' : 'Open mobile menu'"
           >
@@ -309,15 +313,12 @@ const navLinkClass =
       </div>
 
       <!-- Mobile Menu -->
-      <div
-        v-if="isMobileMenuOpen"
-        class="md:hidden py-4 border-t border-border/50 bg-enterprise-card/50 backdrop-blur-sm"
-      >
+      <div v-if="isMobileMenuOpen" class="md:hidden py-4 border-t border-gray-200 bg-white">
         <div class="space-y-1">
-          <RouterLink to="/" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'block']"
+          <RouterLink to="/" @click="isMobileMenuOpen = false" class="nav-link-mobile"
             >Home</RouterLink
           >
-          <RouterLink to="/about" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'block']"
+          <RouterLink to="/about" @click="isMobileMenuOpen = false" class="nav-link-mobile"
             >About</RouterLink
           >
 
@@ -353,38 +354,33 @@ const navLinkClass =
             </div>
           </div>
 
-          <div class="pt-2 border-t border-border/50 mt-2">
+          <div class="pt-2 border-t border-gray-200 mt-2">
             <a
               href="https://github.com/formatho"
               target="_blank"
               rel="noopener noreferrer"
-              :class="[navLinkClass, 'flex items-center gap-2']"
+              class="nav-link-mobile flex items-center gap-2"
             >
-              <Github class="w-3.5 h-3.5" />
+              <Github class="w-4 h-4" />
               GitHub
             </a>
-            <RouterLink
-              to="/blogs"
-              @click="isMobileMenuOpen = false"
-              :class="[navLinkClass, 'block']"
+            <RouterLink to="/blogs" @click="isMobileMenuOpen = false" class="nav-link-mobile"
               >Blog</RouterLink
             >
-            <RouterLink
-              to="/pricing"
-              @click="isMobileMenuOpen = false"
-              :class="[navLinkClass, 'block']"
+            <RouterLink to="/pricing" @click="isMobileMenuOpen = false" class="nav-link-mobile"
               >Pricing</RouterLink
             >
             <RouterLink
               to="/get-verified"
               @click="isMobileMenuOpen = false"
-              :class="[navLinkClass, 'flex items-center gap-1.5']"
+              class="nav-link-mobile flex items-center gap-1.5"
             >
               Get Verified
               <span
-                class="coming-soon-badge text-[9px] font-mono font-bold tracking-wider uppercase px-1.5 py-0.5 rounded bg-foreground text-background"
-                >coming soon</span
+                class="text-[9px] font-mono font-bold tracking-wider uppercase px-1.5 py-0.5 rounded bg-blue-100 text-blue-700"
               >
+                coming soon
+              </span>
             </RouterLink>
           </div>
         </div>

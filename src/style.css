@@ -871,3 +871,59 @@
 .hero-fallback-image {
   will-change: opacity;
 }
+
+/* ============================================
+   REDESIGNED NAVBAR & HERO (Reference Image)
+   Cleaner, more structured design
+   ============================================ */
+
+/* Nav link base style */
+.nav-link {
+  @apply px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all duration-200;
+}
+
+/* Mobile nav link */
+.nav-link-mobile {
+  @apply block px-4 py-3 text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all duration-200;
+}
+
+/* Scroll-reactive navigation */
+.scroll-nav {
+  height: 80px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.scroll-nav--top {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: none;
+}
+
+.scroll-nav--scrolled {
+  height: 60px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Hero text override for cleaner design */
+.hero-text-container h1 {
+  font-size: clamp(42px, 10vw, 96px);
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+  color: rgb(17, 24, 39);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hero-text-container h2 {
+  color: rgb(75, 85, 99);
+}
+
+.hero-text-container p {
+  color: rgb(107, 114, 128);
+}
