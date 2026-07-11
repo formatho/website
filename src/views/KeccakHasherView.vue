@@ -223,6 +223,9 @@ onMounted(() => {
             <a href="/tools/keccak224" class="text-primary hover:underline">Keccak-224 Hash</a>
             <a href="/tools/keccak384" class="text-primary hover:underline">Keccak-384 Hash</a>
             <a href="/tools/keccak512" class="text-primary hover:underline">Keccak-512 Hash</a>
+            <a href="/tools/address-checksum" class="text-primary hover:underline">Address Checksum (EIP-55)</a>
+            <a href="/tools/multi-chain-keys" class="text-primary hover:underline">Multi-Chain Wallet</a>
+            <a href="/tools/abi-encoder" class="text-primary hover:underline">ABI Encoder &amp; Decoder</a>
           </div>
         </CardContent>
       </Card>

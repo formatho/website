@@ -435,6 +435,77 @@ const exampleAddress = '0xa1b2c3d4e5f67890abcdef1234567890abcdef12'
           </ul>
         </CardContent>
       </Card>
+
+      <!-- FAQ Section -->
+      <Card>
+        <CardHeader>
+          <CardTitle class="text-xl">Frequently Asked Questions</CardTitle>
+        </CardHeader>
+        <CardContent class="prose prose-sm dark:prose-invert max-w-none space-y-4">
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              What is an EIP-55 checksummed address?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              An EIP-55 checksummed Ethereum address uses mixed-case letters as a checksum. The capitalization
+              pattern is derived from the Keccak-256 hash of the lowercase address, creating a cryptographic
+              fingerprint that catches typos and spoofing attempts with 99.998% accuracy.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              Can I use lowercase Ethereum addresses?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              Yes, lowercase addresses are valid and will work. But using the checksummed version adds a layer
+              of safety — wallets and exchanges can detect if the address was altered or mistyped. Always
+              prefer the checksummed format for copying and sharing addresses.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              Does EIP-55 work on L2 networks?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              Yes. All EVM-compatible networks (Polygon, Arbitrum, Optimism, Base, Avalanche, etc.) use the
+              same address format and support EIP-55 checksums. The checksum algorithm is identical across
+              all EVM chains.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              What should I do if the checksum fails?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              Stop immediately. Do not send funds to the address. A failed checksum means either there's a
+              typo in the address or it has been deliberately modified (spoofed). Re-copy the address from
+              the original source and verify again. If it still fails, contact the recipient through a
+              different channel to confirm.
+            </p>
+          </details>
+        </CardContent>
+      </Card>
+
+      <!-- Related Tools -->
+      <Card>
+        <CardHeader>
+          <CardTitle class="text-xl">Related Blockchain Tools</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <a href="/tools/keccak256" class="text-primary hover:underline">Keccak-256 Hasher</a>
+            <a href="/tools/multi-chain-keys" class="text-primary hover:underline">Multi-Chain Wallet</a>
+            <a href="/tools/evm-converter" class="text-primary hover:underline">EVM Unit Converter</a>
+            <a href="/tools/abi-encoder" class="text-primary hover:underline">ABI Encoder &amp; Decoder</a>
+            <a href="/tools/solidity-to-opcodes" class="text-primary hover:underline">Solidity to Opcodes</a>
+            <a href="/tools/bip39" class="text-primary hover:underline">BIP39 Mnemonic Generator</a>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   </div>
 </template>

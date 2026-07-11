@@ -556,5 +556,106 @@ onUnmounted(() => {
         </div>
       </div>
     </div>
+
+    <!-- Educational Content -->
+    <div class="max-w-4xl mx-auto w-full space-y-6">
+      <div class="bg-white dark:bg-slate-800 rounded-lg shadow border border-slate-200 dark:border-slate-700 p-6">
+        <h2 class="text-xl font-bold mb-4">Understanding EVM Opcodes</h2>
+        <div class="prose prose-sm dark:prose-invert max-w-none space-y-4">
+          <p>
+            Every Solidity smart contract compiles down to EVM bytecode — a sequence of low-level
+            instructions called opcodes. Understanding opcodes is essential for gas optimization,
+            security auditing, and debugging smart contracts.
+          </p>
+
+          <h3 class="text-lg font-bold mt-4">What Are Opcodes?</h3>
+          <p>
+            Opcodes (operation codes) are the EVM's instruction set. Each opcode is one byte (0x00-0xFF)
+            representing a specific operation. The EVM processes them sequentially, manipulating a stack,
+            memory, and storage. Common categories include:
+          </p>
+          <ul class="space-y-1">
+            <li><strong>Arithmetic:</strong> ADD, SUB, MUL, DIV, MOD</li>
+            <li><strong>Stack:</strong> POP, PUSH, DUP, SWAP</li>
+            <li><strong>Memory:</strong> MLOAD, MSTORE, MSTORE8</li>
+            <li><strong>Storage:</strong> SLOAD, SSTORE (expensive — 2100/20000 gas)</li>
+            <li><strong>Flow:</strong> JUMP, JUMPI, JUMPDEST, PC</li>
+            <li><strong>Environment:</strong> CALLER, CALLVALUE, CALLDATALOAD</li>
+          </ul>
+
+          <h3 class="text-lg font-bold mt-4">Why Read Opcodes?</h3>
+          <ul class="space-y-1">
+            <li><strong>Gas optimization:</strong> Identify expensive SLOAD/SSTORE operations</li>
+            <li><strong>Security audits:</strong> Detect malicious code hidden in verified contracts</li>
+            <li><strong>Debugging:</strong> Understand exactly what your Solidity compiles to</li>
+            <li><strong>Reverse engineering:</strong> Analyze contracts without source code</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="bg-white dark:bg-slate-800 rounded-lg shadow border border-slate-200 dark:border-slate-700 p-6">
+        <h2 class="text-xl font-bold mb-4">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              What is the difference between bytecode and opcodes?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              Bytecode is the raw hexadecimal representation that the EVM executes. Opcodes are the
+              human-readable mnemonics for each instruction. For example, the bytecode <code>0x01</code>
+              corresponds to the <code>ADD</code> opcode. This tool shows both views side by side.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              Which Solidity compiler versions are supported?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              This tool supports Solidity compiler versions from 0.5.x through 0.8.26. The compiler runs
+              entirely in your browser via a Web Worker — no code is sent to any server. Select your
+              desired version from the dropdown.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              Can I use this tool for production smart contract auditing?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              This tool is great for learning, development, and initial analysis. For production audits,
+              use dedicated tools like Echidna, Mythril, Slither, or Halmos in combination with opcode
+              review. Always rely on multiple tools for security-critical work.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              Why does hovering over opcodes show stack and memory?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              This tool generates an execution trace showing the EVM stack and memory state at each
+              opcode during deployment. This helps you understand how the EVM processes your contract
+              and where gas is being consumed.
+            </p>
+          </details>
+        </div>
+      </div>
+
+      <!-- Related Tools -->
+      <div class="bg-white dark:bg-slate-800 rounded-lg shadow border border-slate-200 dark:border-slate-700 p-6">
+        <h2 class="text-xl font-bold mb-4">Related Blockchain Tools</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <a href="/tools/abi-encoder" class="text-primary hover:underline">ABI Encoder &amp; Decoder</a>
+          <a href="/tools/keccak256" class="text-primary hover:underline">Keccak-256 Hasher</a>
+          <a href="/tools/address-checksum" class="text-primary hover:underline">Address Checksum (EIP-55)</a>
+          <a href="/tools/multi-chain-keys" class="text-primary hover:underline">Multi-Chain Wallet</a>
+          <a href="/tools/evm-converter" class="text-primary hover:underline">EVM Unit Converter</a>
+          <a href="/tools/hash-text" class="text-primary hover:underline">Hash Text Generator</a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

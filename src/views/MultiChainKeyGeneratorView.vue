@@ -270,5 +270,110 @@ const reset = () => {
     <div v-if="!generated && !error" class="text-center text-muted-foreground py-8">
       Click <strong>Generate Random</strong> to create a new mnemonic, or paste an existing one and click <strong>Calculate Keys</strong>.
     </div>
+
+    <!-- Educational Content -->
+    <div class="max-w-4xl mx-auto w-full space-y-6">
+      <div class="bg-white dark:bg-slate-800 rounded-lg shadow border border-slate-200 dark:border-slate-700 p-6">
+        <h2 class="text-xl font-bold mb-4">How Multi-Chain Wallets Work</h2>
+        <div class="prose prose-sm dark:prose-invert max-w-none space-y-4">
+          <p>
+            A multi-chain wallet generates keys and addresses for different blockchains from a single
+            recovery phrase (mnemonic). This is possible because of BIP-39, BIP-32, and BIP-44 standards
+            that define hierarchical deterministic (HD) key derivation.
+          </p>
+
+          <h3 class="text-lg font-bold mt-4">The BIP-39 Mnemonic Standard</h3>
+          <p>
+            BIP-39 generates a human-readable 12 or 24-word phrase from entropy. This phrase is the root
+            of all keys — every blockchain address is deterministically derived from it. Lose this phrase
+            and you lose access to all your wallets across every chain.
+          </p>
+
+          <h3 class="text-lg font-bold mt-4">Derivation Paths (BIP-44)</h3>
+          <p>
+            Each blockchain uses a specific derivation path to generate keys from the master seed.
+            The path format is <code>m/purpose'/coin_type'/account'/change/address_index</code>:
+          </p>
+          <ul class="space-y-1">
+            <li><strong>Ethereum:</strong> m/44'/60'/0'/0/0</li>
+            <li><strong>Bitcoin:</strong> m/84'/0'/0'/0/0 (Native SegWit)</li>
+            <li><strong>Solana:</strong> m/44'/501'/0'/0'</li>
+            <li><strong>Cosmos:</strong> m/44'/118'/0'/0/0</li>
+          </ul>
+
+          <h3 class="text-lg font-bold mt-4">Different Curves for Different Chains</h3>
+          <p>
+            Not all blockchains use the same cryptography. Ethereum, Bitcoin, and Cosmos use
+            <strong>secp256k1</strong> (ECDSA). Solana uses <strong>Ed25519</strong> (EdDSA).
+            Polkadot uses <strong>Sr25519</strong> (Schnorr signatures). This is why some chains
+            can share the same private key but others require different derivation methods.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="bg-white dark:bg-slate-800 rounded-lg shadow border border-slate-200 dark:border-slate-700 p-6">
+        <h2 class="text-xl font-bold mb-4">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              Is it safe to use this tool?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              Yes — all key generation happens 100% in your browser using the Web Crypto API. Your mnemonic
+              and private keys never leave your device. However, never paste a mnemonic from a wallet that
+              holds real funds into any online tool.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              Can I use one mnemonic for all blockchains?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              Yes. BIP-44 defines standard derivation paths for each blockchain. A single mnemonic can
+              generate keys for Ethereum, Bitcoin, Solana, Cosmos, and 100+ other chains. Each chain uses
+              its own derivation path, so the addresses are different but all recoverable from the same phrase.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              What is a derivation path?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              A derivation path (e.g., m/44'/60'/0'/0/0) tells the HD wallet algorithm which branch of the
+              key tree to use. Think of it like a file path — different paths lead to different keys, but
+              all originate from the same root (your mnemonic seed).
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              Why does Solana show "Requires SLIP-0010"?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              Solana uses Ed25519 signatures, which require SLIP-0010 derivation instead of BIP-32.
+              The address generation needs a different cryptographic library. The private key shown here
+              is derived via BIP-44 secp256k1 as a reference, but a real Solana wallet uses SLIP-0010.
+            </p>
+          </details>
+        </div>
+      </div>
+
+      <!-- Related Tools -->
+      <div class="bg-white dark:bg-slate-800 rounded-lg shadow border border-slate-200 dark:border-slate-700 p-6">
+        <h2 class="text-xl font-bold mb-4">Related Blockchain Tools</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <a href="/tools/address-checksum" class="text-primary hover:underline">Address Checksum (EIP-55)</a>
+          <a href="/tools/keccak256" class="text-primary hover:underline">Keccak-256 Hasher</a>
+          <a href="/tools/bip39" class="text-primary hover:underline">BIP39 Mnemonic Generator</a>
+          <a href="/tools/evm-converter" class="text-primary hover:underline">EVM Unit Converter</a>
+          <a href="/tools/abi-encoder" class="text-primary hover:underline">ABI Encoder &amp; Decoder</a>
+          <a href="/tools/solidity-to-opcodes" class="text-primary hover:underline">Solidity to Opcodes</a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

@@ -378,9 +378,9 @@ export const routes = [
         meta: {
           title: 'Ethereum Unit Converter Online - Wei, Gwei, Ether | Formatho',
           description:
-            'Convert between Wei, Gwei, and Ether instantly. Essential tool for Ethereum developers.',
+            'Convert between Wei, Gwei, and Ether instantly. Essential tool for Ethereum developers. 100% client-side, privacy-first. Supports all EVM chains including L2s.',
           keywords:
-            'ethereum unit converter, wei converter, gwei converter, ether converter, evm tools'
+            'ethereum unit converter, wei converter, gwei converter, ether converter, evm tools, wei to ether, gwei to wei, blockchain unit converter'
         }
       },
       {
@@ -410,10 +410,10 @@ export const routes = [
         name: 'address-checksum',
         component: () => import(/* webpackPrefetch: true */ '../views/AddressChecksumView.vue'),
         meta: {
-          title: 'Address Checksum (EIP-55)',
+          title: 'Ethereum Address Checksum (EIP-55) - Verify & Encode Online | Formatho',
           description:
-            'Validate and checksum Ethereum addresses (EIP-55). Ensure correct address formatting.',
-          keywords: 'ethereum address checksum, eip-55 checksum, address validator, connect wallet'
+            'Validate and checksum Ethereum addresses using EIP-55. Detect spoofed addresses and prevent loss from typos. 100% client-side, privacy-first.',
+          keywords: 'ethereum address checksum, eip-55 checksum, address validator, spoofed address, ethereum address verify, checksum address, web3 security'
         }
       },
       {
@@ -422,11 +422,11 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/MultiChainKeyGeneratorView.vue'),
         meta: {
-          title: 'Multi-Chain Key Generator',
+          title: 'Multi-Chain Wallet Generator - Ethereum, Bitcoin, Solana | Formatho',
           description:
-            'Generate keys for Ethereum, Solana, Polkadot, and Cosmos from one mnemonic. Understand the algorithms.',
+            'Generate keys and addresses for Ethereum, Bitcoin, Solana, Cosmos, and Polkadot from one mnemonic. BIP-39, BIP-44, secp256k1, Ed25519. 100% client-side.',
           keywords:
-            'multi chain wallet, key generator, ethereum, solana, polkadot, cosmos, bip39, ed25519, secp256k1'
+            'multi chain wallet, key generator, ethereum, solana, polkadot, cosmos, bip39, ed25519, secp256k1, hd wallet, derivation path, blockchain keys'
         }
       },
       {
@@ -486,11 +486,11 @@ export const routes = [
         name: 'solidity-to-opcodes',
         component: () => import(/* webpackPrefetch: true */ '../views/SolidityToOpcodesView.vue'),
         meta: {
-          title: 'Solidity to EVM Opcodes',
+          title: 'Solidity to EVM Opcodes Compiler - View Smart Contract Assembly | Formatho',
           description:
-            'Compile Solidity to EVM Opcodes and Bytecode in your browser. View the assembly of your smart contracts.',
+            'Compile Solidity to EVM Opcodes and Bytecode in your browser. View the assembly of your smart contracts. Multiple compiler versions. 100% client-side.',
           keywords:
-            'solidity compile, evm opcodes, smart contract assembly, solidity bytecode, compiler'
+            'solidity compile, evm opcodes, smart contract assembly, solidity bytecode, compiler, solidity to opcode, evm disassembler, blockchain development'
         }
       },
       {
