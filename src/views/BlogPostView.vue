@@ -4,6 +4,7 @@ import { useRoute, RouterLink } from 'vue-router'
 import { useHead } from '@vueuse/head'
 import { ArrowLeft } from 'lucide-vue-next'
 import { fetchBlogPost, type BlogPost } from '../data/strapi'
+import { getBlogSEO } from '../data/blog-seo-overrides'
 import EmailCapture from '@/components/EmailCapture.vue'
 
 const props = defineProps<{
@@ -64,8 +65,15 @@ useHead(computed(() => {
     }
   }
 
-  const fullTitle = `${post.value.title} - ${siteName}`
+  // Use SEO override if available, otherwise fall back to Strapi data
+  const seoOverride = getBlogSEO(slug.value)
+  const seoTitle = seoOverride?.seoTitle || post.value.title
+  const seoDescription = seoOverride?.seoDescription || post.value.metaDescription || post.value.excerpt
+
+  // Single, canonical title and description (no duplicates)
+  const fullTitle = `${seoTitle} - ${siteName}`
   const url = `${baseUrl}/blogs/${post.value.slug}`
+  const canonicalUrl = seoOverride?.canonical || url
   const image = post.value.image
     ? (post.value.image.startsWith('http') ? post.value.image : `${baseUrl}${post.value.image}`)
     : `${baseUrl}/logo.png`
@@ -73,7 +81,7 @@ useHead(computed(() => {
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: post.value.title,
+    headline: seoTitle,
     image: image,
     datePublished: post.value.date,
     dateModified: post.value.date,
@@ -81,34 +89,33 @@ useHead(computed(() => {
       '@type': 'Organization',
       name: siteName
     },
-    description: post.value.excerpt,
+    description: seoDescription,
     articleSection: post.value.tags[0] || 'Technology',
-    url: url
+    url: canonicalUrl
   }
 
   return {
     title: fullTitle,
     meta: [
-      { name: 'title', content: fullTitle },
-      { name: 'description', content: post.value.excerpt },
+      { name: 'description', content: seoDescription },
       { name: 'keywords', content: post.value.tags.join(', ') },
       { property: 'og:type', content: 'article' },
-      { property: 'og:url', content: url },
+      { property: 'og:url', content: canonicalUrl },
       { property: 'og:title', content: fullTitle },
-      { property: 'og:description', content: post.value.excerpt },
+      { property: 'og:description', content: seoDescription },
       { property: 'og:image', content: image },
       { property: 'og:site_name', content: siteName },
       { property: 'article:published_time', content: post.value.date },
       { property: 'article:tag', content: post.value.tags.join(', ') },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:site', content: '@heyformatho' },
-      { name: 'twitter:url', content: url },
+      { name: 'twitter:url', content: canonicalUrl },
       { name: 'twitter:title', content: fullTitle },
-      { name: 'twitter:description', content: post.value.excerpt },
+      { name: 'twitter:description', content: seoDescription },
       { name: 'twitter:image', content: image }
     ],
     link: [
-      { rel: 'canonical', href: url }
+      { rel: 'canonical', href: canonicalUrl }
     ],
     script: [
       {

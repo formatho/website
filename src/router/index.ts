@@ -76,10 +76,10 @@ export const routes = [
         name: 'blogs',
         component: () => import(/* webpackPrefetch: true */ '../views/BlogsView.vue'),
         meta: {
-          title: 'Blog - Formatho',
+          title: 'Developer Guides, Tutorials, and AI Insights | Formatho Blog',
           description:
-            'Insights, updates, and stories from the Formatho team. Read about privacy-first development, AI agents, and more.',
-          keywords: 'formatho blog, developer tools blog, privacy-first, ai agents, web development'
+            'Explore expert developer guides, tutorials, and technical insights from the Formatho team. Deep dives into AI agent orchestration, blockchain, RWA tokenization, and privacy-first tools with zero fluff.',
+          keywords: 'formatho blog, developer guides, developer tutorials, ai agents, blockchain, rwa tokenization, privacy-first tools, web development'
         }
       },
       // Dynamic blog post route (slug from Strapi)
@@ -88,10 +88,10 @@ export const routes = [
         name: 'blog-post-dynamic',
         component: () => import(/* webpackPrefetch: true */ '../views/BlogPostView.vue'),
         meta: {
-          title: 'Blog Post - Formatho',
+          title: 'Article - Formatho Blog',
           description:
-            'Read technical articles about developer tools, privacy-first development, and AI agents.',
-          keywords: 'formatho blog, developer tools, privacy, ai agents'
+            'Expert developer guides, tutorials, and technical insights on privacy-first development, AI agents, and blockchain from the Formatho team.',
+          keywords: 'formatho blog, developer guides, tutorials, ai agents, blockchain, privacy-first'
         }
       },
       {

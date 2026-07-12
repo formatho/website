@@ -44,6 +44,21 @@ const formatReadTime = (readTime: string) => {
 }
 
 useHead({
+  title: 'Developer Guides, Tutorials, and AI Insights | Formatho Blog',
+  meta: [
+    { name: 'description', content: 'Explore expert developer guides, tutorials, and technical insights from the Formatho team. Deep dives into AI agent orchestration, blockchain, RWA tokenization, and privacy-first tools with zero fluff.' },
+    { name: 'keywords', content: 'formatho blog, developer guides, tutorials, ai agents, blockchain, rwa tokenization, privacy-first tools' },
+    { property: 'og:title', content: 'Developer Guides, Tutorials, and AI Insights | Formatho Blog' },
+    { property: 'og:description', content: 'Explore expert developer guides, tutorials, and technical insights from the Formatho team. Deep dives into AI agent orchestration, blockchain, RWA tokenization, and privacy-first tools with zero fluff.' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: 'https://formatho.com/blogs' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: 'Developer Guides, Tutorials, and AI Insights | Formatho Blog' },
+    { name: 'twitter:description', content: 'Explore expert developer guides, tutorials, and technical insights from the Formatho team. Deep dives into AI agent orchestration, blockchain, RWA tokenization, and privacy-first tools with zero fluff.' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://formatho.com/blogs' }
+  ],
   script: [
     {
       type: 'application/ld+json',
@@ -51,7 +66,7 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'Blog',
         name: 'Formatho Blog',
-        description: 'Developer guides, tutorials, and insights from the Formatho team',
+        description: 'Explore expert developer guides, tutorials, and technical insights from the Formatho team. Deep dives into AI agent orchestration, blockchain, RWA tokenization, and privacy-first tools with zero fluff.',
         url: 'https://formatho.com/blogs',
         publisher: {
           '@type': 'Organization',
