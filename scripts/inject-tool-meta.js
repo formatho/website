@@ -10,6 +10,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { getFAQForRoute } from './faq-data.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -84,6 +85,29 @@ function generateMetaTags(tool) {
   <!-- Canonical URL -->
   <link rel="canonical" href="${escapeHtml(url)}">
 
+  <!-- WebApplication Structured Data -->
+  <script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": tool.title,
+    "url": url,
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": tool.description,
+    "featureList": "Runs 100% client-side. No data sent to servers. No signup required.",
+    "publisher": {
+      "@type": "Organization",
+      "name": siteName,
+      "url": "https://formatho.com"
+    }
+  })}</script>
+
   <!-- SoftwareApplication Structured Data -->
   <script type="application/ld+json">${JSON.stringify({
     "@context": "https://schema.org",
@@ -111,10 +135,33 @@ function generateMetaTags(tool) {
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://formatho.com/" },
-      { "@type": "ListItem", "position": 2, "name": tool.title, "item": url }
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://formatho.com/tools" },
+      { "@type": "ListItem", "position": 3, "name": tool.title, "item": url }
     ]
   })}</script>
+
+  <!-- FAQPage Structured Data -->
+  <script type="application/ld+json">${JSON.stringify(generateFAQSchema(tool.path))}</script>
 `
+}
+
+/**
+ * Generate FAQPage JSON-LD schema for a tool route
+ */
+function generateFAQSchema(routePath) {
+  const faqs = getFAQForRoute(routePath)
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  }
 }
 
 /**
