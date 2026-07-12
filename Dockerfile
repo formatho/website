@@ -9,6 +9,9 @@ COPY package*.json ./
 # Install dependencies
 RUN npm ci
 
+# Set Node memory limit to prevent OOM during build
+ENV NODE_OPTIONS=--max-old-space-size=4096
+
 # Copy source code
 COPY . .
 
