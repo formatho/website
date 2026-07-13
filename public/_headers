@@ -1,0 +1,33 @@
+# Security Headers for Netlify Deployment
+# https://developers.cloudflare.com/security/
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
+
+/*
+  # Content Security Policy (Report-Only Mode for monitoring)
+  # Monitor violations before enforcing strict policy
+  # After confirming no violations, remove report-only and enforce the policy
+  Content-Security-Policy-Report-Only: default-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://cdn.jsdelivr.net https://unpkg.com https://cloud.umami.is; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; img-src 'self' data: blob: https: http:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://cloud.umami.is https://*.li.fi https://li.fi https://remix.ethereum.org; frame-src 'self' https://www.google.com; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; report-uri https://formatho.com/csp-report
+
+  # Strict-Transport-Security (HSTS)
+  # Force HTTPS for 1 year (31536000 seconds), include all subdomains, enable preload
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # X-Content-Type-Options
+  # Prevent MIME type sniffing
+  X-Content-Type-Options: nosniff
+
+  # X-Frame-Options
+  # Prevent clickjacking attacks
+  X-Frame-Options: SAMEORIGIN
+
+  # X-XSS-Protection
+  # Enable XSS filtering (legacy, mostly for older browsers)
+  X-XSS-Protection: 1; mode=block
+
+  # Referrer-Policy
+  # Control referrer information sent to external sites
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Permissions-Policy (formerly Feature-Policy)
+  # Control browser features and APIs
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=()

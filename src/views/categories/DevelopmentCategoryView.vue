@@ -3,6 +3,14 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { tools } from '@/data/tools'
 import * as LucideIcons from 'lucide-vue-next'
+import { useSEO } from '@/composables/useSEO'
+
+useSEO({
+  title: 'SQL, JSON, and Git Developer Utilities | Formatho',
+  description: 'SQL query formatting, database diagram generation, JSON linting, and Docker conversion tools that run free and browser-native. Zero server processing.',
+  keywords: ['sql formatter', 'json lint', 'database diagram', 'docker converter', 'git tools', 'development tools', 'developer utilities', 'browser-native', 'free tools'],
+  canonicalUrl: 'https://formatho.com/category/development'
+})
 
 const developmentCategory = tools.find(t => t.category === 'Development')
 const toolsList = ref(developmentCategory?.items || [])

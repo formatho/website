@@ -89,9 +89,47 @@ useHead(computed(() => {
       '@type': 'Organization',
       name: siteName
     },
+    publisher: {
+      '@type': 'Organization',
+      name: siteName,
+      url: baseUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${baseUrl}/logo.png`
+      }
+    },
     description: seoDescription,
     articleSection: post.value.tags[0] || 'Technology',
-    url: canonicalUrl
+    url: canonicalUrl,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl
+    }
+  }
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: baseUrl
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: `${baseUrl}/blogs`
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: seoTitle,
+        item: canonicalUrl
+      }
+    ]
   }
 
   return {
@@ -121,6 +159,11 @@ useHead(computed(() => {
       {
         type: 'application/ld+json',
         innerHTML: JSON.stringify(articleSchema)
+      },
+      {
+        type: 'application/ld+json',
+        id: 'breadcrumb-schema',
+        innerHTML: JSON.stringify(breadcrumbSchema)
       }
     ]
   }
@@ -206,6 +249,8 @@ useHead(computed(() => {
           <img
             :src="post.image"
             :alt="post.imageAlt || post.title"
+            width="1200"
+            height="675"
             class="w-full max-h-[60vh] object-cover grayscale"
             loading="lazy"
           />

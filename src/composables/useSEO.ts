@@ -15,6 +15,15 @@ interface SEOConfig {
 const BASE_URL = 'https://formatho.com'
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.png`
 
+// Detect environment based on hostname
+function isProductionEnvironment(): boolean {
+  if (typeof window === 'undefined') return true // SSR default to production
+  const hostname = window.location.hostname
+  // Production domains
+  const productionDomains = ['formatho.com', 'www.formatho.com']
+  return productionDomains.includes(hostname)
+}
+
 // Create a map for O(1) tool lookups instead of O(n) scanning
 const toolMap = new Map<string, { tool: any; category: any }>()
 for (const category of tools) {
@@ -36,6 +45,14 @@ export function useSEO(config?: SEOConfig) {
       document.head.appendChild(el)
     }
     el.setAttribute('content', content)
+  }
+
+  function setRobotsMeta() {
+    if (!isBrowser) return
+    const isProduction = isProductionEnvironment()
+    // Production: index, follow | QA/Staging: noindex, nofollow
+    const robotsContent = isProduction ? 'index, follow' : 'noindex, nofollow'
+    updateMeta('robots', robotsContent)
   }
 
   function updateProperty(prop: string, content: string) {
@@ -71,12 +88,23 @@ export function useSEO(config?: SEOConfig) {
     document.head.appendChild(el)
   }
 
+  function setBreadcrumbSchema(data: Record<string, unknown>) {
+    if (!isBrowser) return
+    let el = document.getElementById('json-ld-breadcrumb') as HTMLScriptElement | null
+    if (el) el.remove()
+    el = document.createElement('script')
+    el.type = 'application/ld+json'
+    el.id = 'json-ld-breadcrumb'
+    el.textContent = JSON.stringify(data)
+    document.head.appendChild(el)
+  }
+
   function getToolByRoute(path: string) {
     // O(1) lookup instead of O(n) scanning
     return toolMap.get(path) || null
   }
 
-  function generateToolJsonLd(tool: any, _category: any) {
+  function generateToolJsonLd(tool: any, category: any) {
     return {
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
@@ -99,7 +127,51 @@ export function useSEO(config?: SEOConfig) {
         '@type': 'Organization',
         name: 'Formatho',
         url: BASE_URL
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Formatho',
+        url: BASE_URL
       }
+    }
+  }
+
+  function generateBreadcrumbSchema(path: string, toolName?: string, categoryName?: string) {
+    const breadcrumbs = [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: BASE_URL
+      }
+    ]
+
+    if (toolName && categoryName) {
+      breadcrumbs.push({
+        '@type': 'ListItem',
+        position: 2,
+        name: categoryName,
+        item: `${BASE_URL}/category/${categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
+      })
+      breadcrumbs.push({
+        '@type': 'ListItem',
+        position: 3,
+        name: toolName,
+        item: `${BASE_URL}${path}`
+      })
+    } else if (path.startsWith('/category/')) {
+      breadcrumbs.push({
+        '@type': 'ListItem',
+        position: 2,
+        name: categoryName || 'Category',
+        item: `${BASE_URL}${path}`
+      })
+    }
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs
     }
   }
 
@@ -107,6 +179,13 @@ export function useSEO(config?: SEOConfig) {
     if (!isBrowser) return
     const path = route.path
     const toolInfo = getToolByRoute(path)
+
+    // Set robots meta based on environment (production vs QA)
+    setRobotsMeta()
+
+    // Set self-referencing canonical URL for all pages
+    const canonicalUrl = config?.canonicalUrl || `${BASE_URL}${path}`
+    setCanonical(canonicalUrl)
 
     if (toolInfo) {
       // Tool page SEO
@@ -122,15 +201,13 @@ export function useSEO(config?: SEOConfig) {
         'privacy',
         'client-side'
       ]
-      const canonical = `${BASE_URL}${path}`
 
       document.title = title
       updateMeta('description', description)
       updateMeta('keywords', keywords.join(', '))
-      setCanonical(canonical)
       updateProperty('og:title', title)
       updateProperty('og:description', description)
-      updateProperty('og:url', canonical)
+      updateProperty('og:url', canonicalUrl)
       updateProperty('og:type', 'website')
       updateProperty('og:image', DEFAULT_OG_IMAGE)
       updateProperty('og:site_name', 'Formatho')
@@ -139,19 +216,27 @@ export function useSEO(config?: SEOConfig) {
 
       // Add structured data for tool
       setJsonLd(generateToolJsonLd(tool, category))
+
+      // Add breadcrumb schema for tool
+      setBreadcrumbSchema(generateBreadcrumbSchema(path, tool.name, category.category))
     } else if (config) {
       // Custom page SEO
       if (config.title) document.title = config.title
       if (config.description) updateMeta('description', config.description)
       if (config.keywords) updateMeta('keywords', config.keywords.join(', '))
-      if (config.canonicalUrl) setCanonical(config.canonicalUrl)
       if (config.ogType) updateProperty('og:type', config.ogType)
       if (config.ogImage) updateProperty('og:image', config.ogImage)
       if (config.jsonLd) setJsonLd(config.jsonLd)
+
+      // Add breadcrumb schema for category pages
+      if (path.startsWith('/category/')) {
+        const categoryName = config.title?.replace(' \\| Formatho', '').replace(' \\| Formatho', '') || 'Category'
+        setBreadcrumbSchema(generateBreadcrumbSchema(path, undefined, categoryName))
+      }
     }
 
     // Update OG URL for all pages
-    updateProperty('og:url', `${BASE_URL}${path}`)
+    updateProperty('og:url', canonicalUrl)
   }
 
   // Apply on route change

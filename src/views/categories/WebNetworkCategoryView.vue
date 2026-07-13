@@ -3,6 +3,14 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { tools } from '@/data/tools'
 import * as LucideIcons from 'lucide-vue-next'
+import { useSEO } from '@/composables/useSEO'
+
+useSEO({
+  title: 'Web, Network, and HTTP Utilities | Formatho',
+  description: 'JWT inspection, URL encoding, user agent parsing, and subnet calculation with zero server footprint. Free, browser-native developer tools.',
+  keywords: ['jwt inspector', 'url encoder', 'url decoder', 'user agent parser', 'subnet calculator', 'ipv4 tools', 'http tools', 'web utilities', 'network tools', 'browser-native', 'free tools'],
+  canonicalUrl: 'https://formatho.com/category/web-network'
+})
 
 const webNetworkCategory = tools.find(t => t.category === 'Web & Network')
 const toolsList = ref(webNetworkCategory?.items || [])

@@ -1311,6 +1311,52 @@ export const routes = [
           title: 'A/B Test Dashboard - Formatho Admin',
           description: 'Monitor and analyze A/B test results for landing page optimization'
         }
+      },
+      // Category Routes
+      {
+        path: 'category/blockchain',
+        name: 'category-blockchain',
+        component: () => import(/* webpackPrefetch: true */ '../views/categories/BlockchainCategoryView.vue'),
+        meta: {
+          title: 'EVM and Blockchain Developer Tools | Formatho',
+          description: 'Free client-side crypto utilities like Cosmos address generators, multi-chain wallets, Ethereum checksum validators, Solidity opcode compilers, and asset tokenization labs with zero data collection.'
+        }
+      },
+      {
+        path: 'category/crypto-security',
+        name: 'category-crypto-security',
+        component: () => import(/* webpackPrefetch: true */ '../views/categories/CryptoSecurityCategoryView.vue'),
+        meta: {
+          title: 'Privacy-First Security and Hash Tools | Formatho',
+          description: 'Generate secure Argon2id hashes, unique identifiers, passphrases, and RSA key pairs locally in your browser for absolute privacy. Zero server footprint.'
+        }
+      },
+      {
+        path: 'category/development',
+        name: 'category-development',
+        component: () => import(/* webpackPrefetch: true */ '../views/categories/DevelopmentCategoryView.vue'),
+        meta: {
+          title: 'SQL, JSON, and Git Developer Utilities | Formatho',
+          description: 'SQL query formatting, database diagram generation, JSON linting, and Docker conversion tools that run free and browser-native. Zero server processing.'
+        }
+      },
+      {
+        path: 'category/web-network',
+        name: 'category-web-network',
+        component: () => import(/* webpackPrefetch: true */ '../views/categories/WebNetworkCategoryView.vue'),
+        meta: {
+          title: 'Web, Network, and HTTP Utilities | Formatho',
+          description: 'JWT inspection, URL encoding, user agent parsing, and subnet calculation with zero server footprint. Free, browser-native developer tools.'
+        }
+      },
+      {
+        path: 'category/converters',
+        name: 'category-converters',
+        component: () => import(/* webpackPrefetch: true */ '../views/categories/ConvertersCategoryView.vue'),
+        meta: {
+          title: 'Data, Base64, and Timestamp Converters | Formatho',
+          description: 'Real-time Unix timestamp, JSON to YAML, Base64, and color conversion with client-side processing. Free online converters with zero server uploads.'
+        }
       }
     ]
   },

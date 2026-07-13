@@ -3,6 +3,14 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { tools } from '@/data/tools'
 import * as LucideIcons from 'lucide-vue-next'
+import { useSEO } from '@/composables/useSEO'
+
+useSEO({
+  title: 'EVM and Blockchain Developer Tools | Formatho',
+  description: 'Free client-side crypto utilities like Cosmos address generators, multi-chain wallets, Ethereum checksum validators, Solidity opcode compilers, and asset tokenization labs with zero data collection.',
+  keywords: ['blockchain tools', 'ethereum tools', 'evm tools', 'cosmos address generator', 'multi-chain wallet', 'ethereum checksum', 'solidity compiler', 'opcode compiler', 'tokenization lab', 'rwa tools', 'crypto utilities', 'privacy-first', 'client-side'],
+  canonicalUrl: 'https://formatho.com/category/blockchain'
+})
 
 const blockchainCategory = tools.find(t => t.category === 'Blockchain')
 const toolsList = ref(blockchainCategory?.items || [])

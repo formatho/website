@@ -568,7 +568,7 @@ const activeTab = ref<Tab>('erc20')
             <div class="p-4 bg-muted rounded-lg">
               <p class="text-sm">
                 Fractional ownership typically wraps an ERC-721 NFT and issues ERC-20 shares against it.
-                Use a protocol like <a href="https://github.com/fractional-finance" target="_blank" class="text-blue-600 underline">Fractional</a>
+                Use a protocol like <a href="https://github.com/fractional-finance" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">Fractional</a>
                 or deploy the NFT + ERC-20 separately for this POC.
               </p>
             </div>
@@ -875,7 +875,7 @@ contract TokenizationFactory {
 
       <p class="mt-4">
         To deploy a TokenizationFactory using this lab, compile the Solidity above in
-        <a href="https://remix.ethereum.org" target="_blank" class="text-blue-600 underline">Remix IDE</a>
+        <a href="https://remix.ethereum.org" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">Remix IDE</a>
         or Hardhat, then paste the bytecode into the <strong>Custom Bytecode</strong> tab.
         Once deployed, call <code>createAsset()</code> from your wallet to launch new tokenized assets
         without deploying separate contracts each time.

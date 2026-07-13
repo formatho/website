@@ -200,7 +200,7 @@ onUnmounted(() => {
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-4">
             <RouterLink to="/" class="flex items-center gap-2">
-              <img src="/logo.png" alt="Formatho" class="h-8 w-8 rounded-lg" />
+              <img src="/logo.png" alt="Formatho" width="32" height="32" class="h-8 w-8 rounded-lg" />
               <span class="font-bold text-lg">Formatho</span>
             </RouterLink>
             <span class="text-muted-foreground">|</span>

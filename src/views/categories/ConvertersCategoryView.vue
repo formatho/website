@@ -3,6 +3,14 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { tools } from '@/data/tools'
 import * as LucideIcons from 'lucide-vue-next'
+import { useSEO } from '@/composables/useSEO'
+
+useSEO({
+  title: 'Data, Base64, and Timestamp Converters | Formatho',
+  description: 'Real-time Unix timestamp, JSON to YAML, Base64, and color conversion with client-side processing. Free online converters with zero server uploads.',
+  keywords: ['unix timestamp converter', 'json yaml converter', 'base64 converter', 'color converter', 'timestamp tools', 'data converters', 'format converters', 'client-side', 'free tools'],
+  canonicalUrl: 'https://formatho.com/category/converters'
+})
 
 const convertersCategory = tools.find(t => t.category === 'Converters')
 const toolsList = ref(convertersCategory?.items || [])

@@ -1,13 +1,53 @@
 <script setup lang="ts">
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { onMounted } from 'vue'
 import { useHead } from '@vueuse/head'
 import { Button } from '@/components/ui/button'
-import { Home, ArrowLeft } from 'lucide-vue-next'
+import { Input } from '@/components/ui/input'
+import { Home, ArrowLeft, Search as SearchIcon } from 'lucide-vue-next'
 import { useTwins } from '@/composables/useTwins'
+import { tools } from '@/data/tools'
 
 const router = useRouter()
 const { summonTwin } = useTwins()
+const searchQuery = ref('')
+
+// Flatten tools for search
+const allTools = computed(() => {
+  const flat: Array<{ name: string; route: string; category: string; icon?: string }> = []
+  for (const category of tools) {
+    for (const tool of category.items) {
+      flat.push({
+        name: tool.name,
+        route: tool.route,
+        category: category.category,
+        icon: tool.iconName
+      })
+    }
+  }
+  return flat
+})
+
+// Filter tools based on search
+const filteredTools = computed(() => {
+  if (!searchQuery.value.trim()) return []
+  const query = searchQuery.value.toLowerCase()
+  return allTools.value.filter(tool =>
+    tool.name.toLowerCase().includes(query) ||
+    tool.category.toLowerCase().includes(query)
+  ).slice(0, 6) // Show max 6 results
+})
+
+// Popular tools for quick access
+const popularTools = computed(() => {
+  return allTools.value.filter(tool =>
+    ['json-yaml', 'base64', 'jwt', 'uuid', 'sql', 'regex-tester', 'hash-text', 'qr-code-generator'].includes(tool.route.replace('/tools/', ''))
+  )
+})
+
+const handleToolClick = (route: string) => {
+  router.push(route)
+}
 
 // Prevent Google from indexing 404 pages (fixes soft 404 in Search Console)
 useHead({
@@ -82,23 +122,76 @@ const goHome = () => {
         </Button>
       </div>
 
-      <!-- Helpful Links -->
+      <!-- Search Box -->
       <div
-        class="mt-12 pt-8 border-t border-border"
+        class="mt-8 max-w-md mx-auto"
         data-aos="fade-up"
         data-aos-duration="600"
         data-aos-delay="500"
       >
-        <p class="text-sm text-muted-foreground mb-4">Looking for something specific?</p>
-        <div class="flex flex-wrap justify-center gap-4 text-sm">
+        <div class="relative">
+          <SearchIcon class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+          <Input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Search for tools..."
+            class="w-full pl-12 pr-4 py-3 text-lg border-2 border-foreground"
+            aria-label="Search for tools"
+          />
+        </div>
+
+        <!-- Search Results -->
+        <div v-if="filteredTools.length > 0" class="mt-4 text-left bg-background border border-border rounded-lg overflow-hidden">
+          <div
+            v-for="tool in filteredTools"
+            :key="tool.route"
+            @click="handleToolClick(tool.route)"
+            class="px-4 py-3 hover:bg-muted cursor-pointer border-b border-border last:border-b-0 transition-colors"
+          >
+            <div class="font-semibold text-foreground">{{ tool.name }}</div>
+            <div class="text-xs text-muted-foreground">{{ tool.category }}</div>
+          </div>
+        </div>
+
+        <!-- Popular Tools (shown when no search) -->
+        <div v-if="!searchQuery && popularTools.length > 0" class="mt-6 text-left">
+          <p class="text-sm text-muted-foreground mb-3">Popular Tools</p>
+          <div class="grid grid-cols-2 gap-2">
+            <router-link
+              v-for="tool in popularTools.slice(0, 6)"
+              :key="tool.route"
+              :to="tool.route"
+              class="px-3 py-2 bg-muted/50 hover:bg-muted rounded-md text-sm text-foreground hover:underline transition-colors"
+            >
+              {{ tool.name }}
+            </router-link>
+          </div>
+        </div>
+      </div>
+
+      <!-- Helpful Links -->
+      <div
+        class="mt-8 pt-6 border-t border-border"
+        data-aos="fade-up"
+        data-aos-duration="600"
+        data-aos-delay="600"
+      >
+        <p class="text-sm text-muted-foreground mb-3">Browse by Category</p>
+        <div class="flex flex-wrap justify-center gap-3 text-sm">
           <router-link to="/" class="text-primary hover:underline">
             All Tools
           </router-link>
+          <router-link to="/category/blockchain" class="text-primary hover:underline">
+            Blockchain
+          </router-link>
+          <router-link to="/category/crypto-security" class="text-primary hover:underline">
+            Crypto & Security
+          </router-link>
+          <router-link to="/category/development" class="text-primary hover:underline">
+            Development
+          </router-link>
           <router-link to="/about" class="text-primary hover:underline">
             About
-          </router-link>
-          <router-link to="/contact" class="text-primary hover:underline">
-            Contact
           </router-link>
         </div>
       </div>

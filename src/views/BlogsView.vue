@@ -108,6 +108,8 @@ useHead({
             v-if="blogMetadata[0]?.image"
             :src="blogMetadata[0].image"
             :alt="blogMetadata[0].imageAlt || blogMetadata[0].title"
+            width="800"
+            height="600"
             class="w-full h-full object-cover grayscale"
             loading="eager"
           />
@@ -178,6 +180,8 @@ useHead({
                 v-if="post.image"
                 :src="post.image"
                 :alt="post.imageAlt || post.title"
+                width="96"
+                height="96"
                 class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                 loading="lazy"
               />

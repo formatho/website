@@ -3,6 +3,14 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { tools } from '@/data/tools'
 import * as LucideIcons from 'lucide-vue-next'
+import { useSEO } from '@/composables/useSEO'
+
+useSEO({
+  title: 'Privacy-First Security and Hash Tools | Formatho',
+  description: 'Generate secure Argon2id hashes, unique identifiers, passphrases, and RSA key pairs locally in your browser for absolute privacy. Zero server footprint.',
+  keywords: ['hash tools', 'argon2id', 'bcrypt', 'password hash', 'rsa key generator', 'encryption tools', 'security tools', 'privacy-first', 'client-side', 'zero data collection'],
+  canonicalUrl: 'https://formatho.com/category/crypto-security'
+})
 
 const cryptoCategory = tools.find(t => t.category === 'Crypto & Security')
 const toolsList = ref(cryptoCategory?.items || [])
