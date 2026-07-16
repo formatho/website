@@ -122,6 +122,8 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
           <img
             src="/logo.png"
             alt="Formatho"
+            width="32"
+            height="32"
             class="h-8 w-8 transition-transform group-hover:scale-110"
           />
           <span class="text-lg font-black tracking-tight gradient-text">FORMATHO</span>
@@ -148,22 +150,45 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
               class="absolute left-0 top-full pt-2 z-[9999]"
             >
               <div
-                class="bg-background border border-foreground rounded-xl min-w-[600px] p-6 grid grid-cols-2 gap-6"
+                class="bg-background border border-foreground rounded-xl min-w-[600px] p-6"
               >
-                <div v-for="category in categories" :key="category.name" class="space-y-2">
-                  <h3 class="text-[11px] font-bold tracking-[2px] uppercase text-foreground mb-3 border-b border-foreground/10 pb-2">
-                    {{ category.name }}
-                  </h3>
-                  <div class="space-y-0">
-                    <RouterLink
-                      v-for="item in category.items"
-                      :key="item.name"
-                      :to="item.route"
-                      @click="handleToolLinkClick"
-                      class="block px-2 py-2 text-sm text-muted-foreground hover:text-foreground hover:pl-4 transition-all border-b border-foreground/5"
-                    >
-                      {{ item.name }}
-                    </RouterLink>
+                <!-- Top Quick Links Row -->
+                <div class="flex items-center gap-4 mb-6 pb-4 border-b border-foreground/20">
+                  <RouterLink
+                    to="/tools"
+                    @click="handleToolLinkClick"
+                    class="text-[13px] font-bold tracking-[2px] uppercase text-foreground hover:underline hover:underline-offset-[4px]"
+                  >
+                    Explore All Tools
+                  </RouterLink>
+                  <span class="text-foreground/40 font-mono text-sm">|</span>
+                  <RouterLink
+                    to="/category/blockchain"
+                    @click="handleToolLinkClick"
+                    class="text-[13px] font-bold tracking-[2px] uppercase text-foreground hover:underline hover:underline-offset-[4px]"
+                  >
+                    EVM & Blockchain Developer Tools
+                  </RouterLink>
+                </div>
+
+                <!-- Categories Grid -->
+                <div class="grid grid-cols-2 gap-6">
+                  <!-- Regular Categories -->
+                  <div v-for="category in categories" :key="category.name" class="space-y-2">
+                    <h3 class="text-[11px] font-bold tracking-[2px] uppercase text-foreground mb-3 border-b border-foreground/10 pb-2">
+                      {{ category.name }}
+                    </h3>
+                    <div class="space-y-0">
+                      <RouterLink
+                        v-for="item in category.items"
+                        :key="item.name"
+                        :to="item.route"
+                        @click="handleToolLinkClick"
+                        class="block px-2 py-2 text-sm text-muted-foreground hover:text-foreground hover:pl-4 transition-all border-b border-foreground/5"
+                      >
+                        {{ item.name }}
+                      </RouterLink>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -231,7 +256,38 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
             </button>
 
             <div v-show="isToolsDropdownOpen" class="space-y-3 mt-2 pl-4">
-              <div v-for="category in categories" :key="category.name" class="space-y-1">
+              <!-- Quick Access Links (Mobile) -->
+              <div class="space-y-2">
+                <h3 class="text-[11px] font-bold tracking-[2px] uppercase text-foreground py-2">Explore All Tools</h3>
+                <RouterLink
+                  to="/tools"
+                  @click="handleToolLinkClick"
+                  class="block px-2 py-2 text-sm text-foreground hover:underline hover:underline-offset-[4px]"
+                >
+                  View All Tools
+                </RouterLink>
+              </div>
+
+              <!-- Divider (Mobile) -->
+              <div class="flex items-center my-3">
+                <div class="flex-1 h-px bg-foreground/20"></div>
+                <span class="px-3 text-xs text-foreground/40 font-mono">|</span>
+                <div class="flex-1 h-px bg-foreground/20"></div>
+              </div>
+
+              <div class="space-y-2">
+                <h3 class="text-[11px] font-bold tracking-[2px] uppercase text-foreground py-2">EVM & Blockchain Developer Tools</h3>
+                <RouterLink
+                  to="/category/blockchain"
+                  @click="handleToolLinkClick"
+                  class="block px-2 py-2 text-sm text-foreground hover:underline hover:underline-offset-[4px]"
+                >
+                  Blockchain Tools
+                </RouterLink>
+              </div>
+
+              <!-- Categories -->
+              <div v-for="category in categories" :key="category.name" class="space-y-1 mt-4">
                 <h3 class="text-[11px] font-bold tracking-[2px] uppercase text-foreground py-2">{{ category.name }}</h3>
                 <RouterLink
                   v-for="item in category.items"

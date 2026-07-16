@@ -280,8 +280,8 @@ defineExpose({
             </div>
             <a
               href="https://todo.formatho.com"
-              target="blank"
-              rel="noopener"
+              target="_blank"
+              rel="noopener noreferrer"
               class="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors whitespace-nowrap"
             >
               Try Agent Todo Free →

@@ -44,6 +44,21 @@ const formatReadTime = (readTime: string) => {
 }
 
 useHead({
+  title: 'Developer Guides, Tutorials, and AI Insights | Formatho Blog',
+  meta: [
+    { name: 'description', content: 'Explore expert developer guides, tutorials, and technical insights from the Formatho team. Deep dives into AI agent orchestration, blockchain, RWA tokenization, and privacy-first tools with zero fluff.' },
+    { name: 'keywords', content: 'formatho blog, developer guides, tutorials, ai agents, blockchain, rwa tokenization, privacy-first tools' },
+    { property: 'og:title', content: 'Developer Guides, Tutorials, and AI Insights | Formatho Blog' },
+    { property: 'og:description', content: 'Explore expert developer guides, tutorials, and technical insights from the Formatho team. Deep dives into AI agent orchestration, blockchain, RWA tokenization, and privacy-first tools with zero fluff.' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: 'https://formatho.com/blogs' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: 'Developer Guides, Tutorials, and AI Insights | Formatho Blog' },
+    { name: 'twitter:description', content: 'Explore expert developer guides, tutorials, and technical insights from the Formatho team. Deep dives into AI agent orchestration, blockchain, RWA tokenization, and privacy-first tools with zero fluff.' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://formatho.com/blogs' }
+  ],
   script: [
     {
       type: 'application/ld+json',
@@ -51,7 +66,7 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'Blog',
         name: 'Formatho Blog',
-        description: 'Developer guides, tutorials, and insights from the Formatho team',
+        description: 'Explore expert developer guides, tutorials, and technical insights from the Formatho team. Deep dives into AI agent orchestration, blockchain, RWA tokenization, and privacy-first tools with zero fluff.',
         url: 'https://formatho.com/blogs',
         publisher: {
           '@type': 'Organization',
@@ -93,6 +108,8 @@ useHead({
             v-if="blogMetadata[0]?.image"
             :src="blogMetadata[0].image"
             :alt="blogMetadata[0].imageAlt || blogMetadata[0].title"
+            width="800"
+            height="600"
             class="w-full h-full object-cover grayscale"
             loading="eager"
           />
@@ -163,6 +180,8 @@ useHead({
                 v-if="post.image"
                 :src="post.image"
                 :alt="post.imageAlt || post.title"
+                width="96"
+                height="96"
                 class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                 loading="lazy"
               />

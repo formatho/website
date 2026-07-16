@@ -321,7 +321,7 @@
               <li><span class="cross">✗</span> Closed source</li>
               <li><span class="cross">✗</span> Cloud-only</li>
             </ul>
-            <a href="https://zapier.com" class="btn btn-secondary btn-block" target="_blank">
+            <a href="https://zapier.com" class="btn btn-secondary btn-block" target="_blank" rel="noopener noreferrer">
               Visit Zapier
             </a>
           </div>
@@ -345,7 +345,7 @@
               <li><span class="cross">✗</span> Complex setup</li>
               <li><span class="partial">~</span> Workflow-focused</li>
             </ul>
-            <a href="https://n8n.io" class="btn btn-secondary btn-block" target="_blank">
+            <a href="https://n8n.io" class="btn btn-secondary btn-block" target="_blank" rel="noopener noreferrer">
               Visit n8n
             </a>
           </div>
@@ -369,7 +369,7 @@
               <li><span class="cross">✗</span> Closed source</li>
               <li><span class="cross">✗</span> Cloud-only</li>
             </ul>
-            <a href="https://make.com" class="btn btn-secondary btn-block" target="_blank">
+            <a href="https://make.com" class="btn btn-secondary btn-block" target="_blank" rel="noopener noreferrer">
               Visit Make
             </a>
           </div>
@@ -462,7 +462,7 @@
           <a href="https://todo.formatho.com/?utm_source=formatho&utm_medium=website&utm_campaign=compare_page" class="btn btn-primary btn-large">
             Start Free Trial
           </a>
-          <a href="https://github.com/formatho/agent-todo" class="btn btn-secondary btn-large" target="_blank">
+          <a href="https://github.com/formatho/agent-todo" class="btn btn-secondary btn-large" target="_blank" rel="noopener noreferrer">
             View on GitHub
           </a>
         </div>

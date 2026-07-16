@@ -4,9 +4,9 @@ import { RouterLink, useRouter } from 'vue-router'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
-  title: 'Formatho - Free Developer Tools & AI Agent Platform',
-  description: '100+ free developer tools that run entirely in your browser. Privacy-first, no data leaves your machine. AI agent orchestration, task management, and more.',
-  keywords: ['developer tools', 'free online tools', 'privacy tools', 'AI agents', 'agent orchestration', 'formatho', 'client-side tools', 'browser tools'],
+  title: 'Free Developer Tools and AI Platform | Formatho',
+  description: '100+ free, client-side developer and blockchain utilities—including JSON formatters, Base64 encoders, JWT debuggers, SQL formatters, UUID generators, hash generators, QR codes, regex testers, and more—with zero data tracking and no sign-up required.',
+  keywords: ['developer tools', 'free online tools', 'JSON formatter', 'Base64 encoder', 'JWT debugger', 'SQL formatter', 'UUID generator', 'hash generator', 'QR code generator', 'regex tester', 'privacy tools', 'AI agents', 'agent orchestration', 'formatho', 'client-side tools', 'browser tools', 'blockchain tools', 'ethereum tools', 'crypto tools'],
   ogType: 'website',
   jsonLd: {
     '@context': 'https://schema.org',
@@ -23,8 +23,134 @@ useSEO({
 })
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-vue-next'
-import * as LucideIcons from 'lucide-vue-next'
+// Import only the icons we actually use (59 icons) instead of the entire library
+import {
+  ArrowRightLeft,
+  BarChart3,
+  Binary,
+  Building2,
+  Calculator,
+  Calendar,
+  CaseSensitive,
+  CheckCircle,
+  Clock,
+  Code,
+  Container,
+  Database,
+  Expand,
+  EyeOff,
+  FileCode,
+  FileImage,
+  FileJson,
+  FileSpreadsheet,
+  FileText,
+  Fingerprint,
+  GitBranch,
+  GitCompare,
+  Globe,
+  Hash,
+  ImageDown,
+  Key,
+  Keyboard,
+  KeyRound,
+  Link,
+  Link2,
+  Lock,
+  LockKeyhole,
+  Minimize,
+  Monitor,
+  Palette,
+  Percent,
+  Phone,
+  QrCode,
+  Radio,
+  Regex,
+  Repeat,
+  Search as SearchIcon,
+  Server,
+  Shield,
+  ShieldCheck,
+  Smartphone,
+  Smile,
+  Table2,
+  Tag,
+  Text,
+  Thermometer,
+  Timer,
+  Type,
+  UserCircle,
+  Video,
+  Wallet,
+  Wifi,
+  Workflow,
+  Zap,
+  Wrench,
+} from 'lucide-vue-next'
 import { tools } from '../data/tools'
+
+// Create icon map for dynamic lookup (much smaller bundle than importing *)
+const iconMap = {
+  ArrowRightLeft,
+  BarChart3,
+  Binary,
+  Building2,
+  Calculator,
+  Calendar,
+  CaseSensitive,
+  CheckCircle,
+  Clock,
+  Code,
+  Container,
+  Database,
+  Expand,
+  EyeOff,
+  FileCode,
+  FileImage,
+  FileJson,
+  FileSpreadsheet,
+  FileText,
+  Fingerprint,
+  GitBranch,
+  GitCompare,
+  Globe,
+  Hash,
+  ImageDown,
+  Key,
+  Keyboard,
+  KeyRound,
+  Link,
+  Link2,
+  Lock,
+  LockKeyhole,
+  Minimize,
+  Monitor,
+  Palette,
+  Percent,
+  Phone,
+  QrCode,
+  Radio,
+  Regex,
+  Repeat,
+  Search: SearchIcon,
+  Server,
+  Shield,
+  ShieldCheck,
+  Smartphone,
+  Smile,
+  Table2,
+  Tag,
+  Text,
+  Thermometer,
+  Timer,
+  Type,
+  UserCircle,
+  Video,
+  Wallet,
+  Wifi,
+  Workflow,
+  Zap,
+  Wrench,
+} as const
 import TrustBadges from '@/components/TrustBadges.vue'
 
 import FloatingCTA from '@/components/FloatingCTA.vue'
@@ -115,6 +241,8 @@ const _popularTools = [
             <img
               src="/logo.png"
               alt="Formatho"
+              width="80"
+              height="80"
               class="h-20 w-20 rounded-xl shadow-2xl ring-2 ring-primary/20"
               data-v-8d4ed633=""
             />
@@ -186,6 +314,11 @@ const _popularTools = [
             <RouterLink to="/tools" data-v-8d4ed633="">
               <button class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg" data-v-8d4ed633="">
                 ⚡ Explore All Tools
+              </button>
+            </RouterLink>
+            <RouterLink to="/category/blockchain" data-v-8d4ed633="">
+              <button class="px-6 py-3 bg-foreground/10 border border-foreground text-foreground rounded-lg font-semibold text-lg hover:bg-foreground hover:text-background transition-colors" data-v-8d4ed633="">
+                🔗 EVM and Blockchain Developer Tools
               </button>
             </RouterLink>
           </div>
@@ -286,7 +419,7 @@ const _popularTools = [
                       data-v-8d4ed633=""
                     >
                       <component
-                        :is="LucideIcons[tool.iconName] || LucideIcons.Wrench"
+                        :is="iconMap[tool.iconName as keyof typeof iconMap] || Wrench"
                         class="w-6 h-6 text-gray-900"
                         stroke-width="2"
                       />

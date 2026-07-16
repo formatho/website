@@ -76,10 +76,10 @@ export const routes = [
         name: 'blogs',
         component: () => import(/* webpackPrefetch: true */ '../views/BlogsView.vue'),
         meta: {
-          title: 'Blog - Formatho',
+          title: 'Developer Guides, Tutorials, and AI Insights | Formatho Blog',
           description:
-            'Insights, updates, and stories from the Formatho team. Read about privacy-first development, AI agents, and more.',
-          keywords: 'formatho blog, developer tools blog, privacy-first, ai agents, web development'
+            'Explore expert developer guides, tutorials, and technical insights from the Formatho team. Deep dives into AI agent orchestration, blockchain, RWA tokenization, and privacy-first tools with zero fluff.',
+          keywords: 'formatho blog, developer guides, developer tutorials, ai agents, blockchain, rwa tokenization, privacy-first tools, web development'
         }
       },
       // Dynamic blog post route (slug from Strapi)
@@ -88,10 +88,10 @@ export const routes = [
         name: 'blog-post-dynamic',
         component: () => import(/* webpackPrefetch: true */ '../views/BlogPostView.vue'),
         meta: {
-          title: 'Blog Post - Formatho',
+          title: 'Article - Formatho Blog',
           description:
-            'Read technical articles about developer tools, privacy-first development, and AI agents.',
-          keywords: 'formatho blog, developer tools, privacy, ai agents'
+            'Expert developer guides, tutorials, and technical insights on privacy-first development, AI agents, and blockchain from the Formatho team.',
+          keywords: 'formatho blog, developer guides, tutorials, ai agents, blockchain, privacy-first'
         }
       },
       {
@@ -378,9 +378,9 @@ export const routes = [
         meta: {
           title: 'Ethereum Unit Converter Online - Wei, Gwei, Ether | Formatho',
           description:
-            'Convert between Wei, Gwei, and Ether instantly. Essential tool for Ethereum developers.',
+            'Convert between Wei, Gwei, and Ether instantly. Essential tool for Ethereum developers. 100% client-side, privacy-first. Supports all EVM chains including L2s.',
           keywords:
-            'ethereum unit converter, wei converter, gwei converter, ether converter, evm tools'
+            'ethereum unit converter, wei converter, gwei converter, ether converter, evm tools, wei to ether, gwei to wei, blockchain unit converter'
         }
       },
       {
@@ -410,10 +410,10 @@ export const routes = [
         name: 'address-checksum',
         component: () => import(/* webpackPrefetch: true */ '../views/AddressChecksumView.vue'),
         meta: {
-          title: 'Address Checksum (EIP-55)',
+          title: 'Ethereum Address Checksum (EIP-55) - Verify & Encode Online | Formatho',
           description:
-            'Validate and checksum Ethereum addresses (EIP-55). Ensure correct address formatting.',
-          keywords: 'ethereum address checksum, eip-55 checksum, address validator, connect wallet'
+            'Validate and checksum Ethereum addresses using EIP-55. Detect spoofed addresses and prevent loss from typos. 100% client-side, privacy-first.',
+          keywords: 'ethereum address checksum, eip-55 checksum, address validator, spoofed address, ethereum address verify, checksum address, web3 security'
         }
       },
       {
@@ -422,11 +422,11 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/MultiChainKeyGeneratorView.vue'),
         meta: {
-          title: 'Multi-Chain Key Generator',
+          title: 'Multi-Chain Wallet Generator - Ethereum, Bitcoin, Solana | Formatho',
           description:
-            'Generate keys for Ethereum, Solana, Polkadot, and Cosmos from one mnemonic. Understand the algorithms.',
+            'Generate keys and addresses for Ethereum, Bitcoin, Solana, Cosmos, and Polkadot from one mnemonic. BIP-39, BIP-44, secp256k1, Ed25519. 100% client-side.',
           keywords:
-            'multi chain wallet, key generator, ethereum, solana, polkadot, cosmos, bip39, ed25519, secp256k1'
+            'multi chain wallet, key generator, ethereum, solana, polkadot, cosmos, bip39, ed25519, secp256k1, hd wallet, derivation path, blockchain keys'
         }
       },
       {
@@ -486,11 +486,11 @@ export const routes = [
         name: 'solidity-to-opcodes',
         component: () => import(/* webpackPrefetch: true */ '../views/SolidityToOpcodesView.vue'),
         meta: {
-          title: 'Solidity to EVM Opcodes',
+          title: 'Solidity to EVM Opcodes Compiler - View Smart Contract Assembly | Formatho',
           description:
-            'Compile Solidity to EVM Opcodes and Bytecode in your browser. View the assembly of your smart contracts.',
+            'Compile Solidity to EVM Opcodes and Bytecode in your browser. View the assembly of your smart contracts. Multiple compiler versions. 100% client-side.',
           keywords:
-            'solidity compile, evm opcodes, smart contract assembly, solidity bytecode, compiler'
+            'solidity compile, evm opcodes, smart contract assembly, solidity bytecode, compiler, solidity to opcode, evm disassembler, blockchain development'
         }
       },
       {
@@ -1310,6 +1310,52 @@ export const routes = [
         meta: {
           title: 'A/B Test Dashboard - Formatho Admin',
           description: 'Monitor and analyze A/B test results for landing page optimization'
+        }
+      },
+      // Category Routes
+      {
+        path: 'category/blockchain',
+        name: 'category-blockchain',
+        component: () => import(/* webpackPrefetch: true */ '../views/categories/BlockchainCategoryView.vue'),
+        meta: {
+          title: 'EVM and Blockchain Developer Tools | Formatho',
+          description: 'Free client-side crypto utilities like Cosmos address generators, multi-chain wallets, Ethereum checksum validators, Solidity opcode compilers, and asset tokenization labs with zero data collection.'
+        }
+      },
+      {
+        path: 'category/crypto-security',
+        name: 'category-crypto-security',
+        component: () => import(/* webpackPrefetch: true */ '../views/categories/CryptoSecurityCategoryView.vue'),
+        meta: {
+          title: 'Privacy-First Security and Hash Tools | Formatho',
+          description: 'Generate secure Argon2id hashes, unique identifiers, passphrases, and RSA key pairs locally in your browser for absolute privacy. Zero server footprint.'
+        }
+      },
+      {
+        path: 'category/development',
+        name: 'category-development',
+        component: () => import(/* webpackPrefetch: true */ '../views/categories/DevelopmentCategoryView.vue'),
+        meta: {
+          title: 'SQL, JSON, and Git Developer Utilities | Formatho',
+          description: 'SQL query formatting, database diagram generation, JSON linting, and Docker conversion tools that run free and browser-native. Zero server processing.'
+        }
+      },
+      {
+        path: 'category/web-network',
+        name: 'category-web-network',
+        component: () => import(/* webpackPrefetch: true */ '../views/categories/WebNetworkCategoryView.vue'),
+        meta: {
+          title: 'Web, Network, and HTTP Utilities | Formatho',
+          description: 'JWT inspection, URL encoding, user agent parsing, and subnet calculation with zero server footprint. Free, browser-native developer tools.'
+        }
+      },
+      {
+        path: 'category/converters',
+        name: 'category-converters',
+        component: () => import(/* webpackPrefetch: true */ '../views/categories/ConvertersCategoryView.vue'),
+        meta: {
+          title: 'Data, Base64, and Timestamp Converters | Formatho',
+          description: 'Real-time Unix timestamp, JSON to YAML, Base64, and color conversion with client-side processing. Free online converters with zero server uploads.'
         }
       }
     ]

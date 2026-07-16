@@ -44,7 +44,6 @@ export default defineConfig({
         manualChunks(id) {
           if (!id.includes('node_modules')) return undefined
           // Heavy deps: split into separate lazy-loaded chunks
-          if (id.includes('monaco-editor')) return 'monaco'
           if (id.includes('gpt-tokenizer')) return 'gpt-tokenizer'
           if (id.includes('jspdf') || id.includes('html2pdf') || id.includes('html2canvas')) return 'pdf'
           if (id.includes('chart.js')) return 'charts'

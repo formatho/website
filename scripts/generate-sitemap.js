@@ -41,7 +41,7 @@ function parseToolRoutes() {
     routes.push('/' + match[1])
   }
 
-  return [...new Set(routes)] // dedupe
+  return [...new Set(routes)].filter(r => !r.includes('/admin/')) // dedupe & exclude admin
 }
 
 // Static pages
@@ -73,7 +73,9 @@ const toolRoutes = toolPaths.map((p) => ({
   changefreq: 'monthly',
 }))
 
-const routes = [...staticRoutes, ...blogRoutes, ...toolRoutes]
+// Filter out admin routes - they should NOT be in the public sitemap
+const allRoutes = [...staticRoutes, ...blogRoutes, ...toolRoutes]
+const routes = allRoutes.filter(r => !r.path.includes('/admin/'))
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

@@ -203,7 +203,7 @@ const createOfficialTicket = async () => {
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
       <p class="success-text">Task Created!</p>
-      <a href="https://todo.formatho.com" target="_blank" class="success-link">
+      <a href="https://todo.formatho.com" target="_blank" rel="noopener noreferrer" class="success-link">
         View on todo.formatho.com →
       </a>
     </div>

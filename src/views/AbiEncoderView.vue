@@ -427,5 +427,114 @@ encodeAbi()
         </CardContent>
       </Card>
     </div>
+
+    <!-- Educational Content -->
+    <div class="max-w-4xl mx-auto w-full space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle class="text-xl">Understanding ABI Encoding</CardTitle>
+        </CardHeader>
+        <CardContent class="prose prose-sm dark:prose-invert max-w-none space-y-4">
+          <p>
+            The Application Binary Interface (ABI) defines how Solidity functions are called at the byte
+            level. Every smart contract interaction — from MetaMask transactions to Foundry Cast commands —
+            uses ABI encoding to serialize function names and arguments into hex data.
+          </p>
+
+          <h3 class="text-lg font-bold mt-4">Function Selectors</h3>
+          <p>
+            The first 4 bytes of calldata are the function selector — the first 4 bytes of the Keccak-256
+            hash of the function signature. For example, <code>transfer(address,uint256)</code> produces
+            selector <code>0xa9059cbb</code>. This is how the EVM knows which function to call.
+          </p>
+
+          <h3 class="text-lg font-bold mt-4">How Parameters Are Encoded</h3>
+          <p>
+            ABI encoding pads each parameter to 32 bytes. Static types (address, uint256, bool) are encoded
+            inline. Dynamic types (string, bytes, arrays) use a head-tail pattern: the head contains an offset
+            pointer, and the actual data follows in the tail section.
+          </p>
+
+          <h3 class="text-lg font-bold mt-4">Common Use Cases</h3>
+          <ul class="space-y-1">
+            <li><strong>Decode transaction input data</strong> from Etherscan or block explorers</li>
+            <li><strong>Encode calldata for Foundry/Cast</strong> commands without writing scripts</li>
+            <li><strong>Debug smart contract interactions</strong> by verifying parameter encoding</li>
+            <li><strong>Verify constructor arguments</strong> when deploying contracts</li>
+            <li><strong>Build raw transactions</strong> for custom integrations</li>
+          </ul>
+        </CardContent>
+      </Card>
+
+      <!-- FAQ Section -->
+      <Card>
+        <CardHeader>
+          <CardTitle class="text-xl">Frequently Asked Questions</CardTitle>
+        </CardHeader>
+        <CardContent class="prose prose-sm dark:prose-invert max-w-none space-y-4">
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              What is a function selector?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              A function selector is the first 4 bytes of the Keccak-256 hash of the function signature.
+              For example, <code>keccak256("transfer(address,uint256)")</code> =
+              <code>0xa9059cbb...</code>, so the selector is <code>0xa9059cbb</code>. The EVM uses this to
+              identify which function to execute.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              How do I use encoded calldata with Foundry/Cast?</summary>
+            <p class="mt-2 text-muted-foreground">
+              Copy the full calldata from this tool and use it with: <code>cast send &lt;contract_address&gt;</code>
+              followed by the calldata hex string. For read operations, use <code>cast call</code> instead.
+              This is especially useful when you need to call functions without writing a script.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              What is the difference between ABI encoding and RLP encoding?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              ABI encoding is used for smart contract function calls and parameter serialization. RLP
+              (Recursive Length Prefix) encoding is used by Ethereum for serializing transactions and
+              blocks at the protocol level. They serve different layers of the stack.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
+              <span class="transition-transform group-open:rotate-90">▶</span>
+              Can I decode transaction data from Etherscan?
+            </summary>
+            <p class="mt-2 text-muted-foreground">
+              Yes. Copy the "Input Data" field from any transaction on Etherscan, paste it into the Decode
+              tab, enter the expected parameter types, and click Decode. This works for any EVM transaction
+              on mainnet, L2s, and testnets.
+            </p>
+          </details>
+        </CardContent>
+      </Card>
+
+      <!-- Related Tools -->
+      <Card>
+        <CardHeader>
+          <CardTitle class="text-xl">Related Blockchain Tools</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <a href="/tools/solidity-to-opcodes" class="text-primary hover:underline">Solidity to Opcodes</a>
+            <a href="/tools/keccak256" class="text-primary hover:underline">Keccak-256 Hasher</a>
+            <a href="/tools/address-checksum" class="text-primary hover:underline">Address Checksum (EIP-55)</a>
+            <a href="/tools/multi-chain-keys" class="text-primary hover:underline">Multi-Chain Wallet</a>
+            <a href="/tools/evm-converter" class="text-primary hover:underline">EVM Unit Converter</a>
+            <a href="/tools/hash-text" class="text-primary hover:underline">Hash Text Generator</a>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   </div>
 </template>
