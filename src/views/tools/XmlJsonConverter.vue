@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Copy, FileJson } from 'lucide-vue-next'
 
 // DOMParser is browser-native - privacy-first, zero server calls
-const DOMParser = window.DOMParser
+const DOMParserCtor = typeof window !== 'undefined' ? window.DOMParser : undefined
 
 const xmlInput = ref('')
 const jsonInput = ref('')
@@ -14,7 +14,7 @@ const error = ref('')
 
 // Parse XML to JSON using browser-native DOMParser
 const xmlToJson = (xml: string): any => {
-  const parser = new DOMParser()
+  const parser = new DOMParserCtor!()
   const doc = parser.parseFromString(xml, 'text/xml')
 
   const parseNode = (node: Node): any => {
@@ -137,7 +137,7 @@ const detectAndAutoConvert = (content: string, targetFormat: 'xml' | 'json'): bo
   // Try to detect XML
   if (targetFormat === 'json') {
     try {
-      const parser = new DOMParser()
+      const parser = new DOMParserCtor!()
       parser.parseFromString(content, 'text/xml')
       return true // It's valid XML, should convert
     } catch {

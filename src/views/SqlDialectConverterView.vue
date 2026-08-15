@@ -129,10 +129,11 @@ const convert = () => {
 
   if (mapping) {
     for (const [from, to] of Object.entries(mapping)) {
-      if (result.includes(from) || new RegExp(from, 'i').test(result)) {
+      const escapedFrom = from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      if (result.includes(from) || new RegExp(escapedFrom, 'i').test(result)) {
         const before = result
         if (from.startsWith('\\b')) {
-          result = result.replace(new RegExp(from, 'gi'), to)
+          result = result.replace(new RegExp(escapedFrom, 'gi'), to)
         } else {
           result = result.split(from).join(to)
         }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { bls12_381 } from '@noble/curves/bls12-381.js'
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card'
 import CodeEditor from '@/components/CodeEditor.vue'
@@ -23,7 +23,7 @@ const copyField = ref<string | null>(null)
 
 // Generate a random private key
 const generateKey = () => {
-  const key = bls12_381.utils.randomPrivateKey()
+  const key = bls12_381.utils.randomSecretKey()
   privateKeyHex.value = Buffer.from(key).toString('hex')
 }
 
@@ -117,8 +117,10 @@ const copyToClipboard = (text: string, field: string) => {
   setTimeout(() => { copyField.value = null }, 2000)
 }
 
-// Auto-generate key on mount
-generateKey()
+// Auto-generate key on mount (client-only)
+onMounted(() => {
+  generateKey()
+})
 </script>
 
 <template>

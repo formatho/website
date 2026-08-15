@@ -109,6 +109,31 @@ function updateMetaForRoute(path: string, meta: RouteMeta) {
   updateOrCreateMeta('meta[name="twitter:image"]', 'content', image)
 }
 
+// Prerender blog posts (dynamic route) alongside static routes.
+// vite-ssg skips dynamic segments by default, so we fetch concrete blog
+// slugs from Strapi and add them to the prerender list.
+export async function includedRoutes(paths: string[]) {
+  const staticPaths = paths.filter((p) => !p.includes(':') && !p.includes('*'))
+  try {
+    const res = await fetch(
+      `${'https://cms.formatho.com'}/api/blog-posts?fields[0]=slug&pagination[pageSize]=200`,
+      { signal: AbortSignal.timeout(20000) }
+    )
+    if (!res.ok) return staticPaths
+    const data = await res.json()
+    const posts = Array.isArray(data) ? data : data.data || []
+    const blogPaths = posts
+      .map((p: { slug?: string }) => p.slug)
+      .filter(Boolean)
+      .map((slug: string) => `/blogs/${slug}`)
+    console.log(`[ssg] prerendering ${blogPaths.length} blog posts`)
+    return [...staticPaths, ...blogPaths]
+  } catch (err) {
+    console.warn('[ssg] Failed to fetch blog slugs, skipping blog prerender:', err)
+    return staticPaths
+  }
+}
+
 export const createApp = ViteSSG(
   App,
   {

@@ -110,7 +110,7 @@ const twitterHandle = '@heyformatho'
  */
 function generateMetaTags(post) {
   const seo = getBlogSEO(post.slug, post.title, post.excerpt)
-  const fullTitle = `${seo.title} - ${siteName}`
+  const fullTitle = seo.title.includes(siteName) ? seo.title : `${seo.title} - ${siteName}`
   const url = `${baseUrl}/blogs/${post.slug}`
   const image = post.image 
     ? (post.image.startsWith('http') ? post.image : `${baseUrl}${post.image}`)
@@ -264,6 +264,8 @@ function escapeHtml(text) {
  * Meta tag patterns to remove before adding new ones
  */
 const metaTagPatterns = [
+  // Title tag (a single guarded title is re-inserted with the meta block)
+  /<title[^>]*>[^<]*<\/title>\s*/g,
   // Standard meta tags
   /<meta name="title"[^>]*>\s*/g,
   /<meta name="description"[^>]*>\s*/g,
@@ -300,7 +302,7 @@ const metaTagPatterns = [
 /**
  * Update HTML file with blog-specific meta tags
  */
-function updateHtml(htmlPath, metaTags, customTitle = null) {
+function updateHtml(htmlPath, metaTags) {
   try {
     let html = fs.readFileSync(htmlPath, 'utf8')
     
@@ -308,14 +310,6 @@ function updateHtml(htmlPath, metaTags, customTitle = null) {
     metaTagPatterns.forEach(pattern => {
       html = html.replace(pattern, '')
     })
-    
-    // Update title tag if provided
-    if (customTitle) {
-      const titleRegex = /<title>[^<]*<\/title>/
-      if (titleRegex.test(html)) {
-        html = html.replace(titleRegex, `<title>${escapeHtml(customTitle)}</title>`)
-      }
-    }
     
     // Insert new meta tags before </head>
     html = html.replace('</head>', `${metaTags}</head>`)
@@ -349,21 +343,20 @@ async function main() {
   let updatedCount = 0
   let errorCount = 0
   
-  // Update blog listing page (index.html)
-  const indexHtmlPath = path.join(distDir, 'index.html')
-  if (fs.existsSync(indexHtmlPath)) {
-    const listingTitle = 'Developer Guides, Tutorials, and AI Insights | Formatho Blog'
+  // Update blog listing page (blogs.html)
+  const blogsHtmlPath = path.join(distDir, 'blogs.html')
+  if (fs.existsSync(blogsHtmlPath)) {
     const listingMetaTags = generateBlogListingMetaTags(blogPosts)
     
-    if (updateHtml(indexHtmlPath, listingMetaTags, listingTitle)) {
-      console.log(`✅ Updated blog listing: ${indexHtmlPath}`)
+    if (updateHtml(blogsHtmlPath, listingMetaTags)) {
+      console.log(`✅ Updated blog listing: ${blogsHtmlPath}`)
       updatedCount++
     } else {
-      console.error(`❌ Failed to update blog listing: ${indexHtmlPath}`)
+      console.error(`❌ Failed to update blog listing: ${blogsHtmlPath}`)
       errorCount++
     }
   } else {
-    console.log(`⚠️  Blog listing not found: ${indexHtmlPath}`)
+    console.log(`⚠️  Blog listing not found: ${blogsHtmlPath}`)
   }
   
   // Update individual blog post pages
@@ -382,10 +375,9 @@ async function main() {
     }
     
     if (targetPath) {
-      const fullTitle = `${post.title} - ${siteName}`
       const metaTags = generateMetaTags(post)
       
-      if (updateHtml(targetPath, metaTags, fullTitle)) {
+      if (updateHtml(targetPath, metaTags)) {
         console.log(`✅ Updated: ${post.slug}`)
         updatedCount++
       } else {
