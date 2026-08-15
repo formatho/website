@@ -109,37 +109,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://formatho.com/blogs/ai-agent-memory-management-complete-guide</loc>
-    <lastmod>2026-08-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/blogs/from-dead-capital-to-programmable-gold-2026</loc>
     <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://formatho.com/blogs/privacy-first-development-building-user-trust-in-2026</loc>
-    <lastmod>2026-08-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/blogs/developer-tools-that-dont-spy-on-you</loc>
-    <lastmod>2026-08-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/your-ai-agents-keep-losing-tasks-between-sessions</loc>
-    <lastmod>2026-08-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/building-battle-tested-microservices-a-production-readiness-checklist</loc>
     <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -332,12 +308,6 @@
   </url>
   <url>
     <loc>https://formatho.com/blogs/eip-7702-ethereum-pectra-eoa-smart-contract-upgrade</loc>
-    <lastmod>2026-08-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/optimizing-agent-workflows-task-orchestration-productivity</loc>
     <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
