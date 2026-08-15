@@ -55,7 +55,9 @@ function extractToolRoutes() {
  * Generate meta tags for a tool
  */
 function generateMetaTags(tool) {
-  const fullTitle = tool.title ? `${tool.title} - ${siteName}` : `${siteName} - Privacy-First Developer Tools`
+  const fullTitle = tool.title
+    ? (tool.title.includes(siteName) ? tool.title : `${tool.title} - ${siteName}`)
+    : `${siteName} - Privacy-First Developer Tools`
   const url = `${baseUrl}/${tool.path}`
   const image = `${baseUrl}/tools/logo.png`
 
@@ -187,14 +189,9 @@ function updateToolHtml(htmlPath, tool) {
     // Generate new meta tags
     const newMetaTags = generateMetaTags(tool)
 
-    // Find and replace title tag
-    const titleRegex = /<title>[^<]*<\/title>/
-    if (titleRegex.test(html)) {
-      html = html.replace(titleRegex, `<title>${escapeHtml(tool.title || 'Formatho - Privacy-First Developer Tools')} - ${siteName}</title>`)
-    }
-
     // Meta tags to remove (we'll replace them with specific ones)
     const metaTagsToRemove = [
+      /<title[^>]*>[^<]*<\/title>\s*/g,
       /<meta name="title"[^>]*>/g,
       /<meta name="description"[^>]*>/g,
       /<meta name="keywords"[^>]*>/g,

@@ -7,23 +7,45 @@ const strapiUrl = process.env.VITE_STRAPI_URL || 'https://cms.formatho.com'
 const currentDate = new Date().toISOString().split('T')[0]
 
 /**
- * Fetch blog post slugs from Strapi CMS
+ * Fetch blog post slugs from Strapi CMS (with retries — a failed fetch
+ * would silently drop every blog URL from the sitemap)
  */
-async function fetchBlogSlugs() {
+async function fetchBlogSlugs(attempt = 1, maxAttempts = 3) {
   try {
     const res = await fetch(
-      `${strapiUrl}/api/blog-posts?fields[0]=slug&pagination[pageSize]=200`
+      `${strapiUrl}/api/blog-posts?fields[0]=slug&pagination[pageSize]=200`,
+      { signal: AbortSignal.timeout(15000) }
     )
     if (!res.ok) {
-      console.warn(`⚠️  Strapi returned ${res.status}, falling back to empty blog list`)
-      return []
+      throw new Error(`Strapi returned ${res.status}`)
     }
     const data = await res.json()
     const posts = Array.isArray(data) ? data : data.data || []
-    return posts.map((p) => p.slug).filter(Boolean)
+    const slugs = posts.map((p) => p.slug).filter(Boolean)
+    if (slugs.length === 0) {
+      throw new Error('Strapi returned an empty blog list')
+    }
+    return slugs
   } catch (err) {
-    console.warn(`⚠️  Failed to fetch blog slugs from Strapi: ${err.message}`)
-    return []
+    if (attempt < maxAttempts) {
+      console.warn(
+        `⚠️  Attempt ${attempt}/${maxAttempts} failed: ${err.message}. Retrying in 3s...`
+      )
+      await new Promise((r) => setTimeout(r, 3000))
+      return fetchBlogSlugs(attempt + 1, maxAttempts)
+    }
+    console.warn(`⚠️  Failed to fetch blog slugs from Strapi after ${maxAttempts} attempts: ${err.message}`)
+    console.warn('⚠️  Falling back to previously committed sitemap blog entries to avoid dropping URLs')
+    // Fall back to the blog URLs already in the committed sitemap rather
+    // than emitting a sitemap with zero blog entries
+    try {
+      const existing = readFileSync(resolve(process.cwd(), 'public', 'sitemap.xml'), 'utf8')
+      return [...existing.matchAll(/<loc>https:\/\/formatho\.com\/blogs\/([^<]+)<\/loc>/g)].map(
+        (m) => m[1]
+      )
+    } catch {
+      return []
+    }
   }
 }
 
@@ -35,7 +57,7 @@ function parseToolRoutes() {
   const content = readFileSync(routerPath, 'utf8')
 
   const routes = []
-  const routeRegex = /path:\s*['"`](tools\/[^'"`]+)['"`]/g
+  const routeRegex = /path:\s*['"`]\/?(tools\/[^'"`]+)['"`]/g
   let match
   while ((match = routeRegex.exec(content)) !== null) {
     routes.push('/' + match[1])

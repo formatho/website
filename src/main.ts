@@ -1,3 +1,4 @@
+import sitemapRaw from '../public/sitemap.xml?raw'
 import './polyfill'
 
 import { ViteSSG } from 'vite-ssg'
@@ -107,6 +108,25 @@ function updateMetaForRoute(path: string, meta: RouteMeta) {
     updateOrCreateMeta('meta[name="twitter:description"]', 'content', description)
   }
   updateOrCreateMeta('meta[name="twitter:image"]', 'content', image)
+}
+
+// Prerender blog posts (dynamic route) alongside static routes.
+// vite-ssg skips dynamic segments by default, so we fetch concrete blog
+// slugs from Strapi and add them to the prerender list.
+export async function includedRoutes(paths: string[]) {
+  const staticPaths = paths.filter((p) => !p.includes(':') && !p.includes('*'))
+  // Blog slugs are bundled from public/sitemap.xml at build time.
+  // generate-sitemap.js refreshes it (Strapi fetch with retry + fallback)
+  // earlier in the same build, so this never needs a network call or fs access.
+  try {
+    const blogPaths = [...sitemapRaw.matchAll(/<loc>https:\/\/formatho\.com\/blogs\/([^<]+)<\/loc>/g)]
+      .map((m) => `/blogs/${m[1]}`)
+    console.log(`[ssg] prerendering ${blogPaths.length} blog posts from sitemap`)
+    return [...staticPaths, ...blogPaths]
+  } catch (err) {
+    console.warn('[ssg] Could not parse blog slugs from sitemap, skipping blog prerender:', err)
+    return staticPaths
+  }
 }
 
 export const createApp = ViteSSG(

@@ -4,7 +4,7 @@
  * Post-build script to inject JSON-LD structured data into key landing pages
  * that don't get structured data from other inject scripts.
  * 
- * Pages covered: about, contact, pricing, agent-todo, agent-orchestrator, compare, docs/api
+ * Pages covered: about, contact
  */
 
 import fs from 'fs'
@@ -46,45 +46,6 @@ const pages = [
       "publisher": { "@type": "Organization", "name": "Formatho" }
     },
     breadcrumbs: ["Home", "Contact"]
-  },
-  {
-    path: 'pricing.html',
-    schema: {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Pricing - Formatho",
-      "url": "https://formatho.com/pricing",
-      "description": "Formatho pricing plans. Free tools and Pro plans starting at $29/month for AI agent orchestration.",
-      "publisher": { "@type": "Organization", "name": "Formatho" }
-    },
-    breadcrumbs: ["Home", "Pricing"]
-  },
-  {
-    path: 'agent-todo.html',
-    schema: {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Agent Todo - AI Task Management",
-      "url": "https://formatho.com/agent-todo",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Any",
-      "description": "AI-powered task management for agent orchestration. Assign, track, and automate tasks across AI agents.",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "publisher": { "@type": "Organization", "name": "Formatho" }
-    },
-    breadcrumbs: ["Home", "Agent Todo"]
-  },
-  {
-    path: 'compare.html',
-    schema: {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Agent-Todo vs Competitors",
-      "url": "https://formatho.com/compare",
-      "description": "Compare Agent-Todo with Zapier, n8n, and Make. Privacy-first, developer-friendly AI agent task management.",
-      "publisher": { "@type": "Organization", "name": "Formatho" }
-    },
-    breadcrumbs: ["Home", "Compare"]
   }
 ]
 

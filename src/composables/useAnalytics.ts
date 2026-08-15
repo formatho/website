@@ -9,7 +9,6 @@ export function useAnalytics() {
   const trackConversion = (_type: string, _value?: number) => {}
   const trackToolUsage = (_toolName: string, _action: string) => {}
   const trackContactFormSubmitted = () => {}
-  const trackPricingView = () => {}
   const trackEmailCapture = (_source: string) => {}
 
   return {
@@ -19,7 +18,6 @@ export function useAnalytics() {
     trackConversion,
     trackToolUsage,
     trackContactFormSubmitted,
-    trackPricingView,
     trackEmailCapture,
   }
 }
