@@ -57,7 +57,7 @@ function parseToolRoutes() {
   const content = readFileSync(routerPath, 'utf8')
 
   const routes = []
-  const routeRegex = /path:\s*['"`](tools\/[^'"`]+)['"`]/g
+  const routeRegex = /path:\s*['"`]\/?(tools\/[^'"`]+)['"`]/g
   let match
   while ((match = routeRegex.exec(content)) !== null) {
     routes.push('/' + match[1])
