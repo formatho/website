@@ -6,6 +6,7 @@ import { ArrowLeft } from 'lucide-vue-next'
 import { fetchBlogPost, type BlogPost } from '../data/strapi'
 import { getBlogSEO } from '../data/blog-seo-overrides'
 import EmailCapture from '@/components/EmailCapture.vue'
+import { blogToolLinks } from '@/data/blog-tool-links'
 
 const props = defineProps<{
   slug?: string
@@ -29,6 +30,11 @@ const slug = computed(() => {
     }
   }
   return ''
+})
+
+const relatedTools = computed(() => {
+  const slugKey = (route.params.slug as string) || slug.value || ''
+  return blogToolLinks[slugKey] || blogToolLinks[slugKey.toLowerCase()] || []
 })
 
 onMounted(async () => {
@@ -365,6 +371,25 @@ useHead(computed(() => {
         </div>
       </div>
     </template>
+
+    <!-- Related tools: internal links from article to the tools it covers.
+         Outside the loading gate so the links are in the static HTML. -->
+    <div v-if="relatedTools.length" class="container mx-auto px-4 md:px-8 py-12">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-4">Try these tools</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <RouterLink
+            v-for="tool in relatedTools"
+            :key="tool.path"
+            :to="tool.path"
+            class="group border border-foreground/10 rounded-lg p-4 hover:border-primary/50 transition-colors"
+          >
+            <p class="font-semibold group-hover:text-primary transition-colors">{{ tool.name }} &rarr;</p>
+            <p class="text-sm text-muted-foreground mt-1">Free, private, runs in your browser</p>
+          </RouterLink>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
