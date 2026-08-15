@@ -1,0 +1,917 @@
+[
+  {
+    "title": "The End of Context Collapse: How Block's Buzz Redefines the AI Workspace",
+    "slug": "End-Of-Context-Collapse-Block-Buzz-Redefines-AI-Workspace",
+    "excerpt": "\"If Buzz disappears, your identity and signed history still verify. Git remains Git and can be rehosted... A protocol anyone can rebuild is a protocol nobody can lock you into.\"\n\nThe Crisis of Context in Modern Engineering\nFor years, development teams have accepted a highly fragmented reality where work is scattered across a chaotic ecosystem of specialized tools. We chat in one application, host code in another, run continuous integration pipelines in a third, and now deploy AI agents in completely isolated sandboxes. This fragmentation creates \"context collapse\" - where the overarching narrative of a project, from casual architectural debates to debugging histories, disappears into the seams between proprietary silos.\n\nWhile context collapse frustrates human developers, it is fatal for artificial intelligence. AI agents simply cannot assist with what they cannot see.\n\nThe Buzz Solution: A Unified Cryptographic Workspace\nTo solve this bottleneck, Block released Buzz - an open-source, self-hostable workspace built on the decentralized Nostr protocol. Buzz places human developers, AI agents, conversational threads, and raw code on the exact same hierarchical level behind one cryptographic identity system.\n\nKey Architectural Pillars\nSelf-Sovereign Identity: Instead of renting database rows from a centralized SaaS provider, Buzz stores every action - chat messages, code patches, review comments, and merge approvals - as an immutable, cryptographically signed event on a self-hosted relay. You own your domain, your data, and carry your cryptographic keys anywhere.\n\nAI Agents as First-Class Teammates: In Buzz, an AI agent is not a bolted-on integration or a limited bot. Agents hold their own cryptographic keypairs, channel memberships, and immutable audit trails. They can search project history, open repositories, send code patches, and execute CI workflows natively alongside human teammates.\n\nThe \"Branch as Room\" Philosophy: Buzz turns a Git feature branch into a dedicated collaborative room. Code patches, CI results, human code reviews, and agent refactoring suggestions live in the exact same chronological thread as the casual conversation that shaped them. Code review becomes a fluid conversation with a permanent historical record.\n\nModel-Agnostic & Open Source: Released under the Apache 2.0 license, Buzz relies on open standards like the Model Context Protocol (MCP) and Agent Client Protocol (ACP). Teams can seamlessly plug in Block's internal agent framework (Goose), OpenAI's Codex, Anthropic's Claude Code, or any local custom LLM without vendor lock-in.\n\nThe Big Takeaway\nAs software engineering transitions into a future where AI agents execute a massive percentage of daily tasks, they must be brought out of isolated sandboxes and into the core collaborative environment. By building an open-source workspace where human intent, agent execution, and content-addressed code exist on the exact same cryptographic plane, Block has provided the blueprint for the next generation of decentralized software development.",
+    "date": "2026-07-24",
+    "metaDescription": "",
+    "image": "[https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=630&fit=crop](https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=630&fit=crop)",
+    "imageAlt": "Abstract visualization of a connected cryptographic network representing the Block Buzz workspace where developers and AI agents collaborate autonomously.",
+    "tags": [
+      "Buzz",
+      "AI Workspace",
+      "Open Source",
+      "AI Agents",
+      "Developer Tools",
+      "Nostr",
+      "Collaboration",
+      "Decentralization",
+      "Software Engineering"
+    ]
+  },
+  {
+    "title": "Building Index-Tracking Assets on Options Instead of Debt",
+    "slug": "index-tracking-assets-options-not-debt",
+    "excerpt": "Vitalik Buterin proposes a radical rethink of synthetic assets: replace liquidations with options. Here is a deep dive into how it works, why it matters, and what you can build on top of it.",
+    "date": "2026-06-16",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Abstract financial chart showing options-based synthetic asset curves",
+    "tags": [
+      "Ethereum",
+      "DeFi",
+      "Synthetic Assets",
+      "Options",
+      "Crypto Economics"
+    ]
+  },
+  {
+    "title": "The Future of RWA Tokenization: 5 Megatrends Reshaping Finance by 2030",
+    "slug": "future-of-rwa-tokenization-5-megatrends-reshaping-finance-2030",
+    "excerpt": "Discover how Real World Asset (RWA) tokenization is bridging the gap between traditional finance and blockchain. Explore 2030 market predictions for real estate, institutional adoption, and fractional ownership.",
+    "date": "2026-06-06",
+    "metaDescription": "",
+    "image": "/images/blog/blog-57/rwa-megatrends-1.jpg",
+    "imageAlt": "The future of RWA tokenization — 5 megatrends reshaping global finance by 2030",
+    "tags": [
+      "RWA",
+      "Tokenization",
+      "Blockchain",
+      "Finance",
+      "Real Estate",
+      "Institutional",
+      "DeFi"
+    ]
+  },
+  {
+    "title": "Real Estate Tokenization in 2026: Legal Frameworks, SM REITs, and Smart Contract Compliance",
+    "slug": "real-estate-tokenization-legal-frameworks-sm-reits-2026",
+    "excerpt": "Explore how real estate tokenization works in 2026 — from SPV structures and SEBI SM REIT regulations to ERC-3643 compliance-by-design token standards. A practical guide to the legal architecture behind tokenized property.",
+    "date": "2026-06-05",
+    "metaDescription": "",
+    "image": "/images/blog/blog-58/real-estate-tokenization-1.jpg",
+    "imageAlt": "Real estate tokenization — legal frameworks and smart contract compliance in 2026",
+    "tags": [
+      "Real Estate",
+      "Tokenization",
+      "RWA",
+      "Legal",
+      "SM REIT",
+      "SEBI",
+      "Smart Contracts",
+      "ERC-3643"
+    ]
+  },
+  {
+    "title": "The Structural Reconfiguration of Finance: Institutional Guide to Real-World Asset (RWA) Tokenization in 2026",
+    "slug": "structural-reconfiguration-finance-rwa-tokenization-2026",
+    "excerpt": "The IMF calls it a structural reconfiguration of global finance. With $441B in represented value and $27.65B actively trading on-chain, RWA tokenization is no longer theoretical. This institutional guide breaks down the mechanics, regulations, and systemic risks of tokenized finance in 2026.",
+    "date": "2026-06-04",
+    "metaDescription": "",
+    "image": "/images/blog/blog-56/rwa-tokenization.jpg",
+    "imageAlt": "Real-World Asset tokenization — institutional finance meets blockchain",
+    "tags": [
+      "RWA",
+      "Tokenization",
+      "Blockchain",
+      "Finance",
+      "Institutional",
+      "IMF",
+      "Regulation"
+    ]
+  },
+  {
+    "title": "5 Privacy-Focused Developer Tools You Need in 2026",
+    "slug": "5-privacy-focused-developer-tools",
+    "excerpt": "Discover 5 essential privacy-first developer tools for 2026. From client-side converters to end-to-end encrypted notes, protect your data without sacrificing productivity.",
+    "date": "2026-06-01",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=630&fit=crop",
+    "imageAlt": "Privacy-first development with secure developer tools",
+    "tags": [
+      "Privacy",
+      "Developer Tools",
+      "Security",
+      "Data Protection"
+    ]
+  },
+  {
+    "title": "Why RWA, AI, and Privacy Tokens Are Outperforming Bitcoin in 2026",
+    "slug": "why-rwa-ai-privacy-tokens-outperforming-bitcoin-2026",
+    "excerpt": "Discover how institutional investors are shifting from Bitcoin to Real World Assets (RWA), AI infrastructure, and privacy tokens in the 2026 crypto cycle. Explore the market dynamics driving this major shift in investor preferences.",
+    "date": "2026-05-28",
+    "metaDescription": "",
+    "image": "/images/blog/blog-12/header-image.jpg",
+    "imageAlt": "Financial chart showing RWA, AI, and privacy tokens outperforming Bitcoin in 2026",
+    "tags": [
+      "Crypto",
+      "Bitcoin",
+      "RWA",
+      "AI",
+      "Privacy Tokens",
+      "Investment",
+      "Finance"
+    ]
+  },
+  {
+    "title": "CLARITY Act Victory: Regulatory Clarity for $3T Crypto Market",
+    "slug": "clarity-act-victory-regulatory-clarity-3t-crypto-market",
+    "excerpt": "The cryptocurrency industry just achieved a monumental legislative breakthrough that could reshape the future of digital assets in the United States.",
+    "date": "2026-05-20",
+    "metaDescription": "",
+    "image": "/images/blog/blog-38/blockchain-regulation.jpg",
+    "imageAlt": "Blockchain technology and regulatory framework for cryptocurrency",
+    "tags": [
+      "Crypto",
+      "Legislation",
+      "Regulation",
+      "Developers"
+    ]
+  },
+  {
+    "title": "EIP-7702: How Ethereum's Pectra Upgrade Finally Bridges EOAs and Smart Contracts",
+    "slug": "eip-7702-ethereum-pectra-eoa-smart-contract-upgrade",
+    "excerpt": "EIP-7702 is the most significant change to Ethereum accounts since the network launched. It lets regular wallets temporarily become smart contracts — enabling batching, sponsorship, and privilege de-escalation without migrating to a new address. Here is what every developer needs to know.",
+    "date": "2026-05-18",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=225&fit=crop",
+    "imageAlt": "Ethereum EIP-7702 bridging EOAs and smart contracts in the Pectra upgrade",
+    "tags": [
+      "Blockchain",
+      "Ethereum",
+      "EIP-7702",
+      "Account Abstraction",
+      "Smart Contracts",
+      "Pectra"
+    ]
+  },
+  {
+    "title": "ERC-7730: The Clear Signing Standard That Will Transform How You Verify Ethereum Transactions",
+    "slug": "erc-7730-clear-signing-ethereum-standard",
+    "excerpt": "Blind signing is the silent killer of Ethereum security. ERC-7730 introduces a structured, human-readable format for transaction display that makes hardware wallet verification actually reliable. Here is why it matters for every developer building on Ethereum.",
+    "date": "2026-05-12",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=225&fit=crop",
+    "imageAlt": "Ethereum transaction clear signing with ERC-7730 structured data display",
+    "tags": [
+      "Blockchain",
+      "Ethereum",
+      "Security",
+      "ERC-7730",
+      "Wallets",
+      "Smart Contracts"
+    ]
+  },
+  {
+    "title": "Generate QR Codes Without Tracking Pixels: The Privacy-First Guide",
+    "slug": "generate-qr-codes-without-tracking-pixels",
+    "excerpt": "Discover why most free QR generators track your users. Learn how client-side QR code generation protects user privacy and prevents data harvesting.",
+    "date": "2026-05-01",
+    "metaDescription": "",
+    "image": "/images/blog/blog-09/qr-code.jpg",
+    "imageAlt": "QR code representing privacy-first QR generation",
+    "tags": [
+      "QR Codes",
+      "Privacy",
+      "Tracking",
+      "Security"
+    ]
+  },
+  {
+    "title": "From Dead Capital to Programmable Gold: 5 Shifts Redefining the Global Economy in 2026",
+    "slug": "from-dead-capital-to-programmable-gold-2026",
+    "excerpt": "The global financial architecture is currently undergoing its most significant structural upgrade since the advent of electronic trading. We have entered the era of The Great Migration, where trillions of dollars in \"dead capital\"—illiquid assets like private credit, commercial real estate, and bespoke commodities—are being liberated from the friction of analog, intermediary-centric systems.",
+    "date": "2026-04-20",
+    "metaDescription": "",
+    "image": "/images/blog/blog-11/blockchain-settlement.jpg",
+    "imageAlt": "Financial transformation from traditional capital to programmable gold tokens",
+    "tags": [
+      "Blockchain",
+      "DeFi",
+      "Finance",
+      "AI",
+      "Tokenization",
+      "Global Economy"
+    ]
+  },
+  {
+    "title": "AI Meets Blockchain: How Agent Orchestration Could Transform Web3 Development",
+    "slug": "ai-meets-blockchain-agent-orchestration-web3",
+    "excerpt": "After analyzing 25+ research papers, 5,750+ community reactions, and 12 competitor solutions, we found a critical gap in blockchain infrastructure: no general-purpose multi-agent orchestration. Here's what this means for Web3 developers.",
+    "date": "2026-04-16",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=225&fit=crop",
+    "imageAlt": "Blockchain network visualization with AI agent orchestration nodes connecting across Web3 infrastructure",
+    "tags": [
+      "Blockchain",
+      "Web3",
+      "AI Agents",
+      "DeFi",
+      "Agent Orchestration",
+      "Research"
+    ]
+  },
+  {
+    "title": "Beyond the Chatbot: The Rise of Agentic Orchestration and Digital Workforce",
+    "slug": "beyond-the-chatbot-agentic-orchestration-digital-workforce",
+    "excerpt": "The chatbot era is ending. Discover how multi-agent orchestration, digital twins, and browser-native workflows are transforming enterprise AI from conversation tools to autonomous digital workforces.",
+    "date": "2026-04-14",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=225&fit=crop",
+    "imageAlt": "Digital workforce coordination with multi-agent AI orchestration system",
+    "tags": [
+      "AI Agents",
+      "Orchestration",
+      "Productivity",
+      "Enterprise AI",
+      "Browser Automation"
+    ]
+  },
+  {
+    "title": "From Chaos to Order: Managing AI Agent Workloads",
+    "slug": "from-chaos-to-order-managing-ai-agent-workloads",
+    "excerpt": "How persistent task management transformed our AI operations from scattered to systematic. Real results: 90% reduction in duplicate work, 3x faster task completion.",
+    "date": "2026-03-25",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=225&fit=crop",
+    "imageAlt": "Organized AI agent workflow with persistent task management system",
+    "tags": [
+      "AI Agents",
+      "Workflow Management",
+      "Task Management",
+      "Automation",
+      "Productivity"
+    ]
+  },
+  {
+    "title": "Privacy-First Developer Tools: Why Your Data Should Never Leave Your Browser",
+    "slug": "privacy-first-developer-tools-2026",
+    "excerpt": "The data harvesting problem in developer tooling is real. Learn why privacy-first tools matter in 2026 and how client-side processing protects your code, configs, and credentials.",
+    "date": "2026-03-18",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=225&fit=crop",
+    "imageAlt": "Privacy shield representing data protection in developer tools",
+    "tags": [
+      "Privacy",
+      "Security",
+      "Developer Tools",
+      "Open Source",
+      "Best Practices"
+    ]
+  },
+  {
+    "title": "Need Developer Tools That Don't Spy On You?",
+    "slug": "developer-tools-that-dont-spy-on-you",
+    "excerpt": "Discover why most free developer tools harvest your data. Learn about zero-trust, client-side development and the rise of privacy-first tools.",
+    "date": "2026-03-18",
+    "metaDescription": "",
+    "image": "/images/blog/blog-02/cybersecurity.jpg",
+    "imageAlt": "Secure developer workspace with privacy-focused tools",
+    "tags": [
+      "Privacy",
+      "Developer Tools",
+      "Security",
+      "Zero-Trust"
+    ]
+  },
+  {
+    "title": "JSON to YAML Converter: A Practical Guide for DevOps Engineers",
+    "slug": "json-to-yaml-converter-tools",
+    "excerpt": "Master JSON to YAML conversion for Docker Compose, Kubernetes, and CI/CD configs. Learn when to use each format and avoid common conversion pitfalls.",
+    "date": "2026-03-17",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&h=225&fit=crop",
+    "imageAlt": "Data format conversion between JSON and YAML",
+    "tags": [
+      "JSON",
+      "YAML",
+      "DevOps",
+      "Tutorial",
+      "Developer Tools"
+    ]
+  },
+  {
+    "title": "Convert JSON to YAML in 1 Second — No Upload",
+    "slug": "convert-json-to-yaml-no-upload",
+    "excerpt": "Learn why converting JSON to YAML on cloud servers exposes your infrastructure configuration. Discover client-side conversion that keeps your configs private.",
+    "date": "2026-03-17",
+    "metaDescription": "",
+    "image": "/images/blog/blog-04/json-code.jpg",
+    "imageAlt": "Server configuration and data serialization",
+    "tags": [
+      "JSON",
+      "YAML",
+      "Configuration",
+      "Kubernetes"
+    ]
+  },
+  {
+    "title": "JWT Decoder Security Guide: Inspect Tokens Without Risk",
+    "slug": "jwt-decoder-security-guide",
+    "excerpt": "Deep dive into JWT structure, common vulnerabilities, and why you should never paste tokens into online decoders. Learn to inspect JWTs safely.",
+    "date": "2026-03-16",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=225&fit=crop",
+    "imageAlt": "JWT token security and authentication",
+    "tags": [
+      "JWT",
+      "Security",
+      "Authentication",
+      "Tutorial",
+      "Developer Tools"
+    ]
+  },
+  {
+    "title": "Decode JWT Tokens Without Server Exposure",
+    "slug": "decode-jwt-tokens-without-server-exposure",
+    "excerpt": "Learn why pasting JWTs into online decoders exposes your authentication system. Discover client-side JWT decoding that keeps your tokens private.",
+    "date": "2026-03-16",
+    "metaDescription": "",
+    "image": "/images/blog/blog-05/authentication.jpg",
+    "imageAlt": "Authentication token and security visualization",
+    "tags": [
+      "JWT",
+      "Authentication",
+      "Security",
+      "API"
+    ]
+  },
+  {
+    "title": "Format SQL Queries Without Cloud Uploads",
+    "slug": "format-sql-queries-without-cloud-uploads",
+    "excerpt": "Learn why pasting SQL queries into online formatters exposes your database schema. Discover client-side SQL formatting that keeps your queries private.",
+    "date": "2026-03-15",
+    "metaDescription": "",
+    "image": "/images/blog/blog-06/database.jpg",
+    "imageAlt": "Database schema and SQL query visualization",
+    "tags": [
+      "SQL",
+      "Database",
+      "Security",
+      "Privacy"
+    ]
+  },
+  {
+    "title": "SQL Formatter for Security: Spot Vulnerabilities in Plain Sight",
+    "slug": "sql-formatter-security",
+    "excerpt": "Unformatted SQL is a security blind spot. Learn how proper formatting reveals injection vulnerabilities, improves code reviews, and makes your database layer safer.",
+    "date": "2026-03-15",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=400&h=225&fit=crop",
+    "imageAlt": "SQL query formatting for security review",
+    "tags": [
+      "SQL",
+      "Security",
+      "Database",
+      "Tutorial",
+      "Developer Tools"
+    ]
+  },
+  {
+    "title": "Encode/Decode Base64 — Files Never Leave Your Browser",
+    "slug": "encode-decode-base64-files-never-leave-browser",
+    "excerpt": "Learn why Base64 is not encryption and why using online decoders for secrets is dangerous. Discover zero-trust, client-side Base64 encoding.",
+    "date": "2026-03-14",
+    "metaDescription": "",
+    "image": "/images/blog/blog-07/encryption.jpg",
+    "imageAlt": "Encryption and data transformation visualization",
+    "tags": [
+      "Base64",
+      "Encoding",
+      "Security",
+      "Kubernetes"
+    ]
+  },
+  {
+    "title": "Base64 Encoder/Decoder: The Complete Developer Guide",
+    "slug": "base64-encoder-decoder-complete-guide",
+    "excerpt": "Everything you need to know about Base64 encoding — what it is, when to use it (and when not to), common pitfalls, and why your encoding tool should be client-side.",
+    "date": "2026-03-14",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=225&fit=crop",
+    "imageAlt": "Base64 encoding and decoding visualization",
+    "tags": [
+      "Base64",
+      "Encoding",
+      "Tutorial",
+      "Security",
+      "Developer Tools"
+    ]
+  },
+  {
+    "title": "NEW: 100+ Developer Tools — All Free, All Private",
+    "slug": "100-developer-tools-all-free-all-private",
+    "excerpt": "Discover Formatho's expanded toolkit with 100+ free developer tools. Every tool runs 100% locally in your browser. No server calls, no sign-ups, zero data tracking.",
+    "date": "2026-03-13",
+    "metaDescription": "",
+    "image": "/images/blog/blog-03/toolbox.jpg",
+    "imageAlt": "Developer toolkit with privacy-focused utilities",
+    "tags": [
+      "Developer Tools",
+      "Privacy",
+      "Free Tools",
+      "Formatho"
+    ]
+  },
+  {
+    "title": "We Built 100+ Privacy-First Developer Tools. Here's What We Learned.",
+    "slug": "100-plus-developer-tools-launch",
+    "excerpt": "The story behind Formatho's 100+ developer tools — the architecture decisions, the hard trade-offs, and why we chose client-side processing over data harvesting.",
+    "date": "2026-03-13",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=225&fit=crop",
+    "imageAlt": "100+ privacy-first developer tools launch",
+    "tags": [
+      "Developer Tools",
+      "Launch",
+      "Privacy",
+      "Productivity",
+      "Open Source"
+    ]
+  },
+  {
+    "title": "Test Regex Patterns — No More Random Websites",
+    "slug": "test-regex-patterns-securely-2026",
+    "excerpt": "Learn why pasting production data into online regex testers is a security breach. Discover client-side regex testing that keeps your sample data private.",
+    "date": "2026-03-12",
+    "metaDescription": "",
+    "image": "/images/blog/blog-08/regex-pattern.jpg",
+    "imageAlt": "Code patterns on screen representing regular expression testing",
+    "tags": [
+      "Regex",
+      "Security",
+      "Data Privacy",
+      "Testing"
+    ]
+  },
+  {
+    "title": "Regex Tester Security: Patterns That Protect and Patterns That Kill",
+    "slug": "regex-tester-security",
+    "excerpt": "Regular expressions can validate input or bring your server to its knees. Learn about ReDoS attacks, safe regex patterns, and why client-side testing matters.",
+    "date": "2026-03-12",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&h=225&fit=crop",
+    "imageAlt": "Regular expression testing for security",
+    "tags": [
+      "Regex",
+      "Security",
+      "Tutorial",
+      "Developer Tools",
+      "Testing"
+    ]
+  },
+  {
+    "title": "QR Codes Without Tracking: Privacy-First QR Generation",
+    "slug": "qr-codes-without-tracking",
+    "excerpt": "Most free QR code generators track your data. Learn the privacy risks of online QR tools and how client-side generation keeps your information safe.",
+    "date": "2026-03-11",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=400&h=225&fit=crop",
+    "imageAlt": "Privacy-first QR code generation without tracking",
+    "tags": [
+      "QR Codes",
+      "Privacy",
+      "Security",
+      "Tutorial",
+      "Developer Tools"
+    ]
+  },
+  {
+    "title": "UUID Generator Masterclass: Everything You Need to Know About Unique Identifiers",
+    "slug": "uuid-generator-masterclass",
+    "excerpt": "Complete guide to UUIDs — from v1 to v5, security implications of predictable IDs, and how to generate unique identifiers safely in JavaScript and Node.js.",
+    "date": "2026-03-10",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=225&fit=crop",
+    "imageAlt": "Unique identifier generation and UUID variants",
+    "tags": [
+      "UUID",
+      "Security",
+      "JavaScript",
+      "Tutorial",
+      "Developer Tools"
+    ]
+  },
+  {
+    "title": "Generate UUIDs Without Internet Connection: The 2026 Masterclass",
+    "slug": "generate-uuids-without-internet-connection-2026",
+    "excerpt": "Learn why generating UUIDs offline is critical for security. Discover how client-side UUID generation protects your database primary keys from prediction attacks.",
+    "date": "2026-03-10",
+    "metaDescription": "",
+    "image": "/images/blog/blog-10/unique-id.jpg",
+    "imageAlt": "Database server infrastructure representing unique identifiers and primary keys",
+    "tags": [
+      "UUID",
+      "Security",
+      "Offline Tools",
+      "Databases"
+    ]
+  },
+  {
+    "title": "India's #1 Privacy-First Developer Toolkit — The 2026 Blueprint for Data Sovereignty",
+    "slug": "india-privacy-first-developer-toolkit-2026",
+    "excerpt": "Discover how Formatho became India's leading privacy-first developer toolkit with 100+ tools that run entirely in your browser. Zero data uploads. 100% free. No sign-up ever.",
+    "date": "2026-03-09",
+    "metaDescription": "",
+    "image": "/images/blog/blog-01/developer-workspace.jpg",
+    "imageAlt": "Developer workspace with privacy-focused tools and secure data processing",
+    "tags": [
+      "Privacy",
+      "Developer Tools",
+      "Data Security",
+      "Formatho"
+    ]
+  },
+  {
+    "title": "When AI Stops Feeling Like Software and Starts Feeling Like a Real Employee",
+    "slug": "when-ai-stops-feeling-like-software-and-starts-feeling-like-a-real-employee",
+    "excerpt": "A reflection on local AI agents, persistence, and why location matters more than intelligence.",
+    "date": "2026-03-08",
+    "metaDescription": "",
+    "image": "/images/blog/ai-local-agent-banner.jpeg",
+    "imageAlt": "Clawdbot - Local AI Agent Platform",
+    "tags": [
+      "AI Agents",
+      "Local AI",
+      "Infrastructure",
+      "Technology"
+    ]
+  },
+  {
+    "title": "Inside Meta's AI Restructuring: The Race for Applied Superintelligence",
+    "slug": "meta-ai-restructuring-applied-superintelligence-2026",
+    "excerpt": "Meta's radical 2026 reorganization reveals the strategic tensions and architectural decisions shaping the AI industry. Here's what it means for the future of enterprise AI.",
+    "date": "2026-03-07",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Abstract neural network visualization representing AI research and superintelligence",
+    "tags": [
+      "Meta",
+      "AI Industry",
+      "Technology",
+      "Enterprise"
+    ]
+  },
+  {
+    "title": "UUID v1 vs v4: Which Should You Use?",
+    "slug": "uuid-v1-vs-v4",
+    "excerpt": "Understanding the key differences between UUID versions and when to use each for your projects.",
+    "date": "2026-03-07",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Database server racks representing unique identifier storage and management",
+    "tags": [
+      "UUID",
+      "Databases",
+      "Best Practices"
+    ]
+  },
+  {
+    "title": "AI and Job Safety: The 22 Careers Most Protected From Automation",
+    "slug": "ai-job-safety-22-careers-anthropic-research",
+    "excerpt": "New research from Anthropic reveals a massive gap between theoretical AI capability and actual workplace deployment. Discover which of 22 job categories remain most insulated from AI disruption.",
+    "date": "2026-03-07",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Human and robot hand reaching towards each other, representing AI and human collaboration in the workplace",
+    "tags": [
+      "AI",
+      "Career",
+      "Future of Work",
+      "Research"
+    ]
+  },
+  {
+    "title": "The Strategic Horizon of AI Agent Orchestration: Your 2026 Career Blueprint",
+    "slug": "ai-agent-orchestration-career-blueprint-2026",
+    "excerpt": "A comprehensive guide to building a career in AI Agent Orchestration. Learn the tech stack, frameworks, and skills that matter for the autonomous multi-agent revolution.",
+    "date": "2026-03-07",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Artificial Intelligence robot brain representing autonomous AI agent systems",
+    "tags": [
+      "AI Agents",
+      "Career",
+      "Technology",
+      "Enterprise AI"
+    ]
+  },
+  {
+    "title": "How Bcrypt Hashing Keeps Your User Passwords Safe",
+    "slug": "bcrypt-password-hashing-guide",
+    "excerpt": "A deep dive into bcrypt, the industry-standard password hashing algorithm.",
+    "date": "2026-03-06",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Digital padlock representing password security and encryption",
+    "tags": [
+      "Security",
+      "Passwords",
+      "Bcrypt"
+    ]
+  },
+  {
+    "title": "A Developer's Guide to Encoding and Decoding Base64",
+    "slug": "base64-encoding-guide",
+    "excerpt": "Everything you need to know about Base64 encoding, from basic concepts to advanced use cases.",
+    "date": "2026-03-05",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Programming code on screen representing data encoding and transformation",
+    "tags": [
+      "Encoding",
+      "Base64",
+      "Web Dev"
+    ]
+  },
+  {
+    "title": "Why You Should Use ULIDs Instead of UUIDs in Your Database",
+    "slug": "ulids-vs-uuids",
+    "excerpt": "Discover how ULIDs combine the benefits of UUIDs with time-based sorting.",
+    "date": "2026-03-04",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Programming code on screen representing data encoding and transformation",
+    "tags": [
+      "ULID",
+      "UUID",
+      "Databases"
+    ]
+  },
+  {
+    "title": "Understanding JWT Tokens: A Complete Guide",
+    "slug": "jwt-tokens-complete-guide",
+    "excerpt": "Learn how JSON Web Tokens work and common security pitfalls to avoid.",
+    "date": "2026-03-03",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Database dashboard representing time-sorted data and unique identifiers",
+    "tags": [
+      "JWT",
+      "Authentication",
+      "Security"
+    ]
+  },
+  {
+    "title": "SQL Formatting Best Practices for Readable Code",
+    "slug": "sql-formatting-best-practices",
+    "excerpt": "Learn why properly formatted SQL matters and discover the conventions that make your queries easier to read.",
+    "date": "2026-03-02",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1610986603166-c78b5296f239?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Authentication security token and key concept",
+    "tags": [
+      "SQL",
+      "Best Practices",
+      "Code Quality"
+    ]
+  },
+  {
+    "title": "QR Codes Explained: How They Work and When to Use Them",
+    "slug": "qr-codes-explained",
+    "excerpt": "Discover the technology behind QR codes and learn best practices.",
+    "date": "2026-03-01",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "SQL database query on computer screen",
+    "tags": [
+      "QR Codes",
+      "Mobile",
+      "Marketing"
+    ]
+  },
+  {
+    "title": "Regular Expressions: A Practical Cheat Sheet",
+    "slug": "regex-practical-guide",
+    "excerpt": "Master regex with this practical guide covering common patterns and real-world examples.",
+    "date": "2026-02-28",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1595079676339-1534801ad6cf?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "QR code being scanned with smartphone",
+    "tags": [
+      "Regex",
+      "Text Processing",
+      "Reference"
+    ]
+  },
+  {
+    "title": "Ethereum Unit Converter: Wei, Gwei, and Ether Explained",
+    "slug": "ethereum-units-explained",
+    "excerpt": "Understanding Ethereum denominations is crucial for blockchain development.",
+    "date": "2026-02-27",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Code patterns and regular expressions on screen",
+    "tags": [
+      "Ethereum",
+      "Web3",
+      "Blockchain"
+    ]
+  },
+  {
+    "title": "Crontab Generator: Mastering Scheduled Tasks",
+    "slug": "crontab-guide",
+    "excerpt": "Learn how cron expressions work and best practices for scheduling automated tasks.",
+    "date": "2026-02-26",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Ethereum blockchain cryptocurrency network visualization",
+    "tags": [
+      "Cron",
+      "Automation",
+      "DevOps"
+    ]
+  },
+  {
+    "title": "Understanding HTTP Status Codes Every Developer Should Know",
+    "slug": "http-status-codes-guide",
+    "excerpt": "A comprehensive guide to HTTP status codes and how to use them correctly.",
+    "date": "2026-02-25",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Calendar and clock representing scheduled tasks and cron jobs",
+    "tags": [
+      "HTTP",
+      "API",
+      "Web Dev"
+    ]
+  },
+  {
+    "title": "JSON vs YAML vs TOML: Which Config Format Should You Use?",
+    "slug": "json-yaml-toml-comparison",
+    "excerpt": "Compare the three most popular configuration file formats.",
+    "date": "2026-02-24",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Server room representing HTTP status and web infrastructure",
+    "tags": [
+      "JSON",
+      "YAML",
+      "Config"
+    ]
+  },
+  {
+    "title": "Password Security: How Strong is Your Password Really?",
+    "slug": "password-security-guide",
+    "excerpt": "Learn what makes a password secure and how attackers crack them.",
+    "date": "2026-02-23",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Code configuration files on developer screen",
+    "tags": [
+      "Security",
+      "Passwords",
+      "Authentication"
+    ]
+  },
+  {
+    "title": "IPv4 Subnetting Made Simple",
+    "slug": "ipv4-subnetting-guide",
+    "excerpt": "Master IPv4 subnetting with this practical guide.",
+    "date": "2026-02-22",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Digital security lock representing password protection",
+    "tags": [
+      "Networking",
+      "IPv4",
+      "DevOps"
+    ]
+  },
+  {
+    "title": "Case Conversion: camelCase, snake_case, and Beyond",
+    "slug": "case-conversion-guide",
+    "excerpt": "Navigate the world of text case conventions.",
+    "date": "2026-02-21",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Network infrastructure representing IP addressing and subnets",
+    "tags": [
+      "Naming",
+      "Conventions",
+      "Code Style"
+    ]
+  },
+  {
+    "title": "Understanding Cryptographic Hashes: MD5, SHA-1, SHA-256",
+    "slug": "cryptographic-hashes-guide",
+    "excerpt": "Learn how cryptographic hash functions work and which ones are safe.",
+    "date": "2026-02-20",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Programming code showing text case formatting",
+    "tags": [
+      "Cryptography",
+      "Hashing",
+      "Security"
+    ]
+  },
+  {
+    "title": "Markdown Tips and Tricks for Better Documentation",
+    "slug": "markdown-tips-tricks",
+    "excerpt": "Level up your Markdown skills with advanced formatting and best practices.",
+    "date": "2026-02-19",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Cryptographic hash visualization with binary code",
+    "tags": [
+      "Markdown",
+      "Documentation",
+      "Writing"
+    ]
+  },
+  {
+    "title": "Git Commands You Should Know by Heart",
+    "slug": "git-commands-cheat-sheet",
+    "excerpt": "Essential Git commands for everyday development.",
+    "date": "2026-02-18",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Markdown documentation on laptop screen",
+    "tags": [
+      "Git",
+      "Version Control",
+      "Dev Tools"
+    ]
+  },
+  {
+    "title": "Understanding Color Formats: HEX, RGB, HSL Explained",
+    "slug": "color-formats-guide",
+    "excerpt": "Navigate color formats for web development.",
+    "date": "2026-02-17",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Git version control branching visualization",
+    "tags": [
+      "CSS",
+      "Colors",
+      "Design"
+    ]
+  },
+  {
+    "title": "Docker Run to Docker Compose: A Migration Guide",
+    "slug": "docker-run-to-compose",
+    "excerpt": "Learn how to convert docker run commands to docker-compose.yml.",
+    "date": "2026-02-16",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Color palette representing HEX RGB HSL color formats",
+    "tags": [
+      "Docker",
+      "DevOps",
+      "Containers"
+    ]
+  },
+  {
+    "title": "BIP39 Mnemonic Phrases: Understanding Seed Words",
+    "slug": "bip39-mnemonic-guide",
+    "excerpt": "Learn how BIP39 mnemonic phrases work for cryptocurrency wallets.",
+    "date": "2026-02-15",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Docker container shipping representing containerization",
+    "tags": [
+      "Crypto",
+      "BIP39",
+      "Security"
+    ]
+  },
+  {
+    "title": "Text Encoding vs Encryption: Know the Difference",
+    "slug": "encoding-vs-encryption",
+    "excerpt": "A critical distinction - encoding is not encryption.",
+    "date": "2026-02-14",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Cryptocurrency wallet seed words security concept",
+    "tags": [
+      "Security",
+      "Encryption",
+      "Encoding"
+    ]
+  },
+  {
+    "title": "Understanding Unix File Permissions: chmod Calculator",
+    "slug": "unix-file-permissions",
+    "excerpt": "Demystify Unix file permissions with this guide.",
+    "date": "2026-02-13",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Lock and key representing encryption vs encoding security",
+    "tags": [
+      "Linux",
+      "Permissions",
+      "DevOps"
+    ]
+  }
+]

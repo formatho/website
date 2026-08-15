@@ -22,28 +22,50 @@ const STRAPI_URL = process.env.VITE_STRAPI_URL || 'https://cms.formatho.com'
 /**
  * Fetch all blog posts from Strapi CMS
  */
+const CACHE_PATH = path.join(__dirname, 'blog-meta-cache.json')
+
 async function fetchBlogPosts() {
-  const res = await fetch(
-    `${STRAPI_URL}/api/blog-posts?fields[0]=title&fields[1]=slug&fields[2]=excerpt&fields[3]=date&fields[4]=tags&fields[5]=image&fields[6]=imageAlt&pagination[pageSize]=200&sort=date:desc`
-  )
+  try {
+    const res = await fetch(
+      `${STRAPI_URL}/api/blog-posts?fields[0]=title&fields[1]=slug&fields[2]=excerpt&fields[3]=date&fields[4]=tags&fields[5]=image&fields[6]=imageAlt&pagination[pageSize]=200&sort=date:desc`,
+      { signal: AbortSignal.timeout(20000) }
+    )
 
-  if (!res.ok) {
-    throw new Error(`Strapi returned ${res.status}: ${res.statusText}`)
+    if (!res.ok) {
+      throw new Error(`Strapi returned ${res.status}: ${res.statusText}`)
+    }
+
+    const data = await res.json()
+    const posts = Array.isArray(data) ? data : data.data || []
+
+    // Normalize tags from comma-separated string to array
+    const normalized = posts.map((s) => ({
+      title: s.title,
+      slug: s.slug,
+      excerpt: s.excerpt || '',
+      date: s.date || '',
+      metaDescription: s.metaDescription || '',
+      image: s.image || '',
+      imageAlt: s.imageAlt || '',
+      tags: s.tags ? s.tags.split(',').map((t) => t.trim()).filter(Boolean) : [],
+    }))
+
+    // Refresh the committed cache so CI builds work when Strapi is unreachable
+    try {
+      fs.writeFileSync(CACHE_PATH, JSON.stringify(normalized, null, 2))
+    } catch { /* cache write is best-effort */ }
+
+    return normalized
+  } catch (err) {
+    // CI builds regularly cannot reach cms.formatho.com - fall back to cache
+    try {
+      const cached = JSON.parse(fs.readFileSync(CACHE_PATH, 'utf8'))
+      console.warn(`⚠️  Strapi unreachable (${err.message}). Using cached blog metadata (${cached.length} posts).`)
+      return cached
+    } catch {
+      throw new Error(`Strapi unreachable (${err.message}) and no cache available`)
+    }
   }
-
-  const data = await res.json()
-  const posts = Array.isArray(data) ? data : data.data || []
-
-  // Normalize tags from comma-separated string to array
-  return posts.map((s) => ({
-    title: s.title,
-    slug: s.slug,
-    excerpt: s.excerpt || '',
-    date: s.date || '',
-    image: s.image || '',
-    imageAlt: s.imageAlt || '',
-    tags: s.tags ? s.tags.split(',').map((t) => t.trim()).filter(Boolean) : [],
-  }))
 }
 
 /**
