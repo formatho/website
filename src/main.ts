@@ -1,3 +1,4 @@
+import sitemapRaw from '../public/sitemap.xml?raw'
 import './polyfill'
 
 import { ViteSSG } from 'vite-ssg'
@@ -114,22 +115,16 @@ function updateMetaForRoute(path: string, meta: RouteMeta) {
 // slugs from Strapi and add them to the prerender list.
 export async function includedRoutes(paths: string[]) {
   const staticPaths = paths.filter((p) => !p.includes(':') && !p.includes('*'))
+  // Blog slugs are bundled from public/sitemap.xml at build time.
+  // generate-sitemap.js refreshes it (Strapi fetch with retry + fallback)
+  // earlier in the same build, so this never needs a network call or fs access.
   try {
-    const res = await fetch(
-      `${'https://cms.formatho.com'}/api/blog-posts?fields[0]=slug&pagination[pageSize]=200`,
-      { signal: AbortSignal.timeout(20000) }
-    )
-    if (!res.ok) return staticPaths
-    const data = await res.json()
-    const posts = Array.isArray(data) ? data : data.data || []
-    const blogPaths = posts
-      .map((p: { slug?: string }) => p.slug)
-      .filter(Boolean)
-      .map((slug: string) => `/blogs/${slug}`)
-    console.log(`[ssg] prerendering ${blogPaths.length} blog posts`)
+    const blogPaths = [...sitemapRaw.matchAll(/<loc>https:\/\/formatho\.com\/blogs\/([^<]+)<\/loc>/g)]
+      .map((m) => `/blogs/${m[1]}`)
+    console.log(`[ssg] prerendering ${blogPaths.length} blog posts from sitemap`)
     return [...staticPaths, ...blogPaths]
   } catch (err) {
-    console.warn('[ssg] Failed to fetch blog slugs, skipping blog prerender:', err)
+    console.warn('[ssg] Could not parse blog slugs from sitemap, skipping blog prerender:', err)
     return staticPaths
   }
 }

@@ -344,7 +344,7 @@ async function main() {
   let errorCount = 0
   
   // Update blog listing page (blogs.html)
-  const blogsHtmlPath = path.join(distDir, 'blogs.html')
+  const blogsHtmlPath = path.join(__dirname, '..', 'dist', 'blogs.html')
   if (fs.existsSync(blogsHtmlPath)) {
     const listingMetaTags = generateBlogListingMetaTags(blogPosts)
     
