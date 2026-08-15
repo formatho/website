@@ -243,42 +243,6 @@ export const blogMetadata: BlogMetadata[] = [
     imageAlt: 'Unique identifier generation and UUID variants'
   },
   {
-    id: 40,
-    title: 'From Chaos to Order: Managing AI Agent Workloads',
-    excerpt:
-      'How persistent task management transformed our AI operations from scattered to systematic. Real results: 90% reduction in duplicate work, 3x faster task completion.',
-    date: '2026-03-25',
-    readTime: '6 min',
-    tags: ['AI Agents', 'Workflow Management', 'Task Management', 'Automation', 'Productivity'],
-    slug: 'from-chaos-to-order-managing-ai-agent-workloads',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=225&fit=crop',
-    imageAlt: 'Organized AI agent workflow with persistent task management system'
-  },
-  {
-    id: 39,
-    title: 'Agent-Todo vs Traditional Task Managers: What\'s Different?',
-    excerpt:
-      'Why AI agents need purpose-built task management. Compare Agent-Todo with Todoist, Asana, and Trello — API-first design, agent memory, and 10x better automation.',
-    date: '2026-03-26',
-    readTime: '8 min',
-    tags: ['AI Agents', 'Task Management', 'Comparison', 'Productivity', 'Automation'],
-    slug: 'building-battle-tested-microservices-a-production-readiness-checklist',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=225&fit=crop',
-    imageAlt: 'Split screen showing traditional task manager UI versus API code interface'
-  },
-  {
-    id: 38,
-    title: 'Why AI Agents Need Their Own Task Management System',
-    excerpt:
-      'Your AI agents forget everything between sessions. Discover how persistent task management transforms agent productivity with 10x output gains.',
-    date: '2026-03-26',
-    readTime: '7 min',
-    tags: ['AI Agents', 'Task Management', 'Productivity', 'Privacy', 'Automation'],
-    slug: 'privacy-first-development-building-user-trust-in-2026',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=225&fit=crop',
-    imageAlt: 'AI agents managing tasks in a persistent queue system'
-  },
-  {
     id: 59,
     title: '5 Privacy-Focused Developer Tools You Need in 2026',
     excerpt:

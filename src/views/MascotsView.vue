@@ -3,14 +3,13 @@
 // AgentGPT-style AI workspace with Bento Box grid layout
 // Version: 2.0.0 - Complete UI Overhaul
 
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { mascotSvgs, mascotMetadata, type MascotName } from '@/assets/mascot-assets'
 import { useAgentCouncil } from '@/store/useAgentCouncil'
-import AgentLog from '@/components/AgentLog.vue'
 
 // Agent Council Store Integration
 const council = useAgentCouncil()
-const { isRunning, triggerCouncil, stopCouncil, isAgentActive, messageQueue: _messageQueue, currentPhase } = council
+const { isRunning, triggerCouncil, stopCouncil, isAgentActive, messageQueue: _messageQueue } = council
 
 // Command Center State
 const workflowPrompt = ref('')
@@ -117,21 +116,6 @@ const handleStop = () => {
   stopCouncil()
   isSubmitting.value = false
 }
-
-// Phase label
-const phaseLabel = computed(() => {
-  const labels: Record<string, string> = {
-    idle: 'Ready',
-    planning: 'Planning',
-    building: 'Building',
-    connecting: 'Connecting',
-    remembering: 'Processing',
-    guiding: 'Guiding',
-    complete: 'Complete',
-    generate_task: 'Done'
-  }
-  return labels[currentPhase.value] || 'Ready'
-})
 </script>
 
 <template>
@@ -188,19 +172,6 @@ const phaseLabel = computed(() => {
             <span>Documentation</span>
           </a>
         </nav>
-
-        <!-- Agent Log (Moved from main content) -->
-        <div class="sidebar-log">
-          <div class="log-header">
-            <div class="log-status">
-              <span class="status-dot" :class="{ active: isRunning }"></span>
-              <span>Council Log</span>
-            </div>
-            <span class="phase-badge">{{ phaseLabel }}</span>
-          </div>
-          
-          <AgentLog />
-        </div>
 
         <!-- Footer -->
         <div class="sidebar-footer">
@@ -586,67 +557,6 @@ const phaseLabel = computed(() => {
 
 .nav-item.active svg {
   opacity: 1;
-}
-
-/* Sidebar Log Section */
-.sidebar-log {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  min-height: 0;
-}
-
-.log-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 0.25rem;
-}
-
-.log-status {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.75rem;
-  color: #94a3b8;
-}
-
-.status-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #64748b;
-  transition: all 0.3s ease;
-}
-
-.status-dot.active {
-  background: #22c55e;
-  box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
-  animation: pulse-dot 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-.phase-badge {
-  font-size: 0.65rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  background: rgba(99, 102, 241, 0.2);
-  color: #a5b4fc;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* Override AgentLog styling for sidebar */
-.sidebar-log :deep(.agent-log) {
-  background: rgba(20, 20, 28, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
-  max-height: 400px;
 }
 
 /* Sidebar Footer */

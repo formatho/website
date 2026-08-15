@@ -36,42 +36,6 @@ export const routes = [
         }
       },
       {
-        path: 'docs/api',
-        name: 'api-docs',
-        component: () => import(/* webpackPrefetch: true */ '../views/docs/ApiDocsView.vue'),
-        meta: {
-          title: 'API Documentation | Formatho',
-          description:
-            'Comprehensive REST API documentation. Interactive examples, authentication guides, and code snippets in JavaScript, Python, and Go.',
-          keywords:
-            'api documentation, rest api, developer docs, interactive api, code examples'
-        }
-      },
-      {
-        path: 'beta',
-        name: 'beta',
-        component: () => import(/* webpackPrefetch: true */ '../views/BetaView.vue'),
-        meta: {
-          title: 'Beta Program | Formatho',
-          description:
-            'Become a founding beta tester. Get 6 months free Pro tier ($294 value) and shape the future of AI agent automation.',
-          keywords:
-            'beta tester, early access, free pro tier, ai agents, developer tools beta'
-        }
-      },
-      {
-        path: 'compare',
-        name: 'compare',
-        component: () => import(/* webpackPrefetch: true */ '../views/CompareView.vue'),
-        meta: {
-          title: 'Agent-Todo vs Zapier, n8n, Make - Comparison | Formatho',
-          description:
-            'Compare Agent-Todo with Zapier, n8n, and Make. See why Agent-Todo is the privacy-first, developer-friendly choice for AI agent task management.',
-          keywords:
-            'zapier alternative, n8n alternative, make alternative, agent todo comparison, privacy first automation, ai agent task management'
-        }
-      },
-      {
         path: 'blogs',
         name: 'blogs',
         component: () => import(/* webpackPrefetch: true */ '../views/BlogsView.vue'),
@@ -571,30 +535,6 @@ export const routes = [
             'Privacy-first identity verification for developers. Coming soon from Formatho.',
           keywords:
             'identity verification, get verified, privacy-first, developer verification, trustless'
-        }
-      },
-      {
-        path: 'pricing',
-        name: 'pricing',
-        component: () => import(/* webpackPrefetch: true */ '../views/PricingView.vue'),
-        meta: {
-          title: 'Pricing - Formatho Agent Todo & Tools',
-          description:
-            'Simple, transparent pricing for Formatho Agent Todo. Start free with 3 agents, upgrade to Pro for unlimited power. No hidden fees.',
-          keywords:
-            'formatho pricing, agent todo pricing, ai agent task management pricing, developer tools pricing'
-        }
-      },
-      {
-        path: 'agent-todo',
-        name: 'agent-todo',
-        component: () => import(/* webpackPrefetch: true */ '../views/AgentTodoLandingView.vue'),
-        meta: {
-          title: 'Agent-Todo - Task Management for AI Agents',
-          description:
-            'Persistent task management built for AI agents. Stop losing context between sessions. Keep your AI workforce organized and productive.',
-          keywords:
-            'ai agent tasks, agent todo, task management for ai, persistent tasks, agent memory, ai workforce'
         }
       },
 
