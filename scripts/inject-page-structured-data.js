@@ -33,7 +33,10 @@ const pages = [
         "sameAs": ["https://twitter.com/heyformatho", "https://github.com/nnn-gif/tools"]
       }
     },
-    breadcrumbs: ["Home", "About"]
+    breadcrumbs: [
+      { name: "Home", url: "https://formatho.com/" },
+      { name: "About", url: "https://formatho.com/about" }
+    ]
   },
   {
     path: 'contact.html',
@@ -45,18 +48,22 @@ const pages = [
       "description": "Get in touch with the Formatho team for support, partnerships, or feedback.",
       "publisher": { "@type": "Organization", "name": "Formatho" }
     },
-    breadcrumbs: ["Home", "Contact"]
+    breadcrumbs: [
+      { name: "Home", url: "https://formatho.com/" },
+      { name: "Contact", url: "https://formatho.com/contact" }
+    ]
   }
 ]
 
-function generateBreadcrumbs(names) {
+function generateBreadcrumbs(entries) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": names.map((name, i) => ({
+    "itemListElement": entries.map((entry, i) => ({
       "@type": "ListItem",
       "position": i + 1,
-      "name": name
+      "name": entry.name,
+      "item": entry.url
     }))
   }
 }
