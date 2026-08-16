@@ -238,22 +238,6 @@
     ]
   },
   {
-    "title": "From Chaos to Order: Managing AI Agent Workloads",
-    "slug": "from-chaos-to-order-managing-ai-agent-workloads",
-    "excerpt": "How persistent task management transformed our AI operations from scattered to systematic. Real results: 90% reduction in duplicate work, 3x faster task completion.",
-    "date": "2026-03-25",
-    "metaDescription": "",
-    "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=225&fit=crop",
-    "imageAlt": "Organized AI agent workflow with persistent task management system",
-    "tags": [
-      "AI Agents",
-      "Workflow Management",
-      "Task Management",
-      "Automation",
-      "Productivity"
-    ]
-  },
-  {
     "title": "Privacy-First Developer Tools: Why Your Data Should Never Leave Your Browser",
     "slug": "privacy-first-developer-tools-2026",
     "excerpt": "The data harvesting problem in developer tooling is real. Learn why privacy-first tools matter in 2026 and how client-side processing protects your code, configs, and credentials.",
@@ -409,21 +393,6 @@
     ]
   },
   {
-    "title": "NEW: 100+ Developer Tools — All Free, All Private",
-    "slug": "100-developer-tools-all-free-all-private",
-    "excerpt": "Discover Formatho's expanded toolkit with 100+ free developer tools. Every tool runs 100% locally in your browser. No server calls, no sign-ups, zero data tracking.",
-    "date": "2026-03-13",
-    "metaDescription": "",
-    "image": "/images/blog/blog-03/toolbox.jpg",
-    "imageAlt": "Developer toolkit with privacy-focused utilities",
-    "tags": [
-      "Developer Tools",
-      "Privacy",
-      "Free Tools",
-      "Formatho"
-    ]
-  },
-  {
     "title": "We Built 100+ Privacy-First Developer Tools. Here's What We Learned.",
     "slug": "100-plus-developer-tools-launch",
     "excerpt": "The story behind Formatho's 100+ developer tools — the architecture decisions, the hard trade-offs, and why we chose client-side processing over data harvesting.",
@@ -440,18 +409,18 @@
     ]
   },
   {
-    "title": "Test Regex Patterns — No More Random Websites",
-    "slug": "test-regex-patterns-securely-2026",
-    "excerpt": "Learn why pasting production data into online regex testers is a security breach. Discover client-side regex testing that keeps your sample data private.",
-    "date": "2026-03-12",
+    "title": "NEW: 100+ Developer Tools — All Free, All Private",
+    "slug": "100-developer-tools-all-free-all-private",
+    "excerpt": "Discover Formatho's expanded toolkit with 100+ free developer tools. Every tool runs 100% locally in your browser. No server calls, no sign-ups, zero data tracking.",
+    "date": "2026-03-13",
     "metaDescription": "",
-    "image": "/images/blog/blog-08/regex-pattern.jpg",
-    "imageAlt": "Code patterns on screen representing regular expression testing",
+    "image": "/images/blog/blog-03/toolbox.jpg",
+    "imageAlt": "Developer toolkit with privacy-focused utilities",
     "tags": [
-      "Regex",
-      "Security",
-      "Data Privacy",
-      "Testing"
+      "Developer Tools",
+      "Privacy",
+      "Free Tools",
+      "Formatho"
     ]
   },
   {
@@ -467,6 +436,21 @@
       "Security",
       "Tutorial",
       "Developer Tools",
+      "Testing"
+    ]
+  },
+  {
+    "title": "Test Regex Patterns — No More Random Websites",
+    "slug": "test-regex-patterns-securely-2026",
+    "excerpt": "Learn why pasting production data into online regex testers is a security breach. Discover client-side regex testing that keeps your sample data private.",
+    "date": "2026-03-12",
+    "metaDescription": "",
+    "image": "/images/blog/blog-08/regex-pattern.jpg",
+    "imageAlt": "Code patterns on screen representing regular expression testing",
+    "tags": [
+      "Regex",
+      "Security",
+      "Data Privacy",
       "Testing"
     ]
   },
@@ -487,6 +471,21 @@
     ]
   },
   {
+    "title": "Generate UUIDs Without Internet Connection: The 2026 Masterclass",
+    "slug": "generate-uuids-without-internet-connection-2026",
+    "excerpt": "Learn why generating UUIDs offline is critical for security. Discover how client-side UUID generation protects your database primary keys from prediction attacks.",
+    "date": "2026-03-10",
+    "metaDescription": "",
+    "image": "/images/blog/blog-10/unique-id.jpg",
+    "imageAlt": "Database server infrastructure representing unique identifiers and primary keys",
+    "tags": [
+      "UUID",
+      "Security",
+      "Offline Tools",
+      "Databases"
+    ]
+  },
+  {
     "title": "UUID Generator Masterclass: Everything You Need to Know About Unique Identifiers",
     "slug": "uuid-generator-masterclass",
     "excerpt": "Complete guide to UUIDs — from v1 to v5, security implications of predictable IDs, and how to generate unique identifiers safely in JavaScript and Node.js.",
@@ -500,21 +499,6 @@
       "JavaScript",
       "Tutorial",
       "Developer Tools"
-    ]
-  },
-  {
-    "title": "Generate UUIDs Without Internet Connection: The 2026 Masterclass",
-    "slug": "generate-uuids-without-internet-connection-2026",
-    "excerpt": "Learn why generating UUIDs offline is critical for security. Discover how client-side UUID generation protects your database primary keys from prediction attacks.",
-    "date": "2026-03-10",
-    "metaDescription": "",
-    "image": "/images/blog/blog-10/unique-id.jpg",
-    "imageAlt": "Database server infrastructure representing unique identifiers and primary keys",
-    "tags": [
-      "UUID",
-      "Security",
-      "Offline Tools",
-      "Databases"
     ]
   },
   {
@@ -548,32 +532,18 @@
     ]
   },
   {
-    "title": "Inside Meta's AI Restructuring: The Race for Applied Superintelligence",
-    "slug": "meta-ai-restructuring-applied-superintelligence-2026",
-    "excerpt": "Meta's radical 2026 reorganization reveals the strategic tensions and architectural decisions shaping the AI industry. Here's what it means for the future of enterprise AI.",
+    "title": "The Strategic Horizon of AI Agent Orchestration: Your 2026 Career Blueprint",
+    "slug": "ai-agent-orchestration-career-blueprint-2026",
+    "excerpt": "A comprehensive guide to building a career in AI Agent Orchestration. Learn the tech stack, frameworks, and skills that matter for the autonomous multi-agent revolution.",
     "date": "2026-03-07",
     "metaDescription": "",
-    "image": "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1200&q=80&auto=format&fit=crop",
-    "imageAlt": "Abstract neural network visualization representing AI research and superintelligence",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Artificial Intelligence robot brain representing autonomous AI agent systems",
     "tags": [
-      "Meta",
-      "AI Industry",
+      "AI Agents",
+      "Career",
       "Technology",
-      "Enterprise"
-    ]
-  },
-  {
-    "title": "UUID v1 vs v4: Which Should You Use?",
-    "slug": "uuid-v1-vs-v4",
-    "excerpt": "Understanding the key differences between UUID versions and when to use each for your projects.",
-    "date": "2026-03-07",
-    "metaDescription": "",
-    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop",
-    "imageAlt": "Database server racks representing unique identifier storage and management",
-    "tags": [
-      "UUID",
-      "Databases",
-      "Best Practices"
+      "Enterprise AI"
     ]
   },
   {
@@ -592,18 +562,32 @@
     ]
   },
   {
-    "title": "The Strategic Horizon of AI Agent Orchestration: Your 2026 Career Blueprint",
-    "slug": "ai-agent-orchestration-career-blueprint-2026",
-    "excerpt": "A comprehensive guide to building a career in AI Agent Orchestration. Learn the tech stack, frameworks, and skills that matter for the autonomous multi-agent revolution.",
+    "title": "UUID v1 vs v4: Which Should You Use?",
+    "slug": "uuid-v1-vs-v4",
+    "excerpt": "Understanding the key differences between UUID versions and when to use each for your projects.",
     "date": "2026-03-07",
     "metaDescription": "",
-    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80&auto=format&fit=crop",
-    "imageAlt": "Artificial Intelligence robot brain representing autonomous AI agent systems",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Database server racks representing unique identifier storage and management",
     "tags": [
-      "AI Agents",
-      "Career",
+      "UUID",
+      "Databases",
+      "Best Practices"
+    ]
+  },
+  {
+    "title": "Inside Meta's AI Restructuring: The Race for Applied Superintelligence",
+    "slug": "meta-ai-restructuring-applied-superintelligence-2026",
+    "excerpt": "Meta's radical 2026 reorganization reveals the strategic tensions and architectural decisions shaping the AI industry. Here's what it means for the future of enterprise AI.",
+    "date": "2026-03-07",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Abstract neural network visualization representing AI research and superintelligence",
+    "tags": [
+      "Meta",
+      "AI Industry",
       "Technology",
-      "Enterprise AI"
+      "Enterprise"
     ]
   },
   {

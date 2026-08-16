@@ -5,6 +5,7 @@ import Footer from '@/components/Footer.vue'
 // REMOVED: import LiveSiteAnalytics from '@/components/LiveSiteAnalytics.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 import QABadge from '@/components/QABadge.vue'
+import ToolSEOContent from '@/components/ToolSEOContent.vue'
 import { computed, watch, onMounted, onUnmounted, ref } from 'vue'
 import { tools } from '@/data/tools'
 
@@ -217,6 +218,7 @@ onUnmounted(removeToolSchema)
       </Transition>
 
       <RouterView v-show="!isLoading" @vue:mounted="onComponentReady" />
+      <ToolSEOContent />
     </main>
     <Footer />
     <QABadge />

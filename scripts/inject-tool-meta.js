@@ -58,7 +58,7 @@ function generateMetaTags(tool) {
   const fullTitle = tool.title
     ? (tool.title.includes(siteName) ? tool.title : `${tool.title} - ${siteName}`)
     : `${siteName} - Privacy-First Developer Tools`
-  const url = `${baseUrl}/${tool.path}`
+  const url = tool.path.startsWith('/') ? `${baseUrl}${tool.path}` : `${baseUrl}/${tool.path}`
   const image = `${baseUrl}/tools/logo.png`
 
   return `

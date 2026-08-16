@@ -96,7 +96,7 @@ export const routes = [
         name: 'markdown',
         component: MarkdownView,
         meta: {
-          title: 'Markdown Editor',
+          title: 'Markdown Editor Online - Live Preview, GFM | Formatho',
           description:
             'Edit and preview Markdown files in real-time. Privacy-first markdown editor that runs 100% client-side in your browser.',
           keywords:
@@ -108,7 +108,7 @@ export const routes = [
         name: 'tools-markdown',
         component: MarkdownView,
         meta: {
-          title: 'Markdown Editor',
+          title: 'Markdown Editor Online - Live Preview, GFM | Formatho',
           description:
             'Edit and preview Markdown files in real-time. Privacy-first markdown editor that runs 100% client-side in your browser.',
           keywords:
@@ -302,7 +302,7 @@ export const routes = [
         name: 'bpmn',
         component: () => import(/* webpackPrefetch: true */ '../views/BpmnView.vue'),
         meta: {
-          title: 'BPMN Viewer & PDF Exporter',
+          title: 'BPMN Viewer Online - Open & Export BPMN as PDF | Formatho',
           description:
             'Visualize BPMN 2.0 diagrams and export them as PDF. Free, privacy-first BPMN viewer that runs entirely in your browser.',
           keywords:
@@ -315,7 +315,7 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/BpmnToVisioConverterView.vue'),
         meta: {
-          title: 'BPMN to Visio Converter',
+          title: 'BPMN to Visio Converter Online - Free | Formatho',
           description:
             'Convert BPMN process diagrams into Microsoft Visio compatible formats. Free, privacy-first converter that runs entirely in your browser.',
           keywords:
@@ -328,7 +328,7 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/tools/VisioViewer.vue'),
         meta: {
-          title: 'Visio File Viewer',
+          title: 'Visio Viewer Online - Open VSDX Files in Browser | Formatho',
           description:
             'View Microsoft Visio diagrams (.vsdx, .vsd) directly in your browser. Free, privacy-first Visio viewer that runs entirely client-side.',
           keywords:
@@ -352,7 +352,7 @@ export const routes = [
         name: 'bls-signature',
         component: () => import(/* webpackPrefetch: true */ '../views/BlsSignatureView.vue'),
         meta: {
-          title: 'BLS Signatures — Generate, Verify & Aggregate',
+          title: 'BLS12-381 Signature Generator & Verifier Online | Formatho',
           description:
             'Generate BLS12-381 signatures, verify signatures, and aggregate multiple signatures into one. 100% client-side, privacy-first.',
           keywords: 'bls signature, bls12-381, aggregate signatures, threshold signatures, boneh lynn shacham, ethereum consensus'
@@ -399,7 +399,7 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/AddressFromPrivateKeyView.vue'),
         meta: {
-          title: 'Address from Private Key (Multi-Chain)',
+          title: 'Private Key to Address Converter - ETH, BTC, SOL | Formatho',
           description:
             'Derive addresses for Ethereum, Bitcoin, Solana, and more from a private key. Runs entirely in browser.',
           keywords:
@@ -477,7 +477,7 @@ export const routes = [
         name: 'tools-agent-identity-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/tools/AgentIdentityView.vue'),
         meta: {
-          title: 'AI Agent Identity Generator',
+          title: 'AI Agent Identity Generator - Free | Formatho',
           description:
             'Instantly generate unique personas, traits, and system prompts for AI agents.',
           keywords:
@@ -494,7 +494,7 @@ export const routes = [
         name: 'tools-local-token-counter',
         component: () => import(/* webpackPrefetch: true */ '../views/LocalTokenCounterView.vue'),
         meta: {
-          title: 'Local Token Counter',
+          title: 'LLM Token Counter - Local & Private Tokenizer | Formatho',
           description:
             'Client-side LLM token counter. 100% private, no API calls. Count tokens for text input using local JavaScript.',
           keywords:
@@ -564,7 +564,7 @@ export const routes = [
         name: 'bip39-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/Bip39GeneratorView.vue'),
         meta: {
-          title: 'BIP39 Mnemonic Generator',
+          title: 'BIP39 Mnemonic Generator Online - 12 & 24 Word Seeds | Formatho',
           description:
             'Generate BIP39 mnemonic phrases and derive seeds. Privacy-first crypto tool.'
         }
@@ -574,7 +574,7 @@ export const routes = [
         name: 'crypto-forecasts',
         component: () => import(/* webpackPrefetch: true */ '../views/CryptoForecastsView.vue'),
         meta: {
-          title: 'AI-Powered Crypto Price Forecasts',
+          title: 'AI Crypto Price Forecasts - BTC, ETH, SOL 30-Day | Formatho',
           description:
             '30-day crypto price predictions using Google TimesFM 2.5. Privacy-first AI forecasts for BTC, ETH, SOL, and more.'
         }
@@ -584,7 +584,7 @@ export const routes = [
         name: 'hmac-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/HmacGeneratorView.vue'),
         meta: {
-          title: 'HMAC Generator',
+          title: 'HMAC Generator Online - SHA256, SHA512 & More | Formatho',
           description: 'Generate HMAC hashes using various algorithms. Privacy-first tool.'
         }
       },
@@ -593,7 +593,7 @@ export const routes = [
         name: 'rsa-key-pair-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/RsaKeyPairGeneratorView.vue'),
         meta: {
-          title: 'RSA Key Pair Generator',
+          title: 'RSA Key Pair Generator Online - 2048 & 4096 Bit | Formatho',
           description: 'Generate RSA public/private key pairs. Privacy-first crypto tool.'
         }
       },
@@ -603,7 +603,7 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/PasswordStrengthAnalyserView.vue'),
         meta: {
-          title: 'Password Strength Analyzer',
+          title: 'Password Strength Checker & Analyzer Online | Formatho',
           description: 'Analyze password strength and security. Privacy-first tool.'
         }
       },
@@ -612,7 +612,7 @@ export const routes = [
         name: 'pdf-signature-checker',
         component: () => import(/* webpackPrefetch: true */ '../views/PdfSignatureCheckerView.vue'),
         meta: {
-          title: 'PDF Signature Checker',
+          title: 'PDF Signature Checker - Validate Digital Signatures | Formatho',
           description: 'Check and validate digital signatures in PDF files. Privacy-first tool.'
         }
       },
@@ -623,7 +623,7 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/IntegerBaseConverterView.vue'),
         meta: {
-          title: 'Integer Base Converter',
+          title: 'Number Base Converter - Binary, Hex, Octal, Decimal | Formatho',
           description: 'Convert numbers between binary, octal, decimal, and hexadecimal.'
         }
       },
@@ -633,7 +633,7 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/RomanNumeralConverterView.vue'),
         meta: {
-          title: 'Roman Numeral Converter',
+          title: 'Roman Numeral Converter Online - Free | Formatho',
           description: 'Convert between Roman numerals and numbers.'
         }
       },
@@ -642,7 +642,7 @@ export const routes = [
         name: 'base64-file-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/Base64FileConverterView.vue'),
         meta: {
-          title: 'Base64 File Converter',
+          title: 'Base64 File Converter Online - Encode & Decode Files | Formatho',
           description: 'Convert files to and from Base64 format. Privacy-first tool.'
         }
       },
@@ -651,7 +651,7 @@ export const routes = [
         name: 'text-to-nato-alphabet',
         component: () => import(/* webpackPrefetch: true */ '../views/TextToNatoAlphabetView.vue'),
         meta: {
-          title: 'Text to NATO Alphabet',
+          title: 'Text to NATO Alphabet Converter Online - Free | Formatho',
           description: 'Convert text to NATO phonetic alphabet.'
         }
       },
@@ -660,7 +660,7 @@ export const routes = [
         name: 'text-to-unicode',
         component: () => import(/* webpackPrefetch: true */ '../views/TextToUnicodeView.vue'),
         meta: {
-          title: 'Text to Unicode Converter',
+          title: 'Text to Unicode Converter Online - Free | Formatho',
           description: 'Convert text to Unicode code points and HTML entities.'
         }
       },
@@ -669,7 +669,7 @@ export const routes = [
         name: 'yaml-to-toml',
         component: () => import(/* webpackPrefetch: true */ '../views/YamlToTomlView.vue'),
         meta: {
-          title: 'YAML to TOML Converter',
+          title: 'YAML to TOML Converter Online - Free | Formatho',
           description: 'Convert YAML configuration files to TOML format.'
         }
       },
@@ -684,7 +684,7 @@ export const routes = [
         name: 'list-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/ListConverterView.vue'),
         meta: {
-          title: 'List Converter',
+          title: 'List Converter Online - Comma, Newline, JSON | Formatho',
           description: 'Convert lists between different formats (comma, newline, JSON, etc).'
         }
       },
@@ -693,7 +693,7 @@ export const routes = [
         name: 'toml-to-json',
         component: () => import(/* webpackPrefetch: true */ '../views/TomlToJsonView.vue'),
         meta: {
-          title: 'TOML to JSON Converter',
+          title: 'TOML to JSON Converter Online - Free | Formatho',
           description: 'Convert TOML configuration files to JSON format.'
         }
       },
@@ -702,7 +702,7 @@ export const routes = [
         name: 'toml-to-yaml',
         component: () => import(/* webpackPrefetch: true */ '../views/TomlToYamlView.vue'),
         meta: {
-          title: 'TOML to YAML Converter',
+          title: 'TOML to YAML Converter Online - Free | Formatho',
           description: 'Convert TOML configuration files to YAML format.'
         }
       },
@@ -726,7 +726,7 @@ export const routes = [
         name: 'markdown-to-html',
         component: () => import(/* webpackPrefetch: true */ '../views/MarkdownToHtmlView.vue'),
         meta: {
-          title: 'Markdown to HTML Converter',
+          title: 'Markdown to HTML Converter Online - Free | Formatho',
           description: 'Convert Markdown to HTML with syntax highlighting.'
         }
       },
@@ -736,7 +736,7 @@ export const routes = [
         name: 'url-encoder',
         component: () => import(/* webpackPrefetch: true */ '../views/UrlEncoderView.vue'),
         meta: {
-          title: 'URL Encoder/Decoder',
+          title: 'URL Encoder & Decoder Online - Free | Formatho',
           description: 'Encode and decode URL strings. Privacy-first tool.'
         }
       },
@@ -745,7 +745,7 @@ export const routes = [
         name: 'url-parser',
         component: () => import(/* webpackPrefetch: true */ '../views/URLParserView.vue'),
         meta: {
-          title: 'URL Parser',
+          title: 'URL Parser Online - Split & Inspect URLs | Formatho',
           description: 'Parse and analyze URLs to extract components.'
         }
       },
@@ -754,7 +754,7 @@ export const routes = [
         name: 'html-entities',
         component: () => import(/* webpackPrefetch: true */ '../views/HtmlEntitiesView.vue'),
         meta: {
-          title: 'HTML Entities Encoder/Decoder',
+          title: 'HTML Entities Encoder & Decoder Online - Free | Formatho',
           description: 'Encode and decode HTML entities.'
         }
       },
@@ -769,7 +769,7 @@ export const routes = [
         name: 'basic-auth-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/BasicAuthGeneratorView.vue'),
         meta: {
-          title: 'HTTP Basic Auth Generator',
+          title: 'HTTP Basic Auth Header Generator Online - Free | Formatho',
           description: 'Generate HTTP Basic Authentication headers.'
         }
       },
@@ -778,7 +778,7 @@ export const routes = [
         name: 'meta-tag-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/MetaTagGeneratorView.vue'),
         meta: {
-          title: 'Meta Tag Generator',
+          title: 'Meta Tag Generator Online - SEO & Open Graph | Formatho',
           description: 'Generate HTML meta tags for SEO and social sharing.'
         }
       },
@@ -787,7 +787,7 @@ export const routes = [
         name: 'otp-code-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/OtpCodeGeneratorView.vue'),
         meta: {
-          title: 'OTP/TOTP Generator',
+          title: 'TOTP Generator Online - 2FA OTP Codes | Formatho',
           description: 'Generate TOTP codes from secrets. Privacy-first tool.'
         }
       },
@@ -827,7 +827,7 @@ export const routes = [
         name: 'json-diff',
         component: () => import(/* webpackPrefetch: true */ '../views/JsonDiffView.vue'),
         meta: {
-          title: 'JSON Diff',
+          title: 'JSON Diff Checker - Compare JSON Online | Formatho',
           description: 'Compare and find differences between JSON objects.'
         }
       },
@@ -854,7 +854,7 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/SvgPlaceholderGeneratorView.vue'),
         meta: {
-          title: 'SVG Placeholder Generator',
+          title: 'SVG Placeholder Generator Online - Free | Formatho',
           description: 'Generate SVG placeholder images.'
         }
       },
@@ -880,7 +880,7 @@ export const routes = [
         name: 'random-port-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/RandomPortGeneratorView.vue'),
         meta: {
-          title: 'Random Port Generator',
+          title: 'Random Port Generator Online - Free | Formatho',
           description: 'Generate random port numbers for development.'
         }
       },
@@ -907,7 +907,7 @@ export const routes = [
         name: 'docker-run-to-compose',
         component: () => import(/* webpackPrefetch: true */ '../views/DockerRunToComposeView.vue'),
         meta: {
-          title: 'Docker Run to Compose',
+          title: 'Docker Run to Compose Converter Online - Free | Formatho',
           description: 'Convert docker run commands to docker-compose.yml.'
         }
       },
@@ -940,7 +940,7 @@ export const routes = [
         name: 'regex-memo',
         component: () => import(/* webpackPrefetch: true */ '../views/RegexMemoView.vue'),
         meta: {
-          title: 'Regex Cheat Sheet',
+          title: 'Regex Cheat Sheet - Patterns & Syntax Reference | Formatho',
           description: 'Regular expression patterns and syntax reference.'
         }
       },
@@ -958,7 +958,7 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/Ipv4AddressConverterView.vue'),
         meta: {
-          title: 'IPv4 Address Converter',
+          title: 'IPv4 Address Converter - Decimal, Binary, Hex | Formatho',
           description: 'Convert IPv4 addresses to different formats.'
         }
       },
@@ -967,7 +967,7 @@ export const routes = [
         name: 'ipv4-range-expander',
         component: () => import(/* webpackPrefetch: true */ '../views/Ipv4RangeExpanderView.vue'),
         meta: {
-          title: 'IPv4 Range Expander',
+          title: 'IPv4 Range Expander - Expand CIDR to IP List | Formatho',
           description: 'Expand IPv4 address ranges to individual IPs.'
         }
       },
@@ -976,7 +976,7 @@ export const routes = [
         name: 'mac-address-lookup',
         component: () => import(/* webpackPrefetch: true */ '../views/MacAddressLookupView.vue'),
         meta: {
-          title: 'MAC Address Lookup',
+          title: 'MAC Address Lookup - Find Vendor by MAC | Formatho',
           description: 'Look up MAC address vendor information.'
         }
       },
@@ -1025,7 +1025,7 @@ export const routes = [
         name: 'text-statistics',
         component: () => import(/* webpackPrefetch: true */ '../views/TextStatisticsView.vue'),
         meta: {
-          title: 'Text Statistics',
+          title: 'Text Statistics Counter - Words, Chars, Reading Time | Formatho',
           description: 'Analyze text statistics (characters, words, etc).'
         }
       },
@@ -1082,7 +1082,7 @@ export const routes = [
         name: 'crontab-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/CrontabGeneratorView.vue'),
         meta: {
-          title: 'Crontab Generator',
+          title: 'Crontab Generator Online - Free Cron Expression Builder | Formatho',
           description: 'Generate cron expressions with visual builder.'
         }
       },
@@ -1120,7 +1120,7 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/PercentageCalculatorView.vue'),
         meta: {
-          title: 'Percentage Calculator',
+          title: 'Percentage Calculator Online - Free | Formatho',
           description: 'Calculate percentages, increases, and decreases.'
         }
       },
@@ -1146,7 +1146,7 @@ export const routes = [
         name: 'xml-json',
         component: () => import(/* webpackPrefetch: true */ '../views/tools/XmlJsonConverter.vue'),
         meta: {
-          title: 'XML ↔ JSON Converter',
+          title: 'XML to JSON Converter Online - Free & Bidirectional | Formatho',
           description:
             'Bi-directional XML to JSON converter with real-time conversion and clipboard support. 100% client-side, zero server API calls.'
         }
@@ -1156,7 +1156,7 @@ export const routes = [
         name: 'ulid-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/ULIDGeneratorView.vue'),
         meta: {
-          title: 'ULID Generator',
+          title: 'ULID Generator Online - Free & Sortable IDs | Formatho',
           description: 'Generate Universally Unique Lexicographically Sortable Identifiers.'
         }
       },
@@ -1174,7 +1174,7 @@ export const routes = [
         name: 'date-time-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/DateTimeConverterView.vue'),
         meta: {
-          title: 'Date-Time Converter',
+          title: 'Date & Time Converter Online - Unix, ISO 8601, UTC | Formatho',
           description: 'Convert dates and times between formats.'
         }
       },
@@ -1183,7 +1183,7 @@ export const routes = [
         name: 'unix-timestamp',
         component: () => import(/* webpackPrefetch: true */ '../views/UnixTimestampView.vue'),
         meta: {
-          title: 'Unix Timestamp Converter',
+          title: 'Unix Timestamp Converter Online - Epoch to Date | Formatho',
           description: 'Convert Unix timestamps to human-readable dates and vice versa. Live clock with current time in both formats.'
         }
       },
@@ -1192,7 +1192,7 @@ export const routes = [
         name: 'color-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/ColorConverterView.vue'),
         meta: {
-          title: 'Color Converter',
+          title: 'Color Converter Online - HEX, RGB, HSL | Formatho',
           description: 'Convert colors between HEX, RGB, HSL formats.'
         }
       },
@@ -1201,7 +1201,7 @@ export const routes = [
         name: 'text-to-binary',
         component: () => import(/* webpackPrefetch: true */ '../views/TextToBinaryView.vue'),
         meta: {
-          title: 'Text to Binary Converter',
+          title: 'Text to Binary Converter Online - Free | Formatho',
           description: 'Convert text to binary and vice versa.'
         }
       },
@@ -1210,7 +1210,7 @@ export const routes = [
         name: 'http-status-codes',
         component: () => import(/* webpackPrefetch: true */ '../views/HTTPStatusCodesView.vue'),
         meta: {
-          title: 'HTTP Status Codes',
+          title: 'HTTP Status Codes Reference - All Codes Explained | Formatho',
           description: 'Reference for HTTP status codes and meanings.'
         }
       },
