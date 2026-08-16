@@ -37,12 +37,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://formatho.com/agent-identity-generator</loc>
-    <lastmod>2026-08-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/agents</loc>
     <lastmod>2026-08-16</lastmod>
     <changefreq>monthly</changefreq>
