@@ -25,7 +25,7 @@ onMounted(() => {
     '@type': 'SoftwareApplication',
     name: props.title,
     description: props.description || `${props.title} - Free online privacy-first developer tool by Formatho`,
-    url: `https://formatho.com/tools${window.location.pathname}`,
+    url: `https://formatho.com${window.location.pathname}`,
     applicationCategory: 'DeveloperApplication',
     operatingSystem: 'Any',
     offers: {

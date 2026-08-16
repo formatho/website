@@ -246,13 +246,13 @@ const _popularTools = [
               class="h-20 w-20 rounded-xl shadow-2xl ring-2 ring-primary/20"
               data-v-8d4ed633=""
             />
-            <h1 class="text-5xl md:text-7xl font-bold tracking-tight gradient-text" data-v-8d4ed633="">
+            <p class="text-5xl md:text-7xl font-bold tracking-tight gradient-text" data-v-8d4ed633="">
               Formatho
-            </h1>
+            </p>
           </div>
-          <p class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight" data-aos="fade-down" data-aos-delay="100" data-v-8d4ed633="">
+          <h1 class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight" data-aos="fade-down" data-aos-delay="100" data-v-8d4ed633="">
             Developer Tools: 100+ Free. Zero Tracking. Fully Private.
-          </p>
+          </h1>
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="200" data-v-8d4ed633="">
             JSON formatter, Base64 encoder, JWT debugger, hash generator, and more. <strong class="text-foreground">Everything runs in your browser.</strong> No server uploads. No sign-up. No data collection.
           </p>
