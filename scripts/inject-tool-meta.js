@@ -37,7 +37,7 @@ function extractToolRoutes() {
     const description = match[4]
     const keywords = match[5] || ''
 
-    if (routePath && routePath !== 'blogs' && !routePath.includes(':')) {
+    if (routePath && routePath.startsWith('/tools/') && !routePath.includes(':')) {
       routes.push({
         path: routePath,
         name: routeName,
