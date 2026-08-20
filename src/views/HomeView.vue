@@ -257,7 +257,7 @@ const _popularTools = [
             The complete developer toolkit that runs entirely in your browser
           </h1>
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="200" data-v-8d4ed633="">
-            Format SQL and YAML, decode JWTs, hash with Keccak-256, lint Helm charts, generate vanity addresses — built for <strong class="text-foreground">blockchain, DevOps, enterprise, security, and SRE</strong> workflows. Everything runs in your browser: no uploads, no accounts, no tracking.
+            Format SQL and YAML, decode JWTs, hash with Keccak-256, lint Helm charts, generate vanity addresses — built for <strong class="text-foreground">blockchain, DevOps, enterprise, security, and SRE</strong> workflows. No uploads, no accounts, no tracking.
           </p>
           <div class="flex flex-wrap gap-4 justify-center items-center mt-6" data-v-8d4ed633="">
             <div
@@ -272,7 +272,7 @@ const _popularTools = [
                   <path d="M9 12l2 2 4-4"></path>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> {{ toolCount }} free tools · no account needed </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> {{ toolCount }} free tools </span>
             </div>
             <div
               class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
@@ -287,7 +287,7 @@ const _popularTools = [
                   <line x1="12" y1="8" x2="12" y2="12"></line>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> No account, no uploads </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> No uploads, ever </span>
             </div>
             <div
               class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
