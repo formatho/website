@@ -204,11 +204,11 @@ async function copy(text: string, key: string) {
       </CardContent>
     </Card>
 
-    <div class="flex items-start gap-3 p-4 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-900/30 rounded-lg">
-      <AlertTriangle class="w-5 h-5 text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
+    <div class="flex items-start gap-3 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+      <AlertTriangle class="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
       <div class="text-sm">
-        <p class="font-semibold text-yellow-800 dark:text-yellow-300">Use for testing and throwaway accounts</p>
-        <p class="text-yellow-700 dark:text-yellow-400/80 mt-1">
+        <p class="font-semibold text-yellow-800">Use for testing and throwaway accounts</p>
+        <p class="text-yellow-700 mt-1">
           Although this generator runs entirely in your browser, best practice for holding real funds is to
           generate keys on an air-gapped device or hardware wallet. Never share a private key.
         </p>
