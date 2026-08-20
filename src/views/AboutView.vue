@@ -134,50 +134,92 @@ useSEO({
           <!-- Left: Large Statement -->
           <div class="md:col-span-4">
             <p class="text-xs font-medium tracking-widest text-muted-foreground mb-4">
-              WHAT WE BUILT
+              WHO IT'S FOR
             </p>
             <h3 class="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-8">
               One Hundred<br />Tools. Zero<br />Servers.
             </h3>
             <p class="text-muted-foreground leading-relaxed max-w-md">
-              A complete developer toolkit that treats your browser as the only server it will ever need — organized into focused categories, all free, with no account required.
+              A complete developer toolkit that treats your browser as the only server it will ever need. Whatever stack you build on, there is a Formatho tool in your workflow.
             </p>
           </div>
 
           <!-- Right: Agent Roles -->
           <div class="md:col-span-8 md:border-l md:border-foreground/10 md:pl-16">
-            <p class="text-sm text-muted-foreground leading-relaxed mb-10">
-              Every category solves a real part of the developer workflow, locally:
+            <p class="text-sm text-muted-foreground leading-relaxed mb-8">
+              Whatever your stack, the tools are already here — free, private, and one click away:
             </p>
 
-            <div class="space-y-10">
-              <!-- Agent Role 1 -->
-              <div class="border-b border-foreground/10 pb-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="border border-foreground/10 rounded-lg p-6">
                 <p class="text-xs font-medium tracking-widest text-muted-foreground mb-2">01</p>
-                <h4 class="text-xl md:text-2xl font-bold tracking-tight leading-tight mb-3">
-                  Data &amp; Logic Tools
-                </h4>
-                <p class="text-muted-foreground leading-relaxed">
-                  Formatters, validators, and converters for JSON, YAML, SQL, XML, TOML, and Markdown.
-                </p>
+                <h4 class="text-lg font-bold tracking-tight leading-tight mb-2">Ethereum & Web3</h4>
+                <p class="text-sm text-muted-foreground leading-relaxed mb-4">ABI calls, address safety, and unit math — keys never leave your machine.</p>
+                <div class="flex flex-wrap gap-2">
+                  <RouterLink to="/tools/keccak256" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">Keccak-256</RouterLink>
+                  <RouterLink to="/tools/abi-encoder" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">ABI Encoder</RouterLink>
+                  <RouterLink to="/tools/address-checksum" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">EIP-55 Checksum</RouterLink>
+                  <RouterLink to="/tools/evm-converter" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">Wei / Gwei / ETH</RouterLink>
+                </div>
               </div>
 
-              <!-- Agent Role 2 -->
-              <div class="border-b border-foreground/10 pb-10">
+              <div class="border border-foreground/10 rounded-lg p-6">
                 <p class="text-xs font-medium tracking-widest text-muted-foreground mb-2">02</p>
-                <h4 class="text-xl md:text-2xl font-bold tracking-tight leading-tight mb-3">
-                  Crypto &amp; Security Tools
-                </h4>
-                <p class="text-muted-foreground leading-relaxed">
-                  Hashing, encryption, JWT inspection, and password analysis using real cryptographic libraries in your browser.
-                </p>
+                <h4 class="text-lg font-bold tracking-tight leading-tight mb-2">Kubernetes & DevOps</h4>
+                <p class="text-sm text-muted-foreground leading-relaxed mb-4">Manifests, Helm values, and cron schedules that lint and convert instantly.</p>
+                <div class="flex flex-wrap gap-2">
+                  <RouterLink to="/tools/yaml-lint" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">YAML Linter</RouterLink>
+                  <RouterLink to="/tools/json-yaml" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">JSON ↔ YAML</RouterLink>
+                  <RouterLink to="/tools/docker-run-to-compose" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">Docker → Compose</RouterLink>
+                  <RouterLink to="/tools/crontab-generator" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">Cron Builder</RouterLink>
+                </div>
               </div>
 
-              <!-- Collaboration Statement -->
-              <div>
-                <p class="text-muted-foreground leading-relaxed">
-                  Plus a deep Web3 and blockchain suite: Keccak-256 hashing, ABI encoding, EVM unit conversion, multi-chain key derivation, and Solidity compilation — all client-side, so keys and payloads never leave your machine.
-                </p>
+              <div class="border border-foreground/10 rounded-lg p-6">
+                <p class="text-xs font-medium tracking-widest text-muted-foreground mb-2">03</p>
+                <h4 class="text-lg font-bold tracking-tight leading-tight mb-2">SAP & Enterprise Integration</h4>
+                <p class="text-sm text-muted-foreground leading-relaxed mb-4">PI/PO payloads, API responses, and exports business users can open.</p>
+                <div class="flex flex-wrap gap-2">
+                  <RouterLink to="/tools/xml-formatter" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">XML Formatter</RouterLink>
+                  <RouterLink to="/tools/json-lint" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">JSON Validator</RouterLink>
+                  <RouterLink to="/tools/json-csv" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">JSON → CSV</RouterLink>
+                  <RouterLink to="/tools/jwt" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">JWT Decoder</RouterLink>
+                </div>
+              </div>
+
+              <div class="border border-foreground/10 rounded-lg p-6">
+                <p class="text-xs font-medium tracking-widest text-muted-foreground mb-2">04</p>
+                <h4 class="text-lg font-bold tracking-tight leading-tight mb-2">Security Engineers</h4>
+                <p class="text-sm text-muted-foreground leading-relaxed mb-4">Hash, encrypt, and audit credentials with zero server exposure.</p>
+                <div class="flex flex-wrap gap-2">
+                  <RouterLink to="/tools/hash-text" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">Argon2 / Bcrypt</RouterLink>
+                  <RouterLink to="/tools/encryption" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">AES Encrypt</RouterLink>
+                  <RouterLink to="/tools/rsa-key-pair-generator" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">RSA Keygen</RouterLink>
+                  <RouterLink to="/tools/password-strength-analyser" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">Password Audit</RouterLink>
+                </div>
+              </div>
+
+              <div class="border border-foreground/10 rounded-lg p-6">
+                <p class="text-xs font-medium tracking-widest text-muted-foreground mb-2">05</p>
+                <h4 class="text-lg font-bold tracking-tight leading-tight mb-2">Data & Backend Engineers</h4>
+                <p class="text-sm text-muted-foreground leading-relaxed mb-4">SQL you can read, schemas you can see, and data you can move.</p>
+                <div class="flex flex-wrap gap-2">
+                  <RouterLink to="/tools/sql" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">SQL Formatter</RouterLink>
+                  <RouterLink to="/tools/sql-to-er-diagram" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">SQL → ER Diagram</RouterLink>
+                  <RouterLink to="/tools/json-diff" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">JSON Diff</RouterLink>
+                  <RouterLink to="/tools/uuid" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">UUID Generator</RouterLink>
+                </div>
+              </div>
+
+              <div class="border border-foreground/10 rounded-lg p-6">
+                <p class="text-xs font-medium tracking-widest text-muted-foreground mb-2">06</p>
+                <h4 class="text-lg font-bold tracking-tight leading-tight mb-2">AI & LLM Engineers</h4>
+                <p class="text-sm text-muted-foreground leading-relaxed mb-4">Count tokens privately and render agent-generated diagrams.</p>
+                <div class="flex flex-wrap gap-2">
+                  <RouterLink to="/tools/local-token-counter" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">Token Counter</RouterLink>
+                  <RouterLink to="/tools/mermaid-viewer" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">Mermaid Viewer</RouterLink>
+                  <RouterLink to="/tools/markdown" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">Markdown Editor</RouterLink>
+                </div>
               </div>
             </div>
           </div>
