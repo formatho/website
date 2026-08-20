@@ -484,10 +484,10 @@ export const routes = [
         name: 'vanity-eth',
         component: () => import(/* webpackPrefetch: true */ '../views/VanityEthView.vue'),
         meta: {
-          title: 'Ethereum Vanity Address Generator Online - Client-Side | Formatho',
+          title: 'Ethereum Vanity Address Generator - All EVM Chains | Formatho',
           description:
-            'Generate Ethereum vanity addresses with a custom prefix or suffix. Runs 100% in your browser with a Web Worker - the private key is never transmitted or stored.',
-          keywords: 'ethereum vanity address generator, vanity eth address, eth vanity generator, custom ethereum address, safe vanity address, client-side vanity'
+            'Generate vanity addresses with a custom prefix or suffix. The same key works on every EVM chain - Ethereum, Polygon, BSC, Arbitrum, Base, Optimism, Avalanche. Runs 100% in your browser, key never transmitted.',
+          keywords: 'ethereum vanity address generator, evm vanity address, vanity eth address, polygon vanity address, bsc vanity address generator, base chain vanity address, custom wallet address, safe vanity address, client-side vanity'
         }
       },
       {

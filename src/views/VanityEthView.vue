@@ -7,9 +7,9 @@ import { Input } from '@/components/ui/input'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
-  title: 'Ethereum Vanity Address Generator Online - Client-Side & Private | Formatho',
+  title: 'Ethereum Vanity Address Generator - All EVM Chains | Formatho',
   description:
-    'Generate Ethereum vanity addresses with your chosen prefix or suffix. Runs 100% in your browser with a Web Worker - the private key is never transmitted, logged, or stored.',
+    'Generate vanity addresses with a custom prefix or suffix. The same key works on every EVM chain - Ethereum, Polygon, BSC, Arbitrum, Base. Runs 100% in your browser, key never transmitted.',
   keywords: [
     'ethereum vanity address generator',
     'vanity eth address',
@@ -34,6 +34,11 @@ interface Found {
   attempts: number
 }
 const results = ref<Found[]>([])
+
+const chains = [
+  'Ethereum', 'Polygon', 'BNB Smart Chain', 'Arbitrum', 'Base', 'Optimism',
+  'Avalanche C-Chain', 'zkSync Era', 'Linea', 'Gnosis', 'Cronos', 'Moonbeam'
+]
 
 let worker: Worker | null = null
 let startTime = 0
@@ -200,6 +205,21 @@ async function copy(text: string, key: string) {
             </Button>
           </div>
           <p class="text-xs text-muted-foreground">Found after {{ r.attempts.toLocaleString() }} attempts</p>
+        </div>
+      </CardContent>
+    </Card>
+
+    <Card class="mb-6">
+      <CardHeader>
+        <CardTitle class="text-lg">One key, every EVM chain</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p class="text-sm text-muted-foreground leading-relaxed mb-3">
+          EVM chains share the same address format - the address you generate here is yours on all of them:
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <span v-for="chain in chains" :key="chain" class="text-xs font-medium px-2.5 py-1 bg-primary/5 border border-foreground/15 rounded-full">{{ chain }}</span>
+          <span class="text-xs font-medium px-2.5 py-1 border border-dashed border-foreground/20 rounded-full text-muted-foreground">+ hundreds more</span>
         </div>
       </CardContent>
     </Card>
