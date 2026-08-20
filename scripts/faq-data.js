@@ -380,6 +380,7 @@ export const toolSEOContent = {
   '/tools/vanity-eth': {
     intro: [
       'A vanity Ethereum address contains a pattern you choose — it starts with 0xdead or ends in beef. Generating one is simple brute force: create keypairs until an address matches. Each hex character multiplies the expected work by 16, so 4 characters average around 65,000 attempts and each additional character multiplies that by 16.',
+      'One key, every EVM chain: an address generated here is valid on Ethereum, Polygon, BNB Smart Chain, Arbitrum, Base, Optimism, Avalanche, and every other EVM network - they all share the same address format.',
       "The critical risk with online vanity generators is that most run on a server — the private key exists on someone else's machine. This generator runs entirely in your browser inside a Web Worker: keys are created with your device's secure random generator and are never transmitted, logged, or stored."
     ],
     howTo: [
@@ -440,6 +441,10 @@ const newToolFAQs = {
     {
       question: 'How long does it take to find a match?',
       answer: 'Each hex character multiplies expected attempts by 16: 4 characters average ~65k attempts, 5 around 1M, 6 around 16M. At typical browser speeds of thousands of keys per second, 4-5 characters take seconds to minutes; 7+ can take hours or longer.'
+    },
+    {
+      question: 'Does this work for Polygon, BSC, Base, and other EVM chains?',
+      answer: 'Yes. All EVM chains use the same address derivation, so a vanity address generated here works identically on Ethereum, Polygon, BNB Smart Chain, Arbitrum, Base, Optimism, Avalanche, and every EVM network.'
     },
     {
       question: 'Can I use uppercase letters in my pattern?',
