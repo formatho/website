@@ -73,6 +73,18 @@ export const tools = [
         description: 'Deploy ERC-20 mirror tokens for stocks (AAPL, AMZN), fractional ownership contracts, and custom tokenization contracts on-chain via MetaMask or Rabby.',
         route: '/tools/rwa-deploy-lab',
         iconName: 'Building2'
+      },
+      {
+        name: 'Private Key to Address Converter',
+        description: 'Derive addresses for Ethereum, Bitcoin, Solana, and more from a private key. Runs entirely in browser.',
+        route: '/tools/address-from-key',
+        iconName: 'KeyRound'
+      },
+      {
+        name: 'BLS12-381 Signature Generator & Verifier',
+        description: 'Generate BLS12-381 signatures, verify signatures, and aggregate multiple signatures into one. 100% client-side, privacy-first.',
+        route: '/tools/bls-signature',
+        iconName: 'Signature'
       }
     ]
   },
@@ -138,6 +150,24 @@ export const tools = [
         description: 'Analyze password strength and get improvement suggestions.',
         route: '/tools/password-strength-analyser',
         iconName: 'ShieldCheck'
+      },
+      {
+        name: 'AI Crypto Price Forecasts',
+        description: '30-day crypto price predictions using Google TimesFM 2.5. Privacy-first AI forecasts for BTC, ETH, SOL, and more.',
+        route: '/tools/crypto-forecasts',
+        iconName: 'TrendingUp'
+      },
+      {
+        name: 'TOTP Generator',
+        description: 'Generate TOTP codes from secrets. Privacy-first tool.',
+        route: '/tools/otp-code-generator',
+        iconName: 'Clock'
+      },
+      {
+        name: 'PDF Signature Checker',
+        description: 'Check and validate digital signatures in PDF files. Privacy-first tool.',
+        route: '/tools/pdf-signature-checker',
+        iconName: 'FileCheck'
       }
     ]
   },
@@ -239,6 +269,48 @@ export const tools = [
         description: 'View Microsoft Visio diagrams (.vsdx, .vsd) directly in your browser.',
         route: '/tools/visio-viewer',
         iconName: 'FileImage'
+      },
+      {
+        name: 'json-to-toml',
+        description: 'json-to-toml - free, privacy-first, and 100% client-side.',
+        route: '/tools/json-to-toml',
+        iconName: 'ArrowLeftRight'
+      },
+      {
+        name: 'List Converter',
+        description: 'Convert lists between different formats (comma, newline, JSON, etc).',
+        route: '/tools/list-converter',
+        iconName: 'List'
+      },
+      {
+        name: 'Markdown to HTML Converter',
+        description: 'Convert Markdown to HTML with syntax highlighting.',
+        route: '/tools/markdown-to-html',
+        iconName: 'FileCode'
+      },
+      {
+        name: 'Text to Unicode Converter',
+        description: 'Convert text to Unicode code points and HTML entities.',
+        route: '/tools/text-to-unicode',
+        iconName: 'Languages'
+      },
+      {
+        name: 'TOML to JSON Converter',
+        description: 'Convert TOML configuration files to JSON format.',
+        route: '/tools/toml-to-json',
+        iconName: 'ArrowLeftRight'
+      },
+      {
+        name: 'TOML to YAML Converter',
+        description: 'Convert TOML configuration files to YAML format.',
+        route: '/tools/toml-to-yaml',
+        iconName: 'ArrowLeftRight'
+      },
+      {
+        name: 'YAML to TOML Converter',
+        description: 'Convert YAML configuration files to TOML format.',
+        route: '/tools/yaml-to-toml',
+        iconName: 'ArrowLeftRight'
       }
     ]
   },
@@ -316,12 +388,6 @@ export const tools = [
         description: 'Compare two JSON objects and see differences.',
         route: '/tools/json-diff',
         iconName: 'GitCompare'
-      },
-      {
-        name: 'User Agent Parser',
-        description: 'Parse and analyze user agent strings.',
-        route: '/tools/user-agent-parser',
-        iconName: 'Smartphone'
       }
     ]
   },
@@ -446,6 +512,54 @@ export const tools = [
         description: 'Render Mermaid diagrams in real-time. Flowcharts, sequence diagrams, class diagrams, gantt charts, and more.',
         route: '/tools/mermaid-viewer',
         iconName: 'GitBranch'
+      },
+      {
+        name: 'benchmark-builder',
+        description: 'benchmark-builder - free, privacy-first, and 100% client-side.',
+        route: '/tools/benchmark-builder',
+        iconName: 'Gauge'
+      },
+      {
+        name: 'BPMN Viewer',
+        description: 'Visualize BPMN 2.0 diagrams and export them as PDF. Free, privacy-first BPMN viewer that runs entirely in your browser.',
+        route: '/tools/bpmn',
+        iconName: 'Workflow'
+      },
+      {
+        name: 'email-normalizer',
+        description: 'email-normalizer - free, privacy-first, and 100% client-side.',
+        route: '/tools/email-normalizer',
+        iconName: 'Mail'
+      },
+      {
+        name: 'html-wysiwyg-editor',
+        description: 'html-wysiwyg-editor - free, privacy-first, and 100% client-side.',
+        route: '/tools/html-wysiwyg-editor',
+        iconName: 'Code'
+      },
+      {
+        name: 'mime-types',
+        description: 'mime-types - free, privacy-first, and 100% client-side.',
+        route: '/tools/mime-types',
+        iconName: 'FileType'
+      },
+      {
+        name: 'Random Port Generator',
+        description: 'Generate random port numbers for development.',
+        route: '/tools/random-port-generator',
+        iconName: 'Dices'
+      },
+      {
+        name: 'Regex Cheat Sheet',
+        description: 'Regular expression patterns and syntax reference.',
+        route: '/tools/regex-memo',
+        iconName: 'Regex'
+      },
+      {
+        name: 'safelink-decoder',
+        description: 'safelink-decoder - free, privacy-first, and 100% client-side.',
+        route: '/tools/safelink-decoder',
+        iconName: 'Link2'
       }
     ]
   },
@@ -516,6 +630,12 @@ export const tools = [
         description: 'Calculate percentages, increases, and decreases.',
         route: '/tools/percentage-calculator',
         iconName: 'Percent'
+      },
+      {
+        name: 'chronometer',
+        description: 'chronometer - free, privacy-first, and 100% client-side.',
+        route: '/tools/chronometer',
+        iconName: 'Timer'
       }
     ]
   },
@@ -563,6 +683,18 @@ export const tools = [
         description: 'Convert text to ASCII art.',
         route: '/tools/ascii-text-drawer',
         iconName: 'Type'
+      },
+      {
+        name: 'numeronym-generator',
+        description: 'numeronym-generator - free, privacy-first, and 100% client-side.',
+        route: '/tools/numeronym-generator',
+        iconName: 'Hash'
+      },
+      {
+        name: 'SVG Placeholder Generator',
+        description: 'Generate SVG placeholder images.',
+        route: '/tools/svg-placeholder-generator',
+        iconName: 'Image'
       }
     ]
   },

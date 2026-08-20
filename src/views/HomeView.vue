@@ -165,6 +165,9 @@ onMounted(() => {
 
 // Note: AOS is initialized globally in main.ts to avoid conflicts
 
+const toolCount = tools.reduce((sum: number, cat: { items: unknown[] }) => sum + cat.items.length, 0)
+const categoryCount = tools.length
+
 const searchQuery = ref('')
 
 // Prefetch route chunk on hover for instant navigation
@@ -251,7 +254,7 @@ const _popularTools = [
             </p>
           </div>
           <h1 class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight" data-aos="fade-down" data-aos-delay="100" data-v-8d4ed633="">
-            120 precision tools for your daily developer workflow
+            The complete developer toolkit that runs entirely in your browser
           </h1>
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="200" data-v-8d4ed633="">
             Format SQL and YAML, decode JWTs, hash with Keccak-256, lint Helm charts, generate vanity addresses — built for <strong class="text-foreground">Ethereum, Kubernetes, SAP, and security</strong> workflows. Everything runs in your browser: no uploads, no accounts, no tracking.
@@ -269,7 +272,7 @@ const _popularTools = [
                   <path d="M9 12l2 2 4-4"></path>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> 120 tools · free forever </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> {{ toolCount }} free tools · no account needed </span>
             </div>
             <div
               class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
@@ -326,8 +329,8 @@ const _popularTools = [
           <!-- Social Proof Stats -->
           <div class="flex flex-wrap gap-8 justify-center items-center mt-8 text-center" data-aos="fade-up" data-aos-delay="150">
             <div>
-              <div class="text-3xl font-bold text-primary">120</div>
-              <div class="text-xs text-muted-foreground">Tools across 5 categories</div>
+              <div class="text-3xl font-bold text-primary">{{ toolCount }}</div>
+              <div class="text-xs text-muted-foreground">Tools across {{ categoryCount }} categories</div>
             </div>
             <div class="w-px h-10 bg-foreground"></div>
             <div>
