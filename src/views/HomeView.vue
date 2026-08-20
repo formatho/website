@@ -257,7 +257,7 @@ const _popularTools = [
             The complete developer toolkit that runs entirely in your browser
           </h1>
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="200" data-v-8d4ed633="">
-            Format SQL and YAML, decode JWTs, hash with Keccak-256, lint Helm charts, generate vanity addresses — built for <strong class="text-foreground">Ethereum, Kubernetes, SAP, and security</strong> workflows. Everything runs in your browser: no uploads, no accounts, no tracking.
+            Format SQL and YAML, decode JWTs, hash with Keccak-256, lint Helm charts, generate vanity addresses — built for <strong class="text-foreground">blockchain, DevOps, enterprise, security, and SRE</strong> workflows. Everything runs in your browser: no uploads, no accounts, no tracking.
           </p>
           <div class="flex flex-wrap gap-4 justify-center items-center mt-6" data-v-8d4ed633="">
             <div
