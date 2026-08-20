@@ -458,6 +458,39 @@ export const routes = [
         }
       },
       {
+        path: '/tools/function-selector',
+        name: 'function-selector',
+        component: () => import(/* webpackPrefetch: true */ '../views/FunctionSelectorView.vue'),
+        meta: {
+          title: 'Solidity Function Selector Calculator Online - 4-Byte Keccak | Formatho',
+          description:
+            'Calculate Solidity function selectors (4-byte signatures) from function signatures using Keccak-256. Batch mode for ABI development and Foundry cast sig. 100% client-side.',
+          keywords: 'function selector calculator, solidity selector, 4 byte signature, keccak256 selector, cast sig, abi selector, ethers interface id'
+        }
+      },
+      {
+        path: '/tools/ens-namehash',
+        name: 'ens-namehash',
+        component: () => import(/* webpackPrefetch: true */ '../views/EnsNamehashView.vue'),
+        meta: {
+          title: 'ENS Namehash Calculator Online - Labelhash & Namehash | Formatho',
+          description:
+            'Calculate ENS namehash and labelhash values for any ENS name using Keccak-256 per EIP-137. Full node-by-node derivation chain. 100% client-side.',
+          keywords: 'ens namehash calculator, namehash, labelhash, eip-137, ens resolution, keccak256 ens'
+        }
+      },
+      {
+        path: '/tools/vanity-eth',
+        name: 'vanity-eth',
+        component: () => import(/* webpackPrefetch: true */ '../views/VanityEthView.vue'),
+        meta: {
+          title: 'Ethereum Vanity Address Generator Online - Client-Side | Formatho',
+          description:
+            'Generate Ethereum vanity addresses with a custom prefix or suffix. Runs 100% in your browser with a Web Worker - the private key is never transmitted or stored.',
+          keywords: 'ethereum vanity address generator, vanity eth address, eth vanity generator, custom ethereum address, safe vanity address, client-side vanity'
+        }
+      },
+      {
         path: '/tools/abi-encoder',
         name: 'abi-encoder',
         component: () => import(/* webpackPrefetch: true */ '../views/AbiEncoderView.vue'),

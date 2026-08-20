@@ -353,6 +353,42 @@ export const toolSEOContent = {
       'Copy the exact value for your transaction or contract call.'
     ]
   },
+  '/tools/function-selector': {
+    intro: [
+      'Every Ethereum smart contract function is identified on-chain by its 4-byte selector: the first four bytes of the Keccak-256 hash of its canonical signature. When a wallet or dapp calls transfer(address,uint256), the calldata starts with 0xa9059cbb — that value is the selector. Selector collisions and interface matching make this small hash a daily concern for Solidity developers and auditors.',
+      'Paste one or many function signatures to compute their selectors instantly. This matches exactly what Solidity keccak256(abi.encodeWithSignature(...)), Foundry cast sig, and ethers.js Interface.getSighash produce — the hashing runs entirely in your browser.'
+    ],
+    howTo: [
+      'Enter one function signature per line, e.g. transfer(address,uint256).',
+      'Each 4-byte selector is computed instantly with Keccak-256.',
+      'Verify the selector matches the calldata prefix in your transaction.',
+      'Use Copy all to export selector + signature pairs for your notes or ABI work.'
+    ]
+  },
+  '/tools/ens-namehash': {
+    intro: [
+      'The Ethereum Name Service resolves human-readable names like vitalik.eth through the EIP-137 namehash algorithm: a recursive Keccak-256 construction that turns a dotted name into a 32-byte node used as the storage key in ENS registry contracts. Getting namehash right by hand is error-prone because every label is hashed separately and combined in order.',
+      'This calculator shows the full derivation chain — each label, its labelhash, and the node value after combining it — so you can verify exactly what the ENS registry will look up. Everything is computed locally in your browser.'
+    ],
+    howTo: [
+      'Type an ENS name such as vitalik.eth.',
+      'The final namehash appears immediately at the top.',
+      'Inspect the derivation chain to see each labelhash and intermediate node.',
+      'Copy the namehash for use in your contract calls or tests.'
+    ]
+  },
+  '/tools/vanity-eth': {
+    intro: [
+      'A vanity Ethereum address contains a pattern you choose — it starts with 0xdead or ends in beef. Generating one is simple brute force: create keypairs until an address matches. Each hex character multiplies the expected work by 16, so 4 characters average around 65,000 attempts and each additional character multiplies that by 16.',
+      "The critical risk with online vanity generators is that most run on a server — the private key exists on someone else's machine. This generator runs entirely in your browser inside a Web Worker: keys are created with your device's secure random generator and are never transmitted, logged, or stored."
+    ],
+    howTo: [
+      'Enter a prefix (after 0x) and/or suffix of hex characters.',
+      'Click Start — generation runs in a background worker at full speed.',
+      'Watch the attempt counter and rate; matches appear as they are found.',
+      'Copy the address and private key once a match is found.'
+    ]
+  },
   '/tools/markdown': {
     intro: [
       'Markdown is the writing format of modern development: READMEs, documentation sites, pull requests, issues, and static site generators all use it. A live side-by-side editor shows exactly how your Markdown will render while you write it.',
@@ -371,6 +407,47 @@ export const toolSEOContent = {
  * Additional tool-specific FAQs (rendered visibly and injected as FAQPage
  * structured data). Keyed by route path.
  */
+const newToolFAQs = {
+  '/tools/function-selector': [
+    {
+      question: 'What is a Solidity function selector?',
+      answer: 'The first 4 bytes of the Keccak-256 hash of the function signature, e.g. 0xa9059cbb for transfer(address,uint256). It identifies which function a transaction calls in the calldata.'
+    },
+    {
+      question: 'Does this match Foundry cast sig and ethers.js output?',
+      answer: 'Yes. Selector computation is standardized: Keccak-256 of the canonical signature string, first 4 bytes. Results match cast sig, ethers.js getSighash, and web3.js encodeFunctionSignature.'
+    },
+    {
+      question: 'Why do two of my functions have the same selector?',
+      answer: 'It is rare but possible - 4 bytes allow collisions. The compiler warns on collisions within one contract; across contracts it is usually harmless unless an ABI proxy forwards calls.'
+    }
+  ],
+  '/tools/ens-namehash': [
+    {
+      question: 'What is the difference between namehash and labelhash?',
+      answer: 'A labelhash is the Keccak-256 of a single label like eth. The namehash combines labelhashes recursively from the root, producing the 32-byte node the ENS registry uses as its key.'
+    },
+    {
+      question: 'Does the calculator normalize names?',
+      answer: 'It lowercases labels and strips trailing dots, which covers standard names. Full ENS normalization (ENSIP-15) handles Unicode edge cases; for those, verify with the official ENS normalization library.'
+    }
+  ],
+  '/tools/vanity-eth': [
+    {
+      question: 'Is it safe to use a vanity address for real funds?',
+      answer: 'This generator never transmits keys - everything happens in your browser. Still, best practice for meaningful funds is a hardware wallet or air-gapped generation. Treat browser-generated keys as suitable for testing and throwaway accounts.'
+    },
+    {
+      question: 'How long does it take to find a match?',
+      answer: 'Each hex character multiplies expected attempts by 16: 4 characters average ~65k attempts, 5 around 1M, 6 around 16M. At typical browser speeds of thousands of keys per second, 4-5 characters take seconds to minutes; 7+ can take hours or longer.'
+    },
+    {
+      question: 'Can I use uppercase letters in my pattern?',
+      answer: 'Patterns match case-insensitively against the lowercase hex address. The displayed address uses proper EIP-55 checksum casing. Matching checksum-case exactly would multiply the work enormously per character.'
+    }
+  ]
+}
+
 const extraFAQs = {
   '/tools/diff': [
     {
@@ -469,4 +546,4 @@ const extraFAQs = {
 }
 
 // Merge extra FAQs into the exported map
-Object.assign(toolSpecificFAQ, extraFAQs)
+Object.assign(toolSpecificFAQ, extraFAQs, newToolFAQs)

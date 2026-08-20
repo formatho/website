@@ -3,6 +3,24 @@ export const tools = [
     category: 'Blockchain',
     items: [
       {
+        name: 'Vanity Address Generator',
+        description: 'Generate Ethereum addresses with a custom prefix or suffix. Keys are created in your browser and never transmitted.',
+        route: '/tools/vanity-eth',
+        iconName: 'Sparkles'
+      },
+      {
+        name: 'Function Selector Calculator',
+        description: 'Compute 4-byte Solidity function selectors from signatures with Keccak-256. Batch mode for ABI work.',
+        route: '/tools/function-selector',
+        iconName: 'FunctionSquare'
+      },
+      {
+        name: 'ENS Namehash Calculator',
+        description: 'Derive EIP-137 namehash and labelhash values for any ENS name, with the full derivation chain.',
+        route: '/tools/ens-namehash',
+        iconName: 'Network'
+      },
+      {
         name: 'Cosmos Address Generator',
         description: 'Generate addresses for Cosmos Hub (ATOM), Osmosis (OSMO), Juno (JUNO), Akash (AKT), Injective (INJ), Kava, Stargaze, Secret Network and more from BIP39 seed phrases.',
         route: '/tools/cosmos-address-generator',
