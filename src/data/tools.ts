@@ -98,6 +98,18 @@ export const tools = [
     category: 'Crypto & Security',
     items: [
       {
+        name: 'SAML Request & Response Decoder',
+        description: 'Decode SAML AuthnRequest and Response messages - base64 plus raw-deflate - with pretty-printed XML. Essential for Okta, Entra ID and Shibboleth debugging. 100% client-side.',
+        route: '/tools/saml-decoder',
+        iconName: 'FileCode'
+      },
+      {
+        name: 'OIDC Authorization URL & PKCE Generator',
+        description: 'Build OAuth 2.0 / OIDC authorize URLs with state, nonce and S256 PKCE code challenges. Works with Okta, Auth0, Entra ID, Keycloak.',
+        route: '/tools/oidc-url-builder',
+        iconName: 'Link2'
+      },
+      {
         name: 'Token Generator',
         description: 'Generate secure random tokens with customizable length and character sets.',
         route: '/tools/token-generator',

@@ -353,6 +353,30 @@ export const toolSEOContent = {
       'Copy the exact value for your transaction or contract call.'
     ]
   },
+  '/tools/saml-decoder': {
+    intro: [
+      'When a SAML flow breaks, the evidence is hidden inside a giant base64 blob on the URL or in an HTML form field. HTTP-Redirect bindings deflate-compress the XML before base64-encoding it; POST bindings base64-encode it directly. Either way, what you get in browser dev tools is unreadable - and pasting production SAML assertions into a random website is a real security risk, since assertions can contain names, emails, and group memberships that act as access tokens.',
+      'This decoder runs entirely in your browser using the native DecompressionStream API: raw-deflate decompression plus base64 decoding, then pretty-printed XML showing the AuthnRequest, Subject, conditions, and every attribute statement. Nothing is uploaded, and it also encodes XML back into Redirect-binding format for testing your own SP.'
+    ],
+    howTo: [
+      'Copy the SAMLRequest or SAMLResponse parameter value from the URL or form.',
+      'Paste it in and click Decode - deflate and base64 are handled automatically.',
+      'Inspect the pretty-printed XML: issuer, NameID, attributes, and conditions.',
+      'Switch to Encode to turn SAML XML back into a Redirect-binding payload.'
+    ]
+  },
+  '/tools/oidc-url-builder': {
+    intro: [
+      'Almost every OAuth 2.0 / OpenID Connect bug in a new app traces back to the authorization request: a missing scope, a wrong redirect_uri, or a PKCE verifier that does not match the challenge sent in the authorize URL. Assembling that URL by hand invites typos in exactly the parameters the identity provider compares strictly.',
+      'This builder assembles the full /authorize URL with state, nonce, and an S256 PKCE pair generated with your browser\u2019s secure random generator. The code_verifier stays on your machine and is never transmitted - copy it into your token request when the authorization code comes back. Works with Okta, Auth0, Microsoft Entra ID, Keycloak, Google, and any standards-compliant OIDC provider.'
+    ],
+    howTo: [
+      'Enter your issuer URL (e.g. https://your-org.okta.com/oauth2/default) and client ID.',
+      'Set the redirect URI and scopes exactly as registered with your provider.',
+      'Leave PKCE on for SPAs and mobile apps - the S256 challenge is computed via Web Crypto.',
+      'Copy the authorization URL, complete the login, then exchange the code with the shown token request and code_verifier.'
+    ]
+  },
   '/tools/contract-reader': {
     intro: [
       'Reading a deployed smart contract normally means trusting Etherscan with your RPC traffic or writing a script. But a read-only call is just an eth_call RPC request - the browser can make it directly. Paste the contract ABI, point the tool at any RPC endpoint, and call every view and pure function: token names and balances, owner addresses, config values, or any public getter.',

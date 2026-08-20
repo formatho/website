@@ -502,6 +502,28 @@ export const routes = [
         }
       },
       {
+        path: '/tools/saml-decoder',
+        name: 'saml-decoder',
+        component: () => import(/* webpackPrefetch: true */ '../views/SamlDecoderView.vue'),
+        meta: {
+          title: 'SAML Request & Response Decoder Online - Base64 Deflate XML | Formatho',
+          description:
+            'Decode SAML AuthnRequest, LogoutRequest and Response messages. Base64 plus raw-deflate decompression with pretty-printed XML. 100% client-side - nothing is uploaded.',
+          keywords: 'saml decoder, saml request decoder, saml response decoder, decode saml assertion, base64 deflate saml, saml authnrequest, saml tracing, okta saml decoder'
+        }
+      },
+      {
+        path: '/tools/oidc-url-builder',
+        name: 'oidc-url-builder',
+        component: () => import(/* webpackPrefetch: true */ '../views/OidcUrlBuilderView.vue'),
+        meta: {
+          title: 'OIDC Authorization URL & PKCE Generator - OAuth 2.0 | Formatho',
+          description:
+            'Build OAuth 2.0 / OpenID Connect authorization URLs with scopes, state, nonce and S256 PKCE code challenges. Works with Okta, Auth0, Entra ID, Keycloak. 100% client-side.',
+          keywords: 'oidc url builder, oauth authorization url, pkce generator, code verifier generator, code challenge s256, okta authorize url, auth0 authorize url, openid connect playground'
+        }
+      },
+      {
         path: '/tools/abi-encoder',
         name: 'abi-encoder',
         component: () => import(/* webpackPrefetch: true */ '../views/AbiEncoderView.vue'),
