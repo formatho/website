@@ -134,7 +134,8 @@ export const blogToolLinks: Record<string, BlogToolLink[]> = {
   'eip-7702-ethereum-pectra-eoa-smart-contract-upgrade': [
     { name: 'Keccak-256 Hasher', path: '/tools/keccak256' },
     { name: 'ABI Encoder/Decoder', path: '/tools/abi-encoder' },
-    { name: 'Function Selector Calculator', path: '/tools/function-selector' }
+    { name: 'Function Selector Calculator', path: '/tools/function-selector' },
+    { name: 'Smart Contract Reader', path: '/tools/contract-reader' }
   ],
   'erc-7730-clear-signing-ethereum-standard': [
     { name: 'Ethereum Address Checksum (EIP-55)', path: '/tools/address-checksum' },

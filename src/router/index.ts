@@ -458,6 +458,17 @@ export const routes = [
         }
       },
       {
+        path: '/tools/contract-reader',
+        name: 'contract-reader',
+        component: () => import(/* webpackPrefetch: true */ '../views/ContractReaderView.vue'),
+        meta: {
+          title: 'Smart Contract Reader - Call ABI View Functions | Formatho',
+          description:
+            'Paste a contract ABI, set any RPC endpoint and contract address, and call view and pure functions directly from your browser. Works on every EVM chain. Read-only eth_call - no wallet, no gas, no server.',
+          keywords: 'read smart contract online, call contract function, abi reader, contract view functions, eth_call tool, read contract without etherscan, contract interaction tool'
+        }
+      },
+      {
         path: '/tools/function-selector',
         name: 'function-selector',
         component: () => import(/* webpackPrefetch: true */ '../views/FunctionSelectorView.vue'),

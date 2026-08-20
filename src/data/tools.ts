@@ -9,6 +9,12 @@ export const tools = [
         iconName: 'Sparkles'
       },
       {
+        name: 'Smart Contract Reader',
+        description: 'Paste an ABI and call view functions on any deployed contract via your own RPC endpoint. Works on every EVM chain.',
+        route: '/tools/contract-reader',
+        iconName: 'BookOpen'
+      },
+      {
         name: 'Function Selector Calculator',
         description: 'Compute 4-byte Solidity function selectors from signatures with Keccak-256. Batch mode for ABI work.',
         route: '/tools/function-selector',

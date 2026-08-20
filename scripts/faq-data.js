@@ -353,6 +353,18 @@ export const toolSEOContent = {
       'Copy the exact value for your transaction or contract call.'
     ]
   },
+  '/tools/contract-reader': {
+    intro: [
+      'Reading a deployed smart contract normally means trusting Etherscan with your RPC traffic or writing a script. But a read-only call is just an eth_call RPC request - the browser can make it directly. Paste the contract ABI, point the tool at any RPC endpoint, and call every view and pure function: token names and balances, owner addresses, config values, or any public getter.',
+      'Because it uses eth_call, every request is read-only: no wallet connection, no gas, no signing, and no way to spend anything. Requests go straight from your browser to the RPC endpoint you choose - Formatho never sees your traffic. Works identically on Ethereum, Polygon, BNB Chain, Arbitrum, Base, Optimism, and every other EVM network.'
+    ],
+    howTo: [
+      'Paste the contract ABI JSON (from Etherscan, forge inspect, or build artifacts).',
+      'Pick a chain preset or paste any RPC endpoint, and enter the contract address.',
+      'Expand a view function, fill in its arguments if it has any.',
+      'Click Call - the result appears instantly, straight from your RPC.'
+    ]
+  },
   '/tools/function-selector': {
     intro: [
       'Every Ethereum smart contract function is identified on-chain by its 4-byte selector: the first four bytes of the Keccak-256 hash of its canonical signature. When a wallet or dapp calls transfer(address,uint256), the calldata starts with 0xa9059cbb — that value is the selector. Selector collisions and interface matching make this small hash a daily concern for Solidity developers and auditors.',
@@ -409,6 +421,24 @@ export const toolSEOContent = {
  * structured data). Keyed by route path.
  */
 const newToolFAQs = {
+  '/tools/contract-reader': [
+    {
+      question: 'How is this different from Etherscan read contract?',
+      answer: 'No account limits, no site-specific delays, and your queries go directly from your browser to the RPC you choose. It also works on any EVM chain and with private or paid RPC endpoints, including local development nodes like anvil or Hardhat.'
+    },
+    {
+      question: 'Can this spend my funds or move assets?',
+      answer: 'No. The tool only sends eth_call requests, which are strictly read-only. No wallet is connected and nothing is signed, so there is no way for it - or any function it lists - to transfer or spend anything.'
+    },
+    {
+      question: 'Where do I get a contract ABI?',
+      answer: 'From Etherscan contract page (Code tab), foundry forge inspect <contract> --json, Hardhat artifacts, or the artifacts your build tool emits. Standard interfaces like ERC-20 are also one click away with the example loader.'
+    },
+    {
+      question: 'Can I use a local development node?',
+      answer: 'Yes. Point the RPC field at http://127.0.0.1:8545 (anvil, Hardhat, or ganache) and read your locally deployed contracts the same way.'
+    }
+  ],
   '/tools/function-selector': [
     {
       question: 'What is a Solidity function selector?',
