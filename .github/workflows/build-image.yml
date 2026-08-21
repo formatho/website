@@ -174,7 +174,7 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     environment: digital_ocean_formatho
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && needs.build.result == 'success' && inputs.skip_deploy != true
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && needs.build.result == 'success' && inputs.skip_deploy != true
     steps:
       - name: Validate required secrets
         run: |
