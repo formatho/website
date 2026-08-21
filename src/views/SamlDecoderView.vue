@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { Copy, Check, FileCode2, AlertCircle, ArrowRightLeft } from 'lucide-vue-next'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -23,10 +23,24 @@ useSEO({
   ogType: 'website'
 })
 
-const input = ref('')
+// Realistic sample payload (Redirect binding: raw-deflate + Base64) so the
+// tool demonstrates itself the moment it opens. Swapped, not clobbered:
+// user input is only replaced when it is empty or still the other sample.
+const SAMPLE_ENCODED = 'fZFbawIxEIX/Ssj73uI9uAuLUhBsKdr2oS9lzI4YyGWbybb23xdXRPtgX2fON3PmzJzAGiHrLh7cBj87pMiO1jiSfaPkXXDSA2mSDiySjEpu68e1FGkugQhD1N7xG6b9n2mDj155w9lqWfIPsZ/BRA2KZLobNskQx5DM9gOVNAWOdhPIp2ooOHvDQNq7kos052xF1OHKUQQXSy5yMU7yaSKKl3wmi5HM83fOlkhRO4g9dYixJZllRD7FI9jWYKq8zU52T0XO6sslC++osxi2GL60wtfN+opD26Z7HyzEg7/yoIhX83OMvbNQ3QPm2R9ZD7XyCSyuls/eaPXDHnr5/QiLtOgruknOkyVa0KZumoBEnNXG+O9FQIhY8hg65Fl1WXv75OoX'
+const SAMPLE_XML = '<saml2:AuthnRequest xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" ID="_2f9a7c31-8b4d-4e6a-9f3c-d1e5b7a08c42" Version="2.0" IssueInstant="2026-08-21T09:15:00Z" Destination="https://sso.example.com/saml/sso" AssertionConsumerServiceURL="https://app.formatho.com/saml/acs"><saml2:Issuer>https://app.formatho.com</saml2:Issuer><samlp:NameIDPolicy Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress" AllowCreate="true"/></saml2:AuthnRequest>'
+
+const input = ref(SAMPLE_ENCODED)
 const output = ref('')
 const error = ref('')
 const mode = ref<'decode' | 'encode'>('decode')
+
+watch(mode, (to, from) => {
+  const prevSample = from === 'decode' ? SAMPLE_ENCODED : SAMPLE_XML
+  const nextSample = to === 'decode' ? SAMPLE_ENCODED : SAMPLE_XML
+  if (!input.value.trim() || input.value.trim() === prevSample) {
+    input.value = nextSample
+  }
+})
 const copied = ref(false)
 
 // Strip whitespace that often wraps Redirect-binding payloads
@@ -98,6 +112,14 @@ async function run() {
     error.value = e?.message || 'Could not process this payload'
   }
 }
+
+onMounted(() => {
+  // Demonstrate immediately: decode the prefilled sample (client only -
+  // DecompressionStream is a browser API)
+  if (typeof window !== 'undefined' && 'DecompressionStream' in window) {
+    run()
+  }
+})
 
 async function copyOutput() {
   try {
