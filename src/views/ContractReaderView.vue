@@ -11,7 +11,7 @@ import { useSEO } from '@/composables/useSEO'
 useSEO({
   title: 'Smart Contract Reader - Call ABI View Functions | Formatho',
   description:
-    'Paste a contract ABI, set any RPC endpoint and contract address, and call view and pure functions directly from your browser. Works on every EVM chain - Ethereum, Polygon, BSC, Arbitrum, Base. No key, no server, 100% client-side.',
+    'Paste a contract ABI, set any RPC endpoint and contract address, and call view and pure functions directly from your browser. Works on every EVM chain. No key, no server, 100% client-side.',
   keywords: [
     'read smart contract online',
     'call contract function',
@@ -27,7 +27,7 @@ const rpcUrl = ref('https://eth.llamarpc.com')
 const contractAddress = ref('')
 const abiText = ref('')
 const expanded = ref<string | null>(null)
-const args = reactive<Record<string, Record<string, string>>>({})
+const args = reactive<Record<string, Record<number, string>>>({})
 const results = ref<Record<string, { loading: boolean; error?: string; value?: string }>>({})
 const copied = ref<string | null>(null)
 
@@ -55,11 +55,21 @@ const ERC20_ABI = [
   }
 ]
 
+interface AbiInput {
+  type: string
+  name: string
+}
+
 interface AbiFunction {
   name: string
+  // Canonical signature - unique per overload, used for all state keys
+  sig: string
   stateMutability: string
-  inputs: Array<{ type: string; name: string }>
-  outputs: Array<{ type: string; name: string }>
+  inputs: AbiInput[]
+  outputs: AbiInput[]
+  // The raw ABI item is kept so each call can be made with a single-item
+  // ABI, which disambiguates Solidity overloads for viem
+  item: Record<string, unknown>
 }
 
 const abiError = computed(() => {
@@ -79,10 +89,29 @@ const viewFunctions = computed<AbiFunction[]>(() => {
   try {
     const parsed = JSON.parse(text)
     const items = Array.isArray(parsed) ? parsed : (parsed.abi ?? [])
-    return items.filter(
-      (i: { type?: string; stateMutability?: string; name?: string }) =>
-        i.type === 'function' && (i.stateMutability === 'view' || i.stateMutability === 'pure')
-    ) as AbiFunction[]
+    return items
+      .filter(
+        (i: { type?: string; stateMutability?: string; name?: string }) =>
+          i.type === 'function' && (i.stateMutability === 'view' || i.stateMutability === 'pure')
+      )
+      .map((item: Record<string, unknown>) => {
+        const fn = item as unknown as {
+          name: string
+          inputs?: AbiInput[]
+          outputs?: AbiInput[]
+          stateMutability: string
+        }
+        const inputs = fn.inputs ?? []
+        const sig = `${fn.name}(${inputs.map((i) => i.type).join(',')})`
+        return {
+          name: fn.name,
+          sig,
+          stateMutability: fn.stateMutability,
+          inputs,
+          outputs: fn.outputs ?? [],
+          item
+        }
+      })
   } catch {
     return []
   }
@@ -101,19 +130,88 @@ function loadErc20Example() {
   abiText.value = JSON.stringify(ERC20_ABI, null, 2)
 }
 
-function getArg(fn: string, input: string) {
-  return args[fn]?.[input] ?? ''
+function argPlaceholder(type: string): string {
+  if (type.startsWith('tuple')) return 'JSON array of values'
+  if (type.endsWith('[]')) return 'comma separated values'
+  return type
 }
 
-function setArg(fn: string, input: string, value: string) {
-  if (!args[fn]) args[fn] = {}
-  args[fn][input] = value
+function argLabel(input: AbiInput): string {
+  return input.name || input.type
 }
 
-function convertArg(type: string, value: string): unknown {
-  if (/^u?int/.test(type)) return BigInt(value)
-  if (type === 'bool') return value === 'true'
-  return value
+function getArg(sig: string, idx: number): string {
+  return args[sig]?.[idx] ?? ''
+}
+
+function setArg(sig: string, idx: number, value: string) {
+  if (!args[sig]) args[sig] = {}
+  args[sig][idx] = value
+}
+
+/**
+ * Convert one raw string input to the value viem expects, with
+ * friendly validation errors. Supports ints, bools, arrays (comma
+ * separated) and single tuples (JSON).
+ */
+function parseArg(input: AbiInput, raw: string): unknown {
+  const label = argLabel(input)
+  const type = input.type
+  const v = raw.trim()
+
+  if (v === '') {
+    throw new Error(`"${label}" (${type}) is required`)
+  }
+
+  const isArray = /\[\]$/.test(type)
+  const base = type.replace(/\[\]+$/, '')
+
+  const parseOne = (s: string): unknown => {
+    const t = s.trim()
+    if (/^u?int/.test(base)) {
+      if (!/^-?\d+$/.test(t)) {
+        throw new Error(`"${label}": "${s}" is not a valid integer for ${base}`)
+      }
+      return BigInt(t)
+    }
+    if (base === 'bool') {
+      if (t !== 'true' && t !== 'false') {
+        throw new Error(`"${label}": bool must be true or false`)
+      }
+      return t === 'true'
+    }
+    if (base.startsWith('tuple')) {
+      if (isArray) {
+        throw new Error(`"${label}": arrays of structs are not supported yet - use a script for this call`)
+      }
+      try {
+        return JSON.parse(t)
+      } catch {
+        throw new Error(`"${label}": enter the struct as JSON, e.g. ["PRICE", "1", "0x00..."]`)
+      }
+    }
+    return t
+  }
+
+  if (isArray) {
+    // Split on top-level commas only, so JSON tuples inside arrays stay intact
+    const parts: string[] = []
+    let depth = 0
+    let current = ''
+    for (const ch of v) {
+      if (ch === '[' || ch === '{' || ch === '"') depth++
+      if (ch === ']' || ch === '}' || ch === '"') depth--
+      if (ch === ',' && depth === 0) {
+        parts.push(current)
+        current = ''
+      } else {
+        current += ch
+      }
+    }
+    parts.push(current)
+    return parts.map(parseOne)
+  }
+  return parseOne(v)
 }
 
 function formatResult(value: unknown): string {
@@ -126,26 +224,35 @@ function formatResult(value: unknown): string {
   return String(value)
 }
 
+function rpcHint(message: string): string {
+  if (/fetch|network|CORS|ERR_/i.test(message)) {
+    return message + ' — check the RPC URL: it must be HTTPS and allow browser (CORS) requests'
+  }
+  return message
+}
+
 async function callFunction(fn: AbiFunction) {
-  const key = fn.name
+  const key = fn.sig
   if (!contractAddress.value || !/^0x[0-9a-fA-F]{40}$/.test(contractAddress.value.trim())) {
     results.value[key] = { loading: false, error: 'Enter a valid contract address (0x...)' }
     return
   }
-  results.value[key] = { loading: true }
+
   try {
+    const callArgs = fn.inputs.map((input, idx) => parseArg(input, getArg(key, idx)))
+    results.value[key] = { loading: true }
     const client = createPublicClient({ transport: http(rpcUrl.value) })
-    const parsedAbi = JSON.parse(abiText.value) as Abi
-    const callArgs = fn.inputs.map((i) => convertArg(i.type, getArg(fn.name, `${i.type}:${i.name}`)))
     const result = await client.readContract({
       address: contractAddress.value.trim() as Address,
-      abi: parsedAbi,
+      // Single-item ABI disambiguates overloaded functions for viem
+      abi: [fn.item] as Abi,
       functionName: fn.name,
       args: callArgs.length ? (callArgs as never) : undefined
     })
     results.value[key] = { loading: false, value: formatResult(result) }
   } catch (e) {
-    results.value[key] = { loading: false, error: (e as Error).shortMessage || (e as Error).message }
+    const err = e as Error
+    results.value[key] = { loading: false, error: rpcHint(err.shortMessage || err.message) }
   }
 }
 
@@ -236,10 +343,10 @@ async function copy(text: string, key: string) {
         <CardTitle class="text-lg">View functions ({{ viewFunctions.length }})</CardTitle>
       </CardHeader>
       <CardContent class="space-y-3">
-        <div v-for="fn in viewFunctions" :key="fn.name" class="border border-border rounded-lg">
+        <div v-for="fn in viewFunctions" :key="fn.sig" class="border border-border rounded-lg">
           <button
             class="no-btn-hover w-full flex items-center justify-between gap-4 px-4 py-3 text-left"
-            @click="expanded = expanded === fn.name ? null : fn.name"
+            @click="expanded = expanded === fn.sig ? null : fn.sig"
           >
             <div class="min-w-0">
               <p class="font-mono text-sm font-semibold">
@@ -248,49 +355,61 @@ async function copy(text: string, key: string) {
               <p class="text-xs text-muted-foreground">{{ fn.stateMutability }} &rarr; {{ fn.outputs.map((o) => o.type).join(', ') || 'void' }}</p>
             </div>
             <span
-              v-if="results[fn.name]"
+              v-if="results[fn.sig]"
               class="text-xs px-2 py-0.5 rounded-full flex-shrink-0"
-              :class="results[fn.name].error ? 'bg-red-500/10 text-red-600' : 'bg-green-500/10 text-green-700'"
+              :class="results[fn.sig].error ? 'bg-red-500/10 text-red-600' : 'bg-green-500/10 text-green-700'"
             >
-              {{ results[fn.name].error ? 'error' : 'result' }}
+              {{ results[fn.sig].error ? 'error' : 'result' }}
             </span>
             <span v-else class="text-xs text-muted-400 flex-shrink-0 font-mono">call &darr;</span>
           </button>
 
-          <div v-if="expanded === fn.name" class="px-4 pb-4 space-y-3 border-t border-border pt-3">
+          <div v-if="expanded === fn.sig" class="px-4 pb-4 space-y-3 border-t border-border pt-3">
             <div v-if="fn.inputs.length" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div v-for="(input, inputIdx) in fn.inputs" :key="`${input.type}:${input.name}:${inputIdx}`">
+              <div v-for="(input, inputIdx) in fn.inputs" :key="`${fn.sig}:${inputIdx}`">
                 <label class="text-xs font-mono text-muted-foreground mb-1 block">
-                  {{ input.name || input.type }} <span class="opacity-60">({{ input.type }})</span>
+                  {{ argLabel(input) }} <span class="opacity-60">({{ input.type }})</span>
                 </label>
+                <select
+                  v-if="input.type === 'bool'"
+                  class="w-full h-9 rounded-md border border-input bg-transparent px-3 font-mono text-sm"
+                  :value="getArg(fn.sig, inputIdx)"
+                  @change="setArg(fn.sig, inputIdx, ($event.target as HTMLSelectElement).value)"
+                >
+                  <option value="" disabled>select…</option>
+                  <option value="true">true</option>
+                  <option value="false">false</option>
+                </select>
                 <Input
+                  v-else
                   class="font-mono text-sm"
-                  :placeholder="input.type"
-                  :model-value="getArg(fn.name, `${input.type}:${input.name}`)"
-                  @update:model-value="setArg(fn.name, `${input.type}:${input.name}`, String($event ?? ''))"
+                  :placeholder="argPlaceholder(input.type)"
+                  :model-value="getArg(fn.sig, inputIdx)"
+                  @update:model-value="setArg(fn.sig, inputIdx, String($event ?? ''))"
+                  @keyup.enter="callFunction(fn)"
                 />
               </div>
             </div>
 
             <div class="flex items-center gap-3">
-              <Button size="sm" :disabled="results[fn.name]?.loading" @click="callFunction(fn)">
-                <Loader2 v-if="results[fn.name]?.loading" class="w-4 h-4 mr-1 animate-spin" />
+              <Button size="sm" :disabled="results[fn.sig]?.loading" @click="callFunction(fn)">
+                <Loader2 v-if="results[fn.sig]?.loading" class="w-4 h-4 mr-1 animate-spin" />
                 <Play v-else class="w-4 h-4 mr-1" />
                 Call {{ fn.name }}
               </Button>
               <span class="text-xs text-muted-foreground">eth_call — read-only, no gas, no wallet needed</span>
             </div>
 
-            <div v-if="results[fn.name]?.error" class="p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
-              <p class="text-xs text-red-600 font-mono break-all">{{ results[fn.name]?.error }}</p>
+            <div v-if="results[fn.sig]?.error" class="p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
+              <p class="text-xs text-red-600 font-mono break-all">{{ results[fn.sig]?.error }}</p>
             </div>
             <div
-              v-else-if="results[fn.name]?.value !== undefined"
+              v-else-if="results[fn.sig]?.value !== undefined"
               class="flex items-start justify-between gap-3 p-3 bg-green-500/10 border border-green-500/20 rounded-lg"
             >
-              <pre class="text-xs font-mono whitespace-pre-wrap break-all flex-1">{{ results[fn.name]?.value }}</pre>
-              <Button variant="ghost" size="sm" :aria-label="'Copy result ' + fn.name" @click="copy(results[fn.name]!.value || '', fn.name)">
-                <Check v-if="copied === fn.name" class="w-4 h-4" />
+              <pre class="text-xs font-mono whitespace-pre-wrap break-all flex-1">{{ results[fn.sig]?.value }}</pre>
+              <Button variant="ghost" size="sm" :aria-label="'Copy result ' + fn.name" @click="copy(results[fn.sig]!.value || '', fn.sig)">
+                <Check v-if="copied === fn.sig" class="w-4 h-4" />
                 <Copy v-else class="w-4 h-4" />
               </Button>
             </div>
