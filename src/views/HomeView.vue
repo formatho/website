@@ -165,6 +165,9 @@ onMounted(() => {
 
 // Note: AOS is initialized globally in main.ts to avoid conflicts
 
+const toolCount = tools.reduce((sum: number, cat: { items: unknown[] }) => sum + cat.items.length, 0)
+const categoryCount = tools.length
+
 const searchQuery = ref('')
 
 // Prefetch route chunk on hover for instant navigation
@@ -251,10 +254,10 @@ const _popularTools = [
             </p>
           </div>
           <h1 class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight" data-aos="fade-down" data-aos-delay="100" data-v-8d4ed633="">
-            Developer Tools: 100+ Free. Zero Tracking. Fully Private.
+            The complete developer toolkit that runs entirely in your browser
           </h1>
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="200" data-v-8d4ed633="">
-            JSON formatter, Base64 encoder, JWT debugger, hash generator, and more. <strong class="text-foreground">Everything runs in your browser.</strong> No server uploads. No sign-up. No data collection.
+            Format SQL and YAML, decode JWTs, hash with Keccak-256, lint Helm charts, generate vanity addresses — built for <strong class="text-foreground">blockchain, DevOps, enterprise, security, and SRE</strong> workflows. No uploads, no accounts, no tracking.
           </p>
           <div class="flex flex-wrap gap-4 justify-center items-center mt-6" data-v-8d4ed633="">
             <div
@@ -269,7 +272,7 @@ const _popularTools = [
                   <path d="M9 12l2 2 4-4"></path>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Your data never leaves your browser </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> {{ toolCount }} free tools </span>
             </div>
             <div
               class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
@@ -284,7 +287,7 @@ const _popularTools = [
                   <line x1="12" y1="8" x2="12" y2="12"></line>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Zero tracking, zero storage </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> No uploads, ever </span>
             </div>
             <div
               class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
@@ -306,19 +309,19 @@ const _popularTools = [
                   <line x1="1" y1="14" x2="4" y2="14"></line>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> 100% client-side processing </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Runs offline once loaded </span>
             </div>
           </div>
           <!-- Conversion CTA -->
           <div class="flex flex-col sm:flex-row gap-4 items-center mt-4" data-v-8d4ed633="">
             <RouterLink to="/tools" data-v-8d4ed633="">
               <button class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg" data-v-8d4ed633="">
-                ⚡ Explore All Tools
+                Browse All Tools
               </button>
             </RouterLink>
             <RouterLink to="/category/blockchain" data-v-8d4ed633="">
               <button class="px-6 py-3 bg-foreground/10 border border-foreground text-foreground rounded-lg font-semibold text-lg hover:bg-foreground hover:text-background transition-colors" data-v-8d4ed633="">
-                🔗 EVM and Blockchain Developer Tools
+                Web3 &amp; Blockchain Suite
               </button>
             </RouterLink>
           </div>
@@ -326,18 +329,18 @@ const _popularTools = [
           <!-- Social Proof Stats -->
           <div class="flex flex-wrap gap-8 justify-center items-center mt-8 text-center" data-aos="fade-up" data-aos-delay="150">
             <div>
-              <div class="text-3xl font-bold text-primary">100+</div>
-              <div class="text-xs text-muted-foreground">Free developer tools</div>
+              <div class="text-3xl font-bold text-primary">{{ toolCount }}</div>
+              <div class="text-xs text-muted-foreground">Tools across {{ categoryCount }} categories</div>
             </div>
             <div class="w-px h-10 bg-foreground"></div>
             <div>
-              <div class="text-3xl font-bold text-primary">Zero</div>
-              <div class="text-xs text-muted-foreground">Data collected</div>
+              <div class="text-3xl font-bold text-primary">60+</div>
+              <div class="text-xs text-muted-foreground">Guides &amp; tutorials</div>
             </div>
             <div class="w-px h-10 bg-foreground"></div>
             <div>
               <div class="text-3xl font-bold text-primary">0</div>
-              <div class="text-xs text-muted-foreground">Sign-ups needed</div>
+              <div class="text-xs text-muted-foreground">Servers involved</div>
             </div>
             <div class="w-px h-10 bg-foreground"></div>
             <div>

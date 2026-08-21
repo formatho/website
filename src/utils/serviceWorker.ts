@@ -35,6 +35,15 @@ export function registerServiceWorker() {
     console.log('🔄 Service Worker updated, reloading page...')
     window.location.reload()
   })
+
+  // Check for service worker updates when a tab regains focus, so
+  // returning visitors pick up a new deployment immediately instead of
+  // waiting for the browser's periodic (up to 24h) update check
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      navigator.serviceWorker.getRegistration()?.then((reg) => reg?.update())
+    }
+  })
 }
 
 /**

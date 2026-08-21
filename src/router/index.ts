@@ -458,6 +458,72 @@ export const routes = [
         }
       },
       {
+        path: '/tools/contract-reader',
+        name: 'contract-reader',
+        component: () => import(/* webpackPrefetch: true */ '../views/ContractReaderView.vue'),
+        meta: {
+          title: 'Smart Contract Reader - Call ABI View Functions | Formatho',
+          description:
+            'Paste a contract ABI, set any RPC endpoint and contract address, and call view and pure functions directly from your browser. Works on every EVM chain. Read-only eth_call - no wallet, no gas, no server.',
+          keywords: 'read smart contract online, call contract function, abi reader, contract view functions, eth_call tool, read contract without etherscan, contract interaction tool'
+        }
+      },
+      {
+        path: '/tools/function-selector',
+        name: 'function-selector',
+        component: () => import(/* webpackPrefetch: true */ '../views/FunctionSelectorView.vue'),
+        meta: {
+          title: 'Solidity Function Selector Calculator Online - 4-Byte Keccak | Formatho',
+          description:
+            'Calculate Solidity function selectors (4-byte signatures) from function signatures using Keccak-256. Batch mode for ABI development and Foundry cast sig. 100% client-side.',
+          keywords: 'function selector calculator, solidity selector, 4 byte signature, keccak256 selector, cast sig, abi selector, ethers interface id'
+        }
+      },
+      {
+        path: '/tools/ens-namehash',
+        name: 'ens-namehash',
+        component: () => import(/* webpackPrefetch: true */ '../views/EnsNamehashView.vue'),
+        meta: {
+          title: 'ENS Namehash Calculator Online - Labelhash & Namehash | Formatho',
+          description:
+            'Calculate ENS namehash and labelhash values for any ENS name using Keccak-256 per EIP-137. Full node-by-node derivation chain. 100% client-side.',
+          keywords: 'ens namehash calculator, namehash, labelhash, eip-137, ens resolution, keccak256 ens'
+        }
+      },
+      {
+        path: '/tools/vanity-eth',
+        name: 'vanity-eth',
+        component: () => import(/* webpackPrefetch: true */ '../views/VanityEthView.vue'),
+        meta: {
+          title: 'Ethereum Vanity Address Generator - All EVM Chains | Formatho',
+          description:
+            'Generate vanity addresses with a custom prefix or suffix. The same key works on every EVM chain - Ethereum, Polygon, BSC, Arbitrum, Base, Optimism, Avalanche. Runs 100% in your browser, key never transmitted.',
+          keywords: 'ethereum vanity address generator, evm vanity address, vanity eth address, polygon vanity address, bsc vanity address generator, base chain vanity address, custom wallet address, safe vanity address, client-side vanity'
+        }
+      },
+      {
+        path: '/tools/saml-decoder',
+        name: 'saml-decoder',
+        component: () => import(/* webpackPrefetch: true */ '../views/SamlDecoderView.vue'),
+        meta: {
+          title: 'SAML Request & Response Decoder Online - Base64 Deflate XML | Formatho',
+          description:
+            'Decode SAML AuthnRequest, LogoutRequest and Response messages. Base64 plus raw-deflate decompression with pretty-printed XML. 100% client-side - nothing is uploaded.',
+          keywords: 'saml decoder, saml request decoder, saml response decoder, decode saml assertion, base64 deflate saml, saml authnrequest, saml tracing, okta saml decoder'
+        }
+      },
+      {
+        path: '/tools/oidc-url-builder',
+        name: 'oidc-url-builder',
+        component: () => import(/* webpackPrefetch: true */ '../views/OidcUrlBuilderView.vue'),
+        meta: {
+          title: 'OIDC Authorization URL & PKCE Generator - OAuth 2.0 | Formatho',
+          description:
+            'Build OAuth 2.0 / OpenID Connect authorization URLs with scopes, state, nonce and S256 PKCE code challenges. Works with Okta, Auth0, Entra ID, Keycloak. 100% client-side.',
+          keywords: 'oidc url builder, oauth authorization url, pkce generator, code verifier generator, code challenge s256, okta authorize url, auth0 authorize url, openid connect playground'
+        }
+      },
+      {
         path: '/tools/abi-encoder',
         name: 'abi-encoder',
         component: () => import(/* webpackPrefetch: true */ '../views/AbiEncoderView.vue'),

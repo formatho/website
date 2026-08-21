@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: ["main", "prod"]
   workflow_dispatch:
+    inputs:
+      skip_deploy:
+        description: 'Skip deployment (build only)'
+        required: false
+        type: boolean
+        default: false
 
 env:
   IMAGE_NAME: ${{ github.repository }}
@@ -51,7 +57,7 @@ jobs:
 
   build:
     needs: [generate-version]
-    if: always()
+    if: always() || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -167,9 +173,24 @@ jobs:
   deploy-qa:
     needs: [build]
     runs-on: ubuntu-latest
-    environment: digital_ocean_formatho
-    if: always() && github.ref == 'refs/heads/main' && github.event_name == 'push' && needs.build.result == 'success'
+    if: always() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && needs.build.result == 'success'
     steps:
+      - name: Validate required secrets
+        run: |
+          if [ -z "${{ secrets.DO_HOST }}" ]; then
+            echo "::error::DO_HOST secret not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.DO_USERNAME }}" ]; then
+            echo "::error::DO_USERNAME secret not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.DO_SSH_KEY }}" ]; then
+            echo "::error::DO_SSH_KEY secret not set"
+            exit 1
+          fi
+          echo "✅ All required secrets are set"
+
       - name: Deploy QA via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -188,8 +209,24 @@ jobs:
     needs: [generate-version, build]
     runs-on: ubuntu-latest
     environment: digital_ocean_formatho
-    if: github.ref == 'refs/heads/prod' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/prod' && github.event_name == 'push' && inputs.skip_deploy != true
     steps:
+      - name: Validate required secrets
+        run: |
+          if [ -z "${{ secrets.DO_HOST }}" ]; then
+            echo "::error::DO_HOST secret not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.DO_USERNAME }}" ]; then
+            echo "::error::DO_USERNAME secret not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.DO_SSH_KEY }}" ]; then
+            echo "::error::DO_SSH_KEY secret not set"
+            exit 1
+          fi
+          echo "✅ All required secrets are set"
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -230,20 +267,34 @@ jobs:
             docker stack deploy -c docker-compose.yml formatho --with-registry-auth
 
             echo "Waiting for service to converge..."
-            sleep 5
+            timeout 30 bash -c 'until docker service ls --filter name=formatho --format "{{.Replicas}}" | grep -q "1/1"; do sleep 2; done'
             docker service ls --filter name=formatho
 
             docker image prune -f
 
-      - name: Health check
+      - name: Health check with retry
         run: |
-          sleep 10
-          HTTP_STATUS=$(curl -s -A "OpenClaw-HealthCheck/1.0" -o /dev/null -w "%{http_code}" https://formatho.com || echo "000")
-          if [ "$HTTP_STATUS" != "200" ] && [ "$HTTP_STATUS" != "403" ]; then
-            echo "::error::Health check failed! HTTP status: $HTTP_STATUS"
-            exit 1
-          fi
-          echo "✅ Health check passed — formatho.com returned $HTTP_STATUS"
+          set -e
+          MAX_ATTEMPTS=6
+          TIMEOUT=10
+          ATTEMPT=1
+
+          while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
+            echo "Health check attempt $ATTEMPT/$MAX_ATTEMPTS..."
+            HTTP_STATUS=$(curl -s -A "OpenClaw-HealthCheck/1.0" -o /dev/null -w "%{http_code}" https://formatho.com || echo "000")
+
+            if [ "$HTTP_STATUS" = "200" ] || [ "$HTTP_STATUS" = "403" ]; then
+              echo "✅ Health check passed — formatho.com returned $HTTP_STATUS"
+              exit 0
+            fi
+
+            echo "❌ Health check failed — got $HTTP_STATUS, retrying in ${TIMEOUT}s..."
+            sleep $TIMEOUT
+            ATTEMPT=$((ATTEMPT + 1))
+          done
+
+          echo "::error::Health check failed after $MAX_ATTEMPTS attempts"
+          exit 1
 
       - name: Deployment summary
         run: |

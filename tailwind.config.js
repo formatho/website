@@ -3,6 +3,9 @@ const animate = require('tailwindcss-animate')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  // Site is light-only (no .dark class, no toggle). Class strategy keeps
+  // dark: utilities from activating via OS preference on the white theme.
+  darkMode: 'class',
   // Note: Dark mode not used - strictly maintaining light mode only
   content: [
     './pages/**/*.{ts,tsx,vue}',

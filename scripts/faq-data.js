@@ -353,6 +353,79 @@ export const toolSEOContent = {
       'Copy the exact value for your transaction or contract call.'
     ]
   },
+  '/tools/saml-decoder': {
+    intro: [
+      'When a SAML flow breaks, the evidence is hidden inside a giant base64 blob on the URL or in an HTML form field. HTTP-Redirect bindings deflate-compress the XML before base64-encoding it; POST bindings base64-encode it directly. Either way, what you get in browser dev tools is unreadable - and pasting production SAML assertions into a random website is a real security risk, since assertions can contain names, emails, and group memberships that act as access tokens.',
+      'This decoder runs entirely in your browser using the native DecompressionStream API: raw-deflate decompression plus base64 decoding, then pretty-printed XML showing the AuthnRequest, Subject, conditions, and every attribute statement. Nothing is uploaded, and it also encodes XML back into Redirect-binding format for testing your own SP.'
+    ],
+    howTo: [
+      'Copy the SAMLRequest or SAMLResponse parameter value from the URL or form.',
+      'Paste it in and click Decode - deflate and base64 are handled automatically.',
+      'Inspect the pretty-printed XML: issuer, NameID, attributes, and conditions.',
+      'Switch to Encode to turn SAML XML back into a Redirect-binding payload.'
+    ]
+  },
+  '/tools/oidc-url-builder': {
+    intro: [
+      'Almost every OAuth 2.0 / OpenID Connect bug in a new app traces back to the authorization request: a missing scope, a wrong redirect_uri, or a PKCE verifier that does not match the challenge sent in the authorize URL. Assembling that URL by hand invites typos in exactly the parameters the identity provider compares strictly.',
+      'This builder assembles the full /authorize URL with state, nonce, and an S256 PKCE pair generated with your browser\u2019s secure random generator. The code_verifier stays on your machine and is never transmitted - copy it into your token request when the authorization code comes back. Works with Okta, Auth0, Microsoft Entra ID, Keycloak, Google, and any standards-compliant OIDC provider.'
+    ],
+    howTo: [
+      'Enter your issuer URL (e.g. https://your-org.okta.com/oauth2/default) and client ID.',
+      'Set the redirect URI and scopes exactly as registered with your provider.',
+      'Leave PKCE on for SPAs and mobile apps - the S256 challenge is computed via Web Crypto.',
+      'Copy the authorization URL, complete the login, then exchange the code with the shown token request and code_verifier.'
+    ]
+  },
+  '/tools/contract-reader': {
+    intro: [
+      'Reading a deployed smart contract normally means trusting Etherscan with your RPC traffic or writing a script. But a read-only call is just an eth_call RPC request - the browser can make it directly. Paste the contract ABI, point the tool at any RPC endpoint, and call every view and pure function: token names and balances, owner addresses, config values, or any public getter.',
+      'Because it uses eth_call, every request is read-only: no wallet connection, no gas, no signing, and no way to spend anything. Requests go straight from your browser to the RPC endpoint you choose - Formatho never sees your traffic. Works identically on Ethereum, Polygon, BNB Chain, Arbitrum, Base, Optimism, and every other EVM network.'
+    ],
+    howTo: [
+      'Paste the contract ABI JSON (from Etherscan, forge inspect, or build artifacts).',
+      'Pick a chain preset or paste any RPC endpoint, and enter the contract address.',
+      'Expand a view function, fill in its arguments if it has any.',
+      'Click Call - the result appears instantly, straight from your RPC.'
+    ]
+  },
+  '/tools/function-selector': {
+    intro: [
+      'Every Ethereum smart contract function is identified on-chain by its 4-byte selector: the first four bytes of the Keccak-256 hash of its canonical signature. When a wallet or dapp calls transfer(address,uint256), the calldata starts with 0xa9059cbb — that value is the selector. Selector collisions and interface matching make this small hash a daily concern for Solidity developers and auditors.',
+      'Paste one or many function signatures to compute their selectors instantly. This matches exactly what Solidity keccak256(abi.encodeWithSignature(...)), Foundry cast sig, and ethers.js Interface.getSighash produce — the hashing runs entirely in your browser.'
+    ],
+    howTo: [
+      'Enter one function signature per line, e.g. transfer(address,uint256).',
+      'Each 4-byte selector is computed instantly with Keccak-256.',
+      'Verify the selector matches the calldata prefix in your transaction.',
+      'Use Copy all to export selector + signature pairs for your notes or ABI work.'
+    ]
+  },
+  '/tools/ens-namehash': {
+    intro: [
+      'The Ethereum Name Service resolves human-readable names like vitalik.eth through the EIP-137 namehash algorithm: a recursive Keccak-256 construction that turns a dotted name into a 32-byte node used as the storage key in ENS registry contracts. Getting namehash right by hand is error-prone because every label is hashed separately and combined in order.',
+      'This calculator shows the full derivation chain — each label, its labelhash, and the node value after combining it — so you can verify exactly what the ENS registry will look up. Everything is computed locally in your browser.'
+    ],
+    howTo: [
+      'Type an ENS name such as vitalik.eth.',
+      'The final namehash appears immediately at the top.',
+      'Inspect the derivation chain to see each labelhash and intermediate node.',
+      'Copy the namehash for use in your contract calls or tests.'
+    ]
+  },
+  '/tools/vanity-eth': {
+    intro: [
+      'A vanity Ethereum address contains a pattern you choose — it starts with 0xdead or ends in beef. Generating one is simple brute force: create keypairs until an address matches. Each hex character multiplies the expected work by 16, so 4 characters average around 65,000 attempts and each additional character multiplies that by 16.',
+      'One key, every EVM chain: an address generated here is valid on Ethereum, Polygon, BNB Smart Chain, Arbitrum, Base, Optimism, Avalanche, and every other EVM network - they all share the same address format.',
+      "The critical risk with online vanity generators is that most run on a server — the private key exists on someone else's machine. This generator runs entirely in your browser inside a Web Worker: keys are created with your device's secure random generator and are never transmitted, logged, or stored."
+    ],
+    howTo: [
+      'Enter a prefix (after 0x) and/or suffix of hex characters.',
+      'Click Start — generation runs in a background worker at full speed.',
+      'Watch the attempt counter and rate; matches appear as they are found.',
+      'Copy the address and private key once a match is found.'
+    ]
+  },
   '/tools/markdown': {
     intro: [
       'Markdown is the writing format of modern development: READMEs, documentation sites, pull requests, issues, and static site generators all use it. A live side-by-side editor shows exactly how your Markdown will render while you write it.',
@@ -371,6 +444,100 @@ export const toolSEOContent = {
  * Additional tool-specific FAQs (rendered visibly and injected as FAQPage
  * structured data). Keyed by route path.
  */
+const websiteAgentToolFAQs = {
+  '/tools/saml-decoder': [
+    {
+      question: 'What is the difference between SAML Redirect and POST binding?',
+      answer: 'The Redirect binding packs the XML message into the URL: raw-deflate compression followed by Base64, then URL-encoding. The POST binding puts only Base64 (no compression) into an HTML form field. This decoder auto-detects both - if deflate decompression fails it retries as plain Base64.'
+    },
+    {
+      question: 'Is it safe to paste production SAML assertions here?',
+      answer: 'Yes. Decoding happens entirely in your browser - assertions are never uploaded to any server. That said, SAML assertions are bearer credentials, so avoid pasting them into tools that cannot prove client-side processing.'
+    },
+    {
+      question: 'Why does my decoded SAML show as broken XML?',
+      answer: 'The message was likely truncated by URL length limits or copy-paste. Grab the full parameter (SAMLRequest or SAMLResponse) from your browser devtools network tab rather than the visible URL bar.'
+    }
+  ],
+  '/tools/oidc-url-builder': [
+    {
+      question: 'What is PKCE and when do I need it?',
+      answer: 'PKCE (Proof Key for Code Exchange) binds the authorization code to a verifier secret so intercepted codes cannot be exchanged. It is required for public clients (SPAs, mobile apps) and recommended for all OAuth 2.1 flows. This builder generates the verifier and computes the S256 code challenge with Web Crypto.'
+    },
+    {
+      question: 'Does this work with Okta, Auth0, Entra ID, and Keycloak?',
+      answer: 'Yes. The /authorize endpoint parameters are standardized by OpenID Connect, so the generated URL works with any compliant provider - fill in the authorization endpoint URL from your provider app settings.'
+    },
+    {
+      question: 'Are the state, nonce, and verifier safe to generate here?',
+      answer: 'They are generated with your browser crypto.getRandomValues and never leave the page - nothing is transmitted or logged. For production apps, generate them in your own code; use this tool to understand and debug the flow.'
+    }
+  ]
+}
+
+const newToolFAQs = {
+  '/tools/contract-reader': [
+    {
+      question: 'How is this different from Etherscan read contract?',
+      answer: 'No account limits, no site-specific delays, and your queries go directly from your browser to the RPC you choose. It also works on any EVM chain and with private or paid RPC endpoints, including local development nodes like anvil or Hardhat.'
+    },
+    {
+      question: 'Can this spend my funds or move assets?',
+      answer: 'No. The tool only sends eth_call requests, which are strictly read-only. No wallet is connected and nothing is signed, so there is no way for it - or any function it lists - to transfer or spend anything.'
+    },
+    {
+      question: 'Where do I get a contract ABI?',
+      answer: 'From Etherscan contract page (Code tab), foundry forge inspect <contract> --json, Hardhat artifacts, or the artifacts your build tool emits. Standard interfaces like ERC-20 are also one click away with the example loader.'
+    },
+    {
+      question: 'Can I use a local development node?',
+      answer: 'Yes. Point the RPC field at http://127.0.0.1:8545 (anvil, Hardhat, or ganache) and read your locally deployed contracts the same way.'
+    }
+  ],
+  '/tools/function-selector': [
+    {
+      question: 'What is a Solidity function selector?',
+      answer: 'The first 4 bytes of the Keccak-256 hash of the function signature, e.g. 0xa9059cbb for transfer(address,uint256). It identifies which function a transaction calls in the calldata.'
+    },
+    {
+      question: 'Does this match Foundry cast sig and ethers.js output?',
+      answer: 'Yes. Selector computation is standardized: Keccak-256 of the canonical signature string, first 4 bytes. Results match cast sig, ethers.js getSighash, and web3.js encodeFunctionSignature.'
+    },
+    {
+      question: 'Why do two of my functions have the same selector?',
+      answer: 'It is rare but possible - 4 bytes allow collisions. The compiler warns on collisions within one contract; across contracts it is usually harmless unless an ABI proxy forwards calls.'
+    }
+  ],
+  '/tools/ens-namehash': [
+    {
+      question: 'What is the difference between namehash and labelhash?',
+      answer: 'A labelhash is the Keccak-256 of a single label like eth. The namehash combines labelhashes recursively from the root, producing the 32-byte node the ENS registry uses as its key.'
+    },
+    {
+      question: 'Does the calculator normalize names?',
+      answer: 'It lowercases labels and strips trailing dots, which covers standard names. Full ENS normalization (ENSIP-15) handles Unicode edge cases; for those, verify with the official ENS normalization library.'
+    }
+  ],
+  '/tools/vanity-eth': [
+    {
+      question: 'Is it safe to use a vanity address for real funds?',
+      answer: 'This generator never transmits keys - everything happens in your browser. Still, best practice for meaningful funds is a hardware wallet or air-gapped generation. Treat browser-generated keys as suitable for testing and throwaway accounts.'
+    },
+    {
+      question: 'How long does it take to find a match?',
+      answer: 'Each hex character multiplies expected attempts by 16: 4 characters average ~65k attempts, 5 around 1M, 6 around 16M. At typical browser speeds of thousands of keys per second, 4-5 characters take seconds to minutes; 7+ can take hours or longer.'
+    },
+    {
+      question: 'Does this work for Polygon, BSC, Base, and other EVM chains?',
+      answer: 'Yes. All EVM chains use the same address derivation, so a vanity address generated here works identically on Ethereum, Polygon, BNB Smart Chain, Arbitrum, Base, Optimism, Avalanche, and every EVM network.'
+    },
+    {
+      question: 'Can I use uppercase letters in my pattern?',
+      answer: 'Patterns match case-insensitively against the lowercase hex address. The displayed address uses proper EIP-55 checksum casing. Matching checksum-case exactly would multiply the work enormously per character.'
+    }
+  ]
+}
+
 const extraFAQs = {
   '/tools/diff': [
     {
@@ -469,4 +636,4 @@ const extraFAQs = {
 }
 
 // Merge extra FAQs into the exported map
-Object.assign(toolSpecificFAQ, extraFAQs)
+Object.assign(toolSpecificFAQ, extraFAQs, newToolFAQs, websiteAgentToolFAQs)

@@ -1,9 +1,12 @@
 /**
  * Service Worker for Formatho
- * Simplified caching - stale-while-revalidate for all GET requests
+ * - Navigations (HTML): network-first. HTML is never served stale -
+ *   hashed asset filenames mean a stale shell references missing JS.
+ * - Static assets (/assets/*): cache-first, content-hashed + immutable.
+ * - Everything else same-origin GET: stale-while-revalidate.
  */
 
-const CACHE_NAME = 'formatho-v2-2026-06-14'
+const CACHE_NAME = 'formatho-v3-2026-08-21'
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -30,7 +33,7 @@ self.addEventListener('activate', (event) => {
   )
 })
 
-// Fetch - stale-while-revalidate for everything
+// Fetch - strategy by request type
 self.addEventListener('fetch', (event) => {
   const { request } = event
 
@@ -42,25 +45,38 @@ self.addEventListener('fetch', (event) => {
   // Skip cross-origin
   if (url.origin !== location.origin) return
 
+  // Content-hashed build assets: cache-first (immutable)
+  if (url.pathname.startsWith('/assets/')) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(async (cache) => {
+        const cached = await cache.match(request)
+        if (cached) return cached
+        const response = await fetch(request)
+        if (response && response.status === 200) {
+          cache.put(request, response.clone())
+        }
+        return response
+      })
+    )
+    return
+  }
+
+  // Navigations and everything else: network-first with cache fallback.
+  // Serving stale HTML breaks deploys (stale shell references removed
+  // hashed assets) and can pin users to pages that no longer exist.
   event.respondWith(
     caches.open(CACHE_NAME).then(async (cache) => {
       const cached = await cache.match(request)
-
-      const fetchPromise = fetch(request)
-        .then((response) => {
-          // Cache successful responses
-          if (response && response.status === 200) {
-            cache.put(request, response.clone())
-          }
-          return response
-        })
-        .catch(() => {
-          // Network failed - return cache if available
-          return cached
-        })
-
-      // Return cached immediately if available, otherwise wait for network
-      return cached || fetchPromise
+      try {
+        const response = await fetch(request)
+        if (response && response.status === 200) {
+          cache.put(request, response.clone())
+        }
+        return response
+      } catch {
+        // Network failed - fall back to cache if available
+        return cached || Response.error()
+      }
     })
   )
 })
