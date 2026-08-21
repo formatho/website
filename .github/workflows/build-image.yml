@@ -173,7 +173,7 @@ jobs:
   deploy-qa:
     needs: [build]
     runs-on: ubuntu-latest
-    if: true
+    if: always() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && needs.build.result == 'success'
     steps:
       - name: Validate required secrets
         run: |
