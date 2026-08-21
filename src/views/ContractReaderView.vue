@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, reactive } from 'vue'
 import { Copy, Check, Play, FileJson, AlertCircle, Loader2, BookOpen } from 'lucide-vue-next'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -27,7 +27,7 @@ const rpcUrl = ref('https://eth.llamarpc.com')
 const contractAddress = ref('')
 const abiText = ref('')
 const expanded = ref<string | null>(null)
-const args: Record<string, Record<string, string>> = {}
+const args = reactive<Record<string, Record<string, string>>>({})
 const results = ref<Record<string, { loading: boolean; error?: string; value?: string }>>({})
 const copied = ref<string | null>(null)
 
