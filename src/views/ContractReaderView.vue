@@ -118,8 +118,11 @@ function convertArg(type: string, value: string): unknown {
 
 function formatResult(value: unknown): string {
   if (typeof value === 'bigint') return value.toString()
-  if (Array.isArray(value)) return JSON.stringify(value.map((v) => (typeof v === 'bigint' ? v.toString() : v)), null, 2)
-  if (value && typeof value === 'object') return JSON.stringify(value, null, 2)
+  if (value && typeof value === 'object') {
+    // Decoded structs (tuples) contain BigInts at any depth (price, timestamp, ...)
+    // and JSON.stringify throws "Do not know how to serialize a BigInt" without a replacer
+    return JSON.stringify(value, (_, v) => (typeof v === 'bigint' ? v.toString() : v), 2)
+  }
   return String(value)
 }
 
@@ -256,15 +259,15 @@ async function copy(text: string, key: string) {
 
           <div v-if="expanded === fn.name" class="px-4 pb-4 space-y-3 border-t border-border pt-3">
             <div v-if="fn.inputs.length" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div v-for="input in fn.inputs" :key="input.name">
+              <div v-for="(input, inputIdx) in fn.inputs" :key="`${input.type}:${input.name}:${inputIdx}`">
                 <label class="text-xs font-mono text-muted-foreground mb-1 block">
                   {{ input.name || input.type }} <span class="opacity-60">({{ input.type }})</span>
                 </label>
                 <Input
                   class="font-mono text-sm"
                   :placeholder="input.type"
-                  :value="getArg(fn.name, `${input.type}:${input.name}`)"
-                  @input="setArg(fn.name, `${input.type}:${input.name}`, ($event.target as HTMLInputElement).value)"
+                  :model-value="getArg(fn.name, `${input.type}:${input.name}`)"
+                  @update:model-value="setArg(fn.name, `${input.type}:${input.name}`, String($event ?? ''))"
                 />
               </div>
             </div>
