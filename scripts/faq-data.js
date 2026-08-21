@@ -444,6 +444,37 @@ export const toolSEOContent = {
  * Additional tool-specific FAQs (rendered visibly and injected as FAQPage
  * structured data). Keyed by route path.
  */
+const websiteAgentToolFAQs = {
+  '/tools/saml-decoder': [
+    {
+      question: 'What is the difference between SAML Redirect and POST binding?',
+      answer: 'The Redirect binding packs the XML message into the URL: raw-deflate compression followed by Base64, then URL-encoding. The POST binding puts only Base64 (no compression) into an HTML form field. This decoder auto-detects both - if deflate decompression fails it retries as plain Base64.'
+    },
+    {
+      question: 'Is it safe to paste production SAML assertions here?',
+      answer: 'Yes. Decoding happens entirely in your browser - assertions are never uploaded to any server. That said, SAML assertions are bearer credentials, so avoid pasting them into tools that cannot prove client-side processing.'
+    },
+    {
+      question: 'Why does my decoded SAML show as broken XML?',
+      answer: 'The message was likely truncated by URL length limits or copy-paste. Grab the full parameter (SAMLRequest or SAMLResponse) from your browser devtools network tab rather than the visible URL bar.'
+    }
+  ],
+  '/tools/oidc-url-builder': [
+    {
+      question: 'What is PKCE and when do I need it?',
+      answer: 'PKCE (Proof Key for Code Exchange) binds the authorization code to a verifier secret so intercepted codes cannot be exchanged. It is required for public clients (SPAs, mobile apps) and recommended for all OAuth 2.1 flows. This builder generates the verifier and computes the S256 code challenge with Web Crypto.'
+    },
+    {
+      question: 'Does this work with Okta, Auth0, Entra ID, and Keycloak?',
+      answer: 'Yes. The /authorize endpoint parameters are standardized by OpenID Connect, so the generated URL works with any compliant provider - fill in the authorization endpoint URL from your provider app settings.'
+    },
+    {
+      question: 'Are the state, nonce, and verifier safe to generate here?',
+      answer: 'They are generated with your browser crypto.getRandomValues and never leave the page - nothing is transmitted or logged. For production apps, generate them in your own code; use this tool to understand and debug the flow.'
+    }
+  ]
+}
+
 const newToolFAQs = {
   '/tools/contract-reader': [
     {
@@ -605,4 +636,4 @@ const extraFAQs = {
 }
 
 // Merge extra FAQs into the exported map
-Object.assign(toolSpecificFAQ, extraFAQs, newToolFAQs)
+Object.assign(toolSpecificFAQ, extraFAQs, newToolFAQs, websiteAgentToolFAQs)
