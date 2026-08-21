@@ -8,7 +8,7 @@ import { keccak256, toBytes } from 'viem'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
-  title: 'Solidity Function Selector Calculator - 4-Byte Keccak | Formatho',
+  title: 'Solidity Function Selector Calculator | Formatho',
   description:
     'Calculate Solidity function selectors (4-byte signatures) from function signatures using Keccak-256. Batch mode for ABI development and Foundry cast sig. 100% client-side - nothing is uploaded.',
   keywords: [
