@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
-  title: 'SAML Request & Response Decoder - Base64 Deflate XML | Formatho',
+  title: 'SAML Request & Response Decoder to XML | Formatho',
   description:
     'Decode SAML AuthnRequest, LogoutRequest and Response messages. Base64 plus raw-deflate decompression with pretty-printed XML. 100% client-side - no SAML message ever leaves your browser.',
   keywords: [

@@ -8,7 +8,7 @@ import { keccak256, toBytes, toHex } from 'viem'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
-  title: 'ENS Namehash Calculator Online - Labelhash & Namehash | Formatho',
+  title: 'ENS Namehash & Labelhash Calculator | Formatho',
   description:
     'Calculate ENS namehash and labelhash values for any ENS name using Keccak-256, per EIP-137. See the full derivation chain node by node. 100% client-side.',
   keywords: [

@@ -192,7 +192,7 @@ export const routes = [
         name: 'sql-to-er-diagram',
         component: () => import(/* webpackPrefetch: true */ '../views/SqlToErDiagramView.vue'),
         meta: {
-          title: 'SQL to ER Diagram Converter - Visualize Database Schema | Formatho',
+          title: 'SQL to ER Diagram Converter Online | Formatho',
           description: 'Convert CREATE TABLE SQL statements into interactive ER diagrams instantly. Visualize tables, columns, primary keys, and foreign key relationships. Export as Mermaid for AI tools. Free, 100% client-side.',
           keywords: 'sql to er diagram, erd generator, database schema visualizer, create table to erd, entity relationship diagram, sql schema visualizer, free erd tool, mermaid er diagram, privacy-first'
         }
@@ -202,7 +202,7 @@ export const routes = [
         name: 'sql-query-plan-visualizer',
         component: () => import(/* webpackPrefetch: true */ '../views/SqlQueryPlanVisualizerView.vue'),
         meta: {
-          title: 'SQL Query Plan Visualizer - Analyze & Optimize Queries | Formatho',
+          title: 'SQL Query Plan Visualizer Online | Formatho',
           description: 'Visualize SQL execution plans step by step. Understand table scans, joins, sorts, and aggregates. Get actionable optimization tips for PostgreSQL, MySQL, and more. Free, 100% client-side.',
           keywords: 'sql query plan, execution plan visualizer, sql optimizer, query analysis, explain plan, sql performance, database optimization, free sql tool, privacy-first'
         }
@@ -212,7 +212,7 @@ export const routes = [
         name: 'sql-dialect-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/SqlDialectConverterView.vue'),
         meta: {
-          title: 'SQL Dialect Converter - PostgreSQL, MySQL, SQLite, T-SQL | Formatho',
+          title: 'SQL Dialect Converter - Postgres, MySQL, T-SQL | Formatho',
           description: 'Convert SQL queries between PostgreSQL, MySQL, SQLite, SQL Server, BigQuery, Snowflake, and more. Handles syntax differences, data types, and dialect-specific functions. Free, 100% client-side.',
           keywords: 'sql dialect converter, postgresql to mysql, mysql to postgresql, sql converter, tsql converter, sql translation, database migration tool, free sql converter, privacy-first'
         }
@@ -363,7 +363,7 @@ export const routes = [
         name: 'keccak256',
         component: () => import(/* webpackPrefetch: true */ '../views/KeccakHasherView.vue'),
         meta: {
-          title: 'Keccak-256 Hash Generator Online - Free & Privacy-First | Formatho',
+          title: 'Keccak-256 Hash Generator Online | Formatho',
           description:
             'Calculate Keccak-256 hashes instantly online. Supports UTF-8, UTF-16, Hex, Base64. 100% client-side, no data leaves your browser. Free tool for Ethereum and blockchain developers.',
           keywords: 'keccak-256 hash generator, keccak256 online, ethereum hash, solidity keccak256, blockchain hash, client-side hash, privacy-first, utf-8 hashing, utf-16 hashing, hex hashing, base64 hashing'
@@ -374,7 +374,7 @@ export const routes = [
         name: 'address-checksum',
         component: () => import(/* webpackPrefetch: true */ '../views/AddressChecksumView.vue'),
         meta: {
-          title: 'Ethereum Address Checksum (EIP-55) - Verify & Encode Online | Formatho',
+          title: 'Ethereum Address Checksum (EIP-55) Online | Formatho',
           description:
             'Validate and checksum Ethereum addresses using EIP-55. Detect spoofed addresses and prevent loss from typos. 100% client-side, privacy-first.',
           keywords: 'ethereum address checksum, eip-55 checksum, address validator, spoofed address, ethereum address verify, checksum address, web3 security'
@@ -386,7 +386,7 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/MultiChainKeyGeneratorView.vue'),
         meta: {
-          title: 'Multi-Chain Wallet Generator - Ethereum, Bitcoin, Solana | Formatho',
+          title: 'Multi-Chain Wallet Generator - ETH, BTC, SOL | Formatho',
           description:
             'Generate keys and addresses for Ethereum, Bitcoin, Solana, Cosmos, and Polkadot from one mnemonic. BIP-39, BIP-44, secp256k1, Ed25519. 100% client-side.',
           keywords:
@@ -473,7 +473,7 @@ export const routes = [
         name: 'function-selector',
         component: () => import(/* webpackPrefetch: true */ '../views/FunctionSelectorView.vue'),
         meta: {
-          title: 'Solidity Function Selector Calculator Online - 4-Byte Keccak | Formatho',
+          title: 'Solidity Function Selector Calculator | Formatho',
           description:
             'Calculate Solidity function selectors (4-byte signatures) from function signatures using Keccak-256. Batch mode for ABI development and Foundry cast sig. 100% client-side.',
           keywords: 'function selector calculator, solidity selector, 4 byte signature, keccak256 selector, cast sig, abi selector, ethers interface id'
@@ -484,7 +484,7 @@ export const routes = [
         name: 'ens-namehash',
         component: () => import(/* webpackPrefetch: true */ '../views/EnsNamehashView.vue'),
         meta: {
-          title: 'ENS Namehash Calculator Online - Labelhash & Namehash | Formatho',
+          title: 'ENS Namehash & Labelhash Calculator | Formatho',
           description:
             'Calculate ENS namehash and labelhash values for any ENS name using Keccak-256 per EIP-137. Full node-by-node derivation chain. 100% client-side.',
           keywords: 'ens namehash calculator, namehash, labelhash, eip-137, ens resolution, keccak256 ens'
@@ -506,7 +506,7 @@ export const routes = [
         name: 'saml-decoder',
         component: () => import(/* webpackPrefetch: true */ '../views/SamlDecoderView.vue'),
         meta: {
-          title: 'SAML Request & Response Decoder Online - Base64 Deflate XML | Formatho',
+          title: 'SAML Request & Response Decoder to XML | Formatho',
           description:
             'Decode SAML AuthnRequest, LogoutRequest and Response messages. Base64 plus raw-deflate decompression with pretty-printed XML. 100% client-side - nothing is uploaded.',
           keywords: 'saml decoder, saml request decoder, saml response decoder, decode saml assertion, base64 deflate saml, saml authnrequest, saml tracing, okta saml decoder'
@@ -528,7 +528,7 @@ export const routes = [
         name: 'abi-encoder',
         component: () => import(/* webpackPrefetch: true */ '../views/AbiEncoderView.vue'),
         meta: {
-          title: 'ABI Encoder & Decoder - Solidity Smart Contract ABI Tool | Formatho',
+          title: 'ABI Encoder & Decoder - Solidity Tool | Formatho',
           description: 'Encode and decode Solidity ABI parameters, function calls, and constructor arguments. Generate function selectors and calldata for Foundry/Cast. Decode transaction input data. Supports all Solidity types. Free, 100% client-side.',
           keywords: 'abi encoder, abi decoder, solidity abi, abi encode online, function selector, calldata encoder, solidity encode, erc20 encode, foundry cast, ethers abi, viem abi, smart contract debugging, free abi tool, privacy-first'
         }
@@ -909,7 +909,7 @@ export const routes = [
         name: 'wifi-qr-code-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/WifiQrCodeGeneratorView.vue'),
         meta: {
-          title: 'WiFi QR Code Generator - Share WiFi Password via QR Code | Formatho',
+          title: 'WiFi QR Code Generator - Share WiFi by QR | Formatho',
           description: 'Generate QR codes for WiFi network credentials instantly. Share your WiFi password with guests without typing — scan and connect. Supports WPA, WEP, and open networks with hidden SSID. 100% client-side, no data sent to any server.',
           keywords: 'wifi qr code generator, wifi password qr, qr code wifi, share wifi, wifi qr code, wifi network qr, free wifi qr generator, scan wifi qr, guest wifi qr code, privacy-first'
         }
@@ -988,7 +988,7 @@ export const routes = [
         name: 'yaml-viewer',
         component: () => import(/* webpackPrefetch: true */ '../views/YamlViewerView.vue'),
         meta: {
-          title: 'YAML Linter & Validator - Format, Validate, and Beautify YAML Online',
+          title: 'YAML Linter & Validator Online | Formatho',
           description:
             'Free YAML linter and validator that formats, validates, and beautifies YAML documents instantly. Check YAML syntax errors, fix indentation issues, and format YAML files. 100% privacy-first - runs entirely in your browser with no server uploads.',
           keywords:
@@ -1148,7 +1148,7 @@ export const routes = [
         name: 'crontab-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/CrontabGeneratorView.vue'),
         meta: {
-          title: 'Crontab Generator Online - Free Cron Expression Builder | Formatho',
+          title: 'Crontab Generator - Free Cron Builder | Formatho',
           description: 'Generate cron expressions with visual builder.'
         }
       },
@@ -1201,7 +1201,7 @@ export const routes = [
         name: 'hash-text',
         component: () => import(/* webpackPrefetch: true */ '../views/HashTextView.vue'),
         meta: {
-          title: 'Argon2id Hash Generator Online - Free Browser-Based Hashing Tool',
+          title: 'Argon2id Hash Generator Online - Free | Formatho',
           description: 'Generate Argon2id, bcrypt, PBKDF2, MD5, SHA-1, SHA-256, SHA-384, SHA-512, BLAKE2b, and Poseidon hashes online. 100% client-side hashing - your data never leaves your browser. No signup, free forever.',
           keywords: 'argon2id hash, argon2id online, argon2id browser, argon2id generator, bcrypt online, pbkdf2 online, sha256 generator, sha512 generator, md5 generator, blake2b online, poseidon hash, hash text, password hash, crypto hash, client-side hashing, privacy-first hash tool, free hash generator',
           canonical: 'https://formatho.com/tools/hash-text'
@@ -1285,7 +1285,7 @@ export const routes = [
         name: 'mermaid-viewer',
         component: () => import(/* webpackPrefetch: true */ '../views/tools/MermaidViewer.vue'),
         meta: {
-          title: 'Mermaid Diagram Viewer - Free Online Markdown to Diagram Tool',
+          title: 'Mermaid Diagram Viewer & Editor Online | Formatho',
           description: 'Free online Mermaid diagram viewer and editor. Paste Mermaid.js code from ChatGPT, Claude, or Copilot and render flowcharts, sequence diagrams, ER diagrams, Gantt charts instantly. The easiest way to visualize AI-generated diagrams. No signup, 100% client-side.',
           keywords: 'mermaid viewer, mermaid diagram, mermaid online, ai diagram tool, chatgpt diagram, claude mermaid, copilot diagram, flowchart maker, sequence diagram, er diagram, gantt chart, markdown diagram, free diagram tool, mermaid js, architecture diagram, privacy-first'
         }

@@ -29,7 +29,7 @@ const copyHash = () => {
 // SEO structured data
 onMounted(() => {
   useHead({
-    title: 'Keccak-256 Hash Generator Online - Free & Privacy-First | Formatho',
+    title: 'Keccak-256 Hash Generator Online | Formatho | Formatho',
     meta: [
       { name: 'description', content: 'Calculate Keccak-256 hashes instantly online. Supports UTF-8, UTF-16, Hex, Base64. 100% client-side, no data leaves your browser. Free tool for Ethereum and blockchain developers.' },
       { name: 'keywords', content: 'keccak-256 hash generator, keccak256 online, ethereum hash, solidity keccak256, blockchain hash, client-side hash, privacy-first, utf-8 hashing, utf-16 hashing, hex hashing, base64 hashing' }
