@@ -187,7 +187,7 @@ async function copy(text: string, key: string) {
               <button
                 v-for="preset in rpcPresets"
                 :key="preset.label"
-                class="text-xs px-2 py-0.5 border border-foreground/15 rounded-full hover:border-foreground/40 transition-colors"
+                class="no-btn-hover text-xs px-2 py-0.5 border border-foreground/15 rounded-full hover:border-foreground/40 transition-colors"
                 :class="{ 'bg-primary/10 border-primary/40': rpcUrl === preset.url }"
                 @click="rpcUrl = preset.url"
               >
@@ -210,7 +210,7 @@ async function copy(text: string, key: string) {
           <div class="flex items-center justify-between mb-1">
             <label for="abi-input" class="text-sm font-medium text-muted-foreground">Contract ABI (JSON)</label>
             <button
-              class="text-xs px-2 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 transition-colors"
+              class="no-btn-hover text-xs px-2 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 transition-colors"
               @click="loadErc20Example"
             >
               Load ERC-20 example
@@ -238,7 +238,7 @@ async function copy(text: string, key: string) {
       <CardContent class="space-y-3">
         <div v-for="fn in viewFunctions" :key="fn.name" class="border border-border rounded-lg">
           <button
-            class="w-full flex items-center justify-between gap-4 px-4 py-3 text-left"
+            class="no-btn-hover w-full flex items-center justify-between gap-4 px-4 py-3 text-left"
             @click="expanded = expanded === fn.name ? null : fn.name"
           >
             <div class="min-w-0">
