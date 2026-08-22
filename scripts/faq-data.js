@@ -1049,3 +1049,181 @@ const cosmosReaderFAQs = {
 
 Object.assign(toolSEOContent, cosmosReaderContent)
 Object.assign(toolSpecificFAQ, cosmosReaderFAQs)
+
+
+/**
+ * Content depth layer (GEO): a 40-80 word quotable lead per tool - the
+ * what/why/for-whom summary an AI search engine can cite verbatim - plus
+ * concrete use cases with examples for the top-traffic tools.
+ */
+const toolDepth = {
+  '/tools/base64': {
+    quote: 'This free online Base64 encoder and decoder converts text to Base64 and back instantly in your browser. Developers use it to embed images in CSS, encode API credentials, and package data into JSON - private, with nothing uploaded, since every conversion runs client-side.',
+    useCases: [
+      'Embed small images directly in stylesheets as data URIs to avoid extra HTTP requests. Encode the binary, then reference it: url(data:image/png;base64,<encoded>).',
+      'Debug HTTP Basic authentication: the Authorization header is just Base64 of user:password - decode one to verify what a client sends, or build one to test a server.',
+      'Prepare payloads for JWT work: the header and payload segments of a JWT are Base64URL-encoded JSON. Decoding them here is the first step of inspecting any token.'
+    ],
+    code: { content: 'Authorization: Basic ' + 'dXNlcjpwYXNzd29yZA==' + '  // base64("user:password")' }
+  },
+  '/tools/jwt': {
+    quote: 'Decode and inspect JSON Web Tokens in your browser: this free JWT debugger shows the header, payload, expiry, and claims of any token instantly. For developers debugging authentication - completely private, since tokens never leave your machine.',
+    useCases: [
+      'Debug why a login session expired: decode the token, read the exp claim (a Unix timestamp), and compare it against the current time - expired tokens explain sudden 401 responses.',
+      'Verify what an auth server actually issued: check the alg header for none or weak algorithms, confirm the iss and aud claims match your expectations, and inspect custom role claims.',
+      'Compare tokens before and after a refresh to confirm the session is being extended correctly and no claims are being dropped.'
+    ],
+    code: { content: 'Header:  { "alg": "HS256", "typ": "JWT" }\nPayload: { "sub": "user_123", "exp": 1755432100, "role": "admin" }' }
+  },
+  '/tools/uuid': {
+    quote: 'Generate UUIDs online - free, private, and instant. This tool creates random UUID v4 identifiers (plus v1) for database keys, API request IDs, and distributed systems, in single or batch mode, all generated locally in your browser.',
+    useCases: [
+      'Generate primary keys before an insert so client code can reference rows it is about to create - essential in offline-first apps and event-driven architectures.',
+      'Create correlation IDs for API requests and log lines so a single trace ID ties a user action across services.',
+      'Produce fixture data for tests: batch-generate hundreds of UUIDs and paste them directly into seed files or test scripts.'
+    ]
+  },
+  '/tools/json-lint': {
+    quote: 'Validate and format JSON online for free. Paste any JSON to find syntax errors with their exact location, beautify minified payloads, and lint config files - fast and private, with all parsing running in your browser and nothing uploaded.',
+    useCases: [
+      'Diagnose a failing CI pipeline: paste the JSON config and jump straight to the trailing comma or unquoted key the error message never mentioned.',
+      'Beautify minified API responses so you can read the structure before writing code against them.',
+      'Check JSON5-style config files that permit comments before stripping them for strict parsers.'
+    ]
+  },
+  '/tools/json-yaml': {
+    quote: 'Convert JSON to YAML and YAML to JSON online, free and private. Built for DevOps engineers working with Kubernetes manifests, docker-compose files, and CI pipelines - all conversion happens in your browser, so configs never leave your machine.',
+    useCases: [
+      'Turn an API response or Helm values dump into a readable YAML config you can drop into a repository.',
+      'Convert a docker-compose.yml into JSON when a tool or platform expects structured input.',
+      'Check what a Kubernetes manifest looks like in the other format - useful when YAML anchors obscure the effective structure.'
+    ],
+    code: { content: '# docker-compose.yml to JSON\n{"services": {"web": {"image": "nginx", "ports": ["8080:80"]}}}' }
+  },
+  '/tools/diff': {
+    quote: 'Compare two texts or code files online and see every addition and deletion highlighted line by line. A free, private diff checker for code review, config changes, and log analysis - everything is compared in your browser.',
+    useCases: [
+      'Review a colleague\'s changes when you only have the before and after files - paste both sides and see exactly what moved.',
+      'Compare two versions of a config file after an incident to confirm precisely what changed.',
+      'Diff log files from two runs to spot the first divergent line - often the exact moment a bug appeared.'
+    ]
+  },
+  '/tools/sql': {
+    quote: 'Format and beautify SQL queries online for free. Paste minified or messy SQL from logs, ORMs, or tickets and get a readable, properly indented query - instantly and privately, with all formatting done in your browser.',
+    useCases: [
+      'Decode the wall of SQL an ORM generates: paste the logged query, format it, and finally see which joins and conditions are driving the cost.',
+      'Clean up queries before pasting them into code review, documentation, or a ticket so reviewers read logic instead of noise.',
+      'Prepare a query for optimization work - a formatted statement makes it far easier to reason about join order and predicates.'
+    ]
+  },
+  '/tools/regex-tester': {
+    quote: 'Test regular expressions online with live match highlighting. Enter a pattern, paste sample text, and see matches, groups, and positions update as you type - a free, private regex debugger that runs entirely in your browser.',
+    useCases: [
+      'Build a validation pattern iteratively: try emails, phone numbers, or slugs against realistic samples until it matches exactly what you intend.',
+      'Understand a regex you found in code: paste it with sample input and watch which alternatives and groups fire.',
+      'Prepare a safe pattern for splitting or replacing text, verifying greedy versus lazy behavior before it hits production.'
+    ],
+    code: { content: 'Pattern: /^(\\+\\d{1,3})?[\\s-]?(\\d{3})[\\s-]?(\\d{3})[\\s-]?(\\d{4})$/\nMatches: +1 555-123-4567, 5551234567' }
+  },
+  '/tools/url-encoder': {
+    quote: 'Encode and decode URLs and query parameters online for free. Fix broken links, prepare query strings, and inspect encoded values - fast and private, with every conversion computed locally in your browser.',
+    useCases: [
+      'Encode a redirect URL that must travel inside another query parameter - nested parameters break unless the inner value is fully encoded.',
+      'Decode a URL from analytics or logs to see the actual parameters users hit.',
+      'Prepare values containing spaces, ampersands, or unicode for safe use in links and API calls.'
+    ]
+  },
+  '/tools/hash-text': {
+    quote: 'Generate hashes online - SHA-256, SHA-512, Argon2id, bcrypt, PBKDF2, and more - from any text. Free and private: a client-side hash generator where passwords and secrets are processed in your browser and never uploaded.',
+    useCases: [
+      'Hash a password with Argon2id before storing it, choosing parameters your production system uses.',
+      'Verify a file download or message integrity by comparing SHA-256 digests.',
+      'Generate deterministic test fixtures - hashing a known input gives a stable identifier across environments.'
+    ]
+  },
+  '/tools/bcrypt': {
+    quote: 'Generate and verify bcrypt password hashes online for free. Choose your cost factor, hash a password, or check a candidate against an existing hash - all computed in your browser, so real passwords never touch a server.',
+    useCases: [
+      'Produce seed hashes for database fixtures and test users without writing a script.',
+      'Verify a login bug: check the candidate password against the stored hash to confirm whether the failure is credentials or logic.',
+      'Compare cost factor timings - 10 versus 12 - to pick a value that balances security and login latency.'
+    ]
+  },
+  '/tools/qr-code-generator': {
+    quote: 'Create QR codes online for URLs, text, WiFi credentials, email, and phone numbers - free and private, generated entirely in your browser. Download as PNG or SVG with customizable size, colors, and error correction.',
+    useCases: [
+      'Share WiFi access without reading out a password: encode the SSID and password so guests scan and connect.',
+      'Link physical material - menus, posters, business cards - to a landing page and update the destination without reprinting.',
+      'Encode a vCard or payment request so scanning performs the action instead of typing.'
+    ]
+  },
+  '/tools/image': {
+    quote: 'Compress JPG, PNG, and WebP images in your browser - free and private, with photos never uploaded. Reduce image file sizes up to 80% for faster websites and lighter uploads, with batch processing and resizing built in.',
+    useCases: [
+      'Shrink AI-generated images that ship at multi-megabyte sizes before uploading them to a site or CMS.',
+      'Prepare photos for a portfolio within upload limits without visible quality loss.',
+      'Batch-optimize a folder of screenshots for documentation that loads quickly.'
+    ]
+  },
+  '/tools/unix-timestamp': {
+    quote: 'Convert Unix timestamps to readable dates and back, with a live clock of the current epoch time. A free, private converter for log analysis and API debugging - every conversion happens instantly in your browser.',
+    useCases: [
+      'Read log lines during an incident: convert the epoch at the error to local time and correlate with other events.',
+      'Spot the seconds-versus-milliseconds bug instantly - a 13-digit value where 10 digits was expected.',
+      'Set expiry times for tokens and caches by computing the exact future timestamp.'
+    ]
+  },
+  '/tools/lorem': {
+    quote: 'Generate Lorem Ipsum placeholder text online - paragraphs, sentences, or words in one click. A free, private dummy text generator for designers and developers building mockups, templates, and CMS previews.',
+    useCases: [
+      'Fill wireframes with realistic text density so layout decisions reflect real content lengths.',
+      'Generate fixture copy for CMS templates and component libraries.',
+      'Produce exact word counts for print-style layouts that depend on text length.'
+    ]
+  },
+  '/tools/crontab-generator': {
+    quote: 'Build cron expressions with a visual generator that shows a plain-English summary of your schedule. Free and private - create crontab entries for Linux, Kubernetes CronJobs, and scheduled tasks right in your browser.',
+    useCases: [
+      'Schedule a nightly backup or cleanup job and verify the schedule reads correctly before it ships.',
+      'Build Kubernetes CronJob expressions with the right timezone semantics.',
+      'Convert between step, range, and list syntax and see what each actually triggers.'
+    ],
+    code: { content: '*/10 * * * *   # every 10 minutes\n0 3 * * 1      # 03:00 every Monday' }
+  },
+  '/tools/case-converter': {
+    quote: 'Convert text between camelCase, snake_case, kebab-case, PascalCase, CONSTANT_CASE, and more - free and private, in your browser. Built for developers moving identifiers between languages and conventions.',
+    useCases: [
+      'Convert a JSON field from snake_case to camelCase when an API contract meets JavaScript conventions.',
+      'Generate consistent constant names from human-readable labels in a config migration.',
+      'Prepare CSS class names in kebab-case from a design token list written in PascalCase.'
+    ]
+  },
+  '/tools/keccak256': {
+    quote: 'Calculate Keccak-256 hashes online - free and private, in your browser. For Ethereum and Solidity developers: verify keccak256() outputs, hash preimages, and check commit-reveal values without anything leaving your machine.',
+    useCases: [
+      'Verify a Solidity keccak256(abi.encodePacked(...)) call by hashing the same bytes here and comparing digests.',
+      'Build commit-reveal schemes: hash your secret value now, reveal it on-chain later.',
+      'Confirm that an address was derived from a given public key by reproducing the hash chain.'
+    ]
+  },
+  '/tools/evm-converter': {
+    quote: 'Convert between wei, gwei, and ether online with exact BigInt arithmetic - no floating-point errors. A free, private unit converter for Ethereum developers checking gas prices and transaction values on any EVM chain.',
+    useCases: [
+      'Decode a gas cost: a 25 gwei gas price on a 21,000-gas transfer equals exactly how much ether.',
+      'Verify wallet balance displays by converting raw wei values from an RPC response.',
+      'Cross-check smart contract math that must not lose precision to floating point.'
+    ]
+  },
+  '/tools/markdown': {
+    quote: 'Write Markdown with a live side-by-side preview - GitHub-flavored, with tables, task lists, and syntax-highlighted code blocks. A free, private markdown editor that runs entirely in your browser.',
+    useCases: [
+      'Draft README files with the exact rendering GitHub will show, catching table and formatting mistakes early.',
+      'Preview documentation before committing it to a docs site or wiki.',
+      'Convert rough notes into shareable HTML for emails and internal pages.'
+    ]
+  }
+}
+
+for (const [route, depth] of Object.entries(toolDepth)) {
+  if (toolSEOContent[route]) Object.assign(toolSEOContent[route], depth)
+}

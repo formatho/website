@@ -15,37 +15,6 @@ const props = withDefaults(defineProps<Props>(), {
   description: ''
 })
 
-// Inject SoftwareApplication structured data for SEO
-onMounted(() => {
-  const existingLd = document.getElementById('tool-json-ld')
-  if (existingLd) existingLd.remove()
-
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: props.title,
-    description: props.description || `${props.title} - Free online privacy-first developer tool by Formatho`,
-    url: `https://formatho.com${window.location.pathname}`,
-    applicationCategory: 'DeveloperApplication',
-    operatingSystem: 'Any',
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD'
-    },
-    creator: {
-      '@type': 'Organization',
-      name: 'Formatho',
-      url: 'https://formatho.com'
-    }
-  }
-
-  const script = document.createElement('script')
-  script.type = 'application/ld+json'
-  script.id = 'tool-json-ld'
-  script.textContent = JSON.stringify(schema)
-  document.head.appendChild(script)
-})
 
 const emit = defineEmits<{
   input: [value: string]
