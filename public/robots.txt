@@ -1,10 +1,41 @@
+# Formatho - privacy-first developer tools
+# AI crawlers and search bots are welcome to index and quote our content.
+
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /tools/admin/
 Disallow: /api/
 
-# Sitemaps
-Sitemap: https://formatho.com/sitemap.xml
+# AI crawlers - explicitly allowed (indexing, quoting, and search use)
+User-agent: GPTBot
+Allow: /
 
-# Crawl-delay (respectful crawling)
-Crawl-delay: 1
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://formatho.com/sitemap.xml

@@ -25,9 +25,19 @@ const toolTitle = computed(() => {
   <div v-if="seoContent" class="max-w-4xl mx-auto px-4 py-12 space-y-10">
     <div>
       <h2 class="text-2xl font-bold mb-3">About the {{ toolTitle }}</h2>
+      <p v-if="seoContent.quote" class="leading-relaxed mb-3 text-foreground">
+        {{ seoContent.quote }}
+      </p>
       <p v-for="(para, i) in seoContent.intro" :key="i" class="text-muted-foreground leading-relaxed mb-3">
         {{ para }}
       </p>
+    </div>
+    <div v-if="seoContent.useCases?.length">
+      <h2 class="text-2xl font-bold mb-3">Use cases and examples</h2>
+      <p v-for="(para, i) in seoContent.useCases" :key="i" class="text-muted-foreground leading-relaxed mb-3">
+        {{ para }}
+      </p>
+      <pre v-if="seoContent.code" class="p-4 bg-muted rounded-lg overflow-x-auto text-xs font-mono whitespace-pre">{{ seoContent.code.content }}</pre>
     </div>
     <div>
       <h2 class="text-2xl font-bold mb-3">How to use</h2>

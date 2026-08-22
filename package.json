@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run generate-sitemap && vite-ssg build && node scripts/inject-blog-meta.js && node scripts/inject-tool-meta.js && node scripts/inject-page-structured-data.js",
+    "build": "npm run generate-sitemap && npm run generate-llms-txt && vite-ssg build && node scripts/inject-blog-meta.js && node scripts/inject-tool-meta.js && node scripts/inject-page-structured-data.js",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
     "prepare": "husky",
-    "generate-sitemap": "node scripts/generate-sitemap.js"
+    "generate-sitemap": "node scripts/generate-sitemap.js",
+    "generate-llms-txt": "node scripts/generate-llms-txt.js"
   },
   "dependencies": {
     "@ethereumjs/common": "^10.1.1",

@@ -9,7 +9,31 @@ export const tools = [
         iconName: 'Sparkles'
       },
       {
-        name: 'Smart Contract Reader',
+        name: 'Cosmos Account Reader',
+        description: 'ATOM and token balances, delegations, and rewards for any Cosmos SDK account - plus a bech32 converter for every chain prefix.',
+        route: '/tools/cosmos-reader',
+        iconName: 'Globe'
+      },
+      {
+        name: 'Solana Account Reader',
+        description: 'Look up Solana accounts, decode SPL token accounts, and derive PDAs - client-side via any Solana RPC.',
+        route: '/tools/solana-account-reader',
+        iconName: 'Search'
+      },
+      {
+        name: 'Polkadot Substrate Reader',
+        description: 'Substrate chain info, raw storage queries, and SS58 address conversion for Polkadot, Kusama, and local nodes.',
+        route: '/tools/polkadot-reader',
+        iconName: 'Network'
+      },
+      {
+        name: 'Cardano Address Reader',
+        description: 'ADA balance, UTxO count, and stake info for any Cardano address via the keyless Koios API.',
+        route: '/tools/cardano-reader',
+        iconName: 'Coins'
+      },
+      {
+        name: 'EVM Contract Reader',
         description: 'Paste an ABI and call view functions on any deployed contract via your own RPC endpoint. Works on every EVM chain.',
         route: '/tools/contract-reader',
         iconName: 'BookOpen'

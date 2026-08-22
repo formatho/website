@@ -87,10 +87,10 @@ function generateMetaTags(tool) {
   <!-- Canonical URL -->
   <link rel="canonical" href="${escapeHtml(url)}">
 
-  <!-- WebApplication Structured Data -->
+  <!-- SoftwareApplication Structured Data -->
   <script type="application/ld+json">${JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "WebApplication",
+    "@type": "SoftwareApplication",
     "name": tool.title,
     "url": url,
     "applicationCategory": "DeveloperApplication",
@@ -103,27 +103,6 @@ function generateMetaTags(tool) {
     },
     "description": tool.description,
     "featureList": "Runs 100% client-side. No data sent to servers. No signup required.",
-    "publisher": {
-      "@type": "Organization",
-      "name": siteName,
-      "url": "https://formatho.com"
-    }
-  })}</script>
-
-  <!-- SoftwareApplication Structured Data -->
-  <script type="application/ld+json">${JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": tool.title,
-    "url": url,
-    "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "Any",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "description": tool.description,
     "publisher": {
       "@type": "Organization",
       "name": siteName,
@@ -215,8 +194,13 @@ function updateToolHtml(htmlPath, tool) {
       html = html.replace(regex, '')
     })
 
-    // Insert new meta tags before </head>
-    html = html.replace('</head>', `${newMetaTags}</head>`)
+    // Insert new meta tags before </head> - but skip the SoftwareApplication
+    // schema if the SSG render (useSEO) already emitted one on this page
+    let tags = newMetaTags
+    if (/"@type":\s*"SoftwareApplication"/.test(html)) {
+      tags = tags.replace(/\s*<script type="application\/ld\+json">\s*\{[\s\S]*?"SoftwareApplication"[\s\S]*?<\/script>/, '')
+    }
+    html = html.replace('</head>', `${tags}</head>`)
 
     // Write updated HTML back to file
     fs.writeFileSync(htmlPath, html)
