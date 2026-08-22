@@ -111,6 +111,22 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Extract sitemap from image
+        if: github.event_name != 'pull_request'
+        run: |
+          CID=$(docker create ghcr.io/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }})
+          docker cp "$CID":/usr/share/nginx/html/sitemap.xml /tmp/sitemap.xml
+          docker rm "$CID" > /dev/null
+          head -1 /tmp/sitemap.xml
+
+      - name: Upload sitemap artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployed-sitemap
+          path: /tmp/sitemap.xml
+          retention-days: 3
+
       - name: Set image tag output
         id: tag
         if: github.event_name != 'pull_request'
@@ -338,6 +354,12 @@ jobs:
 
           echo "::error::Health check failed after $MAX_ATTEMPTS attempts"
           exit 1
+
+      - name: Download deployed sitemap
+        uses: actions/download-artifact@v4
+        with:
+          name: deployed-sitemap
+          path: dist
 
       - name: Ping IndexNow (instant indexing)
         run: node scripts/notify-indexnow.js
