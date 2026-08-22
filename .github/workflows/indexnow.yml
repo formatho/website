@@ -1,0 +1,27 @@
+name: IndexNow Ping
+
+# Pings IndexNow (Bing, DuckDuckGo, Yandex) with every sitemap URL after a
+# successful production deploy, and on demand. Runs as a separate workflow
+# so ping failures can never fail a deployment.
+on:
+  workflow_run:
+    workflows: ["Build and Deploy"]
+    types: [completed]
+    branches: [prod]
+  workflow_dispatch:
+
+jobs:
+  ping:
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'prod')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Ping IndexNow
+        run: node scripts/notify-indexnow.js
