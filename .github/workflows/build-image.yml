@@ -87,6 +87,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=sha,prefix={{branch}}-,enable=${{ github.event_name != 'pull_request' }}
             type=raw,value=dev,enable=${{ github.ref == 'refs/heads/main' }}
+            type=raw,value=qa,enable=${{ github.ref == 'refs/heads/main' }}
             type=raw,value=prod,enable=${{ github.ref == 'refs/heads/prod' }}
 
       - name: Log in to GitHub Container Registry
@@ -200,10 +201,19 @@ jobs:
           script: |
             set -e
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-            docker pull ghcr.io/${{ env.IMAGE_NAME }}:main
-            docker tag ghcr.io/${{ env.IMAGE_NAME }}:main ghcr.io/${{ env.IMAGE_NAME }}:qa
-            docker service update --force --image ghcr.io/${{ env.IMAGE_NAME }}:qa qa_qa-app
-            echo "QA updated to main branch image"
+            # :qa is pushed to the registry by the build job for main refs -
+            # deploy by remote tag so swarm resolves the FRESH digest (local
+            # retagging was not picked up by docker service update)
+            docker service update --force --with-registry-auth --image ghcr.io/${{ env.IMAGE_NAME }}:qa qa_qa-app
+            sleep 5
+            echo "=== running image ==="
+            docker service inspect qa_qa-app --format '{{.Spec.TaskTemplate.ContainerSpec.Image}}'
+            CID=$(docker ps --filter name=qa_qa-app --format '{{.ID}}' | head -1)
+            if [ -n "$CID" ]; then
+              echo "=== nginx routing config in running container ==="
+              docker exec "$CID" sh -c "grep -A3 'location / ' /etc/nginx/conf.d/default.conf; grep error_page /etc/nginx/conf.d/default.conf" || true
+            fi
+            echo "QA updated"
 
   deploy:
     needs: [generate-version, build]
