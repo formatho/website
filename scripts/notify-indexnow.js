@@ -26,13 +26,18 @@ function findKey() {
   return { key: match.replace('.txt', ''), keyFile: match }
 }
 
-function loadUrls() {
+async function loadUrls() {
   const local = resolve(process.cwd(), 'dist', 'sitemap.xml')
-  const source = existsSync(local)
-    ? readFileSync(local, 'utf8')
-    : null
-  if (source) return { urls: [...source.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]), from: 'dist/sitemap.xml' }
-  throw new Error('dist/sitemap.xml not found - run the build first')
+  if (existsSync(local)) {
+    const source = readFileSync(local, 'utf8')
+    return { urls: [...source.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]), from: 'dist/sitemap.xml' }
+  }
+  // CI deploy job runs on a fresh runner with no dist/ - use the live sitemap
+  // (the deploy just shipped it)
+  const res = await fetch(`https://${HOST}/sitemap.xml`, { signal: AbortSignal.timeout(20000) })
+  if (!res.ok) throw new Error(`live sitemap fetch failed: ${res.status}`)
+  const source = await res.text()
+  return { urls: [...source.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]), from: 'live sitemap' }
 }
 
 async function submitBatch(batch, key, attempt = 1) {
@@ -57,7 +62,7 @@ async function submitBatch(batch, key, attempt = 1) {
 
 async function main() {
   const { key, keyFile } = findKey()
-  const { urls, from } = loadUrls()
+  const { urls, from } = await loadUrls()
   console.log(`IndexNow: ${urls.length} URLs (${from}), key ${keyFile}`)
   const batches = []
   for (let i = 0; i < urls.length; i += 1000) batches.push(urls.slice(i, i + 1000))
