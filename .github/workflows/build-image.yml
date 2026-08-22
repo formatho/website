@@ -339,6 +339,9 @@ jobs:
           echo "::error::Health check failed after $MAX_ATTEMPTS attempts"
           exit 1
 
+      - name: Ping IndexNow (instant indexing)
+        run: node scripts/notify-indexnow.js
+
       - name: Deployment summary
         run: |
           echo "## Release ${{ needs.generate-version.outputs.version }} ✅" >> $GITHUB_STEP_SUMMARY

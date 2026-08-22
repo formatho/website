@@ -27,3 +27,4 @@ planning/
 .env
 .vercel
 .vite-ssg-temp/
+.env.indexnow
