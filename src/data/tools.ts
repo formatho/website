@@ -9,6 +9,12 @@ export const tools = [
         iconName: 'Sparkles'
       },
       {
+        name: 'Cosmos Account Reader',
+        description: 'ATOM and token balances, delegations, and rewards for any Cosmos SDK account - plus a bech32 converter for every chain prefix.',
+        route: '/tools/cosmos-reader',
+        iconName: 'Globe'
+      },
+      {
         name: 'Solana Account Reader',
         description: 'Look up Solana accounts, decode SPL token accounts, and derive PDAs - client-side via any Solana RPC.',
         route: '/tools/solana-account-reader',

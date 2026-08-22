@@ -1009,3 +1009,43 @@ const chainReaderFAQs = {
 
 Object.assign(toolSEOContent, chainReaderContent)
 Object.assign(toolSpecificFAQ, chainReaderFAQs)
+
+
+const cosmosReaderContent = {
+  '/tools/cosmos-reader': {
+    intro: [
+      'The Cosmos ecosystem spans dozens of SDK-based chains - Cosmos Hub, Osmosis, Juno, Injective, and many more - all sharing the same account model and bech32 address format. Reading an account means one set of LCD queries: bank balances, account number and sequence, staking delegations, and pending rewards.',
+      'Paste any bech32 address, pick a chain (public LCD presets included), and read the full account state. The bech32 converter re-encodes the same key into every common chain prefix - the same trick validators and explorers use to track one wallet across the ecosystem. All queries go directly from your browser to the LCD you choose.'
+    ],
+    howTo: [
+      'Pick a chain preset or paste any Cosmos LCD/REST endpoint.',
+      'Enter a bech32 address from any Cosmos chain.',
+      'Read balances (displayed in human units), account info, and staking state.',
+      'Use the converter to re-encode the address for other chains.'
+    ]
+  }
+}
+
+const cosmosReaderFAQs = {
+  '/tools/cosmos-reader': [
+    {
+      question: 'Why does the same account have a different address on every chain?',
+      answer: 'Cosmos addresses are bech32-encoded public keys, and the prefix (cosmos, osmo, juno...) identifies the chain. The underlying key is identical - the converter re-encodes it so you can verify the same wallet everywhere.'
+    },
+    {
+      question: 'How are balances displayed?',
+    answer: 'Chain tokens use 6 decimal places by default (uatom -> ATOM), with INJ at 18 and other exceptions handled. Unknown or native denominations are shown raw - check the chain docs for their exponent.'
+    },
+    {
+      question: 'Can I check staking rewards for my validators?',
+      answer: 'Yes - pending rewards per validator are listed alongside delegations, so you can see unclaimed amounts before deciding to withdraw.'
+    },
+    {
+      question: 'Which endpoints can I use?',
+      answer: 'Any Cosmos SDK LCD/REST endpoint that allows browser (CORS) access. The presets use reliable public endpoints; official chain LCDs and private endpoints work too - just paste the URL.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, cosmosReaderContent)
+Object.assign(toolSpecificFAQ, cosmosReaderFAQs)

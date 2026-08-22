@@ -458,6 +458,17 @@ export const routes = [
         }
       },
       {
+        path: '/tools/cosmos-reader',
+        name: 'cosmos-reader',
+        component: () => import(/* webpackPrefetch: true */ '../views/CosmosReaderView.vue'),
+        meta: {
+          title: 'Cosmos Account Reader & Address Converter | Formatho',
+          description:
+            'Look up any Cosmos SDK account - ATOM and token balances, account number, delegations and rewards - via public LCD endpoints. Includes a bech32 converter for every Cosmos chain prefix. 100% client-side.',
+          keywords: 'cosmos account reader, cosmos balance checker, cosmos address converter, bech32 converter, atom balance check, osmosis address converter, cosmos lcd explorer'
+        }
+      },
+      {
         path: '/tools/solana-account-reader',
         name: 'solana-account-reader',
         component: () => import(/* webpackPrefetch: true */ '../views/SolanaAccountReaderView.vue'),

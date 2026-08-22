@@ -577,6 +577,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://formatho.com/tools/cosmos-reader</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/tools/solana-account-reader</loc>
     <lastmod>2026-08-22</lastmod>
     <changefreq>monthly</changefreq>
