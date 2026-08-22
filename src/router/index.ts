@@ -1194,7 +1194,12 @@ export const routes = [
         path: '/tools/token-generator',
         name: 'token-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/TokenGeneratorView.vue'),
-        meta: { title: 'Token Generator', description: 'Generate secure random tokens.' }
+        meta: {
+          title: 'Random Token Generator - Secure API Secrets | Formatho',
+          description:
+            'Generate cryptographically secure random tokens and API secrets - hex, base64, and custom-alphabet, any length, batch mode. 100% client-side with crypto.getRandomValues.',
+          keywords: 'random token generator, api token generator, secure token generator, secret key generator, random string generator, api key generator'
+        }
       },
       {
         path: '/tools/hash-text',

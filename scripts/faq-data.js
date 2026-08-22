@@ -637,3 +637,283 @@ const extraFAQs = {
 
 // Merge extra FAQs into the exported map
 Object.assign(toolSpecificFAQ, extraFAQs, newToolFAQs, websiteAgentToolFAQs)
+
+
+/**
+ * Content kits prioritized by real Search Console impressions (2026-08):
+ * pages already earning impressions but lacking content, pushing pos 40+ -> 15.
+ */
+const gscContent = {
+  '/tools/token-generator': {
+    intro: [
+      'API keys, session tokens, secrets for CI pipelines and service-to-service auth all need high-quality randomness. A token generator should use a cryptographic random source - not Math.random(), which is predictable and never safe for authentication material.',
+      'This generator uses the browser Web Crypto API (crypto.getRandomValues), the same source browsers use for TLS. Choose hex or base64 output, any length, or define a custom alphabet - useful for URLs-safe tokens or license-key formats like XXXX-XXXX-XXXX.'
+    ],
+    howTo: [
+      'Pick the output format: hex, base64, or a custom alphabet.',
+      'Set the token length in characters (32-64 is typical for API keys).',
+      'Generate one token or a batch.',
+      'Copy the result straight into your config or secrets manager.'
+    ]
+  },
+  '/tools/eta-calculator': {
+    intro: [
+      'ETA (estimated time of arrival) is the practical output of distance, speed, and time math: when will this delivery arrive, when does this download finish, when does this batch job complete. Doing it by hand invites arithmetic slips exactly when the answer matters.',
+      'Enter distance and average speed - or remaining units and completion rate - and get the arrival time in your local timezone plus the raw duration. Everything computes locally in your browser. ETA-Berechnung: Entfernung und Geschwindigkeit eingeben, Ankunftszeit sofort erhalten.'
+    ],
+    howTo: [
+      'Enter the distance to cover and the average speed you expect.',
+      'Or enter remaining work units and the completion rate.',
+      'Read the total duration and the estimated arrival time.',
+      'Adjust the start time if the trip or job begins later.'
+    ]
+  },
+  '/tools/address-checksum': {
+    intro: [
+      'Ethereum addresses are 20-byte hex values, and the raw form is case-insensitive - which makes a typo completely silent. If one character is wrong, your funds go to a valid-looking but wrong address, forever. EIP-55 checksumming fixes this: the casing of each letter encodes a hash of the address itself.',
+      'Paste any Ethereum address to verify its EIP-55 checksum or convert it to the checksummed form. A mistyped address produces a different casing pattern and fails validation instantly - catching errors before a transaction does. The checksum is computed with Keccak-256 entirely in your browser.'
+    ],
+    howTo: [
+      'Paste the Ethereum address (0x...).',
+      'The tool reports whether the EIP-55 checksum is valid.',
+      'Copy the properly checksummed form of the address.',
+      'Use checksummed addresses in contracts and configs to catch typos.'
+    ]
+  },
+  '/tools/solidity-to-opcodes': {
+    intro: [
+      'Every Solidity function compiles down to EVM opcodes - and the gap between what you wrote and what executes is where gas costs and security bugs live. Reading the opcodes shows which functions actually cost 21k gas, where the compiler inserted expensive memory operations, and what a constructor or modifier really does.',
+      'Paste Solidity source and compile to EVM assembly and bytecode with selectable solc versions. Everything runs in your browser - no code upload. To inspect the reverse direction, decode deployed bytecode with a disassembler or decompiler and verify it against your source.'
+    ],
+    howTo: [
+      'Paste or type your Solidity contract.',
+      'Choose the solc compiler version that matches your target.',
+      'Compile - the opcode listing appears with the bytecode.',
+      'Inspect the assembly per function to understand gas and logic.'
+    ]
+  },
+  '/tools/sql-to-er-diagram': {
+    intro: [
+      'A CREATE TABLE script describes your schema, but understanding it - especially a schema you inherited - requires seeing it: which tables exist, what keys link them, where the joins live. An ER diagram turns DDL into a picture your whole team can read.',
+      'Paste CREATE TABLE statements and get an interactive entity-relationship diagram with primary and foreign keys mapped automatically. Export as Mermaid to drop the diagram into docs, PRs, or an AI assistant. Parsing happens client-side - proprietary schemas never leave your machine.'
+    ],
+    howTo: [
+      'Paste your CREATE TABLE statements (one or many).',
+      'The diagram renders with tables as nodes and foreign keys as edges.',
+      'Inspect any relationship by selecting a table.',
+      'Export as Mermaid for docs, GitHub markdown, or AI tools.'
+    ]
+  },
+  '/tools/date-time-converter': {
+    intro: [
+      'ISO 8601, Unix timestamps, RFC 2822, human-readable local time - every API, database, and log format seems to pick a different one. Converting between them by hand is trivial to get wrong, especially across timezones and daylight-saving boundaries.',
+      'Paste a date in any common format and get every other representation at once: Unix seconds and milliseconds, ISO 8601 with and without offset, UTC, and your local time. Everything converts in your browser.'
+    ],
+    howTo: [
+      'Paste a date, timestamp, or ISO string.',
+      'All formats update instantly - Unix, ISO 8601, UTC, local.',
+      'Check the timezone interpretation carefully (Z, +00:00, or naive).',
+      'Copy the format your target system expects.'
+    ]
+  },
+  '/tools/keccak256': {
+    intro: [
+      'Keccak-256 is the hash at the core of Ethereum: contract addresses derive from it, signatures commit with it, and Solidity keccak256() calls it. It is not SHA-3 - Ethereum adopted Keccak before NIST finalized SHA-3 with different padding, so SHA-3 libraries produce different digests.',
+      'Hash UTF-8 text, hex, or Base64 input and get the exact 0x-prefixed digest Solidity produces. Seed phrases, preimages, and commit-reveal values never leave your browser.'
+    ],
+    howTo: [
+      'Select the input format: UTF-8 text, hex, or Base64.',
+      'Paste your input - the hash updates as you type.',
+      'Verify the digest matches keccak256() in your contract test.',
+      'Copy the 0x-prefixed result.'
+    ]
+  },
+  '/tools/rsa-key-pair-generator': {
+    intro: [
+      'RSA keys still secure a huge share of TLS, JWT signing (RS256), and SSH infrastructure. Generating a pair for testing - without sending anything to a server - is a regular need for anyone wiring up auth or inspecting certificate tooling.',
+      'Generate RSA key pairs locally in your browser at 2048 or 4096 bits, and download or copy the public and private PEM files. Key generation happens with Web Crypto on your device; nothing is transmitted. For production keys, use a managed HSM or your platform key store.'
+    ],
+    howTo: [
+      'Choose the key size - 2048 for most tests, 4096 for realistic weight.',
+      'Click generate - the pair appears as PEM blocks.',
+      'Copy or download the public and private keys.',
+      'Use them for local RS256 JWT signing tests or TLS lab setups.'
+    ]
+  },
+  '/tools/device-information': {
+    intro: [
+      'Support teams, QA engineers, and bug reporters constantly need to know exactly what a user is running: which browser, which OS, what screen size, what locale. A device-information page reads all of it from your browser in one glance - the same data your user agent string and JavaScript environment expose.',
+      'View your user agent, platform, screen dimensions, viewport, color depth, CPU cores, connection type, timezone, and language settings. Useful for verifying UA-based routing, reproducing bug reports, or checking what fingerprinting data your browser reveals.'
+    ],
+    howTo: [
+      'Open the page - every value is read automatically.',
+      'Copy your full user agent string if support asked for it.',
+      'Compare viewport vs screen size to verify responsive behavior.',
+      'Check the timezone and locale values your browser sends.'
+    ]
+  },
+  '/tools/string-obfuscator': {
+    intro: [
+      'Homoglyph obfuscation replaces characters with visually identical alternatives from other alphabets - a Latin "a" becomes a Cyrillic "а". The text reads the same to humans but is materially different to any string matcher, which makes it a standard technique for testing profanity filters, plagiarism detection, and string-matching code.',
+      'Transform any text using homoglyph substitution and invisible characters. Everything renders locally in your browser - useful for security research, filter testing, and understanding why naive string matching fails.'
+    ],
+    howTo: [
+      'Paste the text to obfuscate.',
+      'Choose the transformation - homoglyphs, zero-width characters, or both.',
+      'Copy the result - it looks identical but differs underneath.',
+      'Test how your filters and validators handle it.'
+    ]
+  },
+  '/tools/mermaid-viewer': {
+    intro: [
+      'ChatGPT, Claude, Copilot and every serious AI assistant now emit diagrams as Mermaid code - but pasting ```mermaid blocks into a chat gives you no way to actually view, fix, or export the diagram. "How do I view mermaid diagrams" is the natural next question.',
+      'Paste any Mermaid code to render flowcharts, sequence diagrams, ER models, and Gantt charts instantly. Debug syntax errors with inline messages, iterate on the source in the editor, and export the result. Rendering is 100% client-side.'
+    ],
+    howTo: [
+      'Copy the Mermaid code your AI assistant or teammate produced.',
+      'Paste it into the editor - the diagram renders immediately.',
+      'Fix any syntax errors using the inline error messages.',
+      'Export or screenshot the diagram for docs and presentations.'
+    ]
+  }
+}
+
+const gscFAQs = {
+  '/tools/token-generator': [
+    {
+      question: 'Are these tokens safe to use as API keys?',
+      answer: 'Yes. They are generated with crypto.getRandomValues, the browser cryptographic random source. For production systems, prefer generating secrets server-side or in a secrets manager so nothing transits a browser.'
+    },
+    {
+      question: 'How long should an API token be?',
+      answer: '32 characters of hex (128 bits) is the practical minimum for API keys; 64 hex characters is common. For 256-bit keys use 64 hex characters or 43 base64 characters.'
+    },
+    {
+      question: 'What is the difference between a token and a UUID?',
+      answer: 'A UUID encodes structure (version bits, sometimes a timestamp) and is not meant to be secret. A random token is unstructured and unpredictable - use tokens for secrets, UUIDs for identifiers.'
+    }
+  ],
+  '/tools/eta-calculator': [
+    {
+      question: 'How do I calculate ETA from distance and speed?',
+      answer: 'Divide the distance by the average speed to get travel time, then add it to the departure time. This tool does both steps and accounts for the start time you set.'
+    },
+    {
+      question: 'Wie berechne ich die voraussichtliche Ankunftszeit (ETA)?',
+      answer: 'ETA-Berechnung: Entfernung durch Durchschnittsgeschwindigkeit teilen ergibt die Fahrzeit; addiert zur Startzeit ergibt sich die Ankunftszeit. Dieses Werkzeug rechnet beides automatisch. (To calculate ETA: divide distance by average speed to get duration, then add it to your departure time.)'
+    },
+    {
+      question: 'Can I use it for download or job completion times?',
+      answer: 'Yes - treat remaining data or work units as the distance and the transfer or processing rate as the speed. The same math gives the completion time.'
+    }
+  ],
+  '/tools/address-checksum': [
+    {
+      question: 'What is an EIP-55 checksummed address?',
+      answer: 'An Ethereum address where each letter is capitalized according to a hash of the address itself (EIP-55). Any single-character typo changes the expected casing, so checksum validation catches the error before funds are sent.'
+    },
+    {
+      question: 'Is an all-lowercase address invalid?',
+      answer: 'No - lowercase is the raw, valid form. Checksum validation only applies when the address mixes upper and lower case. Tools and exchanges increasingly require the checksummed form because it is self-verifying.'
+    }
+  ],
+  '/tools/solidity-to-opcodes': [
+    {
+      question: 'Can I convert bytecode back to Solidity source?',
+      answer: 'Not exactly - bytecode does not preserve source details like names and comments. You can disassemble bytecode to opcodes and use a decompiler for pseudo-source, then verify behavior against your original source by comparing compiled outputs.'
+    },
+    {
+      question: 'Which solc version should I pick?',
+      answer: 'Match the version your project pins in its build config (foundry.toml, hardhat.config). Comparing the same source under different versions is also useful for spotting behavior or gas changes across compiler releases.'
+    }
+  ],
+  '/tools/sql-to-er-diagram': [
+    {
+      question: 'Which SQL dialects can I paste?',
+      answer: 'Standard CREATE TABLE syntax works - PostgreSQL, MySQL, SQLite, and SQL Server definitions all parse. Dialect-specific types are shown as declared; relationships come from FOREIGN KEY ... REFERENCES clauses.'
+    },
+    {
+      question: 'Can I export the diagram?',
+      answer: 'Yes, as Mermaid code. Mermaid renders natively in GitHub markdown, Notion, Obsidian, and most documentation tools, so the diagram stays maintainable alongside your schema.'
+    }
+  ],
+  '/tools/date-time-converter': [
+    {
+      question: 'What does the Z at the end of a timestamp mean?',
+      answer: 'Z means UTC - zero offset from coordinated universal time ("Zulu"). 2024-02-26T13:06:54Z and 2024-02-26T13:06:54+00:00 are the same instant expressed two ways.'
+    },
+    {
+      question: 'Why do Unix timestamps come in two lengths?',
+      answer: 'Seconds since 1970 is the classic format (10 digits); many systems, including JavaScript dates, use milliseconds (13 digits). Mixing them up shifts a date by about 53,000 years, which is a common bug.'
+    }
+  ],
+  '/tools/keccak256': [
+    {
+      question: 'Is Keccak-256 the same as SHA3-256?',
+      answer: 'No. Ethereum uses the original Keccak submission; NIST later standardized SHA-3 with different padding. SHA3-256 libraries produce different digests than Solidity keccak256().'
+    },
+    {
+      question: 'Why does my Solidity hash not match?',
+      answer: 'The usual cause is encoding: keccak256 hashes raw bytes, so a string and its hex representation hash differently. Match the input format here (UTF-8 vs hex) to what abi.encodePacked produces.'
+    }
+  ],
+  '/tools/rsa-key-pair-generator': [
+    {
+      question: 'Is it safe to generate RSA keys in a browser?',
+      answer: 'For tests, demos, and lab setups - yes; generation uses the Web Crypto API and keys never leave your device. For production, use a hardware security module, key vault, or your platform-managed key store.'
+    },
+    {
+      question: 'What are RSA key pairs used for?',
+      answer: 'TLS certificates, RS256-signed JWTs, SSH authentication, and document signing. The public key is shared freely; the private key must be kept secret.'
+    }
+  ],
+  '/tools/device-information': [
+    {
+      question: 'What information can a website see about my device?',
+      answer: 'Your user agent string, platform, screen and viewport size, color depth, CPU cores, device memory, timezone, languages, and connection type. This page shows exactly that set - it is the same data any site can read without permissions.'
+    },
+    {
+      question: 'Why is my viewport size different from my screen size?',
+      answer: 'Screen size is the physical display; viewport is the area the browser gives the page - smaller because of the browser UI, zoom level, and device pixel ratio. Responsive designs key off the viewport, which is why both numbers matter when debugging layouts.'
+    },
+    {
+      question: 'Is showing this information a privacy risk?',
+      answer: 'This page reads values locally and displays them to you - nothing is transmitted or logged. The point is transparency: these are the signals your browser hands to every site you visit.'
+    }
+  ],
+  '/tools/string-obfuscator': [
+    {
+      question: 'What are homoglyphs?',
+      answer: 'Characters from different alphabets that look identical - like the Latin "a" and the Cyrillic "а". Text built with homoglyphs reads normally but differs at the byte level, defeating exact string matching.'
+    },
+    {
+      question: 'Why would I obfuscate a string?',
+      answer: 'Commonly to test content filters, profanity detection, plagiarism checkers, and URL validators - systems that must be robust against lookalike-character evasion. Security researchers use it to probe where naive matching breaks.'
+    },
+    {
+      question: 'Does the obfuscated text behave differently?',
+      answer: 'Yes. Search, diff, copy-detection, and validation logic that compares strings will not match the original. Visually it is indistinguishable, which is precisely the point - and the risk when it is used against you.'
+    }
+  ],
+  '/tools/mermaid-viewer': [
+    {
+      question: 'How do I view mermaid diagrams from ChatGPT or Claude?',
+      answer: 'Copy the mermaid code block the assistant produced, paste it into the editor here, and the diagram renders instantly. No plugins or local installs needed.'
+    },
+    {
+      question: 'Which diagram types are supported?',
+      answer: 'The full Mermaid set: flowcharts, sequence diagrams, ER diagrams, class diagrams, state diagrams, Gantt charts, pie charts, and mind maps.'
+    },
+    {
+      question: 'Can I fix errors in generated diagrams?',
+      answer: 'Yes - syntax errors are shown inline with the line number. AI assistants frequently produce small mistakes like unquoted labels; edit the source until the diagram renders, then export.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, gscContent)
+const gscFAQList = {}
+for (const [route, faqs] of Object.entries(gscFAQs)) {
+  if (Array.isArray(faqs) && faqs.length) gscFAQList[route] = faqs
+}
+Object.assign(toolSpecificFAQ, gscFAQList)
