@@ -458,11 +458,44 @@ export const routes = [
         }
       },
       {
+        path: '/tools/solana-account-reader',
+        name: 'solana-account-reader',
+        component: () => import(/* webpackPrefetch: true */ '../views/SolanaAccountReaderView.vue'),
+        meta: {
+          title: 'Solana Account Reader & PDA Generator | Formatho',
+          description:
+            'Look up any Solana account - owner, lamports, rent epoch, data - decode SPL token accounts, and derive Program Derived Addresses. Connects from your browser to any Solana RPC.',
+          keywords: 'solana account reader, solana account info, decode solana token account, solana pda generator, program derived address, solana rpc viewer, solana balance check'
+        }
+      },
+      {
+        path: '/tools/polkadot-reader',
+        name: 'polkadot-reader',
+        component: () => import(/* webpackPrefetch: true */ '../views/PolkadotReaderView.vue'),
+        meta: {
+          title: 'Polkadot Substrate Reader & SS58 Converter | Formatho',
+          description:
+            'Query Substrate chains - Polkadot, Kusama, Westend, local nodes - via RPC: chain info and raw storage. Convert SS58 addresses between network formats. 100% client-side.',
+          keywords: 'polkadot storage query, substrate rpc reader, polkadot address converter, ss58 converter, kusama address, substrate state_getStorage, polkadot rpc'
+        }
+      },
+      {
+        path: '/tools/cardano-reader',
+        name: 'cardano-reader',
+        component: () => import(/* webpackPrefetch: true */ '../views/CardanoReaderView.vue'),
+        meta: {
+          title: 'Cardano Address Reader - ADA Balance & UTxO | Formatho',
+          description:
+            'Look up any Cardano address - ADA balance, UTxO count, stake and script info - via the free keyless Koios API, straight from your browser.',
+          keywords: 'cardano address reader, check ada balance, cardano address viewer, cardano utxo lookup, ada wallet balance, cardano explorer'
+        }
+      },
+      {
         path: '/tools/contract-reader',
         name: 'contract-reader',
         component: () => import(/* webpackPrefetch: true */ '../views/ContractReaderView.vue'),
         meta: {
-          title: 'Smart Contract Reader - Call ABI View Functions | Formatho',
+          title: 'EVM Smart Contract Reader - Call ABI View Functions | Formatho',
           description:
             'Paste a contract ABI, set any RPC endpoint and contract address, and call view and pure functions directly from your browser. Works on every EVM chain. Read-only eth_call - no wallet, no gas, no server.',
           keywords: 'read smart contract online, call contract function, abi reader, contract view functions, eth_call tool, read contract without etherscan, contract interaction tool'

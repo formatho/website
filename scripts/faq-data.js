@@ -917,3 +917,95 @@ for (const [route, faqs] of Object.entries(gscFAQs)) {
   if (Array.isArray(faqs) && faqs.length) gscFAQList[route] = faqs
 }
 Object.assign(toolSpecificFAQ, gscFAQList)
+
+
+/**
+ * Multi-chain readers: Solana / Polkadot / Cardano companions to the EVM
+ * contract reader, built around what each chain natively exposes.
+ */
+const chainReaderContent = {
+  '/tools/solana-account-reader': {
+    intro: [
+      'Solana accounts are the substrate of everything on the network: wallets, token accounts, program data, and PDAs are all accounts, each owned by a program. Inspecting one - who owns it, how much SOL it holds, what its data contains - is the first step in debugging any Solana interaction.',
+      'Paste any public key to read the account from the RPC of your choice, including devnet and local validators. SPL token accounts are automatically decoded (mint, raw amount, state, delegate), and the built-in PDA generator derives Program Derived Addresses with their bump seeds - all computed in your browser.'
+    ],
+    howTo: [
+      'Pick a network preset (mainnet, devnet, testnet) or paste any RPC URL.',
+      'Enter the account public key and look it up.',
+      'Read owner, balance, rent epoch, and data - token accounts decode automatically.',
+      'Use the PDA generator below: one seed per line, plus the program ID.'
+    ]
+  },
+  '/tools/polkadot-reader': {
+    intro: [
+      'Substrate chains - Polkadot, Kusama, and hundreds of parachains - expose a uniform JSON-RPC interface: chain metadata, runtime versions, and raw storage reads. Querying it directly is how developers verify node connectivity, inspect storage state, and debug pallet behavior.',
+      'Point this reader at any Substrate endpoint (public presets included, local nodes work too) to fetch chain info and query raw storage by key. The SS58 converter translates any address into every common network format - the same account renders differently on each chain. Requests go straight from your browser to the endpoint.'
+    ],
+    howTo: [
+      'Pick Polkadot, Kusama, Westend, or paste an endpoint (local ws://127.0.0.1:9944 works).',
+      'Fetch chain info to verify connectivity and runtime version.',
+      'Query raw storage with a 0x hex key via state_getStorage.',
+      'Convert SS58 addresses between network prefixes below.'
+    ]
+  },
+  '/tools/cardano-reader': {
+    intro: [
+      'Cardano tracks every address in the eUTxO model: an address holds unspent outputs, and its balance is their sum. Checking a balance, a stake delegation, or a UTxO count is a read-only query that public indexers answer for free.',
+      'Paste any Shelley address (addr1...) to read its ADA balance, UTxO count, script status, and associated stake address from Koios - a free, keyless public API. Queries go directly from your browser; nothing is logged here.'
+    ],
+    howTo: [
+      'Paste a Cardano mainnet address (starts with addr1).',
+      'Read the ADA balance, UTxO count, and stake address.',
+      'Copy the stake address to check delegation in any pool explorer.',
+      'Script addresses (Plutus) are flagged automatically.'
+    ]
+  }
+}
+
+const chainReaderFAQs = {
+  '/tools/solana-account-reader': [
+    {
+      question: 'Why is my account not found?',
+      answer: 'An account with no SOL and no data is garbage-collected from Solana state. Also check you are querying the right network - an account existing on devnet will read as not found on mainnet.'
+    },
+    {
+      question: 'How does a PDA (Program Derived Address) work?',
+      answer: 'A PDA is an address deterministically derived from a list of seeds and a program ID, with no private key. Programs sign for their PDAs using the bump seed - the number that pushes the derivation off the ed25519 curve.'
+    },
+    {
+      question: 'Can this reader decode any program account data?',
+      answer: 'Raw account data is shown as hex. SPL token accounts are decoded automatically because their layout is standardized; other programs use custom layouts (usually borsh) defined by their IDL.'
+    }
+  ],
+  '/tools/polkadot-reader': [
+    {
+      question: 'Why is the same account a different address on Kusama?',
+      answer: 'Substrate addresses encode a network prefix (SS58 format). The underlying public key is identical - the encoding differs. The converter above shows one account in every common prefix.'
+    },
+    {
+      question: 'How do I find the storage key for a pallet entry?',
+      answer: 'Storage keys are built by hashing module then storage name (Blake2-128 concatenated by default), plus scale-encoded map keys. The system.account prefix is 0x26aa394eea5630e07c48ae0c9558cef734f4a4d1c3... - full key construction is easiest via polkadot.js with the chain metadata.'
+    },
+    {
+      question: 'Can I use a local development node?',
+      answer: 'Yes - point the endpoint at ws://127.0.0.1:9944 (polkadot.js apps node or a substrate-node). Browser access requires the node to allow CORS, which development nodes enable by default.'
+    }
+  ],
+  '/tools/cardano-reader': [
+    {
+      question: 'Does this need an API key?',
+      answer: 'No. It queries Koios, a free public Cardano indexer with no registration. Requests go directly from your browser to the Koios API.'
+    },
+    {
+      question: 'Can I read Cardano smart contracts like EVM view functions?',
+      answer: 'Not directly - Plutus scripts validate transactions rather than expose callable views. On-chain state is inspected via transaction datums and redeemers; this reader covers addresses, balances, and UTxOs.'
+    },
+    {
+      question: 'Why does the balance show zero for a stake address?',
+      answer: 'This tool queries payment addresses (addr1...). Rewards on stake addresses (stake1...) are viewed in wallet apps or stake explorers, though the linked stake address is shown here when one exists.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, chainReaderContent)
+Object.assign(toolSpecificFAQ, chainReaderFAQs)
