@@ -34,7 +34,11 @@ async function loadUrls() {
   }
   // CI deploy job runs on a fresh runner with no dist/ - use the live sitemap
   // (the deploy just shipped it)
-  const res = await fetch(`https://${HOST}/sitemap.xml`, { signal: AbortSignal.timeout(20000) })
+  // Cloudflare blocks default fetch UAs on this zone - send a browser UA
+  const res = await fetch(`https://${HOST}/sitemap.xml`, {
+    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Formatho-Deploy/1.0)' },
+    signal: AbortSignal.timeout(20000)
+  })
   if (!res.ok) throw new Error(`live sitemap fetch failed: ${res.status}`)
   const source = await res.text()
   return { urls: [...source.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]), from: 'live sitemap' }
