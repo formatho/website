@@ -76,13 +76,24 @@ async function main() {
   for (let i = 0; i < urls.length; i += 1000) batches.push(urls.slice(i, i + 1000))
   for (const [i, batch] of batches.entries()) {
     const status = await submitBatch(batch, key)
-    // 200 OK, 202 Accepted are successes; 422 = key file unreachable
-    const ok = status === 200 || status === 202
-    console.log(`batch ${i + 1}/${batches.length}: ${status} ${ok ? 'OK' : 'CHECK KEY FILE'}`)
-    if (!ok && status === 422) {
-      console.error(`key file unreachable: https://${HOST}/${key}.txt must return 200 with the key as body`)
-      process.exit(1)
+    // 200 OK / 202 Accepted are the only successes
+    if (status === 200 || status === 202) {
+      console.log(`batch ${i + 1}/${batches.length}: ${status} OK`)
+      continue
     }
+    if (status === 422) {
+      console.error(`key file unreachable: https://${HOST}/${key}.txt must return 200 with the key as body`)
+    } else if (status === 403) {
+      console.error(
+        `403 Forbidden: IndexNow could not validate the key. The key file is correct - ` +
+        `this is almost always a WAF/CDN (Cloudflare) bot-protection rule blocking ` +
+        `IndexNow's validation crawler from fetching the key file. Allow bots to ` +
+        `fetch /*.txt or disable AI-bot blocking for this host.`
+      )
+    } else {
+      console.error(`unexpected IndexNow response: ${status}`)
+    }
+    process.exit(1)
   }
 }
 
