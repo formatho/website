@@ -220,27 +220,14 @@ jobs:
             echo "--- listeners on 80/443 ---"
             (ss -tlnp 2>/dev/null || netstat -tlnp 2>/dev/null) | grep -E ':80 |:443 ' || true
             echo "--- host nginx? ---"
-            echo "=== FRONT PROXY SOFT-404 FIX ==="
-            # Locate the front-proxy config (volume-mounted from host) and stop it
-            # from masking backend 404s as SPA fallbacks (200 + index.html).
-            NGINX_MOUNT=$(docker service inspect nginx_nginx --format '{{range .Spec.TaskTemplate.ContainerSpec.Mounts}}{{.Source}}:{{.Target}}{{"\n"}}{{end}}')
-            echo "mounts: $NGINX_MOUNT"
-            CONF_DIR=$(echo "$NGINX_MOUNT" | grep -E ':(/etc/nginx/conf\.d|/etc/nginx:ro|/etc/nginx)$' | head -1 | cut -d: -f1)
-            [ -z "$CONF_DIR" ] && CONF_DIR=$(echo "$NGINX_MOUNT" | grep '/etc/nginx' | head -1 | cut -d: -f1)
+            echo "=== FRONT PROXY CONFIG DUMP (read-only) ==="
+            CONF_DIR=$(docker service inspect nginx_nginx --format '{{range .Spec.TaskTemplate.ContainerSpec.Mounts}}{{.Source}}:{{.Target}}{{"\n"}}{{end}}' | grep -E '/etc/nginx' | head -1 | cut -d: -f1)
             echo "conf dir: $CONF_DIR"
             if [ -n "$CONF_DIR" ]; then
-              cp -r "$CONF_DIR" "${CONF_DIR}.bak.$(date +%s)" 2>/dev/null || true
-              grep -rl 'spa_fallback' "$CONF_DIR" | while read -r f; do
-                echo "patching: $f"
-                sed -i '/error_page 404 = @spa_fallback;/d; /location @spa_fallback {/,/^        }$/d' "$f"
+              for f in "$CONF_DIR"/*.conf; do
+                echo "## FILE: $f"
+                cat "$f"
               done
-              docker exec $(docker ps --filter name=nginx_nginx --format '{{.ID}}' | head -1) nginx -t && \
-                docker exec $(docker ps --filter name=nginx_nginx --format '{{.ID}}' | head -1) nginx -s reload && \
-                echo "FRONT PROXY PATCHED AND RELOADED" || echo "PATCH FAILED - config backed up, check manually"
-            else
-              echo "no mounted conf found - patch inside container"
-              CID=$(docker ps --filter name=nginx_nginx --format '{{.ID}}' | head -1)
-              docker exec "$CID" sh -c "grep -rl spa_fallback /etc/nginx | while read f; do sed -i '/error_page 404 = @spa_fallback;/d; /location @spa_fallback {/,/^[[:space:]]*}/d' \$f; done; nginx -t && nginx -s reload && echo PATCHED_IN_CONTAINER"
             fi
             (command -v nginx >/dev/null && nginx -T 2>/dev/null | grep -E 'server_name|proxy_pass|try_files|error_page' | head -30) || echo "no host nginx"
             echo "--- other proxy containers ---"
