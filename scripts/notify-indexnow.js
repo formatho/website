@@ -27,10 +27,14 @@ function findKey() {
 }
 
 async function loadUrls() {
-  const local = resolve(process.cwd(), 'dist', 'sitemap.xml')
-  if (existsSync(local)) {
-    const source = readFileSync(local, 'utf8')
-    return { urls: [...source.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]), from: 'dist/sitemap.xml' }
+  const sources = ['dist/sitemap.xml', 'public/sitemap.xml']
+  for (const src of sources) {
+    const local = resolve(process.cwd(), src)
+    if (existsSync(local)) {
+      const body = readFileSync(local, 'utf8')
+      const urls = [...body.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])
+      if (urls.length) return { urls, from: src }
+    }
   }
   // CI deploy job runs on a fresh runner with no dist/ - use the live sitemap
   // (the deploy just shipped it)
