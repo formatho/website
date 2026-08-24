@@ -73,6 +73,83 @@ interface AbiFunction {
   item: Record<string, unknown>
 }
 
+// ─── Uniswap V2 presets (same addresses on most EVM chains) ───
+const UNISWAP_V2_FACTORY = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'
+const UNISWAP_V2_ROUTER = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
+const UNISWAP_V3_QUOTER = '0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6'
+
+const UNISWAP_V2_FACTORY_ABI = [
+  { type: 'function', name: 'getPair', stateMutability: 'view',
+    inputs: [{ type: 'address', name: 'tokenA' }, { type: 'address', name: 'tokenB' }],
+    outputs: [{ type: 'address', name: 'pair' }] },
+  { type: 'function', name: 'allPairsLength', stateMutability: 'view',
+    inputs: [], outputs: [{ type: 'uint256', name: '' }] },
+  { type: 'function', name: 'feeTo', stateMutability: 'view',
+    inputs: [], outputs: [{ type: 'address', name: '' }] },
+  { type: 'function', name: 'feeToSetter', stateMutability: 'view',
+    inputs: [], outputs: [{ type: 'address', name: '' }] },
+]
+
+const UNISWAP_V2_PAIR_ABI = [
+  { type: 'function', name: 'getReserves', stateMutability: 'view',
+    inputs: [],
+    outputs: [
+      { type: 'uint112', name: 'reserve0' }, { type: 'uint112', name: 'reserve1' },
+      { type: 'uint32', name: 'blockTimestampLast' }
+    ] },
+  { type: 'function', name: 'token0', stateMutability: 'view', inputs: [], outputs: [{ type: 'address', name: '' }] },
+  { type: 'function', name: 'token1', stateMutability: 'view', inputs: [], outputs: [{ type: 'address', name: '' }] },
+  { type: 'function', name: 'totalSupply', stateMutability: 'view', inputs: [], outputs: [{ type: 'uint256', name: '' }] },
+  { type: 'function', name: 'balanceOf', stateMutability: 'view',
+    inputs: [{ type: 'address', name: 'owner' }], outputs: [{ type: 'uint256', name: '' }] },
+  { type: 'function', name: 'price0CumulativeLast', stateMutability: 'view', inputs: [], outputs: [{ type: 'uint256', name: '' }] },
+  { type: 'function', name: 'price1CumulativeLast', stateMutability: 'view', inputs: [], outputs: [{ type: 'uint256', name: '' }] },
+]
+
+const UNISWAP_V2_ROUTER_ABI = [
+  { type: 'function', name: 'getAmountsOut', stateMutability: 'view',
+    inputs: [
+      { type: 'uint256', name: 'amountIn' },
+      { type: 'address[]', name: 'path' }
+    ],
+    outputs: [{ type: 'uint256[]', name: 'amounts' }] },
+  { type: 'function', name: 'getAmountsIn', stateMutability: 'view',
+    inputs: [
+      { type: 'uint256', name: 'amountOut' },
+      { type: 'address[]', name: 'path' }
+    ],
+    outputs: [{ type: 'uint256[]', name: 'amounts' }] },
+  { type: 'function', name: 'WETH', stateMutability: 'pure', inputs: [], outputs: [{ type: 'address', name: '' }] },
+  { type: 'function', name: 'factory', stateMutability: 'pure', inputs: [], outputs: [{ type: 'address', name: '' }] },
+]
+
+const UNISWAP_V3_QUOTER_ABI = [
+  { type: 'function', name: 'quoteExactInputSingle', stateMutability: 'nonpayable',
+    inputs: [
+      { type: 'address', name: 'tokenIn' }, { type: 'address', name: 'tokenOut' },
+      { type: 'uint24', name: 'fee' }, { type: 'uint256', name: 'amountIn' },
+      { type: 'uint160', name: 'sqrtPriceLimitX96' }
+    ],
+    outputs: [{ type: 'uint256', name: 'amountOut' }] },
+  { type: 'function', name: 'WETH9', stateMutability: 'pure', inputs: [], outputs: [{ type: 'address', name: '' }] },
+]
+
+const uniswapPresets = [
+  { label: 'V2 Factory', abi: UNISWAP_V2_FACTORY_ABI, address: UNISWAP_V2_FACTORY,
+    hint: 'Find pair addresses: getPair(tokenA, tokenB)' },
+  { label: 'V2 Router', abi: UNISWAP_V2_ROUTER_ABI, address: UNISWAP_V2_ROUTER,
+    hint: 'Get swap quotes: getAmountsOut(amountIn, [tokenIn, tokenOut])' },
+  { label: 'V2 Pair', abi: UNISWAP_V2_PAIR_ABI, address: '',
+    hint: 'Pool reserves + LP supply: paste the pair address from V2 Factory getPair()' },
+  { label: 'V3 Quoter', abi: UNISWAP_V3_QUOTER_ABI, address: UNISWAP_V3_QUOTER,
+    hint: 'V3 quotes: quoteExactInputSingle(tokenIn, tokenOut, fee, amountIn, 0)' },
+]
+
+function loadUniswapPreset(preset: { abi: unknown[]; address: string }) {
+  abiText.value = JSON.stringify(preset.abi, null, 2)
+  if (preset.address) contractAddress.value = preset.address
+}
+
 const abiError = computed(() => {
   const text = abiText.value.trim()
   if (!text) return ''
@@ -322,6 +399,15 @@ async function copy(text: string, key: string) {
               @click="loadErc20Example"
             >
               Load ERC-20 example
+            </button>
+            <button
+              v-for="preset in uniswapPresets"
+              :key="preset.label"
+              class="no-btn-hover text-xs px-2 py-1 border border-border rounded-full hover:border-primary/40 transition-colors"
+              :title="preset.hint"
+              @click="loadUniswapPreset(preset)"
+            >
+              Uniswap {{ preset.label }}
             </button>
           </div>
           <Textarea

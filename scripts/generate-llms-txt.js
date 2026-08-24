@@ -61,6 +61,19 @@ for (const cat of categories) {
   }
 }
 lines.push('')
+lines.push('## Developer Stack Tools')
+lines.push('Persona-specific tool pages:')
+for (const stack of ['owasp', 'sap', 'okta', 'ping-federate']) {
+  lines.push(`- [${stack.replace('-', ' ')} tools]: ${BASE}/dev-tools/${stack}`)
+}
+lines.push('')
+lines.push('## EVM Chain Tools')
+lines.push('Chain-specific developer tool pages with pre-configured RPC endpoints, chain IDs, and token addresses:')
+const chains = ['ethereum', 'arbitrum', 'base', 'optimism', 'polygon', 'bnb-chain', 'avalanche', 'zksync', 'linea', 'blast', 'mantle', 'cronos']
+for (const chain of chains) {
+  lines.push(`- [${chain.replace('-', ' ')} tools]: ${BASE}/evm-tools/${chain}`)
+}
+lines.push('')
 lines.push('## Guides')
 lines.push(`- [Blog - developer guides and tutorials]: ${BASE}/blogs — Deep dives on AI agents, blockchain, RWA tokenization, and privacy-first tools.`)
 lines.push('')
