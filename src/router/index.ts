@@ -168,7 +168,7 @@ export const routes = [
         name: 'jwt',
         component: () => import(/* webpackPrefetch: true */ '../views/JwtView.vue'),
         meta: {
-          title: 'JWT Decoder Online - Decode JSON Web Tokens Free | Formatho',
+          title: 'JWT Debugger - Decode, Verify & Inspect Tokens | Formatho',
           description:
             'Decode JWT (JSON Web Tokens) online instantly. Inspect JWT header, payload, and signature. Check expiry, validate claims, and debug auth tokens. Free JWT debugger — 100% client-side, tokens never leave your browser.',
           keywords:
@@ -543,6 +543,17 @@ export const routes = [
           description:
             'Generate vanity addresses with a custom prefix or suffix. The same key works on every EVM chain - Ethereum, Polygon, BSC, Arbitrum, Base, Optimism, Avalanche. Runs 100% in your browser, key never transmitted.',
           keywords: 'ethereum vanity address generator, evm vanity address, vanity eth address, polygon vanity address, bsc vanity address generator, base chain vanity address, custom wallet address, safe vanity address, client-side vanity'
+        }
+      },
+      {
+        path: '/tools/jwt-suite',
+        name: 'jwt-suite',
+        component: () => import(/* webpackPrefetch: true */ '../views/JwtSuiteView.vue'),
+        meta: {
+          title: 'JWT & Auth Toolkit - Decode, Verify, Sign | Formatho',
+          description:
+            'A complete JWT and authentication toolkit: decode and verify tokens, inspect claims, build OIDC authorize URLs, decode SAML, and generate secure tokens. All free and client-side.',
+          keywords: 'jwt toolkit, jwt suite, auth tools, token debugging, oauth tools, oidc tools, saml tools, jwt verify, auth debugging'
         }
       },
       {

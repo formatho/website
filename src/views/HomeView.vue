@@ -88,6 +88,7 @@ import {
 } from 'lucide-vue-next'
 import { tools } from '../data/tools'
 import CategoryIcon from '@/components/CategoryIcon.vue'
+import { trackSearchTools } from '@/utils/toolTracking'
 
 // Create icon map for dynamic lookup (much smaller bundle than importing *)
 const iconMap = {
@@ -179,11 +180,16 @@ const popularTools = computed(() => {
 const searchResults = computed(() => {
   if (!searchQuery.value) return []
   const q = searchQuery.value.toLowerCase()
-  return tools.flatMap((c) => c.items).filter(
+  const results = tools.flatMap((c) => c.items).filter(
     (t) =>
       t.name.toLowerCase().includes(q) ||
       t.description.toLowerCase().includes(q)
   ).slice(0, 24)
+  // GA4: fire search_tools when a query yields results (result_count only)
+  if (results.length > 0 && q.length >= 2) {
+    trackSearchTools(results.length)
+  }
+  return results
 })
 
 const toolCount = tools.reduce((sum: number, cat: { items: unknown[] }) => sum + cat.items.length, 0)

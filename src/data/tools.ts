@@ -67,6 +67,7 @@ export const tools: ToolCategory[] = [
     icon: '🔐',
     blurb: 'Hash generators, JWT debugger, SAML decoder, OIDC builder, encryption, TOTP, password analysis, and credential tools - all client-side.',
     items: [
+      { name: 'JWT & Auth Toolkit', description: 'Complete auth debugging suite: decode and verify JWTs, inspect claims, build OIDC URLs, decode SAML, generate tokens. All client-side.', route: '/tools/jwt-suite', iconName: 'Key' },
       { name: 'SAML Request & Response Decoder', description: 'Decode SAML AuthnRequest and Response messages - base64 plus raw-deflate - with pretty-printed XML. Essential for Okta, Entra ID and Shibboleth debugging. 100% client-side.', route: '/tools/saml-decoder', iconName: 'FileCode' },
       { name: 'OIDC Authorization URL & PKCE Generator', description: 'Build OAuth 2.0 / OIDC authorize URLs with state, nonce and S256 PKCE code challenges. Works with Okta, Auth0, Entra ID, Keycloak.', route: '/tools/oidc-url-builder', iconName: 'Link2' },
       { name: 'JWT Debugger', description: 'Decode and inspect JWT tokens instantly.', route: '/tools/jwt', iconName: 'Key' },
