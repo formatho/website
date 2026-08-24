@@ -1367,6 +1367,11 @@ export const routes = [
           description: 'Monitor and analyze A/B test results for landing page optimization'
         }
       },
+      // Category index redirects to the tools directory
+      {
+        path: '/category',
+        redirect: '/tools/all'
+      },
       // Category Routes (single generic component, slugs are stable)
       {
         path: '/category/web3',
