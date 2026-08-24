@@ -1293,3 +1293,135 @@ const jwtSuiteFAQs = {
 
 Object.assign(toolSEOContent, jwtSuiteContent)
 Object.assign(toolSpecificFAQ, jwtSuiteFAQs)
+
+
+const webSecContent = {
+  '/tools/security-headers': {
+    intro: [
+      'HTTP security headers are the first line of defense against common web attacks: XSS via Content-Security-Policy, clickjacking via X-Frame-Options, protocol downgrade via HSTS, and MIME-type sniffing via X-Content-Type-Options. Every production site should send all six critical headers.',
+      'This analyzer fetches the URL from your browser and checks which security headers are present and correctly configured. You get an A-F grade with specific fix recommendations for each missing or misconfigured header. All checks run client-side — the URL is never sent to a third-party scanner.'
+    ],
+    howTo: [
+      'Enter the URL you want to check.',
+      'Click Analyze — the request runs from your browser.',
+      'Review the A-F grade and individual header statuses.',
+      'Apply the fix recommendations for each missing header.'
+    ]
+  },
+  '/tools/csp-generator': {
+    intro: [
+      'Content-Security-Policy is the most powerful security header — it tells the browser exactly which sources are allowed for scripts, styles, images, connections, and more. A well-configured CSP can stop XSS, prevent clickjacking, and block data exfiltration. But writing one from memory is error-prone.',
+      'This generator lets you configure each directive visually: toggle directives on and off, add sources with quick presets, and include security hardening directives like object-src and frame-ancestors. The header updates in real time and supports Report-Only mode for safe testing.'
+    ],
+    howTo: [
+      'Start with default-src as your fallback policy.',
+      'Enable specific directives and add your allowed sources.',
+      'Include object-src none and base-uri self for hardening.',
+      'Test with Report-Only mode first, then enforce.'
+    ]
+  },
+  '/tools/csp-evaluator': {
+    intro: [
+      'A Content-Security-Policy is only as good as its weakest directive. unsafe-inline in script-src defeats the entire purpose. A wildcard (*) allows scripts from anywhere. Missing frame-ancestors leaves the page open to clickjacking. These are the misconfigurations that make a CSP look good while providing almost no real protection.',
+      'Paste your CSP header and this evaluator checks it against known bypass patterns, missing hardening directives, and common mistakes. Each finding includes severity and a specific explanation of why it matters and how to fix it. All analysis is local — your CSP never leaves the browser.'
+    ],
+    howTo: [
+      'Copy your Content-Security-Policy header from DevTools or your server config.',
+      'Paste it into the evaluator.',
+      'Review each finding by severity (high, medium, low).',
+      'Fix the issues using the recommendations, or use our CSP Generator.'
+    ]
+  },
+  '/tools/cors-tester': {
+    intro: [
+      'CORS (Cross-Origin Resource Sharing) controls which websites can make requests to your API. When it breaks, the browser blocks the response with a confusing error message. The fix usually involves adding the right Access-Control-Allow-Origin header — but you need to see what the server actually returns to know what is missing.',
+      'This tester makes a real cross-origin request from your browser to the target URL and shows exactly which CORS headers came back: Access-Control-Allow-Origin, Allow-Methods, Allow-Headers, and more. Because it runs in the browser, you see the same behavior your users see — not a server-side approximation.'
+    ],
+    howTo: [
+      'Enter the API URL you want to test.',
+      'Choose the HTTP method (GET, POST, PUT, etc.).',
+      'Click Test — the request runs from your browser.',
+      'Review the CORS headers that were returned.'
+    ]
+  },
+  '/tools/cookie-analyzer': {
+    intro: [
+      'Cookies carry session tokens, CSRF protections, and tracking identifiers — making them a prime attack target. The Secure flag prevents transmission over HTTP, HttpOnly blocks JavaScript access (XSS mitigation), SameSite prevents CSRF attacks, and the __Host- prefix locks cookies to a specific domain and path.',
+      'Paste any Set-Cookie header and this analyzer checks every security flag, scores the cookie 0-100, and lists specific issues with recommendations. Session cookies, authentication tokens, and CSRF tokens each have different requirements — the analyzer flags what matters for each.'
+    ],
+    howTo: [
+      'Open DevTools, go to Network, and find the set-cookie response header.',
+      'Paste it here (one cookie per line).',
+      'Review the security score and specific issues.',
+      'Fix missing flags in your server configuration.'
+    ]
+  }
+}
+
+const webSecFAQs = {
+  '/tools/security-headers': [
+    {
+      question: 'What is a good security headers score?',
+      answer: 'A (90+) means all critical headers are present and correctly configured. B (75+) is acceptable for most sites. Anything below C should be fixed — you are missing protections against XSS, clickjacking, or protocol downgrade attacks.'
+    },
+    {
+      question: 'Why can this tool not read headers from some sites?',
+      answer: 'The browser only exposes response headers to JavaScript when the server sends Access-Control-Allow-Origin for the requesting origin. Sites that do not send CORS headers cannot be inspected from a browser — use curl -I from a terminal for those.'
+    },
+    {
+      question: 'Which headers are most important?',
+      answer: 'Content-Security-Policy and Strict-Transport-Security are the two highest-impact headers. CSP prevents XSS and data injection; HSTS prevents protocol downgrade and cookie hijacking over HTTP.'
+    }
+  ],
+  '/tools/csp-generator': [
+    {
+      question: 'What CSP should I start with?',
+      answer: "default-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none' — this is a strict baseline that blocks external resources. Then add directives for specific needs (fonts, CDNs, APIs)."
+    },
+    {
+      question: 'What is Report-Only mode?',
+      answer: 'Content-Security-Policy-Report-Only logs violations to your report-uri endpoint without blocking anything. This lets you test a CSP on production traffic before enforcing it.'
+    },
+    {
+      question: 'How do I allow Google Fonts?',
+      answer: "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com — Google Fonts requires inline styles for the loading mechanism."
+    }
+  ],
+  '/tools/csp-evaluator': [
+    {
+      question: 'What is the most common CSP mistake?',
+      answer: "Including 'unsafe-inline' in script-src. This allows inline <script> tags and event handlers, which defeats CSP's core purpose of preventing XSS. Use nonces (per-request tokens) or hashes instead."
+    },
+    {
+      question: 'Is a wildcard (*) ever safe?',
+      answer: 'In img-src it is common and low-risk. In script-src, connect-src, or frame-src it is dangerous — it allows loading code or making requests to attacker-controlled domains.'
+    }
+  ],
+  '/tools/cors-tester': [
+    {
+      question: 'Why did my CORS request fail?',
+      answer: 'The server did not return Access-Control-Allow-Origin for your origin. The fix is to add the header server-side: Access-Control-Allow-Origin: https://yourapp.com (or * for public APIs).'
+    },
+    {
+      question: 'What is a CORS preflight request?',
+      answer: 'For non-simple requests (custom headers, PUT/DELETE methods), the browser first sends an OPTIONS request to check if the server allows the actual request. The server must respond with Access-Control-Allow-Methods and Access-Control-Allow-Headers.'
+    }
+  ],
+  '/tools/cookie-analyzer': [
+    {
+      question: 'What is the __Host- prefix?',
+      answer: 'Cookies named with __Host- must have the Secure flag, no Domain attribute, and Path=/. This locks them to the exact host, preventing subdomain-based cookie injection attacks.'
+    },
+    {
+      question: 'When should I use SameSite=None?',
+      answer: 'Only for cross-site use cases like third-party embeds or payment redirects — and always with the Secure flag. SameSite=Lax is the safe default that prevents CSRF in most scenarios.'
+    },
+    {
+      question: 'Are session cookies (no expiry) more secure?',
+      answer: 'Yes — cookies without Max-Age or Expires are cleared when the browser closes, reducing the window for theft. Only use persistent cookies for "remember me" features.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, webSecContent)
+Object.assign(toolSpecificFAQ, webSecFAQs)
