@@ -165,6 +165,26 @@ onMounted(() => {
 
 // Note: AOS is initialized globally in main.ts to avoid conflicts
 
+const popularTools = computed(() => {
+  const featured = [
+    '/tools/base64', '/tools/jwt', '/tools/uuid', '/tools/json-lint',
+    '/tools/regex-tester', '/tools/sql', '/tools/hash-text', '/tools/diff',
+    '/tools/json-yaml', '/tools/keccak256', '/tools/contract-reader', '/tools/unix-timestamp'
+  ]
+  const all = tools.flatMap((c) => c.items)
+  return featured.map((r) => all.find((t) => t.route === r)).filter(Boolean)
+})
+
+const searchResults = computed(() => {
+  if (!searchQuery.value) return []
+  const q = searchQuery.value.toLowerCase()
+  return tools.flatMap((c) => c.items).filter(
+    (t) =>
+      t.name.toLowerCase().includes(q) ||
+      t.description.toLowerCase().includes(q)
+  ).slice(0, 24)
+})
+
 const toolCount = tools.reduce((sum: number, cat: { items: unknown[] }) => sum + cat.items.length, 0)
 const categoryCount = tools.length
 
@@ -192,7 +212,7 @@ const prefetchRoute = (route: string) => {
 }
 
 // Filter tools based on search query
-const filteredTools = computed(() => {
+const _filteredTools_old = computed(() => {
   if (!searchQuery.value.trim()) {
     return tools
   }
@@ -374,103 +394,61 @@ const _popularTools = [
       </div>
     </section>
 
-    <!-- Tools Grid -->
+    <!-- Category Cards -->
     <section class="container mx-auto px-4 py-10 md:py-14" data-v-8d4ed633="">
-      <div class="space-y-12" data-v-8d4ed633="">
-        <!-- Categories with tools -->
-        <div
-          v-for="(category) in filteredTools"
-          :key="category.category"
-          class="space-y-6"
-          data-v-8d4ed633=""
-        >
-          <div class="flex items-center gap-4 border-b-2 border-foreground pb-2" data-v-8d4ed633="">
-            <h2
-              class="text-2xl md:text-3xl font-black tracking-tight uppercase"
-              data-v-8d4ed633=""
-            >
-              {{ category.category }}
-            </h2>
-            <div class="flex-1" data-v-8d4ed633=""></div>
-            <span class="text-xs font-mono tracking-widest text-muted-foreground" data-v-8d4ed633="">
-              [ {{ String(category.items.length).padStart(2, '0') }} TOOLS ]
-            </span>
-          </div>
-          <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-            data-v-8d4ed633=""
+      <div v-if="searchQuery" class="mb-6">
+        <h2 class="text-lg font-bold mb-4">Search results for "{{ searchQuery }}"</h2>
+        <div v-if="filteredTools.length === 0" class="text-muted-foreground text-sm p-8 border border-border rounded-xl text-center">
+          No tools match "{{ searchQuery }}". Try a different term.
+        </div>
+        <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <RouterLink
+            v-for="tool in searchResults"
+            :key="tool.route"
+            :to="tool.route"
+            class="group border border-border rounded-lg p-4 hover:border-primary/50 hover:bg-primary/5 transition-colors"
           >
-            <RouterLink
-              v-for="(tool, toolIndex) in category.items"
-              :key="tool.name"
-              :to="tool.route"
-              class="premium-card-hover"
-              @mouseenter="prefetchRoute(tool.route)"
-              data-v-8d4ed633=""
-            >
-              <div
-                class="h-full p-6 cursor-pointer border border-foreground transition-all duration-150 ease-out hover:shadow-[4px_4px_0px_#000000] hover:-translate-y-[2px] hover:-translate-x-[2px]"
-                data-aos="fade-up"
-                :data-aos-delay="(toolIndex % 4) * 50"
-                data-v-8d4ed633=""
-              >
-                <div class="flex flex-col h-full" data-v-8d4ed633="">
-                  <!-- Icon with dynamic Lucide component -->
-                  <div class="mb-4" data-v-8d4ed633="">
-                    <div
-                      class="p-3 border border-foreground/20 w-fit"
-                      data-v-8d4ed633=""
-                    >
-                      <component
-                        :is="iconMap[tool.iconName as keyof typeof iconMap] || Wrench"
-                        class="w-6 h-6 text-gray-900"
-                        stroke-width="2"
-                      />
-                    </div>
-                  </div>
+            <p class="font-medium text-sm group-hover:text-primary transition-colors">{{ tool.name }}</p>
+            <p class="text-xs text-muted-foreground mt-1 line-clamp-2">{{ tool.description }}</p>
+          </RouterLink>
+        </div>
+      </div>
 
-                  <!-- Content -->
-                  <div class="flex-1" data-v-8d4ed633="">
-                    <h3
-                      class="text-lg font-semibold mb-2 transition-colors"
-                      data-v-8d4ed633=""
-                    >
-                      {{ tool.name }}
-                    </h3>
-                    <p
-                      class="text-sm text-muted-foreground leading-relaxed"
-                      data-v-8d4ed633=""
-                    >
-                      {{ tool.description }}
-                    </p>
-                  </div>
-
-                  <!-- Arrow Icon -->
-                  <div class="flex items-center text-gray-900 mt-auto pt-4" data-v-8d4ed633="">
-                    <span class="text-xs tracking-widest uppercase font-semibold">EXECUTE</span>
-                    <svg
-                      class="w-4 h-4 ml-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      data-v-8d4ed633=""
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M7 17L17 7M17 7H7M17 7V17"
-                      ></path>
-                    </svg>
-                  </div>
-                </div>
+      <div v-else>
+        <h2 class="text-2xl md:text-3xl font-bold mb-2">Browse by category</h2>
+        <p class="text-sm text-muted-foreground mb-8">{{ toolCount }} free tools across {{ categoryCount }} categories — all private, no sign-up</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+          <RouterLink
+            v-for="category in tools"
+            :key="category.slug"
+            :to="category.route"
+            class="group border border-border rounded-xl p-6 hover:border-primary/50 hover:bg-primary/5 transition-colors"
+          >
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-3xl">{{ category.icon }}</span>
+              <div>
+                <h3 class="text-lg font-bold group-hover:text-primary transition-colors">{{ category.category }}</h3>
+                <p class="text-xs text-muted-foreground">{{ category.items.length }} tools</p>
               </div>
-            </RouterLink>
-          </div>
+            </div>
+            <p class="text-sm text-muted-foreground leading-relaxed line-clamp-2">{{ category.blurb }}</p>
+          </RouterLink>
+        </div>
+
+        <!-- Popular tools -->
+        <h3 class="text-lg font-bold mb-4">Popular tools</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
+          <RouterLink
+            v-for="tool in popularTools"
+            :key="tool.route"
+            :to="tool.route"
+            class="group border border-border rounded-lg p-3 hover:border-primary/50 hover:bg-primary/5 transition-colors text-center"
+          >
+            <p class="text-xs font-medium group-hover:text-primary transition-colors">{{ tool.name }}</p>
+          </RouterLink>
         </div>
       </div>
     </section>
-
     <!-- Floating CTA for Mobile -->
     <FloatingCTA />
   </div>

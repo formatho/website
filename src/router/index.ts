@@ -1367,53 +1367,66 @@ export const routes = [
           description: 'Monitor and analyze A/B test results for landing page optimization'
         }
       },
-      // Category Routes
+      // Category Routes (single generic component, slugs are stable)
       {
-        path: '/category/blockchain',
-        name: 'category-blockchain',
-        component: () => import(/* webpackPrefetch: true */ '../views/categories/BlockchainCategoryView.vue'),
+        path: '/category/web3',
+        name: 'category-web3',
+        component: () => import('../views/CategoryView.vue'),
         meta: {
-          title: 'EVM and Blockchain Developer Tools | Formatho',
-          description: 'Free client-side crypto utilities like Cosmos address generators, multi-chain wallets, Ethereum checksum validators, Solidity opcode compilers, and asset tokenization labs with zero data collection.'
+          title: 'Web3 & Blockchain Tools - Free Online | Formatho',
+          description: 'EVM contract reader, vanity address generator, multi-chain readers for Solana, Polkadot, Cardano, Cosmos. Keccak-256 hasher, ABI tools, ENS calculator. All free and client-side.',
         }
       },
       {
-        path: '/category/crypto-security',
-        name: 'category-crypto-security',
-        component: () => import(/* webpackPrefetch: true */ '../views/categories/CryptoSecurityCategoryView.vue'),
+        path: '/category/security',
+        name: 'category-security',
+        component: () => import('../views/CategoryView.vue'),
         meta: {
-          title: 'Privacy-First Security and Hash Tools | Formatho',
-          description: 'Generate secure Argon2id hashes, unique identifiers, passphrases, and RSA key pairs locally in your browser for absolute privacy. Zero server footprint.'
+          title: 'Security & Auth Tools - Free Online | Formatho',
+          description: 'Hash generators, JWT debugger, SAML decoder, OIDC builder, encryption, TOTP, password analysis. Free, private, 100% client-side.',
         }
       },
       {
-        path: '/category/development',
-        name: 'category-development',
-        component: () => import(/* webpackPrefetch: true */ '../views/categories/DevelopmentCategoryView.vue'),
+        path: '/category/data-formats',
+        name: 'category-data-formats',
+        component: () => import('../views/CategoryView.vue'),
         meta: {
-          title: 'SQL, JSON, and Git Developer Utilities | Formatho',
-          description: 'SQL query formatting, database diagram generation, JSON linting, and Docker conversion tools that run free and browser-native. Zero server processing.'
+          title: 'Data Format Tools - JSON, YAML, XML, CSV | Formatho',
+          description: 'Validators, formatters, and converters for JSON, YAML, XML, TOML, and CSV. Plus UUID, Base64, and IBAN tools. Free and client-side.',
         }
       },
       {
-        path: '/category/web-network',
-        name: 'category-web-network',
-        component: () => import(/* webpackPrefetch: true */ '../views/categories/WebNetworkCategoryView.vue'),
+        path: '/category/developer',
+        name: 'category-developer',
+        component: () => import('../views/CategoryView.vue'),
         meta: {
-          title: 'Web, Network, and HTTP Utilities | Formatho',
-          description: 'JWT inspection, URL encoding, user agent parsing, and subnet calculation with zero server footprint. Free, browser-native developer tools.'
+          title: 'Developer Tools - SQL, Git, Docker, Regex | Formatho',
+          description: 'SQL formatting and schema tools, Git and regex references, Docker conversion, Mermaid viewer, image compression. Free, private, client-side.',
         }
       },
       {
         path: '/category/converters',
         name: 'category-converters',
-        component: () => import(/* webpackPrefetch: true */ '../views/categories/ConvertersCategoryView.vue'),
+        component: () => import('../views/CategoryView.vue'),
         meta: {
-          title: 'Data, Base64, and Timestamp Converters | Formatho',
-          description: 'Real-time Unix timestamp, JSON to YAML, Base64, and color conversion with client-side processing. Free online converters with zero server uploads.'
+          title: 'Converters & Calculators - Free Online | Formatho',
+          description: 'Unix timestamp, date-time, number base, color, case, temperature converters. Math, ETA, and percentage calculators. Free and client-side.',
         }
-      }
-    ]
+      },
+      {
+        path: '/category/network',
+        name: 'category-network',
+        component: () => import('../views/CategoryView.vue'),
+        meta: {
+          title: 'Network & Web Tools - Subnet, URL, HTTP | Formatho',
+          description: 'IPv4 subnet calculator, MAC address tools, IPv6 ULA, URL encoder/parser, HTTP status codes, QR code generator. Free, private, client-side.',
+        }
+      },
+      // Legacy category slugs redirect to new pages
+      { path: '/category/blockchain', redirect: '/category/web3' },
+      { path: '/category/crypto-security', redirect: '/category/security' },
+      { path: '/category/development', redirect: '/category/developer' },
+      { path: '/category/web-network', redirect: '/category/network' },    ]
   },
   // 404 Catch-all route
   {
