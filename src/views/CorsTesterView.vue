@@ -15,6 +15,11 @@ useSEO({
 })
 
 const url = ref('')
+const sampleEndpoints = [
+  { label: 'JSONPlaceholder', url: 'https://jsonplaceholder.typicode.com/posts/1' },
+  { label: 'GitHub API', url: 'https://api.github.com' },
+  { label: 'httpbin', url: 'https://httpbin.org/get' },
+]
 const method = ref('GET')
 const loading = ref(false)
 const result = ref<null | { success: boolean; status: number; statusText: string; headers: Array<{ name: string; value: string }>; error?: string }>(null)
@@ -92,6 +97,9 @@ const error = ref('')
           <Button :disabled="loading" @click="test">
             <Loader2 v-if="loading" class="w-4 h-4 mr-1 animate-spin" />Test
           </Button>
+        </div>
+        <div class="flex flex-wrap gap-2 mt-3">
+          <button v-for="ep in sampleEndpoints" :key="ep.label" class="no-btn-hover text-xs px-2.5 py-1 border border-border rounded-full hover:border-primary/40 transition-colors" @click="url = ep.url">{{ ep.label }}</button>
         </div>
       </CardContent>
     </Card>

@@ -15,6 +15,11 @@ useSEO({
 })
 
 const url = ref('')
+const sampleUrls = [
+  { label: 'GitHub', url: 'https://github.com' },
+  { label: 'Google', url: 'https://www.google.com' },
+  { label: 'Cloudflare', url: 'https://www.cloudflare.com' },
+]
 const loading = ref(false)
 const error = ref('')
 const grade = ref('')
@@ -88,6 +93,11 @@ function sevClass(sev: string) {
       <CardContent class="space-y-4 pt-6">
         <div class="flex gap-3">
           <Input v-model="url" class="font-mono text-sm" placeholder="https://example.com" aria-label="URL to analyze" @keyup.enter="analyze" />
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button v-for="sample in sampleUrls" :key="sample.label" class="no-btn-hover text-xs px-2.5 py-1 border border-border rounded-full hover:border-primary/40 transition-colors" @click="url = sample.url">
+            {{ sample.label }}
+          </button>
           <Button :disabled="loading" @click="analyze">
             <Loader2 v-if="loading" class="w-4 h-4 mr-1 animate-spin" />
             <Search v-else class="w-4 h-4 mr-1" />

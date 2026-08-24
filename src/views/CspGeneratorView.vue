@@ -24,6 +24,54 @@ interface Directive {
   preset: string[]
 }
 
+const cspPresets = [
+  {
+    label: 'Strict',
+    apply: () => {
+      directives.value.forEach(d => { d.enabled = false; d.sources = "'self'" })
+      directives.value[0].enabled = true // default-src
+      extraDirectives.value.forEach(e => { e.enabled = true })
+    }
+  },
+  {
+    label: 'CDN + Fonts',
+    apply: () => {
+      directives.value.forEach(d => { d.enabled = false })
+      const set = (key: string, sources: string) => {
+        const d = directives.value.find(x => x.key === key)
+        if (d) { d.enabled = true; d.sources = sources }
+      }
+      set('default-src', "'self'")
+      set('script-src', "'self' https://cdn.jsdelivr.net")
+      set('style-src', "'self' 'unsafe-inline' https://fonts.googleapis.com")
+      set('font-src', "'self' https://fonts.gstatic.com")
+      set('img-src', "'self' data: https:")
+      set('connect-src', "'self'")
+      extraDirectives.value.forEach(e => { e.enabled = e.key !== 'upgrade-insecure-requests' })
+    }
+  },
+  {
+    label: 'Report-Only',
+    apply: () => {
+      reportOnly.value = true
+      reportUri.value = '/csp-report'
+      directives.value.forEach(d => { d.enabled = false; d.sources = "'self'" })
+      directives.value[0].enabled = true
+    }
+  },
+  {
+    label: 'Clear',
+    apply: () => {
+      directives.value.forEach(d => { d.enabled = false; d.sources = '' })
+      directives.value[0].enabled = true
+      directives.value[0].sources = "'self'"
+      extraDirectives.value.forEach(e => { e.enabled = false })
+      reportOnly.value = false
+      reportUri.value = ''
+    }
+  },
+]
+
 const directives = ref<Directive[]>([
   { key: 'default-src', label: 'default-src', desc: 'Fallback for all resource types', enabled: true, sources: "'self'", preset: ["'self'", "'none'"] },
   { key: 'script-src', label: 'script-src', desc: 'Where JavaScript can load from', enabled: false, sources: '', preset: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'https://cdn.example.com'] },
@@ -90,7 +138,12 @@ async function copyCsp() {
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <!-- Fetch directives -->
       <Card>
-        <CardHeader><CardTitle class="text-lg">Resource directives</CardTitle></CardHeader>
+        <CardHeader><CardTitle class="text-lg">Resource directives</CardTitle>
+          <div class="flex flex-wrap gap-1.5">
+            <button v-for="preset in cspPresets" :key="preset.label" class="no-btn-hover text-xs px-2 py-0.5 border border-border rounded-full hover:border-primary/40 transition-colors" @click="preset.apply">
+              {{ preset.label }}
+            </button>
+          </div></CardHeader>
         <CardContent class="space-y-4">
           <div v-for="d in directives" :key="d.key" class="p-3 border border-border rounded-lg space-y-2">
             <div class="flex items-center justify-between gap-2">
