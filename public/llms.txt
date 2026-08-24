@@ -6,6 +6,13 @@ Every tool page states what the tool does, how to use it step by step, and answe
 
 ## Tools
 
+## Developer Stack Tools
+Persona-specific tool pages:
+- [owasp tools]: https://formatho.com/dev-tools/owasp
+- [sap tools]: https://formatho.com/dev-tools/sap
+- [okta tools]: https://formatho.com/dev-tools/okta
+- [ping federate tools]: https://formatho.com/dev-tools/ping-federate
+
 ## EVM Chain Tools
 Chain-specific developer tool pages with pre-configured RPC endpoints, chain IDs, and token addresses:
 - [ethereum tools]: https://formatho.com/evm-tools/ethereum

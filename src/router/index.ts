@@ -1429,6 +1429,11 @@ export const routes = [
         }
       },
       {
+        path: '/dev-tools/:stack',
+        name: 'dev-tools',
+        component: () => import(/* webpackPrefetch: true */ '../views/DevStackView.vue'),
+      },
+      {
         path: '/evm-tools/:chain',
         name: 'evm-tools',
         component: () => import(/* webpackPrefetch: true */ '../views/EvmToolsView.vue'),
