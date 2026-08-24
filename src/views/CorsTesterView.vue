@@ -62,11 +62,9 @@ async function test() {
     result.value = {
       success: false,
       status: 0,
-      statusText: 'Request blocked',
+      statusText: 'CORS request blocked by browser',
       headers: [],
-      error: msg.includes('CORS') || msg.includes('Access-Control')
-        ? 'Request was blocked by CORS. The server did not return Access-Control-Allow-Origin for this origin.'
-        : msg,
+      error: msg,
     }
   } finally {
     loading.value = false
@@ -105,13 +103,42 @@ const error = ref('')
     </Card>
 
     <div v-if="result">
-      <div class="mb-6 flex items-center gap-3 p-4 rounded-xl border" :class="result.success ? 'bg-green-500/10 border-green-500/20' : 'bg-red-500/10 border-red-500/20'">
-        <component :is="result.success ? CheckCircle2 : XCircle" class="w-5 h-5" :class="result.success ? 'text-green-600' : 'text-red-600'" />
+      <!-- Success -->
+      <div v-if="result.success" class="mb-6 flex items-center gap-3 p-4 rounded-xl border bg-green-500/10 border-green-500/20">
+        <CheckCircle2 class="w-5 h-5 text-green-600" />
         <div>
-          <p class="font-medium" :class="result.success ? 'text-green-700' : 'text-red-700'">
-            {{ result.status }} {{ result.statusText }}
+          <p class="font-medium text-green-700">{{ result.status }} {{ result.statusText }}</p>
+          <p class="text-xs text-muted-foreground mt-1">CORS is working — headers below show what the server allows.</p>
+        </div>
+      </div>
+
+      <!-- CORS blocked -->
+      <div v-else class="mb-6 space-y-3">
+        <div class="flex items-start gap-3 p-4 rounded-xl border bg-red-500/10 border-red-500/20">
+          <XCircle class="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+          <div>
+            <p class="font-medium text-red-700">Request blocked by CORS policy</p>
+            <p class="text-xs text-muted-foreground mt-1">{{ result.error || 'The browser blocked this cross-origin request.' }}</p>
+          </div>
+        </div>
+        <div class="p-4 rounded-xl border border-border bg-muted/50 space-y-3">
+          <p class="text-sm font-semibold">What this means</p>
+          <p class="text-xs text-muted-foreground leading-relaxed">
+            The server at <code class="font-mono">{{ url }}</code> did not return
+            <code class="font-mono text-xs">Access-Control-Allow-Origin</code> for this origin
+            (<code class="font-mono text-xs">https://qa.formatho.com</code>).
+            The browser blocked the response before JavaScript could read it.
           </p>
-          <p v-if="result.error" class="text-xs text-muted-foreground mt-1">{{ result.error }}</p>
+          <p class="text-sm font-semibold mt-3">How to fix it</p>
+          <p class="text-xs text-muted-foreground leading-relaxed">
+            Add this header to the server you are testing:
+          </p>
+          <pre class="text-xs font-mono bg-muted rounded-lg p-3 mt-1">Access-Control-Allow-Origin: *</pre>
+          <p class="text-xs text-muted-foreground">or for specific origins:</p>
+          <pre class="text-xs font-mono bg-muted rounded-lg p-3 mt-1">Access-Control-Allow-Origin: https://qa.formatho.com</pre>
+          <p class="text-xs text-muted-foreground mt-3">
+            <strong>Note:</strong> this tool makes a real browser request from this origin. Try the sample endpoints above (JSONPlaceholder, GitHub API, httpbin) — they have CORS enabled and will show results.
+          </p>
         </div>
       </div>
 
@@ -125,9 +152,12 @@ const error = ref('')
         </CardContent>
       </Card>
 
-      <div v-else-if="result.success" class="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-start gap-3">
+      <div v-else-if="result.success && !result.headers.length" class="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-start gap-3">
         <AlertTriangle class="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-        <p class="text-sm text-amber-700">The request succeeded but no CORS headers were exposed to JavaScript. The server may not send Access-Control-Expose-Headers for custom headers.</p>
+        <div>
+          <p class="text-sm text-amber-700">Request succeeded but no CORS headers were exposed.</p>
+          <p class="text-xs text-amber-600/70 mt-1">The server may not send Access-Control-Expose-Headers for custom headers. Basic CORS is still working.</p>
+        </div>
       </div>
     </div>
   </div>
