@@ -15,6 +15,29 @@ useSEO({
 })
 
 const cspInput = ref('')
+
+const examples = [
+  {
+    label: '⚠️ Weak (unsafe-inline)',
+    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src * data:",
+  },
+  {
+    label: '✅ Strict (recommended)',
+    value: "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+  },
+  {
+    label: 'CDN + Google Fonts',
+    value: "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.example.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self'",
+  },
+  {
+    label: '❌ Broken (wildcards)',
+    value: "default-src *; script-src * 'unsafe-inline' 'unsafe-eval' data:; img-src *; connect-src *",
+  },
+  {
+    label: 'Report-Only mode',
+    value: "default-src 'self'; script-src 'self' https: 'unsafe-inline'; report-uri /csp-report",
+  },
+]
 const findings = computed(() => {
   if (!cspInput.value.trim()) return []
   const results: Array<{ severity: 'high' | 'medium' | 'low' | 'info'; title: string; detail: string }> = []
@@ -96,7 +119,17 @@ function sevClass(s: string) { return s === 'high' ? 'text-red-600 bg-red-500/10
     <Card class="mb-6">
       <CardHeader><CardTitle class="text-lg">Paste your CSP header</CardTitle></CardHeader>
       <CardContent>
-        <Textarea v-model="cspInput" :rows="4" class="font-mono text-xs" placeholder="default-src 'self'; script-src 'self' https://cdn.example.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; object-src 'none'; base-uri 'self'" aria-label="CSP header to evaluate" />
+        <Textarea v-model="cspInput" :rows="4" class="font-mono text-xs" placeholder="default-src 'self'; script-src 'self' https://cdn.example.com 'unsafe-inline'..." aria-label="CSP header to evaluate" />
+        <div class="flex flex-wrap gap-2 mt-3">
+          <button
+            v-for="example in examples"
+            :key="example.label"
+            class="no-btn-hover text-xs px-2.5 py-1 border border-border rounded-full hover:border-primary/40 transition-colors"
+            @click="cspInput = example.value"
+          >
+            {{ example.label }}
+          </button>
+        </div>
       </CardContent>
     </Card>
 
