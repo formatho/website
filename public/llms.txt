@@ -6,6 +6,21 @@ Every tool page states what the tool does, how to use it step by step, and answe
 
 ## Tools
 
+## EVM Chain Tools
+Chain-specific developer tool pages with pre-configured RPC endpoints, chain IDs, and token addresses:
+- [ethereum tools]: https://formatho.com/evm-tools/ethereum
+- [arbitrum tools]: https://formatho.com/evm-tools/arbitrum
+- [base tools]: https://formatho.com/evm-tools/base
+- [optimism tools]: https://formatho.com/evm-tools/optimism
+- [polygon tools]: https://formatho.com/evm-tools/polygon
+- [bnb chain tools]: https://formatho.com/evm-tools/bnb-chain
+- [avalanche tools]: https://formatho.com/evm-tools/avalanche
+- [zksync tools]: https://formatho.com/evm-tools/zksync
+- [linea tools]: https://formatho.com/evm-tools/linea
+- [blast tools]: https://formatho.com/evm-tools/blast
+- [mantle tools]: https://formatho.com/evm-tools/mantle
+- [cronos tools]: https://formatho.com/evm-tools/cronos
+
 ## Guides
 - [Blog - developer guides and tutorials]: https://formatho.com/blogs — Deep dives on AI agents, blockchain, RWA tokenization, and privacy-first tools.
 

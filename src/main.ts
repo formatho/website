@@ -121,8 +121,12 @@ export async function includedRoutes(paths: string[]) {
   try {
     const blogPaths = [...sitemapRaw.matchAll(/<loc>https:\/\/formatho\.com\/blogs\/([^<]+)<\/loc>/g)]
       .map((m) => `/blogs/${m[1]}`)
-    console.log(`[ssg] prerendering ${blogPaths.length} blog posts from sitemap`)
-    return [...staticPaths, ...blogPaths]
+    const chainPaths = [
+      'ethereum', 'arbitrum', 'base', 'optimism', 'polygon', 'bnb-chain',
+      'avalanche', 'zksync', 'linea', 'blast', 'mantle', 'cronos'
+    ].map((slug) => `/evm-tools/${slug}`)
+    console.log(`[ssg] prerendering ${blogPaths.length} blog posts + ${chainPaths.length} chain pages`)
+    return [...staticPaths, ...blogPaths, ...chainPaths]
   } catch (err) {
     console.warn('[ssg] Could not parse blog slugs from sitemap, skipping blog prerender:', err)
     return staticPaths

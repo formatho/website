@@ -1428,6 +1428,11 @@ export const routes = [
           description: 'Monitor and analyze A/B test results for landing page optimization'
         }
       },
+      {
+        path: '/evm-tools/:chain',
+        name: 'evm-tools',
+        component: () => import(/* webpackPrefetch: true */ '../views/EvmToolsView.vue'),
+      },
       // Category index redirects to the tools directory
       {
         path: '/category',

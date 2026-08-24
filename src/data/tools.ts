@@ -21,7 +21,7 @@ export interface ToolCategory {
 }
 
 export const categoryMeta = {
-  'web3': { name: 'Web3 & Blockchain', slug: 'web3', route: '/category/web3', icon: '🔗', blurb: 'EVM contract reader, vanity address generator, multi-chain readers for Solana, Polkadot, Cardano and Cosmos, Keccak-256 hasher, ABI tools, and ENS calculator.' },
+  'web3': { name: 'Web3 & Blockchain', slug: 'web3', route: '/category/web3', icon: '🔗', blurb: 'EVM contract reader with Uniswap presets, vanity address generator, multi-chain readers for Solana, Polkadot, Cardano and Cosmos, Keccak-256 hasher, ABI tools, ENS calculator, and chain-specific tool pages.' },
   'security': { name: 'Security & Auth', slug: 'security', route: '/category/security', icon: '🔐', blurb: 'Hash generators, JWT debugger, SAML decoder, OIDC builder, encryption, TOTP, password analysis, and credential tools - all client-side.' },
   'data': { name: 'Data Formats', slug: 'data-formats', route: '/category/data-formats', icon: '📊', blurb: 'JSON, YAML, XML, TOML, and CSV validators, formatters, converters, and diff tools. Plus UUID, ULID, Base64, and IBAN validators.' },
   'dev': { name: 'Developer Tools', slug: 'developer', route: '/category/developer', icon: '🛠️', blurb: 'SQL formatting and schema tools, Git and regex references, Docker conversion, Mermaid viewer, image compression, and Markdown editor.' },
@@ -35,7 +35,7 @@ export const tools: ToolCategory[] = [
     slug: 'web3',
     route: '/category/web3',
     icon: '🔗',
-    blurb: 'EVM contract reader, vanity address generator, multi-chain readers for Solana, Polkadot, Cardano and Cosmos, Keccak-256 hasher, ABI tools, and ENS calculator.',
+    blurb: 'EVM contract reader with Uniswap presets, vanity address generator, multi-chain readers for Solana, Polkadot, Cardano and Cosmos, Keccak-256 hasher, ABI tools, ENS calculator, and chain-specific tool pages.',
     items: [
       { name: 'Vanity Address Generator', description: 'Generate Ethereum addresses with a custom prefix or suffix. Keys are created in your browser and never transmitted.', route: '/tools/vanity-eth', iconName: 'Sparkles' },
       { name: 'EVM Contract Reader', description: 'Paste an ABI and call view functions on any deployed contract via your own RPC endpoint. Works on every EVM chain.', route: '/tools/contract-reader', iconName: 'BookOpen' },
