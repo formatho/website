@@ -6,6 +6,8 @@ import Footer from '@/components/Footer.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 import QABadge from '@/components/QABadge.vue'
 import ToolSEOContent from '@/components/ToolSEOContent.vue'
+import { trackToolUsed, trackResultCopied } from '@/utils/toolTracking'
+import BookmarkHint from '@/components/BookmarkHint.vue'
 import { computed, watch, onMounted, onUnmounted, ref } from 'vue'
 import { tools } from '@/data/tools'
 
@@ -22,6 +24,65 @@ const showBreadcrumb = computed(() => route.path !== '/')
 // Detect page type for contextual skeleton loaders
 const isToolPage = computed(() => route.path.startsWith('/tools/') && route.path !== '/tools/')
 const isBlogPage = computed(() => route.path.startsWith('/blogs'))
+
+// ─── GA4 Key Event: global tool action interceptor ───
+// Detects primary action clicks (Format/Generate/Encode/etc.) and Copy
+// clicks on any tool page without modifying individual tool components.
+const ACTION_KEYWORDS = [
+  'generate', 'format', 'encode', 'decode', 'convert', 'compress',
+  'hash', 'run', 'execute', 'call', 'calculate', 'encrypt', 'decrypt',
+  'validate', 'beautify', 'minify', 'lint', 'compare', 'diff',
+  'look up', 'derive', 'compile', 'submit', 'start', 'process',
+  'apply', 'transform', 'parse', 'analyze', 'check', 'test',
+]
+const COPY_KEYWORDS = ['copy']
+
+function getToolSlug(): string {
+  const seg = route.path.split('/').filter(Boolean)
+  return seg[seg.length - 1] || ''
+}
+
+function getToolCategory(): string {
+  // Look up from tools.ts by matching the route
+  for (const cat of tools) {
+    if (cat.items.some((t: { route: string }) => t.route === route.path)) {
+      return cat.slug
+    }
+  }
+  return 'unknown'
+}
+
+function handleClick(event: MouseEvent): void {
+  if (!isToolPage.value) return
+
+  const target = event.target as HTMLElement
+  if (!target) return
+
+  // Find the button element (click may hit a child icon/span)
+  const btn = target.closest('button')
+  if (!btn) return
+
+  const text = (btn.textContent || '').toLowerCase().trim()
+  if (!text) return
+
+  const slug = getToolSlug()
+  if (!slug) return
+
+  // Copy buttons → tool_result_copied
+  if (COPY_KEYWORDS.some((k) => text.includes(k))) {
+    trackResultCopied(slug)
+    return
+  }
+
+  // Primary action buttons → tool_used (session-guarded)
+  if (ACTION_KEYWORDS.some((k) => text.includes(k))) {
+    trackToolUsed(slug, getToolCategory())
+  }
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('click', handleClick, { passive: true })
+}
 
 // Watch route changes to show skeleton during lazy-loaded navigation
 watch(
@@ -173,6 +234,7 @@ onUnmounted(removeToolSchema)
 
       <RouterView v-show="!isLoading" @vue:mounted="onComponentReady" />
       <ToolSEOContent />
+      <BookmarkHint />
     </main>
     <Footer />
     <QABadge />
