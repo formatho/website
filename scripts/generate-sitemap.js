@@ -112,6 +112,16 @@ const toolRoutes = toolPaths.map((p) => ({
 const allRoutes = [...staticRoutes, ...blogRoutes, ...toolRoutes]
 const routes = allRoutes.filter(r => !r.path.includes('/admin/'))
 
+// Safety check: never write a suspiciously small sitemap (CI environments
+// where Strapi is unreachable and the fallback also fails would produce
+// an empty file that replaces the committed version)
+const MIN_EXPECTED_URLS = 50
+if (routes.length < MIN_EXPECTED_URLS) {
+  console.error(`⛔ ABORTED: only ${routes.length} URLs (expected 50+). Keeping existing sitemap.`)
+  console.error(`   Blog slugs: ${blogSlugs.length}, tools: ${toolPaths.length}, static: ${staticRoutes.length}`)
+  process.exit(1)
+}
+
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${routes
