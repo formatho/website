@@ -58,12 +58,21 @@ function parseToolRoutes() {
 
   const routes = []
   const routeRegex = /path:\s*['"`]\/?(tools\/[^'"`]+)['"`]/g
+
+  // Collect redirect-only paths to exclude (they waste crawl budget)
+  const redirectRegex = /path:\s*['"`]\/?(tools\/[^'"`]+)['"`],\s*(?:name:\s*[^,]+,\s*)?redirect:/g
+  const redirectPaths = new Set()
+  let redirMatch
+  while ((redirMatch = redirectRegex.exec(content)) !== null) {
+    redirectPaths.add('/' + redirMatch[1])
+  }
+
   let match
   while ((match = routeRegex.exec(content)) !== null) {
     routes.push('/' + match[1])
   }
 
-  return [...new Set(routes)].filter(r => !r.includes('/admin/')) // dedupe & exclude admin
+  return [...new Set(routes)].filter(r => !r.includes('/admin/') && !redirectPaths.has(r))
 }
 
 // Static pages
