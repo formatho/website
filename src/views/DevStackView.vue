@@ -11,15 +11,13 @@ const route = useRoute()
 const stack = computed(() => devStacks.find(s => s.slug === route.params.stack))
 const siblings = computed(() => devStacks.filter(s => s.slug !== stack.value?.slug))
 
-if (stack.value) {
-  useSEO({
-    title: `${stack.value.name} - Free Online Tools | Formatho`,
-    description: `${stack.value.blurb} Free, private, 100% client-side.`,
-    keywords: [stack.value.name.toLowerCase(), `${stack.value.slug} tools`, `${stack.value.slug} online tools`, 'free developer tools', 'privacy first'],
-    ogType: 'website',
-    canonicalUrl: `https://formatho.com/dev-tools/${stack.value.slug}`
-  })
-}
+useSEO({
+  title: stack.value ? `${stack.value.name} - Free Online Tools | Formatho` : 'Developer Tools | Formatho',
+  description: stack.value ? `${stack.value.blurb} Free, private, 100% client-side.` : 'Free developer tools.',
+  keywords: stack.value ? [stack.value.name.toLowerCase(), `${stack.value.slug} tools`] : ['developer tools'],
+  ogType: 'website',
+  canonicalUrl: stack.value ? `https://formatho.com/dev-tools/${stack.value.slug}` : undefined
+})
 </script>
 
 <template>

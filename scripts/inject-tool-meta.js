@@ -23,27 +23,37 @@ const twitterHandle = '@heyformatho'
  * Extract tool routes from router/index.ts
  */
 function extractToolRoutes() {
+  // Read the single source of truth: src/data/routeMeta.ts
+  // (no more fragile regex-parsing of the router source)
+  const metaPath = path.join(__dirname, '..', 'src', 'data', 'routeMeta.ts')
+  const metaContent = fs.readFileSync(metaPath, 'utf8')
+
+  // Also read the router for path mappings
   const routerPath = path.join(__dirname, '..', 'src', 'router', 'index.ts')
   const routerContent = fs.readFileSync(routerPath, 'utf8')
 
+  // Build name -> path map from the router
+  const pathMap = {}
+  const pathRegex = /path:\s*['"`](\/tools\/[^'"`]+)['"`],\s*\n\s*name:\s*['"`]([^'"`]+)['"`]/g
+  let pm
+  while ((pm = pathRegex.exec(routerContent)) !== null) {
+    pathMap[pm[2]] = pm[1]
+  }
+
+  // Parse routeMeta entries (name -> {title, description, keywords})
   const routes = []
-  const routeRegex = /{\s*path:\s*['"`](.*?)['"`],\s*name:\s*['"`](.*?)['"`],\s*component:.*?,\s*meta:\s*{\s*title:\s*['"`](.*?)['"`],\s*description:\s*['"`](.*?)['"`](?:,\s*keywords:\s*['"`](.*?)['"`])?\s*}/gs
-
-  let match
-  while ((match = routeRegex.exec(routerContent)) !== null) {
-    const routePath = match[1]
-    const routeName = match[2]
-    const title = match[3]
-    const description = match[4]
-    const keywords = match[5] || ''
-
-    if (routePath && routePath.startsWith('/tools/') && !routePath.includes(':')) {
+  const metaRegex = /'([^']+)':\s*\{\s*title:\s*'((?:[^'\\]|\\.)*)'\s*,\s*description:\s*'((?:[^'\\]|\\.)*)'(?:,\s*keywords:\s*'((?:[^'\\]|\\.)*)')?/g
+  let mm
+  while ((mm = metaRegex.exec(metaContent)) !== null) {
+    const name = mm[1]
+    const routePath = pathMap[name]
+    if (routePath && !routePath.includes(':')) {
       routes.push({
         path: routePath,
-        name: routeName,
-        title,
-        description,
-        keywords
+        name,
+        title: mm[2].replace(/\\'/g, "'"),
+        description: mm[3].replace(/\\'/g, "'").replace(/\\n/g, ' '),
+        keywords: mm[4] ? mm[4].replace(/\\'/g, "'") : ''
       })
     }
   }

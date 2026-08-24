@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { evmChains, evmChainTools } from '@/data/evmChains'
 import { useSEO } from '@/composables/useSEO'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 import { ArrowRight, Copy, Check, ExternalLink } from 'lucide-vue-next'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { ref } from 'vue'
 
 const route = useRoute()
 const copied = ref('')
