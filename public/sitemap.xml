@@ -769,24 +769,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://formatho.com/tools/xml-json-converter</loc>
-    <lastmod>2026-08-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/xml-to-json</loc>
-    <lastmod>2026-08-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/json-to-xml</loc>
-    <lastmod>2026-08-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/tools/markdown-to-html</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
