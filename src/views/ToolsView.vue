@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
+import CategoryIcon from '@/components/CategoryIcon.vue'
 import { tools } from '@/data/tools'
 import { useSEO } from '@/composables/useSEO'
 import { ArrowRight, Search } from 'lucide-vue-next'
@@ -54,7 +55,7 @@ const totalTools = computed(() => tools.reduce((sum: number, c: { items: unknown
 
     <div v-for="category in filteredCategories" :key="category.slug" class="mb-10">
       <div class="flex items-center gap-2 mb-4">
-        <span class="text-2xl">{{ category.icon }}</span>
+        <CategoryIcon :slug="category.slug" :size="22" />
         <h2 class="text-xl font-bold">{{ category.category }}</h2>
         <RouterLink :to="category.route" class="text-xs text-muted-foreground hover:text-primary transition-colors ml-1">
           view all &rarr;

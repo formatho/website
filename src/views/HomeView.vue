@@ -87,6 +87,7 @@ import {
   Wrench,
 } from 'lucide-vue-next'
 import { tools } from '../data/tools'
+import CategoryIcon from '@/components/CategoryIcon.vue'
 
 // Create icon map for dynamic lookup (much smaller bundle than importing *)
 const iconMap = {
@@ -425,7 +426,7 @@ const _popularTools = [
             class="group border border-border rounded-xl p-6 hover:border-primary/50 hover:bg-primary/5 transition-colors"
           >
             <div class="flex items-center gap-3 mb-3">
-              <span class="text-3xl">{{ category.icon }}</span>
+              <CategoryIcon :slug="category.slug" :size="28" />
               <div>
                 <h3 class="text-lg font-bold group-hover:text-primary transition-colors">{{ category.category }}</h3>
                 <p class="text-xs text-muted-foreground">{{ category.items.length }} tools</p>
