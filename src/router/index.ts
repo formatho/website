@@ -546,6 +546,56 @@ export const routes = [
         }
       },
       {
+        path: '/tools/security-headers',
+        name: 'security-headers',
+        component: () => import(/* webpackPrefetch: true */ '../views/SecurityHeadersView.vue'),
+        meta: {
+          title: 'Security Headers Analyzer - Check HSTS, CSP, X-Frame | Formatho',
+          description: 'Analyze HTTP security headers on any URL: HSTS, Content-Security-Policy, X-Frame-Options and more. Graded A-F with fix recommendations. Runs from your browser.',
+          keywords: 'security headers check, hsts check, csp header analyzer, x-frame-options, http security headers, website security scan'
+        }
+      },
+      {
+        path: '/tools/csp-generator',
+        name: 'csp-generator',
+        component: () => import(/* webpackPrefetch: true */ '../views/CspGeneratorView.vue'),
+        meta: {
+          title: 'CSP Generator - Content Security Policy Builder | Formatho',
+          description: 'Generate Content-Security-Policy headers with a visual builder. Configure script-src, style-src, img-src and more. Copy the header and deploy. Free and client-side.',
+          keywords: 'csp generator, content security policy generator, csp header builder, security header generator'
+        }
+      },
+      {
+        path: '/tools/csp-evaluator',
+        name: 'csp-evaluator',
+        component: () => import(/* webpackPrefetch: true */ '../views/CspEvaluatorView.vue'),
+        meta: {
+          title: 'CSP Evaluator - Analyze Content Security Policy | Formatho',
+          description: 'Paste a Content-Security-Policy header and find security weaknesses: unsafe-inline, wildcards, missing directives, bypass risks. Free, private, client-side.',
+          keywords: 'csp evaluator, csp checker, content security policy analysis, csp validator, csp security check'
+        }
+      },
+      {
+        path: '/tools/cors-tester',
+        name: 'cors-tester',
+        component: () => import(/* webpackPrefetch: true */ '../views/CorsTesterView.vue'),
+        meta: {
+          title: 'CORS Tester - Test Cross-Origin Requests | Formatho',
+          description: 'Test CORS on any API endpoint from your browser. See Access-Control-Allow-Origin, methods, headers, and preflight responses.',
+          keywords: 'cors tester, cors check, access-control-allow-origin, cors preflight, cors debug, cross origin test'
+        }
+      },
+      {
+        path: '/tools/cookie-analyzer',
+        name: 'cookie-analyzer',
+        component: () => import(/* webpackPrefetch: true */ '../views/CookieAnalyzerView.vue'),
+        meta: {
+          title: 'Cookie Security Analyzer - Check Secure, HttpOnly | Formatho',
+          description: 'Analyze Set-Cookie headers for security: Secure flag, HttpOnly, SameSite, prefixes, domain scope and expiry. Free, private, client-side.',
+          keywords: 'cookie security analyzer, set-cookie checker, httponly check, samesite cookie, cookie flags, secure cookie validator'
+        }
+      },
+      {
         path: '/tools/jwt-suite',
         name: 'jwt-suite',
         component: () => import(/* webpackPrefetch: true */ '../views/JwtSuiteView.vue'),

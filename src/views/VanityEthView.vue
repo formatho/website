@@ -21,7 +21,7 @@ useSEO({
   ogType: 'website'
 })
 
-const prefix = ref('')
+const prefix = ref('dead')
 const suffix = ref('')
 const isRunning = ref(false)
 const attempts = ref(0)
