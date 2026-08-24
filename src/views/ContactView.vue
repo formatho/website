@@ -16,7 +16,7 @@ const channels = [
     body: 'Open an issue with your browser version, steps to reproduce, and what you expected vs what happened.',
     action: 'Open an issue',
     link: 'https://github.com/formatho/website/issues/new?labels=bug&template=bug_report.md',
-    tone: 'bg-red-500/10 border-red-500/20'
+    tone: 'bg-primary/10'
   },
   {
     icon: Lightbulb,
@@ -24,7 +24,7 @@ const channels = [
     body: 'Suggest a new tool, an improvement, or a whole category. The best ideas come from daily users.',
     action: 'Request a feature',
     link: 'https://github.com/formatho/website/issues/new?labels=enhancement&template=feature_request.md',
-    tone: 'bg-amber-500/10 border-amber-500/20'
+    tone: 'bg-primary/10'
   },
   {
     icon: Code2,
@@ -32,7 +32,7 @@ const channels = [
     body: 'The entire site is open source. Pick an open issue, submit a PR, or start a discussion about architecture.',
     action: 'Browse the code',
     link: 'https://github.com/formatho/website',
-    tone: 'bg-green-500/10 border-green-500/20'
+    tone: 'bg-primary/10'
   },
   {
     icon: Handshake,
@@ -40,7 +40,7 @@ const channels = [
     body: 'RPC providers, dev-tool companies, and web3 infrastructure teams — reach out to discuss placements.',
     action: 'Start a conversation',
     link: 'mailto:support@formatho.com?subject=Partnership',
-    tone: 'bg-blue-500/10 border-blue-500/20'
+    tone: 'bg-primary/10'
   }
 ]
 
@@ -91,7 +91,7 @@ const faqs = [
       >
         <div class="flex items-start gap-4">
           <div class="p-2.5 rounded-lg shrink-0" :class="ch.tone">
-            <component :is="ch.icon" class="w-5 h-5" :class="ch.tone.includes('red') ? 'text-red-600' : ch.tone.includes('amber') ? 'text-amber-600' : ch.tone.includes('green') ? 'text-green-600' : 'text-blue-600'" />
+            <component :is="ch.icon" class="w-5 h-5 text-foreground" stroke-width="1.5" />
           </div>
           <div class="min-w-0">
             <h2 class="text-lg font-bold mb-1 group-hover:text-primary transition-colors">{{ ch.title }}</h2>
