@@ -490,6 +490,10 @@ const newToolFAQs = {
       answer: 'From Etherscan contract page (Code tab), foundry forge inspect <contract> --json, Hardhat artifacts, or the artifacts your build tool emits. Standard interfaces like ERC-20 are also one click away with the example loader.'
     },
     {
+      question: 'Can I read Uniswap contracts?',
+      answer: 'Yes - the tool includes presets for Uniswap V2 Factory, V2 Router, V2 Pair, and V3 Quoter. One click loads the ABI and fills in the contract address. Use getPair(tokenA, tokenB) to find a pair, then load the V2 Pair preset with that address to read reserves and LP supply. Use getAmountsOut on the Router for swap quotes.'
+    },
+    {
       question: 'Can I use a local development node?',
       answer: 'Yes. Point the RPC field at http://127.0.0.1:8545 (anvil, Hardhat, or ganache) and read your locally deployed contracts the same way.'
     }
