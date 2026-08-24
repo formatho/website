@@ -1,715 +1,87 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { computed, ref } from 'vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
+import CategoryIcon from '@/components/CategoryIcon.vue'
+import { tools } from '@/data/tools'
+import { useSEO } from '@/composables/useSEO'
+import { ArrowRight, Search } from 'lucide-vue-next'
+import { Input } from '@/components/ui/input'
 
-const router = useRouter()
-
-interface Tool {
-  name: string
-  path: string
-  description: string
-  category: string
-  icon: string
-}
-
-// Prefetch tool component on hover
-const prefetchedPaths = new Set<string>()
-
-const prefetchTool = (path: string) => {
-  if (prefetchedPaths.has(path)) return
-  prefetchedPaths.add(path)
-
-  setTimeout(() => {
-    try {
-      const resolved = router.resolve(path)
-      const matched = resolved.matched[resolved.matched.length - 1]
-      if (matched?.components?.default && typeof matched.components.default === 'function') {
-        ;(matched.components.default as Function)()
-      }
-    } catch (e) {
-      // ignore
-    }
-  }, 100)
-}
-
-const tools: Tool[] = [
-  // Text & String Tools
-  {
-    name: 'UUID Generator',
-    path: '/tools/uuid',
-    description: 'Generate UUIDs (v1, v4, and more)',
-    category: 'Text & String',
-    icon: '🔑'
-  },
-  {
-    name: 'Lorem Ipsum Generator',
-    path: '/tools/lorem',
-    description: 'Generate placeholder text',
-    category: 'Text & String',
-    icon: '📝'
-  },
-  {
-    name: 'Case Converter',
-    path: '/tools/case-converter',
-    description: 'Convert text case formats',
-    category: 'Text & String',
-    icon: '🔤'
-  },
-  {
-    name: 'Text Statistics',
-    path: '/tools/text-statistics',
-    description: 'Analyze text statistics',
-    category: 'Text & String',
-    icon: '📊'
-  },
-  {
-    name: 'Text to Binary',
-    path: '/tools/text-to-binary',
-    description: 'Convert text to binary and back',
-    category: 'Text & String',
-    icon: '🔢'
-  },
-  {
-    name: 'List Converter',
-    path: '/tools/list-converter',
-    description: 'Convert list formats',
-    category: 'Text & String',
-    icon: '📋'
-  },
-  {
-    name: 'Numeronym Generator',
-    path: '/tools/numeronym-generator',
-    description: 'Generate numeronyms (i18n, a11y)',
-    category: 'Text & String',
-    icon: '🔢'
-  },
-  {
-    name: 'Sluginator',
-    path: '/tools/sluginator',
-    description: 'Generate URL-friendly slugs',
-    category: 'Text & String',
-    icon: '🔗'
-  },
-  {
-    name: 'Emoji Picker',
-    path: '/tools/emoji-picker',
-    description: 'Search and copy emojis',
-    category: 'Text & String',
-    icon: '😀'
-  },
-  {
-    name: 'ASCII Art Drawer',
-    path: '/tools/ascii-drawer',
-    description: 'Convert text to ASCII art',
-    category: 'Text & String',
-    icon: '🎨'
-  },
-
-  // JSON & Data Tools
-  {
-    name: 'JSON Linter',
-    path: '/tools/json-lint',
-    description: 'Validate and lint JSON',
-    category: 'JSON & Data',
-    icon: '📋'
-  },
-  {
-    name: 'JSON Viewer',
-    path: '/tools/json-viewer',
-    description: 'Format and view JSON',
-    category: 'JSON & Data',
-    icon: '👁️'
-  },
-  {
-    name: 'JSON Diff',
-    path: '/tools/json-diff',
-    description: 'Compare two JSON documents',
-    category: 'JSON & Data',
-    icon: '🔍'
-  },
-  {
-    name: 'JSON Minify',
-    path: '/tools/json-minify',
-    description: 'Minify JSON',
-    category: 'JSON & Data',
-    icon: '🗜️'
-  },
-  {
-    name: 'JSON to CSV',
-    path: '/tools/json-csv',
-    description: 'Convert JSON to CSV and back',
-    category: 'JSON & Data',
-    icon: '📊'
-  },
-  {
-    name: 'JSON to XML',
-    path: '/tools/json-to-xml',
-    description: 'Convert JSON to XML',
-    category: 'JSON & Data',
-    icon: '📄'
-  },
-  {
-    name: 'JSON to YAML',
-    path: '/tools/json-yaml',
-    description: 'Convert JSON to YAML',
-    category: 'JSON & Data',
-    icon: '📄'
-  },
-  {
-    name: 'JSON to TOML',
-    path: '/tools/json-to-toml',
-    description: 'Convert JSON to TOML',
-    category: 'JSON & Data',
-    icon: '📄'
-  },
-  {
-    name: 'XML to JSON',
-    path: '/tools/xml-to-json',
-    description: 'Convert XML to JSON',
-    category: 'JSON & Data',
-    icon: '📄'
-  },
-  {
-    name: 'XML Formatter',
-    path: '/tools/xml-formatter',
-    description: 'Format and beautify XML',
-    category: 'JSON & Data',
-    icon: '📐'
-  },
-
-  // YAML & Config Tools
-  {
-    name: 'YAML Linter',
-    path: '/tools/yaml-lint',
-    description: 'Validate and lint YAML',
-    category: 'YAML & Config',
-    icon: '📋'
-  },
-  {
-    name: 'YAML Viewer',
-    path: '/tools/yaml-viewer',
-    description: 'Format and view YAML',
-    category: 'YAML & Config',
-    icon: '👁️'
-  },
-  {
-    name: 'YAML to TOML',
-    path: '/tools/yaml-to-toml',
-    description: 'Convert YAML to TOML',
-    category: 'YAML & Config',
-    icon: '📄'
-  },
-  {
-    name: 'TOML to JSON',
-    path: '/tools/toml-to-json',
-    description: 'Convert TOML to JSON',
-    category: 'YAML & Config',
-    icon: '📄'
-  },
-  {
-    name: 'TOML to YAML',
-    path: '/tools/toml-to-yaml',
-    description: 'Convert TOML to YAML',
-    category: 'YAML & Config',
-    icon: '📄'
-  },
-  {
-    name: 'SQL Formatter',
-    path: '/tools/sql-formatter',
-    description: 'Format SQL queries',
-    category: 'YAML & Config',
-    icon: '🗃️'
-  },
-
-  // Encoding & Hashing
-  {
-    name: 'Base64 Encoder',
-    path: '/tools/base64',
-    description: 'Encode and decode Base64',
-    category: 'Encoding & Hashing',
-    icon: '🔐'
-  },
-  {
-    name: 'Base64 File Converter',
-    path: '/tools/base64-file-converter',
-    description: 'Convert files to Base64',
-    category: 'Encoding & Hashing',
-    icon: '📁'
-  },
-  {
-    name: 'URL Encoder',
-    path: '/tools/url-encoder',
-    description: 'Encode and decode URLs',
-    category: 'Encoding & Hashing',
-    icon: '🔗'
-  },
-  {
-    name: 'HTML Entities',
-    path: '/tools/html-entities',
-    description: 'Encode and decode HTML entities',
-    category: 'Encoding & Hashing',
-    icon: '🌐'
-  },
-  {
-    name: 'Hash Generator',
-    path: '/tools/hash-text',
-    description: 'Generate MD5, SHA hashes',
-    category: 'Encoding & Hashing',
-    icon: '#️⃣'
-  },
-  {
-    name: 'Bcrypt Hasher',
-    path: '/tools/bcrypt',
-    description: 'Generate bcrypt password hashes',
-    category: 'Encoding & Hashing',
-    icon: '🔒'
-  },
-  {
-    name: 'HMAC Generator',
-    path: '/tools/hmac-generator',
-    description: 'Generate HMAC signatures',
-    category: 'Encoding & Hashing',
-    icon: '🔑'
-  },
-  {
-    name: 'Keccak-256',
-    path: '/tools/keccak256',
-    description: 'Generate Keccak-256 hashes',
-    category: 'Encoding & Hashing',
-    icon: '💎'
-  },
-
-  // Crypto & Keys
-  {
-    name: 'JWT Debugger',
-    path: '/tools/jwt',
-    description: 'Decode and debug JWTs',
-    category: 'Crypto & Keys',
-    icon: '🎫'
-  },
-  {
-    name: 'RSA Key Generator',
-    path: '/tools/rsa-key-generator',
-    description: 'Generate RSA key pairs',
-    category: 'Crypto & Keys',
-    icon: '🗝️'
-  },
-  {
-    name: 'BIP39 Mnemonic',
-    path: '/tools/bip39-generator',
-    description: 'Generate BIP39 mnemonics',
-    category: 'Crypto & Keys',
-    icon: '📝'
-  },
-  {
-    name: 'Multi-Chain Keys',
-    path: '/tools/multi-chain-keys',
-    description: 'Generate keys for multiple blockchains',
-    category: 'Crypto & Keys',
-    icon: '⛓️'
-  },
-  {
-    name: 'Address from Key',
-    path: '/tools/address-from-key',
-    description: 'Derive addresses from private keys',
-    category: 'Crypto & Keys',
-    icon: '📍'
-  },
-  {
-    name: 'Address Checksum',
-    path: '/tools/address-checksum',
-    description: 'Validate Ethereum address checksums',
-    category: 'Crypto & Keys',
-    icon: '✅'
-  },
-  {
-    name: 'Token Generator',
-    path: '/tools/token-generator',
-    description: 'Generate secure random tokens',
-    category: 'Crypto & Keys',
-    icon: '🎰'
-  },
-  {
-    name: 'ULID Generator',
-    path: '/tools/ulid-generator',
-    description: 'Generate ULIDs',
-    category: 'Crypto & Keys',
-    icon: '🆔'
-  },
-  {
-    name: 'Encryption',
-    path: '/tools/encryption',
-    description: 'Encrypt and decrypt text',
-    category: 'Crypto & Keys',
-    icon: '🔐'
-  },
-
-  // Web & Network
-  {
-    name: 'URL Parser',
-    path: '/tools/url-parser',
-    description: 'Parse and analyze URLs',
-    category: 'Web & Network',
-    icon: '🔗'
-  },
-  {
-    name: 'QR Code Generator',
-    path: '/tools/qr-code',
-    description: 'Generate QR codes',
-    category: 'Web & Network',
-    icon: '📱'
-  },
-  {
-    name: 'WiFi QR Code',
-    path: '/tools/wifi-qr-code',
-    description: 'Generate WiFi QR codes',
-    category: 'Web & Network',
-    icon: '📶'
-  },
-  {
-    name: 'Meta Tag Generator',
-    path: '/tools/meta-tag-generator',
-    description: 'Generate HTML meta tags',
-    category: 'Web & Network',
-    icon: '🏷️'
-  },
-  {
-    name: 'Diff Checker',
-    path: '/tools/diff',
-    description: 'Compare text differences',
-    category: 'Web & Network',
-    icon: '🔍'
-  },
-  {
-    name: 'Markdown to HTML',
-    path: '/tools/markdown-to-html',
-    description: 'Convert Markdown to HTML',
-    category: 'Web & Network',
-    icon: '📝'
-  },
-  {
-    name: 'HTML WYSIWYG Editor',
-    path: '/tools/html-wysiwyg-editor',
-    description: 'Visual HTML editor',
-    category: 'Web & Network',
-    icon: '✏️'
-  },
-  {
-    name: 'Docker to Compose',
-    path: '/tools/docker-run-to-compose',
-    description: 'Convert docker run to compose',
-    category: 'Web & Network',
-    icon: '🐳'
-  },
-  {
-    name: 'Git Memo',
-    path: '/tools/git-memo',
-    description: 'Git command reference',
-    category: 'Web & Network',
-    icon: '📚'
-  },
-
-  // Time & Date
-  {
-    name: 'Date Time Converter',
-    path: '/tools/date-time-converter',
-    description: 'Convert date and time formats',
-    category: 'Time & Date',
-    icon: '📅'
-  },
-  {
-    name: 'Cron Generator',
-    path: '/tools/crontab-generator',
-    description: 'Generate cron expressions',
-    category: 'Time & Date',
-    icon: '⏰'
-  },
-  {
-    name: 'Chronometer',
-    path: '/tools/chronometer',
-    description: 'Online stopwatch',
-    category: 'Time & Date',
-    icon: '⏱️'
-  },
-  {
-    name: 'ETA Calculator',
-    path: '/tools/eta-calculator',
-    description: 'Calculate estimated time',
-    category: 'Time & Date',
-    icon: '⏳'
-  },
-
-  // Blockchain
-  {
-    name: 'EVM Unit Converter',
-    path: '/tools/evm-converter',
-    description: 'Convert Wei, Gwei, Ether',
-    category: 'Blockchain',
-    icon: '⟠'
-  },
-  {
-    name: 'Solidity to Opcodes',
-    path: '/tools/solidity-to-opcodes',
-    description: 'Compile Solidity to opcodes',
-    category: 'Blockchain',
-    icon: '⚙️'
-  },
-  {
-    name: 'Gas Estimator',
-    path: '/tools/gas-estimator',
-    description: 'Estimate gas costs',
-    category: 'Blockchain',
-    icon: '⛽'
-  },
-  {
-    name: 'Multi-Chain Address',
-    path: '/tools/multi-chain-keys',
-    description: 'Generate addresses for multiple chains',
-    category: 'Blockchain',
-    icon: '⛓️'
-  },
-
-  // Math & Numbers
-  {
-    name: 'Math Evaluator',
-    path: '/tools/math-evaluator',
-    description: 'Evaluate math expressions',
-    category: 'Math & Numbers',
-    icon: '🧮'
-  },
-  {
-    name: 'Number Base Converter',
-    path: '/tools/base-converter',
-    description: 'Convert between number bases',
-    category: 'Math & Numbers',
-    icon: '🔢'
-  },
-  {
-    name: 'Roman Numeral Converter',
-    path: '/tools/roman-numeral-converter',
-    description: 'Convert Roman numerals',
-    category: 'Math & Numbers',
-    icon: '🏛️'
-  },
-  {
-    name: 'Color Converter',
-    path: '/tools/color-converter',
-    description: 'Convert color formats',
-    category: 'Math & Numbers',
-    icon: '🎨'
-  },
-
-  // Images
-  {
-    name: 'Image Compressor',
-    path: '/tools/image',
-    description: 'Compress images',
-    category: 'Images',
-    icon: '🖼️'
-  },
-  {
-    name: 'BPMN Viewer',
-    path: '/tools/bpmn',
-    description: 'View BPMN diagrams',
-    category: 'Images',
-    icon: '📊'
-  },
-  {
-    name: 'BPMN to Visio',
-    path: '/tools/bpmn-to-visio',
-    description: 'Convert BPMN to Visio',
-    category: 'Images',
-    icon: '📊'
-  },
-
-  // Network
-  {
-    name: 'IP Address Converter',
-    path: '/tools/ipv4-address-converter',
-    description: 'Convert IP addresses',
-    category: 'Network',
-    icon: '🌐'
-  },
-  {
-    name: 'IPv4 Range Expander',
-    path: '/tools/ipv4-range-expander',
-    description: 'Expand IPv4 ranges',
-    category: 'Network',
-    icon: '📊'
-  },
-  {
-    name: 'IPv6 ULA Generator',
-    path: '/tools/ipv6-ula-generator',
-    description: 'Generate IPv6 ULA',
-    category: 'Network',
-    icon: '🌐'
-  },
-  {
-    name: 'MAC Address Generator',
-    path: '/tools/mac-address-generator',
-    description: 'Generate MAC addresses',
-    category: 'Network',
-    icon: '💻'
-  },
-  {
-    name: 'Random Port Generator',
-    path: '/tools/random-port-generator',
-    description: 'Generate random ports',
-    category: 'Network',
-    icon: '🚪'
-  },
-  {
-    name: 'CIDR Calculator',
-    path: '/tools/cidr-calculator',
-    description: 'Calculate CIDR notation',
-    category: 'Network',
-    icon: '🌐'
-  },
-
-  // Developer Utilities
-  {
-    name: 'Regex Tester',
-    path: '/tools/regex-tester',
-    description: 'Test regular expressions',
-    category: 'Developer Utilities',
-    icon: '🔎'
-  },
-  {
-    name: 'Chmod Calculator',
-    path: '/tools/chmod-calculator',
-    description: 'Calculate chmod permissions',
-    category: 'Developer Utilities',
-    icon: '🔐'
-  },
-  {
-    name: 'Basic Auth Generator',
-    path: '/tools/basic-auth-generator',
-    description: 'Generate Basic Auth headers',
-    category: 'Developer Utilities',
-    icon: '🔑'
-  },
-  {
-    name: 'OTP Code Generator',
-    path: '/tools/otp-code-generator',
-    description: 'Generate TOTP codes',
-    category: 'Developer Utilities',
-    icon: '📲'
-  },
-  {
-    name: 'Email Normalizer',
-    path: '/tools/email-normalizer',
-    description: 'Normalize email addresses',
-    category: 'Developer Utilities',
-    icon: '📧'
-  },
-  {
-    name: 'Phone Parser',
-    path: '/tools/phone-number-parser',
-    description: 'Parse phone numbers',
-    category: 'Developer Utilities',
-    icon: '📞'
-  },
-  {
-    name: 'User Agent Parser',
-    path: '/tools/user-agent-parser',
-    description: 'Parse user agent strings',
-    category: 'Developer Utilities',
-    icon: '🤖'
-  },
-  {
-    name: 'Local Token Counter',
-    path: '/tools/local-token-counter',
-    description: 'Count tokens locally',
-    category: 'Developer Utilities',
-    icon: '🔢'
-  },
-
-  // AI & Automation
-  {
-    name: 'Agent Identity Generator',
-    path: '/tools/agent-identity-generator',
-    description: 'Generate AI agent identities',
-    category: 'AI & Automation',
-    icon: '🤖'
-  },
-  {
-    name: 'Benchmark Builder',
-    path: '/tools/benchmark-builder',
-    description: 'Build performance benchmarks',
-    category: 'AI & Automation',
-    icon: '📈'
-  }
-]
-
-const categories = computed(() => {
-  const cats = new Set(tools.map((t) => t.category))
-  return Array.from(cats).sort()
+useSEO({
+  title: 'All Developer Tools - Free & Private | Formatho',
+  description: `Complete directory of ${tools.reduce((a, c) => a + c.items.length, 0)} free developer tools across ${tools.length} categories. All tools run 100% client-side in your browser.`,
+  keywords: ['developer tools', 'free online tools', 'privacy first', 'client side tools'],
+  ogType: 'website'
 })
 
-const getToolsByCategory = (category: string) => {
-  return tools.filter((t) => t.category === category)
-}
+const search = ref('')
+
+const filteredCategories = computed(() => {
+  if (!search.value) return tools
+  const q = search.value.toLowerCase()
+  return tools
+    .map((c) => ({
+      ...c,
+      items: c.items.filter(
+        (t: { name: string; description: string }) =>
+          t.name.toLowerCase().includes(q) || t.description.toLowerCase().includes(q)
+      )
+    }))
+    .filter((c) => c.items.length > 0 || c.category.toLowerCase().includes(q))
+})
+
+const totalTools = computed(() => tools.reduce((sum: number, c: { items: unknown[] }) => sum + c.items.length, 0))
 </script>
 
 <template>
-  <div class="min-h-screen bg-background">
+  <div class="max-w-6xl mx-auto px-4 py-8">
     <Breadcrumb />
+    <div class="mt-6 mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold">All Tools</h1>
+      <p class="text-sm text-muted-foreground mt-2">
+        {{ totalTools }} free tools across {{ tools.length }} categories — all private, all client-side
+      </p>
+    </div>
 
-    <div class="container mx-auto px-4 py-8">
-      <!-- Header -->
-      <div class="text-center mb-12">
-        <h1 class="text-4xl font-bold tracking-tight mb-4">All Developer Tools</h1>
-        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Privacy-first tools that run entirely in your browser. No data sent to servers.
-        </p>
+    <div class="relative max-w-md mb-8">
+      <Search class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+      <Input
+        v-model="search"
+        class="pl-10"
+        placeholder="Search tools..."
+        aria-label="Search all tools"
+      />
+    </div>
+
+    <div v-for="category in filteredCategories" :key="category.slug" class="mb-10">
+      <div class="flex items-center gap-2 mb-4">
+        <CategoryIcon :slug="category.slug" :size="22" />
+        <h2 class="text-xl font-bold">{{ category.category }}</h2>
+        <RouterLink :to="category.route" class="text-xs text-muted-foreground hover:text-primary transition-colors ml-1">
+          view all &rarr;
+        </RouterLink>
       </div>
-
-      <!-- Tools by Category -->
-      <div class="space-y-12">
-        <div v-for="category in categories" :key="category" class="space-y-4">
-          <h2 class="text-2xl font-semibold border-b border-border pb-2">
-            {{ category }}
-          </h2>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            <router-link
-              v-for="tool in getToolsByCategory(category)"
-              :key="tool.path"
-              :to="tool.path"
-              class="group"
-              @mouseenter="prefetchTool(tool.path)"
-            >
-              <Card class="h-full hover:border-primary hover:shadow-lg transition-all duration-200">
-                <CardHeader>
-                  <div class="flex items-start gap-3">
-                    <span class="text-3xl">{{ tool.icon }}</span>
-                    <div class="flex-1">
-                      <CardTitle class="text-lg group-hover:text-primary transition-colors">
-                        {{ tool.name }}
-                      </CardTitle>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription class="text-sm">
-                    {{ tool.description }}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </router-link>
+      <p class="text-sm text-muted-foreground mb-4 max-w-2xl">{{ category.blurb }}</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <RouterLink
+          v-for="tool in category.items"
+          :key="tool.route"
+          :to="tool.route"
+          class="group border border-border rounded-lg p-4 hover:border-primary/50 hover:bg-primary/5 transition-colors"
+        >
+          <div class="flex items-start justify-between gap-2">
+            <div class="min-w-0">
+              <p class="font-medium text-sm group-hover:text-primary transition-colors">{{ tool.name }}</p>
+              <p class="text-xs text-muted-foreground mt-1 line-clamp-2">{{ tool.description }}</p>
+            </div>
+            <ArrowRight class="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary flex-shrink-0 mt-0.5" />
           </div>
-        </div>
+        </RouterLink>
       </div>
+    </div>
 
-      <!-- Stats -->
-      <div class="mt-16 text-center">
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-muted rounded-full text-sm">
-          <span class="font-semibold">{{ tools.length }}</span>
-          <span class="text-muted-foreground">tools available</span>
-        </div>
-      </div>
+    <div v-if="filteredCategories.length === 0" class="text-center py-16 text-muted-foreground">
+      No tools match "{{ search }}". <button class="text-primary hover:underline" @click="search = ''">Clear search</button>
     </div>
   </div>
 </template>

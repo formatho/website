@@ -243,7 +243,7 @@
   .glass-card a:hover,
   .glass-card button:not(.nav-btn):not([role="combobox"]):not([data-radix-collection-item]):not(.no-btn-hover):hover,
   .glass-card RouterLink:hover,
-  a[class*="bg-primary"]:hover {
+  a.bg-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background-color: rgb(23, 23, 23) !important;
