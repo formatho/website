@@ -1227,3 +1227,69 @@ const toolDepth = {
 for (const [route, depth] of Object.entries(toolDepth)) {
   if (toolSEOContent[route]) Object.assign(toolSEOContent[route], depth)
 }
+
+
+const jwtSuiteContent = {
+  '/tools/jwt': {
+    intro: [
+      'A JSON Web Token carries authentication data between services in a compact, URL-safe format. When debugging auth flows, you need to see inside the token — which algorithm signed it, what claims were granted, when it expires — and critically, whether the signature actually validates against your secret or public key.',
+      'This debugger decodes the header, payload, and signature; displays registered claims (iss, sub, aud, exp, iat, nbf) with human-readable timestamps; shows expiry status at a glance; and verifies signatures using the browser native Web Crypto API. Everything runs client-side — tokens and secrets never leave your machine.'
+    ],
+    howTo: [
+      'Paste your JWT (the three dot-separated base64url parts).',
+      'The header, payload, and claims decode instantly.',
+      'Check the expiry banner to see if the token is still valid.',
+      'Enter your HMAC secret or RSA public key and click Verify.'
+    ]
+  },
+  '/tools/jwt-suite': {
+    intro: [
+      'Authentication debugging requires more than one tool: you decode the JWT, check its claims, verify the signature, maybe inspect the SAML response that generated it, and generate a secure token for testing. This toolkit groups all of those in one place.',
+      'Each tool is linked below with a short description. All are free, private, and run entirely in your browser — no tokens, secrets, or keys are ever transmitted to a server.'
+    ],
+    howTo: [
+      'Start with the JWT Debugger to decode and verify your token.',
+      'Use the OIDC URL Builder to construct or debug authorization URLs.',
+      'Decode SAML messages with the SAML Decoder.',
+      'Generate secure test tokens and secrets with the Token Generator.'
+    ]
+  }
+}
+
+const jwtSuiteFAQs = {
+  '/tools/jwt': [
+    {
+      question: 'How do I verify an HS256 JWT signature?',
+      answer: 'Paste the JWT, then enter the shared secret in the verification section and click Verify. The tool uses the browser Web Crypto API to compute the HMAC-SHA256 and compare it with the signature segment of the token.'
+    },
+    {
+      question: 'How do I verify an RS256 JWT with a public key?',
+      answer: 'Paste the JWT, then paste the RSA public key in PEM format (the block starting with -----BEGIN PUBLIC KEY-----). The tool imports the key via Web Crypto and verifies the RSASSA-PKCS1-v1_5 signature.'
+    },
+    {
+      question: 'What is the difference between HS256 and RS256?',
+      answer: 'HS256 uses a shared secret (symmetric) — both signer and verifier know the same secret. RS256 uses an RSA key pair (asymmetric) — the signer holds the private key, and the verifier only needs the public key. RS256 is standard for production services.'
+    },
+    {
+      question: 'Can this tool create or sign JWTs?',
+      answer: 'It currently decodes and verifies. Signing requires the private key or secret on the signing side, which is typically done in your backend code — not in a browser tool.'
+    },
+    {
+      question: 'Is it safe to paste a production token here?',
+      answer: 'Yes. Decoding and verification happen entirely in your browser using the Web Crypto API. No token, secret, or key is transmitted to any server. That said, JWTs are bearer credentials — treat them carefully regardless of the tool.'
+    }
+  ],
+  '/tools/jwt-suite': [
+    {
+      question: 'What is the JWT & Auth Toolkit?',
+      answer: 'A curated collection of authentication debugging tools: JWT decoder and verifier, OIDC URL builder with PKCE, SAML decoder, token generator, TOTP generator, and hash tools. All free and client-side.'
+    },
+    {
+      question: 'Can I use these tools for production debugging?',
+      answer: 'Yes. All processing happens in your browser — tokens, secrets, and keys are never uploaded. This is safer than server-side JWT tools where your credentials transit a third-party server.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, jwtSuiteContent)
+Object.assign(toolSpecificFAQ, jwtSuiteFAQs)
