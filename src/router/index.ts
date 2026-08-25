@@ -291,6 +291,24 @@ export const routes = [
         meta: routeMeta['ens-namehash']
       },
       {
+        path: '/tools/impermanent-loss',
+        name: 'impermanent-loss',
+        component: () => import(/* webpackPrefetch: true */ '../views/ImpermanentLossView.vue'),
+        meta: routeMeta['impermanent-loss']
+      },
+      {
+        path: '/tools/vault-calculator',
+        name: 'vault-calculator',
+        component: () => import(/* webpackPrefetch: true */ '../views/VaultCalculatorView.vue'),
+        meta: routeMeta['vault-calculator']
+      },
+      {
+        path: '/tools/apy-calculator',
+        name: 'apy-calculator',
+        component: () => import(/* webpackPrefetch: true */ '../views/ApyCalculatorView.vue'),
+        meta: routeMeta['apy-calculator']
+      },
+      {
         path: '/tools/vanity-eth',
         name: 'vanity-eth',
         component: () => import(/* webpackPrefetch: true */ '../views/VanityEthView.vue'),

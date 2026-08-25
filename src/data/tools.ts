@@ -37,6 +37,9 @@ export const tools: ToolCategory[] = [
     icon: '🔗',
     blurb: 'EVM contract reader with Uniswap presets, vanity address generator, multi-chain readers for Solana, Polkadot, Cardano and Cosmos, Keccak-256 hasher, ABI tools, ENS calculator, and chain-specific tool pages.',
     items: [
+      { name: 'Impermanent Loss Calculator', description: 'Calculate IL for any price change. Compare HODL vs LP value with fee offset analysis.', route: '/tools/impermanent-loss', iconName: 'TrendingDown' },
+      { name: 'ERC-4626 Vault Calculator', description: 'Convert vault shares to assets, calculate share price and projected returns for Morpho, Yearn, and any ERC-4626 vault.', route: '/tools/vault-calculator', iconName: 'Landmark' },
+      { name: 'APY Calculator', description: 'Convert APR to APY with any compounding frequency. Compare DeFi yields accurately.', route: '/tools/apy-calculator', iconName: 'Percent' },
       { name: 'Vanity Address Generator', description: 'Generate Ethereum addresses with a custom prefix or suffix. Keys are created in your browser and never transmitted.', route: '/tools/vanity-eth', iconName: 'Sparkles' },
       { name: 'EVM Contract Reader', description: 'Paste an ABI and call view functions on any deployed contract via your own RPC endpoint. Works on every EVM chain.', route: '/tools/contract-reader', iconName: 'BookOpen' },
       { name: 'Solana Account Reader', description: 'Look up Solana accounts, decode SPL token accounts, and derive PDAs - client-side via any Solana RPC.', route: '/tools/solana-account-reader', iconName: 'Search' },

@@ -237,6 +237,21 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Calculate ENS namehash and labelhash values for any ENS name using Keccak-256 per EIP-137. Full node-by-node derivation chain. 100% client-side.',
     keywords: 'ens namehash calculator, namehash, labelhash, eip-137, ens resolution, keccak256 ens',
   },
+  'impermanent-loss': {
+    title: 'Impermanent Loss Calculator - Uniswap V2 & V3 | Formatho',
+    description: 'Calculate impermanent loss for any price change. Compare HODL vs LP value, see the IL curve, and understand when fees offset losses. Free, private, client-side.',
+    keywords: 'impermanent loss calculator, il calculator, uniswap impermanent loss, lp loss calculator, defi calculator, liquidity provider loss'
+  },
+  'vault-calculator': {
+    title: 'ERC-4626 Vault Calculator - Shares to Assets | Formatho',
+    description: 'Convert between ERC-4626 vault shares and underlying assets. Calculate share price, APY, and returns for Morpho, Yearn, Beefy, and any ERC-4626 vault.',
+    keywords: 'erc4626 calculator, vault shares to assets, vault calculator, morpho vault calculator, yearn vault calculator, defi vault shares'
+  },
+  'apy-calculator': {
+    title: 'APY Calculator - Convert APR to APY | Formatho',
+    description: 'Convert APR to APY with any compounding frequency (daily, weekly, monthly, continuous). Compare DeFi yields accurately. Free, private, client-side.',
+    keywords: 'apy calculator, apr to apy, apy to apr, defi yield calculator, compounding calculator, apy converter'
+  },
   'vanity-eth': {
     title: 'Ethereum Vanity Address Generator - All EVM Chains | Formatho',
     description: 'Generate vanity addresses with a custom prefix or suffix. The same key works on every EVM chain - Ethereum, Polygon, BSC, Arbitrum, Base, Optimism, Avalanche. Runs 100% in your browser, key never transmitted.',
