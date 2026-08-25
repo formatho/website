@@ -34,6 +34,20 @@ export const toolSpecificFAQ = {
       answer: 'Yes, the Formatho JSON viewer handles large JSON files efficiently with virtualized rendering, all client-side in your browser.'
     }
   ],
+  '/tools/bpmn-to-visio': [
+    {
+      question: 'How do I import a BPMN file into Visio?',
+      answer: 'Visio has no native BPMN import. Convert your BPMN 2.0 XML to Visio VDX format with this free tool, then open the downloaded .vdx file directly in Microsoft Visio (2010 or newer) — no add-in or stencil required.'
+    },
+    {
+      question: 'What BPMN elements are supported?',
+      answer: 'Tasks (user, service, script), start and end events, exclusive and parallel gateways, sequence flows, pools and lanes — all mapped to editable native Visio shapes.'
+    },
+    {
+      question: 'Does the converter upload my diagram to a server?',
+      answer: 'No. The conversion runs 100% client-side in your browser. Process diagrams often contain sensitive internal business logic, so nothing is uploaded, logged, or tracked.'
+    }
+  ],
   '/tools/base64': [
     {
       question: 'How do I encode text to Base64?',
