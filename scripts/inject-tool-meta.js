@@ -253,6 +253,23 @@ function main() {
   if (updatedCount < toolRoutes.length) {
     console.log(`⚠️  ${toolRoutes.length - updatedCount} tool pages were not updated`)
   }
+
+  // Fix /tools index page canonical: SSG leaves the shell's `canonical → /`
+  // on it, which makes Google treat /tools as a duplicate of the homepage
+  // (GSC: "Duplicate, Google chose different canonical").
+  for (const p of ['tools.html', 'tools/index.html']) {
+    const idxPath = path.join(distDir, p)
+    if (!fs.existsSync(idxPath)) continue
+    let html = fs.readFileSync(idxPath, 'utf8')
+    const before = html
+    html = html
+      .replace(/<link rel="canonical"[^>]*>/g, '<link rel="canonical" href="https://formatho.com/tools">')
+      .replace(/<meta property="og:url"[^>]*>/g, '<meta property="og:url" content="https://formatho.com/tools">')
+    if (html !== before) {
+      fs.writeFileSync(idxPath, html)
+      console.log(`✅ Fixed canonical on /tools (${p})`)
+    }
+  }
 }
 
 main()
