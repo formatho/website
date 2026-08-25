@@ -48,24 +48,42 @@ async function loadUrls() {
   return { urls: [...source.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]), from: 'live sitemap' }
 }
 
+const ENDPOINTS = [
+  'https://yandex.com/indexnow',
+  'https://www.bing.com/indexnow',
+  'https://api.indexnow.org/indexnow',
+]
+
 async function submitBatch(batch, key, attempt = 1) {
-  const res = await fetch(ENDPOINT, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      host: HOST,
-      key,
-      keyLocation: `https://${HOST}/${key}.txt`,
-      urlList: batch
-    })
-  })
-  if (res.status === 429 && attempt <= 5) {
-    const wait = Number(res.headers.get('retry-after') || 2 ** attempt)
-    console.warn(`429 - retrying in ${wait}s (attempt ${attempt})`)
-    await new Promise((r) => setTimeout(r, wait * 1000))
-    return submitBatch(batch, key, attempt + 1)
+  // Try each endpoint; succeed if any accepts
+  for (const endpoint of ENDPOINTS) {
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          host: HOST,
+          key,
+          keyLocation: `https://${HOST}/${key}.txt`,
+          urlList: batch
+        }),
+        signal: AbortSignal.timeout(20000)
+      })
+      if (res.status === 200 || res.status === 202) {
+        return res.status
+      }
+      if (res.status === 429 && attempt <= 5) {
+        const wait = Number(res.headers.get('retry-after') || 2 ** attempt)
+        console.warn(`429 from ${endpoint} - retrying in ${wait}s`)
+        await new Promise((r) => setTimeout(r, wait * 1000))
+        return submitBatch(batch, key, attempt + 1)
+      }
+      console.warn(`${endpoint}: ${res.status}`)
+    } catch (err) {
+      console.warn(`${endpoint}: ${err.message}`)
+    }
   }
-  return res.status
+  return 0
 }
 
 async function main() {
