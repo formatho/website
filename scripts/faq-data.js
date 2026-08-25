@@ -1429,3 +1429,188 @@ const webSecFAQs = {
 
 Object.assign(toolSEOContent, webSecContent)
 Object.assign(toolSpecificFAQ, webSecFAQs)
+
+
+const defiContent = {
+  '/tools/impermanent-loss': {
+    intro: [
+      'Impermanent loss (IL) is the loss liquidity providers experience when the price of tokens in an automated market maker pool diverges from their initial ratio. It is called impermanent because if the prices return to the original ratio, the loss disappears — but if you withdraw while prices have diverged, the loss becomes permanent.',
+      'This calculator uses the constant-product AMM formula (x·y = k, used by Uniswap V2 and similar DEXes) to compute exactly how much value is lost relative to simply holding the tokens. Adjust the price change slider and deposit amount to see your specific scenario, and use the fee offset calculator to determine when trading fees compensate for the loss.'
+    ],
+    howTo: [
+      'Enter your deposit amount in USD.',
+      'Set the initial price of token A (token B is the reference).',
+      'Drag the price change slider to model the divergence.',
+      'Compare the HODL value vs the LP value to see your impermanent loss.',
+      'Adjust the fee APR to see when fees offset the loss.'
+    ]
+  },
+  '/tools/vault-calculator': {
+    intro: [
+      'ERC-4626 is the standard interface for tokenized vaults in DeFi. Vaults hold underlying assets (like USDC or ETH) and issue shares representing proportional ownership. As the vault earns yield through lending, farming, or other strategies, the share price increases — but the math for converting between shares and assets confuses many users.',
+      'This calculator implements the exact ERC-4626 formulas: share price = totalAssets / totalShares. Enter your vault state from any compliant protocol (Morpho, Yearn V3, Beefy, Balancer, Rari) to see your position value, project returns, and convert deposit amounts to expected shares.'
+    ],
+    howTo: [
+      'Find your vault totalAssets and totalShares from the contract or a dashboard.',
+      'Enter them above along with your share balance.',
+      'See your current asset value and share price.',
+      'Use the projection tab to model returns at different yield rates.',
+      'Use the deposit calculator to estimate shares from a deposit.'
+    ]
+  },
+  '/tools/apy-calculator': {
+    intro: [
+      'APR (Annual Percentage Rate) and APY (Annual Percentage Yield) are often used interchangeably in DeFi, but they measure different things. APR is the simple annual rate without compounding, while APY includes the effect of reinvesting earnings. At 20% APR compounded daily, the effective APY is 22.13% — a meaningful difference.',
+      'This calculator converts between APR and APY at any compounding frequency: annually, monthly, weekly, daily, or continuously. DeFi protocols typically compound daily or continuously, so the difference between the quoted APR and your actual returns can be significant.'
+    ],
+    howTo: [
+      'Enter the APR quoted by the protocol.',
+      'Select the compounding frequency (most DeFi protocols use daily).',
+      'See the effective APY and the difference from simple APR.',
+      'Use the projection tab to model actual dollar returns.',
+      'Use the reverse calculator to find the APR behind a quoted APY.'
+    ]
+  }
+}
+
+const defiFAQs = {
+  '/tools/impermanent-loss': [
+    {
+      question: 'What is impermanent loss in simple terms?',
+      answer: 'When you provide liquidity to a pool, the pool automatically rebalances as prices change. If you deposited 1 ETH + 2000 USDC (at $2000/ETH) and the price doubles to $4000, the pool now holds less ETH and more USDC. If you withdraw, you get less ETH than you started with — that difference versus just holding is the impermanent loss.'
+    },
+    {
+      question: 'When is impermanent loss permanent?',
+      answer: 'If prices return to the original ratio, the loss disappears — hence impermanent. But if you withdraw while prices have diverged, the loss becomes permanent. The decision to hold or withdraw depends on whether you expect prices to converge and whether fees earned exceed the IL.'
+    },
+    {
+      question: 'How do trading fees offset impermanent loss?',
+      answer: 'Every swap in the pool generates fees distributed to LPs. If the pool has high volume and earns 20% APR in fees, a 5% impermanent loss is more than compensated. The fee offset calculator above shows exactly when fees exceed IL for your scenario.'
+    },
+    {
+      question: 'Is this calculator for Uniswap V2 or V3?',
+      answer: 'The formula applies to constant-product AMMs (Uniswap V2, SushiSwap, PancakeSwap). Uniswap V3 concentrated liquidity has more complex math — the IL can be much higher for narrow ranges. Use this calculator for V2-style pools.'
+    }
+  ],
+  '/tools/vault-calculator': [
+    {
+      question: 'Which protocols use ERC-4626?',
+      answer: 'Morpho Blue, Yearn V3, Beefy, Balancer boosted pools, Rari Fuse, Idle, and many others. Any contract implementing the ERC-4626 interface has totalAssets() and totalShares() functions that provide the inputs for this calculator.'
+    },
+    {
+      question: 'Why does my share price increase over time?',
+      answer: 'As the vault earns yield, totalAssets grow while totalShares stay constant (unless new deposits occur). Since share price = totalAssets / totalShares, the price per share increases. Your shares represent a larger claim on the underlying assets.'
+    },
+    {
+      question: 'How do I find totalAssets and totalShares for a vault?',
+      answer: 'Read totalAssets() and totalSupply() from the vault contract using any block explorer or our EVM Contract Reader. For Morpho vaults, the dashboard also displays these values. Alternatively, use the vault share price directly if the protocol exposes it.'
+    }
+  ],
+  '/tools/apy-calculator': [
+    {
+      question: 'Why is APY higher than APR?',
+      answer: 'APY includes compound interest — you earn returns on your returns. At 20% APR compounded daily, you earn approximately 0.0548% per day, which compounds to 22.13% APY over a year. The more frequent the compounding, the bigger the gap.'
+    },
+    {
+      question: 'Which compounding frequency do DeFi protocols use?',
+      answer: 'Most protocols compound automatically on every harvest or epoch: Aave compounds per block, Compound per block, Yearn on strategy harvests, Morpho continuously. Daily or continuous compounding gives the closest approximation for most DeFi yields.'
+    },
+    {
+      question: 'What is the difference between simple and compound interest?',
+      answer: 'Simple interest (APR) earns a fixed percentage of your original principal. Compound interest (APY) earns a percentage of your current balance, including previously earned interest. Over time, compounding produces exponentially more than simple interest.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, defiContent)
+Object.assign(toolSpecificFAQ, defiFAQs)
+
+
+const soc2Content = {
+  '/tools/tls-checker': {
+    intro: [
+      'TLS certificates are the foundation of encryption in transit — SOC 2 control CC6.1 requires that all data transmitted over public networks is encrypted. Expired certificates cause outages, browser warnings, and audit findings. Regular certificate monitoring is a basic operational security requirement.',
+      'This checker parses OpenSSL certificate output to show expiry dates, issuer, subject alternative names, and remaining validity. The quick connectivity test verifies that HTTPS is working; the paste mode gives you full certificate details for audit documentation. All analysis is local — certificate data never leaves your browser.'
+    ],
+    howTo: [
+      'For a quick check: enter a URL and click Check.',
+      'For full analysis: run openssl s_client and paste the output.',
+      'Review the expiry status (green, amber, red).',
+      'Document the findings for your SOC 2 audit evidence.'
+    ]
+  },
+  '/tools/soc2-checklist': {
+    intro: [
+      'SOC 2 (System and Organization Controls 2) is the auditing framework used by service organizations to demonstrate how they handle customer data. It covers five Trust Service Criteria: Security (required), Availability, Processing Integrity, Confidentiality, and Privacy (optional). Most B2B SaaS companies need SOC 2 Type II to close enterprise deals.',
+      'This interactive checklist breaks down each criterion into specific, actionable controls. Where possible, it links directly to free tools on this site that help you implement or verify the control. Track your progress as you complete items — the grade updates in real time (A = audit ready).'
+    ],
+    howTo: [
+      'Start with the Security criterion (CC6) — it is required for all SOC 2 audits.',
+      'Check off each control you have implemented.',
+      'Click the linked tools to verify controls (e.g., use the Security Headers Analyzer for CC6.1).',
+      'Work through Availability, Processing Integrity, Confidentiality, and Privacy.',
+      'Aim for 90%+ completion before scheduling your audit.'
+    ]
+  },
+  '/tools/policy-generator': {
+    intro: [
+      'SOC 2 auditors request documented policies for every control area. The three most commonly requested are the Password and Authentication Policy (CC6.1), the Access Control Policy (CC6.2), and the Incident Response Plan (CC7.1-CC7.5). Writing these from scratch takes hours; auditors have seen hundreds and know what they expect.',
+      'This generator produces auditor-ready policy templates customized with your company details. The password policy includes MFA requirements and hashing standards; the access control policy covers provisioning, reviews, and deprovisioning; the incident response plan includes severity classification and notification timelines.'
+    ],
+    howTo: [
+      'Enter your company name and effective date.',
+      'Choose the policy type (password, access control, or incident response).',
+      'Customize the parameters to match your actual practices.',
+      'Copy the generated policy and review with your security team.',
+      'Store in your compliance documentation system for audit evidence.'
+    ]
+  }
+}
+
+const soc2FAQs = {
+  '/tools/tls-checker': [
+    {
+      question: 'How often should I check my TLS certificates?',
+      answer: 'SOC 2 requires continuous monitoring of security controls. In practice: automated daily checks with alerting at 30/14/7/1 days before expiry. Use this tool for manual spot checks and audit documentation.'
+    },
+    {
+      question: 'What TLS version should we support?',
+      answer: 'TLS 1.2 minimum (TLS 1.3 preferred). TLS 1.0 and 1.1 are deprecated and will fail SOC 2 review. Check with openssl s_client -tls1_1 to verify older versions are rejected.'
+    },
+    {
+      question: 'Why can browsers not read certificate details?',
+      answer: 'JavaScript cannot access certificate information for security reasons. Use the openssl command shown above in a terminal for full certificate analysis, then paste the output here.'
+    }
+  ],
+  '/tools/soc2-checklist': [
+    {
+      question: 'What is the difference between SOC 2 Type I and Type II?',
+      answer: 'Type I audits the design of controls at a point in time. Type II audits the operating effectiveness of controls over a period (typically 3-12 months). Type II is more valuable and takes longer because it requires evidence of consistent operation.'
+    },
+    {
+      question: 'Which Trust Service Criteria are required?',
+      answer: 'Security (CC6) is always required. Availability, Processing Integrity, Confidentiality, and Privacy are optional — most SaaS companies include Availability and Confidentiality. The checklist above covers all five.'
+    },
+    {
+      question: 'How long does SOC 2 compliance take?',
+      answer: 'For a typical startup with cloud infrastructure: 3-6 months for Type I, 6-12 months for Type II. The Readiness Checklist above gives you an honest assessment of where you are today.'
+    },
+    {
+      question: 'Can I use these tools as audit evidence?',
+      answer: 'Yes — screenshots and output from these tools serve as evidence of control verification. For example, Security Headers Analyzer results demonstrate CC6.1 compliance, and the TLS Checker output documents encryption in transit.'
+    }
+  ],
+  '/tools/policy-generator': [
+    {
+      question: 'Are these policy templates sufficient for a SOC 2 audit?',
+      answer: 'They cover the core requirements that auditors expect for the three most-requested policies. However, every organization is different — review with your security team and auditor to ensure they accurately reflect your actual practices. Auditors check that policies match reality, not just that documents exist.'
+    },
+    {
+      question: 'How often should policies be reviewed?',
+      answer: 'SOC 2 expects annual policy reviews at minimum. Best practice is to review after any significant incident, system change, or organizational change. Document the review date and reviewer in the policy footer.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, soc2Content)
+Object.assign(toolSpecificFAQ, soc2FAQs)

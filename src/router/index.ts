@@ -291,6 +291,42 @@ export const routes = [
         meta: routeMeta['ens-namehash']
       },
       {
+        path: '/tools/tls-checker',
+        name: 'tls-checker',
+        component: () => import(/* webpackPrefetch: true */ '../views/TlsCheckerView.vue'),
+        meta: routeMeta['tls-checker']
+      },
+      {
+        path: '/tools/soc2-checklist',
+        name: 'soc2-checklist',
+        component: () => import(/* webpackPrefetch: true */ '../views/Soc2ChecklistView.vue'),
+        meta: routeMeta['soc2-checklist']
+      },
+      {
+        path: '/tools/policy-generator',
+        name: 'policy-generator',
+        component: () => import(/* webpackPrefetch: true */ '../views/PolicyGeneratorView.vue'),
+        meta: routeMeta['policy-generator']
+      },
+      {
+        path: '/tools/impermanent-loss',
+        name: 'impermanent-loss',
+        component: () => import(/* webpackPrefetch: true */ '../views/ImpermanentLossView.vue'),
+        meta: routeMeta['impermanent-loss']
+      },
+      {
+        path: '/tools/vault-calculator',
+        name: 'vault-calculator',
+        component: () => import(/* webpackPrefetch: true */ '../views/VaultCalculatorView.vue'),
+        meta: routeMeta['vault-calculator']
+      },
+      {
+        path: '/tools/apy-calculator',
+        name: 'apy-calculator',
+        component: () => import(/* webpackPrefetch: true */ '../views/ApyCalculatorView.vue'),
+        meta: routeMeta['apy-calculator']
+      },
+      {
         path: '/tools/vanity-eth',
         name: 'vanity-eth',
         component: () => import(/* webpackPrefetch: true */ '../views/VanityEthView.vue'),

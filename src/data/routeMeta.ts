@@ -237,6 +237,36 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Calculate ENS namehash and labelhash values for any ENS name using Keccak-256 per EIP-137. Full node-by-node derivation chain. 100% client-side.',
     keywords: 'ens namehash calculator, namehash, labelhash, eip-137, ens resolution, keccak256 ens',
   },
+  'tls-checker': {
+    title: 'TLS Certificate Checker - Expiry, Issuer, Security | Formatho',
+    description: 'Check TLS/SSL certificate expiry dates, issuer, subject, and security configuration. Paste openssl output for instant analysis. Free, private, client-side.',
+    keywords: 'tls checker, ssl certificate check, certificate expiry checker, openssl certificate, tls security scan'
+  },
+  'soc2-checklist': {
+    title: 'SOC 2 Compliance Readiness Checklist | Formatho',
+    description: 'Interactive SOC 2 readiness checklist covering all 5 Trust Service Criteria. Track your progress with linked tools for each control. Free, private, client-side.',
+    keywords: 'soc 2 checklist, soc 2 readiness, soc 2 compliance, soc 2 audit prep, trust service criteria'
+  },
+  'policy-generator': {
+    title: 'Security Policy Generator - SOC 2 Templates | Formatho',
+    description: 'Generate security policies for SOC 2 compliance: password policy, access control policy, and incident response plan. Customize and copy. Free, private, client-side.',
+    keywords: 'security policy generator, soc 2 policy template, password policy generator, access control policy, incident response template'
+  },
+  'impermanent-loss': {
+    title: 'Impermanent Loss Calculator - Uniswap V2 & V3 | Formatho',
+    description: 'Calculate impermanent loss for any price change. Compare HODL vs LP value, see the IL curve, and understand when fees offset losses. Free, private, client-side.',
+    keywords: 'impermanent loss calculator, il calculator, uniswap impermanent loss, lp loss calculator, defi calculator, liquidity provider loss'
+  },
+  'vault-calculator': {
+    title: 'ERC-4626 Vault Calculator - Shares to Assets | Formatho',
+    description: 'Convert between ERC-4626 vault shares and underlying assets. Calculate share price, APY, and returns for Morpho, Yearn, Beefy, and any ERC-4626 vault.',
+    keywords: 'erc4626 calculator, vault shares to assets, vault calculator, morpho vault calculator, yearn vault calculator, defi vault shares'
+  },
+  'apy-calculator': {
+    title: 'APY Calculator - Convert APR to APY | Formatho',
+    description: 'Convert APR to APY with any compounding frequency (daily, weekly, monthly, continuous). Compare DeFi yields accurately. Free, private, client-side.',
+    keywords: 'apy calculator, apr to apy, apy to apr, defi yield calculator, compounding calculator, apy converter'
+  },
   'vanity-eth': {
     title: 'Ethereum Vanity Address Generator - All EVM Chains | Formatho',
     description: 'Generate vanity addresses with a custom prefix or suffix. The same key works on every EVM chain - Ethereum, Polygon, BSC, Arbitrum, Base, Optimism, Avalanche. Runs 100% in your browser, key never transmitted.',

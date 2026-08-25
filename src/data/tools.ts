@@ -37,6 +37,9 @@ export const tools: ToolCategory[] = [
     icon: '🔗',
     blurb: 'EVM contract reader with Uniswap presets, vanity address generator, multi-chain readers for Solana, Polkadot, Cardano and Cosmos, Keccak-256 hasher, ABI tools, ENS calculator, and chain-specific tool pages.',
     items: [
+      { name: 'Impermanent Loss Calculator', description: 'Calculate IL for any price change. Compare HODL vs LP value with fee offset analysis.', route: '/tools/impermanent-loss', iconName: 'TrendingDown' },
+      { name: 'ERC-4626 Vault Calculator', description: 'Convert vault shares to assets, calculate share price and projected returns for Morpho, Yearn, and any ERC-4626 vault.', route: '/tools/vault-calculator', iconName: 'Landmark' },
+      { name: 'APY Calculator', description: 'Convert APR to APY with any compounding frequency. Compare DeFi yields accurately.', route: '/tools/apy-calculator', iconName: 'Percent' },
       { name: 'Vanity Address Generator', description: 'Generate Ethereum addresses with a custom prefix or suffix. Keys are created in your browser and never transmitted.', route: '/tools/vanity-eth', iconName: 'Sparkles' },
       { name: 'EVM Contract Reader', description: 'Paste an ABI and call view functions on any deployed contract via your own RPC endpoint. Works on every EVM chain.', route: '/tools/contract-reader', iconName: 'BookOpen' },
       { name: 'Solana Account Reader', description: 'Look up Solana accounts, decode SPL token accounts, and derive PDAs - client-side via any Solana RPC.', route: '/tools/solana-account-reader', iconName: 'Search' },
@@ -67,6 +70,9 @@ export const tools: ToolCategory[] = [
     icon: '🔐',
     blurb: 'Hash generators, JWT debugger, SAML decoder, OIDC builder, encryption, TOTP, password analysis, and credential tools - all client-side.',
     items: [
+      { name: 'TLS Certificate Checker', description: 'Check TLS/SSL certificate expiry, issuer, and security configuration. Paste openssl output for instant analysis.', route: '/tools/tls-checker', iconName: 'Lock' },
+      { name: 'SOC 2 Readiness Checklist', description: 'Interactive checklist covering all 5 Trust Service Criteria with linked tools for each control.', route: '/tools/soc2-checklist', iconName: 'ClipboardCheck' },
+      { name: 'Security Policy Generator', description: 'Generate password, access control, and incident response policies for SOC 2 compliance.', route: '/tools/policy-generator', iconName: 'FileText' },
       { name: 'Security Headers Analyzer', description: 'Check HSTS, CSP, X-Frame-Options and more on any URL. Graded A-F with fix recommendations.', route: '/tools/security-headers', iconName: 'ShieldCheck' },
       { name: 'CSP Generator', description: 'Build Content-Security-Policy headers visually. Configure directives and copy the header.', route: '/tools/csp-generator', iconName: 'Shield' },
       { name: 'CSP Evaluator', description: 'Analyze a CSP header for weaknesses: unsafe-inline, wildcards, missing directives, bypass risks.', route: '/tools/csp-evaluator', iconName: 'ScanSearch' },
