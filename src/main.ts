@@ -121,7 +121,7 @@ export async function includedRoutes(paths: string[]) {
   try {
     const blogPaths = [...sitemapRaw.matchAll(/<loc>https:\/\/formatho\.com\/blogs\/([^<]+)<\/loc>/g)]
       .map((m) => `/blogs/${m[1]}`)
-    const stackPaths = ['owasp', 'sap', 'okta', 'ping-federate'].map((slug) => `/dev-tools/${slug}`)
+    const stackPaths = ['owasp', 'soc2', 'sap', 'okta', 'ping-federate'].map((slug) => `/dev-tools/${slug}`)
     const chainPaths = [
       'ethereum', 'arbitrum', 'base', 'optimism', 'polygon', 'bnb-chain',
       'avalanche', 'zksync', 'linea', 'blast', 'mantle', 'cronos'

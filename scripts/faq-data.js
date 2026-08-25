@@ -1524,3 +1524,93 @@ const defiFAQs = {
 
 Object.assign(toolSEOContent, defiContent)
 Object.assign(toolSpecificFAQ, defiFAQs)
+
+
+const soc2Content = {
+  '/tools/tls-checker': {
+    intro: [
+      'TLS certificates are the foundation of encryption in transit — SOC 2 control CC6.1 requires that all data transmitted over public networks is encrypted. Expired certificates cause outages, browser warnings, and audit findings. Regular certificate monitoring is a basic operational security requirement.',
+      'This checker parses OpenSSL certificate output to show expiry dates, issuer, subject alternative names, and remaining validity. The quick connectivity test verifies that HTTPS is working; the paste mode gives you full certificate details for audit documentation. All analysis is local — certificate data never leaves your browser.'
+    ],
+    howTo: [
+      'For a quick check: enter a URL and click Check.',
+      'For full analysis: run openssl s_client and paste the output.',
+      'Review the expiry status (green, amber, red).',
+      'Document the findings for your SOC 2 audit evidence.'
+    ]
+  },
+  '/tools/soc2-checklist': {
+    intro: [
+      'SOC 2 (System and Organization Controls 2) is the auditing framework used by service organizations to demonstrate how they handle customer data. It covers five Trust Service Criteria: Security (required), Availability, Processing Integrity, Confidentiality, and Privacy (optional). Most B2B SaaS companies need SOC 2 Type II to close enterprise deals.',
+      'This interactive checklist breaks down each criterion into specific, actionable controls. Where possible, it links directly to free tools on this site that help you implement or verify the control. Track your progress as you complete items — the grade updates in real time (A = audit ready).'
+    ],
+    howTo: [
+      'Start with the Security criterion (CC6) — it is required for all SOC 2 audits.',
+      'Check off each control you have implemented.',
+      'Click the linked tools to verify controls (e.g., use the Security Headers Analyzer for CC6.1).',
+      'Work through Availability, Processing Integrity, Confidentiality, and Privacy.',
+      'Aim for 90%+ completion before scheduling your audit.'
+    ]
+  },
+  '/tools/policy-generator': {
+    intro: [
+      'SOC 2 auditors request documented policies for every control area. The three most commonly requested are the Password and Authentication Policy (CC6.1), the Access Control Policy (CC6.2), and the Incident Response Plan (CC7.1-CC7.5). Writing these from scratch takes hours; auditors have seen hundreds and know what they expect.',
+      'This generator produces auditor-ready policy templates customized with your company details. The password policy includes MFA requirements and hashing standards; the access control policy covers provisioning, reviews, and deprovisioning; the incident response plan includes severity classification and notification timelines.'
+    ],
+    howTo: [
+      'Enter your company name and effective date.',
+      'Choose the policy type (password, access control, or incident response).',
+      'Customize the parameters to match your actual practices.',
+      'Copy the generated policy and review with your security team.',
+      'Store in your compliance documentation system for audit evidence.'
+    ]
+  }
+}
+
+const soc2FAQs = {
+  '/tools/tls-checker': [
+    {
+      question: 'How often should I check my TLS certificates?',
+      answer: 'SOC 2 requires continuous monitoring of security controls. In practice: automated daily checks with alerting at 30/14/7/1 days before expiry. Use this tool for manual spot checks and audit documentation.'
+    },
+    {
+      question: 'What TLS version should we support?',
+      answer: 'TLS 1.2 minimum (TLS 1.3 preferred). TLS 1.0 and 1.1 are deprecated and will fail SOC 2 review. Check with openssl s_client -tls1_1 to verify older versions are rejected.'
+    },
+    {
+      question: 'Why can browsers not read certificate details?',
+      answer: 'JavaScript cannot access certificate information for security reasons. Use the openssl command shown above in a terminal for full certificate analysis, then paste the output here.'
+    }
+  ],
+  '/tools/soc2-checklist': [
+    {
+      question: 'What is the difference between SOC 2 Type I and Type II?',
+      answer: 'Type I audits the design of controls at a point in time. Type II audits the operating effectiveness of controls over a period (typically 3-12 months). Type II is more valuable and takes longer because it requires evidence of consistent operation.'
+    },
+    {
+      question: 'Which Trust Service Criteria are required?',
+      answer: 'Security (CC6) is always required. Availability, Processing Integrity, Confidentiality, and Privacy are optional — most SaaS companies include Availability and Confidentiality. The checklist above covers all five.'
+    },
+    {
+      question: 'How long does SOC 2 compliance take?',
+      answer: 'For a typical startup with cloud infrastructure: 3-6 months for Type I, 6-12 months for Type II. The Readiness Checklist above gives you an honest assessment of where you are today.'
+    },
+    {
+      question: 'Can I use these tools as audit evidence?',
+      answer: 'Yes — screenshots and output from these tools serve as evidence of control verification. For example, Security Headers Analyzer results demonstrate CC6.1 compliance, and the TLS Checker output documents encryption in transit.'
+    }
+  ],
+  '/tools/policy-generator': [
+    {
+      question: 'Are these policy templates sufficient for a SOC 2 audit?',
+      answer: 'They cover the core requirements that auditors expect for the three most-requested policies. However, every organization is different — review with your security team and auditor to ensure they accurately reflect your actual practices. Auditors check that policies match reality, not just that documents exist.'
+    },
+    {
+      question: 'How often should policies be reviewed?',
+      answer: 'SOC 2 expects annual policy reviews at minimum. Best practice is to review after any significant incident, system change, or organizational change. Document the review date and reviewer in the policy footer.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, soc2Content)
+Object.assign(toolSpecificFAQ, soc2FAQs)

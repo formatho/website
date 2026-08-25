@@ -70,6 +70,9 @@ export const tools: ToolCategory[] = [
     icon: '🔐',
     blurb: 'Hash generators, JWT debugger, SAML decoder, OIDC builder, encryption, TOTP, password analysis, and credential tools - all client-side.',
     items: [
+      { name: 'TLS Certificate Checker', description: 'Check TLS/SSL certificate expiry, issuer, and security configuration. Paste openssl output for instant analysis.', route: '/tools/tls-checker', iconName: 'Lock' },
+      { name: 'SOC 2 Readiness Checklist', description: 'Interactive checklist covering all 5 Trust Service Criteria with linked tools for each control.', route: '/tools/soc2-checklist', iconName: 'ClipboardCheck' },
+      { name: 'Security Policy Generator', description: 'Generate password, access control, and incident response policies for SOC 2 compliance.', route: '/tools/policy-generator', iconName: 'FileText' },
       { name: 'Security Headers Analyzer', description: 'Check HSTS, CSP, X-Frame-Options and more on any URL. Graded A-F with fix recommendations.', route: '/tools/security-headers', iconName: 'ShieldCheck' },
       { name: 'CSP Generator', description: 'Build Content-Security-Policy headers visually. Configure directives and copy the header.', route: '/tools/csp-generator', iconName: 'Shield' },
       { name: 'CSP Evaluator', description: 'Analyze a CSP header for weaknesses: unsafe-inline, wildcards, missing directives, bypass risks.', route: '/tools/csp-evaluator', iconName: 'ScanSearch' },
