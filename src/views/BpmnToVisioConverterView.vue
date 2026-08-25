@@ -858,6 +858,30 @@ const reset = () => {
       </div>
     </div>
 
+    <!-- SEO: How to convert -->
+    <section class="mt-8 space-y-4 prose-sm">
+      <h2 class="text-xl font-bold">How to Convert BPMN to Visio</h2>
+      <ol class="list-decimal pl-6 space-y-2 text-muted-foreground">
+        <li><strong class="text-foreground">Export or copy your BPMN 2.0 XML</strong> — from Camunda Modeler, bpmn.io, Signavio, or any BPMN editor (File → Export → BPMN 2.0 XML).</li>
+        <li><strong class="text-foreground">Paste it or upload the .bpmn file above</strong> — the converter parses tasks, events, gateways, pools, and sequence flows entirely in your browser.</li>
+        <li><strong class="text-foreground">Download the .vdx file and open it in Visio</strong> — Microsoft Visio (2010+) and Visio for the web open VDX natively; shapes remain editable.</li>
+      </ol>
+
+      <h2 class="text-xl font-bold mt-6">How to Import BPMN into Visio</h2>
+      <p class="text-muted-foreground">Visio has no built-in BPMN import. The usual path is the one above: convert the BPMN XML to Visio's VDX format first, then open the file directly (File → Open) — no Visio add-in or stencil install needed. If you only need to view a BPMN diagram, try our <a class="text-primary underline" href="/tools/bpmn">BPMN Viewer</a> instead.</p>
+
+      <h2 class="text-xl font-bold mt-6">What This BPMN to Visio Converter Supports</h2>
+      <ul class="list-disc pl-6 space-y-1 text-muted-foreground">
+        <li>BPMN 2.0 XML from Camunda, bpmn.io, Flowable, Activiti, Signavio and Bizagi exports</li>
+        <li>Tasks (user, service, script), start/end events, exclusive/parallel gateways</li>
+        <li>Sequence flows, pools and lanes — mapped to native Visio shapes</li>
+        <li>Output: Visio VDX (.vdx), compatible with Visio 2010, 2013, 2016, 2019, 2021 and Microsoft 365</li>
+      </ul>
+
+      <h2 class="text-xl font-bold mt-6">Why Convert Client-Side?</h2>
+      <p class="text-muted-foreground">Process diagrams often describe internal business logic — approval chains, system boundaries, vendors. Uploading them to an online converter server sends that picture of your operations to a third party. This converter runs 100% in your browser: <a class="text-primary underline" href="/blogs/developer-tools-that-dont-spy-on-you">no uploads, no tracking</a>, works offline once loaded.</p>
+    </section>
+
     <!-- Related Tools -->
     <div class="mt-4 p-6 bg-muted/20 rounded-lg border border-border">
       <h2 class="text-xl font-bold mb-4">Related Tools</h2>
