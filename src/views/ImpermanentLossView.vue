@@ -5,6 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 import { useSEO } from '@/composables/useSEO'
+import { Line } from 'vue-chartjs'
+import {
+  Chart as ChartJS, CategoryScale, LinearScale, PointElement,
+  LineElement, Title, Tooltip, Legend, Filler
+} from 'chart.js'
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler)
 
 useSEO({
   title: 'Impermanent Loss Calculator - Uniswap V2 & V3 | Formatho',
@@ -37,6 +44,83 @@ const referenceTable = [
   { change: '5x', ratio: 5, il: '-25.46%' },
   { change: '10x', ratio: 10, il: '-44.34%' },
 ]
+
+// ─── IL Curve Chart ───
+const chartData = computed(() => {
+  const labels: string[] = []
+  const ilData: number[] = []
+  const hodlData: number[] = []
+  const lpData: number[] = []
+
+  // Generate points from 0.2x to 5x price ratio
+  for (let ratio = 0.2; ratio <= 5.05; ratio += 0.05) {
+    const pct = Math.round((ratio - 1) * 100)
+    labels.push(`${ratio.toFixed(1)}x`)
+    const ilVal = (2 * Math.sqrt(ratio)) / (1 + ratio) - 1
+    ilData.push(ilVal * 100)
+    hodlData.push(0) // HODL is always the baseline
+    lpData.push(ilVal * 100) // LP value change = IL (relative to HODL)
+  }
+
+  return {
+    labels,
+    datasets: [
+      {
+        label: 'Impermanent Loss (%)',
+        data: ilData,
+        borderColor: 'rgb(239, 68, 68)',
+        backgroundColor: 'rgba(239, 68, 68, 0.08)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 0,
+        borderWidth: 2,
+      },
+      {
+        label: 'Your position',
+        data: labels.map((_, i) => {
+          const label = labels[i]
+          const ratio = parseFloat(label.replace('x', ''))
+          return Math.abs(ratio - priceRatio.value) < 0.03 ? ilData[i] : null
+        }),
+        borderColor: 'rgb(59, 130, 246)',
+        backgroundColor: 'rgb(59, 130, 246)',
+        pointRadius: 6,
+        pointHoverRadius: 8,
+        showLine: false,
+      },
+    ],
+  }
+})
+
+const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: true,
+      labels: { fontSize: 11, boxWidth: 20 }
+    },
+    tooltip: {
+      callbacks: {
+        title: (items: Array<{ label: string }>) => `Price ratio: ${items[0]?.label}`,
+        label: (item: { datasetIndex: number; parsed: { y: number } }) =>
+          item.datasetIndex === 0
+            ? `IL: ${item.parsed.y.toFixed(2)}%`
+            : 'Your position',
+      },
+    },
+  },
+  scales: {
+    x: {
+      title: { display: true, text: 'Price ratio (new / old)', font: { size: 11 } },
+      ticks: { maxTicksLimit: 15, font: { size: 10 } },
+    },
+    y: {
+      title: { display: true, text: 'Impermanent Loss (%)', font: { size: 11 } },
+      ticks: { callback: (val: string | number) => `${val}%`, font: { size: 10 } },
+    },
+  },
+}
 
 // Fee offset calculator
 const feeAPR = ref(20) // % APR from fees
@@ -112,6 +196,21 @@ const breakEvenIL = computed(() => {
         </CardContent>
       </Card>
     </div>
+
+    <!-- IL Curve Chart -->
+    <Card class="mb-6">
+      <CardHeader><CardTitle class="text-lg">Impermanent loss curve</CardTitle></CardHeader>
+      <CardContent>
+        <div style="height: 320px; position: relative;">
+          <Line :data="chartData" :options="chartOptions" />
+        </div>
+        <p class="text-xs text-muted-foreground mt-3 leading-relaxed">
+          The curve shows IL across all price ratios (0.2x to 5x). The blue dot marks your current position at
+          {{ priceRatio.toFixed(2) }}x ({{ priceChangePct > 0 ? '+' : '' }}{{ priceChangePct }}% price change).
+          Note the asymmetry: IL is worse when prices fall than when they rise by the same ratio.
+        </p>
+      </CardContent>
+    </Card>
 
     <!-- Quick reference -->
     <Card class="mb-6">
