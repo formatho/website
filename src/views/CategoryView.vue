@@ -8,6 +8,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { tools, categoryMeta } from '@/data/tools'
+import { evmChains } from '@/data/evmChains'
 import { useSEO } from '@/composables/useSEO'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 import CategoryIcon from '@/components/CategoryIcon.vue'
@@ -22,6 +23,33 @@ const category = computed(() => {
   return tools.find((c) => c.slug === slug.value || c.slug === pathSlug)
 })
 const siblings = computed(() => tools.filter((c) => c.slug !== slug.value))
+
+// Group tools by subcategory when present
+const groupedTools = computed(() => {
+  if (!category.value) return []
+  const groups: Array<{ name: string; items: typeof category.value.items }> = []
+  const ungrouped: typeof category.value.items = []
+  
+  for (const tool of category.value.items) {
+    const sub = (tool as { subcategory?: string }).subcategory
+    if (sub) {
+      let group = groups.find(g => g.name === sub)
+      if (!group) {
+        group = { name: sub, items: [] }
+        groups.push(group)
+      }
+      group.items.push(tool)
+    } else {
+      ungrouped.push(tool)
+    }
+  }
+  
+  if (ungrouped.length > 0) {
+    groups.push({ name: 'All Tools', items: ungrouped })
+  }
+  
+  return groups
+})
 
 const catName = computed(() => category.value?.category || 'Tools')
 const catBlurb = computed(() => category.value?.blurb || '')
@@ -50,22 +78,43 @@ useSEO({
       <p class="text-base text-muted-foreground leading-relaxed mt-4 max-w-3xl">{{ catBlurb }}</p>
     </div>
 
-    <!-- Tools grid -->
-    <div v-if="category" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-      <RouterLink
-        v-for="tool in category.items"
-        :key="tool.route"
-        :to="tool.route"
-        class="group border border-border rounded-xl p-5 hover:border-primary/50 hover:bg-primary/5 transition-colors"
-      >
-        <div class="flex items-start justify-between gap-3">
-          <div class="min-w-0">
-            <h2 class="font-semibold text-foreground group-hover:text-primary transition-colors">{{ tool.name }}</h2>
-            <p class="text-sm text-muted-foreground mt-1 line-clamp-2 leading-relaxed">{{ tool.description }}</p>
-          </div>
-          <ArrowRight class="w-4 h-4 text-muted-foreground group-hover:text-primary flex-shrink-0 mt-1 transition-colors" />
+    <!-- Tools grid (grouped by subcategory when available) -->
+    <div v-if="category">
+      <div v-for="group in groupedTools" :key="group.name" class="mb-10">
+        <h2 v-if="groupedTools.length > 1" class="text-xl font-bold mb-4 text-muted-foreground">{{ group.name }}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <RouterLink
+            v-for="tool in group.items"
+            :key="tool.route"
+            :to="tool.route"
+            class="group border border-border rounded-xl p-5 hover:border-primary/50 hover:bg-primary/5 transition-colors"
+          >
+            <div class="flex items-start justify-between gap-3">
+              <div class="min-w-0">
+                <h3 class="font-semibold text-foreground group-hover:text-primary transition-colors">{{ tool.name }}</h3>
+                <p class="text-sm text-muted-foreground mt-1 line-clamp-2 leading-relaxed">{{ tool.description }}</p>
+              </div>
+              <ArrowRight class="w-4 h-4 text-muted-foreground group-hover:text-primary flex-shrink-0 mt-1 transition-colors" />
+            </div>
+          </RouterLink>
         </div>
-      </RouterLink>
+      </div>
+    </div>
+
+    <!-- EVM chain quick links (only on web3 category) -->
+    <div v-if="category?.slug === 'web3'" class="mb-12">
+      <h2 class="text-xl font-bold mb-4">Browse by chain</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        <RouterLink
+          v-for="chain in evmChains"
+          :key="chain.slug"
+          :to="`/evm-tools/${chain.slug}`"
+          class="group border border-border rounded-lg p-4 hover:border-primary/50 hover:bg-primary/5 transition-colors text-center"
+        >
+          <p class="text-sm font-medium group-hover:text-primary transition-colors">{{ chain.name }}</p>
+          <p class="text-xs text-muted-foreground mt-0.5">{{ chain.tokenSymbol }} · ID {{ chain.chainId }}</p>
+        </RouterLink>
+      </div>
     </div>
 
     <!-- Sibling categories (internal links) -->
