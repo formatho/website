@@ -541,21 +541,6 @@ export const routes = [
         meta: routeMeta['toml-to-yaml']
       },
       {
-        path: '/tools/xml-json-converter',
-        name: 'xml-json-converter',
-        redirect: '/tools/xml-json'
-      },
-      {
-        path: '/tools/xml-to-json',
-        name: 'xml-to-json',
-        redirect: '/tools/xml-json'
-      },
-      {
-        path: '/tools/json-to-xml',
-        name: 'json-to-xml',
-        redirect: '/tools/xml-json'
-      },
-      {
         path: '/tools/markdown-to-html',
         name: 'markdown-to-html',
         component: () => import(/* webpackPrefetch: true */ '../views/MarkdownToHtmlView.vue'),
@@ -1013,9 +998,6 @@ export const routes = [
         meta: routeMeta['category-network']
       },
       // Legacy category slugs redirect to new pages
-      { path: '/category/blockchain', redirect: '/category/web3' },
-      { path: '/category/crypto-security', redirect: '/category/security' },
-      { path: '/category/development', redirect: '/category/developer' },
       { path: '/category/web-network', redirect: '/category/network' },    ]
   },
   // 404 Catch-all route
