@@ -2052,3 +2052,54 @@ const p2FAQs = {
 
 Object.assign(toolSEOContent, p2Content)
 Object.assign(toolSpecificFAQ, p2FAQs)
+
+
+/** Key features for tools — improves text-to-HTML ratio */
+const toolFeatures = {
+  '/tools/emoji-picker': ["Browse by category or search by name", "One-click copy to clipboard", "Works offline after page load", "Includes the full Unicode emoji set"],
+  '/tools/math-evaluator': ["Supports standard operators: + - * / % ^", "Built-in functions: sqrt, sin, cos, tan, log, abs", "Constants: pi, e", "Results update as you type"],
+  '/tools/html-wysiwyg-editor': ["Rich-text toolbar with common formatting", "Live HTML preview as you type", "Clean semantic HTML output", "Supports links, lists, tables, and images"],
+  '/tools/color-converter': ["Convert between HEX, RGB, HSL, HSV, and CMYK", "Visual color preview updates in real-time", "CSS-ready code snippets", "Includes color name lookup for common values"],
+  '/tools/xml-json': ["Bidirectional: XML to JSON and JSON to XML", "Handles attributes with @ prefix convention", "Preserves namespace information", "Real-time conversion with error detection"],
+  '/tools/yaml-lint': ["Validates YAML syntax with error positions", "Formats and beautifies YAML documents", "Supports YAML 1.2 specification", "Detects common pitfalls like tabs and duplicate keys"],
+  '/tools/json-to-toml': ["Converts JSON objects to TOML tables", "Handles nested structures correctly", "Preserves data types (strings, numbers, booleans, arrays)", "Validates input before converting"],
+  '/tools/yaml-to-toml': ["Converts YAML to TOML format", "Handles multi-line strings and anchors", "Preserves comments where possible", "Real-time output as you type"],
+  '/tools/toml-to-yaml': ["Converts TOML to YAML format", "Handles nested tables and arrays", "Preserves data types accurately", "Validates TOML syntax first"],
+  '/tools/toml-to-json': ["Converts TOML to JSON format", "Handles inline tables and arrays of tables", "Preserves data types exactly", "Validates TOML before converting"],
+  '/tools/svg-placeholder-generator': ["Customizable width, height, and colors", "Optional text label in the center", "Generates valid SVG code", "Copy or download the SVG file"],
+  '/tools/json-csv': ["Converts JSON to CSV and CSV to JSON", "Flattens nested objects automatically", "Configurable delimiter and quoting", "Handles arrays of objects or single objects"],
+  '/tools/roman-numeral-converter': ["Converts Roman numerals to Arabic numbers", "Converts Arabic numbers to Roman numerals", "Supports values from 1 to 3999", "Validates input format"],
+  '/tools/keycode-info': ["Shows keyCode, key, and code properties", "Captures modifier keys (Ctrl, Shift, Alt, Meta)", "Displays in real-time as you press keys", "Useful for building keyboard shortcuts"],
+  '/tools/ipv4-range-expander': ["Expands CIDR ranges to individual IPs", "Calculates the total number of addresses", "Handles /24 through /32 ranges", "Copy the full list or download as text"],
+  '/tools/slugify-string': ["Converts text to URL-friendly slugs", "Removes accents and special characters", "Handles multiple separator options", "Preserves readability"],
+  '/tools/wifi-qr-code-generator': ["Generates QR codes for WiFi credentials", "Supports WPA, WEP, and open networks", "Includes SSID, password, and encryption type", "Guests scan to connect instantly"],
+  '/tools/chronometer': ["Millisecond precision timing", "Start, pause, and reset controls", "Keyboard shortcuts for hands-free use", "Lap times for interval tracking"],
+  '/tools/iban-validator': ["Validates IBAN format and check digits", "Extracts country code and bank code", "Supports all SEPA countries", "Detects common input errors"],
+  '/tools/text-to-unicode': ["Shows Unicode code points for each character", "Includes HTML entity equivalents", "Displays decimal and hexadecimal values", "Handles multi-byte characters correctly"],
+  '/tools/camera-recorder': ["Records HD video and audio from webcam", "No software installation needed", "Download as WebM format", "All processing happens locally"],
+  '/tools/mac-address-lookup': ["Identifies the vendor from MAC address", "Uses the IEEE OUI database", "Shows organization name and address prefix", "Supports all MAC address formats"],
+  '/tools/user-agent-parser': ["Extracts browser name and version", "Identifies operating system and platform", "Detects device type (mobile, tablet, desktop)", "Shows rendering engine information"],
+  '/tools/integer-base-converter': ["Converts between binary, octal, decimal, and hex", "Handles large numbers", "Shows all bases simultaneously", "Includes step-by-step conversion"],
+  '/tools/phone-parser': ["Parses phone numbers in any format", "Extracts country code and area code", "Identifies number type (mobile, landline)", "Formats to international standard"],
+  '/tools/ipv4-address-converter': ["Converts IP to binary, octal, and hex", "Shows each octet in binary", "Identifies address class", "Includes subnet mask information"],
+  '/tools/list-converter': ["Converts between comma, newline, and JSON formats", "Custom delimiter support", "Add or remove quotes", "Handles empty entries"],
+  '/tools/random-port-generator': ["Generates random port numbers", "Avoids well-known ports (0-1023)", "Choose registered or dynamic range", "Generate single or batches"],
+  '/tools/safelink-decoder': ["Extracts original URL from Outlook SafeLinks", "Handles all safelink.protection.outlook.com formats", "Shows the decoded URL clearly", "No data sent to any server"],
+  '/tools/text-statistics': ["Word count, character count, sentence count", "Reading time estimation", "Paragraph and line count", "Average words per sentence"],
+  '/tools/visio-viewer': ["Opens .vsdx files without Visio installed", "Renders shapes and connectors", "Zoom and pan capabilities", "All rendering happens locally"],
+  '/tools/benchmark-builder': ["Compare multiple code snippets", "Measures execution time with statistics", "Configurable iteration count", "Shows mean, median, and standard deviation"],
+  '/tools/bpmn': ["Renders BPMN 2.0 process diagrams", "Exports as PDF", "Handles standard BPMN elements", "Zoom and pan for large diagrams"],
+  '/tools/email-normalizer': ["Removes plus-addressing (user+tag@ \u2192 user@)", "Normalizes Gmail dot variations", "Lowercases domain for comparison", "Outputs deduplicated list"],
+  '/tools/text-to-nato-alphabet': ["Converts each letter to its NATO word", "Includes the complete alphabet", "Handles numbers and punctuation", "Useful for phone and radio communication"],
+  '/tools/base64-file-converter': ["Converts any file to Base64", "Handles images, fonts, PDFs, and binaries", "Shows file size and encoded length", "One-click copy of the result"],
+  '/tools/temperature-converter': ["Converts between Celsius, Fahrenheit, Kelvin, and Rankine", "Enter in any scale to see all others", "Includes common reference points", "Real-time conversion"],
+  '/tools/numeronym-generator': ["Creates numeronyms like i18n and k8s", "Handles multi-word phrases", "Shows the abbreviation breakdown", "Useful for tech naming conventions"],
+  '/tools/percentage-calculator': ["Calculate percentage of a number", "Calculate percentage increase or decrease", "Find what percentage one number is of another", "Reverse percentage calculations"],
+}
+
+// Merge features into existing content entries
+for (const [route, feats] of Object.entries(toolFeatures)) {
+  if (toolSEOContent[route]) {
+    toolSEOContent[route].features = feats
+  }
+}
