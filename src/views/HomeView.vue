@@ -379,8 +379,8 @@ const _popularTools = [
             </div>
             <div class="w-px h-10 bg-foreground"></div>
             <div>
-              <div class="text-3xl font-bold text-primary">60+</div>
-              <div class="text-xs text-muted-foreground">Guides &amp; tutorials</div>
+              <div class="text-3xl font-bold text-primary">Always</div>
+              <div class="text-xs text-muted-foreground">Free, no limits</div>
             </div>
             <div class="w-px h-10 bg-foreground"></div>
             <div>
