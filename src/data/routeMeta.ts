@@ -68,7 +68,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'json to csv converter, csv to json, convert json csv online, json csv free tool, csv json transformer, excel json converter, data conversion tool, privacy-first',
   },
   'diff': {
-    title: 'Text Diff Checker Online - Free File Comparison Tool | Formatho',
+    title: 'Text Diff Checker Online | Formatho',
     description: 'Compare two texts online and highlight differences instantly. Free diff checker for code review, document comparison, and version tracking. Shows additions, deletions, and changes side-by-side. 100% client-side.',
     keywords: 'text diff online, diff checker, compare text online, file comparison tool, text difference, code diff, diff tool free, online text compare, privacy-first',
   },
@@ -118,7 +118,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'uuid generator online, uuid v4 generator, generate uuid online, guid generator, unique id generator, uuid v1, uuid v5, random uuid, batch uuid generator, free uuid tool, privacy-first',
   },
   'lorem': {
-    title: 'Lorem Ipsum Generator Online - Free Placeholder Text | Formatho',
+    title: 'Lorem Ipsum Generator Online | Formatho',
     description: 'Generate Lorem Ipsum placeholder text online instantly. Create paragraphs, sentences, and words for mockups, wireframes, and design templates. Free dummy text generator — 100% client-side.',
     keywords: 'lorem ipsum generator, placeholder text, dummy text generator, lorem ipsum, privacy-first',
   },
@@ -128,12 +128,12 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'image compressor, compress image online, reduce image size, optimize images, ai image compressor, webp compressor, png optimizer, jpg reducer, batch image compression, free image tool, privacy-first',
   },
   'json-lint': {
-    title: 'JSON Validator Online - Free JSON Formatter & Linter | Formatho',
+    title: 'JSON Validator & Formatter Online | Formatho',
     description: 'Free online JSON validator and formatter. Check JSON syntax errors, beautify minified JSON, and validate API responses instantly in your browser. No upload, 100% private. Supports JSON5 comments.',
     keywords: 'json validator online, json formatter online, json linter, validate json, json checker, json beautifier, json parser online, json syntax checker, json to pretty, free json tool, privacy-first',
   },
   'yaml-lint': {
-    title: 'YAML Validator Online - Free YAML Linter & Formatter | Formatho',
+    title: 'YAML Validator & Linter Online | Formatho',
     description: 'Free online YAML validator and formatter. Check YAML syntax errors, format and beautify YAML instantly. Validate docker-compose, Kubernetes configs, CI/CD pipelines, and more. 100% client-side, no data uploaded.',
     keywords: 'yaml linter, yaml validator, yaml formatter, validate yaml, yaml checker, privacy-first',
   },
@@ -183,22 +183,22 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'private key to address, eth address, btc address, solana address, multi chain tool',
   },
   'cosmos-address-generator': {
-    title: 'Cosmos Address Generator - ATOM, OSMO, JUNO, AKT, INJ & More | Formatho',
+    title: 'Cosmos Address Generator - Multi-Chain | Formatho',
     description: 'Free Cosmos address generator for Cosmos Hub (ATOM), Osmosis (OSMO), Juno (JUNO), Secret Network (SCRT), Stargaze (STARS), Akash (AKT), Kava (KAVA), Injective (INJ), Crescent (CRE), and Umee (UMEE). Generate Bech32 addresses from BIP39 seed phrases with real BIP32/BIP44 derivation. 100% client-side, privacy-first.',
     keywords: 'cosmos address generator, cosmos hub address, atom address generator, osmosis address generator, osmo address, juno address generator, secret network address, scrt address, stargaze address, stars address, akash address generator, akt address, kava address, injective address, inj address, crescent address, cre address, umee address, bech32 address generator, bip39 cosmos, bip44 cosmos, cosmos wallet generator, cosmos seed phrase, cosmos mnemonic, multi chain wallet, secp256k1, blockchain address tool',
   },
   'rwa-swap': {
-    title: 'RWA Asset Swap - Cross-Chain Token Swap for Real-World Assets | Formatho',
+    title: 'RWA Asset Swap - Cross-Chain | Formatho',
     description: 'Swap RWA tokens, stablecoins (USDC, USDT, DAI), and native assets across 15+ EVM chains. Cross-chain routing powered by LI.FI. Transfer RWA tokens between Ethereum, Arbitrum, Base, Optimism, Polygon, Avalanche and more. Connect MetaMask or Rabby.',
     keywords: 'rwa swap, cross-chain swap, real world asset swap, li.fi swap, erc20 bridge, stablecoin swap, usdc cross-chain, usdt bridge, rwa token exchange, tokenized asset swap, multi-chain swap, ethereum arbitrum swap, base polygon bridge, metamask swap, rabby wallet swap, defi swap tool',
   },
   'rwa-deploy-lab': {
-    title: 'RWA Tokenization Lab - Deploy ERC-20 Mirror Tokens & Fractional Assets On-Chain | Formatho',
+    title: 'RWA Tokenization Lab - Deploy Assets On-Chain | Formatho',
     description: 'Deploy real-world asset (RWA) smart contracts directly from your browser. Create ERC-20 mirror tokens for stocks like AAPL and AMZN, fractional ownership contracts, and custom tokenization contracts. Connect MetaMask or Rabby wallet, configure parameters, and deploy on Ethereum, Polygon, Arbitrum, Base, and Optimism. Free POC tool for RWA and DeFi developers.',
     keywords: 'rwa tokenization, real world asset tokenization, rwa deployment tool, tokenization factory, compliance manager smart contract, kyc aml blockchain, sanctions screening on-chain, transfer manager erc20, identity registry wallet mapping, treasury fee collection solidity, governance timelock dao, asset registry nft, fractional token erc20, vault custody contract, rwa architecture, erc20 mirror token deploy, fractional ownership contract, asset tokenization platform, rwa smart contract, tokenize real estate, tokenize stocks, aapl mirror token, amzn mirror token, create tokenized asset, factory pattern solidity, rwa defi, real world asset blockchain, metamask smart contract deploy, rabby wallet deploy, deploy erc20 browser, tokenization poc, rwa lab, blockchain asset tokenization, on-chain rwa, erc20 deployment tool, fractional shares, rwa project builder, defi poc tool, createasset, batch token deployment, compliance kyc smart contract, transfer restriction contract, asset fractionalization flow',
   },
   'solidity-to-opcodes': {
-    title: 'Solidity to EVM Opcodes Compiler - View Smart Contract Assembly | Formatho',
+    title: 'Solidity to Opcodes Compiler | Formatho',
     description: 'Compile Solidity to EVM Opcodes and Bytecode in your browser. View the assembly of your smart contracts. Multiple compiler versions. 100% client-side.',
     keywords: 'solidity compile, evm opcodes, smart contract assembly, solidity bytecode, compiler, solidity to opcode, evm disassembler, blockchain development',
   },
@@ -273,7 +273,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'ethereum vanity address generator, evm vanity address, vanity eth address, polygon vanity address, bsc vanity address generator, base chain vanity address, custom wallet address, safe vanity address, client-side vanity',
   },
   'security-headers': {
-    title: 'Security Headers Analyzer - Check HSTS, CSP, X-Frame | Formatho',
+    title: 'Security Headers Checker | Formatho',
     description: 'Analyze HTTP security headers on any URL: HSTS, Content-Security-Policy, X-Frame-Options and more. Graded A-F with fix recommendations. Runs from your browser.',
     keywords: 'security headers check, hsts check, csp header analyzer, x-frame-options, http security headers, website security scan',
   },
@@ -351,7 +351,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Encrypt and decrypt text online with AES-256, DES, and TripleDES. Free client-side encryption tool — your text and keys never leave your browser. Perfect for encrypting sensitive messages and API keys.',
   },
   'bip39-generator': {
-    title: 'BIP39 Mnemonic Generator Online - 12 & 24 Word Seeds | Formatho',
+    title: 'BIP39 Mnemonic Generator | Formatho',
     description: 'Generate BIP39 mnemonic phrases and derive seeds. Privacy-first crypto tool.',
   },
   'crypto-forecasts': {
@@ -383,7 +383,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Convert between Roman numerals and numbers.',
   },
   'base64-file-converter': {
-    title: 'Base64 File Converter Online - Encode & Decode Files | Formatho',
+    title: 'Base64 File Converter Online | Formatho',
     description: 'Convert files to and from Base64 format. Privacy-first tool.',
   },
   'text-to-nato-alphabet': {
@@ -570,7 +570,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Benchmark JavaScript code performance.',
   },
   'text-statistics': {
-    title: 'Text Statistics Counter - Words, Chars, Reading Time | Formatho',
+    title: 'Text Statistics Counter | Formatho',
     description: 'Analyze text statistics (characters, words, etc).',
   },
   'emoji-picker': {
@@ -607,7 +607,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Generate cron expressions with visual builder.',
   },
   'regex-tester': {
-    title: 'Regex Tester Online - Free Regular Expression Tester | Formatho',
+    title: 'Regex Tester Online | Formatho',
     description: 'Test and debug regular expressions online instantly. Match patterns, capture groups, flags (global, case-insensitive), and see results in real-time. Free regex tester for JavaScript, Python, and PCRE. 100% client-side.',
     keywords: 'regex tester online, regular expression tester, regex checker, regex validator, test regex online, regex matcher, regex debugger, free regex tool, privacy-first',
   },
@@ -616,7 +616,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Evaluate mathematical expressions.',
   },
   'quantum-circuit-simulator': {
-    title: 'Quantum Circuit Simulator - Design & Simulate Quantum Circuits | Formatho',
+    title: 'Quantum Circuit Simulator | Formatho',
     description: 'Design and simulate quantum circuits with real quantum gates. Build circuits with Hadamard, Pauli gates, CNOT, and measurements. Perfect for learning quantum computing concepts. Free, 100% client-side simulator.',
     keywords: 'quantum circuit simulator, quantum computing, quantum gates, hadamard gate, cnot gate, quantum simulator, qubits, superposition, entanglement, quantum learning, free quantum tool, privacy-first',
   },
