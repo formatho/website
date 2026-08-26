@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import CodeEditor from '@/components/CodeEditor.vue'
 import { Button } from '@/components/ui/button'
 
-const inputText = ref('')
+const inputText = ref('5 < 10 & "quoted text" > 3')
 const encodedText = ref('')
 const decodedText = ref('')
 

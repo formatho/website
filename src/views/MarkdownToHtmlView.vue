@@ -10,7 +10,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import CodeEditor from '@/components/CodeEditor.vue'
 import { Button } from '@/components/ui/button'
 
-const markdownInput = ref('')
+const markdownInput = ref('# Hello World\n\nThis is **bold** and *italic* text.\n\n- Item 1\n- Item 2\n- Item 3\n\n> A blockquote for emphasis.\n\n[Link](https://example.com)')
 const htmlOutput = ref('')
 const error = ref('')
 

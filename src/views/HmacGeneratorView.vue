@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 
-const message = ref('')
+const message = ref('Hello, World!')
 const secretKey = ref('')
 const algorithm = ref('SHA256')
 const hmacResult = ref('')

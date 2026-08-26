@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import CodeEditor from '@/components/CodeEditor.vue'
 
-const dockerRunInput = ref('')
+const dockerRunInput = ref('docker run -d --name web-app -p 8080:80 -e NODE_ENV=production -v /data:/app/data --restart unless-stopped nginx:latest')
 const dockerComposeOutput = ref('')
 
 const convertToCompose = () => {
