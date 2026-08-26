@@ -5,19 +5,22 @@ import { useSEO } from '@/composables/useSEO'
 import { homeIntro, homeCategoryDetail, homeFAQ } from '@/data/homeSEO'
 
 // FAQPage JSON-LD for homepage FAQ (matches visible text in src/data/homeSEO.ts)
-const faqLd = document.createElement('script')
-faqLd.type = 'application/ld+json'
-faqLd.id = 'json-ld-home-faq'
-faqLd.textContent = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: homeFAQ.map((f) => ({
-    '@type': 'Question',
-    name: f.question,
-    acceptedAnswer: { '@type': 'Answer', text: f.answer }
-  }))
+// Injected on mount so SSG prerendering (no `document` on server) is not broken.
+onMounted(() => {
+  const faqLd = document.createElement('script')
+  faqLd.type = 'application/ld+json'
+  faqLd.id = 'json-ld-home-faq'
+  faqLd.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: homeFAQ.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer }
+    }))
+  })
+  document.head.appendChild(faqLd)
 })
-document.head.appendChild(faqLd)
 
 useSEO({
   title: 'Free Developer Tools and AI Platform | Formatho',
