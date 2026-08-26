@@ -6,33 +6,6 @@ Every tool page states what the tool does, how to use it step by step, and answe
 
 ## Tools
 
-### Web3 & Blockchain
-
-- [Impermanent Loss Calculator]: https://formatho.com/tools/impermanent-loss — Calculate IL for any price change. Compare HODL vs LP value with fee offset analysis.
-- [ERC-4626 Vault Calculator]: https://formatho.com/tools/vault-calculator — Convert vault shares to assets, calculate share price and projected returns for Morpho, Yearn, and any ERC-4626 vault.
-- [APY Calculator]: https://formatho.com/tools/apy-calculator — Convert APR to APY with any compounding frequency. Compare DeFi yields accurately.
-- [Vanity Address Generator]: https://formatho.com/tools/vanity-eth — Generate Ethereum addresses with a custom prefix or suffix. Keys are created in your browser and never transmitted.
-- [EVM Contract Reader]: https://formatho.com/tools/contract-reader — Paste an ABI and call view functions on any deployed contract via your own RPC endpoint. Works on every EVM chain.
-- [Solana Account Reader]: https://formatho.com/tools/solana-account-reader — Look up Solana accounts, decode SPL token accounts, and derive PDAs - client-side via any Solana RPC.
-- [Polkadot Substrate Reader]: https://formatho.com/tools/polkadot-reader — Substrate chain info, raw storage queries, and SS58 address conversion for Polkadot, Kusama, and local nodes.
-- [Cardano Address Reader]: https://formatho.com/tools/cardano-reader — ADA balance, UTxO count, and stake info for any Cardano address via the keyless Koios API.
-- [Cosmos Account Reader]: https://formatho.com/tools/cosmos-reader — ATOM and token balances, delegations, and rewards for any Cosmos SDK account - plus a bech32 converter for every chain prefix.
-- [Function Selector Calculator]: https://formatho.com/tools/function-selector — Compute 4-byte Solidity function selectors from signatures with Keccak-256. Batch mode for ABI work.
-- [ENS Namehash Calculator]: https://formatho.com/tools/ens-namehash — Derive EIP-137 namehash and labelhash values for any ENS name, with the full derivation chain.
-- [Cosmos Address Generator]: https://formatho.com/tools/cosmos-address-generator — Generate addresses for Cosmos Hub (ATOM), Osmosis (OSMO), Juno (JUNO), Akash (AKT), Injective (INJ), Kava, Stargaze, Secret Network and more from BIP39 seed phrases.
-- [Multi-Chain Wallet]: https://formatho.com/tools/multi-chain-keys — Generate keys & addresses for multiple blockchains from one mnemonic, derive addresses from keys, and validate checksums.
-- [Address Checksum (EIP-55)]: https://formatho.com/tools/address-checksum — Validate and checksum Ethereum addresses. Prevent spoofed address attacks.
-- [EVM Unit Converter]: https://formatho.com/tools/evm-converter — Convert between Wei, Gwei, and Ether.
-- [Keccak-256 Hasher]: https://formatho.com/tools/keccak256 — Generate Keccak-256 hashes for Ethereum.
-- [Solidity to Opcodes]: https://formatho.com/tools/solidity-to-opcodes — Compile Solidity to EVM opcodes.
-- [ABI Encoder & Decoder]: https://formatho.com/tools/abi-encoder — Encode/decode Solidity ABI parameters, function selectors, and transaction calldata.
-- [RWA Asset Swap]: https://formatho.com/tools/rwa-swap — Swap RWA tokens, stablecoins, and native assets across 15+ EVM chains. Cross-chain routing via LI.FI.
-- [RWA Tokenization Lab]: https://formatho.com/tools/rwa-deploy-lab — Deploy ERC-20 mirror tokens for stocks (AAPL, AMZN), fractional ownership contracts, and custom tokenization contracts on-chain via MetaMask or Rabby.
-- [Private Key to Address Converter]: https://formatho.com/tools/address-from-key — Derive addresses for Ethereum, Bitcoin, Solana, and more from a private key. Runs entirely in browser.
-- [BLS12-381 Signature Generator & Verifier]: https://formatho.com/tools/bls-signature — Generate BLS12-381 signatures, verify signatures, and aggregate multiple signatures into one. 100% client-side, privacy-first.
-- [BIP39 Passphrase]: https://formatho.com/tools/bip39-generator — Generate BIP39 mnemonic phrases for cryptocurrency wallets.
-- [AI Crypto Price Forecasts]: https://formatho.com/tools/crypto-forecasts — 30-day crypto price predictions using Google TimesFM 2.5. Privacy-first AI forecasts for BTC, ETH, SOL, and more.
-
 ### Security & Auth
 
 - [TLS Certificate Checker]: https://formatho.com/tools/tls-checker — Check TLS/SSL certificate expiry, issuer, and security configuration. Paste openssl output for instant analysis.
