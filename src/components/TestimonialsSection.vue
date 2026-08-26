@@ -116,7 +116,7 @@ const testimonials = ref<Testimonial[]>([
             <div class="text-sm text-muted-foreground">Monthly Active Users</div>
           </div>
           <div data-aos="fade-up" data-aos-delay="100">
-            <div class="text-3xl md:text-4xl font-bold text-foreground mb-2">100+</div>
+            <div class="text-3xl md:text-4xl font-bold text-foreground mb-2">Free</div>
             <div class="text-sm text-muted-foreground">Developer Tools</div>
           </div>
           <div data-aos="fade-up" data-aos-delay="200">

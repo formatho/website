@@ -10,7 +10,7 @@ export interface HomeCategoryDetail {
 }
 
 export const homeIntro: string[] = [
-  'Formatho is a free, privacy-first suite of 134 developer tools that run entirely in your browser. It covers data formats (JSON, YAML, XML, CSV, TOML), security utilities (JWT, SAML, hash generators, TOTP), Web3 and blockchain helpers (Keccak-256, ABI encoding, ENS namehash, multi-chain address readers), and everyday converters like timestamps, number bases, and color codes. Nothing you paste is ever uploaded, logged, or tracked, and no sign-up is required.'
+  'Formatho is a free, privacy-first suite of developer tools that run entirely in your browser. It covers data formats (JSON, YAML, XML, CSV, TOML), security utilities (JWT, SAML, hash generators, TOTP), Web3 and blockchain helpers (Keccak-256, ABI encoding, ENS namehash, multi-chain address readers), and everyday converters like timestamps, number bases, and color codes. Nothing you paste is ever uploaded, logged, or tracked, and no sign-up is required.'
 ]
 
 export const homeCategoryDetail: HomeCategoryDetail[] = [
@@ -49,7 +49,7 @@ export const homeCategoryDetail: HomeCategoryDetail[] = [
 export const homeFAQ = [
   {
     question: 'Are Formatho tools really free?',
-    answer: 'Yes. All 134 tools on Formatho are completely free with no sign-up, no credit card, and no usage limits. The site is supported without selling user data because there is no user data to sell — nothing is collected.'
+    answer: 'Yes. All tools on Formatho are completely free with no sign-up, no credit card, and no usage limits. The site is supported without selling user data because there is no user data to sell — nothing is collected.'
   },
   {
     question: 'How does Formatho protect my data?',

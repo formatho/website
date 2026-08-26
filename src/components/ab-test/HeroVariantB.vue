@@ -26,7 +26,7 @@ const popularTools = [
 const stats = {
   developers: '50,000+',
   toolsUsed: '2M+',
-  toolsAvailable: '100+',
+  toolsAvailable: 'Free',
   uptime: '99.9%',
   rating: '4.9/5',
 }
@@ -82,7 +82,7 @@ const stats = {
         
         <!-- Shortened Description -->
         <p class="text-base md:text-lg text-muted-foreground max-w-2xl" data-aos="fade-down" data-aos-delay="200">
-          Fast, secure, privacy-first collection of 100+ developer utilities — 
+          Fast, secure, privacy-first collection of developer utilities — 
           <strong>your data never leaves your browser.</strong>
         </p>
         

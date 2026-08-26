@@ -13,8 +13,8 @@ export interface RouteMeta {
 
 export const routeMeta: Record<string, RouteMeta> = {
   'home': {
-    title: 'Formatho - 100+ Free Privacy-First Developer Tools & AI Agent Platform',
-    description: '100+ free online developer tools that run in your browser. JSON formatter, Base64, UUID, and more. Zero tracking, 100% client-side.',
+    title: 'Formatho - Privacy-First Developer Tools',
+    description: 'Free privacy-first developer tools that run in your browser. Zero tracking, no sign-up, 100% client-side.',
     keywords: 'developer tools, json formatter, base64 encoder, uuid generator, privacy-first tools, agent todo, online utilities, free developer tools, client-side tools',
   },
   'about': {
