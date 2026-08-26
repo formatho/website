@@ -7,7 +7,7 @@ import { useTwins } from '@/composables/useTwins'
 
 const { summonTwin } = useTwins()
 
-const jsonInput = ref('')
+const jsonInput = ref('{"name":"John Doe","age":30,"email":"john@example.com","address":{"street":"123 Main St","city":"New York","zip":"10001"},"tags":["developer","designer"],"active":true}')
 const jsonOutput = ref('')
 const error = ref('')
 

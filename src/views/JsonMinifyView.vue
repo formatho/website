@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import CodeEditor from '@/components/CodeEditor.vue'
 
-const jsonInput = ref('')
+const jsonInput = ref('{\n  "name": "John Doe",\n  "age": 30,\n  "email": "john@example.com",\n  "tags": ["dev", "admin"],\n  "active": true\n}')
 const minifiedOutput = ref('')
 const originalSize = ref(0)
 const minifiedSize = ref(0)

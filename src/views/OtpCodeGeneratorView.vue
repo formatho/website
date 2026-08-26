@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 
-const secret = ref('')
+const secret = ref('JBSWY3DPEHPK3PXP')
 const digits = ref(6)
 const period = ref(30)
 const otpCode = ref('')

@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import CodeEditor from '@/components/CodeEditor.vue'
 
-const urlInput = ref('')
+const urlInput = ref('https://api.example.com/v1/users?page=2&limit=10&sort=name&filter=active#results')
 const copied = ref<string | null>(null)
 
 // Encode/Decode utility

@@ -3,8 +3,8 @@ import { ref } from 'vue'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
-const username = ref('')
-const password = ref('')
+const username = ref('admin')
+const password = ref('secret123')
 const header = ref('')
 
 const generate = () => {

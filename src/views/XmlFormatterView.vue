@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import CodeEditor from '@/components/CodeEditor.vue'
 import { Button } from '@/components/ui/button'
 
-const xmlInput = ref('')
+const xmlInput = ref('<?xml version="1.0"?><catalog><book id="1"><title>The Great Gatsby</title><author>F. Scott Fitzgerald</author></book><book id="2"><title>1984</title><author>George Orwell</author></book></catalog>')
 const formattedOutput = ref('')
 const error = ref('')
 const indentSize = ref(2)

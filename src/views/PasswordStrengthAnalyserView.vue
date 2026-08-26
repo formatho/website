@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
-const password = ref('')
+const password = ref('MyS3cur3P@ss!')
 
 interface AnalysisResult {
   score: number

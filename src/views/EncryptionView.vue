@@ -7,8 +7,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 
-const plaintext = ref('')
-const secretKey = ref('')
+const plaintext = ref('Hello, this is a secret message!')
+const secretKey = ref('my-secure-key-2024')
 const ciphertext = ref('')
 const decryptText = ref('')
 const decryptKey = ref('')
