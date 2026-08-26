@@ -1628,3 +1628,343 @@ const soc2FAQs = {
 
 Object.assign(toolSEOContent, soc2Content)
 Object.assign(toolSpecificFAQ, soc2FAQs)
+
+
+/**
+ * P1 content kits — top 20 thin-content tools by search priority.
+ * Each tool gets: 2-paragraph intro, 4-step how-to, and 2-3 FAQs.
+ */
+const p1Content = {
+  '/tools/encryption': {
+    intro: [
+      'AES encryption protects sensitive text — API keys, passwords, personal notes — by converting it into ciphertext that only the right key can decrypt. AES-256 is the standard used by banks, governments, and HTTPS itself.',
+      'This tool encrypts and decrypts text using AES directly in your browser via the Web Crypto API. Your plaintext and keys never touch a server. Choose AES-CBC or AES-GCM mode, paste your text, and encrypt instantly.'
+    ],
+    howTo: [
+      'Select encrypt or decrypt mode.',
+      'Enter your text and a secret key.',
+      'Choose the encryption mode (GCM is recommended).',
+      'Click encrypt — the result appears instantly, all client-side.'
+    ]
+  },
+  '/tools/hmac-generator': {
+    intro: [
+      'HMAC (Hash-based Message Authentication Code) verifies both the integrity and authenticity of a message. APIs use HMAC signatures to ensure requests came from an authorized source and were not tampered with in transit.',
+      'Generate HMAC signatures using SHA-256, SHA-384, or SHA-512. Paste your message and secret key — the HMAC is computed instantly in your browser. Common use cases include Stripe webhook verification, AWS API signing, and JWT HS256 tokens.'
+    ],
+    howTo: [
+      'Paste the message you want to sign.',
+      'Enter your secret key.',
+      'Select the hash algorithm (SHA-256 is most common).',
+      'Copy the HMAC signature for your API request or verification.'
+    ]
+  },
+  '/tools/json-viewer': {
+    intro: [
+      'Raw JSON from APIs is often minified into a single unreadable line. A JSON viewer formats it with proper indentation, making the structure immediately visible — which fields exist, how deep the nesting goes, and where arrays start and end.',
+      'Paste any JSON to see it beautified instantly. The viewer handles large payloads, preserves unicode characters, and displays the formatted result with proper syntax highlighting — all computed locally.'
+    ],
+    howTo: [
+      'Paste your JSON into the input panel.',
+      'The formatted output appears instantly.',
+      'Use the output for debugging, documentation, or code review.',
+      'Copy the beautified result with one click.'
+    ]
+  },
+  '/tools/xml-formatter': {
+    intro: [
+      'XML from SOAP APIs, SAP PI/PO messages, and configuration files arrives minified and unreadable. A formatter adds proper indentation, making the element hierarchy visible at a glance.',
+      'Paste any XML document to format it with clean indentation. Handles namespaces, CDATA sections, comments, and deeply nested structures. Your XML never leaves the browser — important for proprietary enterprise data.'
+    ],
+    howTo: [
+      'Paste your XML document.',
+      'The formatted output appears with proper indentation.',
+      'Review the structure for debugging or documentation.',
+      'Copy the result for use in your config or ticket.'
+    ]
+  },
+  '/tools/docker-run-to-compose': {
+    intro: [
+      'Docker run commands get long and unmanageable — port mappings, volume mounts, environment variables, network settings. Docker Compose files are the maintainable alternative, but converting between them by hand is tedious.',
+      'Paste a docker run command and get the equivalent docker-compose.yml service definition. Handles images, ports, volumes, environment variables, restart policies, and network settings.'
+    ],
+    howTo: [
+      'Copy your docker run command.',
+      'Paste it into the converter.',
+      'Review the generated docker-compose.yml service.',
+      'Add it to your compose file and run docker compose up.'
+    ]
+  },
+  '/tools/git-memo': {
+    intro: [
+      'Git has hundreds of commands and options, but daily work uses about 30 of them. This cheat sheet covers the essential Git commands every developer needs: branching, merging, staging, stashing, and fixing mistakes.',
+      'Each command includes a brief explanation and the most useful flags. Use it as a quick reference when you forget the exact syntax for rebasing, cherry-picking, or undoing a commit.'
+    ],
+    howTo: [
+      'Browse by category: setup, staging, branching, remotes, or history.',
+      'Find the command you need.',
+      'Copy it with one click.',
+      'Check the flags section for advanced options.'
+    ]
+  },
+  '/tools/json-minify': {
+    intro: [
+      'Minified JSON removes all unnecessary whitespace — critical for API responses, configuration files, and anywhere payload size matters. A minifier strips indentation, newlines, and extra spaces while preserving the exact data.',
+      'Paste formatted JSON and get the minified version instantly. Useful for embedding JSON in JavaScript files, reducing API response sizes, or preparing data for environments where whitespace is significant.'
+    ],
+    howTo: [
+      'Paste your formatted JSON.',
+      'The minified version appears instantly.',
+      'Verify the output is valid (the tool validates as it minifies).',
+      'Copy the compact result for production use.'
+    ]
+  },
+  '/tools/chmod-calculator': {
+    intro: [
+      'Linux file permissions use a numeric notation (like 755 or 644) that maps to read, write, and execute for owner, group, and others. Converting between the numeric and symbolic forms is a constant need for sysadmins.',
+      'Toggle the permission checkboxes for owner, group, and others — the calculator shows both the numeric code (755) and symbolic form (rwxr-xr-x). Includes common presets like 755 for scripts and 644 for config files.'
+    ],
+    howTo: [
+      'Toggle read, write, and execute for owner, group, and others.',
+      'The numeric code and symbolic notation update in real-time.',
+      'Or enter a numeric code to see the symbolic equivalent.',
+      'Copy the chmod command ready to paste in your terminal.'
+    ]
+  },
+  '/tools/markdown-to-html': {
+    intro: [
+      'Markdown is the standard for READMEs, documentation, and technical writing — but email clients, CMS platforms, and some web pages need raw HTML. Converting between them is a daily task for technical writers and developers.',
+      'Paste Markdown and get clean HTML output instantly. Supports the full GitHub-Flavored Markdown feature set including tables, code blocks with syntax highlighting, task lists, and inline HTML.'
+    ],
+    howTo: [
+      'Paste or type your Markdown content.',
+      'The HTML output appears instantly.',
+      'Review the generated markup.',
+      'Copy the HTML for your email, CMS, or web page.'
+    ]
+  },
+  '/tools/url-parser': {
+    intro: [
+      'URLs contain multiple components — protocol, hostname, port, path, query parameters, and fragment — that are often bundled together in ways that make debugging difficult. A URL parser breaks them apart for inspection.',
+      'Paste any URL to see each component extracted separately: protocol, host, port, path, query string (parsed into individual key-value pairs), and hash fragment. Useful for debugging API endpoints and tracking parameters.'
+    ],
+    howTo: [
+      'Paste the URL you want to dissect.',
+      'Each component is extracted and displayed separately.',
+      'Inspect individual query parameters as key-value pairs.',
+      'Copy any component for use in your code.'
+    ]
+  },
+  '/tools/html-entities': {
+    intro: [
+      'HTML entities encode special characters that would otherwise break HTML parsing — ampersands, angle brackets, quotes, and non-ASCII characters. Encoding prevents XSS attacks and rendering bugs.',
+      'Paste text to encode special characters as HTML entities, or paste entities to decode them back to readable text. Supports both named entities (&amp;) and numeric entities (&#38;).'
+    ],
+    howTo: [
+      'Paste your text or HTML entities.',
+      'Choose encode or decode mode.',
+      'The converted result appears instantly.',
+      'Copy for use in your HTML templates or documentation.'
+    ]
+  },
+  '/tools/text-to-binary': {
+    intro: [
+      'Binary representation of text is used in low-level programming, network protocols, and computer science education. Each character maps to a sequence of 1s and 0s based on its ASCII or UTF-8 encoding.',
+      'Type or paste text to see its binary representation. Each character is converted to its 8-bit binary equivalent. Convert binary back to text just as easily — all computed locally in your browser.'
+    ],
+    howTo: [
+      'Paste text to convert to binary.',
+      'Or paste binary digits to convert back to text.',
+      'The conversion updates in real-time.',
+      'Copy the result for your coursework or debugging.'
+    ]
+  },
+  '/tools/bip39-generator': {
+    intro: [
+      'BIP39 mnemonic phrases are the human-readable form of cryptocurrency wallet seeds — 12 or 24 words that backup your entire wallet. Generating them securely requires cryptographic randomness that ordinary random functions cannot provide.',
+      'This generator uses the browser crypto API to create BIP39 mnemonic phrases locally. Your seed words are never transmitted — they exist only in your browser session. For real funds, always generate on an air-gapped device.'
+    ],
+    howTo: [
+      'Choose 12 or 24 words.',
+      'Click generate — words appear using cryptographic randomness.',
+      'Write down the phrase on paper (never digitally).',
+      'Store securely — anyone with these words controls the wallet.'
+    ]
+  },
+  '/tools/basic-auth-generator': {
+    intro: [
+      'HTTP Basic Authentication sends a Base64-encoded username:password in the Authorization header. While simple, it is still used by many APIs, internal tools, and development environments.',
+      'Enter a username and password to generate the Authorization header. The tool encodes the credentials in Base64 and formats the complete header, ready to paste into curl, Postman, or your HTTP client.'
+    ],
+    howTo: [
+      'Enter your username.',
+      'Enter your password.',
+      'The Authorization header is generated instantly.',
+      'Copy it into your API client or curl command.'
+    ]
+  },
+  '/tools/abi-encoder': {
+    intro: [
+      'The ABI (Application Binary Interface) defines how smart contract functions are encoded into calldata — the raw bytes that the EVM processes. Encoding parameters correctly is essential for contract interactions and transaction decoding.',
+      'Encode function calls with their parameters to get the calldata hex string. Decode transaction input data back into readable function calls. Supports all Solidity types including uint, address, bytes, strings, and arrays.'
+    ],
+    howTo: [
+      'Enter the function signature (e.g., transfer(address,uint256)).',
+      'Fill in the parameter values.',
+      'Click encode to get the calldata.',
+      'Or paste calldata to decode it back to parameters.'
+    ]
+  },
+  '/tools/otp-code-generator': {
+    intro: [
+      'TOTP (Time-based One-Time Password) is the algorithm behind Google Authenticator, Authy, and most 2FA apps. It generates a 6-digit code every 30 seconds from a shared secret — no network connection needed.',
+      'Enter a TOTP secret to generate the current 6-digit code, with a countdown to the next refresh. Useful for testing 2FA flows, verifying authenticator setup, or as a backup when your phone is unavailable. All computation is local.'
+    ],
+    howTo: [
+      'Paste your TOTP secret (base32 encoded).',
+      'The current 6-digit code appears with a countdown.',
+      'Use the code in your 2FA verification.',
+      'The code refreshes automatically every 30 seconds.'
+    ]
+  },
+  '/tools/password-strength-analyser': {
+    intro: [
+      'Password strength is measured by entropy — how many guesses an attacker would need. Length matters more than complexity: a 20-character passphrase is stronger than an 8-character password with symbols.',
+      'Type a password to see its entropy in bits, estimated crack time, and specific improvement suggestions. The analyzer checks length, character variety, common patterns, and dictionary words. All analysis happens locally — your password never leaves the browser.'
+    ],
+    howTo: [
+      'Type or paste a password to analyze.',
+      'Review the entropy score and crack time estimate.',
+      'Read the specific improvement suggestions.',
+      'Adjust and re-analyze until the score is satisfactory.'
+    ]
+  },
+  '/tools/pdf-signature-checker': {
+    intro: [
+      'Digital signatures in PDFs verify that the document has not been modified since signing and confirm the identity of the signer. Checking these signatures is essential for contracts, legal documents, and compliance.',
+      'Upload a PDF to check for digital signatures. The tool verifies certificate chains, checks for post-signing modifications, and displays signer information. Your document never leaves the browser.'
+    ],
+    howTo: [
+      'Upload or drag a PDF file.',
+      'The tool scans for digital signatures.',
+      'Review signer identity and certificate validity.',
+      'Check whether the document was modified after signing.'
+    ]
+  },
+  '/tools/bls-signature': {
+    intro: [
+      'BLS12-381 signatures are used in Ethereum consensus, threshold cryptography, and blockchain aggregation schemes. Multiple parties can sign independently, and their signatures can be combined into a single aggregate signature.',
+      'Generate BLS key pairs, sign messages, and verify signatures. Supports signature aggregation — combine multiple signatures into one. All operations run locally using the bls12-381 curve.'
+    ],
+    howTo: [
+      'Generate a BLS key pair.',
+      'Sign a message with the private key.',
+      'Verify the signature with the public key.',
+      'Try aggregating multiple signatures into one.'
+    ]
+  },
+  '/tools/rsa-key-pair-generator': {
+    intro: [
+      'RSA key pairs are the foundation of TLS certificates, JWT RS256 signing, SSH authentication, and PGP encryption. Generating test keys without a server is a regular need for developers wiring up authentication.',
+      'Generate RSA key pairs at 2048 or 4096 bits locally in your browser using the Web Crypto API. Download the public and private keys in PEM format. Keys are never transmitted — for production, use a managed key store.'
+    ],
+    howTo: [
+      'Select the key size (2048 or 4096 bits).',
+      'Click generate — keys appear as PEM blocks.',
+      'Copy or download the public and private keys.',
+      'Use for local RS256 JWT testing or TLS lab setups.'
+    ]
+  }
+}
+
+const p1FAQs = {
+  '/tools/encryption': [
+    { question: 'Is browser-based AES encryption secure?', answer: 'The Web Crypto API uses the same AES implementation as your browser TLS stack. For encrypting sensitive notes or test data, it is cryptographically sound. For production key management, use a dedicated service like AWS KMS or HashiCorp Vault.' },
+    { question: 'What is the difference between AES-CBC and AES-GCM?', answer: 'GCM (Galois/Counter Mode) provides both encryption and authentication — it detects if ciphertext was tampered with. CBC only encrypts and is vulnerable to padding oracle attacks without a separate MAC. Always prefer GCM.' }
+  ],
+  '/tools/hmac-generator': [
+    { question: 'How is HMAC different from a hash?', answer: 'A hash (like SHA-256) only verifies data integrity — anyone can compute it. HMAC requires a secret key, so it verifies both integrity AND authenticity — only someone with the key could have produced the signature.' },
+    { question: 'Where is HMAC used?', answer: 'Stripe webhook signatures (hex-encoded HMAC-SHA256), AWS API request signing (SigV4), JWT HS256 tokens, and GitHub webhook payloads all use HMAC.' }
+  ],
+  '/tools/json-viewer': [
+    { question: 'Can this handle large JSON files?', answer: 'Yes — the viewer handles multi-megabyte JSON payloads. Very large files may take a moment to format but all processing happens locally.' },
+    { question: 'Does it preserve unicode characters?', answer: 'Yes, unicode characters (emoji, non-Latin text) are preserved exactly as-is. No escaping or replacement occurs.' }
+  ],
+  '/tools/chmod-calculator': [
+    { question: 'What does chmod 755 mean?', answer: 'Owner has read/write/execute (7), group has read/execute (5), others have read/execute (5). This is standard for executable scripts and directories.' },
+    { question: 'What does chmod 644 mean?', answer: 'Owner has read/write (6), group has read-only (4), others have read-only (4). This is standard for configuration files and documents.' }
+  ],
+  '/tools/bip39-generator': [
+    { question: 'Is it safe to generate a seed phrase online?', answer: 'This generator uses the browser crypto API — words never leave your device. However, for wallets holding real funds, best practice is an air-gapped hardware wallet or offline machine.' },
+    { question: 'What is the difference between 12 and 24 words?', answer: '12 words provide 128 bits of entropy, 24 words provide 256 bits. For most users, 12 words is sufficient. Use 24 if you want extra margin.' }
+  ],
+  '/tools/rsa-key-pair-generator': [
+    { question: 'Should I use these keys in production?', answer: 'No — for production, use a managed key service (AWS KMS, Google Cloud KMS, Azure Key Vault) or generate keys on an air-gapped machine. Browser-generated keys are for testing and development only.' },
+    { question: '2048 or 4096 bits?', answer: '2048 bits is sufficient for most purposes and is the NIST minimum through 2030. 4096 bits provides extra margin but is slower to use. For JWT signing, 2048 is the standard.' }
+  ],
+  '/tools/password-strength-analyser': [
+    { question: 'Is my password sent to a server?', answer: 'No. All analysis happens in your browser using JavaScript. Your password never leaves your device.' },
+    { question: 'What entropy is considered strong?', answer: 'Below 40 bits is weak, 40-60 bits is moderate, 60-80 bits is strong, and above 80 bits is very strong. A random 12-character password with mixed case, numbers, and symbols is approximately 75 bits.' }
+  ]
+}
+
+Object.assign(toolSEOContent, p1Content)
+Object.assign(toolSpecificFAQ, p1FAQs)
+
+
+const p1ExtraFAQs = {
+  '/tools/xml-formatter': [
+    { question: 'Does this validate XML?', answer: 'Yes — if the XML is malformed, the formatter shows the error position. Valid XML is formatted with clean indentation.' },
+    { question: 'Can it handle SOAP envelopes?', answer: 'Yes — SOAP XML with namespaces, CDATA, and deeply nested elements all format correctly.' }
+  ],
+  '/tools/docker-run-to-compose': [
+    { question: 'Which docker run flags are supported?', answer: 'Image, -p ports, -v volumes, -e environment variables, --restart, --network, --name, and --memory are all converted. Unsupported flags are noted in the output.' },
+    { question: 'Does it handle multi-container setups?', answer: 'Convert one docker run command at a time. For multi-container setups, convert each service separately and combine them in your compose file.' }
+  ],
+  '/tools/git-memo': [
+    { question: 'Is this a complete Git reference?', answer: 'It covers the 30 most-used commands for daily work: branching, merging, staging, undoing commits, and working with remotes. For advanced topics, consult the official Git documentation.' },
+    { question: 'How do I undo my last commit?', answer: 'Use git reset --soft HEAD~1 to undo the commit but keep changes staged. Use git reset --hard HEAD~1 to undo and discard changes. Use git revert HEAD to create a new commit that undoes the previous one.' }
+  ],
+  '/tools/json-minify': [
+    { question: 'Does minification change the data?', answer: 'No — only whitespace (spaces, newlines, indentation) is removed. The actual data, keys, and values remain exactly the same. The output is semantically identical to the input.' },
+    { question: 'How much size does minification save?', answer: 'Typically 30-50% for formatted JSON. The exact savings depend on how much indentation and whitespace the original had.' }
+  ],
+  '/tools/markdown-to-html': [
+    { question: 'Which Markdown flavor is supported?', answer: 'GitHub-Flavored Markdown (GFM) — the same dialect used in GitHub READMEs. Includes tables, task lists, fenced code blocks, and strikethrough.' },
+    { question: 'Can I use inline HTML in the Markdown?', answer: 'Yes — inline HTML passes through unchanged. You can mix Markdown syntax with HTML tags in the same document.' }
+  ],
+  '/tools/url-parser': [
+    { question: 'Can it parse URLs with query parameters?', answer: 'Yes — each query parameter is extracted as a separate key-value pair, making it easy to inspect individual parameters without manually splitting the string.' },
+    { question: 'Does it handle encoded characters?', answer: 'Yes — percent-encoded characters in the URL are preserved as-is. Use the URL Encoder tool to decode them if needed.' }
+  ],
+  '/tools/html-entities': [
+    { question: 'Which characters get encoded?', answer: 'The five mandatory HTML entities: & < > \" and \'. Non-ASCII characters like é or 中 can optionally be encoded as numeric entities.' },
+    { question: 'Why do I need to encode ampersands?', answer: 'An unencoded & could be interpreted as the start of an HTML entity, causing parsing errors. Always encode & as &amp; in HTML content.' }
+  ],
+  '/tools/text-to-binary': [
+    { question: 'What encoding is used?', answer: 'Each character is converted to its 8-bit ASCII/UTF-8 binary representation. For example, the letter A (ASCII 65) becomes 01000001.' },
+    { question: 'Can I convert binary back to text?', answer: 'Yes — paste binary digits (1s and 0s) and the tool converts them back to readable text using the same encoding.' }
+  ],
+  '/tools/basic-auth-generator': [
+    { question: 'Is Basic Auth secure?', answer: 'Basic Auth sends credentials as Base64 (not encryption) — it is only secure over HTTPS. For production APIs, prefer token-based auth or OAuth 2.0.' },
+    { question: 'What is the format?', answer: 'The Authorization header contains "Basic " followed by Base64(username:password). For example, admin:secret becomes Basic YWRtaW46c2VjcmV0.' }
+  ],
+  '/tools/abi-encoder': [
+    { question: 'What is ABI encoding used for?', answer: 'The EVM requires function calls to be encoded as raw bytes. ABI encoding converts human-readable function signatures and parameters into the hex calldata that smart contracts process.' },
+    { question: 'Can I decode transaction input data?', answer: 'Yes — paste the input data hex from any transaction (found on Etherscan) along with the function signature to decode it back to readable parameter values.' }
+  ],
+  '/tools/otp-code-generator': [
+    { question: 'Is this safe to use for real 2FA?', answer: 'The tool computes TOTP codes locally using the same algorithm as Google Authenticator. Your secret never leaves your browser. Use it for testing or as a backup — your phone is still your primary authenticator.' },
+    { question: 'Why does the code change every 30 seconds?', answer: 'TOTP divides the current Unix timestamp by 30 to get a time step. Each time step produces a different code. The countdown shows how long until the next step.' }
+  ],
+  '/tools/pdf-signature-checker': [
+    { question: 'What does a valid digital signature mean?', answer: 'It means the document has not been modified since it was signed, and the signer identity matches the certificate. It does not guarantee the content is truthful — only that it is unaltered.' },
+    { question: 'Can unsigned PDFs be verified?', answer: 'No — if the PDF has no digital signature, there is no cryptographic way to verify its integrity. The tool will report that no signatures were found.' }
+  ],
+  '/tools/bls-signature': [
+    { question: 'What is BLS signature aggregation?', answer: 'Multiple BLS signatures can be mathematically combined into a single aggregate signature. This is used in Ethereum consensus to compress thousands of validator signatures into one verification.' },
+    { question: 'How does BLS differ from ECDSA?', answer: 'BLS signatures are slightly slower to verify individually but support aggregation — multiple signatures become one. ECDSA is faster but each signature must be verified separately.' }
+  ]
+}
+
+Object.assign(toolSpecificFAQ, p1ExtraFAQs)
