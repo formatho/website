@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, reactive } from 'vue'
-import { Copy, Check, Play, FileJson, AlertCircle, Loader2, BookOpen } from 'lucide-vue-next'
+import { ref, computed, reactive, watch, onMounted } from 'vue'
+import { Copy, Check, Play, FileJson, AlertCircle, Loader2, BookOpen, X, Plus, Save, Trash2 } from 'lucide-vue-next'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -11,7 +11,7 @@ import { useSEO } from '@/composables/useSEO'
 useSEO({
   title: 'EVM Smart Contract Reader - Call ABI View Functions | Formatho',
   description:
-    'Paste a contract ABI, set any RPC endpoint and contract address, and call view and pure functions directly from your browser. Works on every EVM chain. No key, no server, 100% client-side.',
+    'Paste a contract ABI, set any RPC endpoint and contract address, and call view and pure functions directly from your browser. Multi-tab support for multiple contracts. Works on every EVM chain.',
   keywords: [
     'evm smart contract reader',
     'read smart contract online',
@@ -19,272 +19,264 @@ useSEO({
     'abi reader',
     'contract view functions',
     'eth_call tool',
-    'read contract without etherscan'
+    'read contract without etherscan',
+    'multi contract reader'
   ],
   ogType: 'website'
 })
 
-const rpcUrl = ref('https://eth.llamarpc.com')
-const contractAddress = ref('')
-const abiText = ref('')
-const expanded = ref<string | null>(null)
-const args = reactive<Record<string, Record<number, string>>>({})
-const results = ref<Record<string, { loading: boolean; error?: string; value?: string }>>({})
-const copied = ref<string | null>(null)
+// ─── Tab management ───
+interface Tab {
+  id: string
+  name: string
+  rpcUrl: string
+  contractAddress: string
+  abiText: string
+  expanded: string | null
+  args: Record<string, Record<number, string>>
+  results: Record<string, { loading: boolean; error?: string; value?: string }>
+}
 
-const ERC20_ABI = [
-  { type: 'function', name: 'name', stateMutability: 'view', outputs: [{ type: 'string', name: '' }] },
-  { type: 'function', name: 'symbol', stateMutability: 'view', outputs: [{ type: 'string', name: '' }] },
-  { type: 'function', name: 'decimals', stateMutability: 'view', outputs: [{ type: 'uint8', name: '' }] },
-  { type: 'function', name: 'totalSupply', stateMutability: 'view', outputs: [{ type: 'uint256', name: '' }] },
-  {
-    type: 'function',
-    name: 'balanceOf',
-    stateMutability: 'view',
-    inputs: [{ type: 'address', name: 'account' }],
-    outputs: [{ type: 'uint256', name: '' }]
-  },
-  {
-    type: 'function',
-    name: 'allowance',
-    stateMutability: 'view',
-    inputs: [
-      { type: 'address', name: 'owner' },
-      { type: 'address', name: 'spender' }
-    ],
-    outputs: [{ type: 'uint256', name: '' }]
+let tabCounter = 0
+
+function newTab(name?: string): Tab {
+  tabCounter++
+  return {
+    id: `tab-${Date.now()}-${tabCounter}`,
+    name: name || `Tab ${tabCounter}`,
+    rpcUrl: 'https://eth.llamarpc.com',
+    contractAddress: '',
+    abiText: '',
+    expanded: null,
+    args: {},
+    results: {}
   }
-]
-
-interface AbiInput {
-  type: string
-  name: string
 }
 
-interface AbiFunction {
-  name: string
-  // Canonical signature - unique per overload, used for all state keys
-  sig: string
-  stateMutability: string
-  inputs: AbiInput[]
-  outputs: AbiInput[]
-  // The raw ABI item is kept so each call can be made with a single-item
-  // ABI, which disambiguates Solidity overloads for viem
-  item: Record<string, unknown>
+const tabs = ref<Tab[]>([newTab('Main')])
+const activeTabId = ref(tabs.value[0].id)
+const activeTab = computed(() => tabs.value.find(t => t.id === activeTabId.value) || tabs.value[0])
+const showConnection = ref(true)
+
+function addTab() {
+  if (tabs.value.length >= 10) return
+  const tab = newTab()
+  tabs.value.push(tab)
+  activeTabId.value = tab.id
+  showConnection.value = true
 }
 
-// ─── Uniswap V2 presets (same addresses on most EVM chains) ───
-const UNISWAP_V2_FACTORY = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'
-const UNISWAP_V2_ROUTER = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
-const UNISWAP_V3_QUOTER = '0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6'
-
-const UNISWAP_V2_FACTORY_ABI = [
-  { type: 'function', name: 'getPair', stateMutability: 'view',
-    inputs: [{ type: 'address', name: 'tokenA' }, { type: 'address', name: 'tokenB' }],
-    outputs: [{ type: 'address', name: 'pair' }] },
-  { type: 'function', name: 'allPairsLength', stateMutability: 'view',
-    inputs: [], outputs: [{ type: 'uint256', name: '' }] },
-  { type: 'function', name: 'feeTo', stateMutability: 'view',
-    inputs: [], outputs: [{ type: 'address', name: '' }] },
-  { type: 'function', name: 'feeToSetter', stateMutability: 'view',
-    inputs: [], outputs: [{ type: 'address', name: '' }] },
-]
-
-const UNISWAP_V2_PAIR_ABI = [
-  { type: 'function', name: 'getReserves', stateMutability: 'view',
-    inputs: [],
-    outputs: [
-      { type: 'uint112', name: 'reserve0' }, { type: 'uint112', name: 'reserve1' },
-      { type: 'uint32', name: 'blockTimestampLast' }
-    ] },
-  { type: 'function', name: 'token0', stateMutability: 'view', inputs: [], outputs: [{ type: 'address', name: '' }] },
-  { type: 'function', name: 'token1', stateMutability: 'view', inputs: [], outputs: [{ type: 'address', name: '' }] },
-  { type: 'function', name: 'totalSupply', stateMutability: 'view', inputs: [], outputs: [{ type: 'uint256', name: '' }] },
-  { type: 'function', name: 'balanceOf', stateMutability: 'view',
-    inputs: [{ type: 'address', name: 'owner' }], outputs: [{ type: 'uint256', name: '' }] },
-  { type: 'function', name: 'price0CumulativeLast', stateMutability: 'view', inputs: [], outputs: [{ type: 'uint256', name: '' }] },
-  { type: 'function', name: 'price1CumulativeLast', stateMutability: 'view', inputs: [], outputs: [{ type: 'uint256', name: '' }] },
-]
-
-const UNISWAP_V2_ROUTER_ABI = [
-  { type: 'function', name: 'getAmountsOut', stateMutability: 'view',
-    inputs: [
-      { type: 'uint256', name: 'amountIn' },
-      { type: 'address[]', name: 'path' }
-    ],
-    outputs: [{ type: 'uint256[]', name: 'amounts' }] },
-  { type: 'function', name: 'getAmountsIn', stateMutability: 'view',
-    inputs: [
-      { type: 'uint256', name: 'amountOut' },
-      { type: 'address[]', name: 'path' }
-    ],
-    outputs: [{ type: 'uint256[]', name: 'amounts' }] },
-  { type: 'function', name: 'WETH', stateMutability: 'pure', inputs: [], outputs: [{ type: 'address', name: '' }] },
-  { type: 'function', name: 'factory', stateMutability: 'pure', inputs: [], outputs: [{ type: 'address', name: '' }] },
-]
-
-const UNISWAP_V3_QUOTER_ABI = [
-  { type: 'function', name: 'quoteExactInputSingle', stateMutability: 'nonpayable',
-    inputs: [
-      { type: 'address', name: 'tokenIn' }, { type: 'address', name: 'tokenOut' },
-      { type: 'uint24', name: 'fee' }, { type: 'uint256', name: 'amountIn' },
-      { type: 'uint160', name: 'sqrtPriceLimitX96' }
-    ],
-    outputs: [{ type: 'uint256', name: 'amountOut' }] },
-  { type: 'function', name: 'WETH9', stateMutability: 'pure', inputs: [], outputs: [{ type: 'address', name: '' }] },
-]
-
-const uniswapPresets = [
-  { label: 'V2 Factory', abi: UNISWAP_V2_FACTORY_ABI, address: UNISWAP_V2_FACTORY,
-    hint: 'Find pair addresses: getPair(tokenA, tokenB)' },
-  { label: 'V2 Router', abi: UNISWAP_V2_ROUTER_ABI, address: UNISWAP_V2_ROUTER,
-    hint: 'Get swap quotes: getAmountsOut(amountIn, [tokenIn, tokenOut])' },
-  { label: 'V2 Pair', abi: UNISWAP_V2_PAIR_ABI, address: '',
-    hint: 'Pool reserves + LP supply: paste the pair address from V2 Factory getPair()' },
-  { label: 'V3 Quoter', abi: UNISWAP_V3_QUOTER_ABI, address: UNISWAP_V3_QUOTER,
-    hint: 'V3 quotes: quoteExactInputSingle(tokenIn, tokenOut, fee, amountIn, 0)' },
-]
-
-function loadUniswapPreset(preset: { abi: unknown[]; address: string }) {
-  abiText.value = JSON.stringify(preset.abi, null, 2)
-  if (preset.address) contractAddress.value = preset.address
+function closeTab(id: string) {
+  const idx = tabs.value.findIndex(t => t.id === id)
+  if (idx === -1) return
+  tabs.value.splice(idx, 1)
+  if (tabs.value.length === 0) {
+    tabs.value = [newTab('Main')]
+  }
+  if (activeTabId.value === id) {
+    activeTabId.value = tabs.value[Math.max(0, idx - 1)].id
+  }
 }
 
-const abiError = computed(() => {
-  const text = abiText.value.trim()
-  if (!text) return ''
+function closeOtherTabs(id: string) {
+  const tab = tabs.value.find(t => t.id === id)
+  if (tab) tabs.value = [tab]
+  activeTabId.value = id
+}
+
+// ─── localStorage persistence ───
+const STORAGE_KEY = 'formatho-contract-reader-tabs'
+const saveEnabled = ref(false)
+
+function saveTabs() {
+  if (!saveEnabled.value) return
   try {
-    JSON.parse(text)
+    const data = {
+      tabs: tabs.value.map(t => ({
+        id: t.id,
+        name: t.name,
+        rpcUrl: t.rpcUrl,
+        contractAddress: t.contractAddress,
+        abiText: t.abiText,
+        expanded: t.expanded,
+        args: t.args
+      })),
+      activeTabId: activeTabId.value
+    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+  } catch { /* storage full or unavailable */ }
+}
+
+function loadTabs() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (!raw) return
+    const data = JSON.parse(raw)
+    if (data.tabs?.length) {
+      tabs.value = data.tabs.map((t: Partial<Tab>) => ({
+        ...newTab(),
+        ...t,
+        results: {} // Don't persist results (they're stale)
+      }))
+      tabCounter = tabs.value.length
+      if (data.activeTabId && tabs.value.some(t => t.id === data.activeTabId)) {
+        activeTabId.value = data.activeTabId
+      }
+      saveEnabled.value = true
+    }
+  } catch { /* corrupted data, start fresh */ }
+}
+
+function clearSaved() {
+  localStorage.removeItem(STORAGE_KEY)
+  saveEnabled.value = false
+  tabs.value = [newTab('Main')]
+  activeTabId.value = tabs.value[0].id
+}
+
+// Auto-name tab from contract address
+watch(() => activeTab.value?.contractAddress, (addr) => {
+  if (addr && addr.length >= 10) {
+    const tab = activeTab.value
+    if (tab && (tab.name.startsWith('Tab ') || tab.name === 'Main')) {
+      tab.name = addr.slice(0, 6) + '…' + addr.slice(-4)
+    }
+  }
+}, { deep: true })
+
+// Debounced save
+let saveTimeout: ReturnType<typeof setTimeout> | null = null
+watch(tabs, () => {
+  if (saveTimeout) clearTimeout(saveTimeout)
+  saveTimeout = setTimeout(saveTabs, 500)
+}, { deep: true })
+
+onMounted(loadTabs)
+
+// ─── ABI & functions (per active tab) ───
+const abiError = computed(() => {
+  const raw = activeTab.value.abiText.trim()
+  if (!raw) return ''
+  try {
+    JSON.parse(raw)
     return ''
   } catch (e) {
     return 'Invalid ABI JSON: ' + (e as Error).message
   }
 })
 
+interface AbiFunction {
+  name: string
+  sig: string
+  stateMutability: string
+  inputs: Array<{ type: string; name: string }>
+  outputs: Array<{ type: string; name: string }>
+  item: Record<string, unknown>
+}
+
 const viewFunctions = computed<AbiFunction[]>(() => {
-  const text = abiText.value.trim()
-  if (!text || abiError.value) return []
+  const tab = activeTab.value
+  const raw = tab.abiText.trim()
+  if (!raw || abiError.value) return []
   try {
-    const parsed = JSON.parse(text)
+    const parsed = JSON.parse(raw)
     const items = Array.isArray(parsed) ? parsed : (parsed.abi ?? [])
     return items
-      .filter(
-        (i: { type?: string; stateMutability?: string; name?: string }) =>
-          i.type === 'function' && (i.stateMutability === 'view' || i.stateMutability === 'pure')
-      )
+      .filter((i: { type?: string; stateMutability?: string }) =>
+        i.type === 'function' && (i.stateMutability === 'view' || i.stateMutability === 'pure'))
       .map((item: Record<string, unknown>) => {
-        const fn = item as unknown as {
-          name: string
-          inputs?: AbiInput[]
-          outputs?: AbiInput[]
-          stateMutability: string
-        }
+        const fn = item as unknown as { name: string; inputs?: Array<{ type: string; name: string }>; outputs?: Array<{ type: string; name: string }>; stateMutability: string }
         const inputs = fn.inputs ?? []
         const sig = `${fn.name}(${inputs.map((i) => i.type).join(',')})`
-        return {
-          name: fn.name,
-          sig,
-          stateMutability: fn.stateMutability,
-          inputs,
-          outputs: fn.outputs ?? [],
-          item
-        }
+        return { name: fn.name, sig, stateMutability: fn.stateMutability, inputs, outputs: fn.outputs ?? [], item }
       })
-  } catch {
-    return []
-  }
+  } catch { return [] }
 })
 
+// ─── Presets ───
 const rpcPresets = [
   { label: 'Ethereum', url: 'https://eth.llamarpc.com' },
   { label: 'Polygon', url: 'https://polygon-rpc.com' },
-  { label: 'BNB Chain', url: 'https://bsc-dataseed.binance.org' },
+  { label: 'BNB', url: 'https://bsc-dataseed.binance.org' },
   { label: 'Arbitrum', url: 'https://arb1.arbitrum.io/rpc' },
   { label: 'Base', url: 'https://mainnet.base.org' },
   { label: 'Optimism', url: 'https://mainnet.optimism.io' }
 ]
 
-function loadErc20Example() {
-  abiText.value = JSON.stringify(ERC20_ABI, null, 2)
+const ERC20_ABI = [
+  { type: 'function', name: 'name', stateMutability: 'view', outputs: [{ type: 'string', name: '' }] },
+  { type: 'function', name: 'symbol', stateMutability: 'view', outputs: [{ type: 'string', name: '' }] },
+  { type: 'function', name: 'decimals', stateMutability: 'view', outputs: [{ type: 'uint8', name: '' }] },
+  { type: 'function', name: 'totalSupply', stateMutability: 'view', outputs: [{ type: 'uint256', name: '' }] },
+  { type: 'function', name: 'balanceOf', stateMutability: 'view', inputs: [{ type: 'address', name: 'account' }], outputs: [{ type: 'uint256', name: '' }] },
+  { type: 'function', name: 'allowance', stateMutability: 'view', inputs: [{ type: 'address', name: 'owner' }, { type: 'address', name: 'spender' }], outputs: [{ type: 'uint256', name: '' }] }
+]
+
+const UNISWAP_V2_FACTORY_ABI = [
+  { type: 'function', name: 'getPair', stateMutability: 'view', inputs: [{ type: 'address', name: 'tokenA' }, { type: 'address', name: 'tokenB' }], outputs: [{ type: 'address', name: '' }] },
+  { type: 'function', name: 'allPairsLength', stateMutability: 'view', outputs: [{ type: 'uint256', name: '' }] }
+]
+
+const uniswapPresets = [
+  { label: 'V2 Factory', abi: UNISWAP_V2_FACTORY_ABI, address: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f' },
+  { label: 'V2 Router', abi: [{ type: 'function', name: 'getAmountsOut', stateMutability: 'view', inputs: [{ type: 'uint256', name: 'amountIn' }, { type: 'address[]', name: 'path' }], outputs: [{ type: 'uint256[]', name: 'amounts' }] }, { type: 'function', name: 'factory', stateMutability: 'pure', outputs: [{ type: 'address', name: '' }] }], address: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D' },
+  { label: 'V2 Pair', abi: [{ type: 'function', name: 'getReserves', stateMutability: 'view', outputs: [{ type: 'uint112', name: 'reserve0' }, { type: 'uint112', name: 'reserve1' }, { type: 'uint32', name: 'blockTimestampLast' }] }, { type: 'function', name: 'token0', stateMutability: 'view', outputs: [{ type: 'address', name: '' }] }, { type: 'function', name: 'token1', stateMutability: 'view', outputs: [{ type: 'address', name: '' }] }, { type: 'function', name: 'totalSupply', stateMutability: 'view', outputs: [{ type: 'uint256', name: '' }] }], address: '' },
+]
+
+function loadErc20() {
+  activeTab.value.abiText = JSON.stringify(ERC20_ABI, null, 2)
 }
 
-function argPlaceholder(type: string): string {
-  if (type.startsWith('tuple')) return 'JSON array of values'
-  if (type.endsWith('[]')) return 'comma separated values'
-  return type
+function loadUniswap(preset: { abi: unknown[]; address: string }) {
+  activeTab.value.abiText = JSON.stringify(preset.abi, null, 2)
+  if (preset.address) activeTab.value.contractAddress = preset.address
 }
 
-function argLabel(input: AbiInput): string {
+// ─── Argument parsing & function calling (per tab) ───
+function argLabel(input: { type: string; name: string }): string {
   return input.name || input.type
 }
 
-function getArg(sig: string, idx: number): string {
-  return args[sig]?.[idx] ?? ''
+function getArg(tab: Tab, sig: string, idx: number): string {
+  return tab.args[sig]?.[idx] ?? ''
 }
 
-function setArg(sig: string, idx: number, value: string) {
-  if (!args[sig]) args[sig] = {}
-  args[sig][idx] = value
+function setArg(tab: Tab, sig: string, idx: number, value: string) {
+  if (!tab.args[sig]) tab.args[sig] = {}
+  tab.args[sig][idx] = value
 }
 
-/**
- * Convert one raw string input to the value viem expects, with
- * friendly validation errors. Supports ints, bools, arrays (comma
- * separated) and single tuples (JSON).
- */
-function parseArg(input: AbiInput, raw: string): unknown {
+function parseArg(input: { type: string; name: string }, raw: string): unknown {
   const label = argLabel(input)
   const type = input.type
   const v = raw.trim()
-
-  if (v === '') {
-    throw new Error(`"${label}" (${type}) is required`)
-  }
-
+  if (v === '') throw new Error(`"${label}" (${type}) is required`)
   const isArray = /\[\]$/.test(type)
   const base = type.replace(/\[\]+$/, '')
-
   const parseOne = (s: string): unknown => {
     const t = s.trim()
     if (/^u?int/.test(base)) {
-      if (!/^-?\d+$/.test(t)) {
-        throw new Error(`"${label}": "${s}" is not a valid integer for ${base}`)
-      }
+      if (!/^-?\d+$/.test(t)) throw new Error(`"${label}": "${s}" is not a valid integer for ${base}`)
       return BigInt(t)
     }
     if (base === 'bool') {
-      if (t !== 'true' && t !== 'false') {
-        throw new Error(`"${label}": bool must be true or false`)
-      }
+      if (t !== 'true' && t !== 'false') throw new Error(`"${label}": bool must be true or false`)
       return t === 'true'
     }
     if (base.startsWith('tuple')) {
-      if (isArray) {
-        throw new Error(`"${label}": arrays of structs are not supported yet - use a script for this call`)
-      }
-      try {
-        return JSON.parse(t)
-      } catch {
-        throw new Error(`"${label}": enter the struct as JSON, e.g. ["PRICE", "1", "0x00..."]`)
-      }
+      if (isArray) throw new Error(`"${label}": arrays of structs are not supported yet`)
+      try { return JSON.parse(t) } catch { throw new Error(`"${label}": enter the struct as JSON`) }
     }
     return t
   }
-
   if (isArray) {
-    // Split on top-level commas only, so JSON tuples inside arrays stay intact
     const parts: string[] = []
     let depth = 0
     let current = ''
     for (const ch of v) {
       if (ch === '[' || ch === '{' || ch === '"') depth++
       if (ch === ']' || ch === '}' || ch === '"') depth--
-      if (ch === ',' && depth === 0) {
-        parts.push(current)
-        current = ''
-      } else {
-        current += ch
-      }
+      if (ch === ',' && depth === 0) { parts.push(current); current = '' } else { current += ch }
     }
     parts.push(current)
     return parts.map(parseOne)
@@ -295,222 +287,255 @@ function parseArg(input: AbiInput, raw: string): unknown {
 function formatResult(value: unknown): string {
   if (typeof value === 'bigint') return value.toString()
   if (value && typeof value === 'object') {
-    // Decoded structs (tuples) contain BigInts at any depth (price, timestamp, ...)
-    // and JSON.stringify throws "Do not know how to serialize a BigInt" without a replacer
     return JSON.stringify(value, (_, v) => (typeof v === 'bigint' ? v.toString() : v), 2)
   }
   return String(value)
 }
 
-function rpcHint(message: string): string {
-  if (/fetch|network|CORS|ERR_/i.test(message)) {
-    return message + ' — check the RPC URL: it must be HTTPS and allow browser (CORS) requests'
-  }
-  return message
-}
-
 async function callFunction(fn: AbiFunction) {
+  const tab = activeTab.value
   const key = fn.sig
-  if (!contractAddress.value || !/^0x[0-9a-fA-F]{40}$/.test(contractAddress.value.trim())) {
-    results.value[key] = { loading: false, error: 'Enter a valid contract address (0x...)' }
+  if (!tab.contractAddress || !/^0x[0-9a-fA-F]{40}$/.test(tab.contractAddress.trim())) {
+    tab.results[key] = { loading: false, error: 'Enter a valid contract address (0x...)' }
     return
   }
-
   try {
-    const callArgs = fn.inputs.map((input, idx) => parseArg(input, getArg(key, idx)))
-    results.value[key] = { loading: true }
-    const client = createPublicClient({ transport: http(rpcUrl.value) })
+    const callArgs = fn.inputs.map((input, idx) => parseArg(input, getArg(tab, key, idx)))
+    tab.results[key] = { loading: true }
+    const client = createPublicClient({ transport: http(tab.rpcUrl) })
     const result = await client.readContract({
-      address: contractAddress.value.trim() as Address,
-      // Single-item ABI disambiguates overloaded functions for viem
+      address: tab.contractAddress.trim() as Address,
       abi: [fn.item] as Abi,
       functionName: fn.name,
       args: callArgs.length ? (callArgs as never) : undefined
     })
-    results.value[key] = { loading: false, value: formatResult(result) }
+    tab.results[key] = { loading: false, value: formatResult(result) }
   } catch (e) {
     const err = e as Error
-    results.value[key] = { loading: false, error: rpcHint(err.shortMessage || err.message) }
+    tab.results[key] = { loading: false, error: err.shortMessage || err.message }
   }
 }
 
+const copied = ref<string | null>(null)
 async function copy(text: string, key: string) {
   try {
     await navigator.clipboard.writeText(text)
     copied.value = key
     setTimeout(() => (copied.value = null), 1500)
-  } catch {
-    /* clipboard unavailable */
-  }
+  } catch { /* clipboard unavailable */ }
 }
 </script>
 
 <template>
-  <div class="max-w-4xl mx-auto px-4 py-8">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="p-2 bg-primary/10 rounded-lg">
-        <BookOpen class="w-6 h-6 text-primary" />
+  <div class="max-w-6xl mx-auto px-4 py-4">
+    <!-- Compact header -->
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-2">
+        <div class="p-1.5 bg-primary/10 rounded-lg">
+          <BookOpen class="w-5 h-5 text-primary" />
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold">EVM Contract Reader</h1>
+          <p class="text-xs text-muted-foreground">Call view functions on any contract — multi-tab, saved locally</p>
+        </div>
       </div>
-      <div>
-        <h1 class="text-2xl md:text-3xl font-bold">EVM Smart Contract Reader</h1>
-        <p class="text-sm text-muted-foreground">
-          Paste an ABI, connect any RPC, call view functions — 100% from your browser
-        </p>
+      <div class="flex items-center gap-2">
+        <button
+          class="no-btn-hover text-xs px-3 py-1.5 border rounded-lg flex items-center gap-1.5 transition-colors"
+          :class="saveEnabled ? 'border-primary/40 bg-primary/10 text-primary' : 'border-border text-muted-foreground hover:border-foreground/30'"
+          :title="saveEnabled ? 'Tabs saved to localStorage' : 'Enable tab saving'"
+          @click="saveEnabled = !saveEnabled; saveTabs()"
+        >
+          <Save class="w-3.5 h-3.5" />
+          {{ saveEnabled ? 'Saved' : 'Save' }}
+        </button>
+        <button
+          v-if="saveEnabled"
+          class="no-btn-hover text-xs px-2 py-1.5 border border-border rounded-lg text-muted-foreground hover:text-red-500 hover:border-red-500/30 transition-colors"
+          title="Clear saved tabs"
+          @click="clearSaved"
+        >
+          <Trash2 class="w-3.5 h-3.5" />
+        </button>
       </div>
     </div>
 
-    <Card class="mb-6">
-      <CardHeader>
-        <CardTitle class="text-lg">Connection</CardTitle>
-      </CardHeader>
-      <CardContent class="space-y-4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label for="rpc-url" class="text-sm font-medium text-muted-foreground mb-1 block">RPC endpoint</label>
-            <Input id="rpc-url" v-model="rpcUrl" class="font-mono text-sm" placeholder="https://..." aria-label="RPC endpoint" />
-            <div class="flex flex-wrap gap-1.5 mt-2">
-              <button
-                v-for="preset in rpcPresets"
-                :key="preset.label"
-                class="no-btn-hover text-xs px-2 py-0.5 border border-foreground/15 rounded-full hover:border-foreground/40 transition-colors"
-                :class="{ 'bg-primary/10 border-primary/40': rpcUrl === preset.url }"
-                @click="rpcUrl = preset.url"
-              >
-                {{ preset.label }}
-              </button>
-            </div>
-          </div>
-          <div>
-            <label for="contract-addr" class="text-sm font-medium text-muted-foreground mb-1 block">Contract address</label>
-            <Input
-              id="contract-addr"
-              v-model="contractAddress"
-              class="font-mono text-sm"
-              placeholder="0x..."
-              aria-label="Contract address"
-            />
+    <!-- Tab bar -->
+    <div class="flex items-end gap-1 border-b border-border mb-0 overflow-x-auto">
+      <button
+        v-for="tab in tabs"
+        :key="tab.id"
+        class="group relative flex items-center gap-2 px-4 py-2.5 text-sm rounded-t-lg border border-b-0 transition-colors whitespace-nowrap"
+        :class="tab.id === activeTabId
+          ? 'bg-background border-border text-foreground font-medium'
+          : 'bg-muted/30 border-transparent text-muted-foreground hover:bg-muted/60'"
+        @click="activeTabId = tab.id"
+      >
+        <span class="max-w-[140px] truncate">{{ tab.name }}</span>
+        <span
+          v-if="viewFunctions.length && tab.id === activeTabId"
+          class="text-[10px] px-1.5 py-0.5 bg-primary/10 text-primary rounded-full"
+        >{{ viewFunctions.length }}</span>
+        <span
+          class="ml-1 p-0.5 rounded hover:bg-foreground/10 opacity-0 group-hover:opacity-100 transition-opacity"
+          :class="tab.id === activeTabId ? 'opacity-100' : ''"
+          role="button"
+          tabindex="0"
+          :aria-label="'Close tab ' + tab.name"
+          @click.stop="closeTab(tab.id)"
+          @keydown.enter.stop="closeTab(tab.id)"
+        >
+          <X class="w-3.5 h-3.5" />
+        </span>
+      </button>
+      <button
+        class="px-3 py-2.5 text-muted-foreground hover:text-foreground transition-colors"
+        aria-label="Add new tab"
+        @click="addTab"
+      >
+        <Plus class="w-4 h-4" />
+      </button>
+    </div>
+
+    <!-- Active tab content -->
+    <div v-if="activeTab" class="border border-t-0 border-border rounded-b-xl p-4 space-y-4">
+      <!-- Connection bar (collapsible) -->
+      <div class="flex items-center justify-between">
+        <button
+          class="no-btn-hover text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+          @click="showConnection = !showConnection"
+        >
+          {{ showConnection ? '▼' : '▶' }} Connection
+          <span v-if="activeTab.contractAddress" class="font-mono text-[10px] bg-muted px-1.5 py-0.5 rounded">
+            {{ activeTab.contractAddress.slice(0, 6) }}…{{ activeTab.contractAddress.slice(-4) }}
+          </span>
+        </button>
+        <div class="flex gap-1.5 flex-wrap">
+          <button class="no-btn-hover text-[10px] px-2 py-1 border border-border rounded-full hover:border-primary/40 transition-colors" @click="loadErc20">ERC-20</button>
+          <button v-for="preset in uniswapPresets" :key="preset.label"
+            class="no-btn-hover text-[10px] px-2 py-1 border border-border rounded-full hover:border-primary/40 transition-colors"
+            @click="loadUniswap(preset)">Uni {{ preset.label }}</button>
+        </div>
+      </div>
+
+      <div v-if="showConnection" class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div>
+          <label class="text-xs text-muted-foreground mb-1 block">RPC endpoint</label>
+          <Input v-model="activeTab.rpcUrl" class="font-mono text-xs h-9" placeholder="https://..." aria-label="RPC endpoint" />
+          <div class="flex flex-wrap gap-1 mt-1.5">
+            <button v-for="preset in rpcPresets" :key="preset.label"
+              class="no-btn-hover text-[10px] px-2 py-0.5 border border-border rounded-full hover:border-primary/40 transition-colors"
+              :class="{ 'bg-primary/10 border-primary/40': activeTab.rpcUrl === preset.url }"
+              @click="activeTab.rpcUrl = preset.url">{{ preset.label }}</button>
           </div>
         </div>
         <div>
-          <div class="flex items-center justify-between mb-1">
-            <label for="abi-input" class="text-sm font-medium text-muted-foreground">Contract ABI (JSON)</label>
-            <button
-              class="no-btn-hover text-xs px-2 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 transition-colors"
-              @click="loadErc20Example"
-            >
-              Load ERC-20 example
-            </button>
-            <button
-              v-for="preset in uniswapPresets"
-              :key="preset.label"
-              class="no-btn-hover text-xs px-2 py-1 border border-border rounded-full hover:border-primary/40 transition-colors"
-              :title="preset.hint"
-              @click="loadUniswapPreset(preset)"
-            >
-              Uniswap {{ preset.label }}
-            </button>
-          </div>
-          <Textarea
-            id="abi-input"
-            v-model="abiText"
-            :rows="7"
-            class="font-mono text-xs"
-            placeholder='[{"type":"function","name":"totalSupply","stateMutability":"view",...}]'
-            aria-label="Contract ABI"
-          />
-          <p v-if="abiError" class="text-xs text-red-500 flex items-center gap-1 mt-1">
-            <AlertCircle class="w-3 h-3" /> {{ abiError }}
-          </p>
+          <label class="text-xs text-muted-foreground mb-1 block">Contract address</label>
+          <Input v-model="activeTab.contractAddress" class="font-mono text-xs h-9" placeholder="0x..." aria-label="Contract address" />
         </div>
-      </CardContent>
-    </Card>
+        <div>
+          <label class="text-xs text-muted-foreground mb-1 block">ABI (JSON)</label>
+          <Textarea v-model="activeTab.abiText" :rows="2" class="font-mono text-[10px]" placeholder='[{"type":"function",...}]' aria-label="Contract ABI" />
+          <p v-if="abiError" class="text-[10px] text-red-500 mt-1">{{ abiError }}</p>
+        </div>
+      </div>
 
-    <Card v-if="viewFunctions.length">
-      <CardHeader>
-        <CardTitle class="text-lg">View functions ({{ viewFunctions.length }})</CardTitle>
-      </CardHeader>
-      <CardContent class="space-y-3">
-        <div v-for="fn in viewFunctions" :key="fn.sig" class="border border-border rounded-lg">
+      <!-- Functions list (compact) -->
+      <div v-if="viewFunctions.length" class="space-y-1.5">
+        <div class="flex items-center justify-between mb-2">
+          <p class="text-xs font-medium text-muted-foreground">{{ viewFunctions.length }} view functions</p>
+          <p class="text-[10px] text-muted-foreground/60">eth_call · read-only · no gas</p>
+        </div>
+        <div
+          v-for="fn in viewFunctions"
+          :key="fn.sig"
+          class="border border-border rounded-lg"
+          :class="{ 'bg-primary/[0.02]': activeTab.expanded === fn.sig }"
+        >
+          <!-- Function header -->
           <button
-            class="no-btn-hover w-full flex items-center justify-between gap-4 px-4 py-3 text-left"
-            @click="expanded = expanded === fn.sig ? null : fn.sig"
+            class="no-btn-hover w-full flex items-center justify-between gap-3 px-3 py-2.5 text-left"
+            @click="activeTab.expanded = activeTab.expanded === fn.sig ? null : fn.sig"
           >
-            <div class="min-w-0">
-              <p class="font-mono text-sm font-semibold">
-                {{ fn.name }}<span class="text-muted-foreground">({{ fn.inputs.map((i) => i.type).join(', ') }})</span>
-              </p>
-              <p class="text-xs text-muted-foreground">{{ fn.stateMutability }} &rarr; {{ fn.outputs.map((o) => o.type).join(', ') || 'void' }}</p>
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2">
+                <code class="font-mono text-xs font-semibold text-foreground">{{ fn.name }}</code>
+                <span class="font-mono text-[10px] text-muted-foreground">({{ fn.inputs.map(i => i.type).join(', ') }})</span>
+              </div>
+              <code class="font-mono text-[10px] text-muted-foreground/60">
+                {{ fn.stateMutability }} → {{ fn.outputs.map(o => o.type).join(', ') || 'void' }}
+              </code>
             </div>
-            <span
-              v-if="results[fn.sig]"
-              class="text-xs px-2 py-0.5 rounded-full flex-shrink-0"
-              :class="results[fn.sig].error ? 'bg-red-500/10 text-red-600' : 'bg-green-500/10 text-green-700'"
-            >
-              {{ results[fn.sig].error ? 'error' : 'result' }}
-            </span>
-            <span v-else class="text-xs text-muted-400 flex-shrink-0 font-mono">call &darr;</span>
+            <div class="flex items-center gap-2 shrink-0">
+              <span v-if="activeTab.results[fn.sig]" class="text-[10px] px-2 py-0.5 rounded-full font-medium"
+                :class="activeTab.results[fn.sig].error ? 'bg-red-500/10 text-red-600' : 'bg-green-500/10 text-green-700'">
+                {{ activeTab.results[fn.sig].error ? 'error' : 'result' }}
+              </span>
+              <span class="text-muted-foreground text-xs font-mono">{{ activeTab.expanded === fn.sig ? '▾' : '▸' }}</span>
+            </div>
           </button>
 
-          <div v-if="expanded === fn.sig" class="px-4 pb-4 space-y-3 border-t border-border pt-3">
-            <div v-if="fn.inputs.length" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div v-for="(input, inputIdx) in fn.inputs" :key="`${fn.sig}:${inputIdx}`">
-                <label class="text-xs font-mono text-muted-foreground mb-1 block">
-                  {{ argLabel(input) }} <span class="opacity-60">({{ input.type }})</span>
+          <!-- Expanded: args + call + result -->
+          <div v-if="activeTab.expanded === fn.sig" class="px-3 pb-3 space-y-2.5 border-t border-border/50 pt-2.5">
+            <div v-if="fn.inputs.length" class="grid grid-cols-2 md:grid-cols-3 gap-2">
+              <div v-for="(input, idx) in fn.inputs" :key="idx">
+                <label class="text-[10px] font-mono text-muted-foreground mb-0.5 block">
+                  {{ argLabel(input) }} <span class="opacity-50">({{ input.type }})</span>
                 </label>
+                <Input
+                  v-if="input.type !== 'bool'"
+                  class="font-mono text-xs h-8"
+                  :placeholder="input.type.endsWith('[]') ? 'comma sep' : input.type"
+                  :model-value="getArg(activeTab, fn.sig, idx)"
+                  @update:model-value="setArg(activeTab, fn.sig, idx, String($event ?? ''))"
+                  @keyup.enter="callFunction(fn)"
+                />
                 <select
-                  v-if="input.type === 'bool'"
-                  class="w-full h-9 rounded-md border border-input bg-transparent px-3 font-mono text-sm"
-                  :value="getArg(fn.sig, inputIdx)"
-                  @change="setArg(fn.sig, inputIdx, ($event.target as HTMLSelectElement).value)"
+                  v-else
+                  class="w-full h-8 rounded-md border border-input bg-transparent px-2 font-mono text-xs"
+                  :value="getArg(activeTab, fn.sig, idx)"
+                  @change="setArg(activeTab, fn.sig, idx, ($event.target as HTMLSelectElement).value)"
                 >
                   <option value="" disabled>select…</option>
                   <option value="true">true</option>
                   <option value="false">false</option>
                 </select>
-                <Input
-                  v-else
-                  class="font-mono text-sm"
-                  :placeholder="argPlaceholder(input.type)"
-                  :model-value="getArg(fn.sig, inputIdx)"
-                  @update:model-value="setArg(fn.sig, inputIdx, String($event ?? ''))"
-                  @keyup.enter="callFunction(fn)"
-                />
               </div>
             </div>
 
             <div class="flex items-center gap-3">
-              <Button size="sm" :disabled="results[fn.sig]?.loading" @click="callFunction(fn)">
-                <Loader2 v-if="results[fn.sig]?.loading" class="w-4 h-4 mr-1 animate-spin" />
-                <Play v-else class="w-4 h-4 mr-1" />
+              <Button size="sm" class="h-8 text-xs" :disabled="activeTab.results[fn.sig]?.loading" @click="callFunction(fn)">
+                <Loader2 v-if="activeTab.results[fn.sig]?.loading" class="w-3.5 h-3.5 mr-1 animate-spin" />
+                <Play v-else class="w-3.5 h-3.5 mr-1" />
                 Call {{ fn.name }}
               </Button>
-              <span class="text-xs text-muted-foreground">eth_call — read-only, no gas, no wallet needed</span>
             </div>
 
-            <div v-if="results[fn.sig]?.error" class="p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
-              <p class="text-xs text-red-600 font-mono break-all">{{ results[fn.sig]?.error }}</p>
+            <div v-if="activeTab.results[fn.sig]?.error" class="p-2.5 bg-red-500/10 border border-red-500/20 rounded-md">
+              <p class="text-xs text-red-600 font-mono break-all">{{ activeTab.results[fn.sig]?.error }}</p>
             </div>
-            <div
-              v-else-if="results[fn.sig]?.value !== undefined"
-              class="flex items-start justify-between gap-3 p-3 bg-green-500/10 border border-green-500/20 rounded-lg"
-            >
-              <pre class="text-xs font-mono whitespace-pre-wrap break-all flex-1">{{ results[fn.sig]?.value }}</pre>
-              <Button variant="ghost" size="sm" :aria-label="'Copy result ' + fn.name" @click="copy(results[fn.sig]!.value || '', fn.sig)">
-                <Check v-if="copied === fn.sig" class="w-4 h-4" />
-                <Copy v-else class="w-4 h-4" />
+            <div v-else-if="activeTab.results[fn.sig]?.value !== undefined"
+              class="flex items-start justify-between gap-2 p-2.5 bg-green-500/10 border border-green-500/20 rounded-md">
+              <pre class="text-xs font-mono whitespace-pre-wrap break-all flex-1 m-0">{{ activeTab.results[fn.sig]?.value }}</pre>
+              <Button variant="ghost" size="sm" class="h-6 px-2 shrink-0" :aria-label="'Copy result ' + fn.name" @click="copy(activeTab.results[fn.sig]!.value || '', fn.sig)">
+                <Check v-if="copied === fn.sig" class="w-3.5 h-3.5" />
+                <Copy v-else class="w-3.5 h-3.5" />
               </Button>
             </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
 
-    <div v-else-if="!abiText" class="flex items-start gap-3 p-4 bg-primary/5 border border-primary/20 rounded-lg">
-      <FileJson class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-      <p class="text-sm text-muted-foreground">
-        Paste a contract ABI to list its view and pure functions. Get the ABI from Etherscan's "Contract ABI" section,
-        Foundry <code class="font-mono text-xs">forge inspect</code>, or your build artifacts.
-      </p>
+      <!-- Empty state -->
+      <div v-else-if="!activeTab.abiText" class="flex items-start gap-3 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+        <FileJson class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+        <div class="text-sm">
+          <p class="text-muted-foreground">Paste a contract ABI to list view functions.</p>
+          <p class="text-xs text-muted-foreground/70 mt-1">
+            Get the ABI from Etherscan, Foundry <code class="font-mono">forge inspect</code>, or use the presets above.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
