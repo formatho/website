@@ -2,6 +2,22 @@
 import { ref, computed, onMounted } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { useSEO } from '@/composables/useSEO'
+import { homeIntro, homeCategoryDetail, homeFAQ } from '@/data/homeSEO'
+
+// FAQPage JSON-LD for homepage FAQ (matches visible text in src/data/homeSEO.ts)
+const faqLd = document.createElement('script')
+faqLd.type = 'application/ld+json'
+faqLd.id = 'json-ld-home-faq'
+faqLd.textContent = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: homeFAQ.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer }
+  }))
+})
+document.head.appendChild(faqLd)
 
 useSEO({
   title: 'Free Developer Tools and AI Platform | Formatho',
@@ -456,6 +472,27 @@ const _popularTools = [
         </div>
       </div>
     </section>
+    <!-- Citable SEO content -->
+    <section class="container mx-auto px-4 py-10 md:py-14 border-t border-border" aria-label="About Formatho">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6">What is Formatho?</h2>
+      <p v-for="(para, i) in homeIntro" :key="i" class="text-muted-foreground leading-relaxed mb-4 max-w-4xl">{{ para }}</p>
+
+      <div class="mt-10 space-y-8">
+        <div v-for="cat in homeCategoryDetail" :key="cat.slug">
+          <h3 class="text-lg font-bold mb-2">{{ cat.title }}</h3>
+          <p class="text-muted-foreground leading-relaxed max-w-4xl">{{ cat.body }}</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl md:text-3xl font-bold mt-14 mb-6">Frequently asked questions</h2>
+      <div class="space-y-4 max-w-4xl">
+        <div v-for="faq in homeFAQ" :key="faq.question" class="border border-border rounded-xl p-5">
+          <h3 class="font-bold mb-2">{{ faq.question }}</h3>
+          <p class="text-muted-foreground leading-relaxed">{{ faq.answer }}</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Floating CTA for Mobile -->
     <FloatingCTA />
   </div>
