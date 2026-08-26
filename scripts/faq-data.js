@@ -2039,7 +2039,7 @@ const p2Content = {
   '/tools/yaml-lint': { intro: ['Validate and lint YAML files. Find syntax errors, indentation issues, and common YAML pitfalls.', 'Paste YAML to validate it instantly. Errors show the exact line and column. Also formats with proper indentation.'], howTo: ['Paste your YAML.', 'Errors are highlighted with positions.', 'Valid YAML is formatted and ready to copy.'] },
   '/tools/yaml-to-toml': { intro: ['Convert YAML to TOML format. Both are popular config formats with different strengths.', 'Paste YAML to get the equivalent TOML. Handles nested structures, lists, and multi-line strings.'], howTo: ['Paste your YAML.', 'The TOML output appears.', 'Copy for your config file.'] },
   '/tools/yaml-viewer': { intro: ['Format, validate, and beautify YAML documents. Also known as a YAML linter or prettifier.', 'Paste YAML to see it formatted with clean indentation. Syntax errors are highlighted with their position.'], howTo: ['Paste your YAML.', 'The formatted output appears.', 'Copy the beautified result.'] },
-  '/tools/all': { intro: ['Browse all 130+ Formatho developer tools by category. Search by name or function.', 'The complete directory of free, privacy-first tools. All run 100% client-side in your browser.'], howTo: ['Search or browse categories.', 'Click any tool to open it.', 'Bookmark your favorites.'] },
+  '/tools/all': { intro: ['Browse all Formatho developer tools by category. Search by name or function.', 'The complete directory of free, privacy-first tools. All run 100% client-side in your browser.'], howTo: ['Search or browse categories.', 'Click any tool to open it.', 'Bookmark your favorites.'] },
 }
 
 const p2FAQs = {

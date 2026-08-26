@@ -48,7 +48,7 @@ const testimonial = {
             Stop compromising your data.
           </h1>
           <p class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Formatho gives you <strong class="text-foreground">100+ developer tools</strong> that run 
+            Formatho gives you <strong class="text-foreground">privacy-first developer tools</strong> that run 
             <strong class="text-foreground">ENTIRELY</strong> in your browser. 
             No uploads. No tracking. No databases. Just instant, private tools.
           </p>
@@ -66,7 +66,7 @@ const testimonial = {
             class="cta-secondary"
           >
             <span class="icon">📖</span>
-            SEE ALL 100+ TOOLS
+            SEE ALL TOOLS
           </button>
         </div>
 

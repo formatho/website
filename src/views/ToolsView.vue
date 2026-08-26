@@ -30,7 +30,6 @@ const filteredCategories = computed(() => {
     .filter((c) => c.items.length > 0 || c.category.toLowerCase().includes(q))
 })
 
-const totalTools = computed(() => tools.reduce((sum: number, c: { items: unknown[] }) => sum + c.items.length, 0))
 </script>
 
 <template>
@@ -39,7 +38,7 @@ const totalTools = computed(() => tools.reduce((sum: number, c: { items: unknown
     <div class="mt-6 mb-8">
       <h1 class="text-3xl md:text-4xl font-bold">All Tools</h1>
       <p class="text-sm text-muted-foreground mt-2">
-        {{ totalTools }} free tools across {{ tools.length }} categories — all private, all client-side
+        Every tool is free, private, and runs entirely in your browser
       </p>
     </div>
 

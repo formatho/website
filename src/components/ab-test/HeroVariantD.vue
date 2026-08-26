@@ -69,7 +69,7 @@ const exampleQueries = [
 
         <!-- Tagline -->
         <p class="text-xl md:text-2xl text-muted-foreground font-light" data-aos="fade-up" data-aos-delay="150">
-          100+ tools. Zero data collection. 100% free.
+          Free forever. Zero data collection. 100% private.
         </p>
 
         <!-- Large Search Input -->

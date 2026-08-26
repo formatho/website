@@ -24,7 +24,7 @@ onMounted(() => {
 
 useSEO({
   title: 'Free Developer Tools and AI Platform | Formatho',
-  description: '100+ free, client-side developer and blockchain utilities—including JSON formatters, Base64 encoders, JWT debuggers, SQL formatters, UUID generators, hash generators, QR codes, regex testers, and more—with zero data tracking and no sign-up required.',
+  description: 'Free, privacy-first developer tools that run entirely in your browser. JSON formatters, JWT debugger, security headers analyzer, CSP generator, blockchain tools, and more. Zero tracking, zero uploads, no sign-up.',
   keywords: ['developer tools', 'free online tools', 'JSON formatter', 'Base64 encoder', 'JWT debugger', 'SQL formatter', 'UUID generator', 'hash generator', 'QR code generator', 'regex tester', 'privacy tools', 'AI agents', 'agent orchestration', 'formatho', 'client-side tools', 'browser tools', 'blockchain tools', 'ethereum tools', 'crypto tools'],
   ogType: 'website',
   jsonLd: {
@@ -211,7 +211,6 @@ const searchResults = computed(() => {
   return results
 })
 
-const toolCount = tools.reduce((sum: number, cat: { items: unknown[] }) => sum + cat.items.length, 0)
 const categoryCount = tools.length
 
 const searchQuery = ref('')
@@ -318,7 +317,7 @@ const _popularTools = [
                   <path d="M9 12l2 2 4-4"></path>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> {{ toolCount }} free tools </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Free forever, no sign-up </span>
             </div>
             <div
               class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
@@ -375,8 +374,8 @@ const _popularTools = [
           <!-- Social Proof Stats -->
           <div class="flex flex-wrap gap-8 justify-center items-center mt-8 text-center" data-aos="fade-up" data-aos-delay="150">
             <div>
-              <div class="text-3xl font-bold text-primary">{{ toolCount }}</div>
-              <div class="text-xs text-muted-foreground">Tools across {{ categoryCount }} categories</div>
+              <div class="text-3xl font-bold text-primary">Zero</div>
+              <div class="text-xs text-muted-foreground">Data collected or uploaded</div>
             </div>
             <div class="w-px h-10 bg-foreground"></div>
             <div>
@@ -442,7 +441,7 @@ const _popularTools = [
 
       <div v-else>
         <h2 class="text-2xl md:text-3xl font-bold mb-2">Browse by category</h2>
-        <p class="text-sm text-muted-foreground mb-8">{{ toolCount }} free tools across {{ categoryCount }} categories — all private, no sign-up</p>
+        <p class="text-sm text-muted-foreground mb-8">Every tool is free, private, and runs entirely in your browser — no sign-up</p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
           <RouterLink
             v-for="category in tools"

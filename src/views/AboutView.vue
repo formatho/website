@@ -31,7 +31,7 @@ useSEO({
         <p
           class="text-[6vw] md:text-[4vw] font-black tracking-tighter leading-none text-foreground/[0.03] whitespace-nowrap -mb-4"
         >
-          100+ DEVELOPER TOOLS ✧ ZERO UPLOADS ✧ NO SIGN-UPS
+          DEVELOPER TOOLS ✧ ZERO UPLOADS ✧ NO SIGN-UPS
         </p>
       </div>
 
@@ -137,7 +137,7 @@ useSEO({
               WHO IT'S FOR
             </p>
             <h3 class="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-8">
-              One Hundred<br />Tools. Zero<br />Servers.
+              Developer Tools.<br />Zero<br />Servers.
             </h3>
             <p class="text-muted-foreground leading-relaxed max-w-md">
               A complete developer toolkit that treats your browser as the only server it will ever need. Whatever stack you build on, there is a Formatho tool in your workflow.
@@ -301,7 +301,7 @@ useSEO({
     <section class="py-6 border-b border-foreground/10 overflow-hidden bg-muted/30">
       <div class="marquee whitespace-nowrap">
         <span class="text-sm font-medium tracking-widest text-muted-foreground">
-          100+ TOOLS ✧ ZERO UPLOADS ✧ NO SIGN-UPS ✧ BUILD IN PRIVATE ✧ 100+ TOOLS ✧ ZERO UPLOADS ✧ NO SIGN-UPS ✧ BUILD IN PRIVATE ✧ 100+ TOOLS ✧ ZERO UPLOADS ✧ NO SIGN-UPS ✧ BUILD IN PRIVATE ✧
+          FREE FOREVER ✧ ZERO UPLOADS ✧ NO SIGN-UPS ✧ BUILD IN PRIVATE ✧ FREE FOREVER ✧ ZERO UPLOADS ✧ NO SIGN-UPS ✧ BUILD IN PRIVATE ✧ FREE FOREVER ✧ ZERO UPLOADS ✧ NO SIGN-UPS ✧ BUILD IN PRIVATE ✧
         </span>
       </div>
     </section>
@@ -316,7 +316,7 @@ useSEO({
             Build in<br />Private.
           </h2>
           <p class="text-muted-foreground leading-relaxed max-w-xl mb-10">
-            Whether you are a Web3 security researcher decoding complex tokens or a backend engineer parsing production payloads, Formatho gives you 100+ tools that treat your browser as the only server.
+            Whether you are a Web3 security researcher decoding complex tokens or a backend engineer parsing production payloads, Formatho gives you tools that treat your browser as the only server.
           </p>
           <p class="text-2xl md:text-3xl font-black tracking-widest leading-none mb-12">
             WELCOME TO FORMATHO.

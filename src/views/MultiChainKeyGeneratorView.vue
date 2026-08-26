@@ -333,7 +333,7 @@ const reset = () => {
             </summary>
             <p class="mt-2 text-muted-foreground">
               Yes. BIP-44 defines standard derivation paths for each blockchain. A single mnemonic can
-              generate keys for Ethereum, Bitcoin, Solana, Cosmos, and 100+ other chains. Each chain uses
+              generate keys for Ethereum, Bitcoin, Solana, Cosmos, and many other chains. Each chain uses
               its own derivation path, so the addresses are different but all recoverable from the same phrase.
             </p>
           </details>
