@@ -364,7 +364,7 @@ const _popularTools = [
                 Browse All Tools
               </button>
             </RouterLink>
-            <RouterLink to="/category/blockchain" data-v-8d4ed633="">
+            <RouterLink to="/category/web3" data-v-8d4ed633="">
               <button class="px-6 py-3 bg-foreground/10 border border-foreground text-foreground rounded-lg font-semibold text-lg hover:bg-foreground hover:text-background transition-colors" data-v-8d4ed633="">
                 Web3 &amp; Blockchain Suite
               </button>
