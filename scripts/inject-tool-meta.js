@@ -103,8 +103,9 @@ function generateMetaTags(tool) {
     "@type": "SoftwareApplication",
     "name": tool.title,
     "url": url,
+    "screenshot": url,
     "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "Any",
+    "operatingSystem": "Web Browser",
     "browserRequirements": "Requires JavaScript. Requires HTML5.",
     "offers": {
       "@type": "Offer",
