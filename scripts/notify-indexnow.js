@@ -16,7 +16,6 @@ import { readFileSync, existsSync, readdirSync } from 'fs'
 import { resolve } from 'path'
 
 const HOST = 'formatho.com'
-// endpoint list defined below as ENDPOINTS
 
 // Locate the committed key file: public/<32-hex>.txt
 function findKey() {
