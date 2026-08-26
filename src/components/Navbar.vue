@@ -163,7 +163,7 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
                   </RouterLink>
                   <span class="text-foreground/40 font-mono text-sm">|</span>
                   <RouterLink
-                    to="/category/blockchain"
+                    to="/category/web3"
                     @click="handleToolLinkClick"
                     class="text-[13px] font-bold tracking-[2px] uppercase text-foreground hover:underline hover:underline-offset-[4px]"
                   >
@@ -277,7 +277,7 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
               <div class="space-y-2">
                 <h3 class="text-[11px] font-bold tracking-[2px] uppercase text-foreground py-2">EVM & Blockchain Developer Tools</h3>
                 <RouterLink
-                  to="/category/blockchain"
+                  to="/category/web3"
                   @click="handleToolLinkClick"
                   class="block px-2 py-2 text-sm text-foreground hover:underline hover:underline-offset-[4px]"
                 >
