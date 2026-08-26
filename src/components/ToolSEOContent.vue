@@ -31,6 +31,12 @@ const toolTitle = computed(() => {
       <p v-for="(para, i) in seoContent.intro" :key="i" class="text-muted-foreground leading-relaxed mb-3">
         {{ para }}
       </p>
+      <ul v-if="seoContent.features?.length" class="space-y-2 mb-3">
+        <li v-for="(feat, i) in seoContent.features" :key="i" class="flex items-start gap-2 text-muted-foreground">
+          <span class="text-primary mt-0.5 shrink-0" aria-hidden="true">&#10003;</span>
+          <span class="leading-relaxed">{{ feat }}</span>
+        </li>
+      </ul>
     </div>
     <div v-if="seoContent.useCases?.length">
       <h2 class="text-2xl font-bold mb-3">Use cases and examples</h2>
