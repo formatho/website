@@ -368,10 +368,19 @@ async function copy(text: string, key: string) {
         class="group relative flex items-center gap-2 px-4 py-2.5 text-sm rounded-t-lg border border-b-0 transition-colors whitespace-nowrap"
         :class="tab.id === activeTabId
           ? 'bg-background border-border text-foreground font-medium'
-          : 'bg-muted/30 border-transparent text-muted-foreground hover:bg-muted/60'"
+          : 'bg-muted/20 border-transparent text-muted-foreground hover:bg-muted/40'"
         @click="activeTabId = tab.id"
       >
-        <span class="max-w-[140px] truncate">{{ tab.name }}</span>
+        <input
+          :value="tab.name"
+          class="bg-transparent border-none outline-none text-inherit font-inherit max-w-[140px] truncate cursor-text focus:cursor-text"
+          style="width: auto; min-width: 40px; max-width: 140px;"
+          aria-label="Tab name"
+          @input="tab.name = ($event.target as HTMLInputElement).value"
+          @keydown.stop
+          @click.stop
+          @dblclick.stop
+        />
         <span
           v-if="viewFunctions.length && tab.id === activeTabId"
           class="text-[10px] px-1.5 py-0.5 bg-primary/10 text-primary rounded-full"
