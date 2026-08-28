@@ -30,11 +30,14 @@ interface CircuitStep {
 }
 
 const numQubits = ref(3)
-const circuit = ref<CircuitStep[]>([{ gates: [] }])
+const circuit = ref<CircuitStep[]>([
+  { gates: [{ type: 'H', target: 0 }] },
+  { gates: [{ type: 'CNOT', target: 1, control: 0 }] }
+])
 const copied = ref(false)
 const measurementResults = ref<number[]>([])
 const isSimulating = ref(false)
-const showExamples = ref(false)
+const showExamples = ref(true)
 
 // Example quantum circuits
 interface ExampleCircuit {
