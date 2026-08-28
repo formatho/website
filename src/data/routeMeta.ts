@@ -551,7 +551,7 @@ export const routeMeta: Record<string, RouteMeta> = {
   },
   'ipv6-ula-generator': {
     title: 'IPv6 ULA Generator',
-    description: 'Generate IPv6 Unique Local Addresses.',
+    description: 'Generate IPv6 Unique Local Address (ULA) prefixes per RFC 4193. The fd00::/8 equivalent of RFC 1918 private IPs. Free, private, client-side.',
   },
   'eta-calculator': {
     title: 'ETA Calculator',

@@ -2134,3 +2134,34 @@ if (toolSEOContent['/tools/quantum-circuit-simulator']) {
     }
   ]
 }
+
+
+// IPv6 ULA Generator enhancements
+if (toolSEOContent['/tools/ipv6-ula-generator']) {
+  toolSEOContent['/tools/ipv6-ula-generator'].features = [
+    'Generates valid RFC 4193 ULA prefixes (fd00::/8 range)',
+    'Random 40-bit Global ID ensures uniqueness across sites',
+    'Full /48 allocation with 65,536 available subnets',
+    'Supports site-specific subnet IDs (16-bit)',
+    'Copy-paste ready for router and firewall configs',
+    'No network calls — generation is entirely local',
+  ]
+  toolSpecificFAQ['/tools/ipv6-ula-generator'] = [
+    {
+      question: 'What is an IPv6 ULA used for?',
+      answer: 'ULAs are for internal networks that do not need internet routing — homelabs, Docker networks, enterprise LANs, and lab environments. They are the IPv6 equivalent of IPv4 private addresses like 192.168.x.x.'
+    },
+    {
+      question: 'Why fd00::/8 and not fe80::?',
+      answer: 'fe80:: link-local addresses only work on a single network segment. fd00::/8 ULAs work across routers and VLANs, making them suitable for multi-subnet internal networks.'
+    },
+    {
+      question: 'How do I use the generated address?',
+      answer: 'The tool gives you a /48 prefix. Assign a /64 from it to each subnet. For example, if your prefix is fd3a:4f5c:6d7e::/48, use fd3a:4f5c:6d7e::/64 for your first subnet, fd3a:4f5c:6d7e:1::/64 for the second, and so on.'
+    },
+    {
+      question: 'Should I use the same ULA on multiple sites?',
+      answer: 'No — generate a unique ULA per site. The 40-bit random Global ID ensures no collision even if networks merge later. If you need the same ULA across sites connected by VPN, use the same /48.'
+    }
+  ]
+}
