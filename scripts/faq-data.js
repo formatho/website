@@ -2165,3 +2165,40 @@ if (toolSEOContent['/tools/ipv6-ula-generator']) {
     }
   ]
 }
+
+
+// EVM chain page content kits — improves SEO depth for chain-specific pages
+const evmChainContent = {
+  '/evm-tools/cronos': {
+    intro: [
+      'Cronos is the EVM-compatible chain built by Crypto.com, designed for payments, DeFi, and GameFi. It uses the standard EVM instruction set, so every Ethereum tool works natively — the same addresses, the same ABI encoding, the same Keccak-256 hashing.',
+      'This page curates Formatho tools that work on Cronos (chain ID 25), with the RPC endpoint pre-configured. Read smart contracts, generate vanity addresses, hash with Keccak-256, and encode ABI calldata — all client-side, which matters when working with CRO and DeFi positions.'
+    ],
+    howTo: [
+      'Use the Contract Reader with the Cronos RPC endpoint to call view functions.',
+      'Generate a vanity address — the same key works on Cronos and every EVM chain.',
+      'Convert between wei and CRO using the EVM Unit Converter.',
+      'Compute function selectors and ABI calldata for Cronos smart contracts.'
+    ]
+  }
+}
+
+const evmChainFAQs = {
+  '/evm-tools/cronos': [
+    {
+      question: 'What is Cronos chain ID 25?',
+      answer: 'Chain ID 25 identifies the Cronos mainnet. When configuring wallets, MetaMask, or RPC endpoints, use this ID to connect to Cronos instead of Ethereum (chain ID 1) or other chains.'
+    },
+    {
+      question: 'Do Ethereum tools work on Cronos?',
+      answer: 'Yes — Cronos is fully EVM-compatible, meaning it uses the same address format, ABI encoding, and smart contract execution model as Ethereum. All Formatho EVM tools work on Cronos without modification.'
+    },
+    {
+      question: 'What is the gas token on Cronos?',
+      answer: 'CRO is used for gas fees on Cronos. Gas is typically much cheaper than Ethereum mainnet, with transactions costing fractions of a cent.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, evmChainContent)
+Object.assign(toolSpecificFAQ, evmChainFAQs)
