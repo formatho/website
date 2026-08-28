@@ -2202,3 +2202,38 @@ const evmChainFAQs = {
 
 Object.assign(toolSEOContent, evmChainContent)
 Object.assign(toolSpecificFAQ, evmChainFAQs)
+
+
+// Cosmos bech32 SEO enhancements
+if (toolSEOContent['/tools/cosmos-address-generator']) {
+  toolSEOContent['/tools/cosmos-address-generator'].features = [
+    'Generate addresses with the correct bech32 prefix for each Cosmos chain',
+    'Cosmos Hub (cosmos), Osmosis (osmo), Juno (juno), Akash (akash), Injective (inj)',
+    'Stargaze (stars), Kava (kava), Crescent (cre), Umee (umee), Secret (secret)',
+    'Convert the same public key between different chain prefixes',
+    'Uses standard BIP32/BIP44 derivation paths per chain',
+    'All generation happens locally — seed phrases never transmitted',
+  ]
+  toolSpecificFAQ['/tools/cosmos-address-generator'] = [
+    {
+      question: 'What is the bech32 prefix for Cosmos Hub?',
+      answer: 'The bech32 prefix for Cosmos Hub is "cosmos" — addresses start with cosmos1 followed by 38 characters (e.g., cosmos1v9zc6sgv2vwaaufjfsg9q2tg5w7tqfoouxs6d7). Other popular prefixes: osmo (Osmosis), juno (Juno), akash (Akash), inj (Injective).'
+    },
+    {
+      question: 'How do I convert my Cosmos address to an Osmosis address?',
+      answer: 'The underlying public key is the same — only the bech32 prefix changes. Use the converter in this tool: enter your cosmos1... address, select "osmo" as the target prefix, and the same key is re-encoded as osmo1... This works between any two Cosmos SDK chains.'
+    },
+    {
+      question: 'Why do Cosmos addresses use bech32?',
+      answer: 'Bech32 encoding includes a checksum that detects typos before funds are sent. If you accidentally mistype one character, the address fails validation instead of sending to the wrong account. The prefix identifies which chain the address belongs to.'
+    },
+    {
+      question: 'Can I use the same seed phrase on multiple Cosmos chains?',
+      answer: 'Yes — the same BIP39 mnemonic generates valid addresses on every Cosmos SDK chain. However, each chain uses a different derivation path and bech32 prefix. This tool shows you all derived addresses from one seed.'
+    },
+    {
+      question: 'What derivation path does Cosmos Hub use?',
+      answer: "Cosmos Hub uses BIP44 path m/44'/118'/0'/0/0. The coin type 118 is ATOM. Other chains use different coin types: Osmosis uses 100, Juno uses 118 (same as Cosmos), Akash uses 118."
+    }
+  ]
+}

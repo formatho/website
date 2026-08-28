@@ -184,7 +184,7 @@ export const routeMeta: Record<string, RouteMeta> = {
   },
   'cosmos-address-generator': {
     title: 'Cosmos Address Generator - Multi-Chain | Formatho',
-    description: 'Free Cosmos address generator for Cosmos Hub (ATOM), Osmosis (OSMO), Juno (JUNO), Secret Network (SCRT), Stargaze (STARS), Akash (AKT), Kava (KAVA), Injective (INJ), Crescent (CRE), and Umee (UMEE). Generate Bech32 addresses from BIP39 seed phrases with real BIP32/BIP44 derivation. 100% client-side, privacy-first.',
+    description: 'Generate Cosmos bech32 addresses: cosmos (Hub), osmo, juno, akash, inj prefixes. Convert between chains. Free, private, client-side.',
     keywords: 'cosmos address generator, cosmos hub address, atom address generator, osmosis address generator, osmo address, juno address generator, secret network address, scrt address, stargaze address, stars address, akash address generator, akt address, kava address, injective address, inj address, crescent address, cre address, umee address, bech32 address generator, bip39 cosmos, bip44 cosmos, cosmos wallet generator, cosmos seed phrase, cosmos mnemonic, multi chain wallet, secp256k1, blockchain address tool',
   },
   'rwa-swap': {
