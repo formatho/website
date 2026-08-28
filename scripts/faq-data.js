@@ -2103,3 +2103,34 @@ for (const [route, feats] of Object.entries(toolFeatures)) {
     toolSEOContent[route].features = feats
   }
 }
+
+
+// Quantum Circuit Simulator enhancements
+if (toolSEOContent['/tools/quantum-circuit-simulator']) {
+  toolSEOContent['/tools/quantum-circuit-simulator'].features = [
+    'Real quantum gates: Hadamard, Pauli-X/Y/Z, CNOT, SWAP, T, S, and rotation gates',
+    'Pre-built circuits: Bell State, Quantum Teleportation, Fourier Transform, Grover Search',
+    'Complex state vector simulation with amplitude visualization',
+    'Measurement with probabilistic collapse to classical bits',
+    'Supports 1-8 qubits with full entanglement modeling',
+    'Export circuit configuration as JSON',
+  ]
+  toolSpecificFAQ['/tools/quantum-circuit-simulator'] = [
+    {
+      question: 'What is a Bell State and why is it important?',
+      answer: 'A Bell State is a pair of maximally entangled qubits. When you measure one, you instantly know the state of the other regardless of distance. This is the foundation of quantum teleportation and superdense coding.'
+    },
+    {
+      question: 'How does quantum simulation work in a browser?',
+      answer: 'The simulator represents the quantum state as a complex vector of 2^n amplitudes (where n is the number of qubits). Each gate applies a unitary matrix transformation to this vector. For 3 qubits, that is an 8-dimensional complex vector — easily computed in JavaScript.'
+    },
+    {
+      question: 'What is the difference between superposition and entanglement?',
+      answer: 'Superposition is a single qubit being in multiple states simultaneously (like a coin spinning). Entanglement is when multiple qubits share a correlated state — measuring one affects the others. The Bell State demonstrates both.'
+    },
+    {
+      question: 'Can I build my own circuits?',
+      answer: 'Yes — select gates from the palette and place them on qubit wires. Connect qubits with CNOT gates for entanglement. Add measurements to see probabilistic results. Start with the pre-built examples to learn the patterns.'
+    }
+  ]
+}
