@@ -124,7 +124,7 @@ export async function includedRoutes(paths: string[]) {
     const stackPaths = ['owasp', 'soc2', 'sap', 'okta', 'ping-federate'].map((slug) => `/dev-tools/${slug}`)
     const chainPaths = [
       'ethereum', 'arbitrum', 'base', 'optimism', 'polygon', 'bnb-chain',
-      'avalanche', 'zksync', 'linea', 'blast', 'mantle', 'cronos', 'ritual'
+      'avalanche', 'zksync', 'linea', 'blast', 'mantle', 'cronos', 'ritual', 'hyperevm', 'katana', 'monad', 'robinhood', 'unichain', 'stable', 'tempo', 'world-chain'
     ].map((slug) => `/evm-tools/${slug}`)
     console.log(`[ssg] prerendering ${blogPaths.length} blog posts + ${chainPaths.length} chain pages`)
     return [...staticPaths, ...blogPaths, ...chainPaths, ...stackPaths]

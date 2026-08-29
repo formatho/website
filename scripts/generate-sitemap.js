@@ -87,7 +87,7 @@ const staticRoutes = [
   ...['owasp', 'soc2', 'sap', 'okta', 'ping-federate'].map(slug => ({ path: `/dev-tools/${slug}`, priority: '0.8', changefreq: 'weekly' })),
   ...[
     'ethereum', 'arbitrum', 'base', 'optimism', 'polygon', 'bnb-chain',
-    'avalanche', 'zksync', 'linea', 'blast', 'mantle', 'cronos', 'ritual'
+    'avalanche', 'zksync', 'linea', 'blast', 'mantle', 'cronos', 'ritual', 'hyperevm', 'katana', 'monad', 'robinhood', 'unichain', 'stable', 'tempo', 'world-chain'
   ].map(slug => ({ path: `/evm-tools/${slug}`, priority: '0.8', changefreq: 'weekly' })),
 ]
 

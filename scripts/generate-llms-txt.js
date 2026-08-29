@@ -69,7 +69,7 @@ for (const stack of ['owasp', 'sap', 'okta', 'ping-federate']) {
 lines.push('')
 lines.push('## EVM Chain Tools')
 lines.push('Chain-specific developer tool pages with pre-configured RPC endpoints, chain IDs, and token addresses:')
-const chains = ['ethereum', 'arbitrum', 'base', 'optimism', 'polygon', 'bnb-chain', 'avalanche', 'zksync', 'linea', 'blast', 'mantle', 'cronos', 'ritual']
+const chains = ['ethereum', 'arbitrum', 'base', 'optimism', 'polygon', 'bnb-chain', 'avalanche', 'zksync', 'linea', 'blast', 'mantle', 'cronos', 'ritual', 'hyperevm', 'katana', 'monad', 'robinhood', 'unichain', 'stable', 'tempo', 'world-chain']
 for (const chain of chains) {
   lines.push(`- [${chain.replace('-', ' ')} tools]: ${BASE}/evm-tools/${chain}`)
 }
