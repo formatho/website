@@ -237,6 +237,21 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Calculate ENS namehash and labelhash values for any ENS name using Keccak-256 per EIP-137. Full node-by-node derivation chain. 100% client-side.',
     keywords: 'ens namehash calculator, namehash, labelhash, eip-137, ens resolution, keccak256 ens',
   },
+  'passkey-address': {
+    title: 'Passkey Address Deriver - P-256 WebAuthn to EVM | Formatho',
+    description: 'Derive EVM addresses from P-256 passkey public keys (WebAuthn, Face ID, fingerprint). For Ritual Chain passkey transactions and WebAuthn wallets. Free, private, client-side.',
+    keywords: 'passkey address, webauthn address, p256 to evm, passkey wallet, ritual passkey, face id ethereum, secp256r1 address'
+  },
+  'dkms-visualizer': {
+    title: 'DKMS Key Derivation Visualizer - Ritual Agents | Formatho',
+    description: 'Visualize how Ritual Chain agents derive identity keys via DKMS. See the derivation chain from TEE-held master keys to agent-specific signing keys.',
+    keywords: 'dkms visualizer, ritual agent keys, decentralized key management, tee key derivation, agent identity, ritual chain'
+  },
+  'x402-encoder': {
+    title: 'X402 Payment Encoder - Agent-to-Agent | Formatho',
+    description: 'Encode and decode X402 payment payloads for agent-to-agent transactions on Ritual Chain. Build HTTP 402 challenges and payment headers.',
+    keywords: 'x402 encoder, x402 payment, agent payment, ritual x402, http 402, machine payments, ai agent payments'
+  },
   'tls-checker': {
     title: 'TLS Certificate Checker - Expiry, Issuer, Security | Formatho',
     description: 'Check TLS/SSL certificate expiry dates, issuer, subject, and security configuration. Paste openssl output for instant analysis. Free, private, client-side.',

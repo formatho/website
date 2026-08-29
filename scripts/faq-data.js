@@ -2295,3 +2295,104 @@ for (const [route, data] of Object.entries(bpmnVisioContent)) {
   if (toolSEOContent[route]) Object.assign(toolSEOContent[route], data)
 }
 Object.assign(toolSpecificFAQ, bpmnVisioFAQs)
+
+
+// Ritual Chain tools — content kits
+const ritualContent = {
+  '/tools/passkey-address': {
+    intro: [
+      'Passkey wallets use P-256 (secp256r1) keys — the same elliptic curve used by WebAuthn, Face ID, Touch ID, and security keys. Unlike Ethereum secp256k1 keys, P-256 keys can be stored in hardware secure enclaves and used without seed phrases. Ritual Chain supports passkey transactions natively (type 0x77).',
+      'This deriver converts a P-256 public key into an EVM-compatible address using the standard derivation: keccak256 of the X and Y coordinates, take the last 20 bytes. Paste a key in any common format — uncompressed hex, compressed hex, or WebAuthn JSON.'
+    ],
+    howTo: [
+      'Get your P-256 public key from WebAuthn registration, a hardware key, or generate one.',
+      'Paste it above in any supported format.',
+      'Click derive to see the EVM address.',
+      'Use this address with Ritual Chain passkey transactions (type 0x77).'
+    ],
+    features: [
+      'Accepts uncompressed hex (04 + X + Y), compressed hex (02/03 + X), and WebAuthn JSON',
+      'Handles base64 and base64url encodings from WebAuthn responses',
+      'Decompresses compressed points using P-256 curve math',
+      'Derives using keccak256 — same as Ethereum address derivation',
+      'All computation happens locally — keys never transmitted',
+    ]
+  },
+  '/tools/dkms-visualizer': {
+    intro: [
+      'Ritual agents get their identity through DKMS — Decentralized Key Management System. Keys are derived deterministically inside Trusted Execution Environments (TEEs), so agents keep the same identity across restarts and revivals without anyone ever seeing the private key.',
+      'This visualizer shows the derivation chain: from the TEE-held root, through the chain-specific master, to agent-specific keys and purpose-specific keys. Adjust the agent ID and purpose to see how the derivation path changes.'
+    ],
+    howTo: [
+      'Enter your agent ID (the unique identifier on Ritual).',
+      'Select the key purpose (signing, encryption, authentication).',
+      'Review the 4-level derivation chain.',
+      'Read the security properties below for why this matters.'
+    ],
+    features: [
+      'Interactive — adjust agent ID and purpose to see path changes',
+      'Shows the exact derivation formula at each level',
+      'Explains security properties (TEE isolation, determinism, purpose separation)',
+      'Educational reference for DKMS and TEE key management',
+    ]
+  },
+  '/tools/x402-encoder': {
+    intro: [
+      'X402 is the payment protocol for AI agents — HTTP 402 (Payment Required) turned into a machine-readable payment flow. When an agent requests a paid resource, the server responds with a 402 challenge, the agent constructs a payment, and the retry request includes the payment header.',
+      'On Ritual Chain, X402 payments run on the HTTP precompile, letting agents pay for API calls, LLM inference, and data without human intervention. This encoder builds valid X402 payloads, HTTP challenges, and payment headers.'
+    ],
+    howTo: [
+      'Enter the payer and payee addresses.',
+      'Set the amount (in wei) and token.',
+      'Specify the resource URL being paid for.',
+      'Copy the encoded payment, challenge, or header format.'
+    ],
+    features: [
+      'Encodes full X402 payment payloads with auto-generated nonces',
+      'Generates HTTP 402 challenge responses for payee agents',
+      'Generates payment headers for payer agent retry requests',
+      'Decode mode for inspecting existing X402 payments',
+      'All computation happens locally',
+    ]
+  }
+}
+
+const ritualFAQs = {
+  '/tools/passkey-address': [
+    {
+      question: 'Why do passkeys use P-256 instead of secp256k1?',
+      answer: 'P-256 (secp256r1) is the NIST curve supported natively by WebAuthn, Apple Secure Enclave, Windows Hello, and hardware security keys. It enables biometric authentication without seed phrases. Ethereum uses secp256k1 for historical reasons — passkey wallets bridge the two.'
+    },
+    {
+      question: 'Can I use this address on Ethereum mainnet?',
+      answer: 'The derivation (keccak256 of X‖Y, last 20 bytes) is the standard convention for P-256 passkey wallets. However, Ethereum mainnet does not natively verify P-256 signatures — you need a smart contract wallet (like a passkey account abstraction wallet) or a chain like Ritual that enshrines P-256 verification (precompile 0x0100).'
+    },
+    {
+      question: 'How do I get my passkey public key?',
+      answer: 'Register a WebAuthn credential in your browser or app, then export the public key from the registration response. It contains the X and Y coordinates in base64url format. Some hardware keys also display the public key directly.'
+    }
+  ],
+  '/tools/dkms-visualizer': [
+    {
+      question: 'What is DKMS?',
+      answer: 'Decentralized Key Management System — keys are derived deterministically from a root held inside a TEE (Trusted Execution Environment). The private key never exists outside the enclave, but the same keys are regenerated on every boot from the sealed root.'
+    },
+    {
+      question: 'Why does determinism matter for agents?',
+      answer: 'When a Ritual agent dies and gets auto-revived from its checkpoint, it regenerates the same identity keys from the TEE root. This means the agent keeps its on-chain identity, can still sign transactions, and can still decrypt its secrets — despite having been completely restarted.'
+    }
+  ],
+  '/tools/x402-encoder': [
+    {
+      question: 'What is HTTP 402?',
+      answer: 'HTTP 402 Payment Required is a status code defined in the original HTTP spec but never widely used. X402 repurposes it: servers return a structured 402 challenge describing what payment is needed, and clients retry with a payment header attached.'
+    },
+    {
+      question: 'How do agents pay each other on Ritual?',
+      answer: 'The payer agent calls the HTTP precompile (0x0801) which handles X402 natively. The payee specifies a price for their resource, the payer deposits RITUAL into their RitualWallet, and the chain settles the payment atomically with the resource delivery.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, ritualContent)
+Object.assign(toolSpecificFAQ, ritualFAQs)
