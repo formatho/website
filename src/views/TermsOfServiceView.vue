@@ -6,7 +6,7 @@ import { RouterLink } from 'vue-router'
   <div class="container mx-auto px-4 py-12">
     <div class="max-w-4xl mx-auto">
       <h1 class="text-5xl font-bold mb-8">Terms of Service</h1>
-      <p class="text-muted-foreground mb-8">Last updated: March 7, 2026</p>
+      <p class="text-muted-foreground mb-8">Last updated: August 29, 2026</p>
 
       <div class="glass-card p-8 md:p-12 space-y-8">
         <section>
@@ -127,7 +127,19 @@ import { RouterLink } from 'vue-router'
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold mb-4">11. Contact Us</h2>
+          <h2 class="text-2xl font-bold mb-4">11. Related Policies</h2>
+          <p class="text-muted-foreground leading-relaxed mb-4">
+            This Terms of Service works alongside our other policies:
+          </p>
+          <ul class="space-y-2">
+            <li><RouterLink to="/privacy" class="text-primary hover:underline">Privacy Policy</RouterLink> — how we handle data (spoiler: we don't collect it)</li>
+            <li><RouterLink to="/acceptable-use" class="text-primary hover:underline">Acceptable Use Policy</RouterLink> — permitted and prohibited uses of our tools</li>
+            <li><RouterLink to="/security" class="text-primary hover:underline">Security</RouterLink> — vulnerability disclosure program</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold mb-4">12. Contact Us</h2>
           <p class="text-muted-foreground leading-relaxed">
             If you have any questions about these Terms, please contact us through our
             <RouterLink to="/contact" class="text-gray-900">Contact page</RouterLink

@@ -172,6 +172,12 @@ const currentYear = new Date().getFullYear()
           <RouterLink to="/about" class="hover:text-gray-900 transition-colors">
             About Us
           </RouterLink>
+          <RouterLink to="/security" class="hover:text-gray-900 transition-colors">
+            Security
+          </RouterLink>
+          <RouterLink to="/acceptable-use" class="hover:text-gray-900 transition-colors">
+            Acceptable Use
+          </RouterLink>
           <RouterLink to="/privacy" class="hover:text-gray-900 transition-colors">
             Privacy Policy
           </RouterLink>

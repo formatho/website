@@ -38,6 +38,18 @@ export const routes = [
         meta: routeMeta['blog-post-dynamic']
       },
       {
+        path: '/security',
+        name: 'security',
+        component: () => import(/* webpackPrefetch: true */ '../views/SecurityView.vue'),
+        meta: routeMeta['security']
+      },
+      {
+        path: '/acceptable-use',
+        name: 'acceptable-use',
+        component: () => import(/* webpackPrefetch: true */ '../views/AcceptableUseView.vue'),
+        meta: routeMeta['acceptable-use']
+      },
+      {
         path: '/privacy',
         name: 'privacy',
         component: () => import(/* webpackPrefetch: true */ '../views/PrivacyPolicyView.vue'),
