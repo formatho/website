@@ -229,6 +229,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://formatho.com/blogs/Debian-Responsible-Generative-AI-Vote-Open-Source</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/blogs/jwt-tokens-complete-guide</loc>
     <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
@@ -256,7 +262,7 @@
     <loc>https://formatho.com/blogs/index-tracking-assets-options-not-debt</loc>
     <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/blogs/from-dead-capital-to-programmable-gold-2026</loc>
