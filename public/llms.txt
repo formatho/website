@@ -1,6 +1,6 @@
 # Formatho
 
-> Privacy-first developer tools: 120+ free online utilities that run 100% client-side in the browser. Nothing entered is uploaded, logged, or stored. No account needed.
+> Privacy-first developer tools that run 100% client-side in your browser. Free forever, no sign-up, zero tracking. Nothing you enter is uploaded, logged, or stored.
 
 Every tool page states what the tool does, how to use it step by step, and answers common questions. Free, private, runs in your browser.
 
@@ -133,10 +133,11 @@ Every tool page states what the tool does, how to use it step by step, and answe
 
 ## Developer Stack Tools
 Persona-specific tool pages:
-- [owasp tools]: https://formatho.com/dev-tools/owasp
-- [sap tools]: https://formatho.com/dev-tools/sap
-- [okta tools]: https://formatho.com/dev-tools/okta
-- [ping federate tools]: https://formatho.com/dev-tools/ping-federate
+- [owasp tools]: https://formatho.com/dev-tools/owasp — OWASP-aligned security tools — headers analyzer, CSP generator, CORS tester, cookie analyzer
+- [soc2 tools]: https://formatho.com/dev-tools/soc2 — SOC 2 compliance tools — readiness checklist, policy generator, TLS checker, security headers
+- [sap tools]: https://formatho.com/dev-tools/sap — SAP developer tools — XML formatter, JSON validator, CSV converter for PI/PO, CPI, BTP
+- [okta tools]: https://formatho.com/dev-tools/okta — Okta developer tools — SAML decoder, OIDC builder, JWT verifier for SSO debugging
+- [ping federate tools]: https://formatho.com/dev-tools/ping-federate — Ping Federate tools — SAML decoder, OIDC builder, JWT verifier for identity flows
 
 ## EVM Chain Tools
 Chain-specific developer tool pages with pre-configured RPC endpoints, chain IDs, and token addresses:
@@ -164,4 +165,65 @@ Chain-specific developer tool pages with pre-configured RPC endpoints, chain IDs
 
 ## Guides
 - [Blog - developer guides and tutorials]: https://formatho.com/blogs — Deep dives on AI agents, blockchain, RWA tokenization, and privacy-first tools.
+
+### Blog posts
+- [The End of Context Collapse: How Block's Buzz Redefines the AI Workspace]: https://formatho.com/blogs/End-Of-Context-Collapse-Block-Buzz-Redefines-AI-Workspace — "If Buzz disappears, your identity and signed history still verify. Git remains Git and can be rehosted... A protocol an
+- [Building Index-Tracking Assets on Options Instead of Debt]: https://formatho.com/blogs/index-tracking-assets-options-not-debt — Vitalik Buterin proposes a radical rethink of synthetic assets: replace liquidations with options. Here is a deep dive i
+- [The Future of RWA Tokenization: 5 Megatrends Reshaping Finance by 2030]: https://formatho.com/blogs/future-of-rwa-tokenization-5-megatrends-reshaping-finance-2030 — Discover how Real World Asset (RWA) tokenization is bridging the gap between traditional finance and blockchain. Explore
+- [Real Estate Tokenization in 2026: Legal Frameworks, SM REITs, and Smart Contract Compliance]: https://formatho.com/blogs/real-estate-tokenization-legal-frameworks-sm-reits-2026 — Explore how real estate tokenization works in 2026 — from SPV structures and SEBI SM REIT regulations to ERC-3643 compli
+- [The Structural Reconfiguration of Finance: Institutional Guide to Real-World Asset (RWA) Tokenization in 2026]: https://formatho.com/blogs/structural-reconfiguration-finance-rwa-tokenization-2026 — The IMF calls it a structural reconfiguration of global finance. With $441B in represented value and $27.65B actively tr
+- [5 Privacy-Focused Developer Tools You Need in 2026]: https://formatho.com/blogs/5-privacy-focused-developer-tools — Discover 5 essential privacy-first developer tools for 2026. From client-side converters to end-to-end encrypted notes, 
+- [Why RWA, AI, and Privacy Tokens Are Outperforming Bitcoin in 2026]: https://formatho.com/blogs/why-rwa-ai-privacy-tokens-outperforming-bitcoin-2026 — Discover how institutional investors are shifting from Bitcoin to Real World Assets (RWA), AI infrastructure, and privac
+- [CLARITY Act Victory: Regulatory Clarity for $3T Crypto Market]: https://formatho.com/blogs/clarity-act-victory-regulatory-clarity-3t-crypto-market — The cryptocurrency industry just achieved a monumental legislative breakthrough that could reshape the future of digital
+- [EIP-7702: How Ethereum's Pectra Upgrade Finally Bridges EOAs and Smart Contracts]: https://formatho.com/blogs/eip-7702-ethereum-pectra-eoa-smart-contract-upgrade — EIP-7702 is the most significant change to Ethereum accounts since the network launched. It lets regular wallets tempora
+- [ERC-7730: The Clear Signing Standard That Will Transform How You Verify Ethereum Transactions]: https://formatho.com/blogs/erc-7730-clear-signing-ethereum-standard — Blind signing is the silent killer of Ethereum security. ERC-7730 introduces a structured, human-readable format for tra
+- [Generate QR Codes Without Tracking Pixels: The Privacy-First Guide]: https://formatho.com/blogs/generate-qr-codes-without-tracking-pixels — Discover why most free QR generators track your users. Learn how client-side QR code generation protects user privacy an
+- [From Dead Capital to Programmable Gold: 5 Shifts Redefining the Global Economy in 2026]: https://formatho.com/blogs/from-dead-capital-to-programmable-gold-2026 — The global financial architecture is currently undergoing its most significant structural upgrade since the advent of el
+- [AI Meets Blockchain: How Agent Orchestration Could Transform Web3 Development]: https://formatho.com/blogs/ai-meets-blockchain-agent-orchestration-web3 — After analyzing 25+ research papers, 5,750+ community reactions, and 12 competitor solutions, we found a critical gap in
+- [Beyond the Chatbot: The Rise of Agentic Orchestration and Digital Workforce]: https://formatho.com/blogs/beyond-the-chatbot-agentic-orchestration-digital-workforce — The chatbot era is ending. Discover how multi-agent orchestration, digital twins, and browser-native workflows are trans
+- [Privacy-First Developer Tools: Why Your Data Should Never Leave Your Browser]: https://formatho.com/blogs/privacy-first-developer-tools-2026 — The data harvesting problem in developer tooling is real. Learn why privacy-first tools matter in 2026 and how client-si
+- [Need Developer Tools That Don't Spy On You?]: https://formatho.com/blogs/developer-tools-that-dont-spy-on-you — Discover why most free developer tools harvest your data. Learn about zero-trust, client-side development and the rise o
+- [JSON to YAML Converter: A Practical Guide for DevOps Engineers]: https://formatho.com/blogs/json-to-yaml-converter-tools — Master JSON to YAML conversion for Docker Compose, Kubernetes, and CI/CD configs. Learn when to use each format and avoi
+- [Convert JSON to YAML in 1 Second — No Upload]: https://formatho.com/blogs/convert-json-to-yaml-no-upload — Learn why converting JSON to YAML on cloud servers exposes your infrastructure configuration. Discover client-side conve
+- [JWT Decoder Security Guide: Inspect Tokens Without Risk]: https://formatho.com/blogs/jwt-decoder-security-guide — Deep dive into JWT structure, common vulnerabilities, and why you should never paste tokens into online decoders. Learn 
+- [Decode JWT Tokens Without Server Exposure]: https://formatho.com/blogs/decode-jwt-tokens-without-server-exposure — Learn why pasting JWTs into online decoders exposes your authentication system. Discover client-side JWT decoding that k
+- [Format SQL Queries Without Cloud Uploads]: https://formatho.com/blogs/format-sql-queries-without-cloud-uploads — Learn why pasting SQL queries into online formatters exposes your database schema. Discover client-side SQL formatting t
+- [SQL Formatter for Security: Spot Vulnerabilities in Plain Sight]: https://formatho.com/blogs/sql-formatter-security — Unformatted SQL is a security blind spot. Learn how proper formatting reveals injection vulnerabilities, improves code r
+- [Encode/Decode Base64 — Files Never Leave Your Browser]: https://formatho.com/blogs/encode-decode-base64-files-never-leave-browser — Learn why Base64 is not encryption and why using online decoders for secrets is dangerous. Discover zero-trust, client-s
+- [Base64 Encoder/Decoder: The Complete Developer Guide]: https://formatho.com/blogs/base64-encoder-decoder-complete-guide — Everything you need to know about Base64 encoding — what it is, when to use it (and when not to), common pitfalls, and w
+- [We Built 100+ Privacy-First Developer Tools. Here's What We Learned.]: https://formatho.com/blogs/100-plus-developer-tools-launch — The story behind Formatho's 100+ developer tools — the architecture decisions, the hard trade-offs, and why we chose cli
+- [NEW: 100+ Developer Tools — All Free, All Private]: https://formatho.com/blogs/100-developer-tools-all-free-all-private — Discover Formatho's expanded toolkit with 100+ free developer tools. Every tool runs 100% locally in your browser. No se
+- [Regex Tester Security: Patterns That Protect and Patterns That Kill]: https://formatho.com/blogs/regex-tester-security — Regular expressions can validate input or bring your server to its knees. Learn about ReDoS attacks, safe regex patterns
+- [Test Regex Patterns — No More Random Websites]: https://formatho.com/blogs/test-regex-patterns-securely-2026 — Learn why pasting production data into online regex testers is a security breach. Discover client-side regex testing tha
+- [QR Codes Without Tracking: Privacy-First QR Generation]: https://formatho.com/blogs/qr-codes-without-tracking — Most free QR code generators track your data. Learn the privacy risks of online QR tools and how client-side generation 
+- [Generate UUIDs Without Internet Connection: The 2026 Masterclass]: https://formatho.com/blogs/generate-uuids-without-internet-connection-2026 — Learn why generating UUIDs offline is critical for security. Discover how client-side UUID generation protects your data
+- [UUID Generator Masterclass: Everything You Need to Know About Unique Identifiers]: https://formatho.com/blogs/uuid-generator-masterclass — Complete guide to UUIDs — from v1 to v5, security implications of predictable IDs, and how to generate unique identifier
+- [India's #1 Privacy-First Developer Toolkit — The 2026 Blueprint for Data Sovereignty]: https://formatho.com/blogs/india-privacy-first-developer-toolkit-2026 — Discover how Formatho became India's leading privacy-first developer toolkit with 100+ tools that run entirely in your b
+- [When AI Stops Feeling Like Software and Starts Feeling Like a Real Employee]: https://formatho.com/blogs/when-ai-stops-feeling-like-software-and-starts-feeling-like-a-real-employee — A reflection on local AI agents, persistence, and why location matters more than intelligence.
+- [The Strategic Horizon of AI Agent Orchestration: Your 2026 Career Blueprint]: https://formatho.com/blogs/ai-agent-orchestration-career-blueprint-2026 — A comprehensive guide to building a career in AI Agent Orchestration. Learn the tech stack, frameworks, and skills that 
+- [AI and Job Safety: The 22 Careers Most Protected From Automation]: https://formatho.com/blogs/ai-job-safety-22-careers-anthropic-research — New research from Anthropic reveals a massive gap between theoretical AI capability and actual workplace deployment. Dis
+- [UUID v1 vs v4: Which Should You Use?]: https://formatho.com/blogs/uuid-v1-vs-v4 — Understanding the key differences between UUID versions and when to use each for your projects.
+- [Inside Meta's AI Restructuring: The Race for Applied Superintelligence]: https://formatho.com/blogs/meta-ai-restructuring-applied-superintelligence-2026 — Meta's radical 2026 reorganization reveals the strategic tensions and architectural decisions shaping the AI industry. H
+- [How Bcrypt Hashing Keeps Your User Passwords Safe]: https://formatho.com/blogs/bcrypt-password-hashing-guide — A deep dive into bcrypt, the industry-standard password hashing algorithm.
+- [A Developer's Guide to Encoding and Decoding Base64]: https://formatho.com/blogs/base64-encoding-guide — Everything you need to know about Base64 encoding, from basic concepts to advanced use cases.
+- [Why You Should Use ULIDs Instead of UUIDs in Your Database]: https://formatho.com/blogs/ulids-vs-uuids — Discover how ULIDs combine the benefits of UUIDs with time-based sorting.
+- [Understanding JWT Tokens: A Complete Guide]: https://formatho.com/blogs/jwt-tokens-complete-guide — Learn how JSON Web Tokens work and common security pitfalls to avoid.
+- [SQL Formatting Best Practices for Readable Code]: https://formatho.com/blogs/sql-formatting-best-practices — Learn why properly formatted SQL matters and discover the conventions that make your queries easier to read.
+- [QR Codes Explained: How They Work and When to Use Them]: https://formatho.com/blogs/qr-codes-explained — Discover the technology behind QR codes and learn best practices.
+- [Regular Expressions: A Practical Cheat Sheet]: https://formatho.com/blogs/regex-practical-guide — Master regex with this practical guide covering common patterns and real-world examples.
+- [Ethereum Unit Converter: Wei, Gwei, and Ether Explained]: https://formatho.com/blogs/ethereum-units-explained — Understanding Ethereum denominations is crucial for blockchain development.
+- [Crontab Generator: Mastering Scheduled Tasks]: https://formatho.com/blogs/crontab-guide — Learn how cron expressions work and best practices for scheduling automated tasks.
+- [Understanding HTTP Status Codes Every Developer Should Know]: https://formatho.com/blogs/http-status-codes-guide — A comprehensive guide to HTTP status codes and how to use them correctly.
+- [JSON vs YAML vs TOML: Which Config Format Should You Use?]: https://formatho.com/blogs/json-yaml-toml-comparison — Compare the three most popular configuration file formats.
+- [Password Security: How Strong is Your Password Really?]: https://formatho.com/blogs/password-security-guide — Learn what makes a password secure and how attackers crack them.
+- [IPv4 Subnetting Made Simple]: https://formatho.com/blogs/ipv4-subnetting-guide — Master IPv4 subnetting with this practical guide.
+- [Case Conversion: camelCase, snake_case, and Beyond]: https://formatho.com/blogs/case-conversion-guide — Navigate the world of text case conventions.
+- [Understanding Cryptographic Hashes: MD5, SHA-1, SHA-256]: https://formatho.com/blogs/cryptographic-hashes-guide — Learn how cryptographic hash functions work and which ones are safe.
+- [Markdown Tips and Tricks for Better Documentation]: https://formatho.com/blogs/markdown-tips-tricks — Level up your Markdown skills with advanced formatting and best practices.
+- [Git Commands You Should Know by Heart]: https://formatho.com/blogs/git-commands-cheat-sheet — Essential Git commands for everyday development.
+- [Understanding Color Formats: HEX, RGB, HSL Explained]: https://formatho.com/blogs/color-formats-guide — Navigate color formats for web development.
+- [Docker Run to Docker Compose: A Migration Guide]: https://formatho.com/blogs/docker-run-to-compose — Learn how to convert docker run commands to docker-compose.yml.
+- [BIP39 Mnemonic Phrases: Understanding Seed Words]: https://formatho.com/blogs/bip39-mnemonic-guide — Learn how BIP39 mnemonic phrases work for cryptocurrency wallets.
+- [Text Encoding vs Encryption: Know the Difference]: https://formatho.com/blogs/encoding-vs-encryption — A critical distinction - encoding is not encryption.
+- [Understanding Unix File Permissions: chmod Calculator]: https://formatho.com/blogs/unix-file-permissions — Demystify Unix file permissions with this guide.
 

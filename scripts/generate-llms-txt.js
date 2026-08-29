@@ -47,7 +47,7 @@ for (const cm of catMatches) {
 const lines = []
 lines.push('# Formatho')
 lines.push('')
-lines.push('> Privacy-first developer tools: 120+ free online utilities that run 100% client-side in the browser. Nothing entered is uploaded, logged, or stored. No account needed.')
+lines.push('> Privacy-first developer tools that run 100% client-side in your browser. Free forever, no sign-up, zero tracking. Nothing you enter is uploaded, logged, or stored.')
 lines.push('')
 lines.push('Every tool page states what the tool does, how to use it step by step, and answers common questions. Free, private, runs in your browser.')
 lines.push('')
@@ -63,8 +63,15 @@ for (const cat of categories) {
 lines.push('')
 lines.push('## Developer Stack Tools')
 lines.push('Persona-specific tool pages:')
-for (const stack of ['owasp', 'sap', 'okta', 'ping-federate']) {
-  lines.push(`- [${stack.replace('-', ' ')} tools]: ${BASE}/dev-tools/${stack}`)
+const stackDescriptions = {
+  'owasp': 'OWASP-aligned security tools — headers analyzer, CSP generator, CORS tester, cookie analyzer',
+  'soc2': 'SOC 2 compliance tools — readiness checklist, policy generator, TLS checker, security headers',
+  'sap': 'SAP developer tools — XML formatter, JSON validator, CSV converter for PI/PO, CPI, BTP',
+  'okta': 'Okta developer tools — SAML decoder, OIDC builder, JWT verifier for SSO debugging',
+  'ping-federate': 'Ping Federate tools — SAML decoder, OIDC builder, JWT verifier for identity flows',
+}
+for (const [stack, desc] of Object.entries(stackDescriptions)) {
+  lines.push(`- [${stack.replace('-', ' ')} tools]: ${BASE}/dev-tools/${stack} — ${desc}`)
 }
 lines.push('')
 lines.push('## EVM Chain Tools')
@@ -76,6 +83,19 @@ for (const chain of chains) {
 lines.push('')
 lines.push('## Guides')
 lines.push(`- [Blog - developer guides and tutorials]: ${BASE}/blogs — Deep dives on AI agents, blockchain, RWA tokenization, and privacy-first tools.`)
+
+// Blog posts from cache (same source as sitemap fallback)
+try {
+  const cached = JSON.parse(readFileSync(resolve(process.cwd(), 'scripts', 'blog-meta-cache.json'), 'utf8'))
+  if (cached.length > 0) {
+    lines.push('')
+    lines.push('### Blog posts')
+    for (const post of cached) {
+      const excerpt = (post.excerpt || '').replace(/\n/g, ' ').slice(0, 120)
+      lines.push(`- [${post.title}]: ${BASE}/blogs/${post.slug}${excerpt ? ' — ' + excerpt : ''}`)
+    }
+  }
+} catch { /* no cache available */ }
 lines.push('')
 
 writeFileSync(resolve(process.cwd(), 'public', 'llms.txt'), lines.join('\n') + '\n')
