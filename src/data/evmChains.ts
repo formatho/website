@@ -232,6 +232,20 @@ export const evmChains: EvmChain[] = [
       { symbol: 'USDT', address: '0x66e428c3f545EF2E11Dfb9dFbb2b96Fbc06a11f7', decimals: 6 },
     ],
   },
+  {
+    slug: 'ritual',
+    name: 'Ritual',
+    chainId: 1979,
+    nativeToken: 'RITUAL',
+    tokenSymbol: 'RITUAL',
+    rpc: 'https://rpc.ritualfoundation.org',
+    explorer: 'https://explorer.ritualfoundation.org',
+    explorerName: 'Ritual Explorer',
+    type: 'L1',
+    blurb: 'The blockchain for autonomous AI agents. Smart contracts call LLMs, fetch web data, and run ONNX models natively via 16 precompiles. Agents hold their own wallets, keep secrets in TEEs, and stay alive via on-chain heartbeats. Currently testnet with chain ID 1979.',
+    gasNote: 'Gas paid in RITUAL, ~350ms block time, supports passkey transactions',
+    popularTokens: [],
+  },
 ]
 
 export const evmChainTools = [

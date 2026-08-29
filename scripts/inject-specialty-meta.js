@@ -30,7 +30,7 @@ const chains = [
   ['ethereum','Ethereum',1],['arbitrum','Arbitrum',42161],['base','Base',8453],
   ['optimism','Optimism',10],['polygon','Polygon PoS',137],['bnb-chain','BNB Smart Chain',56],
   ['avalanche','Avalanche C-Chain',43114],['zksync','zkSync Era',324],['linea','Linea',59144],
-  ['blast','Blast',81457],['mantle','Mantle',5000],['cronos','Cronos',25],
+  ['blast','Blast',81457],['mantle','Mantle',5000],['cronos','Cronos',25],['ritual','Ritual',1979],
 ]
 console.log('EVM chains:')
 for (const [s,n,id] of chains) {

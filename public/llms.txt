@@ -152,6 +152,7 @@ Chain-specific developer tool pages with pre-configured RPC endpoints, chain IDs
 - [blast tools]: https://formatho.com/evm-tools/blast
 - [mantle tools]: https://formatho.com/evm-tools/mantle
 - [cronos tools]: https://formatho.com/evm-tools/cronos
+- [ritual tools]: https://formatho.com/evm-tools/ritual
 
 ## Guides
 - [Blog - developer guides and tutorials]: https://formatho.com/blogs — Deep dives on AI agents, blockchain, RWA tokenization, and privacy-first tools.

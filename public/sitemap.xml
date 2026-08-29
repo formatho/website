@@ -145,6 +145,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://formatho.com/evm-tools/ritual</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/blogs/future-of-rwa-tokenization-5-megatrends-reshaping-finance-2030</loc>
     <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
