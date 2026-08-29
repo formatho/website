@@ -10,7 +10,10 @@ export function registerServiceWorker() {
 
   window.addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('/sw.js')
+      // Versioned filename: a never-before-seen URL is a cache miss at every
+      // layer (browser HTTP cache + CDN edge), so updates can't be blocked by
+      // a long-cached previous copy. Bump the version when shipping SW changes.
+      const registration = await navigator.serviceWorker.register('/sw-v4.js')
 
       console.log('✅ Service Worker registered:', registration.scope)
 
