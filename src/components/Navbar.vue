@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Menu, X, Github, Search } from 'lucide-vue-next'
 import GlobalSearchModal from './GlobalSearchModal.vue'
@@ -57,46 +57,18 @@ onUnmounted(() => {
   window.removeEventListener('keydown', handleGlobalKeydown)
 })
 
-const categories = [
-  {
-    name: 'Data Tools',
-    items: [
-      { name: 'JSON Lint', route: '/tools/json-lint' },
-      { name: 'YAML Linter', route: '/tools/yaml-lint' },
-      { name: 'JSON to YAML', route: '/tools/json-yaml' },
-      { name: 'Base64', route: '/tools/base64' },
-      { name: 'SQL Formatter', route: '/tools/sql' }
-    ]
-  },
-  {
-    name: 'Converters',
-    items: [
-      { name: 'Case Converter', route: '/tools/case-converter' },
-      { name: 'Color Converter', route: '/tools/color-converter' },
-      { name: 'Integer Base', route: '/tools/integer-base-converter' },
-      { name: 'Temperature', route: '/tools/temperature-converter' },
-      { name: 'Date-Time', route: '/tools/date-time-converter' }
-    ]
-  },
-  {
-    name: 'EVM Tools',
-    items: [
-      { name: 'Unit Converter', route: '/tools/evm-converter' },
-      { name: 'Keccak-256', route: '/tools/keccak256' },
-      { name: 'Checksum', route: '/tools/address-checksum' },
-      { name: 'Multi-Chain Keys', route: '/tools/multi-chain-keys' }
-    ]
-  },
-  {
-    name: 'Generators',
-    items: [
-      { name: 'UUID', route: '/tools/uuid' },
-      { name: 'Token Generator', route: '/tools/token-generator' },
-      { name: 'Hash Text', route: '/tools/hash-text' },
-      { name: 'QR Code', route: '/tools/qr-code-generator' }
-    ]
-  }
-]
+import { tools } from '@/data/tools'
+
+// Build menu from the same source of truth as the directory
+// Show top 5 tools per category (by directory order = curated)
+const menuCategories = computed(() =>
+  tools.map((cat) => ({
+    name: cat.category,
+    route: cat.route,
+    items: cat.items.slice(0, 5).map((item) => ({ name: item.name, route: item.route })),
+    total: cat.items.length,
+  }))
+)
 
 // Shared nav link classes — brutalist editorial style
 const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-foreground hover:underline hover:underline-offset-[6px] decoration-2 hover:decoration-foreground py-2 px-1'
@@ -153,42 +125,43 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
                 class="bg-background border border-foreground rounded-xl min-w-[600px] p-6"
               >
                 <!-- Top Quick Links Row -->
-                <div class="flex items-center gap-4 mb-6 pb-4 border-b border-foreground/20">
+                <div class="flex items-center justify-between mb-5 pb-4 border-b border-foreground/20">
                   <RouterLink
                     to="/tools"
                     @click="handleToolLinkClick"
                     class="text-[13px] font-bold tracking-[2px] uppercase text-foreground hover:underline hover:underline-offset-[4px]"
                   >
-                    Explore All Tools
+                    Explore All Tools &rarr;
                   </RouterLink>
-                  <span class="text-foreground/40 font-mono text-sm">|</span>
                   <RouterLink
-                    to="/category/web3"
+                    to="/blogs"
                     @click="handleToolLinkClick"
-                    class="text-[13px] font-bold tracking-[2px] uppercase text-foreground hover:underline hover:underline-offset-[4px]"
+                    class="text-[11px] tracking-[1px] uppercase text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    EVM & Blockchain Developer Tools
+                    Guides &amp; Tutorials
                   </RouterLink>
                 </div>
 
-                <!-- Categories Grid -->
-                <div class="grid grid-cols-2 gap-6">
-                  <!-- Regular Categories -->
-                  <div v-for="category in categories" :key="category.name" class="space-y-2">
-                    <h3 class="text-[11px] font-bold tracking-[2px] uppercase text-foreground mb-3 border-b border-foreground/10 pb-2">
+                <!-- Categories Grid: all 6 categories, top tools each -->
+                <div class="grid grid-cols-3 gap-x-6 gap-y-4">
+                  <div v-for="category in menuCategories" :key="category.name" class="space-y-1">
+                    <RouterLink
+                      :to="category.route"
+                      @click="handleToolLinkClick"
+                      class="block text-[11px] font-bold tracking-[2px] uppercase text-foreground mb-2 border-b border-foreground/10 pb-2 hover:text-primary transition-colors"
+                    >
                       {{ category.name }}
-                    </h3>
-                    <div class="space-y-0">
-                      <RouterLink
-                        v-for="item in category.items"
-                        :key="item.name"
-                        :to="item.route"
-                        @click="handleToolLinkClick"
-                        class="block px-2 py-2 text-sm text-muted-foreground hover:text-foreground hover:pl-4 transition-all border-b border-foreground/5"
-                      >
-                        {{ item.name }}
-                      </RouterLink>
-                    </div>
+                      <span class="text-foreground/40 font-mono text-[10px] ml-1">{{ category.total }}</span>
+                    </RouterLink>
+                    <RouterLink
+                      v-for="item in category.items"
+                      :key="item.name"
+                      :to="item.route"
+                      @click="handleToolLinkClick"
+                      class="block px-2 py-1.5 text-[13px] text-muted-foreground hover:text-foreground hover:pl-3 transition-all"
+                    >
+                      {{ item.name }}
+                    </RouterLink>
                   </div>
                 </div>
               </div>
