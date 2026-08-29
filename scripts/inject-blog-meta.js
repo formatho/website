@@ -136,7 +136,7 @@ function generateMetaTags(post) {
   const url = `${baseUrl}/blogs/${post.slug}`
   const image = post.image 
     ? (post.image.startsWith('http') ? post.image : `${baseUrl}${post.image}`)
-    : `${baseUrl}/logo.png`
+    : `${baseUrl}/logo.png?v=2`
   
   const keywords = post.tags.join(', ')
   
@@ -158,7 +158,7 @@ function generateMetaTags(post) {
       "name": siteName,
       "logo": {
         "@type": "ImageObject",
-        "url": `${baseUrl}/logo.png`
+        "url": `${baseUrl}/logo.png?v=2`
       }
     },
     "description": seo.description,

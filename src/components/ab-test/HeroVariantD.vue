@@ -52,7 +52,7 @@ const exampleQueries = [
         <!-- Logo -->
         <div class="logo-container" data-aos="fade-down">
           <img
-            src="/logo.png"
+            src="/logo.png?v=2"
             alt="Formatho"
             class="h-24 w-24 rounded-2xl shadow-2xl ring-4 ring-primary/20"
           />

@@ -287,7 +287,7 @@ const _popularTools = [
             <div class="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto" data-v-8d4ed633="">
           <div class="flex items-center gap-4" data-aos="fade-down" data-aos-delay="0" data-v-8d4ed633="">
             <img
-              src="/logo.png"
+              src="/logo.png?v=2"
               alt="Formatho"
               width="80"
               height="80"
