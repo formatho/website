@@ -109,9 +109,9 @@ export function useABTest() {
 
   // Track event (integrate with your analytics)
   function trackEvent(eventName: string, data: Record<string, any>) {
-    // Google Analytics 4
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', eventName, data)
+    // Umami Analytics (cookieless)
+    if (typeof window !== 'undefined' && (window as any).umami?.track) {
+      ;(window as any).umami.track(eventName, data)
     }
 
     // Console log for development

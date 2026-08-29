@@ -1,5 +1,24 @@
 [
   {
+    "title": "Debian Votes to Allow 'Responsible Use of Generative AI' — What It Means for Open Source",
+    "slug": "Debian-Responsible-Generative-AI-Vote-Open-Source",
+    "excerpt": "Debian's 2026 general resolution lets contributors use generative AI — but keeps them fully responsible for quality, correctness, and licensing. Here's what the landmark vote means for open source developers.",
+    "date": "2026-08-29",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=630&fit=crop",
+    "imageAlt": "Circuit board with glowing processor representing Debian's vote on generative AI in open source software",
+    "tags": [
+      "Debian",
+      "Generative AI",
+      "Open Source",
+      "LLM",
+      "AI Governance",
+      "Software Development",
+      "Linux",
+      "Developer Tools"
+    ]
+  },
+  {
     "title": "The End of Context Collapse: How Block's Buzz Redefines the AI Workspace",
     "slug": "End-Of-Context-Collapse-Block-Buzz-Redefines-AI-Workspace",
     "excerpt": "\"If Buzz disappears, your identity and signed history still verify. Git remains Git and can be rehosted... A protocol anyone can rebuild is a protocol nobody can lock you into.\"\n\nThe Crisis of Context in Modern Engineering\nFor years, development teams have accepted a highly fragmented reality where work is scattered across a chaotic ecosystem of specialized tools. We chat in one application, host code in another, run continuous integration pipelines in a third, and now deploy AI agents in completely isolated sandboxes. This fragmentation creates \"context collapse\" - where the overarching narrative of a project, from casual architectural debates to debugging histories, disappears into the seams between proprietary silos.\n\nWhile context collapse frustrates human developers, it is fatal for artificial intelligence. AI agents simply cannot assist with what they cannot see.\n\nThe Buzz Solution: A Unified Cryptographic Workspace\nTo solve this bottleneck, Block released Buzz - an open-source, self-hostable workspace built on the decentralized Nostr protocol. Buzz places human developers, AI agents, conversational threads, and raw code on the exact same hierarchical level behind one cryptographic identity system.\n\nKey Architectural Pillars\nSelf-Sovereign Identity: Instead of renting database rows from a centralized SaaS provider, Buzz stores every action - chat messages, code patches, review comments, and merge approvals - as an immutable, cryptographically signed event on a self-hosted relay. You own your domain, your data, and carry your cryptographic keys anywhere.\n\nAI Agents as First-Class Teammates: In Buzz, an AI agent is not a bolted-on integration or a limited bot. Agents hold their own cryptographic keypairs, channel memberships, and immutable audit trails. They can search project history, open repositories, send code patches, and execute CI workflows natively alongside human teammates.\n\nThe \"Branch as Room\" Philosophy: Buzz turns a Git feature branch into a dedicated collaborative room. Code patches, CI results, human code reviews, and agent refactoring suggestions live in the exact same chronological thread as the casual conversation that shaped them. Code review becomes a fluid conversation with a permanent historical record.\n\nModel-Agnostic & Open Source: Released under the Apache 2.0 license, Buzz relies on open standards like the Model Context Protocol (MCP) and Agent Client Protocol (ACP). Teams can seamlessly plug in Block's internal agent framework (Goose), OpenAI's Codex, Anthropic's Claude Code, or any local custom LLM without vendor lock-in.\n\nThe Big Takeaway\nAs software engineering transitions into a future where AI agents execute a massive percentage of daily tasks, they must be brought out of isolated sandboxes and into the core collaborative environment. By building an open-source workspace where human intent, agent execution, and content-addressed code exist on the exact same cryptographic plane, Block has provided the blueprint for the next generation of decentralized software development.",
@@ -238,6 +257,21 @@
     ]
   },
   {
+    "title": "Need Developer Tools That Don't Spy On You?",
+    "slug": "developer-tools-that-dont-spy-on-you",
+    "excerpt": "Discover why most free developer tools harvest your data. Learn about zero-trust, client-side development and the rise of privacy-first tools.",
+    "date": "2026-03-18",
+    "metaDescription": "",
+    "image": "/images/blog/blog-02/cybersecurity.jpg",
+    "imageAlt": "Secure developer workspace with privacy-focused tools",
+    "tags": [
+      "Privacy",
+      "Developer Tools",
+      "Security",
+      "Zero-Trust"
+    ]
+  },
+  {
     "title": "Privacy-First Developer Tools: Why Your Data Should Never Leave Your Browser",
     "slug": "privacy-first-developer-tools-2026",
     "excerpt": "The data harvesting problem in developer tooling is real. Learn why privacy-first tools matter in 2026 and how client-side processing protects your code, configs, and credentials.",
@@ -251,21 +285,6 @@
       "Developer Tools",
       "Open Source",
       "Best Practices"
-    ]
-  },
-  {
-    "title": "Need Developer Tools That Don't Spy On You?",
-    "slug": "developer-tools-that-dont-spy-on-you",
-    "excerpt": "Discover why most free developer tools harvest your data. Learn about zero-trust, client-side development and the rise of privacy-first tools.",
-    "date": "2026-03-18",
-    "metaDescription": "",
-    "image": "/images/blog/blog-02/cybersecurity.jpg",
-    "imageAlt": "Secure developer workspace with privacy-focused tools",
-    "tags": [
-      "Privacy",
-      "Developer Tools",
-      "Security",
-      "Zero-Trust"
     ]
   },
   {

@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy-Report-Only",
-          "value": "default-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://cdn.jsdelivr.net https://unpkg.com https://cloud.umami.is; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; img-src 'self' data: blob: https: http:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://cloud.umami.is https://*.li.fi https://li.fi https://remix.ethereum.org; frame-src 'self' https://www.google.com; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; report-uri https://formatho.com/csp-report"
+          "value": "default-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://unpkg.com https://cloud.umami.is; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; img-src 'self' data: blob: https: http:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://cloud.umami.is https://*.li.fi https://li.fi https://remix.ethereum.org; frame-src 'self' https://www.google.com; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; report-uri https://formatho.com/csp-report"
         },
         {
           "key": "Strict-Transport-Security",
