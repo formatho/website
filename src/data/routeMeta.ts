@@ -32,6 +32,16 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Expert developer guides, tutorials, and technical insights on privacy-first development, AI agents, and blockchain from the Formatho team.',
     keywords: 'formatho blog, developer guides, tutorials, ai agents, blockchain, privacy-first',
   },
+  'security': {
+    title: 'Security - Vulnerability Disclosure | Formatho',
+    description: 'Report security vulnerabilities to Formatho. Responsible disclosure program with safe harbor protections and response timeline commitments.',
+    keywords: 'formatho security, vulnerability disclosure, bug bounty, security report, responsible disclosure'
+  },
+  'acceptable-use': {
+    title: 'Acceptable Use Policy - Formatho',
+    description: 'Acceptable use policy for Formatho tools. Permitted and prohibited uses of our free developer tools, including security and crypto tool guidelines.',
+    keywords: 'formatho acceptable use, usage policy, terms of use, permitted use'
+  },
   'privacy': {
     title: 'Privacy Policy - Formatho',
     description: 'Learn about Formatho privacy practices. All data processing happens locally in your browser.',

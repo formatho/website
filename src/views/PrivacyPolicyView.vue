@@ -1,152 +1,144 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { useSEO } from '@/composables/useSEO'
+
+useSEO({
+  title: 'Privacy Policy - Formatho',
+  description: 'Formatho privacy policy: zero cookies, zero tracking, all processing in your browser. No personal data collected.',
+  keywords: ['formatho privacy policy', 'zero tracking', 'cookieless analytics', 'client-side processing'],
+  ogType: 'website'
+})
 </script>
 
 <template>
   <div class="container mx-auto px-4 py-12">
     <div class="max-w-4xl mx-auto">
       <h1 class="text-5xl font-bold mb-8">Privacy Policy</h1>
-      <p class="text-muted-foreground mb-8">Last updated: March 7, 2026</p>
+      <p class="text-muted-foreground mb-8">Last updated: {{ new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</p>
 
       <div class="glass-card p-8 md:p-12 space-y-8">
         <section>
-          <h2 class="text-2xl font-bold mb-4">Introduction</h2>
+          <h2 class="text-2xl font-bold mb-4">The Short Version</h2>
           <p class="text-muted-foreground leading-relaxed">
-            Welcome to Formatho. We are committed to protecting your privacy and ensuring the
-            security of your data. This Privacy Policy explains how we collect, use, and safeguard
-            information when you use our website and services at formatho.com.
+            Formatho sets zero cookies. We run zero ads. All tool processing happens in your browser —
+            your data (JSON, tokens, keys, hashes) never touches our servers. We use Umami Analytics,
+            which is cookieless and collects no personal data. That's the whole policy.
           </p>
         </section>
 
         <section>
           <h2 class="text-2xl font-bold mb-4">Information We Collect</h2>
           <p class="text-muted-foreground leading-relaxed mb-4">
-            <strong>Client-Side Processing:</strong> The core principle of Formatho is that all data
-            processing happens locally in your browser. When you use our tools (JSON formatters,
-            Base64 encoders, hash generators, etc.), your data is processed entirely on your device
-            and is never transmitted to our servers.
+            <strong>Tool inputs and outputs:</strong> Never collected. When you use any Formatho tool —
+            JSON formatter, JWT decoder, vanity address generator, hash tool — the processing happens
+            entirely in your browser using JavaScript. Nothing you paste, type, or generate is
+            transmitted to us or any third party.
           </p>
           <p class="text-muted-foreground leading-relaxed mb-4">
-            <strong>Analytics Data:</strong> We use Google Analytics to collect anonymous usage
-            statistics such as page views, browser types, and general geographic data. This helps us
-            improve our services and understand how users interact with our website.
+            <strong>Analytics:</strong> We use <a href="https://umami.is" class="text-primary hover:underline" rel="noopener noreferrer">Umami Analytics</a>,
+            a privacy-first analytics platform that does not use cookies and does not collect personal
+            data. Umami records anonymous, aggregated page views and events (which pages are visited,
+            which tools are used). It cannot identify you, track you across sites, or build a profile
+            of your behavior.
           </p>
           <p class="text-muted-foreground leading-relaxed">
-            <strong>Cookies:</strong> We use cookies and similar tracking technologies to enhance
-            your browsing experience and analyze site traffic. You can control cookie preferences
-            through your browser settings.
+            <strong>Email newsletter (optional):</strong> If you voluntarily subscribe to our newsletter,
+            we store your email address to send you updates. You can unsubscribe at any time. This is
+            the only personal data we ever collect, and only if you explicitly provide it.
           </p>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold mb-4">How We Use Your Information</h2>
-          <ul class="list-disc list-inside text-muted-foreground space-y-2">
-            <li>To provide, maintain, and improve our services</li>
-            <li>To analyze usage patterns and optimize user experience</li>
-            <li>To detect and prevent technical issues</li>
-            <li>To comply with legal obligations</li>
+          <h2 class="text-2xl font-bold mb-4">Cookies</h2>
+          <p class="text-muted-foreground leading-relaxed">
+            Formatho sets <strong>zero cookies</strong>. We do not use Google Analytics, ad networks,
+            social media pixels, or any other tracking technology that sets cookies. No cookie consent
+            banner is needed because there is nothing to consent to.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold mb-4">Local Storage</h2>
+          <p class="text-muted-foreground leading-relaxed mb-4">
+            We use browser localStorage and sessionStorage to remember UI preferences — for example,
+            that you dismissed a popup, saved contract reader tabs, or muted audio. This data:
+          </p>
+          <ul class="list-disc list-inside text-muted-foreground leading-relaxed space-y-1">
+            <li>Never leaves your device</li>
+            <li>Is not transmitted to any server</li>
+            <li>Cannot track you across websites</li>
+            <li>Is cleared when you clear your browser data</li>
           </ul>
-        </section>
-
-        <section>
-          <h2 class="text-2xl font-bold mb-4">Data Security</h2>
-          <p class="text-muted-foreground leading-relaxed mb-4">
-            Since all data processing occurs locally in your browser, your sensitive information
-            (API keys, passwords, configuration files, etc.) never leaves your device. This
-            architecture inherently provides a high level of security and privacy.
-          </p>
-          <p class="text-muted-foreground leading-relaxed">
-            We implement industry-standard security measures to protect our website infrastructure,
-            including SSL/TLS encryption and regular security audits.
-          </p>
         </section>
 
         <section>
           <h2 class="text-2xl font-bold mb-4">Third-Party Services</h2>
           <p class="text-muted-foreground leading-relaxed mb-4">
-            <strong>Google Analytics:</strong> We use Google Analytics to understand how visitors
-            interact with our website. Google Analytics may collect information about your use of
-            our website. For more information, see
-            <a
-              href="https://policies.google.com/privacy"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-gray-900"
-              >Google's Privacy Policy</a
-            >.
+            <strong>Umami Analytics (cloud.umami.is):</strong> Cookieless analytics. Receives anonymous
+            page view and event data. No cookies, no personal data, no cross-site tracking.
+          </p>
+          <p class="text-muted-foreground leading-relaxed mb-4">
+            <strong>Content Delivery:</strong> Our site is served via standard web infrastructure
+            (Cloudflare CDN, web servers). These services see your IP address as part of delivering
+            the page — standard for every website — but we do not use this for tracking.
           </p>
           <p class="text-muted-foreground leading-relaxed">
-            <strong>Google AdSense:</strong> We may display advertisements through Google AdSense,
-            which uses cookies to serve ads based on your prior visits to our website or other
-            websites. You can opt out of personalized advertising by visiting
-            <a
-              href="https://www.google.com/settings/ads"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-gray-900"
-              >Google Ads Settings</a
-            >.
+            <strong>Fonts (fonts.googleapis.com):</strong> We load web fonts from Google Fonts. Google
+            may see your IP address as part of this request. If this concerns you, a content blocker
+            will prevent it without affecting site functionality.
           </p>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold mb-4">Your Rights</h2>
+          <h2 class="text-2xl font-bold mb-4">Your Rights (GDPR / CCPA)</h2>
           <p class="text-muted-foreground leading-relaxed mb-4">
-            Depending on your location, you may have the following rights:
+            Under GDPR and CCPA, you have the right to access, correct, delete, and export your
+            personal data. Because we collect almost no personal data:
           </p>
-          <ul class="list-disc list-inside text-muted-foreground space-y-2">
-            <li><strong>Access:</strong> Request information about data we collect about you</li>
-            <li><strong>Correction:</strong> Request correction of inaccurate data</li>
-            <li><strong>Deletion:</strong> Request deletion of your data</li>
-            <li>
-              <strong>Opt-Out:</strong> Opt out of analytics tracking and personalized advertising
-            </li>
+          <ul class="list-disc list-inside text-muted-foreground leading-relaxed space-y-1">
+            <li><strong>Right to access:</strong> We have no personal data about you (unless you subscribed to the newsletter — contact us for that)</li>
+            <li><strong>Right to deletion:</strong> Clear your browser's localStorage — that removes all Formatho data from your device</li>
+            <li><strong>Right to opt out:</strong> Block cloud.umami.is in your content blocker — analytics stops with no effect on functionality</li>
+            <li><strong>Data portability:</strong> No data to port — your tool inputs and outputs already belong to you</li>
           </ul>
         </section>
 
         <section>
           <h2 class="text-2xl font-bold mb-4">Children's Privacy</h2>
           <p class="text-muted-foreground leading-relaxed">
-            Our services are not intended for children under 13 years of age. We do not knowingly
-            collect personal information from children under 13. If you believe we have collected
-            information from a child under 13, please contact us immediately.
+            Formatho is not directed at children under 13. We do not knowingly collect personal
+            information from children. Since we collect almost no data from anyone, this is
+            straightforwardly true.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold mb-4">Security</h2>
+          <p class="text-muted-foreground leading-relaxed">
+            All traffic to formatho.com is encrypted via HTTPS (TLS 1.2+). We enforce HSTS, CSP,
+            and other security headers. Since we do not store your data, there is nothing to breach.
+            If you find a security issue, see our <RouterLink to="/security" class="text-primary hover:underline">security page</RouterLink>.
           </p>
         </section>
 
         <section>
           <h2 class="text-2xl font-bold mb-4">Changes to This Policy</h2>
           <p class="text-muted-foreground leading-relaxed">
-            We may update this Privacy Policy from time to time. We will notify you of any changes
-            by posting the new Privacy Policy on this page and updating the "Last updated" date.
+            We may update this policy to reflect changes in our practices. Any changes will be
+            posted on this page with an updated date. If we ever add a technology that sets cookies
+            or collects personal data, we will update this policy and add appropriate consent
+            mechanisms before doing so.
           </p>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
+          <h2 class="text-2xl font-bold mb-4">Contact</h2>
           <p class="text-muted-foreground leading-relaxed">
-            If you have any questions about this Privacy Policy, please contact us through our
-            <RouterLink to="/contact" class="text-gray-900">Contact page</RouterLink>
-            or visit our
-            <RouterLink to="/about" class="text-gray-900">About page</RouterLink> for
-            more information.
+            Questions about privacy? Email us at
+            <a href="mailto:privacy@formatho.com" class="text-primary hover:underline">privacy@formatho.com</a>
+            or visit our <RouterLink to="/contact" class="text-primary hover:underline">contact page</RouterLink>.
           </p>
         </section>
-      </div>
-
-      <!-- Related Links -->
-      <div class="mt-8 flex flex-wrap gap-4">
-        <RouterLink
-          to="/terms"
-          class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
-        >
-          Terms of Service →
-        </RouterLink>
-        <RouterLink
-          to="/contact"
-          class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
-        >
-          Contact Us →
-        </RouterLink>
       </div>
     </div>
   </div>

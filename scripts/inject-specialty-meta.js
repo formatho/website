@@ -63,3 +63,15 @@ for (const [s,n] of cats) {
 }
 
 console.log('Done.')
+
+
+// Static compliance pages
+const staticPages = {
+  'security': ['Security - Vulnerability Disclosure | Formatho', 'Report security vulnerabilities to Formatho. Responsible disclosure program with safe harbor protections.'],
+  'acceptable-use': ['Acceptable Use Policy - Formatho', 'Permitted and prohibited uses of Formatho tools including security and crypto tool guidelines.'],
+  'privacy': ['Privacy Policy - Formatho', 'Zero cookies, zero tracking, all processing in your browser. No personal data collected.'],
+}
+console.log('Static compliance pages:')
+for (const [slug, [title, desc]] of Object.entries(staticPages)) {
+  fix('', slug, title, desc, 'https://formatho.com/' + slug)
+}
