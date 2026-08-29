@@ -37,6 +37,9 @@ export const tools: ToolCategory[] = [
     icon: '🔗',
     blurb: 'EVM contract reader with Uniswap presets, vanity address generator, multi-chain readers for Solana, Polkadot, Cardano and Cosmos, Keccak-256 hasher, ABI tools, ENS calculator, and chain-specific tool pages.',
     items: [
+      { name: 'Passkey Address Deriver', description: 'Derive EVM addresses from P-256 passkey public keys. For Ritual Chain TxPasskey and WebAuthn wallets.', route: '/tools/passkey-address', iconName: 'Fingerprint', subcategory: 'Smart Contract Dev' },
+      { name: 'DKMS Key Visualizer', description: 'Visualize how Ritual agents derive identity keys via DKMS from TEE-held roots to purpose-specific keys.', route: '/tools/dkms-visualizer', iconName: 'KeyRound', subcategory: 'Smart Contract Dev' },
+      { name: 'X402 Payment Encoder', description: 'Encode and decode X402 payment payloads for agent-to-agent transactions. Build HTTP 402 challenges.', route: '/tools/x402-encoder', iconName: 'DollarSign', subcategory: 'Smart Contract Dev' },
       { name: 'Impermanent Loss Calculator', description: 'Calculate IL for any price change. Compare HODL vs LP value with fee offset analysis.', route: '/tools/impermanent-loss', subcategory: 'DeFi & Trading', iconName: 'TrendingDown' },
       { name: 'ERC-4626 Vault Calculator', description: 'Convert vault shares to assets, calculate share price and projected returns for Morpho, Yearn, and any ERC-4626 vault.', route: '/tools/vault-calculator', subcategory: 'DeFi & Trading', iconName: 'Landmark' },
       { name: 'APY Calculator', description: 'Convert APR to APY with any compounding frequency. Compare DeFi yields accurately.', route: '/tools/apy-calculator', subcategory: 'DeFi & Trading', iconName: 'Percent' },

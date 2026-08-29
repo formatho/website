@@ -291,6 +291,24 @@ export const routes = [
         meta: routeMeta['ens-namehash']
       },
       {
+        path: '/tools/passkey-address',
+        name: 'passkey-address',
+        component: () => import(/* webpackPrefetch: true */ '../views/PasskeyAddressView.vue'),
+        meta: routeMeta['passkey-address']
+      },
+      {
+        path: '/tools/dkms-visualizer',
+        name: 'dkms-visualizer',
+        component: () => import(/* webpackPrefetch: true */ '../views/DkmsVisualizerView.vue'),
+        meta: routeMeta['dkms-visualizer']
+      },
+      {
+        path: '/tools/x402-encoder',
+        name: 'x402-encoder',
+        component: () => import(/* webpackPrefetch: true */ '../views/X402EncoderView.vue'),
+        meta: routeMeta['x402-encoder']
+      },
+      {
         path: '/tools/tls-checker',
         name: 'tls-checker',
         component: () => import(/* webpackPrefetch: true */ '../views/TlsCheckerView.vue'),

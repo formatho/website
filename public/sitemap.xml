@@ -727,6 +727,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://formatho.com/tools/passkey-address</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/dkms-visualizer</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/x402-encoder</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/tools/tls-checker</loc>
     <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
