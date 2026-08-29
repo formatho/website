@@ -2237,3 +2237,61 @@ if (toolSEOContent['/tools/cosmos-address-generator']) {
     }
   ]
 }
+
+
+// BPMN Viewer and Visio Viewer SEO enhancements
+const bpmnVisioContent = {
+  '/tools/bpmn': {
+    features: [
+      'Renders standard BPMN 2.0 XML files',
+      'Supports tasks, events, gateways, pools, and lanes',
+      'Export diagrams as PDF for documentation',
+      'Zoom and pan for navigating large process diagrams',
+      'All rendering happens locally in your browser',
+      'Handles files from Camunda, Signavio, Bizagi, and draw.io',
+    ]
+  },
+  '/tools/visio-viewer': {
+    features: [
+      'Opens .vsdx files without Microsoft Visio installed',
+      'Renders shapes, connectors, and text annotations',
+      'Zoom and pan capabilities',
+      'No file upload — diagrams never leave your device',
+      'Works on any OS (Windows, Mac, Linux, mobile)',
+      'Free alternative to Visio Viewer control',
+    ]
+  }
+}
+
+const bpmnVisioFAQs = {
+  '/tools/bpmn': [
+    {
+      question: 'What is BPMN 2.0?',
+      answer: 'Business Process Model and Notation 2.0 is the OMG standard for business process modeling. It defines a XML interchange format that all major BPM tools support, making it the universal format for process diagrams.'
+    },
+    {
+      question: 'Which BPMN tools create compatible files?',
+      answer: 'Camunda Modeler, bpmn.io, Signavio, Bizagi, Enterprise Architect, and draw.io all export standard BPMN 2.0 XML that this viewer renders correctly.'
+    },
+    {
+      question: 'Can I export as PDF?',
+      answer: 'Yes — use the PDF export button after rendering your diagram. The PDF is generated locally and preserves the exact layout.'
+    }
+  ],
+  '/tools/visio-viewer': [
+    {
+      question: 'Can I view Visio files without Visio?',
+      answer: 'Yes — this viewer opens .vsdx files directly in your browser without any Microsoft software installed. It renders shapes, connectors, and text from standard Visio diagrams.'
+    },
+    {
+      question: 'Is this safe for confidential diagrams?',
+      answer: 'Yes. Your .vsdx file is parsed entirely in your browser using JavaScript. No file content is uploaded to any server.'
+    }
+  ]
+}
+
+// Merge features and FAQs
+for (const [route, data] of Object.entries(bpmnVisioContent)) {
+  if (toolSEOContent[route]) Object.assign(toolSEOContent[route], data)
+}
+Object.assign(toolSpecificFAQ, bpmnVisioFAQs)
