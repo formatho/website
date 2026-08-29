@@ -69,7 +69,7 @@ function generateMetaTags(tool) {
     ? (tool.title.includes(siteName) ? tool.title : `${tool.title} - ${siteName}`)
     : `${siteName} - Privacy-First Developer Tools`
   const url = tool.path.startsWith('/') ? `${baseUrl}${tool.path}` : `${baseUrl}/${tool.path}`
-  const image = `${baseUrl}/tools/logo.png`
+  const image = `${baseUrl}/logo.png`
 
   return `
   <!-- Tool Page Meta Tags -->
