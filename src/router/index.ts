@@ -450,12 +450,6 @@ export const routes = [
         component: () => import(/* webpackPrefetch: true */ '../views/AgentDetailView.vue'),
         meta: routeMeta['agent-detail']
       },
-      {
-        path: '/get-verified',
-        name: 'get-verified',
-        component: () => import(/* webpackPrefetch: true */ '../views/GetVerifiedView.vue'),
-        meta: routeMeta['get-verified']
-      },
 
       // Crypto Tools
       {

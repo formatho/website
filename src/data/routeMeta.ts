@@ -362,11 +362,6 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'View detailed information about blockchain AI agents including reputation history, ratings, metadata, and transaction records. Track agent performance and feedback.',
     keywords: 'agent details, agent reputation, blockchain agent history, ai agent ratings, crypto agent metadata, ethereum agent tracker',
   },
-  'get-verified': {
-    title: 'Get Verified - Formatho',
-    description: 'Privacy-first identity verification for developers. Coming soon from Formatho.',
-    keywords: 'identity verification, get verified, privacy-first, developer verification, trustless',
-  },
   'bcrypt': {
     title: 'Bcrypt Hash Generator Online - Free Password Hasher | Formatho',
     description: 'Generate bcrypt password hashes online with custom cost factors (4-31). Compare and verify bcrypt hashes. Free tool for Node.js and Python password hashing. 100% client-side — passwords never leave your browser.',
