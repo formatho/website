@@ -29,7 +29,7 @@ const pages = [
         "@type": "Organization",
         "name": "Formatho",
         "url": "https://formatho.com",
-        "logo": { "@type": "ImageObject", "url": "https://formatho.com/tools/logo.png" },
+        "logo": { "@type": "ImageObject", "url": "https://formatho.com/logo.png" },
         "sameAs": ["https://twitter.com/heyformatho", "https://github.com/nnn-gif/tools"]
       }
     },

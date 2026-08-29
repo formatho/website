@@ -32,7 +32,7 @@ useSEO({
     '@type': 'Organization',
     name: 'Formatho',
     url: 'https://formatho.com',
-    logo: 'https://formatho.com/tools/logo.png',
+    logo: 'https://formatho.com/logo.png',
     description: 'Free developer tools and AI agent platform. Privacy-first, client-side processing.',
     sameAs: [
       'https://twitter.com/formatho',
