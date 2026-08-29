@@ -13,7 +13,7 @@ const currentYear = new Date().getFullYear()
         <!-- Brand -->
         <div class="space-y-4">
           <RouterLink to="/" class="flex items-center gap-3">
-            <img src="/logo.png" alt="Formatho" width="32" height="32" class="h-8 w-8 rounded-lg" />
+            <img src="/logo.png?v=2" alt="Formatho" width="32" height="32" class="h-8 w-8 rounded-lg" />
             <span class="text-lg font-bold text-foreground">Formatho</span>
           </RouterLink>
           <p class="text-sm text-muted-foreground leading-relaxed">

@@ -41,7 +41,7 @@ const stats = {
         <!-- Logo + Title -->
         <div class="flex items-center gap-4" data-aos="fade-down">
           <img
-            src="/logo.png"
+            src="/logo.png?v=2"
             alt="Formatho"
             class="h-20 w-20 rounded-xl shadow-2xl ring-2 ring-primary/20"
           />

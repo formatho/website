@@ -92,7 +92,7 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
         <!-- Logo -->
         <RouterLink to="/" class="flex items-center gap-3 group">
           <img
-            src="/logo.png"
+            src="/logo.png?v=2"
             alt="Formatho"
             width="32"
             height="32"
