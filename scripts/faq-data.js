@@ -1938,7 +1938,7 @@ const p1ExtraFAQs = {
     { question: 'Does it handle encoded characters?', answer: 'Yes — percent-encoded characters in the URL are preserved as-is. Use the URL Encoder tool to decode them if needed.' }
   ],
   '/tools/html-entities': [
-    { question: 'Which characters get encoded?', answer: 'The five mandatory HTML entities: & < > \" and \'. Non-ASCII characters like é or 中 can optionally be encoded as numeric entities.' },
+    { question: 'Which characters get encoded?', answer: 'The five mandatory HTML entities: & < > " and \'. Non-ASCII characters like é or 中 can optionally be encoded as numeric entities.' },
     { question: 'Why do I need to encode ampersands?', answer: 'An unencoded & could be interpreted as the start of an HTML entity, causing parsing errors. Always encode & as &amp; in HTML content.' }
   ],
   '/tools/text-to-binary': [
