@@ -525,7 +525,15 @@ const newToolFAQs = {
       question: 'Why do two of my functions have the same selector?',
       answer: 'It is rare but possible - 4 bytes allow collisions. The compiler warns on collisions within one contract; across contracts it is usually harmless unless an ABI proxy forwards calls.'
     }
-  ],
+  ,
+    {
+      question: 'What function is selector 0xa9059cbb?',
+      answer: '0xa9059cbb is transfer(address,uint256) — the ERC-20 transfer function. It is the most common selector seen in Ethereum calldata. Other frequently encountered selectors: 0x095ea7b3 is approve(address,uint256), 0x23b872dd is transferFrom(address,address,uint256), 0x70a08231 is balanceOf(address). Paste any selector into the reverse lookup above to match it against a dictionary of common signatures.'
+    },
+    {
+      question: 'Can two different functions have the same 4-byte selector?',
+      answer: 'Yes. The selector is only the first 4 bytes of a 32-byte Keccak-256 hash, so collisions exist by construction — roughly 50% probability once you gather around 77,000 signatures, and deliberate collision attacks (like the 2021 transfer/transfer30541730497GoldDuplex case) are a known attack vector for unprotected fallback routing. Solidity compilers since 0.4.x reject exact-match collisions in a single contract. The lookup above flags dictionary collisions when your input produces a selector it already knows.'
+    }],
   '/tools/ens-namehash': [
     {
       question: 'What is the difference between namehash and labelhash?',
