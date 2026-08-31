@@ -41,7 +41,7 @@ for (const [s,n,id] of chains) {
 
 const stacks = [
   ['owasp','OWASP Security Tools','Free OWASP security tools: headers analyzer, CSP generator/evaluator, CORS tester, cookie analyzer, JWT debugger. 100% client-side.'],
-  ['soc2','SOC 2 Compliance Tools','SOC 2 readiness checklist, security policy generator, TLS checker, and the full security suite for audit preparation.'],
+  ['soc2','Open Source SOC 2 Compliance Tools','Free open-source SOC 2 compliance tools: readiness checklist, policy generator, TLS checker. 100% client-side - audit evidence never leaves your browser. Source on GitHub.'],
   ['sap','SAP Developer Tools','Tools for SAP PI/PO, CPI, BTP, Gateway: XML formatter, JSON validator, CSV converter, JWT debugger, diff checker.'],
   ['okta','Okta Developer Tools','Debug Okta auth: SAML decoder, OIDC builder, JWT verifier, TOTP generator, cookie analyzer, CORS tester.'],
   ['ping-federate','Ping Federate Tools','Debug Ping Federate: SAML decoder, OIDC builder, JWT verifier, hash generator, TOTP generator.'],

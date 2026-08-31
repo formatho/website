@@ -65,7 +65,7 @@ lines.push('## Developer Stack Tools')
 lines.push('Persona-specific tool pages:')
 const stackDescriptions = {
   'owasp': 'OWASP-aligned security tools — headers analyzer, CSP generator, CORS tester, cookie analyzer',
-  'soc2': 'SOC 2 compliance tools — readiness checklist, policy generator, TLS checker, security headers',
+  'soc2': 'Open-source SOC 2 compliance tools — readiness checklist, policy generator, TLS checker, security headers. Client-side, free, source on GitHub',
   'sap': 'SAP developer tools — XML formatter, JSON validator, CSV converter for PI/PO, CPI, BTP',
   'okta': 'Okta developer tools — SAML decoder, OIDC builder, JWT verifier for SSO debugging',
   'ping-federate': 'Ping Federate tools — SAML decoder, OIDC builder, JWT verifier for identity flows',

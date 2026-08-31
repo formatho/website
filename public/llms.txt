@@ -134,7 +134,7 @@ Every tool page states what the tool does, how to use it step by step, and answe
 ## Developer Stack Tools
 Persona-specific tool pages:
 - [owasp tools]: https://formatho.com/dev-tools/owasp — OWASP-aligned security tools — headers analyzer, CSP generator, CORS tester, cookie analyzer
-- [soc2 tools]: https://formatho.com/dev-tools/soc2 — SOC 2 compliance tools — readiness checklist, policy generator, TLS checker, security headers
+- [soc2 tools]: https://formatho.com/dev-tools/soc2 — Open-source SOC 2 compliance tools — readiness checklist, policy generator, TLS checker, security headers. Client-side, free, source on GitHub
 - [sap tools]: https://formatho.com/dev-tools/sap — SAP developer tools — XML formatter, JSON validator, CSV converter for PI/PO, CPI, BTP
 - [okta tools]: https://formatho.com/dev-tools/okta — Okta developer tools — SAML decoder, OIDC builder, JWT verifier for SSO debugging
 - [ping federate tools]: https://formatho.com/dev-tools/ping-federate — Ping Federate tools — SAML decoder, OIDC builder, JWT verifier for identity flows

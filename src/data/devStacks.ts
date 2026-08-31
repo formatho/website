@@ -46,9 +46,9 @@ export const devStacks: DevStack[] = [
   },
   {
     slug: 'soc2',
-    name: 'SOC 2 Compliance Tools',
-    tagline: 'Controls, checklists, and policies for SOC 2 Type I and II audits',
-    blurb: 'Everything you need to prepare for a SOC 2 audit: interactive readiness checklist across all 5 Trust Service Criteria, security policy generator (password, access control, incident response), TLS certificate checker, and the full security tool suite for verifying controls.',
+    name: 'Open-Source SOC 2 Compliance Tools',
+    tagline: 'Free, open-source controls, checklists, and policies for SOC 2 Type I and II audits',
+    blurb: 'Everything you need to prepare for a SOC 2 audit, in one open-source suite: interactive readiness checklist across all 5 Trust Service Criteria, security policy generator (password, access control, incident response), TLS certificate checker, and the full security tool suite for verifying controls. Every tool runs client-side — your audit evidence and policy drafts never leave your browser. The source code is public on GitHub, so your security team can verify exactly what the tools do before trusting them with compliance work.',
     whoFor: 'Security engineers, compliance teams, and startup founders preparing for SOC 2 Type I or Type II audits',
     tools: [
       { name: 'SOC 2 Readiness Checklist', route: '/tools/soc2-checklist', desc: 'Interactive checklist covering all 5 Trust Service Criteria (Security, Availability, Processing Integrity, Confidentiality, Privacy)' },
