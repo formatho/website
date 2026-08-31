@@ -1556,7 +1556,8 @@ const soc2Content = {
   '/tools/soc2-checklist': {
     intro: [
       'SOC 2 (System and Organization Controls 2) is the auditing framework used by service organizations to demonstrate how they handle customer data. It covers five Trust Service Criteria: Security (required), Availability, Processing Integrity, Confidentiality, and Privacy (optional). Most B2B SaaS companies need SOC 2 Type II to close enterprise deals.',
-      'This interactive checklist breaks down each criterion into specific, actionable controls. Where possible, it links directly to free tools on this site that help you implement or verify the control. Track your progress as you complete items — the grade updates in real time (A = audit ready).'
+      'This interactive checklist breaks down each criterion into specific, actionable controls. Where possible, it links directly to free tools on this site that help you implement or verify the control. Track your progress as you complete items — the grade updates in real time (A = audit ready).',
+      'The entire suite is free and open source — the code is public on GitHub, and every tool runs entirely in your browser. That matters for compliance work: your checklist state, policy drafts, and verification outputs are never uploaded to a server, so you are not creating a new data-flow question for your auditor while closing others.'
     ],
     howTo: [
       'Start with the Security criterion (CC6) — it is required for all SOC 2 audits.',
@@ -1612,6 +1613,14 @@ const soc2FAQs = {
     {
       question: 'Can I use these tools as audit evidence?',
       answer: 'Yes — screenshots and output from these tools serve as evidence of control verification. For example, Security Headers Analyzer results demonstrate CC6.1 compliance, and the TLS Checker output documents encryption in transit.'
+    },
+    {
+      question: 'Are these SOC 2 tools really free and open source?',
+      answer: 'Yes. Every tool on this site is free with no account required, and the source code is publicly available on GitHub. You can inspect exactly what each tool does before using it for compliance work — no black-box SaaS between you and your audit evidence.'
+    },
+    {
+      question: 'Does my compliance data leave my browser?',
+      answer: 'No. All processing happens client-side in JavaScript. Your checklist progress stays in your browser storage, policy drafts are generated locally, and verification tools like the headers analyzer and TLS checker fetch only the public targets you point them at. Nothing about your SOC 2 readiness is transmitted to us.'
     }
   ],
   '/tools/policy-generator': [

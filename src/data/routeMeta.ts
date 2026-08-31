@@ -268,9 +268,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'tls checker, ssl certificate check, certificate expiry checker, openssl certificate, tls security scan'
   },
   'soc2-checklist': {
-    title: 'SOC 2 Compliance Readiness Checklist | Formatho',
-    description: 'Interactive SOC 2 readiness checklist covering all 5 Trust Service Criteria. Track your progress with linked tools for each control. Free, private, client-side.',
-    keywords: 'soc 2 checklist, soc 2 readiness, soc 2 compliance, soc 2 audit prep, trust service criteria'
+    title: 'SOC 2 Readiness Checklist - Free & Open Source | Formatho',
+    description: 'Interactive, open-source SOC 2 readiness checklist covering all 5 Trust Service Criteria. Track progress with linked tools for each control. Free, private, 100% client-side.',
+    keywords: 'soc 2 checklist, open source soc 2, soc 2 readiness, soc 2 compliance, soc 2 audit prep, trust service criteria, free soc 2 tools'
   },
   'policy-generator': {
     title: 'Security Policy Generator - SOC 2 Templates | Formatho',
