@@ -238,9 +238,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'read smart contract online, call contract function, abi reader, contract view functions, eth_call tool, read contract without etherscan, contract interaction tool',
   },
   'function-selector': {
-    title: 'Solidity Function Selector Calculator | Formatho',
-    description: 'Calculate Solidity function selectors (4-byte signatures) from function signatures using Keccak-256. Batch mode for ABI development and Foundry cast sig. 100% client-side.',
-    keywords: 'function selector calculator, solidity selector, 4 byte signature, keccak256 selector, cast sig, abi selector, ethers interface id',
+    title: 'Solidity Function Selector Calculator & Lookup | Formatho',
+    description: 'Calculate 4-byte Solidity function selectors with Keccak-256, or look up which function a selector like 0xa9059cbb belongs to. Batch mode, ERC presets, cast sig compatible, 100% client-side.',
+    keywords: 'function selector calculator, solidity function selector, function selector lookup, 4 byte signature lookup, selector decoder, keccak256 selector, cast sig, abi selector, 0xa9059cbb, ethers interface id',
   },
   'ens-namehash': {
     title: 'ENS Namehash & Labelhash Calculator | Formatho',
