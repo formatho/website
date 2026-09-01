@@ -297,6 +297,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Generate vanity addresses with a custom prefix or suffix. The same key works on every EVM chain - Ethereum, Polygon, BSC, Arbitrum, Base, Optimism, Avalanche. Runs 100% in your browser, key never transmitted.',
     keywords: 'ethereum vanity address generator, evm vanity address, vanity eth address, polygon vanity address, bsc vanity address generator, base chain vanity address, custom wallet address, safe vanity address, client-side vanity',
   },
+  'prompt-injection-tester': {
+    title: 'Prompt Injection Tester - Scan Prompts & Content | Formatho',
+    description: 'Scan untrusted content and prompts for prompt-injection patterns: instruction overrides, exfiltration commands, hidden Unicode, encoded payloads. Copy attack payloads to test your AI agent. 100% client-side.',
+    keywords: 'prompt injection tester, prompt injection scanner, prompt injection checker, llm security, owasp llm01, indirect prompt injection, ai agent security',
+  },
   'security-headers': {
     title: 'Security Headers Checker | Formatho',
     description: 'Analyze HTTP security headers on any URL: HSTS, Content-Security-Policy, X-Frame-Options and more. Graded A-F with fix recommendations. Runs from your browser.',

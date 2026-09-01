@@ -496,7 +496,13 @@ export const routes = [
         meta: routeMeta['password-strength-analyser']
       },
       {
-        path: '/tools/pdf-signature-checker',
+        path: '/tools/prompt-injection-tester',
+        name: 'prompt-injection-tester',
+        component: () => import('@/views/PromptInjectionTesterView.vue'),
+        meta: routeMeta['prompt-injection-tester']
+      },
+      {
+                path: '/tools/pdf-signature-checker',
         name: 'pdf-signature-checker',
         component: () => import(/* webpackPrefetch: true */ '../views/PdfSignatureCheckerView.vue'),
         meta: routeMeta['pdf-signature-checker']

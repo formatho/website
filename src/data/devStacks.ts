@@ -37,6 +37,7 @@ export const devStacks: DevStack[] = [
       { name: 'Hash Generator', route: '/tools/hash-text', desc: 'Argon2id, bcrypt, PBKDF2 per OWASP Password Storage Cheat Sheet' },
       { name: 'Password Strength Analyzer', route: '/tools/password-strength-analyser', desc: 'Evaluate entropy per OWASP Authentication Cheat Sheet' },
       { name: 'Base64 Encoder/Decoder', route: '/tools/base64', desc: 'Decode encoded payloads in security testing' },
+      { name: 'Prompt Injection Tester', route: '/tools/prompt-injection-tester', desc: 'OWASP LLM01: scan content for prompt-injection patterns, test payloads, Lethal Trifecta checklist' },
     ],
     tips: [
       'Start with the Security Headers Analyzer on your production domain — an A grade means all six OWASP-recommended headers are configured.',

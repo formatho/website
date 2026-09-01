@@ -9,6 +9,7 @@ Every tool page states what the tool does, how to use it step by step, and answe
 ### Security & Auth
 
 - [TLS Certificate Checker]: https://formatho.com/tools/tls-checker — Check TLS/SSL certificate expiry, issuer, and security configuration. Paste openssl output for instant analysis.
+- [Prompt Injection Tester]: https://formatho.com/tools/prompt-injection-tester — Scan prompts and untrusted content for injection patterns: overrides, exfiltration commands, hidden Unicode, encoded payloads. Includes attack payloads and the Lethal Trifecta checklist.
 - [SOC 2 Readiness Checklist]: https://formatho.com/tools/soc2-checklist — Interactive checklist covering all 5 Trust Service Criteria with linked tools for each control.
 - [Security Policy Generator]: https://formatho.com/tools/policy-generator — Generate password, access control, and incident response policies for SOC 2 compliance.
 - [Security Headers Analyzer]: https://formatho.com/tools/security-headers — Check HSTS, CSP, X-Frame-Options and more on any URL. Graded A-F with fix recommendations.
