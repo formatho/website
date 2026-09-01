@@ -383,8 +383,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Generate HMAC hashes using various algorithms. Privacy-first tool.',
   },
   'rsa-key-pair-generator': {
-    title: 'RSA Key Pair Generator Online - 2048 & 4096 Bit | Formatho',
-    description: 'Generate RSA public/private key pairs. Privacy-first crypto tool.',
+    title: 'RSA Key Generator & Signature Online (Sign/Verify) | Formatho',
+    description: 'Generate RSA key pairs, sign messages with an RSA private key (RSASSA-PKCS1-v1_5 or RSA-PSS), and verify RSA signatures online. 2048-4096 bit, 100% client-side.',
+    keywords: 'rsa signature online, generate rsa signature, sign message with rsa private key, rsa sign and verify, rsa key pair generator, rsassa-pkcs1-v1_5, rsa-pss',
   },
   'password-strength-analyser': {
     title: 'Password Strength Checker & Analyzer Online | Formatho',

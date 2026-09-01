@@ -24,7 +24,7 @@ Every tool page states what the tool does, how to use it step by step, and answe
 - [Bcrypt]: https://formatho.com/tools/bcrypt — Generate and verify Bcrypt password hashes.
 - [Encrypt/Decrypt]: https://formatho.com/tools/encryption — Encrypt and decrypt text using various algorithms.
 - [HMAC Generator]: https://formatho.com/tools/hmac-generator — Generate HMAC hash codes with various algorithms.
-- [RSA Key Pair]: https://formatho.com/tools/rsa-key-pair-generator — Generate RSA public/private key pairs.
+- [RSA Key Generator & Signer]: https://formatho.com/tools/rsa-key-pair-generator — Generate RSA key pairs, sign messages with a private key, and verify RSA signatures (PKCS1-v1_5, PSS).
 - [Password Strength]: https://formatho.com/tools/password-strength-analyser — Analyze password strength and get improvement suggestions.
 - [TOTP Generator]: https://formatho.com/tools/otp-code-generator — Generate TOTP codes from secrets. Privacy-first tool.
 - [PDF Signature Checker]: https://formatho.com/tools/pdf-signature-checker — Check and validate digital signatures in PDF files. Privacy-first tool.
