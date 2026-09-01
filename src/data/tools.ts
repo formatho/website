@@ -89,7 +89,7 @@ export const tools: ToolCategory[] = [
       { name: 'Bcrypt', description: 'Generate and verify Bcrypt password hashes.', route: '/tools/bcrypt', iconName: 'Lock' },
       { name: 'Encrypt/Decrypt', description: 'Encrypt and decrypt text using various algorithms.', route: '/tools/encryption', iconName: 'LockKeyhole' },
       { name: 'HMAC Generator', description: 'Generate HMAC hash codes with various algorithms.', route: '/tools/hmac-generator', iconName: 'Hash' },
-      { name: 'RSA Key Pair', description: 'Generate RSA public/private key pairs.', route: '/tools/rsa-key-pair-generator', iconName: 'KeyRound' },
+      { name: 'RSA Key Generator & Signer', description: 'Generate RSA key pairs, sign messages with a private key, and verify RSA signatures (PKCS1-v1_5, PSS).', route: '/tools/rsa-key-pair-generator', iconName: 'KeyRound' },
       { name: 'Password Strength', description: 'Analyze password strength and get improvement suggestions.', route: '/tools/password-strength-analyser', iconName: 'ShieldCheck' },
       { name: 'TOTP Generator', description: 'Generate TOTP codes from secrets. Privacy-first tool.', route: '/tools/otp-code-generator', iconName: 'Clock' },
       { name: 'PDF Signature Checker', description: 'Check and validate digital signatures in PDF files. Privacy-first tool.', route: '/tools/pdf-signature-checker', iconName: 'FileCheck' },

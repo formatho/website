@@ -1882,14 +1882,14 @@ const p1Content = {
   },
   '/tools/rsa-key-pair-generator': {
     intro: [
-      'RSA key pairs are the foundation of TLS certificates, JWT RS256 signing, SSH authentication, and PGP encryption. Generating test keys without a server is a regular need for developers wiring up authentication.',
-      'Generate RSA key pairs at 2048 or 4096 bits locally in your browser using the Web Crypto API. Download the public and private keys in PEM format. Keys are never transmitted — for production, use a managed key store.'
+      'RSA keys still secure a huge share of TLS, JWT RS256 signing, SSH authentication, and code signing. But generating a pair is only half the workflow — developers also need to sign a message with the private key and check a signature against a public key, usually while debugging an RS256 token, a webhook payload, or an SSO assertion.',
+      'This tool does all three in your browser via the Web Crypto API: generate 2048–4096 bit key pairs as PEM, sign any message with a private key (RSASSA-PKCS1-v1_5 or RSA-PSS, SHA-256/384/512), and verify Base64 or hex signatures against a public key. Keys, messages, and signatures never touch a server — for production key material, use a managed key store.'
     ],
     howTo: [
-      'Select the key size (2048 or 4096 bits).',
-      'Click generate — keys appear as PEM blocks.',
-      'Copy or download the public and private keys.',
-      'Use for local RS256 JWT testing or TLS lab setups.'
+      'Generate: pick a key size and click Generate Key Pair — PEM blocks appear for both keys.',
+      'Sign: paste a private key (PKCS#8 or traditional RSA PEM) plus your message, choose scheme and hash.',
+      'Copy the Base64 or hex signature and hand the public key to the receiving side.',
+      'Verify: paste the public key, the exact message, and the signature — valid/invalid is shown instantly.'
     ]
   }
 }
@@ -1917,7 +1917,10 @@ const p1FAQs = {
   ],
   '/tools/rsa-key-pair-generator': [
     { question: 'Should I use these keys in production?', answer: 'No — for production, use a managed key service (AWS KMS, Google Cloud KMS, Azure Key Vault) or generate keys on an air-gapped machine. Browser-generated keys are for testing and development only.' },
-    { question: '2048 or 4096 bits?', answer: '2048 bits is sufficient for most purposes and is the NIST minimum through 2030. 4096 bits provides extra margin but is slower to use. For JWT signing, 2048 is the standard.' }
+    { question: '2048 or 4096 bits?', answer: '2048 bits is sufficient for most purposes and is the NIST minimum through 2030. 4096 bits provides extra margin but is slower to use. For JWT signing, 2048 is the standard.' },
+    { question: 'How do I sign a message with an RSA private key?', answer: 'Paste a PEM private key (PKCS#8 -----BEGIN PRIVATE KEY----- or traditional -----BEGIN RSA PRIVATE KEY-----) and your message into the Sign tab, pick a scheme and hash, and the signature is produced in your browser via the Web Crypto API. RSASSA-PKCS1-v1_5 with SHA-256 is what JWT RS256 and most APIs expect; RSA-PSS is the modern scheme with provable security — use it when the receiving side supports it.' },
+    { question: 'Can I verify an RSA signature online?', answer: 'Yes — the Verify tab checks a Base64 or hex signature against a PEM public key and the exact message, entirely client-side. The message must be byte-identical to what was signed, and the scheme and hash must match the signer settings. A common failure is verifying PKCS1-v1_5 output with the PSS scheme selected, or trailing whitespace differences in the message.' },
+    { question: 'RSASSA-PKCS1-v1_5 or RSA-PSS — which should I use?', answer: 'PKCS1-v1_5 is ubiquitous: TLS certificates, JWT RS256, and most legacy APIs use it, and despite no formal proof of security in the generic model it remains safe when implemented with correct padding checks (browsers do this for you). PSS includes a random salt, making forgery provably as hard as RSA inversion, and it is required in newer specifications. New designs that can choose should default to PSS with SHA-256 and a 32-byte salt — exactly what this tool uses.' }
   ],
   '/tools/password-strength-analyser': [
     { question: 'Is my password sent to a server?', answer: 'No. All analysis happens in your browser using JavaScript. Your password never leaves your device.' },
