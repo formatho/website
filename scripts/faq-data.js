@@ -2416,3 +2416,46 @@ const ritualFAQs = {
 
 Object.assign(toolSEOContent, ritualContent)
 Object.assign(toolSpecificFAQ, ritualFAQs)
+
+
+/**
+ * Prompt Injection Tester — AI agent security content.
+ */
+const promptInjectionContent = {
+  '/tools/prompt-injection-tester': {
+    intro: [
+      'Prompt injection is OWASP\u2019s number-one risk for LLM applications: untrusted text that, once read by a model, is followed as instructions. Direct injections arrive from the user ("ignore your rules"); indirect injections hide inside the content an agent retrieves \u2014 web pages, emails, PDFs, RAG documents \u2014 and are the reason "just write a better system prompt" is not a defense. An agent becomes exploitable when the Lethal Trifecta lines up: it can read private data, it touches untrusted content, and it can take external actions.',
+      'This tester covers three jobs in your browser. Scan pastes content against ~20 heuristic rule categories drawn from the injection corpora \u2014 instruction overrides, role hijacks, fake turn markers, exfiltration commands, tool abuse, system-prompt extraction, hidden Unicode and markup, and encoded payloads. Test payloads gives you copy-ready attacks (direct, indirect, encoding tricks, tool probes) to smoke-test your own agent. The checklist scores your agent against the Lethal Trifecta and a ten-control defense stack. Nothing is uploaded \u2014 which matters, since the content you are screening is exactly the content you do not want to leak.'
+    ],
+    howTo: [
+      'Paste retrieved content, an email, a document, or a suspicious user message into Scan and click Scan content.',
+      'Review findings by severity \u2014 high findings mean treat the content as hostile, not merely suspicious.',
+      'Open Test payloads, plant the indirect-injection samples in a document your agent retrieves, and verify it does not act on them.',
+      'Run the Agent checklist: confirm you break at least one leg of the Lethal Trifecta before shipping.'
+    ]
+  }
+}
+
+const promptInjectionFAQs = {
+  '/tools/prompt-injection-tester': [
+    {
+      question: 'Can prompt injection actually be detected with patterns?',
+      answer: 'Partially \u2014 that is the honest answer. Known attack phrasings, fake turn markers, exfiltration URLs, hidden Unicode, and encoded blobs are reliably catchable with heuristics, which is what this scanner does. Novel or heavily obfuscated injections can evade any pattern list, so treat scanning as one layer among many: isolate untrusted content as data, filter outputs, allow-list egress, and gate destructive actions behind human confirmation. No scanner \u2014 heuristic or model-based \u2014 makes an agent safe alone.'
+    },
+    {
+      question: 'What is the Lethal Trifecta?',
+      answer: 'The three conditions that make an AI agent exploitable via prompt injection: access to private data, exposure to untrusted content, and the ability to take external actions. Any indirect injection planted in retrieved content can chain all three \u2014 read the private data, act on it externally. Break any one leg and the worst-case attack collapses: restrict data access, isolate untrusted content, or require human confirmation for external actions.'
+    },
+    {
+      question: 'How do I test my AI agent for prompt injection?',
+      answer: 'Plant the indirect-injection payloads from this tool inside documents your agent will actually retrieve \u2014 a page it browses, an email it summarizes, a file it parses \u2014 then observe whether it follows them. A hardened agent treats the payload as content, not instructions. Test the exfil probes with tool access enabled and confirm they fail closed or demand confirmation. Repeat with encoded variants (base64, ROT13, zero-width characters) since those bypass naive keyword filters.'
+    },
+    {
+      question: 'Does this tool send my prompts or content to a server?',
+      answer: 'No. All pattern matching runs locally in JavaScript, the checklist state stays in your browser, and payloads are static strings. For security teams this matters twice over: the content you are screening is sensitive by definition, and a scanning tool that uploads it would itself be an exfiltration path.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, promptInjectionContent)
+Object.assign(toolSpecificFAQ, promptInjectionFAQs)

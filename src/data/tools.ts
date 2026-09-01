@@ -74,6 +74,7 @@ export const tools: ToolCategory[] = [
     blurb: 'Hash generators, JWT debugger, SAML decoder, OIDC builder, encryption, TOTP, password analysis, and credential tools - all client-side.',
     items: [
       { name: 'TLS Certificate Checker', description: 'Check TLS/SSL certificate expiry, issuer, and security configuration. Paste openssl output for instant analysis.', route: '/tools/tls-checker', iconName: 'Lock' },
+      { name: 'Prompt Injection Tester', description: 'Scan prompts and untrusted content for injection patterns: overrides, exfiltration commands, hidden Unicode, encoded payloads. Includes attack payloads and the Lethal Trifecta checklist.', route: '/tools/prompt-injection-tester', iconName: 'ShieldAlert' },
       { name: 'SOC 2 Readiness Checklist', description: 'Interactive checklist covering all 5 Trust Service Criteria with linked tools for each control.', route: '/tools/soc2-checklist', iconName: 'ClipboardCheck' },
       { name: 'Security Policy Generator', description: 'Generate password, access control, and incident response policies for SOC 2 compliance.', route: '/tools/policy-generator', iconName: 'FileText' },
       { name: 'Security Headers Analyzer', description: 'Check HSTS, CSP, X-Frame-Options and more on any URL. Graded A-F with fix recommendations.', route: '/tools/security-headers', iconName: 'ShieldCheck' },
