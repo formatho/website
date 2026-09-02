@@ -177,6 +177,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Generate BLS12-381 signatures, verify signatures, and aggregate multiple signatures into one. 100% client-side, privacy-first.',
     keywords: 'bls signature, bls12-381, aggregate signatures, threshold signatures, boneh lynn shacham, ethereum consensus',
   },
+  'r1cs-inspector': {
+    title: 'R1CS Viewer - Inspect Circom Circuit Files | Formatho',
+    description: 'Open .r1cs constraint files and .wtns witnesses in your browser. Wire counts, constraints, public/private inputs, curve, and named signal terms per constraint. Works with circom, snarkjs, and coCircom files. Nothing uploaded.',
+    keywords: 'r1cs viewer, r1cs info online, inspect r1cs file, circom constraint count, snarkjs r1cs print, wtns viewer, r1cs file format, taceo cocircom',
+  },
   'keccak256': {
     title: 'Keccak-256 Hash Generator Online | Formatho',
     description: 'Calculate Keccak-256 hashes instantly online. Supports UTF-8, UTF-16, Hex, Base64. 100% client-side, no data leaves your browser. Free tool for Ethereum and blockchain developers.',

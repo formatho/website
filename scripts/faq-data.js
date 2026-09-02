@@ -2553,3 +2553,46 @@ const visioViewerFAQs = {
 
 Object.assign(toolSEOContent, visioViewerContent)
 Object.assign(toolSpecificFAQ, visioViewerFAQs)
+
+
+/**
+ * R1CS Circuit Inspector content.
+ */
+const r1csContent = {
+  '/tools/r1cs-inspector': {
+    intro: [
+      'Every Circom circuit compiles to an R1CS file — the rank-1 constraint system that encodes your circuit as bilinear equations over a prime field. The number everyone optimizes is the constraint count: it drives proving time and memory. Until now, checking it meant installing circom and snarkjs and running CLI commands on a machine you trust with your circuit.',
+      'This inspector parses .r1cs files entirely in your browser: field/curve identification, wire and constraint counts, public/private input split, and every constraint rendered as named signal terms (A \u00d7 B = C) using the label and annotation maps embedded in the file. It also reads .wtns witness files and dumps their signal values. Because the r1cs format is shared across toolchains, files from circom, snarkjs, and Taceo\u2019s coCircom all open identically — and since pre-launch circuits are confidential business logic, keeping the file local is not a nice-to-have; it is the point.'
+    ],
+    howTo: [
+      'Export your circuit with circom circuit.circuit --r1cs (add --wtns for a witness, or use snarkjs wtns).',
+      'Drop the .r1cs or .wtns file onto the page — parsing is instant and local.',
+      'Read the summary cards: constraints, wires, labels, and the input split tell you circuit size at a glance.',
+      'Search constraints by signal name to find which parts of the circuit generate them.'
+    ]
+  }
+}
+
+const r1csFAQs = {
+  '/tools/r1cs-inspector': [
+    {
+      question: 'What does an R1CS file contain?',
+      answer: 'A rank-1 constraint system: a header with the prime field, signal counts, and constraint count; the constraints themselves (each is three linear combinations A, B, C satisfying A \u00d7 B = C); a wire-to-label map; and, if compiled with circom 2.x, an annotation map with the original signal names. This viewer parses all of them, so you see named signals instead of raw wire indices.'
+    },
+    {
+      question: 'How do I check my circuit\u2019s constraint count?',
+      answer: 'Compile with circom to produce the .r1cs file, drop it here, and the count is in the summary — the same number snarkjs r1cs info prints. The constraint list also shows which named signals each constraint touches, which is how you locate the expensive sub-circits (hashing, comparators, bitwise ops) to optimize.'
+    },
+    {
+      question: 'Does this work with coCircom and Taceo files?',
+      answer: 'Yes. coCircom uses the same r1cs artifacts as circom and snarkjs — its collaborative proofs verify against the same verification keys. Any standard .r1cs or .wtns file opens here. Files using custom gates (the extended plonk-oriented format) are detected and reported rather than half-rendered.'
+    },
+    {
+      question: 'Is my circuit safe here?',
+      answer: 'The file is read with the browser FileReader API and parsed with plain JavaScript in this tab — there is no upload endpoint and no network request involved. You can confirm this in your devtools network tab: opening a file produces zero requests. For a confidential pre-launch circuit, that is exactly what you want from an inspection tool.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, r1csContent)
+Object.assign(toolSpecificFAQ, r1csFAQs)
