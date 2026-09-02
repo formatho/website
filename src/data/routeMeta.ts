@@ -152,6 +152,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Visualize BPMN 2.0 diagrams and export them as PDF. Free, privacy-first BPMN viewer that runs entirely in your browser.',
     keywords: 'bpmn viewer, bpmn to pdf, bpmn diagram, business process model, bpmn export, privacy-first',
   },
+  'visio-viewer': {
+    title: 'Visio Viewer Online - Open .vsdx Files Free | Formatho',
+    description: 'View Microsoft Visio .vsdx files in your browser without Visio or an upload. Multi-page rendering, zoom, SVG export. 100% client-side — the file never leaves your machine.',
+    keywords: 'visio viewer, microsoft visio viewer, vsdx viewer online, open visio file online, view vsdx without visio, visio file viewer free',
+  },
   'bpmn-to-visio': {
     title: 'BPMN to Visio Converter Online - Free | Formatho',
     description: 'Convert BPMN process diagrams into Microsoft Visio compatible formats. Free, privacy-first converter that runs entirely in your browser.',
@@ -335,7 +340,7 @@ export const routeMeta: Record<string, RouteMeta> = {
   'saml-decoder': {
     title: 'SAML Request & Response Decoder to XML | Formatho',
     description: 'Decode SAML AuthnRequest, LogoutRequest and Response messages. Base64 plus raw-deflate decompression with pretty-printed XML. 100% client-side - nothing is uploaded.',
-    keywords: 'saml decoder, saml request decoder, saml response decoder, decode saml assertion, base64 deflate saml, saml authnrequest, saml tracing, okta saml decoder',
+    keywords: 'saml decoder, saml pretty print, pretty print saml response, saml formatter, format saml xml, saml request decoder, saml response decoder, decode saml assertion, base64 deflate saml, saml authnrequest, saml tracing, okta saml decoder',
   },
   'oidc-url-builder': {
     title: 'OIDC Authorization URL & PKCE Generator - OAuth 2.0 | Formatho',
