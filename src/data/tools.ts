@@ -55,6 +55,7 @@ export const tools: ToolCategory[] = [
       { name: 'Multi-Chain Wallet', description: 'Generate keys & addresses for multiple blockchains from one mnemonic, derive addresses from keys, and validate checksums.', route: '/tools/multi-chain-keys', subcategory: 'Addresses & Keys', iconName: 'Link' },
       { name: 'Address Checksum (EIP-55)', description: 'Validate and checksum Ethereum addresses. Prevent spoofed address attacks.', route: '/tools/address-checksum', subcategory: 'Addresses & Keys', iconName: 'Shield' },
       { name: 'EVM Unit Converter', description: 'Convert between Wei, Gwei, and Ether.', route: '/tools/evm-converter', subcategory: 'Utilities', iconName: 'ArrowRightLeft' },
+      { name: 'R1CS Circuit Inspector', description: 'Inspect Circom .r1cs constraint files and .wtns witnesses: constraints, wires, inputs, named signals. Works with circom, snarkjs, and coCircom artifacts — 100% local.', route: '/tools/r1cs-inspector', iconName: 'CircuitBoard' },
       { name: 'Keccak-256 Hasher', description: 'Generate Keccak-256 hashes for Ethereum.', route: '/tools/keccak256', subcategory: 'Utilities', iconName: 'Hash' },
       { name: 'Solidity to Opcodes', description: 'Compile Solidity to EVM opcodes.', route: '/tools/solidity-to-opcodes', subcategory: 'Smart Contract Dev', iconName: 'Code' },
       { name: 'ABI Encoder & Decoder', description: 'Encode/decode Solidity ABI parameters, function selectors, and transaction calldata.', route: '/tools/abi-encoder', subcategory: 'Smart Contract Dev', iconName: 'Binary' },

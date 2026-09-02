@@ -691,6 +691,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://formatho.com/tools/r1cs-inspector</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/tools/keccak256</loc>
     <lastmod>2026-09-02</lastmod>
     <changefreq>monthly</changefreq>

@@ -6,6 +6,10 @@ Every tool page states what the tool does, how to use it step by step, and answe
 
 ## Tools
 
+### Web3 & Blockchain
+
+- [R1CS Circuit Inspector]: https://formatho.com/tools/r1cs-inspector — Inspect Circom .r1cs constraint files and .wtns witnesses: constraints, wires, inputs, named signals. Works with circom, snarkjs, and coCircom artifacts — 100% local.
+
 ### Security & Auth
 
 - [TLS Certificate Checker]: https://formatho.com/tools/tls-checker — Check TLS/SSL certificate expiry, issuer, and security configuration. Paste openssl output for instant analysis.

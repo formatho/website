@@ -214,6 +214,12 @@ export const routes = [
         meta: routeMeta['bls-signature']
       },
       {
+        path: '/tools/r1cs-inspector',
+        name: 'r1cs-inspector',
+        component: () => import('@/views/R1csInspectorView.vue'),
+        meta: routeMeta['r1cs-inspector']
+      },
+      {
         path: '/tools/keccak256',
         name: 'keccak256',
         component: () => import(/* webpackPrefetch: true */ '../views/KeccakHasherView.vue'),
