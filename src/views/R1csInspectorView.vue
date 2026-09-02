@@ -224,6 +224,27 @@ function parseR1cs(r: Reader): ParsedR1cs {
   }
 }
 
+// Sample circuit: private squaring (out = prv^2 + 3*pub) compiled with 2
+// constraints over BN254 — same fixture used to validate the parser, base64'd.
+const SAMPLE_R1CS_B64 = 'cjFjcwEAAAAEAAAAAQAAAEQAAAAAAAAAIAAAAAEAAPCT9eFDkXC5eUjoMyhdWIGBtkVQuCmgMeFyTmQwBgAAAAEAAAABAAAAAQAAAAgAAAAAAAAAAgAAAAAAAAACAAAAFAEAAAAAAAABAAAABAAAAPv//08cNJasKc1gn5V2/DYuRnl4b6NuZi/fB5rBdwoOAQAAAAQAAAD7//9PHDSWrCnNYJ+Vdvw2LkZ5eG+jbmYv3weawXcKDgEAAAAFAAAA+///Txw0lqwpzWCflXb8Ni5GeXhvo25mL98HmsF3Cg4BAAAAAAAAAPv//08cNJasKc1gn5V2/DYuRnl4b6NuZi/fB5rBdwoOAgAAAAQAAAD7//9PHDSWrCnNYJ+Vdvw2LkZ5eG+jbmYv3weawXcKDgIAAADx///vVJzCBX1nIt7AY/WkitJraU7qSzOOnRfORGcfKgEAAAAFAAAA+///Txw0lqwpzWCflXb8Ni5GeXhvo25mL98HmsF3Cg4DAAAANAAAAAAAAAAGAAAACgAAAAAAAAALAAAAAAAAAAwAAAAAAAAADQAAAAAAAAAOAAAAAAAAAA8AAAAAAAAABAAAAHwAAAAAAAAABgAAAAoAAAAAAAAABgAAAG1haW4ueAsAAAAAAAAACAAAAG1haW4ub3V0DAAAAAAAAAAIAAAAbWFpbi5wdWINAAAAAAAAAAgAAABtYWluLnBydg4AAAAAAAAABwAAAG1haW4ueDIPAAAAAAAAAAsAAABtYWluLnJlc3VsdA=='
+const SAMPLE_WTNS_B64 = 'd3RucwIAAAACAAAAAQAAACgAAAAAAAAAIAAAAAEAAPCT9eFDkXC5eUjoMyhdWIGBtkVQuCmgMeFyTmQwBgAAAAIAAADAAAAAAAAAAPv//08cNJasKc1gn5V2/DYuRnl4b6NuZi/fB5rBdwoOIv//37UJDSIHYjBxJpH8Ijdf1bG7i2Mq0hv3tmD4Awnb//9PnoFXMAG7MmiGbX8wiTpOSJ/sZVz42dNzZamAAdH//+/W6YOJVFX0prFaeJ7lxkA5fjNDKVeY46fomJUdVP7/v6psOYIizfd91KY3yUBEwHvfcsvZPzoIge/XTBhU/v+/qmw5giLN933UpjfJQETAe99yy9k/OgiB79dMGA=='
+
+function loadSample(which: 'r1cs' | 'wtns') {
+  parseError.value = ''
+  parsed.value = null
+  const b64 = which === 'r1cs' ? SAMPLE_R1CS_B64 : SAMPLE_WTNS_B64
+  fileName.value = which === 'r1cs' ? 'example-squaring.r1cs' : 'example-squaring.wtns'
+  try {
+    const bin = atob(b64)
+    const buf = new ArrayBuffer(bin.length)
+    const arr = new Uint8Array(buf)
+    for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i)
+    parsed.value = parseR1csOrWtns(buf)
+  } catch (e: any) {
+    parseError.value = e?.message || 'Failed to load sample.'
+  }
+}
+
 // ---------------- UI state ----------------
 const fileName = ref('')
 const parsed = ref<ParsedR1cs | ParsedWtns | null>(null)
@@ -365,6 +386,11 @@ function downloadJson() {
         <p v-if="parseError" class="text-sm text-red-500 flex items-center gap-1 mt-3">
           <AlertCircle class="w-4 h-4 shrink-0" /> {{ parseError }}
         </p>
+        <div class="flex items-center justify-center gap-3 mt-4 flex-wrap">
+          <span class="text-xs text-muted-foreground">No file handy?</span>
+          <Button variant="outline" size="sm" @click="loadSample('r1cs')">Load example circuit (.r1cs)</Button>
+          <Button variant="outline" size="sm" @click="loadSample('wtns')">Load example witness (.wtns)</Button>
+        </div>
       </CardContent>
     </Card>
 
