@@ -182,6 +182,12 @@ export const routes = [
         meta: routeMeta['bpmn']
       },
       {
+        path: '/tools/visio-viewer',
+        name: 'visio-viewer',
+        component: () => import('@/views/VisioViewerView.vue'),
+        meta: routeMeta['visio-viewer']
+      },
+      {
         path: '/tools/bpmn-to-visio',
         name: 'bpmn-to-visio',
         component: () =>

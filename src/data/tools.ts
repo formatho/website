@@ -151,6 +151,7 @@ export const tools: ToolCategory[] = [
       { name: 'Mermaid Diagram Viewer', description: 'Render Mermaid diagrams in real-time. Flowcharts, sequence diagrams, class diagrams, gantt charts, and more.', route: '/tools/mermaid-viewer', iconName: 'GitBranch' },
       { name: 'Performance Benchmark', description: 'benchmark-builder - free, privacy-first, and 100% client-side.', route: '/tools/benchmark-builder', iconName: 'Gauge' },
       { name: 'BPMN Viewer', description: 'Visualize BPMN 2.0 diagrams and export them as PDF. Free, privacy-first BPMN viewer that runs entirely in your browser.', route: '/tools/bpmn', iconName: 'Workflow' },
+      { name: 'Visio Viewer', description: 'Open and view Microsoft Visio .vsdx files in your browser — no Visio install, no upload. Multi-page rendering, zoom, and SVG export.', route: '/tools/visio-viewer', iconName: 'FileText' },
       { name: 'BPMN to Visio', description: 'Convert BPMN process diagrams into Microsoft Visio compatible formats.', route: '/tools/bpmn-to-visio', iconName: 'Workflow' },
       { name: 'Visio File Viewer', description: 'View Microsoft Visio diagrams (.vsdx, .vsd) directly in your browser.', route: '/tools/visio-viewer', iconName: 'FileImage' },
       { name: 'Html Wysiwyg Editor', description: 'html-wysiwyg-editor - free, privacy-first, and 100% client-side.', route: '/tools/html-wysiwyg-editor', iconName: 'Code' },

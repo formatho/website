@@ -74,6 +74,7 @@ Every tool page states what the tool does, how to use it step by step, and answe
 - [Mermaid Diagram Viewer]: https://formatho.com/tools/mermaid-viewer — Render Mermaid diagrams in real-time. Flowcharts, sequence diagrams, class diagrams, gantt charts, and more.
 - [Performance Benchmark]: https://formatho.com/tools/benchmark-builder — benchmark-builder - free, privacy-first, and 100% client-side.
 - [BPMN Viewer]: https://formatho.com/tools/bpmn — Visualize BPMN 2.0 diagrams and export them as PDF. Free, privacy-first BPMN viewer that runs entirely in your browser.
+- [Visio Viewer]: https://formatho.com/tools/visio-viewer — Open and view Microsoft Visio .vsdx files in your browser — no Visio install, no upload. Multi-page rendering, zoom, and SVG export.
 - [BPMN to Visio]: https://formatho.com/tools/bpmn-to-visio — Convert BPMN process diagrams into Microsoft Visio compatible formats.
 - [Visio File Viewer]: https://formatho.com/tools/visio-viewer — View Microsoft Visio diagrams (.vsdx, .vsd) directly in your browser.
 - [Html Wysiwyg Editor]: https://formatho.com/tools/html-wysiwyg-editor — html-wysiwyg-editor - free, privacy-first, and 100% client-side.

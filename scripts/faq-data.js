@@ -471,6 +471,14 @@ const websiteAgentToolFAQs = {
     {
       question: 'Why does my decoded SAML show as broken XML?',
       answer: 'The message was likely truncated by URL length limits or copy-paste. Grab the full parameter (SAMLRequest or SAMLResponse) from your browser devtools network tab rather than the visible URL bar.'
+    },
+    {
+      question: 'How do I pretty print a SAML response?',
+      answer: 'Base64-decode the SAMLResponse parameter, inflate it if it was raw-deflate compressed (most AuthnRequests are), and run the resulting XML through an indenter. This tool does all three steps: paste the value from your browser URL bar, SAML tracer, or IdP export, and you get namespace-preserved, pretty-printed XML you can actually read — attribute statements, conditions, signatures and all.'
+    },
+    {
+      question: 'Why is my SAML XML all on one line?',
+      answer: 'SAML messages are generated programmatically and transmitted without insignificant whitespace, so the XML arrives as a single line. Pretty printing only adds indentation between elements — it changes nothing semantically, and the signature (if present) still validates because signed XML canonicalization ignores this whitespace.'
     }
   ],
   '/tools/oidc-url-builder': [
@@ -2459,3 +2467,89 @@ const promptInjectionFAQs = {
 
 Object.assign(toolSEOContent, promptInjectionContent)
 Object.assign(toolSpecificFAQ, promptInjectionFAQs)
+
+
+/**
+ * GSC-driven additions: Blast chain page (token swap intent) + SAML pretty print.
+ */
+const gscChainContent = {
+  '/evm-tools/blast': {
+    intro: [
+      'Blast is an Ethereum L2 with native yield: ETH and stable balances earn yield automatically inside the chain itself, and gas is reimbursed through Blast Points and Blast Gold incentive programs. It runs the standard EVM instruction set, so the same addresses, ABI encoding, and Keccak-256 tooling you use on Ethereum mainnet work unchanged.',
+      'This page curates Formatho tools configured for Blast (chain ID 81457): read and verify smart contracts before you interact with them, check token approvals that swap routers request, convert between wei and ETH for gas math, and decode calldata to see exactly what a swap or bridge transaction will do — all client-side, no wallet connection, nothing signed.'
+    ],
+    howTo: [
+      'Paste any Blast contract address into the Contract Reader with the Blast RPC to inspect tokens, routers, and pools.',
+      'Before approving a token swap, decode the router calldata with the ABI Encoder to see the exact path and amounts.',
+      'Use the EVM Unit Converter for gas and output-amount math in wei.',
+      'Generate or checksum addresses — identical on Blast and every EVM chain.'
+    ]
+  }
+}
+
+const gscChainFAQs = {
+  '/evm-tools/blast': [
+    {
+      question: 'How do token swaps work on Blast?',
+      answer: 'Token swaps on Blast run through the same AMM model as Ethereum: you approve a router contract to spend your token, then call a swap function that executes against liquidity pools. Blast uses ETH for gas (auto rebasing to stETH yield) and USDB as the yield-bearing dollar. Because it is fully EVM-compatible, the same UniswapV2/V3-style router interfaces and ABI encoding apply — you can decode any Blast swap calldata with the tools on this page before signing.'
+    },
+    {
+      question: 'What is the Blast chain ID and RPC?',
+      answer: 'Blast mainnet is chain ID 81457 with the public RPC https://rpc.blast.io. Testnet (Blaster) is chain ID 168587773. Wallets and tooling that accept custom EVM networks connect with these values.'
+    },
+    {
+      question: 'Is swapping tokens on Blast safe?',
+      answer: 'The chain itself inherits EVM security semantics, but the risks live in the contracts: unlimited approvals, malicious or fee-on-transfer tokens, and counterfeit versions of bridged assets. Before swapping, verify the token contract address with a contract reader, check what the router is asking you to approve, and prefer per-swap exact amounts over unlimited approvals. Never sign transactions for addresses you have not verified.'
+    },
+    {
+      question: 'Why do these Blast tools never ask for my wallet?',
+      answer: 'Every tool here is read-only and client-side: contract reads are plain eth_call requests that cannot move funds, and everything else (ABI encoding, calldata decoding, unit conversion) is local math in your browser. There is nothing to connect and nothing that can sign — which makes the tools safe to use while you research a swap.'
+    }
+  ],
+}
+
+Object.assign(toolSEOContent, gscChainContent)
+Object.assign(toolSpecificFAQ, gscChainFAQs)
+
+
+/**
+ * Visio Viewer content.
+ */
+const visioViewerContent = {
+  '/tools/visio-viewer': {
+    intro: [
+      'Microsoft Visio files are notoriously closed: without Visio (Windows-only, Microsoft 365 licensed) or a viewer install, a .vsdx attachment is a dead end. Online viewers exist, but most of them upload your diagram to a server — awkward for org charts, network layouts, and process documents that describe the inside of a company.',
+      'This viewer parses .vsdx files entirely in your browser. The format is an OPC package (a zip of XML parts), so the viewer unpacks it locally, reads each page\u2019s shape geometry — pins, sizes, angles, fill colors, lines, and labels — and renders it to SVG. You get every page as a tab, zoom, and one-click SVG export for use in docs and slides. The file never leaves your machine.'
+    ],
+    howTo: [
+      'Drop or select a .vsdx file (Visio 2013 or newer).',
+      'Switch between pages with the tabs if the file has several.',
+      'Zoom in/out or fit the page; pan by scrolling.',
+      'Export the current page as SVG for documentation or slides.'
+    ]
+  }
+}
+
+const visioViewerFAQs = {
+  '/tools/visio-viewer': [
+    {
+      question: 'Can I open Visio files without Microsoft Visio?',
+      answer: 'Yes — for .vsdx files (Visio 2013 and later) you do not need Visio installed. The format is documented as an OPC package of XML parts, which this viewer reads and renders in the browser. Legacy .vsd files (Visio 2003-2010) are a proprietary binary OLE format that is not practical to parse in a browser — re-save those as .vsdx in Visio first.'
+    },
+    {
+      question: 'Is this Visio viewer really private?',
+      answer: 'Yes. The file is read with the browser FileReader API, unzipped in memory, and rendered as SVG locally. No upload endpoint exists — you can verify this in the network tab of your developer tools, which shows zero requests when you open a file.'
+    },
+    {
+      question: 'Why do some shapes look simplified?',
+      answer: 'Visio diagrams lean on stencil libraries (master shapes) whose full visual definitions live outside each file. The viewer draws each shape\u2019s actual geometry — positions, sizes, outlines, fills, and text — which is exact for boxes, connectors, and standard diagrams. Highly themed stencils, embedded images, and CAD-sourced shapes render in simplified form.'
+    },
+    {
+      question: 'Can I export or convert the diagram?',
+      answer: 'The current page exports as SVG, which imports cleanly into PowerPoint, Word, Google Slides, Figma, and Illustrator. SVG is also the right intermediate if you need PNG — any converter can rasterize it.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, visioViewerContent)
+Object.assign(toolSpecificFAQ, visioViewerFAQs)
