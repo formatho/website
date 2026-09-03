@@ -73,6 +73,10 @@
     box-sizing: border-box;
   }
 
+  #app {
+    min-height: 100vh;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family:

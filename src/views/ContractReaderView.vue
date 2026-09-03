@@ -373,8 +373,7 @@ async function copy(text: string, key: string) {
       >
         <input
           :value="tab.name"
-          class="bg-transparent border-none outline-none text-inherit font-inherit max-w-[140px] truncate cursor-text focus:cursor-text"
-          style="width: auto; min-width: 40px; max-width: 140px;"
+          class="bg-transparent border-none outline-none text-inherit font-inherit w-auto min-w-[40px] max-w-[140px] truncate cursor-text focus:cursor-text"
           aria-label="Tab name"
           @input="tab.name = ($event.target as HTMLInputElement).value"
           @keydown.stop

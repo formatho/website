@@ -195,13 +195,6 @@ export const routes = [
         meta: routeMeta['bpmn-to-visio']
       },
       {
-        path: '/tools/visio-viewer',
-        name: 'visio-viewer',
-        component: () =>
-          import(/* webpackPrefetch: true */ '../views/tools/VisioViewer.vue'),
-        meta: routeMeta['visio-viewer']
-      },
-      {
         path: '/tools/evm-converter',
         name: 'evm-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/EvmUnitConverterView.vue'),

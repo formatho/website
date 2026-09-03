@@ -901,7 +901,7 @@ contract TokenizationFactory {
 
       <!-- Architecture Flow Diagram -->
       <div class="mt-6 p-6 bg-muted rounded-lg overflow-x-auto">
-        <pre v-pre class="text-xs font-mono leading-relaxed text-foreground" style="white-space: pre">
+        <pre v-pre class="text-xs font-mono leading-relaxed text-foreground whitespace-pre">
   ┌─────────────────────────────────────────────────────────────────────┐
   │                        RWA TOKENIZATION STACK                       │
   └─────────────────────────────────────────────────────────────────────┘

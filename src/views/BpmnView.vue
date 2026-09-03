@@ -259,13 +259,14 @@ onUnmounted(() => {
   </div>
 </template>
 
-<style>
-/* BPMN.js styles */
-.bjs-container {
+<style scoped>
+/* bpmn-js renders its own DOM inside our container — reach it with :deep(),
+   never with an unscoped block (unscoped styles leak site-wide). */
+:deep(.bjs-container) {
   background-color: transparent !important;
 }
 
-.djs-container {
+:deep(.djs-container) {
   font-family: inherit !important;
 }
 </style>

@@ -162,11 +162,6 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Convert BPMN process diagrams into Microsoft Visio compatible formats. Free, privacy-first converter that runs entirely in your browser.',
     keywords: 'bpmn to visio, bpmn converter, visio converter, process diagram, bpmn export, microsoft visio, privacy-first',
   },
-  'visio-viewer': {
-    title: 'Visio Viewer Online - Open VSDX Files in Browser | Formatho',
-    description: 'View Microsoft Visio diagrams (.vsdx, .vsd) directly in your browser. Free, privacy-first Visio viewer that runs entirely client-side.',
-    keywords: 'visio viewer, visio file viewer, vsdx viewer, vsd viewer, microsoft visio, diagram viewer, visio online, privacy-first',
-  },
   'evm-converter': {
     title: 'Ethereum Unit Converter Online - Wei, Gwei, Ether | Formatho',
     description: 'Convert between Wei, Gwei, and Ether instantly. Essential tool for Ethereum developers. 100% client-side, privacy-first. Supports all EVM chains including L2s.',

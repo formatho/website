@@ -87,8 +87,7 @@ useSEO({
             <img
               :src="cloudIsAtRisk"
               alt="Cloud AI is a Security Risk"
-              class="absolute inset-0 w-full h-full object-cover border border-foreground/10"
-              style="filter: grayscale(100%) contrast(120%);"
+              class="absolute inset-0 w-full h-full object-cover border border-foreground/10 grayscale contrast-[1.2]"
               loading="lazy"
             />
           </div>
@@ -98,8 +97,7 @@ useSEO({
             <img
               :src="cloudIsAtRisk"
               alt="Privacy risk soft focus"
-              class="absolute inset-0 w-full h-full object-cover border border-foreground/10"
-              style="filter: grayscale(100%) blur(4px); opacity: 0.3;"
+              class="absolute inset-0 w-full h-full object-cover border border-foreground/10 grayscale blur-[4px] opacity-30"
               loading="lazy"
             />
           </div>
