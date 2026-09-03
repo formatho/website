@@ -22,6 +22,9 @@ Every tool page states what the tool does, how to use it step by step, and answe
 - [CORS Tester]: https://formatho.com/tools/cors-tester — Test cross-origin requests from your browser. See Access-Control-Allow-Origin, methods and headers.
 - [Cookie Security Analyzer]: https://formatho.com/tools/cookie-analyzer — Check Set-Cookie headers for Secure, HttpOnly, SameSite, prefixes and domain scope.
 - [JWT & Auth Toolkit]: https://formatho.com/tools/jwt-suite — Complete auth debugging suite: decode and verify JWTs, inspect claims, build OIDC URLs, decode SAML, generate tokens. All client-side.
+- [SAML Metadata Generator]: https://formatho.com/tools/saml-metadata-generator — Generate SP and IdP SAML 2.0 metadata XML: entityID, ACS/SLO endpoints, NameID format, certificates. Client-side.
+- [Certificate Fingerprint]: https://formatho.com/tools/certificate-fingerprint — Calculate SHA-1/256/384/512 fingerprints of X.509 certificates from PEM. For SAML, pinning, and TLS debugging.
+- [Key Format Converter]: https://formatho.com/tools/key-format-converter — Convert RSA keys between PKCS#1 and PKCS#8, public keys between SPKI and PKCS#1, PEM to DER hex. All client-side.
 - [SAML Request & Response Decoder]: https://formatho.com/tools/saml-decoder — Decode SAML AuthnRequest and Response messages - base64 plus raw-deflate - with pretty-printed XML. Essential for Okta, Entra ID and Shibboleth debugging. 100% client-side.
 - [OIDC Authorization URL & PKCE Generator]: https://formatho.com/tools/oidc-url-builder — Build OAuth 2.0 / OIDC authorize URLs with state, nonce and S256 PKCE code challenges. Works with Okta, Auth0, Entra ID, Keycloak.
 - [JWT Debugger]: https://formatho.com/tools/jwt — Decode and inspect JWT tokens instantly.
@@ -53,6 +56,7 @@ Every tool page states what the tool does, how to use it step by step, and answe
 - [JSON to TOML Converter]: https://formatho.com/tools/json-to-toml — json-to-toml - free, privacy-first, and 100% client-side.
 - [TOML to YAML Converter]: https://formatho.com/tools/toml-to-yaml — Convert TOML configuration files to YAML format.
 - [YAML to TOML Converter]: https://formatho.com/tools/yaml-to-toml — Convert YAML configuration files to TOML format.
+- [GZip Compress/Decompress]: https://formatho.com/tools/gzip — Compress to gzip/zlib/deflate and back, with Base64 in/out. Native browser streams, nothing uploaded.
 - [UUID Generator]: https://formatho.com/tools/uuid — Generate UUIDs (Universally Unique Identifiers). Supports v1, v4, and more.
 - [ULID Generator]: https://formatho.com/tools/ulid-generator — Generate ULIDs (Universally Unique Lexicographically Sortable Identifiers).
 - [Base64 String]: https://formatho.com/tools/base64 — Encode and decode Base64 strings instantly.

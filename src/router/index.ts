@@ -411,6 +411,30 @@ export const routes = [
         meta: routeMeta['jwt-suite']
       },
       {
+        path: '/tools/saml-metadata-generator',
+        name: 'saml-metadata-generator',
+        component: () => import('@/views/SamlMetadataGeneratorView.vue'),
+        meta: routeMeta['saml-metadata-generator']
+      },
+      {
+        path: '/tools/certificate-fingerprint',
+        name: 'certificate-fingerprint',
+        component: () => import('@/views/CertificateFingerprintView.vue'),
+        meta: routeMeta['certificate-fingerprint']
+      },
+      {
+        path: '/tools/key-format-converter',
+        name: 'key-format-converter',
+        component: () => import('@/views/KeyFormatConverterView.vue'),
+        meta: routeMeta['key-format-converter']
+      },
+      {
+        path: '/tools/gzip',
+        name: 'gzip',
+        component: () => import('@/views/GzipView.vue'),
+        meta: routeMeta['gzip']
+      },
+      {
         path: '/tools/saml-decoder',
         name: 'saml-decoder',
         component: () => import(/* webpackPrefetch: true */ '../views/SamlDecoderView.vue'),
