@@ -2596,3 +2596,104 @@ const r1csFAQs = {
 
 Object.assign(toolSEOContent, r1csContent)
 Object.assign(toolSpecificFAQ, r1csFAQs)
+
+
+/**
+ * SAML suite v2 — metadata generator, cert fingerprint, key converter, gzip.
+ */
+const samlSuiteContent = {
+  '/tools/saml-metadata-generator': {
+    intro: [
+      'SAML metadata is the XML contract between an SP and an IdP: entity IDs, endpoint URLs, NameID formats, and the signing certificates. Hand-writing it is error-prone — one wrong binding URI or a certificate pasted with headers breaks the trust exchange — and most online generators receive your real endpoints and certificates on a server.',
+      'This generator produces standards-compliant SAML 2.0 metadata for either side of the flow. Fill in the entity ID and endpoints, pick a NameID format, optionally paste your signing certificate (the PEM body is embedded into the KeyDescriptor), and download the XML. Element ordering follows the SAML metadata schema so strict parsers accept the result, and everything is assembled in your browser.'
+    ],
+    howTo: [
+      'Choose SP or IdP depending on which side you operate.',
+      'Enter your entityID (usually your metadata URL) and the ACS/SSO and SLO endpoints.',
+      'Paste your signing certificate PEM so partners can validate your signatures.',
+      'Download or copy the generated metadata and register it with your IdP or SP.'
+    ]
+  },
+  '/tools/certificate-fingerprint': {
+    intro: [
+      'Certificate fingerprints — the SHA-1 or SHA-256 hash of a certificate\u2019s DER encoding — are how certificates are identified in SAML key descriptors, SSH host key warnings, certificate pinning configs, and enterprise trust lists. When a partner asks for your cert thumbprint, they want this hash, not the PEM.',
+      'Paste a PEM certificate and this tool computes SHA-1, SHA-256, SHA-384, and SHA-512 fingerprints locally with the Web Crypto API, in both colon-separated and plain hex forms. The values match OpenSSL\u2019s x509 -fingerprint output exactly because they are computed over the same DER bytes.'
+    ],
+    howTo: [
+      'Paste the certificate PEM (BEGIN CERTIFICATE block).',
+      'Click calculate — all four digests appear instantly.',
+      'Copy the format your platform expects (colon hex or plain hex).',
+      'For SAML, the SHA-256 fingerprint is the modern default; SHA-1 appears in older setups.'
+    ]
+  },
+  '/tools/key-format-converter': {
+    intro: [
+      'RSA keys come in two PEM flavors that trip everyone up: PKCS#1 (BEGIN RSA PRIVATE KEY, the OpenSSL genrsa classic) and PKCS#8 (BEGIN PRIVATE KEY, what Java, AWS KMS imports, and modern tooling expect). Public keys have the same split — SPKI (BEGIN PUBLIC KEY) versus PKCS#1 (BEGIN RSA PUBLIC KEY). Loaders usually want one specific flavor and fail opaquely on the other.',
+      'Paste any of the four RSA key PEMs and this converter validates it with Web Crypto, then emits every other representation: both PEM flavors and the raw DER hex. The PKCS#1 \u2194 PKCS#8 re-wrapping is done with a local DER encoder — the key material is never transmitted and never leaves the tab.'
+    ],
+    howTo: [
+      'Paste your key PEM — the format is detected from the armor label.',
+      'Click convert — the key is first validated by importing it into Web Crypto.',
+      'Copy the flavor your target system expects (e.g. PKCS#8 for AWS KMS imports).',
+      'DER hex is available for tools that want raw bytes.'
+    ]
+  },
+  '/tools/gzip': {
+    intro: [
+      'Gzip and deflate are everywhere: HTTP content encoding, SAML Redirect bindings (raw deflate), API payloads, and log archives. Debugging usually means piping through gzip -d on a terminal — or pasting compressed data into an online tool that ships it to a server.',
+      'This compressor uses the browser\u2019s native CompressionStream and DecompressionStream — the same code Chrome ships for HTTP decoding — so nothing is installed and nothing is uploaded. Compress text to gzip, zlib, or raw deflate with Base64 output, or decompress any of the three from Base64 or hex, with byte counts and compression ratio.'
+    ],
+    howTo: [
+      'Pick compress or decompress, and the format (gzip, zlib, or raw deflate).',
+      'For SAML SAMLRequest/SAMLResponse values choose raw deflate.',
+      'Paste input — Base64 or hex is auto-detected when decompressing.',
+      'Copy the result; byte counts and ratio are shown below the output.'
+    ]
+  }
+}
+
+const samlSuiteFAQs = {
+  '/tools/saml-metadata-generator': [
+    {
+      question: 'What is a SAML metadata file?',
+      answer: 'An XML document describing a SAML entity to its partners: its entityID (unique name), endpoint URLs (where assertions are delivered for an SP, where login requests go for an IdP), supported NameID formats, and signing certificates in KeyDescriptor elements. SPs and IdPs exchange metadata to establish trust — often by uploading the file or pasting its URL into admin consoles like Okta, Entra ID, or Keycloak.'
+    },
+    {
+      question: 'Is the generated metadata complete enough for production?',
+      answer: 'It covers what a standard SP/IdP pairing needs: entityID, ACS/SSO and SLO endpoints, NameID format, signing certificate, and the WantAssertionsSigned/AuthnRequestsSigned flags, with schema-correct element ordering. Enterprise IdPs may also want organization details, contact persons, or encryption certificates — add those before production. The XML is a correct starting point, generated locally from your values.'
+    }
+  ],
+  '/tools/certificate-fingerprint': [
+    {
+      question: 'Why do SAML setups ask for a certificate fingerprint?',
+      answer: 'Instead of exchanging full certificates, many platforms identify trust by thumbprint — the SHA-1 or SHA-256 hash of the certificate\u2019s DER encoding. Okta, OneLogin, and Shibboleth admin screens display them prominently. Two fingerprints match if and only if the certificates are byte-identical, so a typo-free thumbprint exchange proves you are trusting the exact right key.'
+    },
+    {
+      question: 'Do these fingerprints match OpenSSL output?',
+      answer: 'Yes. OpenSSL computes its fingerprint over the DER encoding of the certificate, which is exactly what this tool hashes with the browser\u2019s Web Crypto digest. The colon-separated uppercase form matches openssl x509 -fingerprint; the lowercase plain hex matches what Java keytool and many cloud consoles display.'
+    }
+  ],
+  '/tools/key-format-converter': [
+    {
+      question: 'What is the difference between PKCS#1 and PKCS#8?',
+      answer: 'PKCS#1 (BEGIN RSA PRIVATE KEY) is the RSA-specific format from older OpenSSL: just the key components in a SEQUENCE. PKCS#8 (BEGIN PRIVATE KEY) is the generic envelope that wraps the same key with an algorithm identifier — which is why Java, AWS KMS, and most modern libraries standardize on it. The underlying key material is identical; only the DER wrapper differs, which is why conversion is lossless.'
+    },
+    {
+      question: 'Is it safe to paste a private key here?',
+      answer: 'The conversion runs entirely in this browser tab — parsing, DER re-wrapping, and validation via Web Crypto. There is no upload endpoint (verify in your network tab). That said, production private keys should live in HSMs or managed key stores; use this for the keys you are actively wiring into systems, and rotate anything you have pasted into tools you do not control.'
+    }
+  ],
+  '/tools/gzip': [
+    {
+      question: 'Which format does SAML Redirect binding use?',
+      answer: 'Raw deflate — the DEFLATE compressed stream without the gzip or zlib wrapper. That is why a SAMLRequest value base64-decoded and gunzipped fails while inflating with raw deflate works. Select deflate-raw in this tool to decompress or produce exactly those payloads.'
+    },
+    {
+      question: 'Does the browser\u2019s compression differ from gzip on the command line?',
+      answer: 'The compressed output may differ byte-for-byte from GNU gzip because compression levels and implementations vary — decompressed content is identical. For SAML and API debugging that is what matters; if you need a byte-identical gzip stream (rare, e.g. reproducible builds), use the command-line tool.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, samlSuiteContent)
+Object.assign(toolSpecificFAQ, samlSuiteFAQs)

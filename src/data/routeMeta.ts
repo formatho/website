@@ -342,6 +342,26 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'A complete JWT and authentication toolkit: decode and verify tokens, inspect claims, build OIDC authorize URLs, decode SAML, and generate secure tokens. All free and client-side.',
     keywords: 'jwt toolkit, jwt suite, auth tools, token debugging, oauth tools, oidc tools, saml tools, jwt verify, auth debugging',
   },
+  'saml-metadata-generator': {
+    title: 'SAML Metadata Generator - SP & IdP XML Online | Formatho',
+    description: 'Generate SAML 2.0 SP and IdP metadata XML online: entityID, ACS/SLO endpoints, NameID format, signing certificates. 100% client-side — nothing uploaded.',
+    keywords: 'saml metadata generator, sp metadata generator, idp metadata generator, saml 2.0 metadata xml, assertion consumer service, generate saml metadata online',
+  },
+  'certificate-fingerprint': {
+    title: 'X.509 Certificate Fingerprint Calculator Online | Formatho',
+    description: 'Calculate SHA-1, SHA-256, SHA-384 and SHA-512 fingerprints of X.509 certificates from PEM. For certificate pinning, SAML key descriptors, and TLS debugging. Client-side.',
+    keywords: 'certificate fingerprint calculator, x509 fingerprint, cert sha256 fingerprint online, pem fingerprint, saml certificate fingerprint, certificate thumbprint',
+  },
+  'key-format-converter': {
+    title: 'Private Key Format Converter - PKCS#1 to PKCS#8 | Formatho',
+    description: 'Convert RSA keys between PKCS#1 and PKCS#8, and public keys between SPKI and PKCS#1. PEM and DER hex output. Keys are validated and converted entirely in your browser.',
+    keywords: 'private key format converter, pkcs1 to pkcs8, pkcs8 to pkcs1, rsa private key converter, pem to der, begin rsa private key, key format online',
+  },
+  'gzip': {
+    title: 'GZip Compress & Decompress Online - Client-Side | Formatho',
+    description: 'Compress text to gzip/deflate and decompress gzip, zlib, or raw deflate data online. Base64 input/output for SAML and API debugging. Native browser compression, nothing uploaded.',
+    keywords: 'gzip decompress online, gzip compress online, deflate decode online, zlib decompress, base64 to gzip, gzip to base64, saml deflate decompress',
+  },
   'saml-decoder': {
     title: 'SAML Request & Response Decoder to XML | Formatho',
     description: 'Decode SAML AuthnRequest, LogoutRequest and Response messages. Base64 plus raw-deflate decompression with pretty-printed XML. 100% client-side - nothing is uploaded.',
