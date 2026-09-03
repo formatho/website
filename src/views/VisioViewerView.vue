@@ -283,7 +283,7 @@ function downloadSvg() {
               {{ p.name }} <span class="opacity-60">({{ p.shapes }})</span>
             </button>
           </div>
-          <div class="border border-border rounded-lg overflow-auto bg-white" style="max-height: 70vh">
+          <div class="border border-border rounded-lg overflow-auto bg-white max-h-[70vh]">
             <div
               v-html="current?.svg"
               :style="{ width: `${zoom * 100}%`, margin: '0 auto' }"

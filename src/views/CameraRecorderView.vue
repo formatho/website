@@ -98,8 +98,7 @@ onUnmounted(() => {
             ref="videoRef"
             autoplay
             playsinline
-            class="w-full rounded-lg bg-black"
-            style="max-height: 400px"
+            class="w-full rounded-lg bg-black max-h-[400px]"
           ></video>
           <div class="flex gap-2 flex-wrap">
             <Button @click="startCamera" variant="outline" size="sm" aria-label="Start camera">Start Camera</Button>
@@ -126,8 +125,7 @@ onUnmounted(() => {
           <video
             :src="recordedVideoUrl"
             controls
-            class="w-full rounded-lg"
-            style="max-height: 400px"
+            class="w-full rounded-lg max-h-[400px]"
           ></video>
         </CardContent>
       </Card>

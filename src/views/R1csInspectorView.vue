@@ -439,7 +439,7 @@ function downloadJson() {
       <Card v-else>
         <CardHeader><CardTitle class="text-lg">Witness values</CardTitle></CardHeader>
         <CardContent>
-          <div class="border border-border rounded-lg overflow-auto" style="max-height: 60vh">
+          <div class="border border-border rounded-lg overflow-auto max-h-[60vh]">
             <table class="w-full text-xs font-mono">
               <thead class="bg-muted/60 sticky top-0">
                 <tr><th class="text-left p-2">Index</th><th class="text-left p-2">Value</th></tr>

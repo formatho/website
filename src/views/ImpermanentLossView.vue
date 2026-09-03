@@ -201,7 +201,7 @@ const breakEvenIL = computed(() => {
     <Card class="mb-6">
       <CardHeader><CardTitle class="text-lg">Impermanent loss curve</CardTitle></CardHeader>
       <CardContent>
-        <div style="height: 320px; position: relative;">
+        <div class="h-[320px] relative">
           <Line :data="chartData" :options="chartOptions" />
         </div>
         <p class="text-xs text-muted-foreground mt-3 leading-relaxed">
