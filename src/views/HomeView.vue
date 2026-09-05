@@ -299,10 +299,10 @@ const _popularTools = [
             </p>
           </div>
           <h1 class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight" data-aos="fade-down" data-aos-delay="100" data-v-8d4ed633="">
-            Developer tools that run entirely in your browser. Now also a self-hosted MCP server for your AI agents.
+            Secure AI tool infrastructure, running on your premises
           </h1>
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="200" data-v-8d4ed633="">
-            Format SQL and YAML, decode JWTs, hash with Keccak-256, lint Helm charts, decode EVM calldata. Every tool runs locally — nothing uploads, no accounts. <RouterLink to="/runtime" class="text-foreground font-semibold underline underline-offset-4">Formatho Runtime</RouterLink> packages the same catalog as a Docker-deployable MCP server, so AI agents get the tools without payloads leaving your network.
+            Give your AI agents controlled access to developer, security, and EVM tooling through <RouterLink to="/runtime" class="text-foreground font-semibold underline underline-offset-4">Formatho Runtime</RouterLink> — a self-hosted MCP server with a permissioned tool registry and metadata-only audit logging. Tools execute as pure functions with zero network, filesystem, or secret access. Sensitive payloads never leave your infrastructure. The same catalog powers our browser tools for individual engineers.
           </p>
           <div class="flex flex-wrap gap-4 justify-center items-center mt-6" data-v-8d4ed633="">
             <div
@@ -317,7 +317,7 @@ const _popularTools = [
                   <path d="M9 12l2 2 4-4"></path>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Free, no sign-up </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> On-premise or VPC </span>
             </div>
             <div
               class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
@@ -332,7 +332,7 @@ const _popularTools = [
                   <line x1="12" y1="8" x2="12" y2="12"></line>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> No uploads, no telemetry </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Zero data egress by design </span>
             </div>
             <div
               class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
@@ -354,19 +354,19 @@ const _popularTools = [
                   <line x1="1" y1="14" x2="4" y2="14"></line>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> MCP server for agents </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Permissioned + audit-logged </span>
             </div>
           </div>
           <!-- Conversion CTA -->
           <div class="flex flex-col sm:flex-row gap-4 items-center mt-4" data-v-8d4ed633="">
-            <RouterLink to="/tools" data-v-8d4ed633="">
+            <RouterLink to="/runtime" data-v-8d4ed633="">
               <button class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg" data-v-8d4ed633="">
-                Browse All Tools
+                Deploy On-Premise
               </button>
             </RouterLink>
-            <RouterLink to="/runtime" data-v-8d4ed633="">
+            <RouterLink to="/tools" data-v-8d4ed633="">
               <button class="px-6 py-3 bg-foreground/10 border border-foreground text-foreground rounded-lg font-semibold text-lg hover:bg-foreground hover:text-background transition-colors" data-v-8d4ed633="">
-                Deploy the Runtime
+                Browse the Tool Catalog
               </button>
             </RouterLink>
           </div>
@@ -374,23 +374,23 @@ const _popularTools = [
           <!-- Social Proof Stats -->
           <div class="flex flex-wrap gap-8 justify-center items-center mt-8 text-center" data-aos="fade-up" data-aos-delay="150">
             <div>
-              <div class="text-3xl font-bold text-primary">140+</div>
-              <div class="text-xs text-muted-foreground">Browser tools, free</div>
-            </div>
-            <div class="w-px h-10 bg-foreground"></div>
-            <div>
               <div class="text-3xl font-bold text-primary">0</div>
-              <div class="text-xs text-muted-foreground">Servers processing your data</div>
+              <div class="text-xs text-muted-foreground">Data egress by design</div>
             </div>
             <div class="w-px h-10 bg-foreground"></div>
             <div>
               <div class="text-3xl font-bold text-primary">20+</div>
-              <div class="text-xs text-muted-foreground">Tools agents call via MCP</div>
+              <div class="text-xs text-muted-foreground">Agent-callable tools via MCP</div>
+            </div>
+            <div class="w-px h-10 bg-foreground"></div>
+            <div>
+              <div class="text-3xl font-bold text-primary">3</div>
+              <div class="text-xs text-muted-foreground">Pinned runtime dependencies</div>
             </div>
             <div class="w-px h-10 bg-foreground"></div>
             <div>
               <div class="text-3xl font-bold text-primary">100%</div>
-              <div class="text-xs text-muted-foreground">Client-side execution</div>
+              <div class="text-xs text-muted-foreground">Execution inside your perimeter</div>
             </div>
           </div>
 

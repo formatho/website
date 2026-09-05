@@ -13,8 +13,8 @@ export interface RouteMeta {
 
 export const routeMeta: Record<string, RouteMeta> = {
   'home': {
-    title: 'Formatho | Free Developer Tools & Private AI Agent Runtime',
-    description: '140+ free privacy-first developer tools in your browser - plus Formatho Runtime, a self-hosted MCP server giving AI agents the same tools privately. Zero tracking, no sign-up.',
+    title: 'Formatho | Secure On-Premise AI Tool Infrastructure for Agents',
+    description: 'Self-hosted MCP server giving AI agents controlled access to developer, security, and EVM tools - permissioned, audit-logged, zero data egress. Runs in your infrastructure; 140+ browser tools included.',
     keywords: 'developer tools, json formatter, base64 encoder, uuid generator, privacy-first tools, agent todo, online utilities, free developer tools, client-side tools',
   },
   'runtime': {
