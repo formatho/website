@@ -19,8 +19,8 @@ const footerCategories = Object.values(categoryMeta)
             <span class="text-lg font-bold text-foreground">Formatho</span>
           </RouterLink>
           <p class="text-sm text-muted-foreground leading-relaxed">
-            Privacy-first developer tools that run 100% client-side. Your data stays in your
-            browser.
+            Self-hosted MCP infrastructure for AI agents — plus 140+ developer
+            tools that run where your data lives.
           </p>
           <div class="flex items-center gap-4 social-icons-group justify-start">
             <a
@@ -69,15 +69,15 @@ const footerCategories = Object.values(categoryMeta)
           <ul class="space-y-3">
             <li class="flex items-center gap-2 text-sm text-muted-foreground">
               <Shield class="w-4 h-4 text-gray-900" />
-              100% Client-Side
+              Zero Data Egress
             </li>
             <li class="flex items-center gap-2 text-sm text-muted-foreground">
               <Zap class="w-4 h-4 text-gray-900" />
-              Lightning Fast
+              MCP Native
             </li>
             <li class="flex items-center gap-2 text-sm text-muted-foreground">
               <Heart class="w-4 h-4 text-gray-900" />
-              Privacy First
+              Permissioned &amp; Audited
             </li>
           </ul>
         </div>
@@ -96,10 +96,10 @@ const footerCategories = Object.values(categoryMeta)
             </li>
             <li>
               <RouterLink
-                to="/tools/uuid"
+                to="/tools/evm-converter"
                 class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
               >
-                UUID Generator
+                EVM Unit Converter
               </RouterLink>
             </li>
             <li>
@@ -142,13 +142,16 @@ const footerCategories = Object.values(categoryMeta)
         class="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4"
       >
         <p class="text-sm text-muted-foreground">
-          © {{ currentYear }} Formatho. Built with
+          © {{ currentYear }} Formatho. Private infrastructure for AI agents. Built with
           <Heart class="w-4 h-4 inline text-red-500" />
           for developers.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
           <RouterLink to="/about" class="hover:text-gray-900 transition-colors">
             About Us
+          </RouterLink>
+          <RouterLink to="/runtime" class="hover:text-gray-900 transition-colors">
+            Runtime
           </RouterLink>
           <RouterLink to="/security" class="hover:text-gray-900 transition-colors">
             Security
