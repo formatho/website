@@ -74,6 +74,13 @@ for (const [stack, desc] of Object.entries(stackDescriptions)) {
   lines.push(`- [${stack.replace('-', ' ')} tools]: ${BASE}/dev-tools/${stack} — ${desc}`)
 }
 lines.push('')
+lines.push('## Formatho Runtime (MCP for AI agents)')
+lines.push('Self-hosted MCP server exposing these tools to AI agents privately — Docker deployment, permissioned tool registry, metadata-only audit logging:')
+lines.push('- Formatho Runtime: ' + BASE + '/runtime')
+lines.push('- Docker image: docker.io/formatho/formatho-runtime')
+lines.push('- Source: https://github.com/formatho/formatho-runtime')
+lines.push('- MCP connect: docker run -i --rm -v formatho-audit:/data formatho/formatho-runtime')
+lines.push('')
 lines.push('## EVM Chain Tools')
 lines.push('Chain-specific developer tool pages with pre-configured RPC endpoints, chain IDs, and token addresses:')
 const chains = ['ethereum', 'arbitrum', 'base', 'optimism', 'polygon', 'bnb-chain', 'avalanche', 'zksync', 'linea', 'blast', 'mantle', 'cronos', 'ritual', 'hyperevm', 'katana', 'monad', 'robinhood', 'unichain', 'stable', 'tempo', 'world-chain']

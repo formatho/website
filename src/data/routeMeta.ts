@@ -13,9 +13,14 @@ export interface RouteMeta {
 
 export const routeMeta: Record<string, RouteMeta> = {
   'home': {
-    title: 'Formatho - Privacy-First Developer Tools',
-    description: 'Free privacy-first developer tools that run in your browser. Zero tracking, no sign-up, 100% client-side.',
+    title: 'Formatho | Free Developer Tools & Private AI Agent Runtime',
+    description: '140+ free privacy-first developer tools in your browser - plus Formatho Runtime, a self-hosted MCP server giving AI agents the same tools privately. Zero tracking, no sign-up.',
     keywords: 'developer tools, json formatter, base64 encoder, uuid generator, privacy-first tools, agent todo, online utilities, free developer tools, client-side tools',
+  },
+  'runtime': {
+    title: 'Formatho Runtime - Private Self-Hosted MCP Server for AI Agents',
+    description: 'Self-hosted MCP server with a permissioned tool registry, metadata-only audit logging, and Docker deployment. Developer, security, and EVM tools for AI agents - inside your infrastructure.',
+    keywords: 'private mcp server, self-hosted mcp, docker mcp server, enterprise mcp, mcp security, ai agent tools, ai tool sandbox, self-hosted ai tools, developer mcp tools, evm mcp tools',
   },
   'about': {
     title: 'About Us - Formatho',
