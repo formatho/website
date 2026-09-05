@@ -290,6 +290,48 @@ export const routes = [
         meta: routeMeta['contract-reader']
       },
       {
+        path: '/tools/calldata-decoder',
+        name: 'calldata-decoder',
+        component: () => import('@/views/CalldataDecoderView.vue'),
+        meta: routeMeta['calldata-decoder']
+      },
+      {
+        path: '/tools/create2-calculator',
+        name: 'create2-calculator',
+        component: () => import('@/views/Create2CalculatorView.vue'),
+        meta: routeMeta['create2-calculator']
+      },
+      {
+        path: '/tools/uniswap-math',
+        name: 'uniswap-math',
+        component: () => import('@/views/UniswapMathView.vue'),
+        meta: routeMeta['uniswap-math']
+      },
+      {
+        path: '/tools/eip1967-checker',
+        name: 'eip1967-checker',
+        component: () => import('@/views/Eip1967CheckerView.vue'),
+        meta: routeMeta['eip1967-checker']
+      },
+      {
+        path: '/tools/storage-slot-calculator',
+        name: 'storage-slot-calculator',
+        component: () => import('@/views/StorageSlotView.vue'),
+        meta: routeMeta['storage-slot-calculator']
+      },
+      {
+        path: '/tools/v4-hook-calculator',
+        name: 'v4-hook-calculator',
+        component: () => import('@/views/V4HookCalculatorView.vue'),
+        meta: routeMeta['v4-hook-calculator']
+      },
+      {
+        path: '/tools/tx-decoder',
+        name: 'tx-decoder',
+        component: () => import('@/views/TxDecoderView.vue'),
+        meta: routeMeta['tx-decoder']
+      },
+      {
         path: '/tools/function-selector',
         name: 'function-selector',
         component: () => import(/* webpackPrefetch: true */ '../views/FunctionSelectorView.vue'),
