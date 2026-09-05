@@ -770,11 +770,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Monitor and analyze A/B test results for landing page optimization',
   },
   'category-web3': {
-    title: 'Web3 & Blockchain Tools - Free Online | Formatho',
+    title: 'Web3 & Blockchain Tools - Free, MCP-Ready | Formatho',
     description: 'EVM contract reader, vanity address generator, multi-chain readers for Solana, Polkadot, Cardano, Cosmos. Keccak-256 hasher, ABI tools, ENS calculator. All free and client-side.',
   },
   'category-security': {
-    title: 'Security & Auth Tools - Free Online | Formatho',
+    title: 'Security & Auth Tools - Free, MCP-Ready | Formatho',
     description: 'Hash generators, JWT debugger, SAML decoder, OIDC builder, encryption, TOTP, password analysis. Free, private, 100% client-side.',
   },
   'category-data-formats': {
@@ -786,7 +786,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'SQL formatting and schema tools, Git and regex references, Docker conversion, Mermaid viewer, image compression. Free, private, client-side.',
   },
   'category-converters': {
-    title: 'Converters & Calculators - Free Online | Formatho',
+    title: 'Converters & Calculators - Free, MCP-Ready | Formatho',
     description: 'Unix timestamp, date-time, number base, color, case, temperature converters. Math, ETA, and percentage calculators. Free and client-side.',
   },
   'category-network': {

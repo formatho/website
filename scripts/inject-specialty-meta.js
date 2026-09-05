@@ -34,7 +34,7 @@ const chains = [
 ]
 console.log('EVM chains:')
 for (const [s,n,id] of chains) {
-  fix('evm-tools', s, `${n} Developer Tools - Free & Private | Formatho`,
+  fix('evm-tools', s, `${n} Developer Tools - Free, MCP-Ready | Formatho`,
     `Free ${n} developer tools: contract reader, vanity address generator, Keccak-256 hasher, ABI encoder, and unit converter. Works on ${n} (chain ID ${id}). 100% client-side.`,
     `https://formatho.com/evm-tools/${s}`)
 }
@@ -48,7 +48,7 @@ const stacks = [
 ]
 console.log('Personas:')
 for (const [s,n,d] of stacks) {
-  fix('dev-tools', s, `${n} - Free Online | Formatho`, d.slice(0,160), `https://formatho.com/dev-tools/${s}`)
+  fix('dev-tools', s, `${n} - Free, MCP-Ready | Formatho`, d.slice(0,160), `https://formatho.com/dev-tools/${s}`)
 }
 
 const cats = [
@@ -57,7 +57,7 @@ const cats = [
 ]
 console.log('Categories:')
 for (const [s,n] of cats) {
-  fix('category', s, `${n} - Free Online Tools | Formatho`,
+  fix('category', s, `${n} - Free Online Tools, MCP-Ready | Formatho`,
     `Free ${n} for developers. All tools run 100% client-side in your browser.`,
     `https://formatho.com/category/${s}`)
 }
