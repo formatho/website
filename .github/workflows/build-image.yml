@@ -242,6 +242,9 @@ jobs:
     needs: [generate-version, build]
     runs-on: ubuntu-latest
     environment: digital_ocean_formatho
+    permissions:
+      contents: read
+      packages: read
     if: github.ref == 'refs/heads/prod' && github.event_name == 'push' && inputs.skip_deploy != true
     steps:
       - name: Validate required secrets
