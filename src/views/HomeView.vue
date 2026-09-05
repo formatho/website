@@ -299,10 +299,13 @@ const _popularTools = [
             </p>
           </div>
           <h1 class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight" data-aos="fade-down" data-aos-delay="100" data-v-8d4ed633="">
-            Secure AI tool infrastructure, running on your premises
+            Private infrastructure for AI agents
           </h1>
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="200" data-v-8d4ed633="">
-            Give your AI agents controlled access to developer, security, and EVM tooling through <RouterLink to="/runtime" class="text-foreground font-semibold underline underline-offset-4">Formatho Runtime</RouterLink> — a self-hosted MCP server with a permissioned tool registry and metadata-only audit logging. Tools execute as pure functions with zero network, filesystem, or secret access. Sensitive payloads never leave your infrastructure. The same catalog powers our browser tools for individual engineers.
+            Give AI agents secure, controlled access to your developer, security, and EVM tools — entirely inside your infrastructure.
+          </p>
+          <p class="text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="250" data-v-8d4ed633="">
+            <RouterLink to="/runtime" class="text-foreground font-semibold underline underline-offset-4">Formatho Runtime</RouterLink> is a self-hosted MCP server with permissioned tools, sandboxed execution, and metadata-only audit logs. Sensitive data stays inside your network.
           </p>
           <div class="flex flex-wrap gap-4 justify-center items-center mt-6" data-v-8d4ed633="">
             <div
@@ -361,12 +364,12 @@ const _popularTools = [
           <div class="flex flex-col sm:flex-row gap-4 items-center mt-4" data-v-8d4ed633="">
             <RouterLink to="/runtime" data-v-8d4ed633="">
               <button class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg" data-v-8d4ed633="">
-                Deploy On-Premise
+                Deploy Formatho
               </button>
             </RouterLink>
             <RouterLink to="/tools" data-v-8d4ed633="">
               <button class="px-6 py-3 bg-foreground/10 border border-foreground text-foreground rounded-lg font-semibold text-lg hover:bg-foreground hover:text-background transition-colors" data-v-8d4ed633="">
-                Browse the Tool Catalog
+                Explore Tools
               </button>
             </RouterLink>
           </div>
