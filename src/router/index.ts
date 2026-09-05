@@ -68,12 +68,6 @@ export const routes = [
         meta: routeMeta['contact']
       },
       {
-        path: '/markdown',
-        name: 'markdown',
-        component: MarkdownView,
-        meta: routeMeta['markdown']
-      },
-      {
         path: '/tools/markdown',
         name: 'tools-markdown',
         component: MarkdownView,
@@ -446,20 +440,10 @@ export const routes = [
         meta: routeMeta['abi-encoder']
       },
       {
-        path: '/agent-identity-generator',
-        name: 'agent-identity-generator',
-        component: () => import(/* webpackPrefetch: true */ '../views/tools/AgentIdentityView.vue'),
-      },
-      {
         path: '/tools/agent-identity-generator',
         name: 'tools-agent-identity-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/tools/AgentIdentityView.vue'),
         meta: routeMeta['tools-agent-identity-generator']
-      },
-      {
-        path: '/local-token-counter',
-        name: 'local-token-counter',
-        component: () => import(/* webpackPrefetch: true */ '../views/LocalTokenCounterView.vue'),
       },
       {
         path: '/tools/local-token-counter',
