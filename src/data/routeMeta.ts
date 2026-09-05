@@ -23,9 +23,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'private mcp server, self-hosted mcp, docker mcp server, enterprise mcp, mcp security, ai agent tools, ai tool sandbox, self-hosted ai tools, developer mcp tools, evm mcp tools',
   },
   'about': {
-    title: 'About Us - Formatho',
-    description: 'Learn about Formatho - our mission to build privacy-first developer tools and AI agent orchestration solutions.',
-    keywords: 'about formatho, privacy-first tools, developer tools, open source',
+    title: 'About Formatho - Private Infrastructure for AI Agents',
+    description: 'Formatho builds self-hosted MCP infrastructure giving AI agents controlled, audited access to developer, security, and EVM tools - plus 140+ free browser tools that run entirely client-side.',
+    keywords: 'about formatho, private mcp server, ai agent infrastructure, self-hosted tools, on-premise ai',
   },
   'blogs': {
     title: 'Developer Guides, Tutorials, and AI Insights | Formatho Blog',

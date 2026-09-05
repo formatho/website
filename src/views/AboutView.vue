@@ -22,7 +22,7 @@ useSEO({
         <h1
           class="text-[18vw] md:text-[14vw] font-black tracking-tighter leading-none text-foreground/[0.04] whitespace-nowrap"
         >
-          PRIVACY FIRST
+          AGENT READY
         </h1>
       </div>
 
@@ -31,7 +31,7 @@ useSEO({
         <p
           class="text-[6vw] md:text-[4vw] font-black tracking-tighter leading-none text-foreground/[0.03] whitespace-nowrap -mb-4"
         >
-          DEVELOPER TOOLS ✧ ZERO UPLOADS ✧ NO SIGN-UPS
+          PRIVATE AI INFRASTRUCTURE ✧ ON-PREMISE ✧ ZERO EGRESS
         </p>
       </div>
 
@@ -50,7 +50,7 @@ useSEO({
               ABOUT FORMATHO
             </p>
             <h2 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none text-foreground">
-              The Privacy-First<br />Developer Toolkit
+              Private Infrastructure<br />for AI Agents
             </h2>
           </div>
 
@@ -60,13 +60,13 @@ useSEO({
               WHY WE BUILT THIS
             </p>
             <h3 class="text-2xl md:text-3xl font-bold tracking-tight leading-tight mb-6">
-              Our Premise: Tools Should Not Be Data Liabilities
+              Our Premise: Agents Should Not Be Data Liabilities
             </h3>
             <p class="text-muted-foreground leading-relaxed">
-              Formatho began with a simple, uncompromising premise: developer tools should not be data liabilities. Every day, developers paste production JWTs, smart contract ABIs, private keys, and proprietary configs into random websites that upload everything to a server. We built the alternative: over 100 cryptography, formatting, conversion, and web utilities that run strictly client-side. No server calls. No external APIs. Just clean, immediate execution.
+              Formatho began with a simple premise: developer tools should not be data liabilities. Every day, engineers paste production JWTs, smart contract calldata, and proprietary configs into sites that upload everything to a server. We built the alternative — 140+ tools that run entirely in your browser — and now we are extending that same principle to AI agents: Formatho Runtime is a self-hosted MCP server that gives agents controlled, audited access to the same tool catalog without payloads leaving your infrastructure.
             </p>
             <p class="text-muted-foreground leading-relaxed mt-4">
-              That premise still governs every tool we ship. Nothing you enter is uploaded, logged, or stored. When you close the tab, it is gone.
+              Whether the consumer is a human in a browser tab or an AI agent on your network, the principle is identical: tools execute where the data already lives, and nothing needs to leave.
             </p>
           </div>
         </div>
@@ -236,7 +236,7 @@ useSEO({
             ARCHITECTURE
           </p>
           <h3 class="text-3xl md:text-5xl font-black tracking-tighter leading-none">
-            Runs in Your Browser.<br />Governed by Privacy.
+            Runs Where Your Data Lives.<br />Governed by You.
           </h3>
         </div>
 
@@ -255,7 +255,7 @@ useSEO({
             </div>
             <div class="py-10 md:pl-16 md:border-l border-foreground/10">
               <p class="text-muted-foreground leading-relaxed">
-                When you close the tab, the state is gone.
+                Browser tools: state dies with the tab. Agent tools: state stays inside your perimeter.
               </p>
             </div>
           </div>
@@ -270,7 +270,7 @@ useSEO({
             </div>
             <div class="py-10 md:pl-16 md:border-l border-foreground/10">
               <p class="text-muted-foreground leading-relaxed">
-                No reliance on centralized cloud APIs for core formatting and transformations.
+                Browser: pure client-side JavaScript. Runtime: pure-function tools with zero network, filesystem, or secret access — enforced by the registry itself.
               </p>
             </div>
           </div>
@@ -285,7 +285,7 @@ useSEO({
             </div>
             <div class="py-10 md:pl-16 md:border-l border-foreground/10">
               <p class="text-muted-foreground leading-relaxed">
-                No accounts, no sign-ups, no usage limits. Tool inputs are never stored or transmitted.
+                Browser tools: free, no sign-up, no telemetry. Runtime: self-hosted Docker, per-agent API keys, policy-driven tool access, metadata-only audit logs.
               </p>
             </div>
           </div>
@@ -299,7 +299,7 @@ useSEO({
     <section class="py-6 border-b border-foreground/10 overflow-hidden bg-muted/30">
       <div class="marquee whitespace-nowrap">
         <span class="text-sm font-medium tracking-widest text-muted-foreground">
-          FREE FOREVER ✧ ZERO UPLOADS ✧ NO SIGN-UPS ✧ BUILD IN PRIVATE ✧ FREE FOREVER ✧ ZERO UPLOADS ✧ NO SIGN-UPS ✧ BUILD IN PRIVATE ✧ FREE FOREVER ✧ ZERO UPLOADS ✧ NO SIGN-UPS ✧ BUILD IN PRIVATE ✧
+          SELF-HOSTED MCP ✧ ZERO DATA EGRESS ✧ PERMISSIONED TOOLS ✧ AUDIT-LOGGED ✧ SELF-HOSTED MCP ✧ ZERO DATA EGRESS ✧ PERMISSIONED TOOLS ✧ AUDIT-LOGGED ✧ SELF-HOSTED MCP ✧ ZERO DATA EGRESS ✧ PERMISSIONED TOOLS ✧ AUDIT-LOGGED ✧
         </span>
       </div>
     </section>
@@ -311,27 +311,27 @@ useSEO({
       <div class="container mx-auto px-4 md:px-12">
         <div class="max-w-3xl">
           <h2 class="text-5xl md:text-7xl lg:text-[8rem] font-black tracking-tighter leading-none mb-8">
-            Build in<br />Private.
+            Deploy in<br />Private.
           </h2>
           <p class="text-muted-foreground leading-relaxed max-w-xl mb-10">
-            Whether you are a Web3 security researcher decoding complex tokens or a backend engineer parsing production payloads, Formatho gives you tools that treat your browser as the only server.
+            Whether you are a security researcher decoding tokens, a protocol engineer inspecting calldata, or a team giving AI agents safe tool access, Formatho runs where your data lives — in the browser or inside your network.
           </p>
           <p class="text-2xl md:text-3xl font-black tracking-widest leading-none mb-12">
             WELCOME TO FORMATHO.
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
             <RouterLink
-              to="/"
+              to="/runtime"
               class="inline-flex items-center justify-center rounded-xl bg-foreground px-8 py-4 text-sm font-medium tracking-widest text-background hover:bg-foreground/90 transition-colors"
+            >
+              DEPLOY THE RUNTIME
+            </RouterLink>
+            <RouterLink
+              to="/tools"
+              class="inline-flex items-center justify-center rounded-xl border border-foreground/20 px-8 py-4 text-sm font-medium tracking-widest text-foreground hover:bg-muted transition-colors"
             >
               EXPLORE TOOLS
             </RouterLink>
-            <a
-              href="mailto:support@formatho.com"
-              class="inline-flex items-center justify-center rounded-xl border border-foreground/20 px-8 py-4 text-sm font-medium tracking-widest text-foreground hover:bg-muted transition-colors"
-            >
-              CONTACT
-            </a>
           </div>
         </div>
       </div>
