@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
-import { useHead } from '@vueuse/head'
+import { useHead } from '@unhead/vue'
 import { ArrowLeft } from 'lucide-vue-next'
 import { fetchBlogPost, type BlogPost } from '../data/strapi'
 import { getBlogSEO } from '../data/blog-seo-overrides'
