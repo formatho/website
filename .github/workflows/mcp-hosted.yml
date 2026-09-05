@@ -6,6 +6,9 @@ name: MCP hosted tier (mcp.formatho.com)
 # manually. Idempotent — safe to run repeatedly.
 
 on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/mcp-hosted.yml']
   schedule:
     - cron: '0 */6 * * *' # every 6h: pull :latest (rebuilt on every runtime release)
   workflow_dispatch:
