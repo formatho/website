@@ -629,7 +629,7 @@ const activeTab = ref<Tab>('erc20')
           <div v-for="c in deployed" :key="c.id"
             class="flex flex-wrap items-center gap-3 p-3 rounded-lg border bg-card hover:shadow-sm transition-shadow">
             <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
-              :style="{ backgroundColor: CONTRACT_DEFS[c.type]?.color + '20' ?? '#99999920' }">
+              :style="{ backgroundColor: (CONTRACT_DEFS[c.type]?.color ?? '#999999') + '20' }">
               <component :is="CONTRACT_DEFS[c.type]?.icon ?? Code2" class="w-5 h-5"
                 :style="{ color: CONTRACT_DEFS[c.type]?.color ?? '#999' }" />
             </div>

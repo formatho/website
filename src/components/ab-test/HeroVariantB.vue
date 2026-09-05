@@ -39,7 +39,7 @@ const stats = {
       <div class="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto">
         
         <!-- Logo + Title -->
-        <div class="flex items-center gap-4" data-aos="fade-down">
+        <div class="flex items-center gap-4">
           <img
             src="/logo.png?v=2"
             alt="Formatho"
@@ -51,12 +51,12 @@ const stats = {
         </div>
         
         <!-- Tagline -->
-        <p class="text-2xl md:text-3xl font-semibold text-foreground" data-aos="fade-down" data-aos-delay="100">
+        <p class="text-2xl md:text-3xl font-semibold text-foreground">
           The Privacy-First Developer Toolkit
         </p>
 
         <!-- Social Proof Bar -->
-        <div class="w-full max-w-3xl" data-aos="fade-up" data-aos-delay="150">
+        <div class="w-full max-w-3xl">
           <div class="social-proof-bar">
             <span class="badge">🏆 TRUSTED BY 50,000+ DEVELOPERS WORLDWIDE</span>
             <div class="stats-grid">
@@ -81,13 +81,13 @@ const stats = {
         </div>
         
         <!-- Shortened Description -->
-        <p class="text-base md:text-lg text-muted-foreground max-w-2xl" data-aos="fade-down" data-aos-delay="200">
+        <p class="text-base md:text-lg text-muted-foreground max-w-2xl">
           Fast, secure, privacy-first collection of developer utilities — 
           <strong>your data never leaves your browser.</strong>
         </p>
         
         <!-- Search Bar -->
-        <div class="w-full max-w-2xl" data-aos="fade-up" data-aos-delay="250">
+        <div class="w-full max-w-2xl">
           <div class="relative">
             <Input
               class="w-full pl-12 pr-4 py-6 text-lg glass-card border-primary/20 focus:border-primary/50"
@@ -100,7 +100,7 @@ const stats = {
         </div>
 
         <!-- Popular Tools Quick Links -->
-        <div class="flex flex-wrap items-center justify-center gap-3 mt-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-4">
           <span class="text-sm text-muted-foreground">Popular now:</span>
           <RouterLink
             v-for="tool in popularTools"

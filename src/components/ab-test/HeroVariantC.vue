@@ -37,13 +37,13 @@ const testimonial = {
       <div class="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
         
         <!-- Pain Point Headline -->
-        <div class="alert-banner" data-aos="fade-down">
+        <div class="alert-banner">
           <span class="icon">⚠️</span>
           <span class="text">TIRED OF UPLOADING YOUR DATA TO RANDOM WEBSITES?</span>
         </div>
 
         <!-- Main Value Prop Card -->
-        <div class="value-prop-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="value-prop-card">
           <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Stop compromising your data.
           </h1>
@@ -55,7 +55,7 @@ const testimonial = {
         </div>
 
         <!-- Dual CTAs -->
-        <div class="cta-group" data-aos="fade-up" data-aos-delay="200">
+        <div class="cta-group">
           <RouterLink to="/tools" class="cta-primary">
             <span class="icon">🔧</span>
             START USING FREE TOOLS
@@ -71,7 +71,7 @@ const testimonial = {
         </div>
 
         <!-- Tool Categories Grid -->
-        <div class="tool-categories-grid" data-aos="fade-up" data-aos-delay="300">
+        <div class="tool-categories-grid">
           <div 
             v-for="cat in topCategories" 
             :key="cat.name" 
@@ -83,7 +83,7 @@ const testimonial = {
         </div>
 
         <!-- Testimonial -->
-        <div class="testimonial-quote" data-aos="fade-up" data-aos-delay="400">
+        <div class="testimonial-quote">
           <span class="quote-icon">💬</span>
           <blockquote class="quote">"{{ testimonial.quote }}"</blockquote>
           <cite class="author">— {{ testimonial.author }}, {{ testimonial.year }}</cite>

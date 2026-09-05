@@ -94,8 +94,6 @@ const isButtonDisabled = computed(() => {
   <div
     v-if="variant === 'hero'"
     :class="['w-full', className]"
-    data-aos="fade-up"
-    data-aos-delay="300"
   >
     <div v-if="!success" class="space-y-3">
       <p class="text-sm text-center text-muted-foreground">
@@ -128,7 +126,6 @@ const isButtonDisabled = computed(() => {
   <div
     v-else-if="variant === 'card'"
     :class="['glass-card p-6 md:p-8', className]"
-    data-aos="fade-up"
   >
     <div v-if="!success" class="space-y-4">
       <div class="flex items-center gap-3">
