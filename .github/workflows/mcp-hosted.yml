@@ -49,8 +49,8 @@ jobs:
             NGINX_CID=$(docker ps -qf name=nginx_nginx | head -1)
             reload_nginx() { docker exec "$NGINX_CID" nginx -s reload; }
 
-            # ---------- 2. TLS cert (idempotent) ----------
-            if [ ! -f "$HOME/.mcp-cert-done" ]; then
+            # ---------- 2. TLS cert (idempotent: keyed on the real cert file) ----------
+            if ! docker exec "$NGINX_CID" sh -c '[ -f /etc/letsencrypt/live/mcp.formatho.com/fullchain.pem ]' 2>/dev/null; then
               echo 'c2VydmVyIHsKICAgIGxpc3RlbiA4MDsKICAgIGxpc3RlbiBbOjpdOjgwOwogICAgc2VydmVyX25hbWUgbWNwLmZvcm1hdGhvLmNvbTsKICAgIGxvY2F0aW9uIC8ud2VsbC1rbm93bi9hY21lLWNoYWxsZW5nZS8geyByb290IC92YXIvd3d3L2NlcnRib3Q7IH0KICAgIGxvY2F0aW9uIC8geyByZXR1cm4gMjAwICdmb3JtYXRobyBtY3AgLSBjZXJ0IHByb3Zpc2lvbmluZyc7IGFkZF9oZWFkZXIgQ29udGVudC1UeXBlIHRleHQvcGxhaW47IH0KfQo=' | base64 -d > "$NGINX_CONF_DIR/45-mcp.conf"
               reload_nginx
               sleep 2
