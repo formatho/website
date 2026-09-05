@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Copy, Check, KeyRound, PenLine, ShieldCheck, AlertCircle } from 'lucide-vue-next'
@@ -256,25 +257,15 @@ const selectClass = 'flex h-10 w-full rounded-md border border-input bg-backgrou
     </div>
 
     <!-- Tabs -->
-    <div class="flex gap-2" role="tablist" aria-label="RSA operations">
-      <button
-        v-for="t in tabs"
-        :key="t.id"
-        role="tab"
-        :aria-selected="tab === t.id"
-        class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border transition-colors"
-        :class="tab === t.id
-          ? 'bg-primary text-primary-foreground border-primary'
-          : 'bg-background border-border hover:bg-muted'"
-        @click="tab = t.id"
-      >
-        <component :is="t.icon" class="w-4 h-4" />
-        {{ t.label }}
-      </button>
-    </div>
+    <Tabs v-model="tab">
+      <TabsList aria-label="RSA operations">
+        <TabsTrigger v-for="t in tabs" :key="t.id" :value="t.id" class="flex items-center gap-2">
+          <component :is="t.icon" class="w-4 h-4" />
+          {{ t.label }}
+        </TabsTrigger>
+      </TabsList>
 
-    <!-- GENERATE -->
-    <template v-if="tab === 'generate'">
+      <TabsContent value="generate">
       <Card>
         <CardHeader><CardTitle class="text-lg">Generate RSA key pair</CardTitle></CardHeader>
         <CardContent class="space-y-4">
@@ -324,10 +315,8 @@ const selectClass = 'flex h-10 w-full rounded-md border border-input bg-backgrou
           </CardContent>
         </Card>
       </div>
-    </template>
-
-    <!-- SIGN -->
-    <template v-else-if="tab === 'sign'">
+      </TabsContent>
+      <TabsContent value="sign">
       <Card>
         <CardHeader><CardTitle class="text-lg">Sign a message with your RSA private key</CardTitle></CardHeader>
         <CardContent class="space-y-4">
@@ -386,10 +375,8 @@ const selectClass = 'flex h-10 w-full rounded-md border border-input bg-backgrou
           </p>
         </CardContent>
       </Card>
-    </template>
-
-    <!-- VERIFY -->
-    <template v-else>
+      </TabsContent>
+      <TabsContent value="verify">
       <Card>
         <CardHeader><CardTitle class="text-lg">Verify an RSA signature</CardTitle></CardHeader>
         <CardContent class="space-y-4">
@@ -450,6 +437,7 @@ const selectClass = 'flex h-10 w-full rounded-md border border-input bg-backgrou
           </div>
         </CardContent>
       </Card>
-    </template>
+      </TabsContent>
+    </Tabs>
   </div>
 </template>

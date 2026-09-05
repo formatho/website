@@ -22,11 +22,13 @@ const handleClick = () => {
 <template>
   <button
     @click="handleClick"
+    :role="'tab'"
+    :aria-selected="isActive"
     :class="[
-      'inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-slate-900 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+      'inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
       isActive
-        ? 'bg-slate-700 text-white shadow-sm'
-        : 'text-slate-400 hover:text-white hover:bg-slate-700/50'
+        ? 'bg-primary text-primary-foreground shadow-sm'
+        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
     ]"
   >
     <slot />

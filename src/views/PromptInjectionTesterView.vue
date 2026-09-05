@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Copy, Check, ShieldAlert, ShieldCheck, ScanSearch, FlaskConical, ListChecks, AlertTriangle } from 'lucide-vue-next'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
@@ -202,23 +203,15 @@ const defenseProgress = computed(() => defenses.value.filter((d) => d.checked).l
       </div>
     </div>
 
-    <div class="flex gap-2 flex-wrap" role="tablist" aria-label="Prompt injection testing">
-      <button
-        v-for="t in tabs"
-        :key="t.id"
-        role="tab"
-        :aria-selected="tab === t.id"
-        class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border transition-colors"
-        :class="tab === t.id ? 'bg-primary text-primary-foreground border-primary' : 'bg-background border-border hover:bg-muted'"
-        @click="tab = t.id"
-      >
-        <component :is="t.icon" class="w-4 h-4" />
-        {{ t.label }}
-      </button>
-    </div>
+    <Tabs v-model="tab">
+      <TabsList aria-label="Prompt injection testing">
+        <TabsTrigger v-for="t in tabs" :key="t.id" :value="t.id" class="flex items-center gap-2">
+          <component :is="t.icon" class="w-4 h-4" />
+          {{ t.label }}
+        </TabsTrigger>
+      </TabsList>
 
-    <!-- SCAN -->
-    <template v-if="tab === 'scan'">
+      <TabsContent value="scan">
       <Card>
         <CardHeader><CardTitle class="text-lg">Scan content for injection patterns</CardTitle></CardHeader>
         <CardContent class="space-y-4">
@@ -278,10 +271,8 @@ const defenseProgress = computed(() => defenses.value.filter((d) => d.checked).l
           <p class="font-mono text-[11px] bg-background/70 border border-border/60 rounded px-2 py-1 break-all">…{{ f.excerpt }}…</p>
         </div>
       </div>
-    </template>
-
-    <!-- PAYLOADS -->
-    <template v-else-if="tab === 'payloads'">
+      </TabsContent>
+      <TabsContent value="payloads">
       <Card v-for="group in payloadGroups" :key="group.name">
         <CardHeader>
           <CardTitle class="text-lg">{{ group.name }}</CardTitle>
@@ -306,10 +297,8 @@ const defenseProgress = computed(() => defenses.value.filter((d) => d.checked).l
           </div>
         </CardContent>
       </Card>
-    </template>
-
-    <!-- CHECKLIST -->
-    <template v-else>
+      </TabsContent>
+      <TabsContent value="checklist">
       <Card :class="lethalTrifecta ? 'border-red-500/50' : ''">
         <CardHeader>
           <CardTitle class="text-lg">The Lethal Trifecta</CardTitle>
@@ -355,6 +344,7 @@ const defenseProgress = computed(() => defenses.value.filter((d) => d.checked).l
           </label>
         </CardContent>
       </Card>
-    </template>
+      </TabsContent>
+    </Tabs>
   </div>
 </template>

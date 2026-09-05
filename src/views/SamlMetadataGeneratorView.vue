@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Copy, Check, FileKey2, AlertCircle, Download } from 'lucide-vue-next'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
@@ -129,19 +130,18 @@ function download() {
       </div>
     </div>
 
-    <div class="flex gap-2" role="tablist" aria-label="Metadata type">
-      <button
-        v-for="s in (['sp', 'idp'] as Side[])"
-        :key="s"
-        role="tab"
-        :aria-selected="side === s"
-        class="px-4 py-2 rounded-lg text-sm font-semibold border transition-colors uppercase"
-        :class="side === s ? 'bg-primary text-primary-foreground border-primary' : 'bg-background border-border hover:bg-muted'"
-        @click="side = s"
-      >
-        {{ s === 'sp' ? 'Service Provider (SP)' : 'Identity Provider (IdP)' }}
-      </button>
-    </div>
+    <Tabs v-model="side">
+      <TabsList aria-label="Metadata type">
+        <TabsTrigger
+          v-for="s in (['sp', 'idp'] as Side[])"
+          :key="s"
+          :value="s"
+          class="uppercase"
+        >
+          {{ s === 'sp' ? 'Service Provider (SP)' : 'Identity Provider (IdP)' }}
+        </TabsTrigger>
+      </TabsList>
+    </Tabs>
 
     <Card>
       <CardHeader><CardTitle class="text-lg">{{ side === 'sp' ? 'SP' : 'IdP' }} details</CardTitle></CardHeader>

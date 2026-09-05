@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Copy, Check, Package, ArrowRightLeft, AlertCircle } from 'lucide-vue-next'
+import { Package, ArrowRightLeft, AlertCircle } from 'lucide-vue-next'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { CopyButton } from '@/components/ui/copy-button'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
@@ -31,7 +33,6 @@ const input = ref('')
 const base64Out = ref(true)
 const output = ref('')
 const error = ref('')
-const copied = ref(false)
 const stat = ref({ inBytes: 0, outBytes: 0 })
 
 function streamSupported(): boolean {
@@ -88,15 +89,6 @@ const ratio = computed(() => {
   return `${Math.round((1 - outBytes / inBytes) * 100)}% smaller`
 })
 
-async function copyOut() {
-  try {
-    await navigator.clipboard.writeText(output.value)
-    copied.value = true
-    setTimeout(() => (copied.value = false), 1500)
-  } catch {
-    /* clipboard unavailable */
-  }
-}
 </script>
 
 <template>
@@ -111,20 +103,19 @@ async function copyOut() {
       </div>
     </div>
 
-    <div class="flex gap-2 flex-wrap" role="tablist" aria-label="Compression mode">
-      <button
-        v-for="m in (['compress', 'decompress'] as Mode[])"
-        :key="m"
-        role="tab"
-        :aria-selected="mode === m"
-        class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border capitalize transition-colors"
-        :class="mode === m ? 'bg-primary text-primary-foreground border-primary' : 'bg-background border-border hover:bg-muted'"
-        @click="mode = m"
-      >
-        <ArrowRightLeft class="w-4 h-4" />
-        {{ m }}
-      </button>
-    </div>
+    <Tabs v-model="mode">
+      <TabsList aria-label="Compression mode">
+        <TabsTrigger
+          v-for="m in (['compress', 'decompress'] as Mode[])"
+          :key="m"
+          :value="m"
+          class="capitalize"
+        >
+          <ArrowRightLeft class="w-4 h-4" />
+          {{ m }}
+        </TabsTrigger>
+      </TabsList>
+    </Tabs>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
       <Card>
@@ -159,9 +150,7 @@ async function copyOut() {
       <Card>
         <CardHeader class="flex flex-row items-center justify-between space-y-0">
           <CardTitle class="text-lg">{{ mode === 'compress' ? 'Compressed output' : 'Decompressed text' }}</CardTitle>
-          <Button v-if="output" variant="ghost" size="sm" aria-label="Copy output" @click="copyOut">
-            <Check v-if="copied" class="w-4 h-4" /><Copy v-else class="w-4 h-4" />
-          </Button>
+          <CopyButton v-if="output" :text="output" variant="ghost" aria-label="Copy output" />
         </CardHeader>
         <CardContent>
           <pre class="font-mono text-xs whitespace-pre-wrap break-all p-3 border border-border rounded-lg bg-muted/40 min-h-48 max-h-96 overflow-auto">{{ output || '—' }}</pre>
