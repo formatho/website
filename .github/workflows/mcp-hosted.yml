@@ -42,6 +42,7 @@ jobs:
             cat > "$RUNTIME_DIR/docker-compose.yml" <<'YAML'
             services:
               mcp-runtime:
+                container_name: mcp-runtime
                 image: formatho/formatho-runtime:latest
                 # no published ports: reachable only inside the swarm network,
                 # the front proxy (nginx) fronts it as mcp.formatho.com
@@ -62,12 +63,16 @@ jobs:
                   resources:
                     limits: { memory: 256M, cpus: "0.5" }
             networks:
-              app-network:
+              formatho_net:
                 external: true
             volumes:
               mcp-audit:
             YAML
             sed -i 's/^            //' "$RUNTIME_DIR/docker-compose.yml"
+            # resolve the real (stack-prefixed) overlay network name
+            NET_NAME=$(docker network ls --filter driver=overlay --format '{{.Name}}' | grep -m1 'app-network')
+            sed -i "s/formatho_net/$NET_NAME/" "$RUNTIME_DIR/docker-compose.yml"
+            echo "joining overlay network: $NET_NAME"
             docker pull formatho/formatho-runtime:latest
             docker compose -f "$RUNTIME_DIR/docker-compose.yml" up -d --remove-orphans
 
