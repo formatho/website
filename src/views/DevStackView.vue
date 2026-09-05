@@ -12,7 +12,7 @@ const stack = computed(() => devStacks.find(s => s.slug === route.params.stack))
 const siblings = computed(() => devStacks.filter(s => s.slug !== stack.value?.slug))
 
 useSEO({
-  title: stack.value ? `${stack.value.name} - Free Online Tools, MCP-Ready | Formatho` : 'Developer Tools | Formatho',
+  title: stack.value ? `${stack.value.name} Tools - Secure MCP for AI Agents | Formatho` : 'Developer Tools | Formatho',
   description: stack.value ? `${stack.value.blurb} Free, private, 100% client-side.` : 'Free developer tools.',
   keywords: stack.value ? [stack.value.name.toLowerCase(), `${stack.value.slug} tools`] : ['developer tools'],
   ogType: 'website',

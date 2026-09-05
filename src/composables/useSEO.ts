@@ -190,7 +190,7 @@ export function useSEO(config?: SEOConfig) {
     if (toolInfo) {
       // Tool page SEO
       const { tool, category } = toolInfo
-      const title = `${tool.name} - Free Online Tool, MCP-Ready | Formatho`
+      const title = `${tool.name} - Secure MCP Tool for AI Agents | Formatho`
       const description = `${tool.description}. Free, privacy-first ${tool.name} tool. No data leaves your browser. 100% client-side processing.`
       const keywords = [
         tool.name,

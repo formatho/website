@@ -34,21 +34,21 @@ const chains = [
 ]
 console.log('EVM chains:')
 for (const [s,n,id] of chains) {
-  fix('evm-tools', s, `${n} Developer Tools - Free, MCP-Ready | Formatho`,
-    `Free ${n} developer tools: contract reader, vanity address generator, Keccak-256 hasher, ABI encoder, and unit converter. Works on ${n} (chain ID ${id}). 100% client-side.`,
+  fix('evm-tools', s, `${n} Developer Tools - Secure MCP for AI Agents | Formatho`,
+    `Secure ${n} developer tools: contract reader, vanity address generator, Keccak-256 hasher, ABI encoder, and unit converter. Works on ${n} (chain ID ${id}). 100% client-side.`,
     `https://formatho.com/evm-tools/${s}`)
 }
 
 const stacks = [
-  ['owasp','OWASP Security Tools','Free OWASP security tools: headers analyzer, CSP generator/evaluator, CORS tester, cookie analyzer, JWT debugger. 100% client-side.'],
-  ['soc2','Open Source SOC 2 Compliance Tools','Free open-source SOC 2 compliance tools: readiness checklist, policy generator, TLS checker. 100% client-side - audit evidence never leaves your browser. Source on GitHub.'],
+  ['owasp','OWASP Security Tools','OWASP security tools: headers analyzer, CSP generator/evaluator, CORS tester, cookie analyzer, JWT debugger. 100% client-side.'],
+  ['soc2','Open Source SOC 2 Compliance Tools','Open-source SOC 2 compliance tools: readiness checklist, policy generator, TLS checker. 100% client-side - audit evidence never leaves your browser. Source on GitHub.'],
   ['sap','SAP Developer Tools','Tools for SAP PI/PO, CPI, BTP, Gateway: XML formatter, JSON validator, CSV converter, JWT debugger, diff checker.'],
   ['okta','Okta Developer Tools','Debug Okta auth: SAML decoder, OIDC builder, JWT verifier, TOTP generator, cookie analyzer, CORS tester.'],
   ['ping-federate','Ping Federate Tools','Debug Ping Federate: SAML decoder, OIDC builder, JWT verifier, hash generator, TOTP generator.'],
 ]
 console.log('Personas:')
 for (const [s,n,d] of stacks) {
-  fix('dev-tools', s, `${n} - Free, MCP-Ready | Formatho`, d.slice(0,160), `https://formatho.com/dev-tools/${s}`)
+  fix('dev-tools', s, `${n} Tools - Secure MCP for AI Agents | Formatho`, d.slice(0,160), `https://formatho.com/dev-tools/${s}`)
 }
 
 const cats = [
@@ -57,8 +57,8 @@ const cats = [
 ]
 console.log('Categories:')
 for (const [s,n] of cats) {
-  fix('category', s, `${n} - Free Online Tools, MCP-Ready | Formatho`,
-    `Free ${n} for developers. All tools run 100% client-side in your browser.`,
+  fix('category', s, `${n} Tools - Secure MCP for AI Agents | Formatho`,
+    `Secure ${n} for developers. All tools run 100% client-side in your browser.`,
     `https://formatho.com/category/${s}`)
 }
 

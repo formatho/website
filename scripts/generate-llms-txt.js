@@ -49,7 +49,7 @@ lines.push('# Formatho')
 lines.push('')
 lines.push('> Secure AI tool infrastructure: Formatho Runtime is a self-hosted MCP server giving AI agents controlled access to developer, security, and EVM tools - permissioned, audit-logged, zero data egress. Runs in your VPC or on-premise. A hosted tier is available at https://mcp.formatho.com/mcp.')
 lines.push('')
-lines.push('The same tool catalog powers 140+ free browser tools at formatho.com - every tool page states what it does, how to use it, and how AI agents can call it via MCP. Free, private, runs in your browser; nothing you enter is uploaded, logged, or stored.')
+lines.push('The same tool catalog powers 140+ free browser tools at formatho.com - every tool page states what it does, how to use it, and how AI agents can call it via MCP. Private and secure, runs in your browser; nothing you enter is uploaded, logged, or stored.')
 lines.push('')
 lines.push('## Tools')
 for (const cat of categories) {
