@@ -63,10 +63,10 @@ useSEO({
               Our Premise: Agents Should Not Be Data Liabilities
             </h3>
             <p class="text-muted-foreground leading-relaxed">
-              Formatho began with a simple premise: developer tools should not be data liabilities. Every day, engineers paste production JWTs, smart contract calldata, and proprietary configs into sites that upload everything to a server. We built the alternative — 140+ tools that run entirely in your browser — and now we are extending that same principle to AI agents: Formatho Runtime is a self-hosted MCP server that gives agents controlled, audited access to the same tool catalog without payloads leaving your infrastructure.
+              Formatho started with a simple premise: developer tools should not be data liabilities. Every day, engineers paste production JWTs, smart contract calldata, and proprietary configs into sites that upload everything to a server. We built the alternative: a catalog of browser tools where every operation runs locally, nothing uploaded, nothing logged. We are now extending the same principle to AI agents. Formatho Runtime is a self-hosted MCP server that gives agents controlled, audited access to the same tools without payloads ever leaving your infrastructure.
             </p>
             <p class="text-muted-foreground leading-relaxed mt-4">
-              Whether the consumer is a human in a browser tab or an AI agent on your network, the principle is identical: tools execute where the data already lives, and nothing needs to leave.
+              Whether the user is a person in a browser tab or an AI agent on your network, the principle stays the same: tools run where the data already lives, so nothing needs to leave.
             </p>
           </div>
         </div>
