@@ -47,10 +47,10 @@ const testimonials = ref<Testimonial[]>([
     <div class="max-w-6xl mx-auto">
       <!-- Section Header -->
       <div class="text-center mb-12">
-        <h2 class="text-2xl md:text-3xl font-bold mb-4" data-aos="fade-down">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">
           Loved by Developers Worldwide
         </h2>
-        <p class="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto" data-aos="fade-down" data-aos-delay="50">
+        <p class="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
           Join thousands of developers who trust Formatho for their daily productivity needs
         </p>
       </div>
@@ -61,7 +61,6 @@ const testimonials = ref<Testimonial[]>([
           v-for="(testimonial, index) in testimonials"
           :key="testimonial.id"
           class="bg-white border border-gray-100 rounded-lg p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.05)]"
-          data-aos="fade-up"
           :data-aos-delay="index * 100"
         >
           <!-- Quote -->
@@ -111,19 +110,19 @@ const testimonials = ref<Testimonial[]>([
       <!-- Stats/Social Proof -->
       <div class="mt-12 pt-12 border-t border-border/50">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div data-aos="fade-up" data-aos-delay="0">
+          <div>
             <div class="text-3xl md:text-4xl font-bold text-foreground mb-2">15K+</div>
             <div class="text-sm text-muted-foreground">Monthly Active Users</div>
           </div>
-          <div data-aos="fade-up" data-aos-delay="100">
+          <div>
             <div class="text-3xl md:text-4xl font-bold text-foreground mb-2">Free</div>
             <div class="text-sm text-muted-foreground">Developer Tools</div>
           </div>
-          <div data-aos="fade-up" data-aos-delay="200">
+          <div>
             <div class="text-3xl md:text-4xl font-bold text-foreground mb-2">99.9%</div>
             <div class="text-sm text-muted-foreground">Uptime</div>
           </div>
-          <div data-aos="fade-up" data-aos-delay="300">
+          <div>
             <div class="text-3xl md:text-4xl font-bold text-foreground mb-2">0</div>
             <div class="text-sm text-muted-foreground">Data Tracking</div>
           </div>

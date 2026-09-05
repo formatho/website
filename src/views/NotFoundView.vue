@@ -79,9 +79,6 @@ const goHome = () => {
       <!-- Error Code -->
       <h1
         class="text-8xl md:text-9xl font-bold text-muted-foreground/20 mb-4"
-        data-aos="fade-up"
-        data-aos-duration="600"
-        data-aos-delay="100"
       >
         404
       </h1>
@@ -89,18 +86,12 @@ const goHome = () => {
       <!-- Error Message -->
       <h2
         class="text-2xl md:text-3xl font-bold mb-4"
-        data-aos="fade-up"
-        data-aos-duration="600"
-        data-aos-delay="200"
       >
         Page Not Found
       </h2>
 
       <p
         class="text-muted-foreground mb-8"
-        data-aos="fade-up"
-        data-aos-duration="600"
-        data-aos-delay="300"
       >
         The page you're looking for doesn't exist or has been moved.
       </p>
@@ -108,9 +99,6 @@ const goHome = () => {
       <!-- Action Buttons -->
       <div
         class="flex flex-col sm:flex-row items-center justify-center gap-4"
-        data-aos="fade-up"
-        data-aos-duration="600"
-        data-aos-delay="400"
       >
         <Button @click="goBack" variant="outline" class="gap-2" aria-label="Go back to previous page">
           <ArrowLeft class="w-4 h-4" />
@@ -125,9 +113,6 @@ const goHome = () => {
       <!-- Search Box -->
       <div
         class="mt-8 max-w-md mx-auto"
-        data-aos="fade-up"
-        data-aos-duration="600"
-        data-aos-delay="500"
       >
         <div class="relative">
           <SearchIcon class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -172,9 +157,6 @@ const goHome = () => {
       <!-- Helpful Links -->
       <div
         class="mt-8 pt-6 border-t border-border"
-        data-aos="fade-up"
-        data-aos-duration="600"
-        data-aos-delay="600"
       >
         <p class="text-sm text-muted-foreground mb-3">Browse by Category</p>
         <div class="flex flex-wrap justify-center gap-3 text-sm">

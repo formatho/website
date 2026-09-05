@@ -285,7 +285,7 @@ const _popularTools = [
       
       <div class="container mx-auto px-4 py-12 md:py-16 relative" data-v-8d4ed633="">
             <div class="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto" data-v-8d4ed633="">
-          <div class="flex items-center gap-4" data-aos="fade-down" data-aos-delay="0" data-v-8d4ed633="">
+          <div class="flex items-center gap-4" data-v-8d4ed633="">
             <img
               src="/logo.png?v=2"
               alt="Formatho"
@@ -298,20 +298,18 @@ const _popularTools = [
               Formatho
             </p>
           </div>
-          <h1 class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight" data-aos="fade-down" data-aos-delay="100" data-v-8d4ed633="">
+          <h1 class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight" data-v-8d4ed633="">
             Private infrastructure for AI agents
           </h1>
-          <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="200" data-v-8d4ed633="">
+          <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-v-8d4ed633="">
             Give AI agents secure, controlled access to your developer, security, and EVM tools — entirely inside your infrastructure.
           </p>
-          <p class="text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="250" data-v-8d4ed633="">
+          <p class="text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed" data-v-8d4ed633="">
             <RouterLink to="/runtime" class="text-foreground font-semibold underline underline-offset-4">Formatho Runtime</RouterLink> is a self-hosted MCP server with permissioned tools, sandboxed execution, and metadata-only audit logs. Sensitive data stays inside your network.
           </p>
           <div class="flex flex-wrap gap-4 justify-center items-center mt-6" data-v-8d4ed633="">
             <div
               class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
-              data-aos="fade-up"
-              data-aos-delay="0"
               data-v-8d4ed633=""
             >
               <span class="text-gray-900" data-v-8d4ed633="">
@@ -324,8 +322,6 @@ const _popularTools = [
             </div>
             <div
               class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
-              data-aos="fade-up"
-              data-aos-delay="50"
               data-v-8d4ed633=""
             >
               <span class="text-gray-900" data-v-8d4ed633="">
@@ -339,8 +335,6 @@ const _popularTools = [
             </div>
             <div
               class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
-              data-aos="fade-up"
-              data-aos-delay="100"
               data-v-8d4ed633=""
             >
               <span class="text-gray-900" data-v-8d4ed633="">
@@ -375,7 +369,7 @@ const _popularTools = [
           </div>
 
           <!-- Social Proof Stats -->
-          <div class="flex flex-wrap gap-8 justify-center items-center mt-8 text-center" data-aos="fade-up" data-aos-delay="150">
+          <div class="flex flex-wrap gap-8 justify-center items-center mt-8 text-center">
             <div>
               <div class="text-3xl font-bold text-primary">0</div>
               <div class="text-xs text-muted-foreground">Data egress by design</div>

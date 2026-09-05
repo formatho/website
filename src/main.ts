@@ -172,10 +172,6 @@ export const createApp = ViteSSG(
       }
     })
 
-    // AOS initialization moved to App.vue onMounted hook
-    // This ensures Vue virtual DOM has painted data-aos elements before AOS.init()
-    // SPA refresh is handled in App.vue via router.afterEach()
-
     // Core Web Vitals - Performance Monitoring (client-side only)
     if (isClient) {
       // Register service worker for caching and offline support

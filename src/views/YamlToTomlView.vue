@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import CodeEditor from '@/components/CodeEditor.vue'
 

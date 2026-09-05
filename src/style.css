@@ -310,55 +310,8 @@
     color: rgb(23, 23, 23) !important;
   }
 
-  /* Fix 7: AOS Reverse Scroll Animation */
-  [data-aos] {
-    transition-property: opacity, transform;
-    transition-duration: 0.4s;
-    transition-timing-function: ease-out-cubic;
-    /* CODE RED FIX: Ensure elements are visible, not permanently hidden */
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  /* Fix 7.1: Ensure AOS-initialized elements are visible */
-  [data-aos][data-aos="fade-up"],
-  [data-aos][data-aos="fade-down"],
-  [data-aos][data-aos="fade-left"],
-  [data-aos][data-aos="fade-right"],
-  [data-aos][data-aos="fade-up"],
-  [data-aos][data-aos="zoom-in"] {
-    /* Reset opacity to ensure elements don't stay hidden */
-    opacity: 1 !important;
-  }
-
-  /* Fix 7.2: Handle AOS initialization state */
-  .aos-init {
-    opacity: 1 !important;
-  }
-
-  .aos-animate {
-    opacity: 1 !important;
-  }
-
-  [data-aos="fade-up"] {
-    transition-duration: 0.4s;
-  }
-
-  [data-aos="fade-right"] {
-    transition-duration: 0.4s;
-  }
-
-  [data-aos="fade-left"] {
-    transition-duration: 0.4s;
-  }
 
   /* Fix 8: Ensure dropdowns are not affected by overflow settings */
-  nav [data-aos="no-animation"] {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-
   /* Fix 9: Ensure dropdown containers have proper z-index and pointer events */
   .group\:hover\:pointer-events-auto {
     pointer-events: auto !important;
@@ -367,8 +320,7 @@
   /* Fix 10: Prevent AOS from interfering with interactive elements */
   button,
   a,
-  .pointer-events-auto,
-  [data-aos="no-animation"] {
+  .pointer-events-auto {
     pointer-events: auto !important;
   }
 

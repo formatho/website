@@ -50,7 +50,7 @@ const exampleQueries = [
       <div class="flex flex-col items-center text-center space-y-10 max-w-3xl mx-auto">
         
         <!-- Logo -->
-        <div class="logo-container" data-aos="fade-down">
+        <div class="logo-container">
           <img
             src="/logo.png?v=2"
             alt="Formatho"
@@ -59,7 +59,7 @@ const exampleQueries = [
         </div>
 
         <!-- Title -->
-        <div class="title-block" data-aos="fade-up" data-aos-delay="100">
+        <div class="title-block">
           <h1 class="text-4xl md:text-6xl font-bold tracking-tight">
             <span class="text-foreground">Privacy-First</span>
             <br />
@@ -68,12 +68,12 @@ const exampleQueries = [
         </div>
 
         <!-- Tagline -->
-        <p class="text-xl md:text-2xl text-muted-foreground font-light" data-aos="fade-up" data-aos-delay="150">
+        <p class="text-xl md:text-2xl text-muted-foreground font-light">
           Free forever. Zero data collection. 100% private.
         </p>
 
         <!-- Large Search Input -->
-        <div class="search-container w-full max-w-2xl" data-aos="fade-up" data-aos-delay="200">
+        <div class="search-container w-full max-w-2xl">
           <div class="search-wrapper">
             <Search class="search-icon" />
             <input
@@ -109,14 +109,14 @@ const exampleQueries = [
         </div>
 
         <!-- Single CTA Button -->
-        <RouterLink to="/tools" class="hero-cta" data-aos="fade-up" data-aos-delay="250">
+        <RouterLink to="/tools" class="hero-cta">
           <span class="icon">🔧</span>
           EXPLORE ALL TOOLS
           <span class="arrow">→</span>
         </RouterLink>
 
         <!-- Minimal Trust Badges -->
-        <div class="trust-badges-compact" data-aos="fade-up" data-aos-delay="300">
+        <div class="trust-badges-compact">
           <span class="badge">
             <span class="badge-icon">🛡️</span>
             No tracking

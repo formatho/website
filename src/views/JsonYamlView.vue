@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 import { FileJson, FileType } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import CodeEditor from '@/components/CodeEditor.vue'
