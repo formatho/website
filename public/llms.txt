@@ -149,6 +149,13 @@ Persona-specific tool pages:
 - [okta tools]: https://formatho.com/dev-tools/okta — Okta developer tools — SAML decoder, OIDC builder, JWT verifier for SSO debugging
 - [ping federate tools]: https://formatho.com/dev-tools/ping-federate — Ping Federate tools — SAML decoder, OIDC builder, JWT verifier for identity flows
 
+## Formatho Runtime (MCP for AI agents)
+Self-hosted MCP server exposing these tools to AI agents privately — Docker deployment, permissioned tool registry, metadata-only audit logging:
+- Formatho Runtime: https://formatho.com/runtime
+- Docker image: docker.io/formatho/formatho-runtime
+- Source: https://github.com/formatho/formatho-runtime
+- MCP connect: docker run -i --rm -v formatho-audit:/data formatho/formatho-runtime
+
 ## EVM Chain Tools
 Chain-specific developer tool pages with pre-configured RPC endpoints, chain IDs, and token addresses:
 - [ethereum tools]: https://formatho.com/evm-tools/ethereum

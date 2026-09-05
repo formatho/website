@@ -104,6 +104,7 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center gap-6">
           <RouterLink to="/" :class="navLinkClass">Home</RouterLink>
+          <RouterLink to="/runtime" :class="navLinkClass">Runtime</RouterLink>
           <RouterLink to="/about" :class="navLinkClass">About</RouterLink>
 
           <!-- Tools Dropdown -->
@@ -211,6 +212,7 @@ const navLinkClass = 'text-[13px] font-semibold tracking-[1.5px] uppercase text-
       <div v-if="isMobileMenuOpen" class="md:hidden py-4 border-t border-foreground">
         <div class="space-y-1">
           <RouterLink to="/" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'block']">Home</RouterLink>
+          <RouterLink to="/runtime" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'block']">Runtime</RouterLink>
           <RouterLink to="/about" @click="isMobileMenuOpen = false" :class="[navLinkClass, 'block']">About</RouterLink>
 
           <!-- Mobile Tools Dropdown -->

@@ -19,6 +19,12 @@ export const routes = [
         meta: routeMeta['home']
       },
       {
+        path: '/runtime',
+        name: 'runtime',
+        component: () => import('@/views/RuntimeView.vue'),
+        meta: routeMeta['runtime']
+      },
+      {
         path: '/about',
         name: 'about',
         component: () => import(/* webpackPrefetch: true */ '../views/AboutView.vue'),
