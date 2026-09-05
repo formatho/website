@@ -4,7 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Copy, Check, Fingerprint, AlertCircle } from 'lucide-vue-next'
+import { Fingerprint, AlertCircle } from 'lucide-vue-next'
+import { CopyButton } from '@/components/ui/copy-button'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
@@ -25,8 +26,6 @@ useSEO({
 const pem = ref('')
 const error = ref('')
 const fingerprints = ref<{ algo: string; hex: string; colon: string }[]>([])
-const copiedKey = ref('')
-
 async function compute() {
   error.value = ''
   fingerprints.value = []
@@ -57,15 +56,6 @@ async function compute() {
   }
 }
 
-async function copy(text: string, key: string) {
-  try {
-    await navigator.clipboard.writeText(text)
-    copiedKey.value = key
-    setTimeout(() => (copiedKey.value = ''), 1500)
-  } catch {
-    /* clipboard unavailable */
-  }
-}
 </script>
 
 <template>
@@ -101,12 +91,8 @@ async function copy(text: string, key: string) {
           <div class="flex items-center justify-between">
             <p class="text-xs font-bold uppercase tracking-wide">{{ f.algo }}</p>
             <div class="flex gap-1">
-              <Button variant="ghost" size="sm" :aria-label="'Copy ' + f.algo + ' hex'" @click="copy(f.hex, f.algo + 'h')">
-                <Check v-if="copiedKey === f.algo + 'h'" class="w-4 h-4" /><Copy v-else class="w-4 h-4" />
-              </Button>
-              <Button variant="ghost" size="sm" :aria-label="'Copy ' + f.algo + ' colon'" @click="copy(f.colon, f.algo + 'c')">
-                <Check v-if="copiedKey === f.algo + 'c'" class="w-4 h-4" /><Copy v-else class="w-4 h-4" />
-              </Button>
+              <CopyButton variant="ghost" :text="f.hex" :aria-label="'Copy ' + f.algo + ' hex'" />
+              <CopyButton variant="ghost" :text="f.colon" :aria-label="'Copy ' + f.algo + ' colon'" />
             </div>
           </div>
           <p class="font-mono text-xs break-all">{{ f.colon }}</p>

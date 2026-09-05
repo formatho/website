@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="inline-flex h-10 items-center justify-center rounded-lg bg-slate-800/50 p-1 text-slate-300">
+  <div role="tablist" class="inline-flex items-center gap-1 rounded-lg bg-muted p-1">
     <slot />
   </div>
 </template>

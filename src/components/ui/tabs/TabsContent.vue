@@ -16,7 +16,7 @@ const isActive = computed(() => tabsContext?.activeTab.value === props.value)
 </script>
 
 <template>
-  <div v-show="isActive" class="mt-2 ring-offset-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2">
+  <div v-show="isActive" role="tabpanel" class="mt-4">
     <slot />
   </div>
 </template>
