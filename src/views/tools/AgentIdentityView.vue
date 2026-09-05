@@ -231,7 +231,7 @@ const copySystemPrompt = async () => {
       <h2 class="text-xl font-bold mb-4">Related Tools</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <a
-          href="/local-token-counter"
+          href="/tools/local-token-counter"
           class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
         >
           <h3 class="font-semibold mb-2">Local Token Counter</h3>
