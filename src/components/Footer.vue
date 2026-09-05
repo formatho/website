@@ -2,8 +2,10 @@
 import { RouterLink } from 'vue-router'
 import { Heart, Shield, Zap } from 'lucide-vue-next'
 import EmailCapture from '@/components/EmailCapture.vue'
+import { categoryMeta } from '@/data/tools'
 
 const currentYear = new Date().getFullYear()
+const footerCategories = Object.values(categoryMeta)
 </script>
 
 <template>
@@ -13,7 +15,7 @@ const currentYear = new Date().getFullYear()
         <!-- Brand -->
         <div class="space-y-4">
           <RouterLink to="/" class="flex items-center gap-3">
-            <img src="/logo.png?v=2" alt="Formatho" width="32" height="32" class="h-8 w-8 rounded-lg" />
+            <img src="/logo.png?v=2" alt="" width="32" height="32" class="h-8 w-8 rounded-lg" />
             <span class="text-lg font-bold text-foreground">Formatho</span>
           </RouterLink>
           <p class="text-sm text-muted-foreground leading-relaxed">
@@ -119,40 +121,16 @@ const currentYear = new Date().getFullYear()
           </ul>
         </div>
 
-        <!-- Categories -->
+        <!-- Categories (from tools.ts single source) -->
         <div>
           <h3 class="text-sm font-semibold mb-4">Categories</h3>
           <ul class="space-y-2">
-            <li>
+            <li v-for="cat in footerCategories" :key="cat.slug">
               <RouterLink
-                to="/"
+                :to="cat.route"
                 class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
               >
-                Data Tools
-              </RouterLink>
-            </li>
-            <li>
-              <RouterLink
-                to="/"
-                class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
-              >
-                Converters
-              </RouterLink>
-            </li>
-            <li>
-              <RouterLink
-                to="/"
-                class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
-              >
-                EVM Tools
-              </RouterLink>
-            </li>
-            <li>
-              <RouterLink
-                to="/"
-                class="text-sm text-muted-foreground hover:text-gray-900 transition-colors"
-              >
-                Generators
+                {{ cat.name }}
               </RouterLink>
             </li>
           </ul>
