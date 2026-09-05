@@ -111,7 +111,7 @@ useSEO({
               Your Data Shouldn't<br />Leave the Browser
             </h3>
             <p class="text-muted-foreground leading-relaxed mb-8">
-              Most free online tools are free for a reason: your input becomes their data. The JSON you validate, the token you decode, the key you generate — it all hits their servers. For security researchers, Web3 developers, and anyone handling production data, that is an unacceptable trade-off. The browser is powerful enough to do all of this locally. So we do.
+              Most free online tools are free for a reason: your input becomes their data. The JSON you validate, the token you decode, the key you generate. It all hits their servers. For security researchers, Web3 developers, and anyone handling production data, that is an unacceptable trade-off. The browser is powerful enough to do all of this locally. So we do.
             </p>
             <div class="border-l-2 border-foreground pl-6 py-2">
               <p class="text-xl md:text-2xl font-black tracking-widest leading-none">
@@ -145,14 +145,14 @@ useSEO({
           <!-- Right: Agent Roles -->
           <div class="md:col-span-8 md:border-l md:border-foreground/10 md:pl-16">
             <p class="text-sm text-muted-foreground leading-relaxed mb-8">
-              Whatever your stack, the tools are already here — free, private, and one click away:
+              Whatever your stack, the tools are already here: free, private, and one click away.
             </p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div class="border border-foreground/10 rounded-lg p-6">
                 <p class="text-xs font-medium tracking-widest text-muted-foreground mb-2">01</p>
                 <h4 class="text-lg font-bold tracking-tight leading-tight mb-2">Ethereum & Web3</h4>
-                <p class="text-sm text-muted-foreground leading-relaxed mb-4">ABI calls, address safety, and unit math — keys never leave your machine.</p>
+                <p class="text-sm text-muted-foreground leading-relaxed mb-4">ABI calls, address safety, and unit math. Keys never leave your machine.</p>
                 <div class="flex flex-wrap gap-2">
                   <RouterLink to="/tools/keccak256" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">Keccak-256</RouterLink>
                   <RouterLink to="/tools/abi-encoder" class="text-xs font-medium px-2.5 py-1 border border-foreground/15 rounded-full hover:border-foreground/40 hover:bg-muted transition-colors">ABI Encoder</RouterLink>
@@ -270,7 +270,7 @@ useSEO({
             </div>
             <div class="py-10 md:pl-16 md:border-l border-foreground/10">
               <p class="text-muted-foreground leading-relaxed">
-                Browser: pure client-side JavaScript. Runtime: pure-function tools with zero network, filesystem, or secret access — enforced by the registry itself.
+                Browser: pure client-side JavaScript. Runtime: pure-function tools with zero network, filesystem, or secret access, enforced by the registry itself.
               </p>
             </div>
           </div>
@@ -314,7 +314,7 @@ useSEO({
             Deploy in<br />Private.
           </h2>
           <p class="text-muted-foreground leading-relaxed max-w-xl mb-10">
-            Whether you are a security researcher decoding tokens, a protocol engineer inspecting calldata, or a team giving AI agents safe tool access, Formatho runs where your data lives — in the browser or inside your network.
+            Whether you are a security researcher decoding tokens, a protocol engineer inspecting calldata, or a team giving AI agents safe tool access, Formatho runs where your data lives: in the browser or inside your network.
           </p>
           <p class="text-2xl md:text-3xl font-black tracking-widest leading-none mb-12">
             WELCOME TO FORMATHO.
