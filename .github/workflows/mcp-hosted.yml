@@ -15,6 +15,9 @@ on:
   repository_dispatch:
     types: [runtime-release]
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

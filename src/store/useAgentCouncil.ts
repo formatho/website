@@ -100,10 +100,16 @@ export const canGenerateTask = computed(() => state.currentPhase === 'complete' 
 // ============================================================
 // Helper Functions
 // ============================================================
-const generateId = () => `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+const cryptoRandom = () => {
+  const buf = new Uint32Array(1)
+  crypto.getRandomValues(buf)
+  return buf[0] / 0x100000000
+}
+
+const generateId = () => `msg_${Date.now()}_${Math.floor(cryptoRandom() * 1e9).toString(36)}`
 
 const randomDelay = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min
+  return Math.floor(cryptoRandom() * (max - min + 1)) + min
 }
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
@@ -129,7 +135,7 @@ async function triggerCouncil(): Promise<void> {
   state.currentPhase = 'planning'
 
   // Pick a random sequence
-  const sequence = HANDOFF_SEQUENCES[Math.floor(Math.random() * HANDOFF_SEQUENCES.length)]
+  const sequence = HANDOFF_SEQUENCES[Math.floor(cryptoRandom() * HANDOFF_SEQUENCES.length)]
 
   console.log(`[AgentCouncil] Starting session ${state.sessionId} with ${sequence.length} steps`)
 
@@ -182,7 +188,7 @@ function prepareTaskData(sequence: HandoffStep[]): CouncilTaskData | null {
   const now = new Date()
   const yy = String(now.getFullYear()).slice(-2)
   const mm = String(now.getMonth() + 1).padStart(2, '0')
-  const taskIdNum = String(Math.floor(Math.random() * 999) + 1).padStart(3, '0')
+  const taskIdNum = String(Math.floor(cryptoRandom() * 999) + 1).padStart(3, '0')
   const taskId = `TASK-${yy}${mm}-${taskIdNum}`
   
   // Determine priority based on Flowtho analysis (if present in sequence)

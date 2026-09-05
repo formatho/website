@@ -2,6 +2,9 @@ name: Show origin IP (one-off)
 
 on: workflow_dispatch
 
+permissions:
+  contents: read
+
 jobs:
   ip:
     runs-on: ubuntu-latest

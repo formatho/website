@@ -10,6 +10,9 @@ on:
     branches: [prod]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   ping:
     if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'prod')

@@ -16,6 +16,9 @@ on:
 env:
   IMAGE_NAME: ${{ github.repository }}
 
+permissions:
+  contents: read
+
 jobs:
   generate-version:
     runs-on: ubuntu-latest

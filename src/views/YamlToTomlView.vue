@@ -9,6 +9,14 @@ const tomlOutput = ref('')
 const error = ref('')
 
 // Simple TOML converter for basic structures
+const escapeTomlString = (v: string): string =>
+  v
+    .replace(/\\/g, '\\\\')
+    .replace(/"/g, '\\"')
+    .replace(/\n/g, '\\n')
+    .replace(/\r/g, '\\r')
+    .replace(/\t/g, '\\t')
+
 const toToml = (obj: any, prefix = ''): string => {
   let result = ''
 
@@ -18,12 +26,12 @@ const toToml = (obj: any, prefix = ''): string => {
     if (value === null || value === undefined) {
       continue
     } else if (typeof value === 'string') {
-      result += `${fullKey} = "${value.replace(/"/g, '\\"')}"\n`
+      result += `${fullKey} = "${escapeTomlString(value)}"\n`
     } else if (typeof value === 'number' || typeof value === 'boolean') {
       result += `${fullKey} = ${value}\n`
     } else if (Array.isArray(value)) {
       result += `${fullKey} = [${value
-        .map((v) => (typeof v === 'string' ? `"${v}"` : v))
+        .map((v) => (typeof v === 'string' ? `"${escapeTomlString(v)}"` : v))
         .join(', ')}]\n`
     } else if (typeof value === 'object') {
       result += `\n[${fullKey}]\n`
