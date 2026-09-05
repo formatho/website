@@ -79,6 +79,7 @@ function parseToolRoutes() {
 const staticRoutes = [
   { path: '/tools', priority: '1.0', changefreq: 'weekly' },
   { path: '/about', priority: '0.9', changefreq: 'monthly' },
+  { path: '/runtime', priority: '0.9', changefreq: 'weekly' },
   { path: '/blogs', priority: '0.9', changefreq: 'weekly' },
   { path: '/privacy', priority: '0.5', changefreq: 'yearly' },
   { path: '/terms', priority: '0.5', changefreq: 'yearly' },
