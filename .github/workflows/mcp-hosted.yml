@@ -38,113 +38,37 @@ jobs:
             NGINX_CONF_DIR="$HOME/nginx/conf.d"
             mkdir -p "$RUNTIME_DIR" "$NGINX_CONF_DIR"
 
-            # ---------- 1. container on the shared swarm network ----------
-            cat > "$RUNTIME_DIR/docker-compose.yml" <<'YAML'
-            services:
-              mcp-runtime:
-                container_name: mcp-runtime
-                image: formatho/formatho-runtime:latest
-                # no published ports: reachable only inside the swarm network,
-                # the front proxy (nginx) fronts it as mcp.formatho.com
-                command: ["node", "dist/index.js", "--http"]
-                environment:
-                  FORMATHO_AUDIT_LOG: /data/audit.jsonl
-                  FORMATHO_ALLOW_ANONYMOUS: "true"
-                  FORMATHO_ANON_BURST: "20"
-                  FORMATHO_ANON_RPM: "30"
-                  FORMATHO_KEY_BURST: "300"
-                  FORMATHO_KEY_RPM: "300"
-                volumes:
-                  - mcp-audit:/data
-                networks:
-                  - formatho_net
-                restart: unless-stopped
-                deploy:
-                  resources:
-                    limits: { memory: 256M, cpus: "0.5" }
-            networks:
-              formatho_net:
-                external: true
-            volumes:
-              mcp-audit:
-            YAML
-            sed -i 's/^            //' "$RUNTIME_DIR/docker-compose.yml"
-            # resolve the real (stack-prefixed) overlay network name
+            # ---------- 1. container on the shared overlay network ----------
+            echo 'c2VydmljZXM6CiAgbWNwLXJ1bnRpbWU6CiAgICBpbWFnZTogZm9ybWF0aG8vZm9ybWF0aG8tcnVudGltZTpsYXRlc3QKICAgIGNvbnRhaW5lcl9uYW1lOiBtY3AtcnVudGltZQogICAgY29tbWFuZDogWyJub2RlIiwgImRpc3QvaW5kZXguanMiLCAiLS1odHRwIl0KICAgIGVudmlyb25tZW50OgogICAgICBGT1JNQVRIT19BVURJVF9MT0c6IC9kYXRhL2F1ZGl0Lmpzb25sCiAgICAgIEZPUk1BVEhPX0FMTE9XX0FOT05ZTU9VUzogInRydWUiCiAgICAgIEZPUk1BVEhPX0FOT05fQlVSU1Q6ICIyMCIKICAgICAgRk9STUFUSE9fQU5PTl9SUE06ICIzMCIKICAgICAgRk9STUFUSE9fS0VZX0JVUlNUOiAiMzAwIgogICAgICBGT1JNQVRIT19LRVlfUlBNOiAiMzAwIgogICAgdm9sdW1lczoKICAgICAgLSBtY3AtYXVkaXQ6L2RhdGEKICAgIG5ldHdvcmtzOgogICAgICAtIGZvcm1hdGhvX25ldAogICAgcmVzdGFydDogdW5sZXNzLXN0b3BwZWQKICAgIGRlcGxveToKICAgICAgcmVzb3VyY2VzOgogICAgICAgIGxpbWl0czogeyBtZW1vcnk6IDI1Nk0sIGNwdXM6ICIwLjUiIH0KbmV0d29ya3M6CiAgZm9ybWF0aG9fbmV0OgogICAgZXh0ZXJuYWw6IHRydWUKdm9sdW1lczoKICBtY3AtYXVkaXQ6Cg==' | base64 -d > "$RUNTIME_DIR/docker-compose.yml"
             NET_NAME=$(docker network ls --filter driver=overlay --format '{{.Name}}' | grep -m1 'app-network')
-            sed -i "s/formatho_net/$NET_NAME/" "$RUNTIME_DIR/docker-compose.yml"
             echo "joining overlay network: $NET_NAME"
+            sed -i "s/formatho_net/$NET_NAME/" "$RUNTIME_DIR/docker-compose.yml"
             docker pull formatho/formatho-runtime:latest
             docker compose -f "$RUNTIME_DIR/docker-compose.yml" up -d --remove-orphans
 
-            # ---------- 2. TLS cert for mcp.formatho.com (idempotent) ----------
-            CERT_DIR=$(docker volume ls -q | grep -m1 letsencrypt || true)
+            NGINX_CID=$(docker ps -qf name=nginx_nginx | head -1)
+            reload_nginx() { docker exec "$NGINX_CID" nginx -s reload; }
+
+            # ---------- 2. TLS cert (idempotent) ----------
             if [ ! -f "$HOME/.mcp-cert-done" ]; then
-              # 2a. HTTP-only vhost first so the ACME challenge can pass
-              cat > "$NGINX_CONF_DIR/45-mcp.conf" <<'CONF'
-              server {
-                  listen 80;
-                  listen [::]:80;
-                  server_name mcp.formatho.com;
-                  location /.well-known/acme-challenge/ { root /var/www/certbot; }
-                  location / { return 200 'formatho mcp — cert provisioning'; add_header Content-Type text/plain; }
-              }
-              CONF
-              sed -i 's/^              //' "$NGINX_CONF_DIR/45-mcp.conf"
-              docker exec "$(docker ps -qf name=nginx_nginx | head -1)" nginx -s reload
+              echo 'c2VydmVyIHsKICAgIGxpc3RlbiA4MDsKICAgIGxpc3RlbiBbOjpdOjgwOwogICAgc2VydmVyX25hbWUgbWNwLmZvcm1hdGhvLmNvbTsKICAgIGxvY2F0aW9uIC8ud2VsbC1rbm93bi9hY21lLWNoYWxsZW5nZS8geyByb290IC92YXIvd3d3L2NlcnRib3Q7IH0KICAgIGxvY2F0aW9uIC8geyByZXR1cm4gMjAwICdmb3JtYXRobyBtY3AgLSBjZXJ0IHByb3Zpc2lvbmluZyc7IGFkZF9oZWFkZXIgQ29udGVudC1UeXBlIHRleHQvcGxhaW47IH0KfQo=' | base64 -d > "$NGINX_CONF_DIR/45-mcp.conf"
+              reload_nginx
               sleep 2
-              # 2b. issue the cert via the shared certbot webroot volume
-              docker run --rm \
-                -v letsencrypt:/etc/letsencrypt \
-                -v certbot-www:/var/www/certbot \
+              docker run --rm -v letsencrypt:/etc/letsencrypt -v certbot-www:/var/www/certbot \
                 certbot/certbot:latest certonly --webroot -w /var/www/certbot \
                 -d mcp.formatho.com --non-interactive --agree-tos \
                 --register-unsafely-without-email || true
               touch "$HOME/.mcp-cert-done"
             fi
 
-            # ---------- 3. full vhost: https proxy to the runtime ----------
-            cat > "$NGINX_CONF_DIR/45-mcp.conf" <<'CONF'
-            server {
-                listen 80;
-                listen [::]:80;
-                server_name mcp.formatho.com;
-                location /.well-known/acme-challenge/ { root /var/www/certbot; }
-                location / { return 301 https://$host$request_uri; }
-            }
-
-            server {
-                listen 443 ssl;
-                listen [::]:443 ssl;
-                http2 on;
-                server_name mcp.formatho.com;
-
-                ssl_certificate /etc/letsencrypt/live/mcp.formatho.com/fullchain.pem;
-                ssl_certificate_key /etc/letsencrypt/live/mcp.formatho.com/privkey.pem;
-                include /etc/letsencrypt/options-ssl-nginx.conf;
-                ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
-
-                # MCP streamable HTTP is SSE-based: no buffering, long timeouts
-                proxy_buffering off;
-                proxy_read_timeout 3600s;
-                proxy_send_timeout 3600s;
-                proxy_http_version 1.1;
-                proxy_set_header Connection "";
-                proxy_set_header Host $host;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header X-Forwarded-Proto https;
-
-                location / {
-                    proxy_pass http://mcp-runtime:8787;
-                }
-            }
-            CONF
-            sed -i 's/^            //' "$NGINX_CONF_DIR/45-mcp.conf"
-            if ! docker exec "$(docker ps -qf name=nginx_nginx | head -1)" nginx -t 2>/dev/null; then
-              echo "::error::nginx config test failed — check cert issuance"
-              docker exec "$(docker ps -qf name=nginx_nginx | head -1)" nginx -t || true
+            # ---------- 3. full https vhost ----------
+            echo 'c2VydmVyIHsKICAgIGxpc3RlbiA4MDsKICAgIGxpc3RlbiBbOjpdOjgwOwogICAgc2VydmVyX25hbWUgbWNwLmZvcm1hdGhvLmNvbTsKICAgIGxvY2F0aW9uIC8ud2VsbC1rbm93bi9hY21lLWNoYWxsZW5nZS8geyByb290IC92YXIvd3d3L2NlcnRib3Q7IH0KICAgIGxvY2F0aW9uIC8geyByZXR1cm4gMzAxIGh0dHBzOi8vJGhvc3QkcmVxdWVzdF91cmk7IH0KfQoKc2VydmVyIHsKICAgIGxpc3RlbiA0NDMgc3NsOwogICAgbGlzdGVuIFs6Ol06NDQzIHNzbDsKICAgIGh0dHAyIG9uOwogICAgc2VydmVyX25hbWUgbWNwLmZvcm1hdGhvLmNvbTsKCiAgICBzc2xfY2VydGlmaWNhdGUgL2V0Yy9sZXRzZW5jcnlwdC9saXZlL21jcC5mb3JtYXRoby5jb20vZnVsbGNoYWluLnBlbTsKICAgIHNzbF9jZXJ0aWZpY2F0ZV9rZXkgL2V0Yy9sZXRzZW5jcnlwdC9saXZlL21jcC5mb3JtYXRoby5jb20vcHJpdmtleS5wZW07CiAgICBpbmNsdWRlIC9ldGMvbGV0c2VuY3J5cHQvb3B0aW9ucy1zc2wtbmdpbnguY29uZjsKICAgIHNzbF9kaHBhcmFtIC9ldGMvbGV0c2VuY3J5cHQvc3NsLWRocGFyYW1zLnBlbTsKCiAgICAjIE1DUCBzdHJlYW1hYmxlIEhUVFAgaXMgU1NFLWJhc2VkOiBubyBidWZmZXJpbmcsIGxvbmcgdGltZW91dHMKICAgIHByb3h5X2J1ZmZlcmluZyBvZmY7CiAgICBwcm94eV9yZWFkX3RpbWVvdXQgMzYwMHM7CiAgICBwcm94eV9zZW5kX3RpbWVvdXQgMzYwMHM7CiAgICBwcm94eV9odHRwX3ZlcnNpb24gMS4xOwogICAgcHJveHlfc2V0X2hlYWRlciBDb25uZWN0aW9uICIiOwogICAgcHJveHlfc2V0X2hlYWRlciBIb3N0ICRob3N0OwogICAgcHJveHlfc2V0X2hlYWRlciBYLUZvcndhcmRlZC1Gb3IgJHByb3h5X2FkZF94X2ZvcndhcmRlZF9mb3I7CiAgICBwcm94eV9zZXRfaGVhZGVyIFgtRm9yd2FyZGVkLVByb3RvIGh0dHBzOwoKICAgIGxvY2F0aW9uIC8gewogICAgICAgIHByb3h5X3Bhc3MgaHR0cDovL21jcC1ydW50aW1lOjg3ODc7CiAgICB9Cn0K' | base64 -d > "$NGINX_CONF_DIR/45-mcp.conf"
+            if ! docker exec "$NGINX_CID" nginx -t 2>&1; then
+              echo "nginx config test failed - cert may not have issued; rerun in a minute"
               exit 1
             fi
-            docker exec "$(docker ps -qf name=nginx_nginx | head -1)" nginx -s reload
+            reload_nginx
+            echo "vhost installed and nginx reloaded"
 
       - name: Health check (https://mcp.formatho.com)
         run: |
