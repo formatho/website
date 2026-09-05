@@ -13,7 +13,7 @@ const decodedUrl = computed(() => {
     const url = new URL(safelinkUrl.value)
 
     // Outlook safelink format: https://safelink.protection.outlook.com/?url=...
-    if (url.hostname.includes('safelink.protection.outlook.com')) {
+    if (url.hostname === 'safelink.protection.outlook.com') {
       const encodedUrl = url.searchParams.get('url')
       if (encodedUrl) {
         return decodeURIComponent(encodedUrl)

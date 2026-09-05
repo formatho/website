@@ -1,6 +1,6 @@
 name: MCP hosted tier (mcp.formatho.com)
 
-# Runs the formatho/formatho-runtime (rev 3: cert retry after direct DNS) public container on the Droplet and keeps
+# Runs the formatho/formatho-runtime (rev 6: cert retry after direct DNS) public container on the Droplet and keeps
 # it current: polls the runtime repo's latest release on a schedule, and can
 # also be triggered instantly (repository_dispatch: runtime-release) or
 # manually. Idempotent — safe to run repeatedly.
@@ -14,6 +14,9 @@ on:
   workflow_dispatch:
   repository_dispatch:
     types: [runtime-release]
+
+permissions:
+  contents: read
 
 jobs:
   deploy:

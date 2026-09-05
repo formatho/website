@@ -16,12 +16,12 @@ const toToml = (obj: any, prefix = ''): string => {
     if (value === null) {
       continue
     } else if (typeof value === 'string') {
-      result += `${fullKey} = "${value.replace(/"/g, '\\"')}"\n`
+      result += `${fullKey} = "${escapeTomlString(value)}"\n`
     } else if (typeof value === 'number' || typeof value === 'boolean') {
       result += `${fullKey} = ${value}\n`
     } else if (Array.isArray(value)) {
       result += `${fullKey} = [${value
-        .map((v) => (typeof v === 'string' ? `"${v}"` : v))
+        .map((v) => (typeof v === 'string' ? `"${escapeTomlString(v)}"` : v))
         .join(', ')}]\n`
     } else if (typeof value === 'object') {
       result += `\n[${fullKey}]\n`

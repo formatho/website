@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
-import { useHead } from '@vueuse/head'
+import { useHead } from '@unhead/vue'
 import { fetchBlogMetadata, type BlogMetadata } from '../data/strapi'
 
 const activeCategory = ref('ALL')
