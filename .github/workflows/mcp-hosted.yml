@@ -1,0 +1,148 @@
+name: MCP hosted tier (mcp.formatho.com)
+
+# Runs the formatho/formatho-runtime public container on the Droplet and keeps
+# it current: polls the runtime repo's latest release on a schedule, and can
+# also be triggered instantly (repository_dispatch: runtime-release) or
+# manually. Idempotent — safe to run repeatedly.
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # every 6h: pull :latest (rebuilt on every runtime release)
+  workflow_dispatch:
+  repository_dispatch:
+    types: [runtime-release]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: digital_ocean_formatho
+    steps:
+      - name: Validate secrets
+        run: |
+          [ -n "${{ secrets.DO_HOST }}" ] || { echo "::error::DO_HOST not set"; exit 1; }
+          [ -n "${{ secrets.DO_USERNAME }}" ] || { echo "::error::DO_USERNAME not set"; exit 1; }
+          [ -n "${{ secrets.DO_SSH_KEY }}" ] || { echo "::error::DO_SSH_KEY not set"; exit 1; }
+
+      - name: Deploy MCP runtime + nginx vhost
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USERNAME }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          script: |
+            set -e
+            RUNTIME_DIR="$HOME/formatho-mcp"
+            NGINX_CONF_DIR="$HOME/nginx/conf.d"
+            mkdir -p "$RUNTIME_DIR" "$NGINX_CONF_DIR"
+
+            # ---------- 1. container on the shared swarm network ----------
+            cat > "$RUNTIME_DIR/docker-compose.yml" <<'YAML'
+            services:
+              mcp-runtime:
+                image: formatho/formatho-runtime:latest
+                # no published ports: reachable only inside the swarm network,
+                # the front proxy (nginx) fronts it as mcp.formatho.com
+                command: ["node", "dist/index.js", "--http"]
+                environment:
+                  FORMATHO_AUDIT_LOG: /data/audit.jsonl
+                  FORMATHO_ALLOW_ANONYMOUS: "true"
+                  FORMATHO_ANON_BURST: "20"
+                  FORMATHO_ANON_RPM: "30"
+                  FORMATHO_KEY_BURST: "300"
+                  FORMATHO_KEY_RPM: "300"
+                volumes:
+                  - mcp-audit:/data
+                networks:
+                  - app-network
+                restart: unless-stopped
+                deploy:
+                  resources:
+                    limits: { memory: 256M, cpus: "0.5" }
+            networks:
+              app-network:
+                external: true
+            volumes:
+              mcp-audit:
+            YAML
+            sed -i 's/^            //' "$RUNTIME_DIR/docker-compose.yml"
+            docker pull formatho/formatho-runtime:latest
+            docker compose -f "$RUNTIME_DIR/docker-compose.yml" up -d --remove-orphans
+
+            # ---------- 2. TLS cert for mcp.formatho.com (idempotent) ----------
+            CERT_DIR=$(docker volume ls -q | grep -m1 letsencrypt || true)
+            if [ ! -f "$HOME/.mcp-cert-done" ]; then
+              # 2a. HTTP-only vhost first so the ACME challenge can pass
+              cat > "$NGINX_CONF_DIR/45-mcp.conf" <<'CONF'
+              server {
+                  listen 80;
+                  listen [::]:80;
+                  server_name mcp.formatho.com;
+                  location /.well-known/acme-challenge/ { root /var/www/certbot; }
+                  location / { return 200 'formatho mcp — cert provisioning'; add_header Content-Type text/plain; }
+              }
+              CONF
+              sed -i 's/^              //' "$NGINX_CONF_DIR/45-mcp.conf"
+              docker exec "$(docker ps -qf name=nginx_nginx | head -1)" nginx -s reload
+              sleep 2
+              # 2b. issue the cert via the shared certbot webroot volume
+              docker run --rm \
+                -v letsencrypt:/etc/letsencrypt \
+                -v certbot-www:/var/www/certbot \
+                certbot/certbot:latest certonly --webroot -w /var/www/certbot \
+                -d mcp.formatho.com --non-interactive --agree-tos \
+                --register-unsafely-without-email || true
+              touch "$HOME/.mcp-cert-done"
+            fi
+
+            # ---------- 3. full vhost: https proxy to the runtime ----------
+            cat > "$NGINX_CONF_DIR/45-mcp.conf" <<'CONF'
+            server {
+                listen 80;
+                listen [::]:80;
+                server_name mcp.formatho.com;
+                location /.well-known/acme-challenge/ { root /var/www/certbot; }
+                location / { return 301 https://$host$request_uri; }
+            }
+
+            server {
+                listen 443 ssl;
+                listen [::]:443 ssl;
+                http2 on;
+                server_name mcp.formatho.com;
+
+                ssl_certificate /etc/letsencrypt/live/mcp.formatho.com/fullchain.pem;
+                ssl_certificate_key /etc/letsencrypt/live/mcp.formatho.com/privkey.pem;
+                include /etc/letsencrypt/options-ssl-nginx.conf;
+                ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+                # MCP streamable HTTP is SSE-based: no buffering, long timeouts
+                proxy_buffering off;
+                proxy_read_timeout 3600s;
+                proxy_send_timeout 3600s;
+                proxy_http_version 1.1;
+                proxy_set_header Connection "";
+                proxy_set_header Host $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto https;
+
+                location / {
+                    proxy_pass http://mcp-runtime:8787;
+                }
+            }
+            CONF
+            sed -i 's/^            //' "$NGINX_CONF_DIR/45-mcp.conf"
+            if ! docker exec "$(docker ps -qf name=nginx_nginx | head -1)" nginx -t 2>/dev/null; then
+              echo "::error::nginx config test failed — check cert issuance"
+              docker exec "$(docker ps -qf name=nginx_nginx | head -1)" nginx -t || true
+              exit 1
+            fi
+            docker exec "$(docker ps -qf name=nginx_nginx | head -1)" nginx -s reload
+
+      - name: Health check (https://mcp.formatho.com)
+        run: |
+          for i in $(seq 1 10); do
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" https://mcp.formatho.com/.well-known/mcp-server.json || echo 000)
+            [ "$CODE" = "200" ] && { echo "mcp.formatho.com healthy"; exit 0; } || sleep 10
+          done
+          echo "::warning::health check did not pass yet (cert DNS propagation or first-run cert issuance can take a minute — rerun this workflow)"
+          exit 0
