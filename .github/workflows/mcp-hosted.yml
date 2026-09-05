@@ -57,7 +57,7 @@ jobs:
                 volumes:
                   - mcp-audit:/data
                 networks:
-                  - app-network
+                  - formatho_net
                 restart: unless-stopped
                 deploy:
                   resources:
