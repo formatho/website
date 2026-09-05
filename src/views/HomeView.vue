@@ -299,10 +299,10 @@ const _popularTools = [
             </p>
           </div>
           <h1 class="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl leading-tight" data-aos="fade-down" data-aos-delay="100" data-v-8d4ed633="">
-            Free developer tools that run in your browser — and a private runtime that gives AI agents the same tools
+            Developer tools that run entirely in your browser. Now also a self-hosted MCP server for your AI agents.
           </h1>
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-aos="fade-down" data-aos-delay="200" data-v-8d4ed633="">
-            Format SQL and YAML, decode JWTs, hash with Keccak-256, lint Helm charts, generate vanity addresses — built for <strong class="text-foreground">blockchain, DevOps, enterprise, security, and SRE</strong> workflows. No uploads, no accounts, no tracking. New: <RouterLink to="/runtime" class="text-foreground font-semibold underline underline-offset-4">Formatho Runtime</RouterLink> serves the same tools to your AI agents over self-hosted MCP.
+            Format SQL and YAML, decode JWTs, hash with Keccak-256, lint Helm charts, decode EVM calldata. Every tool runs locally — nothing uploads, no accounts. <RouterLink to="/runtime" class="text-foreground font-semibold underline underline-offset-4">Formatho Runtime</RouterLink> packages the same catalog as a Docker-deployable MCP server, so AI agents get the tools without payloads leaving your network.
           </p>
           <div class="flex flex-wrap gap-4 justify-center items-center mt-6" data-v-8d4ed633="">
             <div
@@ -317,7 +317,7 @@ const _popularTools = [
                   <path d="M9 12l2 2 4-4"></path>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Free forever, no sign-up </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Free, no sign-up </span>
             </div>
             <div
               class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
@@ -332,7 +332,7 @@ const _popularTools = [
                   <line x1="12" y1="8" x2="12" y2="12"></line>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> No uploads, ever </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> No uploads, no telemetry </span>
             </div>
             <div
               class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-foreground"
@@ -354,7 +354,7 @@ const _popularTools = [
                   <line x1="1" y1="14" x2="4" y2="14"></line>
                 </svg>
               </span>
-              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> Runs offline once loaded </span>
+              <span class="text-sm font-medium text-foreground" data-v-8d4ed633=""> MCP server for agents </span>
             </div>
           </div>
           <!-- Conversion CTA -->
@@ -364,9 +364,9 @@ const _popularTools = [
                 Browse All Tools
               </button>
             </RouterLink>
-            <RouterLink to="/category/web3" data-v-8d4ed633="">
+            <RouterLink to="/runtime" data-v-8d4ed633="">
               <button class="px-6 py-3 bg-foreground/10 border border-foreground text-foreground rounded-lg font-semibold text-lg hover:bg-foreground hover:text-background transition-colors" data-v-8d4ed633="">
-                Web3 &amp; Blockchain Suite
+                Deploy the Runtime
               </button>
             </RouterLink>
           </div>
@@ -374,23 +374,23 @@ const _popularTools = [
           <!-- Social Proof Stats -->
           <div class="flex flex-wrap gap-8 justify-center items-center mt-8 text-center" data-aos="fade-up" data-aos-delay="150">
             <div>
-              <div class="text-3xl font-bold text-primary">Zero</div>
-              <div class="text-xs text-muted-foreground">Data collected or uploaded</div>
-            </div>
-            <div class="w-px h-10 bg-foreground"></div>
-            <div>
-              <div class="text-3xl font-bold text-primary">Always</div>
-              <div class="text-xs text-muted-foreground">Free, no limits</div>
+              <div class="text-3xl font-bold text-primary">140+</div>
+              <div class="text-xs text-muted-foreground">Browser tools, free</div>
             </div>
             <div class="w-px h-10 bg-foreground"></div>
             <div>
               <div class="text-3xl font-bold text-primary">0</div>
-              <div class="text-xs text-muted-foreground">Servers involved</div>
+              <div class="text-xs text-muted-foreground">Servers processing your data</div>
+            </div>
+            <div class="w-px h-10 bg-foreground"></div>
+            <div>
+              <div class="text-3xl font-bold text-primary">20+</div>
+              <div class="text-xs text-muted-foreground">Tools agents call via MCP</div>
             </div>
             <div class="w-px h-10 bg-foreground"></div>
             <div>
               <div class="text-3xl font-bold text-primary">100%</div>
-              <div class="text-xs text-muted-foreground">Client-side</div>
+              <div class="text-xs text-muted-foreground">Client-side execution</div>
             </div>
           </div>
 
