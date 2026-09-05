@@ -242,6 +242,34 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Paste a contract ABI, set any RPC endpoint and contract address, and call view and pure functions directly from your browser. Works on every EVM chain. Read-only eth_call - no wallet, no gas, no server.',
     keywords: 'read smart contract online, call contract function, abi reader, contract view functions, eth_call tool, read contract without etherscan, contract interaction tool',
   },
+  'calldata-decoder': {
+    title: 'EVM Calldata Decoder | Formatho',
+    description: 'Decode raw Ethereum calldata and error data against a built-in signature dictionary (ERC-20, permit, routers, standard errors), or by pasted ABI. Event topic0 lookup included. 100% client-side.',
+  },
+  'create2-calculator': {
+    title: 'CREATE2 Address Calculator | Formatho',
+    description: 'Compute deterministic CREATE2 deployment addresses from factory, salt, and init code hash. Keccak math identical to the EVM, all client-side. 100% client-side.',
+  },
+  'uniswap-math': {
+    title: 'Uniswap Tick & SqrtPrice Calculator | Formatho',
+    description: 'Convert between Uniswap v3 price, tick, and sqrtPriceX96 with token decimals. Exact Q64.96 integer math matching TickMath. 100% client-side.',
+  },
+  'eip1967-checker': {
+    title: 'EIP-1967 Proxy Slot Checker | Formatho',
+    description: 'Read the standardized proxy storage slots — implementation, admin, beacon — for any contract across 21 EVM chains. Read-only eth_getStorageAt. 100% client-side.',
+  },
+  'storage-slot-calculator': {
+    title: 'Solidity Storage Slot Calculator | Formatho',
+    description: 'Compute storage slots for Solidity variables, mappings (keccak of key and slot), and dynamic array elements. Exact EVM slot math. 100% client-side.',
+  },
+  'v4-hook-calculator': {
+    title: 'Uniswap v4 Hook Calculator | Formatho',
+    description: 'Compute the v4 hook permission bits and the address prefix to mine, or decode any hook address into its 14 hook-call permissions. 100% client-side.',
+  },
+  'tx-decoder': {
+    title: 'Ethereum Transaction Decoder | Formatho',
+    description: 'Decode raw signed transactions (legacy, EIP-1559, EIP-2930, EIP-4844) into typed fields: nonce, gas, to, value, calldata selector, signature. 100% client-side.',
+  },
   'function-selector': {
     title: 'Solidity Function Selector Calculator & Lookup | Formatho',
     description: 'Calculate 4-byte Solidity function selectors with Keccak-256, or look up which function a selector like 0xa9059cbb belongs to. Batch mode, ERC presets, cast sig compatible, 100% client-side.',
