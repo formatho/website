@@ -73,12 +73,12 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'markdown editor, markdown preview, markdown viewer, github markdown, privacy-first',
   },
   'json-yaml': {
-    title: 'JSON to YAML Converter Online - Free | Formatho',
+    title: 'JSON to YAML Converter - Secure MCP Tool for AI | Formatho',
     description: 'Convert JSON to YAML and YAML to JSON online instantly. Free converter for config files, Kubernetes manifests, docker-compose, and CI/CD configs. 100% client-side — your data never leaves your browser.',
     keywords: 'json to yaml converter, yaml to json, convert json yaml online, json yaml converter free, kubernetes yaml converter, docker compose converter, json yaml online tool, privacy-first',
   },
   'json-csv': {
-    title: 'JSON to CSV Converter Online - Free | Formatho',
+    title: 'JSON to CSV Converter - Secure MCP Tool for AI | Formatho',
     description: 'Convert JSON to CSV and CSV to JSON online instantly. Free converter for data export, spreadsheet import, and API data transformation. Handles nested objects and arrays. 100% client-side, no upload.',
     keywords: 'json to csv converter, csv to json, convert json csv online, json csv free tool, csv json transformer, excel json converter, data conversion tool, privacy-first',
   },
@@ -88,7 +88,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'text diff online, diff checker, compare text online, file comparison tool, text difference, code diff, diff tool free, online text compare, privacy-first',
   },
   'base64': {
-    title: 'Base64 Encoder & Decoder Online - Free | Formatho',
+    title: 'Base64 Encoder & Decoder - Secure MCP Tool for AI | Formatho',
     description: 'Encode text to Base64 or decode Base64 to text online instantly. Free Base64 converter supports UTF-8, files, and URLs. No signup, 100% client-side — your data never leaves your browser.',
     keywords: 'base64 encoder online, base64 decoder online, base64 converter, decode base64, encode base64, base64 to text, text to base64, base64 online tool, free base64, privacy-first',
   },
@@ -98,7 +98,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'jwt decoder online, decode jwt, jwt debugger, jwt inspector, json web token decoder, jwt payload viewer, jwt validator, jwt expiry checker, free jwt tool, privacy-first',
   },
   'sql': {
-    title: 'SQL Formatter Online - Free SQL Beautifier | Formatho',
+    title: 'SQL Formatter Online - Secure SQL Beautifier | Formatho',
     description: 'Format and beautify SQL queries online instantly. Free SQL formatter supporting PostgreSQL, MySQL, SQLite, T-SQL, and more. Beautify minified SQL, validate syntax, and improve readability. 100% client-side.',
     keywords: 'sql formatter online, sql beautifier, format sql online, sql prettifier, sql format tool, free sql formatter, postgresql formatter, mysql formatter, sqlite formatter, privacy-first',
   },
@@ -128,7 +128,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'developer tools, json formatter, yaml validator, base64 encoder, hash generator, privacy-first tools',
   },
   'uuid': {
-    title: 'UUID Generator Online - Free UUID v4 & v1 | Formatho',
+    title: 'UUID Generator Online - Secure UUID v4 & v1 | Formatho',
     description: 'Generate UUIDs online instantly — UUID v4, v1, v3, and v5. Create single or batch unique identifiers for databases, APIs, and distributed systems. Free, 100% client-side, no signup required.',
     keywords: 'uuid generator online, uuid v4 generator, generate uuid online, guid generator, unique id generator, uuid v1, uuid v5, random uuid, batch uuid generator, free uuid tool, privacy-first',
   },
@@ -138,7 +138,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'lorem ipsum generator, placeholder text, dummy text generator, lorem ipsum, privacy-first',
   },
   'image': {
-    title: 'Image Compressor - Reduce Image Size Free Online | Formatho',
+    title: 'Image Compressor - Reduce Image Size Securely | Formatho',
     description: 'Compress JPG, PNG, and WebP images by up to 80% without quality loss. Perfect for reducing AI-generated image sizes, optimizing web performance, and saving storage. Resize, convert, and batch process images — all in your browser, 100% private.',
     keywords: 'image compressor, compress image online, reduce image size, optimize images, ai image compressor, webp compressor, png optimizer, jpg reducer, batch image compression, free image tool, privacy-first',
   },
@@ -158,12 +158,12 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'bpmn viewer, bpmn to pdf, bpmn diagram, business process model, bpmn export, privacy-first',
   },
   'visio-viewer': {
-    title: 'Visio Viewer Online - Open .vsdx Files Free | Formatho',
+    title: 'Visio Viewer Online - Open .vsdx Files Securely | Formatho',
     description: 'View Microsoft Visio .vsdx files in your browser without Visio or an upload. Multi-page rendering, zoom, SVG export. 100% client-side — the file never leaves your machine.',
     keywords: 'visio viewer, microsoft visio viewer, vsdx viewer online, open visio file online, view vsdx without visio, visio file viewer free',
   },
   'bpmn-to-visio': {
-    title: 'BPMN to Visio Converter Online - Free | Formatho',
+    title: 'BPMN to Visio Converter - Secure MCP Tool for AI | Formatho',
     description: 'Convert BPMN process diagrams into Microsoft Visio compatible formats. Free, privacy-first converter that runs entirely in your browser.',
     keywords: 'bpmn to visio, bpmn converter, visio converter, process diagram, bpmn export, microsoft visio, privacy-first',
   },
@@ -306,7 +306,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'tls checker, ssl certificate check, certificate expiry checker, openssl certificate, tls security scan'
   },
   'soc2-checklist': {
-    title: 'SOC 2 Readiness Checklist - Free & Open Source | Formatho',
+    title: 'SOC 2 Readiness Checklist - Secure & Open Source | Formatho',
     description: 'Interactive, open-source SOC 2 readiness checklist covering all 5 Trust Service Criteria. Track progress with linked tools for each control. Free, private, 100% client-side.',
     keywords: 'soc 2 checklist, open source soc 2, soc 2 readiness, soc 2 compliance, soc 2 audit prep, trust service criteria, free soc 2 tools'
   },
@@ -406,7 +406,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'abi encoder, abi decoder, solidity abi, abi encode online, function selector, calldata encoder, solidity encode, erc20 encode, foundry cast, ethers abi, viem abi, smart contract debugging, free abi tool, privacy-first',
   },
   'tools-agent-identity-generator': {
-    title: 'AI Agent Identity Generator - Free | Formatho',
+    title: 'AI Agent Identity Generator - Secure MCP Tool for AI | Formatho',
     description: 'Instantly generate unique personas, traits, and system prompts for AI agents.',
     keywords: 'ai agent identity, agent persona, agent traits, system prompts, agent generator, artificial intelligence',
   },
@@ -426,11 +426,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'agent details, agent reputation, blockchain agent history, ai agent ratings, crypto agent metadata, ethereum agent tracker',
   },
   'bcrypt': {
-    title: 'Bcrypt Hash Generator Online - Free Password Hasher | Formatho',
+    title: 'Bcrypt Hash Generator Online - Secure Password Hasher | Formatho',
     description: 'Generate bcrypt password hashes online with custom cost factors (4-31). Compare and verify bcrypt hashes. Free tool for Node.js and Python password hashing. 100% client-side — passwords never leave your browser.',
   },
   'encryption': {
-    title: 'AES Encryption Tool Online - Encrypt Text Free | Formatho',
+    title: 'AES Encryption Tool Online - Encrypt Text Securely | Formatho',
     description: 'Encrypt and decrypt text online with AES-256, DES, and TripleDES. Free client-side encryption tool — your text and keys never leave your browser. Perfect for encrypting sensitive messages and API keys.',
   },
   'bip39-generator': {
@@ -463,7 +463,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Convert numbers between binary, octal, decimal, and hexadecimal.',
   },
   'roman-numeral-converter': {
-    title: 'Roman Numeral Converter Online - Free | Formatho',
+    title: 'Roman Numeral Converter - Secure MCP Tool for AI | Formatho',
     description: 'Convert between Roman numerals and numbers.',
   },
   'base64-file-converter': {
@@ -471,15 +471,15 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Convert files to and from Base64 format. Privacy-first tool.',
   },
   'text-to-nato-alphabet': {
-    title: 'Text to NATO Alphabet Converter Online - Free | Formatho',
+    title: 'Text to NATO Alphabet Converter - Secure MCP Tool for AI | Formatho',
     description: 'Convert text to NATO phonetic alphabet.',
   },
   'text-to-unicode': {
-    title: 'Text to Unicode Converter Online - Free | Formatho',
+    title: 'Text to Unicode Converter - Secure MCP Tool for AI | Formatho',
     description: 'Convert text to Unicode code points and HTML entities.',
   },
   'yaml-to-toml': {
-    title: 'YAML to TOML Converter Online - Free | Formatho',
+    title: 'YAML to TOML Converter - Secure MCP Tool for AI | Formatho',
     description: 'Convert YAML configuration files to TOML format.',
   },
   'json-to-toml': {
@@ -491,19 +491,19 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Convert lists between different formats (comma, newline, JSON, etc).',
   },
   'toml-to-json': {
-    title: 'TOML to JSON Converter Online - Free | Formatho',
+    title: 'TOML to JSON Converter - Secure MCP Tool for AI | Formatho',
     description: 'Convert TOML configuration files to JSON format.',
   },
   'toml-to-yaml': {
-    title: 'TOML to YAML Converter Online - Free | Formatho',
+    title: 'TOML to YAML Converter - Secure MCP Tool for AI | Formatho',
     description: 'Convert TOML configuration files to YAML format.',
   },
   'markdown-to-html': {
-    title: 'Markdown to HTML Converter Online - Free | Formatho',
+    title: 'Markdown to HTML Converter - Secure MCP Tool for AI | Formatho',
     description: 'Convert Markdown to HTML with syntax highlighting.',
   },
   'url-encoder': {
-    title: 'URL Encoder & Decoder Online - Free | Formatho',
+    title: 'URL Encoder & Decoder - Secure MCP Tool for AI | Formatho',
     description: 'Encode and decode URL strings. Privacy-first tool.',
   },
   'url-parser': {
@@ -511,7 +511,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Parse and analyze URLs to extract components.',
   },
   'html-entities': {
-    title: 'HTML Entities Encoder & Decoder Online - Free | Formatho',
+    title: 'HTML Entities Encoder & Decoder - Secure MCP Tool for AI | Formatho',
     description: 'Encode and decode HTML entities.',
   },
   'device-information': {
@@ -519,7 +519,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'View browser and device information.',
   },
   'basic-auth-generator': {
-    title: 'HTTP Basic Auth Header Generator Online - Free | Formatho',
+    title: 'HTTP Basic Auth Header Generator - Secure MCP Tool for AI | Formatho',
     description: 'Generate HTTP Basic Authentication headers.',
   },
   'meta-tag-generator': {
@@ -564,7 +564,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'wifi qr code generator, wifi password qr, qr code wifi, share wifi, wifi qr code, wifi network qr, free wifi qr generator, scan wifi qr, guest wifi qr code, privacy-first',
   },
   'svg-placeholder-generator': {
-    title: 'SVG Placeholder Generator Online - Free | Formatho',
+    title: 'SVG Placeholder Generator - Secure MCP Tool for AI | Formatho',
     description: 'Generate SVG placeholder images.',
   },
   'camera-recorder': {
@@ -577,7 +577,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Common Git commands and their usage.',
   },
   'random-port-generator': {
-    title: 'Random Port Generator Online - Free | Formatho',
+    title: 'Random Port Generator - Secure MCP Tool for AI | Formatho',
     description: 'Generate random port numbers for development.',
   },
   'json-viewer': {
@@ -593,7 +593,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Calculate Unix file permissions.',
   },
   'docker-run-to-compose': {
-    title: 'Docker Run to Compose Converter Online - Free | Formatho',
+    title: 'Docker Run to Compose Converter - Secure MCP Tool for AI | Formatho',
     description: 'Convert docker run commands to docker-compose.yml.',
   },
   'xml-formatter': {
@@ -682,12 +682,12 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Validate and parse IBAN numbers.',
   },
   'qr-code-generator': {
-    title: 'QR Code Generator - Free Online QR Code Maker | Formatho',
+    title: 'QR Code Generator - Secure AI & MCP Tool | Formatho',
     description: 'Create custom QR codes for URLs, text, WiFi, email, phone numbers, and more. Free online QR code generator with customizable size, colors, and error correction. Download as PNG or SVG. No signup, 100% client-side, zero tracking.',
     keywords: 'qr code generator, free qr code, create qr code, qr code maker, online qr generator, custom qr code, url qr code, qr code download, qr code png, qr code svg, privacy-first',
   },
   'crontab-generator': {
-    title: 'Crontab Generator - Free Cron Builder | Formatho',
+    title: 'Crontab Generator - Secure Cron Builder | Formatho',
     description: 'Generate cron expressions with visual builder.',
   },
   'regex-tester': {
@@ -705,7 +705,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'quantum circuit simulator, quantum computing, quantum gates, hadamard gate, cnot gate, quantum simulator, qubits, superposition, entanglement, quantum learning, free quantum tool, privacy-first',
   },
   'percentage-calculator': {
-    title: 'Percentage Calculator Online - Free | Formatho',
+    title: 'Percentage Calculator - Secure MCP Tool for AI | Formatho',
     description: 'Calculate percentages, increases, and decreases.',
   },
   'token-generator': {
@@ -714,21 +714,21 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'random token generator, api token generator, secure token generator, secret key generator, random string generator, api key generator',
   },
   'hash-text': {
-    title: 'Argon2id Hash Generator Online - Free | Formatho',
+    title: 'Argon2id Hash Generator - Secure MCP Tool for AI | Formatho',
     description: 'Generate Argon2id, bcrypt, PBKDF2, MD5, SHA-1, SHA-256, SHA-384, SHA-512, BLAKE2b, and Poseidon hashes online. 100% client-side hashing - your data never leaves your browser. No signup, free forever.',
     keywords: 'argon2id hash, argon2id online, argon2id browser, argon2id generator, bcrypt online, pbkdf2 online, sha256 generator, sha512 generator, md5 generator, blake2b online, poseidon hash, hash text, password hash, crypto hash, client-side hashing, privacy-first hash tool, free hash generator',
     canonical: 'https://formatho.com/tools/hash-text',
   },
   'xml-json': {
-    title: 'XML to JSON Converter Online - Free & Bidirectional | Formatho',
+    title: 'XML to JSON Converter Online - Secure & Bidirectional | Formatho',
     description: 'Bi-directional XML to JSON converter with real-time conversion and clipboard support. 100% client-side, zero server API calls.',
   },
   'ulid-generator': {
-    title: 'ULID Generator Online - Free & Sortable IDs | Formatho',
+    title: 'ULID Generator Online - Secure & Sortable IDs | Formatho',
     description: 'Generate Universally Unique Lexicographically Sortable Identifiers.',
   },
   'case-converter': {
-    title: 'Case Converter Online - Free Text Case Changer | Formatho',
+    title: 'Case Converter Online - Secure Text Case Changer | Formatho',
     description: 'Convert text case online instantly — UPPER, lower, Title Case, camelCase, snake_case, kebab-case, CONSTANT_CASE, and more. Free text transformer for developers and writers. 100% client-side.',
   },
   'date-time-converter': {
@@ -744,7 +744,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Convert colors between HEX, RGB, HSL formats.',
   },
   'text-to-binary': {
-    title: 'Text to Binary Converter Online - Free | Formatho',
+    title: 'Text to Binary Converter - Secure MCP Tool for AI | Formatho',
     description: 'Convert text to binary and vice versa.',
   },
   'http-status-codes': {
@@ -770,11 +770,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Monitor and analyze A/B test results for landing page optimization',
   },
   'category-web3': {
-    title: 'Web3 & Blockchain Tools - Free Online | Formatho',
+    title: 'Web3 & Blockchain Tools - Secure MCP for AI Agents | Formatho',
     description: 'EVM contract reader, vanity address generator, multi-chain readers for Solana, Polkadot, Cardano, Cosmos. Keccak-256 hasher, ABI tools, ENS calculator. All free and client-side.',
   },
   'category-security': {
-    title: 'Security & Auth Tools - Free Online | Formatho',
+    title: 'Security & Auth Tools - Secure MCP for AI Agents | Formatho',
     description: 'Hash generators, JWT debugger, SAML decoder, OIDC builder, encryption, TOTP, password analysis. Free, private, 100% client-side.',
   },
   'category-data-formats': {
@@ -786,7 +786,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'SQL formatting and schema tools, Git and regex references, Docker conversion, Mermaid viewer, image compression. Free, private, client-side.',
   },
   'category-converters': {
-    title: 'Converters & Calculators - Free Online | Formatho',
+    title: 'Converters & Calculators - Secure MCP for AI Agents | Formatho',
     description: 'Unix timestamp, date-time, number base, color, case, temperature converters. Math, ETA, and percentage calculators. Free and client-side.',
   },
   'category-network': {
