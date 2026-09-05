@@ -288,9 +288,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'impermanent loss calculator, il calculator, uniswap impermanent loss, lp loss calculator, defi calculator, liquidity provider loss'
   },
   'vault-calculator': {
-    title: 'ERC-4626 Vault Calculator - Shares to Assets | Formatho',
-    description: 'Convert between ERC-4626 vault shares and underlying assets. Calculate share price, APY, and returns for Morpho, Yearn, Beefy, and any ERC-4626 vault.',
-    keywords: 'erc4626 calculator, vault shares to assets, vault calculator, morpho vault calculator, yearn vault calculator, defi vault shares'
+    title: 'ERC-4626 Vault Analyzer & Calculator Online | Formatho',
+    description: 'Simulate ERC-4626 vault math with exact spec rounding (shares minted, round-trip dust, inflation attack) and read live vaults on-chain: share price, totals, convertTo checks. Morpho, Yearn, Beefy, any vault.',
+    keywords: 'erc4626 calculator, erc-4626 vault analyzer, vault shares to assets, vault calculator, share price calculator, erc4626 inflation attack, morpho vault calculator, yearn vault calculator, defi vault shares'
   },
   'apy-calculator': {
     title: 'APY Calculator - Convert APR to APY | Formatho',

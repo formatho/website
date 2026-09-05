@@ -346,7 +346,7 @@ export const routes = [
       {
         path: '/tools/vault-calculator',
         name: 'vault-calculator',
-        component: () => import(/* webpackPrefetch: true */ '../views/VaultCalculatorView.vue'),
+        component: () => import('@/views/VaultAnalyzerView.vue'),
         meta: routeMeta['vault-calculator']
       },
       {
