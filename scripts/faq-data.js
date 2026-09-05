@@ -2697,3 +2697,46 @@ const samlSuiteFAQs = {
 
 Object.assign(toolSEOContent, samlSuiteContent)
 Object.assign(toolSpecificFAQ, samlSuiteFAQs)
+
+
+/**
+ * ERC-4626 Vault Analyzer content.
+ */
+const vaultAnalyzerContent = {
+  '/tools/vault-calculator': {
+    intro: [
+      'ERC-4626 standardized yield vaults: one interface for deposit, mint, withdraw, redeem, accounting, and previews — so vaults compose like tokens. But the spec\u2019s integer math is where integrations break: four rounding directions (mint/deposit round shares down, withdraw rounds assets up, redeem rounds assets down), virtual-share offsets against the inflation attack, and share prices that shift with every harvest.',
+      'This analyzer gives you both halves of vault math. The simulator computes EIP-4626 conversions in exact BigInt arithmetic with configurable virtual offsets — shares minted, round-trip dust, withdraw costs, share price — plus growth and management-fee drag over a horizon, and a worked inflation-attack illustration. The on-chain reader pulls any live vault through the standard interface (asset, totals, convertTo probes, share price) with plain read-only eth_calls across 21 EVM chains or your own RPC.'
+    ],
+    howTo: [
+      'Simulator: set the vault state (total assets, total supply, decimals, offsets) and your deposit.',
+      'Read the minted shares, redeem-back assets, and round-trip dust — all with spec rounding.',
+      'Set APR, horizon, and fee to see gross vs net growth of the position.',
+      'Read on-chain: pick a chain, paste a vault address, and get live totals and share price.'
+    ]
+  }
+}
+
+const vaultAnalyzerFAQs = {
+  '/tools/vault-calculator': [
+    {
+      question: 'How does ERC-4626 rounding work?',
+      answer: 'Four rules from the spec: previewDeposit and previewMint round shares DOWN in favor of the vault (you never receive more shares than earned); previewWithdraw rounds the required shares UP (you never pay less than owed); previewRedeem rounds assets DOWN. The simulator implements all four in exact integer math, so the round-trip dust it shows is precisely what the spec permits a vault to keep.'
+    },
+    {
+      question: 'What is the ERC-4626 inflation attack?',
+      answer: 'The first depositor attack: an attacker mints 1 share, donates tokens directly to the vault to inflate assets-per-share, then waits for a victim whose large deposit rounds to nearly zero shares. The attacker redeems their 1 share for a cut of the victim\u2019s deposit. Defenses: virtual share offsets (OpenZeppelin\u2019s default DECIMALS_OFFSET math, simulated above), seeding the vault at deployment, or dead shares. Deposits after meaningful liquidity exists are not exposed.'
+    },
+    {
+      question: 'How is vault share price calculated?',
+      answer: 'Share price is totalAssets divided by totalSupply — assets per share, independent of token decimals. This reader reports it scaled by 10^18 for precision. A rising share price is the vault\u2019s yield accruing; a falling one means losses or accounting issues. Compare convertToShares(100) against 100 / price as a sanity check for spec compliance.'
+    },
+    {
+      question: 'Can this tool move my funds?',
+      answer: 'No. The reader sends only eth_call requests — protocol-level reads that cannot mutate state — to the standard ERC-4626 view functions. The simulator is pure local arithmetic. No wallet is connected and nothing is signed.'
+    }
+  ]
+}
+
+Object.assign(toolSEOContent, vaultAnalyzerContent)
+Object.assign(toolSpecificFAQ, vaultAnalyzerFAQs)
