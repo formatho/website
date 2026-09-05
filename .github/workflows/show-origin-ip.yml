@@ -1,0 +1,16 @@
+name: Show origin IP (one-off)
+
+on: workflow_dispatch
+
+jobs:
+  ip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask the droplet for its public IP
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USERNAME }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          script: |
+            curl -s https://api.ipify.org || curl -s https://ifconfig.me
