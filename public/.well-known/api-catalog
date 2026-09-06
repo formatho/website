@@ -1,0 +1,84 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://formatho.com",
+      "service-desc": [
+        {
+          "href": "https://mcp.formatho.com/.well-known/mcp-server.json",
+          "type": "application/json",
+          "title": "Formatho Runtime MCP Server Metadata"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://formatho.com/runtime",
+          "type": "text/html",
+          "title": "Formatho Runtime — Private Self-Hosted MCP Server"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://mcp.formatho.com/.well-known/mcp-server.json",
+          "title": "MCP Server Health"
+        }
+      ]
+    },
+    {
+      "anchor": "https://mcp.formatho.com",
+      "service-desc": [
+        {
+          "href": "https://mcp.formatho.com/.well-known/mcp-server.json",
+          "type": "application/json",
+          "title": "MCP Server Descriptor"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://github.com/formatho/formatho-runtime",
+          "type": "text/html",
+          "title": "API Documentation and Source"
+        }
+      ]
+    },
+    {
+      "anchor": "https://mcp.formatho.com/api/tools",
+      "service-desc": [
+        {
+          "href": "https://mcp.formatho.com/.well-known/mcp-server.json",
+          "type": "application/json",
+          "title": "Tool Registry Schema"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://github.com/formatho/formatho-runtime#rest--http-mcp-gateway-phase-2",
+          "type": "text/html",
+          "title": "REST API Documentation"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://mcp.formatho.com/api/tools",
+          "title": "Tool Registry Status"
+        }
+      ]
+    },
+    {
+      "anchor": "https://registry.modelcontextprotocol.io/v0/servers/com.formatho/runtime",
+      "service-desc": [
+        {
+          "href": "https://raw.githubusercontent.com/formatho/formatho-runtime/main/server.json",
+          "type": "application/json",
+          "title": "MCP Registry server.json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://formatho.com/runtime",
+          "type": "text/html",
+          "title": "Product Documentation"
+        }
+      ]
+    }
+  ]
+}
