@@ -7,6 +7,12 @@ Disallow: /admin/
 Disallow: /tools/admin/
 Disallow: /api/
 
+# Content Signals (https://contentsignals.org) — AI usage preferences
+# search=yes: tools are indexable and quotable in search/AI search results
+# ai-train=no: our tool descriptions and docs are not for model training
+# ai-input=no: agents may call our tools via MCP but not ingest pages as context
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
 # AI crawlers - explicitly allowed (indexing, quoting, and search use)
 User-agent: GPTBot
 Allow: /
