@@ -68,5 +68,6 @@
         ]
       }
     ]
-  }
+  },
+  "www_authenticate": "Bearer realm=\"formatho\", resource_metadata=\"https://formatho.com/.well-known/oauth-protected-resource\""
 }
