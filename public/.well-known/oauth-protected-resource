@@ -1,10 +1,9 @@
 {
   "resource": "https://mcp.formatho.com",
-  "authorization_servers": [],
-  "scopes_supported": [],
+  "authorization_servers": ["https://formatho.com"],
+  "scopes_supported": ["tools:read", "tools:execute"],
   "bearer_methods_supported": ["header"],
   "resource_documentation": "https://formatho.com/auth.md",
-  "resource_signing_alg_values_supported": [],
   "token_endpoint_auth_methods_supported": ["none"],
   "description": "Formatho Runtime MCP server. Authentication via API keys (see auth.md). Anonymous tier available with rate limits.",
   "anonymous_access": {
