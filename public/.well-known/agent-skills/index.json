@@ -1,0 +1,27 @@
+{
+  "skills": [
+    {
+      "name": "tools",
+      "description": "Execute developer, security, and EVM tools via MCP",
+      "endpoint": "https://mcp.formatho.com/mcp",
+      "transport": "streamable-http",
+      "auth": "bearer"
+    },
+    {
+      "name": "registry",
+      "description": "Discover available tools with schemas",
+      "endpoint": "https://mcp.formatho.com/api/tools",
+      "transport": "rest",
+      "auth": "none"
+    },
+    {
+      "name": "metadata",
+      "description": "Server capabilities and well-known info",
+      "endpoint": "https://mcp.formatho.com/.well-known/mcp-server.json",
+      "transport": "rest",
+      "auth": "none"
+    }
+  ],
+  "documentation": "https://formatho.com/auth.md",
+  "provider": "Formatho"
+}
