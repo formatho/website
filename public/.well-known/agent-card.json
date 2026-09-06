@@ -1,0 +1,43 @@
+{
+  "name": "Formatho Runtime",
+  "description": "Self-hosted MCP tool infrastructure for AI agents.",
+  "url": "https://mcp.formatho.com/mcp",
+  "version": "0.3.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "defaultInputModes": [
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "tools",
+      "name": "Developer Tools",
+      "description": "JSON, Base64, hashing, JWT, regex"
+    },
+    {
+      "id": "evm",
+      "name": "EVM / Web3 Tools",
+      "description": "Keccak, selectors, CREATE2, storage, calldata, v4 hooks"
+    },
+    {
+      "id": "security",
+      "name": "Security Tools",
+      "description": "Hashing, UUID, random, JWT decode"
+    },
+    {
+      "id": "defi",
+      "name": "DeFi Tools",
+      "description": "ERC-4626 math, unit conversion"
+    }
+  ],
+  "provider": {
+    "organization": "Formatho",
+    "url": "https://formatho.com"
+  }
+}

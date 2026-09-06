@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "serverInfo": {
+    "name": "formatho-runtime",
+    "version": "0.3.0",
+    "title": "Formatho Runtime",
+    "description": "Self-hosted MCP server with 26 deterministic developer, security, and EVM tools."
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": false
+  },
+  "transport": {
+    "type": "streamable-http",
+    "url": "https://mcp.formatho.com/mcp",
+    "auth": {
+      "type": "bearer",
+      "anonymous": true
+    }
+  },
+  "tools_endpoint": "https://mcp.formatho.com/api/tools",
+  "registry_entry": "https://registry.modelcontextprotocol.io/v0/servers/com.formatho/runtime",
+  "source_code": "https://github.com/formatho/formatho-runtime",
+  "docker_image": "docker.io/formatho/formatho-runtime:latest"
+}
