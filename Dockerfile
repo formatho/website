@@ -26,6 +26,9 @@ FROM nginx:alpine
 # Copy built files from builder
 COPY --from=builder /app/dist /usr/share/nginx/html
 
+# Add .md to nginx mime types for markdown content negotiation
+RUN sed -i 's/}/    text\/markdown  md;\n}/' /etc/nginx/mime.types
+
 # Copy nginx configuration for SPA routing
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
