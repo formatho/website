@@ -39,5 +39,17 @@
   "provider": {
     "organization": "Formatho",
     "url": "https://formatho.com"
-  }
+  },
+  "supportedInterfaces": [
+    {
+      "protocol": "mcp/1.0",
+      "transport": "streamable-http",
+      "url": "https://mcp.formatho.com/mcp"
+    },
+    {
+      "protocol": "rest/1.0",
+      "transport": "https",
+      "url": "https://mcp.formatho.com/api/tools"
+    }
+  ]
 }

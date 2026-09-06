@@ -1,6 +1,6 @@
 {
   "catalog": "formatho",
-  "version": "1.0",
+  "version": "1.0.0",
   "capabilities": [
     {
       "name": "mcp-server",
@@ -23,5 +23,6 @@
     }
   ],
   "documentation": "https://formatho.com/runtime",
-  "auth": "https://formatho.com/auth.md"
+  "auth": "https://formatho.com/auth.md",
+  "specVersion": "1.0"
 }
