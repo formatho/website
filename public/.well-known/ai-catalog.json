@@ -1,7 +1,10 @@
 {
   "catalog": "formatho",
   "version": "1.0.0",
-  "capabilities": [
+  "documentation": "https://formatho.com/runtime",
+  "auth": "https://formatho.com/auth.md",
+  "specVersion": "1.0",
+  "entries": [
     {
       "name": "mcp-server",
       "type": "mcp",
@@ -21,8 +24,5 @@
       "endpoint": "https://formatho.com/tools",
       "description": "140+ browser-based tools"
     }
-  ],
-  "documentation": "https://formatho.com/runtime",
-  "auth": "https://formatho.com/auth.md",
-  "specVersion": "1.0"
+  ]
 }
