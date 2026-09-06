@@ -1,10 +1,19 @@
 {
   "resource": "https://mcp.formatho.com",
-  "authorization_servers": ["https://formatho.com"],
-  "scopes_supported": ["tools:read", "tools:execute"],
-  "bearer_methods_supported": ["header"],
+  "authorization_servers": [
+    "https://formatho.com"
+  ],
+  "scopes_supported": [
+    "tools:read",
+    "tools:execute"
+  ],
+  "bearer_methods_supported": [
+    "header"
+  ],
   "resource_documentation": "https://formatho.com/auth.md",
-  "token_endpoint_auth_methods_supported": ["none"],
+  "token_endpoint_auth_methods_supported": [
+    "none"
+  ],
   "description": "Formatho Runtime MCP server. Authentication via API keys (see auth.md). Anonymous tier available with rate limits.",
   "anonymous_access": {
     "available": true,
@@ -12,10 +21,12 @@
       "burst": 20,
       "requests_per_minute": 30
     },
-    "credential_types_supported": ["rate_limit_key"]
+    "credential_types_supported": [
+      "rate_limit_key"
+    ]
   },
   "agent_auth": {
-    "skill": "api-key",
+    "skill": "https://formatho.com/auth.md",
     "register_uri": "https://formatho.com/auth.md#registration",
     "methods": [
       {
