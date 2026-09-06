@@ -1,27 +1,26 @@
 {
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
   "skills": [
     {
-      "name": "tools",
-      "description": "Execute developer, security, and EVM tools via MCP",
-      "endpoint": "https://mcp.formatho.com/mcp",
-      "transport": "streamable-http",
-      "auth": "bearer"
+      "name": "evm-tools",
+      "type": "skill-md",
+      "description": "Keccak-256, function selectors, CREATE2, storage slots, calldata decode, v4 hooks, EIP-55, unit conversion",
+      "url": "https://formatho.com/.well-known/agent-skills/evm-tools.md",
+      "digest": "sha256:af611462813a9c7a55b52fa55e2718ed4cc03a8d97b55429f44787d0224a518c"
     },
     {
-      "name": "registry",
-      "description": "Discover available tools with schemas",
-      "endpoint": "https://mcp.formatho.com/api/tools",
-      "transport": "rest",
-      "auth": "none"
+      "name": "dev-tools",
+      "type": "skill-md",
+      "description": "JSON, Base64, URL, hashing, JWT decode, regex, case conversion, timestamps, hex, slugs",
+      "url": "https://formatho.com/.well-known/agent-skills/dev-tools.md",
+      "digest": "sha256:11c99893d4e21cbd90d989718246edad65af9fbaf6fa4a6ef226ef64cf9b139d"
     },
     {
-      "name": "metadata",
-      "description": "Server capabilities and well-known info",
-      "endpoint": "https://mcp.formatho.com/.well-known/mcp-server.json",
-      "transport": "rest",
-      "auth": "none"
+      "name": "tool-registry",
+      "type": "skill-md",
+      "description": "Discover tools with schemas, permissions, and verification status",
+      "url": "https://formatho.com/.well-known/agent-skills/tool-registry.md",
+      "digest": "sha256:878fcbd8af1f136e8cdcc642877a9ba9ab1408f9119e42b11a4a1d8047f19936"
     }
-  ],
-  "documentation": "https://formatho.com/auth.md",
-  "provider": "Formatho"
+  ]
 }
