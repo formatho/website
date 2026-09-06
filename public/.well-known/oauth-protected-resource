@@ -1,0 +1,34 @@
+{
+  "resource": "https://mcp.formatho.com",
+  "authorization_servers": [],
+  "scopes_supported": [],
+  "bearer_methods_supported": ["header"],
+  "resource_documentation": "https://formatho.com/auth.md",
+  "resource_signing_alg_values_supported": [],
+  "token_endpoint_auth_methods_supported": ["none"],
+  "description": "Formatho Runtime MCP server. Authentication via API keys (see auth.md). Anonymous tier available with rate limits.",
+  "anonymous_access": {
+    "available": true,
+    "rate_limit": {
+      "burst": 20,
+      "requests_per_minute": 30
+    },
+    "credential_types_supported": ["rate_limit_key"]
+  },
+  "agent_auth": {
+    "skill": "api-key",
+    "register_uri": "https://formatho.com/auth.md#registration",
+    "methods": [
+      {
+        "type": "api_key",
+        "description": "Bearer token mapped to an agent identity with per-tool policy scope",
+        "documentation": "https://formatho.com/auth.md"
+      },
+      {
+        "type": "anonymous",
+        "description": "Rate-limited access without credentials",
+        "rate_limit": "30 req/min per IP"
+      }
+    ]
+  }
+}
