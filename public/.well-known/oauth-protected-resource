@@ -28,16 +28,36 @@
   "agent_auth": {
     "skill": "https://formatho.com/auth.md",
     "register_uri": "https://formatho.com/auth.md#registration",
+    "identity_types_supported": [
+      "anonymous",
+      "api_key"
+    ],
+    "anonymous": {
+      "credential_types_supported": [
+        "rate_limit_key"
+      ],
+      "claim_uri": "https://formatho.com/auth.md#anonymous-rate-limited"
+    },
+    "api_key": {
+      "credential_types_supported": [
+        "bearer_token"
+      ],
+      "claim_uri": "https://formatho.com/auth.md#api-key-bearer-token",
+      "registration_endpoint": "https://formatho.com/auth.md#registration"
+    },
     "methods": [
       {
         "type": "api_key",
+        "method": "static_bearer",
         "description": "Bearer token mapped to an agent identity with per-tool policy scope",
+        "registration_endpoint": "https://formatho.com/auth.md#registration",
         "documentation": "https://formatho.com/auth.md"
       },
       {
         "type": "anonymous",
-        "description": "Rate-limited access without credentials",
-        "rate_limit": "30 req/min per IP"
+        "method": "rate_limit",
+        "description": "Rate-limited access without credentials (30 req/min per IP)",
+        "documentation": "https://formatho.com/auth.md"
       }
     ]
   }
