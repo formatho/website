@@ -6,9 +6,9 @@ import { Shield, Lock, Zap } from 'lucide-vue-next'
   <div class="flex flex-wrap items-center justify-center gap-4 py-6">
     <div
       v-for="badge in [
-        { icon: Shield, label: '100% Private' },
-        { icon: Lock, label: 'Zero Tracking' },
-        { icon: Zap, label: 'Lightning Fast' },
+        { icon: Shield, label: 'Zero Egress' },
+        { icon: Lock, label: 'Permissioned' },
+        { icon: Zap, label: 'MCP Native' },
       ]"
       :key="badge.label"
       class="flex items-center gap-2 px-4 py-2 bg-primary/5 border border-primary/15 rounded-lg"
