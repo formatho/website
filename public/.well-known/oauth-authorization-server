@@ -3,11 +3,13 @@
   "token_endpoint": null,
   "response_types_supported": [],
   "grant_types_supported": [],
-  "token_endpoint_auth_methods_supported": ["none"],
+  "token_endpoint_auth_methods_supported": [
+    "none"
+  ],
   "service_documentation": "https://formatho.com/auth.md",
-  "description": "Formatho issues static API keys for MCP server access. No OAuth token flow — keys are provisioned directly per auth.md.",
+  "description": "Formatho issues static API keys for MCP server access. No OAuth token flow \u2014 keys are provisioned directly per auth.md.",
   "agent_auth": {
-    "skill": "api-key",
+    "skill": "https://formatho.com/auth.md",
     "register_uri": "https://formatho.com/auth.md#registration",
     "methods": [
       {
