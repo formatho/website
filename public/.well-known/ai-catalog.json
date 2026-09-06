@@ -10,22 +10,22 @@
       "displayName": "Formatho MCP Server",
       "description": "Self-hosted MCP server with 26 developer, security, and EVM tools",
       "type": "mcp",
-      "endpoint": "https://mcp.formatho.com/mcp",
-      "transport": "streamable-http"
+      "transport": "streamable-http",
+      "url": "https://mcp.formatho.com/mcp"
     },
     {
       "identifier": "formatho-rest-api",
       "displayName": "Formatho REST API",
       "description": "REST gateway for tool execution",
       "type": "rest",
-      "endpoint": "https://mcp.formatho.com/api/tools"
+      "url": "https://mcp.formatho.com/api/tools"
     },
     {
       "identifier": "formatho-web-tools",
       "displayName": "Formatho Web Tools",
       "description": "140+ browser-based developer tools",
       "type": "web",
-      "endpoint": "https://formatho.com/tools"
+      "url": "https://formatho.com/tools"
     }
   ]
 }
