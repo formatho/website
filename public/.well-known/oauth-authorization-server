@@ -1,0 +1,20 @@
+{
+  "issuer": "https://formatho.com",
+  "token_endpoint": null,
+  "response_types_supported": [],
+  "grant_types_supported": [],
+  "token_endpoint_auth_methods_supported": ["none"],
+  "service_documentation": "https://formatho.com/auth.md",
+  "description": "Formatho issues static API keys for MCP server access. No OAuth token flow — keys are provisioned directly per auth.md.",
+  "agent_auth": {
+    "skill": "api-key",
+    "register_uri": "https://formatho.com/auth.md#registration",
+    "methods": [
+      {
+        "type": "api_key",
+        "description": "Static bearer token provisioned per agent identity",
+        "documentation": "https://formatho.com/auth.md"
+      }
+    ]
+  }
+}
