@@ -259,7 +259,7 @@ const _popularTools = [
   { name: 'UUID Gen', path: '/uuid', tag: 'Generate', emoji: '🆔' },
   { name: 'SQL Format', path: '/sql', tag: 'Format', emoji: '🗃️' },
   { name: 'Regex Test', path: '/regex-tester', tag: 'Test', emoji: '🔍' },
-  { name: 'Hash Gen', path: '/hash-text', tag: 'Crypto', emoji: '🔒' },
+  { name: 'Hash Gen', path: '/hash-text', tag: 'Crypto', emoji: '🔐' },
   { name: 'QR Code', path: '/qr-code-generator', tag: 'Generate', emoji: '📱' },
   { name: 'Crontab', path: '/crontab-generator', tag: 'Schedule', emoji: '⏰' },
   { name: 'Markdown', path: '/markdown', tag: 'Editor', emoji: '📝' },

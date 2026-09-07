@@ -153,7 +153,7 @@ onMounted(() => {
       <!-- Privacy Section -->
       <Card>
         <CardHeader>
-          <CardTitle>🔒 Privacy First</CardTitle>
+          <CardTitle class="flex items-center gap-2"><Lock class="w-4 h-4" /> Privacy First</CardTitle>
         </CardHeader>
         <CardContent class="space-y-2">
           <p class="text-muted-foreground">
