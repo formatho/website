@@ -410,6 +410,31 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Instantly generate unique personas, traits, and system prompts for AI agents.',
     keywords: 'ai agent identity, agent persona, agent traits, system prompts, agent generator, artificial intelligence',
   },
+  'pii-redactor': {
+    title: 'PII Redactor - Remove Personal Data Before AI | Formatho',
+    description: 'Scan text for PII before sending to an LLM: emails, phones, SSNs, credit cards, API keys, IPs. Mask or replace sensitive data client-side.',
+    keywords: 'pii redactor, data redaction, remove personal data, llm privacy, text anonymizer, scrub pii',
+  },
+  'openai-request-builder': {
+    title: 'OpenAI API Request Builder - curl, Python, JS | Formatho',
+    description: 'Build OpenAI chat/completions API requests visually. Generate ready-to-run curl, Python, and JavaScript code. Client-side, no API key needed.',
+    keywords: 'openai api builder, chat completions curl, openai request generator, gpt-4o api call, llm code generator',
+  },
+  'context-splitter': {
+    title: 'Context Window Splitter - RAG Chunking Tool | Formatho',
+    description: 'Split long text into RAG-ready chunks by tokens, sentences, or paragraphs. See overlap, chunk sizes, and context usage. Client-side.',
+    keywords: 'context window splitter, rag chunking, text chunker, llm text splitting, document chunking',
+  },
+  'prompt-template-renderer': {
+    title: 'Prompt Template Renderer - Variable Substitution | Formatho',
+    description: 'Paste a prompt with {{variables}} and get an auto-generated form to fill each variable. Renders with token count. Client-side.',
+    keywords: 'prompt template renderer, prompt variable substitution, llm prompt template, prompt form generator',
+  },
+  'llm-json-validator': {
+    title: 'LLM JSON Output Validator & Extractor | Formatho',
+    description: 'Extract and validate JSON from any AI model output. Handles markdown fences, prose, trailing commas, smart quotes. Client-side.',
+    keywords: 'llm json validator, extract json from ai, json from chatgpt, validate llm output, json extractor',
+  },
   'tools-local-token-counter': {
     title: 'LLM Token Counter - GPT-4o, GPT-4, o1, Davinci | Formatho',
     description: 'Count tokens for GPT-4o, GPT-4, GPT-3.5, o1, and legacy models locally. Compare token counts across tokenizers (o200k_base, cl100k_base, p50k_base). Free, private, no API calls.',
