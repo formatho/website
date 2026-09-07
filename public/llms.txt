@@ -95,7 +95,7 @@ The same tool catalog powers 140+ free browser tools at formatho.com - every too
 - [Camera Recorder]: https://formatho.com/tools/camera-recorder — Record video from your webcam.
 - [SVG Placeholder Generator]: https://formatho.com/tools/svg-placeholder-generator — Generate SVG placeholder images.
 - [Agent Identity Generator]: https://formatho.com/tools/agent-identity-generator — Instantly generate unique personas, traits, and system prompts for AI agents.
-- [Local Token Counter]: https://formatho.com/tools/local-token-counter — Client-side LLM token counter. 100% private, no API calls.
+- [LLM Token Counter]: https://formatho.com/tools/local-token-counter — Count tokens for GPT-4o, GPT-4, o1, and legacy models locally. Compare across tokenizers, estimate API costs. No API calls.
 - [Meta Tag Generator]: https://formatho.com/tools/meta-tag-generator — Generate HTML meta tags for SEO.
 
 ### Converters & Calculators

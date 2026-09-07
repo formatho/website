@@ -176,7 +176,7 @@ export const tools: ToolCategory[] = [
       { name: 'Camera Recorder', description: 'Record video from your webcam.', route: '/tools/camera-recorder', iconName: 'Video' },
       { name: 'SVG Placeholder Generator', description: 'Generate SVG placeholder images.', route: '/tools/svg-placeholder-generator', iconName: 'Image' },
       { name: 'Agent Identity Generator', description: 'Instantly generate unique personas, traits, and system prompts for AI agents.', route: '/tools/agent-identity-generator', iconName: 'UserCircle' },
-      { name: 'Local Token Counter', description: 'Client-side LLM token counter. 100% private, no API calls.', route: '/tools/local-token-counter', iconName: 'Hash' },
+      { name: 'LLM Token Counter', description: 'Count tokens for GPT-4o, GPT-4, o1, and legacy models locally. Compare across tokenizers, estimate API costs. No API calls.', route: '/tools/local-token-counter', iconName: 'Hash' },
       { name: 'Meta Tag Generator', description: 'Generate HTML meta tags for SEO.', route: '/tools/meta-tag-generator', iconName: 'Tag' },
     ]
   },
