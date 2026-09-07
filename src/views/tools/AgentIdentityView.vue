@@ -139,7 +139,7 @@ const copySystemPrompt = async () => {
     <!-- Privacy Notice -->
     <div class="glass-card p-4 text-center border-l-4 border-primary">
       <div class="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-        <span class="text-xl">🔒</span>
+        <Lock class="w-5 h-5 text-primary shrink-0" />
         <span class="font-medium">Privacy Check:</span>
         <span>This tool runs 100% in your browser. No data is sent to any AI service.</span>
       </div>
