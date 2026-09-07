@@ -2032,7 +2032,18 @@ const p2Content = {
   '/tools/json-to-toml': { intro: ['Convert JSON to TOML format. TOML is used by Rust, Python, and many modern config files.', 'Paste JSON to get the equivalent TOML. Handles nested tables, arrays, and primitive types.'], howTo: ['Paste your JSON.', 'The TOML output appears.', 'Copy for your config file.'] },
   '/tools/keycode-info': { intro: ['See keyboard event codes in real-time. Displays keyCode, key, code, and modifiers for any key press.', 'Press any key to see its JavaScript event properties. Useful for building keyboard shortcuts and debugging key handlers.'], howTo: ['Press any key.', 'See the event properties.', 'Copy the code for your key handler.'] },
   '/tools/list-converter': { intro: ['Convert lists between formats: comma-separated, newline-separated, JSON array, quoted list, and more.', 'Paste a list in any format and convert it to another. Handles custom delimiters and quoting options.'], howTo: ['Paste your list.', 'Choose the output format.', 'Copy the converted result.'] },
-  '/tools/local-token-counter': { intro: ['Count LLM tokens for any text without sending it to an API. Works with GPT and Claude tokenizers.', 'Paste text to see the token count computed locally using the gpt-tokenizer library. No network calls — your prompts never leave the browser.'], howTo: ['Paste your text or prompt.', 'The token count appears instantly.', 'Use to estimate API costs or check context limits.'] },
+  '/tools/local-token-counter': {
+    intro: [
+      'Tokens are how language models measure text: every prompt, system message, and completion are broken into sub-word chunks that determine your API cost and whether you fit within a context window. GPT-4o uses the o200k_base tokenizer, GPT-4 and GPT-3.5 use cl100k_base, and older models use p50k_base and r50k_base — the same text produces different token counts on each.',
+      'This counter runs six tokenizers entirely in your browser using the same BPE algorithms OpenAI uses in tiktoken. No API calls, no data sent to any server — your prompts, code, and documents never leave your machine. Switch between models to compare counts, see tokens-per-word and characters-per-token ratios, and use the cross-model comparison to pick the most cost-efficient model for your workload.'
+    ],
+    howTo: [
+      'Select a model (GPT-4o, GPT-4, o1, or legacy GPT-3 models).',
+      'Paste or type your text — the token count updates instantly.',
+      'Review tokens, characters, words, tokens/word, and chars/token metrics.',
+      'Click "Compare all models" to see token counts for every tokenizer side by side with context window usage.'
+    ]
+  },
   '/tools/mac-address-generator': { intro: ['Generate random MAC addresses for testing and lab environments. Supports all standard formats.', 'Choose a format (colon, hyphen, dot, or bare) and generate single or batches. Includes options for locally-administered and multicast flags.'], howTo: ['Choose the output format.', 'Click generate.', 'Copy the MAC address.'] },
   '/tools/mac-address-lookup': { intro: ['Look up the vendor and manufacturer for any MAC address. Identifies which company registered the OUI (Organizationally Unique Identifier).', 'Enter a MAC address to find the vendor name and address prefix. Uses the IEEE OUI database.'], howTo: ['Enter a MAC address.', 'The vendor information appears.', 'Use for asset tracking or network identification.'] },
   '/tools/math-evaluator': { intro: ['Evaluate mathematical expressions with support for operators, functions, and constants. A calculator that handles complex formulas.', 'Enter an expression like sqrt(144) + 2^3 or sin(pi/4) to get the result. Supports standard math functions.'], howTo: ['Type your expression.', 'The result appears as you type.', 'Use functions like sqrt, sin, cos, log.'] },
@@ -2740,3 +2751,43 @@ const vaultAnalyzerFAQs = {
 
 Object.assign(toolSEOContent, vaultAnalyzerContent)
 Object.assign(toolSpecificFAQ, vaultAnalyzerFAQs)
+
+
+const tokenCounterFAQs = {
+  '/tools/local-token-counter': [
+    {
+      question: 'What is a token in an LLM?',
+      answer: 'A token is a chunk of text that a language model processes as a single unit — typically a word, part of a word, or punctuation. English text averages roughly 1 token per 0.75 words (or about 4 characters). Models like GPT-4o, GPT-4, and Claude use different tokenizers that split text differently, which is why the same prompt can cost different amounts depending on the model.'
+    },
+    {
+      question: 'How many tokens does GPT-4o use compared to GPT-4?',
+      answer: 'GPT-4o uses the o200k_base tokenizer which is typically 10-20% more efficient than GPT-4\u2019s cl100k_base for English text. For example, 1,000 words of English averages ~1,300 tokens with GPT-4o but ~1,500 tokens with GPT-4. Use the cross-model comparison above to see exact counts for your specific text.'
+    },
+    {
+      question: 'Are these token counts exact?',
+      answer: 'Yes for the tokenizers we implement (o200k_base, cl100k_base, p50k_base, r50k_base) — these use the same BPE algorithms as OpenAI\u2019s tiktoken library. However, actual API usage may add a few tokens for system messages, message formatting overhead, and tool definitions that wrap your input. Add 3-5 tokens per message for chat formatting.'
+    },
+    {
+      question: 'How do I calculate my OpenAI API cost from token count?',
+      answer: 'Multiply your input tokens by the model\u2019s input price and output tokens by the output price. For GPT-4o: $2.50 per 1M input tokens and $10.00 per 1M output tokens. For GPT-4o mini: $0.15 per 1M input and $0.60 per 1M output. This counter gives you the exact input token count — your actual cost also depends on the response length.'
+    },
+    {
+      question: 'Why does the same text have different token counts per model?',
+      answer: 'Each model family uses a different Byte Pair Encoding (BPE) tokenizer trained on different data. GPT-4o\u2019s o200k_base handles non-English languages, code, and special characters more efficiently than GPT-4\u2019s cl100k_base. Legacy models like text-davinci-003 use older tokenizers that are less efficient for modern text. Use the comparison view to find the cheapest model for your content.'
+    },
+    {
+      question: 'What is the context window for each model?',
+      answer: 'GPT-4o, GPT-4o mini, GPT-4, GPT-4-turbo, and o1-preview all support 128,000 token context windows. Legacy GPT-3 models like text-davinci-003 support 4,096 tokens. The comparison view shows what percentage of each model\u2019s context window your text consumes.'
+    },
+    {
+      question: 'Does this tool handle non-English text and emoji correctly?',
+      answer: 'Yes. The tokenizers handle Unicode, emoji, CJK (Chinese, Japanese, Korean), and right-to-left scripts. Note that non-English text typically uses more tokens per word than English — Chinese averages ~1.5 tokens per character, and emoji can use 2-4 tokens each depending on the tokenizer.'
+    },
+    {
+      question: 'Is my text sent to any server?',
+      answer: 'No. This tool runs entirely in your browser using the gpt-tokenizer JavaScript library. There are no API calls, no analytics on your text, and no server-side processing. You can verify this by opening your browser\u2019s network tab — zero requests are made while counting tokens.'
+    }
+  ]
+}
+
+Object.assign(toolSpecificFAQ, tokenCounterFAQs)

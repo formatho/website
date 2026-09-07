@@ -411,9 +411,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'ai agent identity, agent persona, agent traits, system prompts, agent generator, artificial intelligence',
   },
   'tools-local-token-counter': {
-    title: 'LLM Token Counter - Local & Private Tokenizer | Formatho',
-    description: 'Client-side LLM token counter. 100% private, no API calls. Count tokens for text input using local JavaScript.',
-    keywords: 'token counter, llm token counter, gpt token count, claude token count, local token counter, privacy-first',
+    title: 'LLM Token Counter - GPT-4o, GPT-4, o1, Davinci | Formatho',
+    description: 'Count tokens for GPT-4o, GPT-4, GPT-3.5, o1, and legacy models locally. Compare token counts across tokenizers (o200k_base, cl100k_base, p50k_base). Free, private, no API calls.',
+    keywords: 'token counter, llm token counter, gpt-4o token count, gpt-4 tokenizer, gpt-3.5 token counter, o200k_base, cl100k_base, p50k_base, tiktoken alternative, token cost calculator, ai token counter, openai token count, prompt token counter, context window calculator',
   },
   'agents': {
     title: 'Agent Browser - Blockchain Agents with Reputation',
