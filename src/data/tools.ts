@@ -176,6 +176,11 @@ export const tools: ToolCategory[] = [
       { name: 'Camera Recorder', description: 'Record video from your webcam.', route: '/tools/camera-recorder', iconName: 'Video' },
       { name: 'SVG Placeholder Generator', description: 'Generate SVG placeholder images.', route: '/tools/svg-placeholder-generator', iconName: 'Image' },
       { name: 'Agent Identity Generator', description: 'Instantly generate unique personas, traits, and system prompts for AI agents.', route: '/tools/agent-identity-generator', iconName: 'UserCircle' },
+      { name: 'PII Redactor', description: 'Scan and remove personal data (emails, phones, SSNs, API keys) before sending to any AI model. Client-side.', route: '/tools/pii-redactor', iconName: 'EyeOff' },
+      { name: 'OpenAI API Request Builder', description: 'Build chat/completions requests visually — model, messages, parameters. Generates curl, Python, and JavaScript code.', route: '/tools/openai-request-builder', iconName: 'Terminal' },
+      { name: 'Context Window Splitter', description: 'Chunk long text for RAG by tokens, sentences, or paragraphs. Shows overlap and context usage per chunk.', route: '/tools/context-splitter', iconName: 'Scissors' },
+      { name: 'Prompt Template Renderer', description: 'Auto-generate a form from {{variables}} in your prompt template. Fill values, get the rendered prompt with token count.', route: '/tools/prompt-template-renderer', iconName: 'Braces' },
+      { name: 'LLM JSON Validator', description: 'Extract and validate JSON from any AI model output — handles markdown fences, prose, trailing commas, smart quotes.', route: '/tools/llm-json-validator', iconName: 'FileJson' },
       { name: 'LLM Token Counter', description: 'Count tokens for GPT-4o, GPT-4, o1, and legacy models locally. Compare across tokenizers, estimate API costs. No API calls.', route: '/tools/local-token-counter', iconName: 'Hash' },
       { name: 'Meta Tag Generator', description: 'Generate HTML meta tags for SEO.', route: '/tools/meta-tag-generator', iconName: 'Tag' },
     ]

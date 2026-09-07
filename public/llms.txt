@@ -95,6 +95,11 @@ The same tool catalog powers 140+ free browser tools at formatho.com - every too
 - [Camera Recorder]: https://formatho.com/tools/camera-recorder — Record video from your webcam.
 - [SVG Placeholder Generator]: https://formatho.com/tools/svg-placeholder-generator — Generate SVG placeholder images.
 - [Agent Identity Generator]: https://formatho.com/tools/agent-identity-generator — Instantly generate unique personas, traits, and system prompts for AI agents.
+- [PII Redactor]: https://formatho.com/tools/pii-redactor — Scan and remove personal data (emails, phones, SSNs, API keys) before sending to any AI model. Client-side.
+- [OpenAI API Request Builder]: https://formatho.com/tools/openai-request-builder — Build chat/completions requests visually — model, messages, parameters. Generates curl, Python, and JavaScript code.
+- [Context Window Splitter]: https://formatho.com/tools/context-splitter — Chunk long text for RAG by tokens, sentences, or paragraphs. Shows overlap and context usage per chunk.
+- [Prompt Template Renderer]: https://formatho.com/tools/prompt-template-renderer — Auto-generate a form from {{variables}} in your prompt template. Fill values, get the rendered prompt with token count.
+- [LLM JSON Validator]: https://formatho.com/tools/llm-json-validator — Extract and validate JSON from any AI model output — handles markdown fences, prose, trailing commas, smart quotes.
 - [LLM Token Counter]: https://formatho.com/tools/local-token-counter — Count tokens for GPT-4o, GPT-4, o1, and legacy models locally. Compare across tokenizers, estimate API costs. No API calls.
 - [Meta Tag Generator]: https://formatho.com/tools/meta-tag-generator — Generate HTML meta tags for SEO.
 

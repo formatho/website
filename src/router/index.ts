@@ -494,6 +494,36 @@ export const routes = [
         meta: routeMeta['tools-agent-identity-generator']
       },
       {
+        path: '/tools/pii-redactor',
+        name: 'pii-redactor',
+        component: () => import('@/views/PiiRedactorView.vue'),
+        meta: routeMeta['pii-redactor']
+      },
+      {
+        path: '/tools/openai-request-builder',
+        name: 'openai-request-builder',
+        component: () => import('@/views/OpenAiRequestBuilderView.vue'),
+        meta: routeMeta['openai-request-builder']
+      },
+      {
+        path: '/tools/context-splitter',
+        name: 'context-splitter',
+        component: () => import('@/views/ContextSplitterView.vue'),
+        meta: routeMeta['context-splitter']
+      },
+      {
+        path: '/tools/prompt-template-renderer',
+        name: 'prompt-template-renderer',
+        component: () => import('@/views/PromptTemplateRendererView.vue'),
+        meta: routeMeta['prompt-template-renderer']
+      },
+      {
+        path: '/tools/llm-json-validator',
+        name: 'llm-json-validator',
+        component: () => import('@/views/JsonFromLlmView.vue'),
+        meta: routeMeta['llm-json-validator']
+      },
+      {
         path: '/tools/local-token-counter',
         name: 'tools-local-token-counter',
         component: () => import(/* webpackPrefetch: true */ '../views/LocalTokenCounterView.vue'),
