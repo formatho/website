@@ -410,6 +410,16 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Instantly generate unique personas, traits, and system prompts for AI agents.',
     keywords: 'ai agent identity, agent persona, agent traits, system prompts, agent generator, artificial intelligence',
   },
+  'iso20022-validator': {
+    title: 'ISO 20022 Message Validator - pain.001, pacs.008 | Formatho',
+    description: 'Validate ISO 20022 payment messages: pain, pacs, camt families. Auto-detects message type, checks required fields, pretty-prints XML. Free, client-side.',
+    keywords: 'iso 20022 validator, pain.001 validator, pacs.008 validator, camt.053 validator, iso 20022 xml, payment message validation',
+  },
+  'pain001-builder': {
+    title: 'pain.001 Message Builder - ISO 20022 Credit Transfer | Formatho',
+    description: 'Build ISO 20022 pain.001 Customer Credit Transfer Initiation messages visually. Fill debtor, creditor, amount → get valid XML. Free, no upload.',
+    keywords: 'pain.001 builder, iso 20022 message generator, pain.001 example xml, credit transfer initiation, sepa payment message',
+  },
   'pii-redactor': {
     title: 'PII Redactor - Remove Personal Data Before AI | Formatho',
     description: 'Scan text for PII before sending to an LLM: emails, phones, SSNs, credit cards, API keys, IPs. Mask or replace sensitive data client-side.',

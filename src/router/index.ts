@@ -494,6 +494,18 @@ export const routes = [
         meta: routeMeta['tools-agent-identity-generator']
       },
       {
+        path: '/tools/iso20022-validator',
+        name: 'iso20022-validator',
+        component: () => import('@/views/Iso20022ValidatorView.vue'),
+        meta: routeMeta['iso20022-validator']
+      },
+      {
+        path: '/tools/pain001-builder',
+        name: 'pain001-builder',
+        component: () => import('@/views/Pain001BuilderView.vue'),
+        meta: routeMeta['pain001-builder']
+      },
+      {
         path: '/tools/pii-redactor',
         name: 'pii-redactor',
         component: () => import('@/views/PiiRedactorView.vue'),
