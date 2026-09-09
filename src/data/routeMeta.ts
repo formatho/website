@@ -425,6 +425,21 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Count rows, columns, and cells in CSV data. Handles quoted fields, custom delimiters, shows column types and empty values. Free, client-side.',
     keywords: 'csv row counter, csv column count, count csv lines, csv dimensions, how many rows in csv, csv analyzer',
   },
+  'shamir-splitter': {
+    title: 'Shamir Secret Sharing - Split & Combine Online | Formatho',
+    description: 'Split secrets into N shares where any threshold K reconstructs. Visual polynomial interpolation, GF(257) arithmetic. Free, private, client-side.',
+    keywords: 'shamir secret sharing, split secret into shares, threshold cryptography, secret sharing online, k of n scheme',
+  },
+  'mpc-demo': {
+    title: 'MPC Demo - How Secure Multi-Party Computation Works | Formatho',
+    description: 'Interactive demo: split numbers into additive shares, compute on encrypted shares, reconstruct result. See how MPC enables private AI, confidential DeFi, sealed auctions. Client-side.',
+    keywords: 'mpc demo, secure multi-party computation, additive secret sharing, how does mpc work, encrypted computation, privacy preserving',
+  },
+  'pedersen-commitment': {
+    title: 'Pedersen Commitment Calculator - Commit Without Revealing | Formatho',
+    description: 'Create Pedersen commitments over secp256k1: bind to a value without revealing it. Hiding and binding. Free, client-side.',
+    keywords: 'pedersen commitment, commitment scheme, hiding commitment, binding commitment, zero knowledge, cryptographic commitment',
+  },
   'pii-redactor': {
     title: 'PII Redactor - Remove Personal Data Before AI | Formatho',
     description: 'Scan text for PII before sending to an LLM: emails, phones, SSNs, credit cards, API keys, IPs. Mask or replace sensitive data client-side.',
