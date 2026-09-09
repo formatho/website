@@ -420,6 +420,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Build ISO 20022 pain.001 Customer Credit Transfer Initiation messages visually. Fill debtor, creditor, amount → get valid XML. Free, no upload.',
     keywords: 'pain.001 builder, iso 20022 message generator, pain.001 example xml, credit transfer initiation, sepa payment message',
   },
+  'csv-counter': {
+    title: 'CSV Row & Column Counter - Online, Private | Formatho',
+    description: 'Count rows, columns, and cells in CSV data. Handles quoted fields, custom delimiters, shows column types and empty values. Free, client-side.',
+    keywords: 'csv row counter, csv column count, count csv lines, csv dimensions, how many rows in csv, csv analyzer',
+  },
   'pii-redactor': {
     title: 'PII Redactor - Remove Personal Data Before AI | Formatho',
     description: 'Scan text for PII before sending to an LLM: emails, phones, SSNs, credit cards, API keys, IPs. Mask or replace sensitive data client-side.',
