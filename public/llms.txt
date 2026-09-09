@@ -48,6 +48,7 @@ The same tool catalog powers 140+ free browser tools at formatho.com - every too
 - [JSON <> YAML]: https://formatho.com/tools/json-yaml — Convert JSON to YAML and YAML to JSON instantly.
 - [JSON <> CSV]: https://formatho.com/tools/json-csv — Convert JSON to CSV and CSV to JSON format instantly.
 - [JSON Diff]: https://formatho.com/tools/json-diff — Compare two JSON objects and see differences.
+- [CSV Row & Column Counter]: https://formatho.com/tools/csv-counter — Count rows, columns, and cells in CSV data. Handles quoted fields, auto-detects delimiter, shows column types and empty values.
 - [ISO 20022 Validator]: https://formatho.com/tools/iso20022-validator — Validate ISO 20022 payment messages (pain.001, pacs.008, camt.053). Auto-detects type, checks required fields, pretty-prints XML.
 - [pain.001 Builder]: https://formatho.com/tools/pain001-builder — Build ISO 20022 Customer Credit Transfer Initiation XML visually — debtor, creditor, amount, SEPA service level, purpose codes.
 - [XML Formatter]: https://formatho.com/tools/xml-formatter — Format and prettify XML documents.

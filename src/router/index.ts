@@ -506,6 +506,12 @@ export const routes = [
         meta: routeMeta['pain001-builder']
       },
       {
+        path: '/tools/csv-counter',
+        name: 'csv-counter',
+        component: () => import('@/views/CsvCounterView.vue'),
+        meta: routeMeta['csv-counter']
+      },
+      {
         path: '/tools/pii-redactor',
         name: 'pii-redactor',
         component: () => import('@/views/PiiRedactorView.vue'),
