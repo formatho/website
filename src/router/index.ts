@@ -512,6 +512,24 @@ export const routes = [
         meta: routeMeta['csv-counter']
       },
       {
+        path: '/tools/shamir-splitter',
+        name: 'shamir-splitter',
+        component: () => import('@/views/ShamirSplitterView.vue'),
+        meta: routeMeta['shamir-splitter']
+      },
+      {
+        path: '/tools/mpc-demo',
+        name: 'mpc-demo',
+        component: () => import('@/views/MpcDemoView.vue'),
+        meta: routeMeta['mpc-demo']
+      },
+      {
+        path: '/tools/pedersen-commitment',
+        name: 'pedersen-commitment',
+        component: () => import('@/views/PedersenCommitmentView.vue'),
+        meta: routeMeta['pedersen-commitment']
+      },
+      {
         path: '/tools/pii-redactor',
         name: 'pii-redactor',
         component: () => import('@/views/PiiRedactorView.vue'),

@@ -32,6 +32,9 @@ The same tool catalog powers 140+ free browser tools at formatho.com - every too
 - [Bcrypt]: https://formatho.com/tools/bcrypt — Generate and verify Bcrypt password hashes.
 - [Encrypt/Decrypt]: https://formatho.com/tools/encryption — Encrypt and decrypt text using various algorithms.
 - [HMAC Generator]: https://formatho.com/tools/hmac-generator — Generate HMAC hash codes with various algorithms.
+- [Shamir Secret Sharing]: https://formatho.com/tools/shamir-splitter — Split secrets into N shares where any threshold K reconstructs. Visual polynomial interpolation over GF(257). Client-side.
+- [MPC Demo]: https://formatho.com/tools/mpc-demo — Interactive demo of secure multi-party computation: split numbers into shares, compute on encrypted data, reconstruct without revealing inputs.
+- [Pedersen Commitment]: https://formatho.com/tools/pedersen-commitment — Create Pedersen commitments over secp256k1: bind to a value without revealing it. Hiding and binding properties. Client-side.
 - [RSA Key Generator & Signer]: https://formatho.com/tools/rsa-key-pair-generator — Generate RSA key pairs, sign messages with a private key, and verify RSA signatures (PKCS1-v1_5, PSS).
 - [Password Strength]: https://formatho.com/tools/password-strength-analyser — Analyze password strength and get improvement suggestions.
 - [TOTP Generator]: https://formatho.com/tools/otp-code-generator — Generate TOTP codes from secrets. Privacy-first tool.
