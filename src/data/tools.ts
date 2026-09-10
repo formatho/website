@@ -101,6 +101,8 @@ export const tools: ToolCategory[] = [
       { name: 'Bcrypt', description: 'Generate and verify Bcrypt password hashes.', route: '/tools/bcrypt', iconName: 'Lock' },
       { name: 'Encrypt/Decrypt', description: 'Encrypt and decrypt text using various algorithms.', route: '/tools/encryption', iconName: 'LockKeyhole' },
       { name: 'HMAC Generator', description: 'Generate HMAC hash codes with various algorithms.', route: '/tools/hmac-generator', iconName: 'Hash' },
+      { name: 'X25519 Key Exchange', description: 'Generate X25519 keypairs and perform ECDH key exchange. See how two parties derive the same shared secret without transmitting it.', route: '/tools/x25519-demo', iconName: 'ArrowRightLeft' },
+      { name: 'CTR Mode Visualizer', description: 'Interactive counter mode encryption demo: watch keystream blocks XOR with plaintext. Block-by-block breakdown with nonce/counter visualization.', route: '/tools/ctr-mode', iconName: 'Binary' },
       { name: 'Shamir Secret Sharing', description: 'Split secrets into N shares where any threshold K reconstructs. Visual polynomial interpolation over GF(257). Client-side.', route: '/tools/shamir-splitter', iconName: 'Split' },
       { name: 'MPC Demo', description: 'Interactive demo of secure multi-party computation: split numbers into shares, compute on encrypted data, reconstruct without revealing inputs.', route: '/tools/mpc-demo', iconName: 'Cpu' },
       { name: 'Pedersen Commitment', description: 'Create Pedersen commitments over secp256k1: bind to a value without revealing it. Hiding and binding properties. Client-side.', route: '/tools/pedersen-commitment', iconName: 'Lock' },

@@ -440,6 +440,16 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Create Pedersen commitments over secp256k1: bind to a value without revealing it. Hiding and binding. Free, client-side.',
     keywords: 'pedersen commitment, commitment scheme, hiding commitment, binding commitment, zero knowledge, cryptographic commitment',
   },
+  'x25519-demo': {
+    title: 'X25519 Key Exchange Demo - ECDH Online | Formatho',
+    description: 'Generate X25519 keypairs and perform ECDH key exchange. See how two parties derive the same shared secret without transmitting it. Used by Signal, TLS 1.3, Arcium. Free, client-side.',
+    keywords: 'x25519 key exchange, diffie hellman demo, ecdh x25519, curve25519, shared secret, elliptic curve key exchange',
+  },
+  'ctr-mode': {
+    title: 'CTR Mode Encryption Visualizer - Counter Mode Demo | Formatho',
+    description: 'Interactive CTR mode demo: watch counter blocks generate a keystream that XORs with plaintext. Block-by-block breakdown. Used by AES-GCM, Arcium Rescue cipher. Free, client-side.',
+    keywords: 'ctr mode demo, counter mode encryption, block cipher modes, aes ctr, keystream visualizer, nonce handling',
+  },
   'pii-redactor': {
     title: 'PII Redactor - Remove Personal Data Before AI | Formatho',
     description: 'Scan text for PII before sending to an LLM: emails, phones, SSNs, credit cards, API keys, IPs. Mask or replace sensitive data client-side.',
