@@ -32,6 +32,8 @@ The same tool catalog powers 140+ free browser tools at formatho.com - every too
 - [Bcrypt]: https://formatho.com/tools/bcrypt — Generate and verify Bcrypt password hashes.
 - [Encrypt/Decrypt]: https://formatho.com/tools/encryption — Encrypt and decrypt text using various algorithms.
 - [HMAC Generator]: https://formatho.com/tools/hmac-generator — Generate HMAC hash codes with various algorithms.
+- [X25519 Key Exchange]: https://formatho.com/tools/x25519-demo — Generate X25519 keypairs and perform ECDH key exchange. See how two parties derive the same shared secret without transmitting it.
+- [CTR Mode Visualizer]: https://formatho.com/tools/ctr-mode — Interactive counter mode encryption demo: watch keystream blocks XOR with plaintext. Block-by-block breakdown with nonce/counter visualization.
 - [Shamir Secret Sharing]: https://formatho.com/tools/shamir-splitter — Split secrets into N shares where any threshold K reconstructs. Visual polynomial interpolation over GF(257). Client-side.
 - [MPC Demo]: https://formatho.com/tools/mpc-demo — Interactive demo of secure multi-party computation: split numbers into shares, compute on encrypted data, reconstruct without revealing inputs.
 - [Pedersen Commitment]: https://formatho.com/tools/pedersen-commitment — Create Pedersen commitments over secp256k1: bind to a value without revealing it. Hiding and binding properties. Client-side.

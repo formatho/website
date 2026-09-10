@@ -530,6 +530,18 @@ export const routes = [
         meta: routeMeta['pedersen-commitment']
       },
       {
+        path: '/tools/x25519-demo',
+        name: 'x25519-demo',
+        component: () => import('@/views/X25519DemoView.vue'),
+        meta: routeMeta['x25519-demo']
+      },
+      {
+        path: '/tools/ctr-mode',
+        name: 'ctr-mode',
+        component: () => import('@/views/CtrModeDemoView.vue'),
+        meta: routeMeta['ctr-mode']
+      },
+      {
         path: '/tools/pii-redactor',
         name: 'pii-redactor',
         component: () => import('@/views/PiiRedactorView.vue'),
