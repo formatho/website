@@ -5,7 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { createPublicClient, http, type Abi, type Address } from 'viem'
+import { createPublicClient, http, encodeFunctionData, type Abi, type Address } from 'viem'
+import { Wallet, ExternalLink, Zap, LogOut } from 'lucide-vue-next'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
@@ -232,6 +233,182 @@ function loadUniswap(preset: { abi: unknown[]; address: string }) {
   if (preset.address) activeTab.value.contractAddress = preset.address
 }
 
+// ─── Wallet connection ───
+const walletAddress = ref<string | null>(null)
+const walletChainId = ref<number | null>(null)
+const isConnecting = ref(false)
+const walletError = ref('')
+
+const hasWallet = computed(() => typeof window !== 'undefined' && !!window.ethereum)
+
+async function connectWallet() {
+  if (!hasWallet.value) {
+    walletError.value = 'No Ethereum wallet found. Install MetaMask or another wallet.'
+    return
+  }
+  isConnecting.value = true
+  walletError.value = ''
+  try {
+    const accounts: string[] = await window.ethereum.request({ method: 'eth_requestAccounts' })
+    walletAddress.value = accounts[0] || null
+    const chainId: string = await window.ethereum.request({ method: 'eth_chainId' })
+    walletChainId.value = parseInt(chainId, 16)
+  } catch (e: any) {
+    walletError.value = e?.message || 'Failed to connect wallet'
+  } finally {
+    isConnecting.value = false
+  }
+}
+
+function disconnectWallet() {
+  walletAddress.value = null
+  walletChainId.value = null
+  walletError.value = ''
+}
+
+// Listen for account/chain changes
+if (typeof window !== 'undefined' && window.ethereum) {
+  window.ethereum.on?.('accountsChanged', (accounts: string[]) => {
+    walletAddress.value = accounts[0] || null
+    if (!accounts[0]) walletChainId.value = null
+  })
+  window.ethereum.on?.('chainChanged', (chainId: string) => {
+    walletChainId.value = parseInt(chainId, 16)
+  })
+}
+
+// ─── Write functions ───
+const writeFunctions = computed<AbiFunction[]>(() => {
+  const tab = activeTab.value
+  const raw = tab.abiText.trim()
+  if (!raw || abiError.value) return []
+  try {
+    const parsed = JSON.parse(raw)
+    const items = Array.isArray(parsed) ? parsed : (parsed.abi ?? [])
+    return items
+      .filter((i: { type?: string; stateMutability?: string }) =>
+        i.type === 'function' && i.stateMutability !== 'view' && i.stateMutability !== 'pure')
+      .map((item: Record<string, unknown>) => {
+        const fn = item as unknown as { name: string; inputs?: Array<{ type: string; name: string }>; outputs?: Array<{ type: string; name: string }>; stateMutability: string }
+        const inputs = fn.inputs ?? []
+        const sig = `${fn.name}(${inputs.map((i) => i.type).join(',')})`
+        return { name: fn.name, sig, stateMutability: fn.stateMutability, inputs, outputs: fn.outputs ?? [], item }
+      })
+  } catch { return [] }
+})
+
+// Write results stored per tab
+interface WriteResult {
+  loading: boolean
+  txHash?: string
+  error?: string
+  confirmed?: boolean
+  blockNumber?: number
+}
+const writeResults = reactive<Record<string, Record<string, WriteResult>>>({})
+
+function getWriteResult(tab: Tab, sig: string): WriteResult {
+  if (!writeResults[tab.id]) writeResults[tab.id] = {}
+  if (!writeResults[tab.id][sig]) writeResults[tab.id][sig] = { loading: false }
+  return writeResults[tab.id][sig]
+}
+
+async function writeContractFunction(fn: AbiFunction) {
+  const tab = activeTab.value
+  const key = fn.sig
+  const result = getWriteResult(tab, key)
+
+  if (!walletAddress.value) {
+    result.error = 'Connect your wallet first'
+    return
+  }
+  if (!tab.contractAddress || !/^0x[0-9a-fA-F]{40}$/.test(tab.contractAddress.trim())) {
+    result.error = 'Enter a valid contract address'
+    return
+  }
+
+  result.loading = true
+  result.error = ''
+  result.txHash = undefined
+  result.confirmed = false
+
+  try {
+    const callArgs = fn.inputs.map((input, idx) => parseArg(input, getArg(tab, key, idx)))
+
+    // Encode the function call
+    const data = encodeFunctionData({
+      abi: [fn.item] as Abi,
+      functionName: fn.name,
+      args: callArgs.length ? (callArgs as never) : undefined
+    })
+
+    // Estimate gas
+    const gasHex: string = await window.ethereum.request({
+      method: 'eth_estimateGas',
+      params: [{ from: walletAddress.value, to: tab.contractAddress.trim(), data }]
+    })
+    const gas = BigInt(gasHex)
+
+    // Send transaction
+    const txHash: string = await window.ethereum.request({
+      method: 'eth_sendTransaction',
+      params: [{
+        from: walletAddress.value,
+        to: tab.contractAddress.trim(),
+        data,
+        // Add buffer to gas estimate
+        gas: '0x' + (gas + (gas / BigInt(10))).toString(16)
+      }]
+    })
+
+    result.txHash = txHash
+    result.loading = false
+
+    // Wait for receipt (poll)
+    const pollInterval = setInterval(async () => {
+      try {
+        const receipt = await window.ethereum.request({
+          method: 'eth_getTransactionReceipt',
+          params: [txHash]
+        })
+        if (receipt) {
+          clearInterval(pollInterval)
+          result.confirmed = receipt.status === '0x1'
+          result.blockNumber = parseInt(receipt.blockNumber, 16)
+        }
+      } catch { /* keep polling */ }
+    }, 3000)
+
+    // Stop polling after 5 minutes
+    setTimeout(() => clearInterval(pollInterval), 300000)
+  } catch (e: any) {
+    result.loading = false
+    if (e?.code === 4001) {
+      result.error = 'Transaction rejected by user'
+    } else if (e?.code === -32603) {
+      result.error = 'Transaction would revert. Check your arguments and approvals.'
+    } else {
+      result.error = e?.message?.slice(0, 200) || 'Transaction failed'
+    }
+  }
+}
+
+const explorerUrl = computed(() => {
+  const tab = activeTab.value
+  const chainMap: Record<string, string> = {
+    'eth.llamarpc.com': 'https://etherscan.io/tx/',
+    'mainnet.base.org': 'https://basescan.org/tx/',
+    'arb1.arbitrum.io': 'https://arbiscan.io/tx/',
+    'mainnet.optimism.io': 'https://optimistic.etherscan.io/tx/',
+    'polygon-rpc.com': 'https://polygonscan.com/tx/',
+    'bsc-dataseed.binance.org': 'https://bscscan.com/tx/'
+  }
+  for (const [rpc, explorer] of Object.entries(chainMap)) {
+    if (tab.rpcUrl.includes(rpc)) return explorer
+  }
+  return null
+})
+
 // ─── Argument parsing & function calling (per tab) ───
 function argLabel(input: { type: string; name: string }): string {
   return input.name || input.type
@@ -340,6 +517,30 @@ async function copy(text: string, key: string) {
         </div>
       </div>
       <div class="flex items-center gap-2">
+        <button
+          v-if="!walletAddress"
+          class="no-btn-hover text-xs px-3 py-1.5 border rounded-lg flex items-center gap-1.5 transition-colors"
+          :class="hasWallet ? 'border-blue-500/40 bg-blue-500/10 text-blue-600 hover:bg-blue-500/20' : 'border-border text-muted-foreground'"
+          :disabled="isConnecting"
+          @click="connectWallet"
+        >
+          <Wallet class="w-3.5 h-3.5" />
+          {{ isConnecting ? 'Connecting…' : 'Connect Wallet' }}
+        </button>
+        <div v-else class="flex items-center gap-1.5">
+          <span class="text-[10px] font-mono px-2 py-1 border border-blue-500/30 bg-blue-500/10 text-blue-600 rounded-lg">
+            {{ walletAddress.slice(0, 6) }}…{{ walletAddress.slice(-4) }}
+          </span>
+          <span v-if="walletChainId" class="text-[10px] text-muted-foreground">chain {{ walletChainId }}</span>
+          <button
+            class="no-btn-hover text-xs p-1.5 border border-border rounded-lg text-muted-foreground hover:text-red-500 hover:border-red-500/30 transition-colors"
+            title="Disconnect wallet"
+            @click="disconnectWallet"
+          >
+            <LogOut class="w-3 h-3" />
+          </button>
+        </div>
+        <p v-if="walletError && !walletAddress" class="text-[10px] text-red-500 max-w-32 truncate" :title="walletError">{{ walletError }}</p>
         <button
           class="no-btn-hover text-xs px-3 py-1.5 border rounded-lg flex items-center gap-1.5 transition-colors"
           :class="saveEnabled ? 'border-primary/40 bg-primary/10 text-primary' : 'border-border text-muted-foreground hover:border-foreground/30'"
@@ -534,8 +735,115 @@ async function copy(text: string, key: string) {
         </div>
       </div>
 
+      <!-- Write functions -->
+      <div v-if="writeFunctions.length" class="space-y-1.5">
+        <div class="flex items-center justify-between mb-2">
+          <p class="text-xs font-medium text-amber-600 flex items-center gap-1">
+            <Zap class="w-3 h-3" /> {{ writeFunctions.length }} write functions
+          </p>
+          <p class="text-[10px] text-muted-foreground/60">eth_sendTransaction · requires wallet · costs gas</p>
+        </div>
+        <div
+          v-for="fn in writeFunctions"
+          :key="'w-' + fn.sig"
+          class="border border-amber-500/30 rounded-lg"
+          :class="{ 'bg-amber-500/[0.03]': activeTab.expanded === fn.sig }"
+        >
+          <button
+            class="no-btn-hover w-full flex items-center justify-between gap-3 px-3 py-2.5 text-left"
+            @click="activeTab.expanded = activeTab.expanded === fn.sig ? null : fn.sig"
+          >
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2">
+                <Zap class="w-3 h-3 text-amber-500" />
+                <code class="font-mono text-xs font-semibold text-foreground">{{ fn.name }}</code>
+                <span class="font-mono text-[10px] text-muted-foreground">({{ fn.inputs.map(i => i.type).join(', ') }})</span>
+                <span v-if="fn.stateMutability === 'payable'" class="text-[9px] px-1.5 py-0.5 bg-amber-500/20 text-amber-700 rounded-full font-bold uppercase">payable</span>
+              </div>
+              <code class="font-mono text-[10px] text-muted-foreground/60">
+                {{ fn.stateMutability }} → {{ fn.outputs.map(o => o.type).join(', ') || 'void' }}
+              </code>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <span v-if="getWriteResult(activeTab, fn.sig).txHash" class="text-[10px] px-2 py-0.5 rounded-full font-medium"
+                :class="getWriteResult(activeTab, fn.sig).confirmed === true ? 'bg-green-500/10 text-green-700' : getWriteResult(activeTab, fn.sig).confirmed === false ? 'bg-red-500/10 text-red-600' : 'bg-blue-500/10 text-blue-600'">
+                {{ getWriteResult(activeTab, fn.sig).confirmed === true ? '✓' : getWriteResult(activeTab, fn.sig).confirmed === false ? '✗' : '…' }}
+              </span>
+              <span class="text-muted-foreground text-xs font-mono">{{ activeTab.expanded === fn.sig ? '▾' : '▸' }}</span>
+            </div>
+          </button>
+
+          <div v-if="activeTab.expanded === fn.sig" class="px-3 pb-3 space-y-2.5 border-t border-amber-500/20 pt-2.5">
+            <p v-if="!walletAddress" class="text-xs text-amber-600 bg-amber-500/10 p-2 rounded border border-amber-500/20 flex items-center gap-2">
+              <Wallet class="w-3.5 h-3.5" /> Connect your wallet (top right) to send this transaction.
+            </p>
+            <div v-if="fn.inputs.length" class="grid grid-cols-2 md:grid-cols-3 gap-2">
+              <div v-for="(input, idx) in fn.inputs" :key="idx">
+                <label class="text-[10px] font-mono text-muted-foreground mb-0.5 block">
+                  {{ argLabel(input) }} <span class="opacity-50">({{ input.type }})</span>
+                </label>
+                <Input
+                  v-if="input.type !== 'bool'"
+                  class="font-mono text-xs h-8"
+                  :placeholder="input.type.endsWith('[]') ? 'comma sep' : input.type"
+                  :model-value="getArg(activeTab, fn.sig, idx)"
+                  @update:model-value="setArg(activeTab, fn.sig, idx, String($event ?? ''))"
+                />
+                <select
+                  v-else
+                  class="w-full h-8 rounded-md border border-input bg-transparent px-2 font-mono text-xs"
+                  :value="getArg(activeTab, fn.sig, idx)"
+                  @change="setArg(activeTab, fn.sig, idx, ($event.target as HTMLSelectElement).value)"
+                >
+                  <option value="" disabled>select…</option>
+                  <option value="true">true</option>
+                  <option value="false">false</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <Button size="sm" class="h-8 text-xs bg-amber-600 hover:bg-amber-700 text-white" :disabled="getWriteResult(activeTab, fn.sig).loading || !walletAddress" @click="writeContractFunction(fn)">
+                <Loader2 v-if="getWriteResult(activeTab, fn.sig).loading" class="w-3.5 h-3.5 mr-1 animate-spin" />
+                <Zap v-else class="w-3.5 h-3.5 mr-1" />
+                Send {{ fn.name }}
+              </Button>
+            </div>
+
+            <div v-if="getWriteResult(activeTab, fn.sig).error" class="p-2.5 bg-red-500/10 border border-red-500/20 rounded-md">
+              <p class="text-xs text-red-600 font-mono break-all">{{ getWriteResult(activeTab, fn.sig).error }}</p>
+            </div>
+            <div v-else-if="getWriteResult(activeTab, fn.sig).txHash" class="p-2.5 bg-blue-500/10 border border-blue-500/20 rounded-md space-y-1">
+              <div class="flex items-center justify-between gap-2">
+                <p class="text-xs text-blue-600 font-mono break-all flex-1">tx: {{ getWriteResult(activeTab, fn.sig).txHash }}</p>
+                <div class="flex gap-1 shrink-0">
+                  <Button variant="ghost" size="sm" class="h-6 px-2" aria-label="Copy tx hash" @click="copy(getWriteResult(activeTab, fn.sig).txHash || '', 'tx-' + fn.sig)">
+                    <Check v-if="copied === 'tx-' + fn.sig" class="w-3.5 h-3.5" />
+                    <Copy v-else class="w-3.5 h-3.5" />
+                  </Button>
+                  <a
+                    v-if="explorerUrl"
+                    :href="explorerUrl + getWriteResult(activeTab, fn.sig).txHash"
+                    target="_blank"
+                    rel="noopener"
+                    class="text-blue-600 hover:text-blue-800 p-1"
+                    aria-label="View on explorer"
+                  >
+                    <ExternalLink class="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+              <p v-if="getWriteResult(activeTab, fn.sig).confirmed !== undefined" class="text-xs" :class="getWriteResult(activeTab, fn.sig).confirmed ? 'text-green-600' : 'text-red-600'">
+                {{ getWriteResult(activeTab, fn.sig).confirmed ? '✓ Confirmed' : '✗ Reverted' }}
+                <span v-if="getWriteResult(activeTab, fn.sig).blockNumber">in block {{ getWriteResult(activeTab, fn.sig).blockNumber }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Empty state -->
-      <div v-else-if="!activeTab.abiText" class="flex items-start gap-3 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+      <div v-if="!viewFunctions.length && !writeFunctions.length && !activeTab.abiText" class="flex items-start gap-3 p-4 bg-primary/5 border border-primary/20 rounded-lg">
         <FileJson class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
         <div class="text-sm">
           <p class="text-muted-foreground">Paste a contract ABI to list view functions.</p>
