@@ -237,20 +237,6 @@ const prefetchRoute = (route: string) => {
 }
 
 // Filter tools based on search query
-const _filteredTools_old = computed(() => {
-  if (!searchQuery.value.trim()) {
-    return tools
-  }
-
-  const query = searchQuery.value.toLowerCase()
-  return tools.filter(category =>
-    category.items.some(tool =>
-      tool.name.toLowerCase().includes(query) ||
-      tool.description.toLowerCase().includes(query) ||
-      category.category.toLowerCase().includes(query)
-    )
-  )
-})
 
 const _popularTools = [
   { name: 'JSON ↔ YAML', path: '/json-yaml', tag: 'Convert', emoji: '🔄' },
@@ -420,7 +406,7 @@ const _popularTools = [
     <section class="container mx-auto px-4 py-10 md:py-14" data-v-8d4ed633="">
       <div v-if="searchQuery" class="mb-6">
         <h2 class="text-lg font-bold mb-4">Search results for "{{ searchQuery }}"</h2>
-        <div v-if="filteredTools.length === 0" class="text-muted-foreground text-sm p-8 border border-border rounded-xl text-center">
+        <div v-if="searchResults.length === 0" class="text-muted-foreground text-sm p-8 border border-border rounded-xl text-center">
           No tools match "{{ searchQuery }}". Try a different term.
         </div>
         <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
