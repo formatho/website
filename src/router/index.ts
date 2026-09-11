@@ -542,6 +542,24 @@ export const routes = [
         meta: routeMeta['ctr-mode']
       },
       {
+        path: '/tools/bom-diff',
+        name: 'bom-diff',
+        component: () => import('@/views/BomDiffView.vue'),
+        meta: routeMeta['bom-diff']
+      },
+      {
+        path: '/tools/bom-cost-rollup',
+        name: 'bom-cost-rollup',
+        component: () => import('@/views/BomCostRollupView.vue'),
+        meta: routeMeta['bom-cost-rollup']
+      },
+      {
+        path: '/tools/part-number-generator',
+        name: 'part-number-generator',
+        component: () => import('@/views/PartNumberGeneratorView.vue'),
+        meta: routeMeta['part-number-generator']
+      },
+      {
         path: '/tools/pii-redactor',
         name: 'pii-redactor',
         component: () => import('@/views/PiiRedactorView.vue'),
