@@ -450,6 +450,21 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Interactive CTR mode demo: watch counter blocks generate a keystream that XORs with plaintext. Block-by-block breakdown. Used by AES-GCM, Arcium Rescue cipher. Free, client-side.',
     keywords: 'ctr mode demo, counter mode encryption, block cipher modes, aes ctr, keystream visualizer, nonce handling',
   },
+  'bom-diff': {
+    title: 'BOM Diff Tool - Compare Bills of Materials | Formatho',
+    description: 'Compare two Bills of Materials and see added, removed, and changed parts. Handles CSV/TSV. Free, client-side.',
+    keywords: 'bom diff, bill of materials comparison, bom changes, compare bom, engineering change',
+  },
+  'bom-cost-rollup': {
+    title: 'BOM Cost Roll-up Calculator - Multi-Level | Formatho',
+    description: 'Calculate total cost of multi-level Bills of Materials. Handles indented BOMs with quantities and unit costs. Free, client-side.',
+    keywords: 'bom cost calculator, bill of materials cost, multi-level bom, rolled up cost, product cost',
+  },
+  'part-number-generator': {
+    title: 'Intelligent Part Number Generator | Formatho',
+    description: 'Generate categorised part numbers with configurable category, type, and sequence codes. Batch generation, CSV export. Free, client-side.',
+    keywords: 'part number generator, intelligent part number, pn format, part numbering system',
+  },
   'pii-redactor': {
     title: 'PII Redactor - Remove Personal Data Before AI | Formatho',
     description: 'Scan text for PII before sending to an LLM: emails, phones, SSNs, credit cards, API keys, IPs. Mask or replace sensitive data client-side.',

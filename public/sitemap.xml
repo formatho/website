@@ -1027,6 +1027,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://formatho.com/tools/bom-diff</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/bom-cost-rollup</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/part-number-generator</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/tools/pii-redactor</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
