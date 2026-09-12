@@ -10,6 +10,15 @@ import { resolve } from 'path'
 
 const BASE = 'https://formatho.com'
 
+const CATEGORY_HUBS = {
+  'web3': { name: 'Web3 & Blockchain Tools', blurb: 'EVM contract reader, vanity address generator, Keccak-256 hasher, ABI tools, Uniswap math, multi-chain readers.' },
+  'security': { name: 'Security & Auth Tools', blurb: 'JWT debugger, SAML decoder, OIDC builder, hash generators, encryption, TOTP, password analysis.' },
+  'data-formats': { name: 'Data Format Tools', blurb: 'JSON, YAML, XML, TOML, CSV validators, formatters, converters, diff tools. UUID, Base64, IBAN, ISO 20022.' },
+  'developer': { name: 'Developer Tools', blurb: 'SQL formatter, SQLite browser, Git, regex, Docker, Mermaid viewer, diff checker.' },
+  'converters': { name: 'Converters & Calculators', blurb: 'Timestamp, number base, color, case, temperature converters. Math, ETA, percentage calculators.' },
+  'network': { name: 'Network & Web Tools', blurb: 'IPv4 subnet calculator, MAC tools, IPv6 ULA, URL encoder/parser, HTTP status codes, QR generator.' }
+}
+
 const CATEGORY_BLURBS = {
   Blockchain: 'Web3 and blockchain tools: Keccak-256 hashing, ABI encoding, EVM unit conversion, vanity address generation, and chain readers for EVM, Solana, Polkadot, Cardano, and Cosmos.',
   'Crypto & Security': 'Hashing (Argon2id, bcrypt, SHA), encryption, RSA keys, password analysis - all client-side.',
@@ -50,6 +59,12 @@ lines.push('')
 lines.push('> Secure AI tool infrastructure: Formatho Runtime is a self-hosted MCP server giving AI agents controlled access to developer, security, and EVM tools - permissioned, audit-logged, zero data egress. Runs in your VPC or on-premise. A hosted tier is available at https://mcp.formatho.com/mcp.')
 lines.push('')
 lines.push('The same tool catalog powers 140+ free browser tools at formatho.com - every tool page states what it does, how to use it, and how AI agents can call it via MCP. Private and secure, runs in your browser; nothing you enter is uploaded, logged, or stored.')
+lines.push('')
+lines.push('## Categories')
+lines.push('Category hub pages group every tool with a one-line description each:')
+for (const [slug, desc] of Object.entries(CATEGORY_HUBS)) {
+  lines.push(`- [${desc.name}]: ${BASE}/category/${slug} — ${desc.blurb}`)
+}
 lines.push('')
 lines.push('## Tools')
 for (const cat of categories) {

@@ -4,6 +4,15 @@
 
 The same tool catalog powers 140+ free browser tools at formatho.com - every tool page states what it does, how to use it, and how AI agents can call it via MCP. Private and secure, runs in your browser; nothing you enter is uploaded, logged, or stored.
 
+## Categories
+Category hub pages group every tool with a one-line description each:
+- [Web3 & Blockchain Tools]: https://formatho.com/category/web3 — EVM contract reader, vanity address generator, Keccak-256 hasher, ABI tools, Uniswap math, multi-chain readers.
+- [Security & Auth Tools]: https://formatho.com/category/security — JWT debugger, SAML decoder, OIDC builder, hash generators, encryption, TOTP, password analysis.
+- [Data Format Tools]: https://formatho.com/category/data-formats — JSON, YAML, XML, TOML, CSV validators, formatters, converters, diff tools. UUID, Base64, IBAN, ISO 20022.
+- [Developer Tools]: https://formatho.com/category/developer — SQL formatter, SQLite browser, Git, regex, Docker, Mermaid viewer, diff checker.
+- [Converters & Calculators]: https://formatho.com/category/converters — Timestamp, number base, color, case, temperature converters. Math, ETA, percentage calculators.
+- [Network & Web Tools]: https://formatho.com/category/network — IPv4 subnet calculator, MAC tools, IPv6 ULA, URL encoder/parser, HTTP status codes, QR generator.
+
 ## Tools
 
 ### Web3 & Blockchain
