@@ -96,6 +96,7 @@ The same tool catalog powers 140+ free browser tools at formatho.com - every too
 - [SQL Query Plan]: https://formatho.com/tools/sql-query-plan-visualizer — Visualize SQL execution plans and get optimization tips.
 - [SQL Dialect Converter]: https://formatho.com/tools/sql-dialect-converter — Convert SQL between PostgreSQL, MySQL, SQLite, T-SQL, BigQuery, and more.
 - [Foreign Key Visualizer]: https://formatho.com/tools/foreign-key-visualizer — Map foreign key relationships and find orphaned tables in your schema.
+- [SQLite Browser]: https://formatho.com/tools/sqlite-browser — Open, query, and edit SQLite databases in your browser. Browse tables, run SQL, edit cells, import CSV, export .db files. WebAssembly, no upload.
 - [Chmod Calculator]: https://formatho.com/tools/chmod-calculator — Calculate Unix file permissions.
 - [Docker to Compose]: https://formatho.com/tools/docker-run-to-compose — Convert docker run commands to docker-compose.
 - [Regex Tester]: https://formatho.com/tools/regex-tester — Test and debug regular expressions.
