@@ -163,9 +163,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'visio viewer, microsoft visio viewer, vsdx viewer online, open visio file online, view vsdx without visio, visio file viewer free',
   },
   'bpmn-to-visio': {
-    title: 'BPMN to Visio Converter - Secure MCP Tool for AI | Formatho',
-    description: 'Convert BPMN process diagrams into Microsoft Visio compatible formats. Free, privacy-first converter that runs entirely in your browser.',
-    keywords: 'bpmn to visio, bpmn converter, visio converter, process diagram, bpmn export, microsoft visio, privacy-first',
+    title: 'BPMN to Visio Converter - Free, Layout Preserved | Formatho',
+    description: 'Convert BPMN 2.0 XML to Visio (.vdx) with a live preview and exact BPMN DI layout preservation. Waypoint connectors, auto-layout fallback, conversion summary. Client-side.',
+    keywords: 'bpmn to visio, bpmn converter, convert bpmn to visio, bpmn to vdx, visio converter, bpmn export, camunda to visio, bpmn diagram import visio',
   },
   'evm-converter': {
     title: 'Ethereum Unit Converter Online - Wei, Gwei, Ether | Formatho',
