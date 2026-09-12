@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide, ref } from 'vue'
+import { provide, ref, watch } from 'vue'
 
 interface TabsProps {
   defaultValue?: string
@@ -17,6 +17,10 @@ const setActiveTab = (value: string) => {
   activeTab.value = value
   emit('update:modelValue', value)
 }
+
+watch(() => props.modelValue, (v) => {
+  if (v && v !== activeTab.value) activeTab.value = v
+})
 
 provide('tabs', {
   activeTab,

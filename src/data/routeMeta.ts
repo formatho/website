@@ -425,6 +425,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Count rows, columns, and cells in CSV data. Handles quoted fields, custom delimiters, shows column types and empty values. Free, client-side.',
     keywords: 'csv row counter, csv column count, count csv lines, csv dimensions, how many rows in csv, csv analyzer',
   },
+  'sqlite-browser': {
+    title: 'SQLite Browser - Open & Query .db Files Online | Formatho',
+    description: 'Open SQLite databases in your browser: browse tables, run SQL, edit cells, import CSV, export .db files. Powered by WebAssembly SQLite — no upload, fully client-side.',
+    keywords: 'sqlite browser, sqlite viewer, open sqlite online, sqlite online, run sql in browser, db browser online, db file viewer, sqlite editor, sqlite wasm',
+  },
   'shamir-splitter': {
     title: 'Shamir Secret Sharing - Split & Combine Online | Formatho',
     description: 'Split secrets into N shares where any threshold K reconstructs. Visual polynomial interpolation, GF(257) arithmetic. Free, private, client-side.',
