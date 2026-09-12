@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -53,19 +53,29 @@ async function ensureViewer() {
 
 function schedulePreview() {
   if (renderTimer) clearTimeout(renderTimer)
-  if (!bpmnInput.value.trim()) { previewError.value = ''; return }
+  if (!bpmnInput.value.trim()) { previewError.value = ''; previewNoDi.value = false; return }
   renderTimer = setTimeout(renderPreview, 600)
 }
+
+// bpmn-js cannot render diagram-less XML — it needs DI coordinates. The
+// converter still handles such files via auto-layout, so show a hint
+// instead of an error.
+const previewNoDi = ref(false)
 
 async function renderPreview() {
   if (!bpmnInput.value.trim()) return
   await ensureViewer()
   if (!viewer) return
   isRendering.value = true
+  previewNoDi.value = !/BPMNDiagram|bpmndi:/i.test(bpmnInput.value)
   try {
-    await viewer.importXML(bpmnInput.value)
-    fitPreview()
-    previewError.value = ''
+    if (previewNoDi.value) {
+      previewError.value = ''
+    } else {
+      await viewer.importXML(bpmnInput.value)
+      fitPreview()
+      previewError.value = ''
+    }
   } catch (e) {
     previewError.value = (e as Error).message || 'Invalid BPMN XML'
   } finally {
@@ -195,6 +205,10 @@ function parseBpmn(xml: string) {
     warnings.push(`Flow "${f.name || f.id}" skipped: references an element that is not converted (data objects, annotations, and lane sets are not exported as Visio shapes)`)
     return false
   })
+
+  if (doc.querySelector('laneSet, participant, bpmn\\:laneSet')) {
+    warnings.push('Pools and lanes are not exported as Visio swimlane bands — lane member shapes keep their diagram positions')
+  }
 
   // BPMN Diagram Interchange — exact coordinates from the source modeler
   const diShapes = new Map<string, DiShape>()
@@ -572,8 +586,15 @@ const handleDownload = () => {
   URL.revokeObjectURL(url)
 }
 
-const fillSample = () => {
-  bpmnInput.value = `<?xml version="1.0" encoding="UTF-8"?>
+// ─── Example gallery ───
+// Each example is a complete, valid BPMN 2.0 file. The first four carry
+// BPMNDI layout data (rendered and converted position-exact); the last has
+// none, demonstrating the layered auto-layout fallback.
+const EXAMPLES = [
+  {
+    label: 'Order Fulfillment',
+    note: 'Exclusive + parallel gateways, two end states — layout preserved via BPMN DI',
+    xml: `<?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
              xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
              xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
@@ -626,22 +647,172 @@ const fillSample = () => {
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </definitions>`
+  },
+  {
+    label: 'Expense Approval',
+    note: 'Labeled gateway branches, error boundary event with a rework loop',
+    xml: `<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             targetNamespace="http://formatho.com/bpmn/sample">
+  <process id="ExpenseApproval" name="Expense Approval">
+    <startEvent id="start" name="Submitted"/>
+    <userTask id="submit" name="Submit Report"/>
+    <exclusiveGateway id="amount" name="Over €500?"/>
+    <userTask id="manager" name="Manager Review">
+      <boundaryEvent id="mgr_error" name="System Error" attachedToRef="manager">
+        <errorEventDefinition/>
+      </boundaryEvent>
+    </userTask>
+    <serviceTask id="rework" name="Request Info"/>
+    <serviceTask id="auto" name="Auto-Approve"/>
+    <sendTask id="notify" name="Notify Employee"/>
+    <endEvent id="end" name="Closed"/>
+    <sequenceFlow id="f1" sourceRef="start" targetRef="submit"/>
+    <sequenceFlow id="f2" sourceRef="submit" targetRef="amount"/>
+    <sequenceFlow id="f3" name="yes" sourceRef="amount" targetRef="manager"/>
+    <sequenceFlow id="f4" name="no" sourceRef="amount" targetRef="auto"/>
+    <sequenceFlow id="f5" sourceRef="manager" targetRef="notify"/>
+    <sequenceFlow id="f6" sourceRef="auto" targetRef="notify"/>
+    <sequenceFlow id="f7" sourceRef="notify" targetRef="end"/>
+    <sequenceFlow id="f8" sourceRef="mgr_error" targetRef="rework"/>
+    <sequenceFlow id="f9" sourceRef="rework" targetRef="submit"/>
+  </process>
+  <bpmndi:BPMNDiagram id="diagram">
+    <bpmndi:BPMNPlane bpmnElement="ExpenseApproval">
+      <bpmndi:BPMNShape bpmnElement="start"><omgdc:Bounds x="152" y="219" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="submit"><omgdc:Bounds x="240" y="207" width="120" height="60"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="amount"><omgdc:Bounds x="430" y="212" width="50" height="50"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="manager"><omgdc:Bounds x="560" y="100" width="120" height="60"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mgr_error"><omgdc:Bounds x="655" y="88" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="rework"><omgdc:Bounds x="330" y="330" width="120" height="60"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="auto"><omgdc:Bounds x="560" y="320" width="120" height="60"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="notify"><omgdc:Bounds x="740" y="207" width="120" height="60"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="end"><omgdc:Bounds x="920" y="219" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="f1"><omgdi:waypoint x="188" y="237"/><omgdi:waypoint x="240" y="237"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="f2"><omgdi:waypoint x="360" y="237"/><omgdi:waypoint x="430" y="237"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="f3"><omgdi:waypoint x="455" y="212"/><omgdi:waypoint x="455" y="130"/><omgdi:waypoint x="560" y="130"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="f4"><omgdi:waypoint x="455" y="262"/><omgdi:waypoint x="455" y="350"/><omgdi:waypoint x="560" y="350"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="f5"><omgdi:waypoint x="680" y="130"/><omgdi:waypoint x="700" y="130"/><omgdi:waypoint x="700" y="237"/><omgdi:waypoint x="740" y="237"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="f6"><omgdi:waypoint x="680" y="350"/><omgdi:waypoint x="720" y="350"/><omgdi:waypoint x="720" y="237"/><omgdi:waypoint x="740" y="237"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="f7"><omgdi:waypoint x="860" y="237"/><omgdi:waypoint x="920" y="237"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="f8"><omgdi:waypoint x="691" y="124"/><omgdi:waypoint x="691" y="360"/><omgdi:waypoint x="450" y="360"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="f9"><omgdi:waypoint x="390" y="330"/><omgdi:waypoint x="390" y="300"/><omgdi:waypoint x="300" y="300"/><omgdi:waypoint x="300" y="267"/></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>`
+  },
+  {
+    label: 'Support Desk (pools & lanes)',
+    note: 'Collaboration with two swimlanes — cross-lane flows render in the preview',
+    xml: `<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             targetNamespace="http://formatho.com/bpmn/sample">
+  <collaboration id="collab_1">
+    <participant id="pool_support" name="Support Desk" processRef="SupportProcess"/>
+  </collaboration>
+  <process id="SupportProcess" name="Support Desk">
+    <laneSet id="lanes_1">
+      <lane id="lane_customer" name="Customer">
+        <flowNodeRef>start</flowNodeRef>
+        <flowNodeRef>provide</flowNodeRef>
+        <flowNodeRef>feedback</flowNodeRef>
+      </lane>
+      <lane id="lane_agent" name="Support Agent">
+        <flowNodeRef>triage</flowNodeRef>
+        <flowNodeRef>fixed</flowNodeRef>
+        <flowNodeRef>end</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="start" name="Request Filed"/>
+    <userTask id="provide" name="Provide Details"/>
+    <userTask id="feedback" name="Confirm Fix"/>
+    <serviceTask id="triage" name="Triage Ticket"/>
+    <exclusiveGateway id="fixed" name="Resolved?"/>
+    <endEvent id="end" name="Closed"/>
+    <sequenceFlow id="f1" sourceRef="start" targetRef="provide"/>
+    <sequenceFlow id="f2" sourceRef="provide" targetRef="triage"/>
+    <sequenceFlow id="f3" sourceRef="triage" targetRef="fixed"/>
+    <sequenceFlow id="f4" name="yes" sourceRef="fixed" targetRef="end"/>
+    <sequenceFlow id="f5" name="needs info" sourceRef="fixed" targetRef="feedback"/>
+    <sequenceFlow id="f6" sourceRef="feedback" targetRef="provide"/>
+  </process>
+  <bpmndi:BPMNDiagram id="diagram">
+    <bpmndi:BPMNPlane bpmnElement="collab_1">
+      <bpmndi:BPMNShape id="pool_support_di" bpmnElement="pool_support" isHorizontal="true">
+        <omgdc:Bounds x="250" y="80" width="720" height="300"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="lane_customer_di" bpmnElement="lane_customer" isHorizontal="true">
+        <omgdc:Bounds x="250" y="80" width="720" height="150"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="lane_agent_di" bpmnElement="lane_agent" isHorizontal="true">
+        <omgdc:Bounds x="250" y="230" width="720" height="150"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="start"><omgdc:Bounds x="320" y="137" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="provide"><omgdc:Bounds x="410" y="125" width="120" height="60"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="feedback"><omgdc:Bounds x="620" y="125" width="120" height="60"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="triage"><omgdc:Bounds x="410" y="275" width="120" height="60"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="fixed"><omgdc:Bounds x="580" y="280" width="50" height="50"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="end"><omgdc:Bounds x="750" y="287" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="f1"><omgdi:waypoint x="356" y="155"/><omgdi:waypoint x="410" y="155"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="f2"><omgdi:waypoint x="470" y="185"/><omgdi:waypoint x="470" y="275"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="f3"><omgdi:waypoint x="530" y="305"/><omgdi:waypoint x="580" y="305"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="f4"><omgdi:waypoint x="630" y="305"/><omgdi:waypoint x="750" y="305"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="f5"><omgdi:waypoint x="605" y="280"/><omgdi:waypoint x="605" y="155"/><omgdi:waypoint x="620" y="155"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="f6"><omgdi:waypoint x="620" y="140"/><omgdi:waypoint x="470" y="140"/><omgdi:waypoint x="470" y="125"/></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>`
+  },
+  {
+    label: 'Incident Response (no DI)',
+    note: 'No BPMNDiagram section — watch the layered auto-layout arrange it',
+    xml: `<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             targetNamespace="http://formatho.com/bpmn/sample">
+  <process id="IncidentProcess" name="Incident Response">
+    <startEvent id="start" name="Alert Triggered"/>
+    <serviceTask id="detect" name="Detect &amp; Log"/>
+    <exclusiveGateway id="severity" name="Severity?"/>
+    <userTask id="escalate" name="Escalate On-Call"/>
+    <scriptTask id="remediate" name="Auto-Remediate"/>
+    <businessRuleTask id="verify" name="Verify Fix"/>
+    <endEvent id="end" name="Resolved"/>
+    <sequenceFlow id="f1" sourceRef="start" targetRef="detect"/>
+    <sequenceFlow id="f2" sourceRef="detect" targetRef="severity"/>
+    <sequenceFlow id="f3" name="critical" sourceRef="severity" targetRef="escalate"/>
+    <sequenceFlow id="f4" name="standard" sourceRef="severity" targetRef="remediate"/>
+    <sequenceFlow id="f5" sourceRef="escalate" targetRef="verify"/>
+    <sequenceFlow id="f6" sourceRef="remediate" targetRef="verify"/>
+    <sequenceFlow id="f7" sourceRef="verify" targetRef="end"/>
+  </process>
+</definitions>`
+  }
+]
+
+const selectedExample = ref(EXAMPLES[0].label)
+const exampleNote = computed(() => EXAMPLES.find((e) => e.label === selectedExample.value)?.note || '')
+
+function loadExample() {
+  const ex = EXAMPLES.find((e) => e.label === selectedExample.value)
+  if (!ex) return
+  bpmnInput.value = ex.xml
   error.value = ''
   conversionSuccess.value = false
   visioBlob.value = null
   summary.value = null
 }
 
-// Sample without BPMNDI — exercises the layered auto-layout path
-const fillSampleNoDi = () => {
-  fillSample()
-  bpmnInput.value = bpmnInput.value.replace(/<bpmndi:BPMNDiagram[\s\S]*?<\/bpmndi:BPMNDiagram>\s*/, '')
-}
-
 const reset = () => {
   bpmnInput.value = ''
   error.value = ''
   previewError.value = ''
+  previewNoDi.value = false
   conversionSuccess.value = false
   visioBlob.value = null
   visioXml.value = ''
@@ -650,7 +821,7 @@ const reset = () => {
 }
 
 onMounted(() => {
-  fillSample()
+  loadExample()
 })
 
 // Summon Flowtho on successful conversion
@@ -675,12 +846,20 @@ watch(conversionSuccess, (success) => {
           Convert BPMN 2.0 diagrams to Microsoft Visio (.vdx) — live preview, exact layout preserved
         </p>
       </div>
-      <div class="flex gap-2">
-        <Button variant="ghost" size="sm" @click="fillSample" aria-label="Load sample with layout data">Sample (with DI)</Button>
-        <Button variant="ghost" size="sm" @click="fillSampleNoDi" aria-label="Load sample without layout data">Sample (no DI)</Button>
+      <div class="flex items-center gap-2">
+        <select
+          v-model="selectedExample"
+          class="h-8 rounded-md border border-input bg-background px-2 text-xs font-medium"
+          aria-label="Load example BPMN diagram"
+          @change="loadExample"
+        >
+          <option v-for="ex in EXAMPLES" :key="ex.label" :value="ex.label">{{ ex.label }}</option>
+        </select>
+        <Button variant="ghost" size="sm" @click="loadExample" aria-label="Reload selected example">Reload</Button>
         <Button v-if="bpmnInput" variant="outline" size="sm" @click="reset" aria-label="Reset BPMN input">Reset</Button>
       </div>
     </div>
+    <p class="text-xs text-muted-foreground -mt-2">{{ exampleNote }}</p>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
       <!-- Input -->
@@ -745,6 +924,16 @@ watch(conversionSuccess, (success) => {
                 <div ref="previewContainer" class="absolute inset-0" aria-label="BPMN diagram live preview"></div>
                 <div v-if="isRendering" class="absolute inset-0 flex items-center justify-center bg-white/70">
                   <Loader2 class="w-5 h-5 animate-spin text-primary" />
+                </div>
+                <div v-else-if="previewNoDi" class="absolute inset-0 flex items-center justify-center p-6">
+                  <div class="text-center max-w-xs space-y-2">
+                    <FileCode class="w-8 h-8 mx-auto text-muted-foreground/50" />
+                    <p class="text-sm font-medium">No layout data (BPMN DI) in this file</p>
+                    <p class="text-xs text-muted-foreground">
+                      Diagram-less XML cannot be previewed, but conversion still works — shapes will be
+                      arranged automatically. Check the Summary tab after converting.
+                    </p>
+                  </div>
                 </div>
                 <div v-else-if="previewError" class="absolute inset-0 flex items-start gap-2 p-4 overflow-auto">
                   <AlertCircle class="w-4 h-4 text-red-500 mt-0.5 shrink-0" />
