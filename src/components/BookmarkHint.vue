@@ -21,6 +21,10 @@ const toolSlug = computed(() => {
 
 const isToolPage = computed(() => route.path.startsWith('/tools/') && route.path !== '/tools/')
 
+// navigator.platform is deprecated and `navigator` is not resolvable inside
+// templates — derive the shortcut key in script instead.
+const isApple = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.userAgent)
+
 onMounted(() => {
   if (!isToolPage.value) return
   const key = `bm-hint-${toolSlug.value}`
@@ -82,7 +86,7 @@ function dismiss() {
           <div>
             <p class="text-sm font-semibold mb-1">Bookmark this tool</p>
             <p class="text-xs text-muted-foreground leading-relaxed mb-2">
-              Press {{ navigator.platform.includes('Mac') ? '⌘D' : 'Ctrl+D' }} to save for quick access.
+              Press {{ isApple ? '⌘D' : 'Ctrl+D' }} to save for quick access.
             </p>
             <button
               class="no-btn-hover text-xs font-medium text-primary hover:underline"

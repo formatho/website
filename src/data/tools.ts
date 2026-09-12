@@ -167,6 +167,7 @@ export const tools: ToolCategory[] = [
       { name: 'SQL Query Plan', description: 'Visualize SQL execution plans and get optimization tips.', route: '/tools/sql-query-plan-visualizer', iconName: 'Zap' },
       { name: 'SQL Dialect Converter', description: 'Convert SQL between PostgreSQL, MySQL, SQLite, T-SQL, BigQuery, and more.', route: '/tools/sql-dialect-converter', iconName: 'Repeat' },
       { name: 'Foreign Key Visualizer', description: 'Map foreign key relationships and find orphaned tables in your schema.', route: '/tools/foreign-key-visualizer', iconName: 'Link2' },
+      { name: 'SQLite Browser', description: 'Open, query, and edit SQLite databases in your browser. Browse tables, run SQL, edit cells, import CSV, export .db files. WebAssembly, no upload.', route: '/tools/sqlite-browser', iconName: 'Database' },
       { name: 'Chmod Calculator', description: 'Calculate Unix file permissions.', route: '/tools/chmod-calculator', iconName: 'Lock' },
       { name: 'Docker to Compose', description: 'Convert docker run commands to docker-compose.', route: '/tools/docker-run-to-compose', iconName: 'Container' },
       { name: 'Regex Tester', description: 'Test and debug regular expressions.', route: '/tools/regex-tester', iconName: 'Regex' },

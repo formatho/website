@@ -140,6 +140,12 @@ export const routes = [
         meta: routeMeta['foreign-key-visualizer']
       },
       {
+        path: '/tools/sqlite-browser',
+        name: 'sqlite-browser',
+        component: () => import('@/views/SqliteBrowserView.vue'),
+        meta: routeMeta['sqlite-browser']
+      },
+      {
         path: '/tools/all',
         name: 'tools-all',
         component: () => import(/* webpackPrefetch: true */ '../views/ToolsView.vue'),
