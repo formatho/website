@@ -25,7 +25,7 @@ const CATEGORY_BLURBS = {
 }
 
 const router = readFileSync(resolve(process.cwd(), 'src', 'data', 'tools.ts'), 'utf8')
-const itemRe = /\{ name: '([^']+)', description: '((?:[^'\\]|\\.)*)', route: '(\/tools\/[^']+)', iconName: '[^']+' \}/g
+const itemRe = /\{ name: '([^']+)', description: '((?:[^'\\]|\\.)*)', route: '(\/tools\/[^']+)', iconName: '[^']+'(?:, subcategory: '[^']+')? ?\}/g
 const catRe = /category: '([^']+)',[^\]]*?items: \[/g
 
 const categories = []
