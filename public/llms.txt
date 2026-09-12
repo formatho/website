@@ -114,7 +114,7 @@ Category hub pages group every tool with a one-line description each:
 - [Performance Benchmark]: https://formatho.com/tools/benchmark-builder — benchmark-builder - free, privacy-first, and 100% client-side.
 - [BPMN Viewer]: https://formatho.com/tools/bpmn — Visualize BPMN 2.0 diagrams and export them as PDF. Free, privacy-first BPMN viewer that runs entirely in your browser.
 - [Visio Viewer]: https://formatho.com/tools/visio-viewer — Open and view Microsoft Visio .vsdx files in your browser — no Visio install, no upload. Multi-page rendering, zoom, and SVG export.
-- [BPMN to Visio]: https://formatho.com/tools/bpmn-to-visio — Convert BPMN process diagrams into Microsoft Visio compatible formats.
+- [BPMN to Visio]: https://formatho.com/tools/bpmn-to-visio — Convert BPMN 2.0 diagrams to Visio (.vdx) with live preview and exact BPMN DI layout preservation. Drag-drop, layered auto-layout fallback, conversion summary. Client-side.
 - [Visio File Viewer]: https://formatho.com/tools/visio-viewer — View Microsoft Visio diagrams (.vsdx, .vsd) directly in your browser.
 - [Html Wysiwyg Editor]: https://formatho.com/tools/html-wysiwyg-editor — html-wysiwyg-editor - free, privacy-first, and 100% client-side.
 - [MIME Type Lookup]: https://formatho.com/tools/mime-types — mime-types - free, privacy-first, and 100% client-side.
