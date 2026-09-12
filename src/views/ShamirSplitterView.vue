@@ -253,7 +253,7 @@ const selectClass = 'flex h-10 w-full rounded-md border border-input bg-backgrou
               <!-- y-axis label -->
               <text x="15" y="80" font-size="10" fill="#666" text-anchor="middle" transform="rotate(-90,15,80)">f(x)</text>
               <!-- secret point at x=0 -->
-              <circle v-for="pt in polyPoints.filter(p => p.x === 0)" :key="'sec'" :cx="30 + 0" :cy="150 - (pt.y / 257) * 130" r="6" fill="#e11d48" />
+              <circle v-for="(pt, si) in polyPoints.filter(p => p.x === 0)" :key="'sec' + si" :cx="30" :cy="150 - (pt.y / 257) * 130" r="6" fill="#e11d48" />
               <text v-if="polyPoints.find(p => p.x === 0)" x="20" :cy="150 - (polyPoints[0].y / 257) * 130 - 8" font-size="9" fill="#e11d48">secret</text>
               <!-- share points -->
               <g v-for="pt in polyPoints.filter(p => p.x > 0)" :key="pt.x">
