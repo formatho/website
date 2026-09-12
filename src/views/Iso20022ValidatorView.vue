@@ -121,8 +121,7 @@ function checkField(doc: Document, xpath: string, description: string, required:
       } else {
         const children = Array.from(el.children)
         const found = children.find(c => c.tagName.toLowerCase().includes(part.toLowerCase()))
-        if (found) el = found
-        else { el = el } // stay at current level
+        if (found) el = found // else: stay at current level
       }
     }
     const val = el instanceof Document ? '' : el.textContent?.trim() || ''
