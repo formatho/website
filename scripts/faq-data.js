@@ -451,6 +451,270 @@ export const toolSEOContent = {
       'Use tables, code fences, and task lists just like on GitHub.',
       'Copy the HTML or keep your Markdown for your README.'
     ]
+  },
+  '/tools/calldata-decoder': {
+    intro: [
+      'Every Ethereum transaction that calls a contract starts with calldata: a 4-byte function selector followed by ABI-encoded arguments. Reading raw hex by hand is impractical — the EVM Calldata Decoder turns it into the function name, argument types, and decoded values, so you can see exactly what a pending transaction will do before signing or replaying it.',
+      'The decoder works on plain 0x-prefixed input data from Etherscan, wallets, or logs. Decoding runs entirely in your browser with no RPC call needed for the ABI step, and unknown selectors are hashed locally so nothing about the transaction you are inspecting leaks anywhere.'
+    ],
+    howTo: [
+      'Paste the transaction input data (0x…) into the decoder.',
+      'Optionally paste a known ABI for named outputs.',
+      'Read the function signature and each decoded argument.',
+      'Verify calls before signing, or reverse-engineer a contract you are auditing.'
+    ]
+  },
+  '/tools/create2-calculator': {
+    intro: [
+      'CREATE2 is the Ethereum opcode that derives a contract address from the deployer, a salt, and the contract bytecode — meaning the address is knowable before deployment. Counterfactual deployments, deterministic factory patterns, and exchange addresses (like Uniswap pools) all rely on it.',
+      'This calculator computes the keccak256-based address locally. Change the salt or bytecode and see the resulting address immediately — useful when you are designing a deterministic deployment scheme or verifying how an existing protocol derives its addresses.'
+    ],
+    howTo: [
+      'Enter the deployer address and the init code bytecode.',
+      'Pick or paste a salt (or generate a random one).',
+      'The resulting CREATE2 address is computed instantly, in-browser.'
+    ]
+  },
+  '/tools/uniswap-math': {
+    intro: [
+      'Uniswap pricing is pure math: constant-product (x·y=k) for v2, concentrated liquidity and tick square-root pricing for v3 and v4. When you are integrating a router, estimating slippage, or auditing a pool, you need those numbers — without trusting a frontend.',
+      'This calculator implements the actual formulas: getAmountsOut for v2 paths, sqrtPriceX96 conversions, tick-to-price mapping, and fee math. It is the reference implementation in your browser — no wallet connection, no RPC, nothing sent anywhere.'
+    ],
+    howTo: [
+      'Choose the curve version and calculation you need.',
+      'Enter reserves, amounts, or sqrtPrice as available.',
+      'Read the exact output amounts and price implications.'
+    ]
+  },
+  '/tools/eip1967-checker': {
+    intro: [
+      'EIP-1967 standardized where proxies store their implementation, admin, and beacon slots — at fixed, predictable storage slots hashed from well-known strings. Checking whether a contract is a proxy, and what it points to, becomes two eth_getStorageAt calls instead of guesswork.',
+      'This checker reads the standardized slots for any proxy across 21 EVM chains, resolves the implementation address, and flags mismatches or empty slots. Reads are sent directly from your browser to a public RPC endpoint of your choosing — read-only, no keys, no signing.'
+    ],
+    howTo: [
+      'Enter the proxy contract address.',
+      'Pick the chain or paste a custom RPC URL.',
+      'Read the implementation, admin, and beacon slots directly.'
+    ]
+  },
+  '/tools/storage-slot-calculator': {
+    intro: [
+      'Solidity storage layout is deterministic: each declared variable occupies a computed slot. Computing slots by hand (especially for mappings and dynamic arrays, where the slot is keccak256 of key and slot) is where audits go slowly.',
+      'This calculator mirrors solc layout rules for value types, mappings, arrays, and packed structs, and shows the exact slot and offset for each variable — the fastest way to write a storage-collision test or a getStorageAt probe.'
+    ],
+    howTo: [
+      'Paste the contract storage declarations.',
+      'Each variable slot and byte offset is computed instantly.',
+      'Use the slots with eth_getStorageAt to verify on-chain values.'
+    ]
+  },
+  '/tools/v4-hook-calculator': {
+    intro: [
+      'Uniswap v4 gives hooks contract-address-derived permissions: the bits of the address itself determine which hook callbacks the pool will call. Designing a hook means designing an address whose flags land in the right bits.',
+      'This calculator maps hook addresses to their permission flags and back — before-beforeInitialize, before-swap, after-swap and the full grid — so you can verify a deployed hook or plan a vanity address with the exact permissions you need. All computation is local keccak and bit math in your browser.'
+    ],
+    howTo: [
+      'Paste a hook address to see which permissions its bits encode.',
+      'Or select desired flags to see the address constraints.'
+    ]
+  },
+  '/tools/tx-decoder': {
+    intro: [
+      'A raw signed Ethereum transaction is RLP-encoded bytes — signature, nonce, gas, and the call itself all packed together. Decoding it by hand means RLP parsing plus EIP-155 and EIP-2718/7702 handling.',
+      'Paste any signed transaction (legacy, EIP-1559, EIP-2930, or type-4 with authorization lists) and see every field broken out: from, to, value, gas, fees, and the decoded calldata. Everything is parsed locally — a signed transaction contains your signature, so it should never be pasted into a random decoder.'
+    ],
+    howTo: [
+      'Paste the raw signed transaction bytes (0x…).',
+      'Read the decoded fields, recovered sender, and embedded calldata.',
+      'Verify exactly what a transaction does before broadcasting it.'
+    ]
+  },
+  '/tools/x25519-demo': {
+    intro: [
+      'X25519 is the elliptic-curve Diffie-Hellman key exchange behind TLS 1.3, Signal, and SSH. Two parties exchange public keys and independently derive the same shared secret — without the secret ever traveling the wire.',
+      'This interactive demo generates keypairs in your browser and performs the full exchange step by step, so you can see how the shared secret appears identically on both sides. The same property makes protocols like Arcium\'s multi-party computation possible: compute on data without ever revealing it.'
+    ],
+    howTo: [
+      'Generate keypairs for both parties.',
+      'Exchange the public keys (the demo does this for you).',
+      'Watch both sides derive the identical shared secret.'
+    ]
+  },
+  '/tools/ctr-mode': {
+    intro: [
+      'CTR mode turns a block cipher into a stream cipher: encrypt an incrementing counter, XOR the keystream with your plaintext. Its parallelizability and seekability make it common — and its pitfalls (nonce reuse reveals XOR of plaintexts) make it worth understanding.',
+      'This visualizer encrypts step by step, showing the counter blocks, the keystream, and how each plaintext byte transforms. Watch what happens when you reuse a nonce — the demonstration is unforgettable and entirely local.'
+    ],
+    howTo: [
+      'Enter a key, nonce, and message.',
+      'Step through counter blocks and the generated keystream.',
+      'Try reusing a nonce across two messages to see why it breaks.'
+    ]
+  },
+  '/tools/bom-diff': {
+    intro: [
+      'Engineering change orders live or die by what actually changed between BOM revisions. Comparing spreadsheets by eye hides the part that quietly changed quantity, reference designator, or manufacturer.',
+      'This diff compares two BOMs (CSV/TSV with automatic delimiter and header detection) and classifies every line as added, removed, changed, or unchanged — with a color-coded table and CSV export for the change record. Your BOMs describe your product; they stay in your browser.'
+    ],
+    howTo: [
+      'Paste the old and new BOM files.',
+      'Review added, removed, and changed parts with field-level detail.',
+      'Export the diff as CSV for your ECO documentation.'
+    ]
+  },
+  '/tools/bom-cost-rollup': {
+    intro: [
+      'A multi-level BOM carries cost at every assembly level, and rolling it up correctly — extended cost per part, sub-assembly totals, top-level grand total — is exactly the kind of arithmetic spreadsheets get wrong at 3pm.',
+      'Paste an indented BOM with levels and unit costs; the calculator computes extended costs, rolls sub-assemblies into parents, and produces the grand total with the full tree visible. Everything computes client-side, so proprietary cost data never leaves your machine.'
+    ],
+    howTo: [
+      'Paste your indented BOM with levels, quantities, and unit costs.',
+      'Read extended and rolled-up costs per assembly level.',
+      'Verify the grand total before it goes into a quote.'
+    ]
+  },
+  '/tools/part-number-generator': {
+    intro: [
+      'Intelligent part numbering encodes what a part is — category, type, sequence — so engineers can read a BOM line without opening the item master. Designing the scheme is the hard part; generating conforming numbers should be easy.',
+      'This generator builds numbers from configurable category presets (electronic, mechanical, hydraulic, pneumatic, optical, connector), separators, prefixes, and padding, with batch generation and uniqueness checking. Schemes you paste in are your company\'s IP — generation is fully client-side.'
+    ],
+    howTo: [
+      'Pick a category preset or define your own segments.',
+      'Set separator, prefix, and sequence padding.',
+      'Generate batches with duplicate detection, export to CSV.'
+    ]
+  },
+  '/tools/shamir-splitter': {
+    intro: [
+      'Shamir\'s Secret Sharing splits a secret into N shares, any K of which reconstruct it — with fewer than K shares revealing nothing, mathematically. It is how seed phrases and recovery keys get stored across locations without any single point of failure.',
+      'This tool performs the split and combine over GF(257) with a live polynomial visualization: drag shares on the curve and watch why two points cannot reveal a cubic. Split test values locally — and only test values; real secrets belong in air-gapped tools.'
+    ],
+    howTo: [
+      'Enter a secret, choose N shares and threshold K.',
+      'Distribute the shares (the demo shows the polynomial).',
+      'Combine any K shares to reconstruct; try fewer to see it fail.'
+    ]
+  },
+  '/tools/mpc-demo': {
+    intro: [
+      'Multi-party computation lets parties jointly compute a function while keeping their inputs private — add numbers without anyone seeing the addends. It powers private auctions, confidential AI, and sealed-bid workflows.',
+      'This walkthrough splits values into additive shares, passes them between virtual parties, computes on the shares, and reconstructs the result — every intermediate value visible so you can verify nothing leaks. The demo runs entirely in your browser.'
+    ],
+    howTo: [
+      'Enter each party\'s private input.',
+      'Step through the sharing, computation, and reconstruction.',
+      'Inspect every message to confirm inputs never appear in the clear.'
+    ]
+  },
+  '/tools/pedersen-commitment': {
+    intro: [
+      'A Pedersen commitment binds you to a value without revealing it — open later to prove what you committed to. Because it is perfectly hiding and computationally binding, it is the building block for confidential transactions and zero-knowledge statements.',
+      'This calculator works over secp256k1: enter a value and blinding factor, get the commitment point, and verify openings. The elliptic-curve math runs locally, so commit-and-reveal experiments never touch a server.'
+    ],
+    howTo: [
+      'Enter a value and a random blinding factor.',
+      'Generate the commitment point over secp256k1.',
+      'Verify an opening later — same value and blinder reproduce it.'
+    ]
+  },
+  '/tools/csv-counter': {
+    intro: [
+      'Before a CSV goes anywhere — a database import, a pipeline, a customer — you need to know its shape: how many rows, columns, which fields are empty, and whether the file is even well-formed.',
+      'This analyzer counts rows, columns, and cells; handles quoted fields with embedded commas and newlines; auto-detects delimiters; and profiles each column\'s type and emptiness. Files parse in your browser — customer CSVs never need to be uploaded anywhere.'
+    ],
+    howTo: [
+      'Paste or upload your CSV.',
+      'Read row, column, and cell counts with delimiter detection.',
+      'Check per-column types and empty-value ratios before importing.'
+    ]
+  },
+  '/tools/iso20022-validator': {
+    intro: [
+      'ISO 20022 is the message grammar reshaping payments — pain.001 initiations, pacs.008 transfers, camt.053 statements. A structurally invalid message bounces at the gateway, usually with an unhelpful error.',
+      'This validator detects the message family, checks required elements per schema, and pretty-prints the XML for review — before you send anything to a bank or scheme. Payment messages describe your flows and counterparties; validation is entirely client-side.'
+    ],
+    howTo: [
+      'Paste your pain, pacs, or camt message.',
+      'Review required-field checks and structural findings.',
+      'Use the pretty-printed XML to fix and re-validate.'
+    ]
+  },
+  '/tools/pain001-builder': {
+    intro: [
+      'pain.001 is the ISO 20022 Customer Credit Transfer Initiation message — the file businesses submit to banks to execute payments. Building one by hand means namespaces, group headers, and structured party identifiers, all in exactly the right order.',
+      'This builder generates a schema-conformant pain.001 from a form: debtor, creditor, amount, SEPA service levels, purpose codes. Fill it in, get valid XML — generated in your browser, so payment details never leave your machine until you choose to send the file to your bank.'
+    ],
+    howTo: [
+      'Enter debtor and creditor details, amount, and currency.',
+      'Choose service level and purpose code.',
+      'Copy or download the generated pain.001 XML.'
+    ]
+  },
+  '/tools/sqlite-browser': {
+    intro: [
+      'SQLite is everywhere — app databases, exports from phones and browsers, data files shipped with tools. Opening one usually means installing DB Browser; this one runs in a tab, powered by SQLite compiled to WebAssembly.',
+      'Open any .db file, browse tables with pagination, edit cells and delete rows, run full SQL (joins, CTEs, window functions), import CSV with type inference, and export the modified database. The engine loads from a CDN and executes entirely in your browser — your database file never leaves your machine.'
+    ],
+    howTo: [
+      'Open a .db file, load the sample, or import CSV.',
+      'Browse tables and edit values inline.',
+      'Run SQL in the editor (Cmd/Ctrl+Enter) and export results or the whole database.'
+    ]
+  },
+  '/tools/pii-redactor': {
+    intro: [
+      'Sending logs, support tickets, or prompts to an LLM or a vendor means sending whatever personal data is inside them. PII Redactor scans text for emails, phone numbers, credit cards, SSNs, API keys, and IBANs — and replaces them before the text goes anywhere.',
+      'Detection runs on a battery of pattern matchers with optional custom rules, and the diff view shows exactly what will be redacted before you commit. Especially before pasting into any AI service: strip first, then send. All processing is local.'
+    ],
+    howTo: [
+      'Paste the text you are about to share.',
+      'Review detected PII in the highlighted diff.',
+      'Copy the redacted version instead of the original.'
+    ]
+  },
+  '/tools/openai-request-builder': {
+    intro: [
+      'Chat API calls have a dozen parameters that interact — temperature, max tokens, function definitions, message ordering. Getting the JSON right is half the friction of prototyping.',
+      'This builder composes the request visually: model, system and user messages, tools, and sampling parameters — then emits ready-to-run curl, Python, and JavaScript. Your API key is never needed here; you generate the call, you run it from your own terminal.'
+    ],
+    howTo: [
+      'Compose messages and set model parameters.',
+      'Define tools or function schemas if your flow needs them.',
+      'Copy the generated curl, Python, or JavaScript snippet.'
+    ]
+  },
+  '/tools/context-splitter': {
+    intro: [
+      'Every retrieval and long-context workflow starts with chunking — and how you split (by tokens, sentences, or paragraphs, with how much overlap) changes what the model actually sees.',
+      'This splitter chunks text for RWA/RAG with token counting, sentence and paragraph modes, and configurable overlap, showing each chunk with its size and context-window usage. Long documents never need to be uploaded to experiment: splitting is local.'
+    ],
+    howTo: [
+      'Paste your document.',
+      'Choose chunk size, mode, and overlap.',
+      'Inspect each chunk and its token budget before embedding.'
+    ]
+  },
+  '/tools/prompt-template-renderer': {
+    intro: [
+      'Prompt templates with {{variables}} are how teams reuse prompts — but testing them means hand-editing the braces every time a variable changes.',
+      'Paste a template and get an auto-generated form for every variable; fill it in once and copy the rendered prompt with a live token count. Templates you are testing may be proprietary — rendering happens entirely in your browser.'
+    ],
+    howTo: [
+      'Paste a prompt containing {{variables}}.',
+      'Fill the auto-generated form fields.',
+      'Copy the rendered prompt with its token estimate.'
+    ]
+  },
+  '/tools/llm-json-validator': {
+    intro: [
+      'Language models return JSON surrounded by markdown fences, prose, trailing commas, and smart quotes — all of which break JSON.parse. Every LLM pipeline needs the cleanup step.',
+      'This validator extracts the JSON block from messy model output, repairs the common breakages, parses and pretty-prints it, and diffs against your expected schema shape. Paste raw model output and get clean JSON — processed locally, which matters when the output contains customer data.'
+    ],
+    howTo: [
+      'Paste the model\'s raw response.',
+      'Review the extracted and repaired JSON.',
+      'Copy the clean payload into your pipeline.'
+    ]
   }
 }
 
