@@ -502,7 +502,7 @@ const exampleAddress = '0xa1b2c3d4e5f67890abcdef1234567890abcdef12'
             <a href="/tools/evm-converter" class="text-primary hover:underline">EVM Unit Converter</a>
             <a href="/tools/abi-encoder" class="text-primary hover:underline">ABI Encoder &amp; Decoder</a>
             <a href="/tools/solidity-to-opcodes" class="text-primary hover:underline">Solidity to Opcodes</a>
-            <a href="/tools/bip39" class="text-primary hover:underline">BIP39 Mnemonic Generator</a>
+            <a href="/tools/bip39-generator" class="text-primary hover:underline">BIP39 Mnemonic Generator</a>
           </div>
         </CardContent>
       </Card>

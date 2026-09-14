@@ -67,7 +67,7 @@ ORDER BY
 </ul>
 <h2>SEO angles</h2>
 <p>Google treats 4xx/5xx honestly: a 404 drops the URL from index (fine for removed pages), but a soft-404 — a "200 OK" page saying "not found" — wastes crawl budget and confuses signals. 301 passes equity; 302 tells Google the target is temporary. 503 with Retry-After is the correct "down for maintenance" signal; repeated 500s deindex content.</p>
-<p>Look up any code with response-class explanations in the <a href="/tools/http-status">HTTP Status Codes reference</a>.</p>`,
+<p>Look up any code with response-class explanations in the <a href="/tools/http-status-codes">HTTP Status Codes reference</a>.</p>`,
 
   'cryptographic-hashes-guide': `
 <h2>What a hash is</h2>
@@ -147,7 +147,7 @@ ORDER BY
 <li>API keys and DB passwords are passwords: long random (32+ bytes), one per environment, rotated on exposure, stored in a secrets manager — never in git (even Base64'd; scanners decode).</li>
 <li>Rate-limit and add progressive delays on login endpoints; lockout isn't the only tool.</li>
 </ul>
-<p>Check the entropy model and get generation guidance in the <a href="/tools/password-strength">Password Strength</a> analyzer — it runs entirely in your browser.</p>`,
+<p>Check the entropy model and get generation guidance in the <a href="/tools/password-strength-analyser">Password Strength</a> analyzer — it runs entirely in your browser.</p>`,
 
   'regex-practical-guide': `
 <h2>Think in building blocks</h2>
@@ -234,7 +234,7 @@ ORDER BY
 </ul>
 <h2>WiFi and vCard QR codes</h2>
 <p>WiFi codes embed <code>WIFI:T:WPA;S:network;P:password;;</code> — phones join without typing. vCard codes carry contact records for business cards. Both are static: the data lives in the code itself, so a printed WiFi QR with a rotated password needs reprinting, not editing.</p>
-<p>Generate QR codes for URLs, text, WiFi, and vCards with adjustable size and error correction in the <a href="/tools/qr-code">QR Code Generator</a>.</p>`,
+<p>Generate QR codes for URLs, text, WiFi, and vCards with adjustable size and error correction in the <a href="/tools/qr-code-generator">QR Code Generator</a>.</p>`,
 
   'ulids-vs-uuids': `
 <h2>Same job, different shape</h2>

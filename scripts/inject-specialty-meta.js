@@ -235,6 +235,10 @@ const stubs = {
   'category/web-network': '/category/network',
   '': '/',
   '404': '/',
+  // Internal admin screens that must never be indexed (near-empty, not
+  // for the public)
+  'tools/admin/ab-tests': '/',
+  'tools/admin/beta-feedback': '/',
 }
 for (const [slug, target] of Object.entries(stubs)) {
   const fp = path.join(distDir, slug + '.html')

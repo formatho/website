@@ -368,7 +368,7 @@ const reset = () => {
         <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
           <a href="/tools/address-checksum" class="text-primary hover:underline">Address Checksum (EIP-55)</a>
           <a href="/tools/keccak256" class="text-primary hover:underline">Keccak-256 Hasher</a>
-          <a href="/tools/bip39" class="text-primary hover:underline">BIP39 Mnemonic Generator</a>
+          <a href="/tools/bip39-generator" class="text-primary hover:underline">BIP39 Mnemonic Generator</a>
           <a href="/tools/evm-converter" class="text-primary hover:underline">EVM Unit Converter</a>
           <a href="/tools/abi-encoder" class="text-primary hover:underline">ABI Encoder &amp; Decoder</a>
           <a href="/tools/solidity-to-opcodes" class="text-primary hover:underline">Solidity to Opcodes</a>

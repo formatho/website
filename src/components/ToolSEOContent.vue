@@ -7,13 +7,15 @@
  */
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { toolSEOContent, toolSpecificFAQ, generalToolFAQ } from '../../scripts/faq-data'
+import { toolSEOContent, toolSpecificFAQ } from '../../scripts/faq-data'
 
 const route = useRoute()
 const seoContent = computed(() => toolSEOContent[route.path])
 const visibleFaqs = computed(() => {
-  const specific = toolSpecificFAQ[route.path] || []
-  return specific.length > 0 ? [...specific, ...generalToolFAQ.slice(0, 2)] : []
+  // Tool-specific Q&A only — appending the generic block here meant the same
+  // two questions appeared on every tool page (AdSense duplicate-content
+  // guidance; the JSON-LD equivalent was already removed at the source).
+  return toolSpecificFAQ[route.path] || []
 })
 // Slug → title-case mangles acronyms ("jwt" → "Jwt", "yaml-lint" → "Yaml Lint").
 // Map known tokens to their canonical spelling instead.
