@@ -68,19 +68,32 @@ useSEO({
           <p class="text-muted-foreground leading-relaxed mb-4">
             Formatho itself sets no cookies for its own purposes, and tool functionality never requires
             cookies. However, advertising and measurement vendors do use cookies and similar
-            technologies:
+            technologies under the <strong>ePrivacy/GDPR consent regime</strong>:
           </p>
           <ul class="list-disc list-inside text-muted-foreground leading-relaxed space-y-1 mb-4">
-            <li><strong>Google AdSense</strong> and its partners may set advertising cookies (including the
-              <code class="text-xs">__gads</code> family and local storage entries) to serve and measure ads.</li>
-            <li>Visitors in the <strong>European Economic Area, the United Kingdom, and Switzerland</strong> are
-              shown a consent banner powered by <strong>Google Funding Choices</strong>, a Google-certified
-              consent management platform, before personalised ads are served. Your choice (consent or
-              refusal, and preferences for personalised ads, measurement, and legitimate-interest
-              processing) is recorded and can be changed at any time via the "Privacy" / "Manage cookies"
-              link in the banner or through your browser settings.</li>
-            <li>Where required by law, non-personalised ads or no ads are served when consent is not given.</li>
+            <li><strong>Google advertising cookies</strong> you may receive include <code class="text-xs">__gads</code>,
+              <code class="text-xs">__gpi</code>, and <code class="text-xs">__goli</code> (Google Ads / AdSense),
+              the <code class="text-xs">IDE</code> and <code class="text-xs">test_cookie</code> cookies
+              (doubleclick.net), and consent records stored by Funding Choices such as
+              <code class="text-xs">OTAdditionalConsentString</code> and entries under
+              <code class="text-xs">fundingchoicesmessages.google.com</code>. Local storage and web beacons
+              may be used for the same purposes.</li>
+            <li>Visitors in the <strong>European Economic Area, the United Kingdom, and Switzerland</strong> see a
+              consent banner powered by <strong>Google Funding Choices</strong>, a Google-certified consent
+              management platform, <strong>before personalised ads are served</strong>. Your decision
+              (personalised advertising, measurement, and legitimate-interest purposes) is recorded
+              with a timestamp and passed to Google's ad tags on every request.</li>
           </ul>
+          <p class="text-muted-foreground leading-relaxed mb-4">
+            <strong>Withdrawing or changing consent:</strong> reopen the banner any time via the
+            "Privacy" / "Manage cookies" link it leaves on the page, or clear the cookies above in your
+            browser settings — the banner reappears on your next visit. You can additionally opt out of
+            personalised advertising at
+            <a href="https://www.google.com/settings/ads" class="text-primary hover:underline" rel="noopener noreferrer">Google Ads Settings</a>
+            and <a href="https://optout.aboutads.info/" class="text-primary hover:underline" rel="noopener noreferrer">optout.aboutads.info</a>.
+            Where consent is not given, Google serves non-personalised ads or, where even that requires
+            consent, no ads at all.
+          </p>
           <p class="text-muted-foreground leading-relaxed">
             Full details of the technologies involved are in Google's disclosure:
             <a href="https://policies.google.com/technologies/partner-sites" class="text-primary hover:underline" rel="noopener noreferrer">How Google uses data when you use our partners' sites or apps</a>.

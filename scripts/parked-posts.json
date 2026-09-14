@@ -1,0 +1,25 @@
+{
+  "_comment": "Parked blog posts: under ~130 words of real content — thin/scaled-content risk for web-search spam policies. They render for visitors but are noindexed and excluded from the sitemap until deepened in Strapi. Remove a slug from this list after expanding its content, then rebuild.",
+  "parked": [
+    "case-conversion-guide",
+    "docker-run-to-compose",
+    "git-commands-cheat-sheet",
+    "markdown-tips-tricks",
+    "color-formats-guide",
+    "ipv4-subnetting-guide",
+    "ethereum-units-explained",
+    "bip39-mnemonic-guide",
+    "unix-file-permissions",
+    "encoding-vs-encryption",
+    "json-yaml-toml-comparison",
+    "sql-formatting-best-practices",
+    "http-status-codes-guide",
+    "cryptographic-hashes-guide",
+    "crontab-guide",
+    "password-security-guide",
+    "regex-practical-guide",
+    "jwt-tokens-complete-guide",
+    "qr-codes-explained",
+    "ulids-vs-uuids"
+  ]
+}
