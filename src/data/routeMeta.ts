@@ -62,11 +62,6 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Get in touch with the Formatho team. Report bugs, request features, or join our community.',
     keywords: 'contact, support, feedback, github',
   },
-  'markdown': {
-    title: 'Markdown Editor Online - Live Preview, GFM | Formatho',
-    description: 'Edit and preview Markdown files in real-time. Privacy-first markdown editor that runs 100% client-side in your browser.',
-    keywords: 'markdown editor, markdown preview, markdown viewer, github markdown, privacy-first',
-  },
   'tools-markdown': {
     title: 'Markdown Editor Online - Live Preview, GFM | Formatho',
     description: 'Edit and preview Markdown files in real-time. Privacy-first markdown editor that runs 100% client-side in your browser.',

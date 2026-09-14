@@ -171,14 +171,15 @@ export function useEmailCapture() {
           message: message.value
         }
       } else {
-        // All endpoints failed - store locally and show success
-        // This provides a graceful degradation
+        // All endpoints failed. Do NOT report success — thanking the visitor
+        // while the lead exists only in their own localStorage destroys the
+        // lead and lies to the user. Keep the draft locally (retryable) and
+        // surface an honest error.
         storeEmailLocally(emailAddress, source, metadata)
-        success.value = true
-        message.value = 'Thanks for subscribing! We\'ll be in touch soon.'
+        error.value = 'Signup service is unreachable right now. Your email was kept in this browser — please try again in a moment.'
         return {
-          success: true,
-          message: message.value
+          success: false,
+          message: error.value
         }
       }
     } catch (e) {

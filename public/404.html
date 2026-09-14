@@ -2,15 +2,6 @@
 <html lang="en">
 
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJ1GXW78TW"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-ZJ1GXW78TW');
-  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -22,7 +13,10 @@
   <meta name="keywords"
     content="developer tools, json converter, yaml converter, sql formatter, jwt decoder, base64 encoder, image compressor, privacy-first, client-side tools" />
   <meta name="author" content="Formatho" />
-  <meta name="robots" content="index, follow" />
+  <!-- An error page is not indexable content and must not carry a
+       self-declared canonical; it also must not load trackers — the
+       privacy policy promises zero tracking. -->
+  <meta name="robots" content="noindex, nofollow" />
   <meta name="language" content="English" />
   <meta name="theme-color" content="#0f172a" />
 

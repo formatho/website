@@ -40,25 +40,12 @@ export default defineConfig({
     rollupOptions: {
       output: {
         chunkFileNames: 'assets/[name]-[hash].js',
-        entryFileNames: 'assets/[name]-[hash].js',
-        manualChunks(id) {
-          if (!id.includes('node_modules')) return undefined
-          // Heavy deps: split into separate lazy-loaded chunks
-          if (id.includes('gpt-tokenizer')) return 'gpt-tokenizer'
-          if (id.includes('jspdf') || id.includes('html2pdf') || id.includes('html2canvas')) return 'pdf'
-          if (id.includes('chart.js')) return 'charts'
-          if (id.includes('viem') || id.includes('@wagmi')) return 'viem'
-          if (id.includes('@solana/web3.js') || id.includes('@solana')) return 'solana'
-          if (id.includes('solidity') || id.includes('@ethereumjs')) return 'solidity'
-          if (id.includes('@polkadot')) return 'crypto-polkadot'
-          if (id.includes('bpmn-js') || id.includes('bpmn-moddle')) return 'bpmn'
-          if (id.includes('lucide-vue-next')) return 'lucide'
-          if (id.includes('highlight.js') || id.includes('highlightjs')) return 'highlight'
-          // Core framework
-          if (id.includes('vue') || id.includes('vue-router') || id.includes('pinia') || id.includes('@vueuse')) return 'vue-core'
-          // Everything else
-          return 'vendor'
-        }
+        entryFileNames: 'assets/[name]-[hash].js'
+        // No manualChunks: a catch-all vendor bucket forces every node_modules
+        // package into one eager chunk (~5 MB) because the entry imports a
+        // helper from it. Letting Rollup place each library next to its lazy
+        // importer keeps the entry graph small; shared libs get automatic
+        // on-demand chunks.
       }
     }
   },
