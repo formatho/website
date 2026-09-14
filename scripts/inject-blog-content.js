@@ -33,6 +33,8 @@ function esc(s) {
     .replace(/"/g, '&quot;').replace(/'/g, '&#039;')
 }
 
+const CACHE_PATH = path.join(__dirname, 'blog-content-cache.json')
+
 async function fetchPosts() {
   const res = await fetch(
     `${STRAPI_URL}/api/blog-posts?fields[0]=title&fields[1]=slug&fields[2]=content&fields[3]=date&fields[4]=readTime&fields[5]=tags&fields[6]=image&fields[7]=imageAlt&pagination[pageSize]=200&sort=date:desc`,
@@ -41,6 +43,26 @@ async function fetchPosts() {
   if (!res.ok) throw new Error(`Strapi returned ${res.status}`)
   const data = await res.json()
   return Array.isArray(data) ? data : data.data || []
+}
+
+// cms.formatho.com sits behind Cloudflare, which 403s CI runner IPs
+// intermittently — same cache pattern as blog-meta-cache.json: refresh the
+// committed cache whenever a build can reach Strapi, fall back to it when
+// this build cannot.
+async function fetchPostsWithCache() {
+  try {
+    const posts = await fetchPosts()
+    fs.writeFileSync(CACHE_PATH, JSON.stringify(posts))
+    console.log(`inject-blog-content: fetched ${posts.length} posts from Strapi (cache refreshed)`)
+    return posts
+  } catch (e) {
+    if (fs.existsSync(CACHE_PATH)) {
+      const posts = JSON.parse(fs.readFileSync(CACHE_PATH, 'utf8'))
+      console.warn(`⚠️  inject-blog-content: Strapi unreachable (${e.message}) — using content cache (${posts.length} posts)`)
+      return posts
+    }
+    throw e
+  }
 }
 
 function articleHtml(post) {
@@ -93,10 +115,9 @@ async function main() {
 
   let posts
   try {
-    posts = await fetchPosts()
-    console.log(`inject-blog-content: fetched ${posts.length} posts from Strapi`)
+    posts = await fetchPostsWithCache()
   } catch (e) {
-    console.warn(`⚠️  inject-blog-content: Strapi unreachable (${e.message}) — blog shells left as-is`)
+    console.warn(`⚠️  inject-blog-content: Strapi unreachable and no content cache (${e.message}) — blog shells left as-is`)
     return
   }
 
