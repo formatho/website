@@ -28,3 +28,6 @@ planning/
 .vercel
 .vite-ssg-temp/
 .env.indexnow
+
+# wrangler local dev secrets
+.dev.vars

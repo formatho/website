@@ -49,7 +49,9 @@ export default {
 
     const url = new URL(request.url)
 
-    if (url.pathname !== '/subscribe') {
+    // Routed deployments keep the original path (/api/subscribe); a custom
+    // domain would serve /subscribe. Accept both.
+    if (url.pathname !== '/subscribe' && url.pathname !== '/api/subscribe') {
       return json(404, { error: 'not found' })
     }
 
@@ -58,11 +60,13 @@ export default {
       if (!env.LEADS_ADMIN_KEY || url.searchParams.get('key') !== env.LEADS_ADMIN_KEY) {
         return json(401, { error: 'unauthorized' })
       }
-      const list = await env.LEADS.list({ limit: 1000 })
+      const list = await env.LEADS.list({ limit: 1000, prefix: 'lead:' })
       const leads = []
       for (const key of list.keys) {
-        leads.push(JSON.parse((await env.LEADS.get(key.name)) || 'null'))
+        const raw = await env.LEADS.get(key.name)
+        if (raw) leads.push(JSON.parse(raw))
       }
+      leads.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''))
       return json(200, { count: leads.length, leads })
     }
 

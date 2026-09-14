@@ -7,9 +7,11 @@ export interface EmailCaptureResult {
 
 export type EmailCaptureSource = 'homepage' | 'pricing' | 'blog' | 'footer' | 'banner' | 'popup' | 'contextual'
 
-// Configuration - can be set via environment variables
+// Configuration - can be set via environment variables. The default is the
+// formatho-lead-capture Cloudflare Worker (workers/lead-capture) — a public
+// POST target, safe to hardcode; the Resend API key lives only in the worker.
+const RESEND_API_ENDPOINT = import.meta.env.VITE_RESEND_API_ENDPOINT || 'https://formatho.com/api/subscribe'
 const EMAIL_API_ENDPOINT = import.meta.env.VITE_EMAIL_API_ENDPOINT || '/api/newsletter/subscribe'
-const RESEND_API_ENDPOINT = import.meta.env.VITE_RESEND_API_ENDPOINT || '/api/resend/subscribe'
 
 // Honeypot field name for spam prevention
 const HONEYPOT_FIELD = 'website_url'

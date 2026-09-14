@@ -2,14 +2,18 @@ name = "formatho-lead-capture"
 main = "index.js"
 compatibility_date = "2026-01-15"
 
-# Create the namespace first: wrangler kv:namespace create LEADS
-# then paste the id below.
+routes = [
+  # wildcard matters: the exact-path pattern does not match requests with
+  # query strings (admin export uses ?key=...)
+  { pattern = "formatho.com/api/subscribe*", custom_domain = false }
+]
+
 [[kv_namespaces]]
 binding = "LEADS"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+id = "df7cfe638206433aaa4c1643bcdeaa0d"
 
-# Optional: forward each lead to a Resend email list.
-# [vars] are public; secrets go in: wrangler secret put RESEND_API_KEY
-# and: wrangler secret put LEADS_ADMIN_KEY (for GET /subscribe?key=... export)
-# [vars]
-# LEADS_LIST_ID = "updates@formatho.com"
+# Secrets (set via `wrangler secret put`, values also in .dev.vars for
+# local dev): RESEND_API_KEY, LEADS_ADMIN_KEY.
+# LEADS_LIST_ID can be a plain var — it is not secret.
+[vars]
+LEADS_LIST_ID = "updates@formatho.com"
