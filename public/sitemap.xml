@@ -241,18 +241,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://formatho.com/blogs/jwt-tokens-complete-guide</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/regex-practical-guide</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/blogs/privacy-first-developer-tools-2026</loc>
     <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -268,13 +256,13 @@
     <loc>https://formatho.com/blogs/index-tracking-assets-options-not-debt</loc>
     <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/blogs/from-dead-capital-to-programmable-gold-2026</loc>
     <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://formatho.com/blogs/developer-tools-that-dont-spy-on-you</loc>
@@ -308,12 +296,6 @@
   </url>
   <url>
     <loc>https://formatho.com/blogs/encode-decode-base64-files-never-leave-browser</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/password-security-guide</loc>
     <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -391,12 +373,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://formatho.com/blogs/git-commands-cheat-sheet</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/blogs/meta-ai-restructuring-applied-superintelligence-2026</loc>
     <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -404,12 +380,6 @@
   </url>
   <url>
     <loc>https://formatho.com/blogs/100-developer-tools-all-free-all-private</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/crontab-guide</loc>
     <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -427,42 +397,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://formatho.com/blogs/json-yaml-toml-comparison</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/cryptographic-hashes-guide</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/markdown-tips-tricks</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/sql-formatting-best-practices</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/bip39-mnemonic-guide</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/unix-file-permissions</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/blogs/ai-meets-blockchain-agent-orchestration-web3</loc>
     <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -475,19 +409,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://formatho.com/blogs/docker-run-to-compose</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/blogs/real-estate-tokenization-legal-frameworks-sm-reits-2026</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/encoding-vs-encryption</loc>
     <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -511,49 +433,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://formatho.com/blogs/qr-codes-explained</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/ethereum-units-explained</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/http-status-codes-guide</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/ipv4-subnetting-guide</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/blogs/End-Of-Context-Collapse-Block-Buzz-Redefines-AI-Workspace</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/color-formats-guide</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/ulids-vs-uuids</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/case-conversion-guide</loc>
     <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

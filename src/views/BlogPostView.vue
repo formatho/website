@@ -93,7 +93,8 @@ useHead(computed(() => {
     dateModified: post.value.date,
     author: {
       '@type': 'Organization',
-      name: siteName
+      name: 'Formatho Editorial Team',
+      url: `${baseUrl}/about`
     },
     publisher: {
       '@type': 'Organization',
@@ -220,12 +221,15 @@ useHead(computed(() => {
       <header class="min-h-[50vh] flex flex-col justify-end border-b border-foreground/10">
         <div class="container mx-auto px-4 md:px-8 pb-12 md:pb-20">
           <!-- Meta -->
-          <div class="flex items-center gap-6 mb-8">
+          <div class="flex items-center flex-wrap gap-6 mb-8">
             <p class="text-xs tracking-widest text-muted-foreground uppercase">
               {{ formatDate(post.date) }}
             </p>
             <p class="text-xs tracking-widest text-muted-foreground uppercase">
               {{ post.readTime }}
+            </p>
+            <p class="text-xs tracking-widest text-muted-foreground uppercase">
+              By <RouterLink to="/about" class="hover:text-foreground transition-colors">Formatho Editorial</RouterLink>
             </p>
           </div>
 
@@ -273,6 +277,22 @@ useHead(computed(() => {
             v-html="post.content"
           ></div>
         </article>
+
+        <!-- Author / E-E-A-T -->
+        <div class="max-w-4xl mx-auto mt-12 pt-8 border-t border-foreground/10">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-foreground/5 border border-foreground/10 flex items-center justify-center text-sm font-black shrink-0">F</div>
+            <div>
+              <p class="text-sm font-semibold">Formatho Editorial Team</p>
+              <p class="text-sm text-muted-foreground leading-relaxed mt-1">
+                Written and maintained by the team behind formatho.com — 230+ free, privacy-first
+                developer tools that run entirely in your browser. Every guide on this blog is
+                tested against the tool it describes. Found an error or have a suggestion?
+                <a href="https://github.com/formatho" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-4">Open an issue on GitHub</a>.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ============================================ -->

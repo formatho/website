@@ -3,6 +3,11 @@ import { ref, computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import { fetchBlogMetadata, type BlogMetadata } from '../data/strapi'
+import parkedPosts from '../../scripts/parked-posts.json'
+
+// Parked posts are being deepened; don't list them until they clear the
+// thin-content bar (same list the build uses for noindex + sitemap removal).
+const parkedSet = new Set<string>(parkedPosts.parked)
 
 const activeCategory = ref('ALL')
 const blogMetadata = ref<BlogMetadata[]>([])
@@ -11,7 +16,8 @@ const error = ref(false)
 
 onMounted(async () => {
   try {
-    blogMetadata.value = await fetchBlogMetadata()
+    blogMetadata.value = (await fetchBlogMetadata())
+      .filter(post => !parkedSet.has(post.slug))
   } catch (e) {
     error.value = true
   } finally {
@@ -96,6 +102,11 @@ useHead({
         </h1>
         <p class="text-muted-foreground max-w-md leading-relaxed">
           Developer guides, tutorials, and insights from the Formatho team. No fluff. Pure signal.
+        </p>
+        <p class="text-muted-foreground max-w-md leading-relaxed mt-4 text-sm">
+          Each guide is written and tested against the free browser tool it explains — JSON and YAML
+          workflows, JWT and SSO debugging, EVM contract tooling, subnetting, and MCP infrastructure
+          for AI agents. Everything we write about, you can try in one click, in your own browser.
         </p>
       </div>
 

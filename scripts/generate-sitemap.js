@@ -93,8 +93,13 @@ const staticRoutes = [
 ]
 
 async function main() {
-// Dynamically generate blog routes
-const blogSlugs = await fetchBlogSlugs()
+// Dynamically generate blog routes — parked posts (thin content, noindexed
+// at build) are excluded so the sitemap advertises only indexable URLs
+const { parked } = JSON.parse(
+  readFileSync(resolve(process.cwd(), 'scripts', 'parked-posts.json'), 'utf8')
+)
+const parkedSet = new Set(parked)
+const blogSlugs = (await fetchBlogSlugs()).filter((slug) => !parkedSet.has(slug))
 const blogRoutes = blogSlugs.map((slug, i) => ({
   path: `/blogs/${slug}`,
   priority: i < 10 ? '0.8' : '0.7',
