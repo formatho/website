@@ -226,7 +226,7 @@ block size   = 256 - mask-octet</code></pre>
 <li><strong>Checksums matter:</strong> an invalid word order usually fails the checksum loudly, but a wrong-but-valid phrase restores a valid <em>empty</em> wallet — which is the failure you won't notice until it matters.</li>
 <li><strong>Entropy source:</strong> generate with a hardware wallet or vetted software; "made up" words have a fraction of the entropy and are crackable.</li>
 </ul>
-<p>Understand and experiment with derivation safely (offline, test values only) in the <a href="/tools/bip39">BIP39 Passphrase tool</a> — everything runs locally in your browser.</p>`,
+<p>Understand and experiment with derivation safely (offline, test values only) in the <a href="/tools/bip39-generator">BIP39 Passphrase tool</a> — everything runs locally in your browser.</p>`,
 
   'unix-file-permissions': `
 <h2>Reading the nine characters</h2>
@@ -280,7 +280,7 @@ block size   = 256 - mask-octet</code></pre>
 <li><strong>Encoding isn't compression either</strong> — it makes data bigger. Pair with gzip before Base64 if size matters.</li>
 </ul>
 <h2>A real-world checklist</h2>
-<p>Before shipping: secrets in git are not "hidden" by Base64 (scanners decode them); "encrypted" client-side with a key shipped in the same JavaScript is encoding with extra steps; JWT payloads are Base64URL — <em>signed, not encrypted</em> — so never put secrets in one. Verify all of this hands-on in the <a href="/tools/base64">Base64</a> and <a href="/tools/encrypt">Encrypt/Decrypt</a> tools — both fully client-side.</p>`,
+<p>Before shipping: secrets in git are not "hidden" by Base64 (scanners decode them); "encrypted" client-side with a key shipped in the same JavaScript is encoding with extra steps; JWT payloads are Base64URL — <em>signed, not encrypted</em> — so never put secrets in one. Verify all of this hands-on in the <a href="/tools/base64">Base64</a> and <a href="/tools/encryption">Encrypt/Decrypt</a> tools — both fully client-side.</p>`,
 
   'json-yaml-toml-comparison': `
 <h2>Three formats, three philosophies</h2>

@@ -217,12 +217,9 @@ onMounted(() => {
         </CardHeader>
         <CardContent>
           <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-            <a href="/tools/sha256" class="text-primary hover:underline">SHA-256 Hash Generator</a>
-            <a href="/tools/md5" class="text-primary hover:underline">MD5 Hash Generator</a>
-            <a href="/tools/sha3" class="text-primary hover:underline">SHA-3 Hash Generator</a>
-            <a href="/tools/keccak224" class="text-primary hover:underline">Keccak-224 Hash</a>
-            <a href="/tools/keccak384" class="text-primary hover:underline">Keccak-384 Hash</a>
-            <a href="/tools/keccak512" class="text-primary hover:underline">Keccak-512 Hash</a>
+            <a href="/tools/hash-text" class="text-primary hover:underline">Hash Text (MD5, SHA-1, SHA-256)</a>
+            <a href="/tools/hmac-generator" class="text-primary hover:underline">HMAC Generator</a>
+            <a href="/tools/bcrypt" class="text-primary hover:underline">bcrypt Password Hashing</a>
             <a href="/tools/address-checksum" class="text-primary hover:underline">Address Checksum (EIP-55)</a>
             <a href="/tools/multi-chain-keys" class="text-primary hover:underline">Multi-Chain Wallet</a>
             <a href="/tools/abi-encoder" class="text-primary hover:underline">ABI Encoder &amp; Decoder</a>

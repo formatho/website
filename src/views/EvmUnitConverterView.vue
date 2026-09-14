@@ -230,7 +230,7 @@ const copyToClipboard = (text: string) => {
             <a href="/tools/multi-chain-keys" class="text-primary hover:underline">Multi-Chain Wallet</a>
             <a href="/tools/abi-encoder" class="text-primary hover:underline">ABI Encoder &amp; Decoder</a>
             <a href="/tools/solidity-to-opcodes" class="text-primary hover:underline">Solidity to Opcodes</a>
-            <a href="/tools/bip39" class="text-primary hover:underline">BIP39 Mnemonic Generator</a>
+            <a href="/tools/bip39-generator" class="text-primary hover:underline">BIP39 Mnemonic Generator</a>
           </div>
         </CardContent>
       </Card>
