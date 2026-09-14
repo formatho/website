@@ -10,7 +10,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { getFAQForRoute } from './faq-data.js'
+import { toolSpecificFAQ } from './faq-data.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -132,16 +132,18 @@ function generateMetaTags(tool) {
     ]
   })}</script>
 
-  <!-- FAQPage Structured Data -->
-  <script type="application/ld+json">${JSON.stringify(generateFAQSchema(tool.path))}</script>
+  <!-- FAQPage Structured Data: tool-specific Q&A only. The four generic
+       questions were previously prepended to ~136 routes — duplicate
+       sitewide markup that Google treats as spam. -->
+  ${(toolSpecificFAQ[tool.path] || []).length ? `<script type="application/ld+json">${JSON.stringify(generateFAQSchema(tool.path))}</script>` : ''}
 `
 }
 
 /**
- * Generate FAQPage JSON-LD schema for a tool route
+ * Generate FAQPage JSON-LD schema for a tool route — specific FAQs only
  */
 function generateFAQSchema(routePath) {
-  const faqs = getFAQForRoute(routePath)
+  const faqs = toolSpecificFAQ[routePath] || []
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -255,20 +257,21 @@ function main() {
     console.log(`⚠️  ${toolRoutes.length - updatedCount} tool pages were not updated`)
   }
 
-  // Fix /tools index page canonical: SSG leaves the shell's `canonical → /`
-  // on it, which makes Google treat /tools as a duplicate of the homepage
-  // (GSC: "Duplicate, Google chose different canonical").
+  // /tools renders the same HomeView document as /. Two indexable URLs with
+  // self-canonicals compete in GSC ("Duplicate, Google chose different
+  // canonical"). / is the linked home everywhere (nav, sitemap, external),
+  // so /tools declares / as its canonical.
   for (const p of ['tools.html', 'tools/index.html']) {
     const idxPath = path.join(distDir, p)
     if (!fs.existsSync(idxPath)) continue
     let html = fs.readFileSync(idxPath, 'utf8')
     const before = html
     html = html
-      .replace(/<link rel="canonical"[^>]*>/g, '<link rel="canonical" href="https://formatho.com/tools">')
-      .replace(/<meta property="og:url"[^>]*>/g, '<meta property="og:url" content="https://formatho.com/tools">')
+      .replace(/<link rel="canonical"[^>]*>/g, '<link rel="canonical" href="https://formatho.com/">')
+      .replace(/<meta property="og:url"[^>]*>/g, '<meta property="og:url" content="https://formatho.com/">')
     if (html !== before) {
       fs.writeFileSync(idxPath, html)
-      console.log(`✅ Fixed canonical on /tools (${p})`)
+      console.log(`✅ Canonicalized /tools → / (${p})`)
     }
   }
 }

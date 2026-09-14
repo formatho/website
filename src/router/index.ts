@@ -1,7 +1,6 @@
 import AppLayout from '../layouts/AppLayout.vue'
 import HomeView from '../views/HomeView.vue'
 import { routeMeta } from '../data/routeMeta'
-import MarkdownView from '../views/MarkdownView.vue'
 
 export const routes = [
   {
@@ -76,7 +75,7 @@ export const routes = [
       {
         path: '/tools/markdown',
         name: 'tools-markdown',
-        component: MarkdownView,
+        component: () => import(/* webpackPrefetch: true */ '../views/MarkdownView.vue'),
         meta: routeMeta['tools-markdown']
       },
       {

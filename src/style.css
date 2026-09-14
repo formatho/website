@@ -1,5 +1,6 @@
-@import 'highlight.js/styles/github-dark.css';
-@import 'github-markdown-css/github-markdown.css';
+/* highlight.js theme + github-markdown-css moved into Preview.vue — they are
+   only used by the Markdown editor preview, which loads lazily; keeping them
+   here ships ~100 KB of unused CSS on every page. */
 
 @tailwind base;
 @tailwind components;

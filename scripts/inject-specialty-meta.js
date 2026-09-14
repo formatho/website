@@ -185,10 +185,13 @@ for (const [slug, seo] of Object.entries(catSeo)) {
   console.log(`  ok: category/${slug} -> ${title.slice(0, 50)} (${toolItems.length} tools)`)
 }
 
-// The FAQPage JSON-LD lives in the index.html shell and therefore lands on
-// every page. Keep it on the homepage only - sitewide duplicates look like
-// markup spam to search engines.
-console.log('Stripping sitewide FAQPage JSON-LD (homepage excluded):')
+// Two duplicate-FAQ sources must not land on every page: the index.html
+// shell's homepage FAQ ("Is Formatho free to use?" …) and the generic tool
+// FAQ formerly prepended to ~136 routes ("Is this tool free to use?" …).
+// Strip blocks carrying either signature — tool-specific FAQPage JSON-LD
+// is unique content and must survive. The homepage keeps its copy.
+const GENERIC_FAQ_SIGNATURES = ['Is this tool free to use?', 'Is Formatho free to use?']
+console.log('Stripping generic FAQPage JSON-LD (homepage excluded):')
 let stripped = 0
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -198,7 +201,7 @@ function walk(dir) {
     if (fp === path.join(distDir, 'index.html')) continue
     const html = fs.readFileSync(fp, 'utf8')
     const cleaned = html.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g,
-      (m, body) => (body.includes('"FAQPage"') || body.includes('@type":"FAQPage') ? '' : m))
+      (m, body) => (GENERIC_FAQ_SIGNATURES.some((sig) => body.includes(sig)) ? '' : m))
     if (cleaned !== html) {
       fs.writeFileSync(fp, cleaned)
       stripped++

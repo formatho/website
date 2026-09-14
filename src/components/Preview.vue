@@ -38,3 +38,10 @@ watchEffect(async () => {
     <article class="markdown-body bg-transparent" v-html="htmlContent"></article>
   </div>
 </template>
+
+<style>
+/* Scoped to this lazily-loaded component so the syntax theme and markdown
+   typography stay out of the global CSS every page downloads. */
+@import 'highlight.js/styles/github-dark.css';
+@import 'github-markdown-css/github-markdown.css';
+</style>

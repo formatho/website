@@ -15,9 +15,34 @@ const visibleFaqs = computed(() => {
   const specific = toolSpecificFAQ[route.path] || []
   return specific.length > 0 ? [...specific, ...generalToolFAQ.slice(0, 2)] : []
 })
+// Slug → title-case mangles acronyms ("jwt" → "Jwt", "yaml-lint" → "Yaml Lint").
+// Map known tokens to their canonical spelling instead.
+const ACRONYMS: Record<string, string> = {
+  api: 'API', abi: 'ABI', ai: 'AI', apy: 'APY', ascii: 'ASCII', bcrypt: 'bcrypt',
+  bls: 'BLS', bpmn: 'BPMN', bom: 'BOM', caas: 'CaaS', cidr: 'CIDR', cors: 'CORS',
+  csp: 'CSP', csv: 'CSV', ctr: 'CTR', dkms: 'DKMS', dns: 'DNS', docker: 'Docker',
+  eip: 'EIP', ens: 'ENS', erc: 'ERC', eta: 'ETA', evm: 'EVM', gzip: 'GZip',
+  hmac: 'HMAC', html: 'HTML', http: 'HTTP', https: 'HTTPS', iban: 'IBAN',
+  iso: 'ISO', ip: 'IP', jwt: 'JWT', json: 'JSON', llm: 'LLM', mac: 'MAC',
+  mcp: 'MCP', mime: 'MIME', mpc: 'MPC', nato: 'NATO', oidc: 'OIDC', os: 'OS',
+  pdf: 'PDF', plm: 'PLM', qr: 'QR', rwa: 'RWA', rsa: 'RSA', saml: 'SAML',
+  seo: 'SEO', sql: 'SQL', svg: 'SVG', tls: 'TLS', totp: 'TOTP', toml: 'TOML',
+  ulid: 'ULID', unicode: 'Unicode', uri: 'URI', url: 'URL', uuid: 'UUID',
+  visio: 'Visio', wasm: 'WASM', wifi: 'Wi-Fi', xml: 'XML', x402: 'X402',
+  yaml: 'YAML', wysiwyg: 'WYSIWYG'
+}
+
 const toolTitle = computed(() => {
   const seg = route.path.split('/').filter(Boolean).pop() || 'Tool'
-  return seg.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+  return seg
+    .replace(/-/g, ' ')
+    .split(/\s+/)
+    .map((word) => {
+      const known = ACRONYMS[word.toLowerCase()]
+      if (known) return known
+      return word.replace(/\b\w/g, (c) => c.toUpperCase())
+    })
+    .join(' ')
 })
 </script>
 
