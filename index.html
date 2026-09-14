@@ -9,6 +9,32 @@
     crossorigin="anonymous"></script>
   <!-- Google Funding Choices (certified CMP) — EEA/UK/CH ad consent -->
   <script async src="https://fundingchoicesmessages.google.com/i/pub-7468579722342385.js"></script>
+  <!-- Google Analytics 4 with Consent Mode v2: granted by default outside
+       the EEA/UK/CH, denied there until the Funding Choices banner records
+       a choice. Must run before the gtag loader. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      'ad_storage': 'granted',
+      'ad_user_data': 'granted',
+      'ad_personalization': 'granted',
+      'analytics_storage': 'granted'
+    });
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'regions': ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IS', 'IE', 'IT', 'LV', 'LI', 'LT', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'GB', 'CH']
+    });
+    gtag('set', 'url_passthrough', true);
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-516615571"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-516615571');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -166,7 +192,7 @@
         "name": "How does Formatho protect my privacy?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Formatho uses zero server-side processing. Every tool executes directly in your browser's JavaScript engine — no data you enter is ever sent to our servers, and our analytics is cookieless. The site is funded by Google AdSense, which may use cookies for ad purposes; visitors in the EEA, UK, and Switzerland see a consent banner first. See our Privacy Policy for full details."
+          "text": "Formatho uses zero server-side processing. Every tool executes directly in your browser's JavaScript engine — no data you enter is ever sent to our servers. Analytics uses cookieless Umami plus Google Analytics (consent-gated in the EEA/UK/Switzerland). The site is funded by Google AdSense, which may use cookies for ad purposes; visitors in the EEA, UK, and Switzerland see a consent banner first. See our Privacy Policy for full details."
         }
       }
     ]
