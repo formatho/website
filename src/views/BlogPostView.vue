@@ -285,7 +285,7 @@ useHead(computed(() => {
             <div>
               <p class="text-sm font-semibold">Formatho Editorial Team</p>
               <p class="text-sm text-muted-foreground leading-relaxed mt-1">
-                Written and maintained by the team behind formatho.com — 230+ free, privacy-first
+                Written and maintained by the team behind formatho.com — free, privacy-first
                 developer tools that run entirely in your browser. Every guide on this blog is
                 tested against the tool it describes. Found an error or have a suggestion?
                 <a href="https://github.com/formatho" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-4">Open an issue on GitHub</a>.

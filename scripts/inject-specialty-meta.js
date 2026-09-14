@@ -217,7 +217,7 @@ const staticPages = {
   'security': ['Security - Vulnerability Disclosure | Formatho', 'Report security vulnerabilities to Formatho. Responsible disclosure program with safe harbor protections.'],
   'acceptable-use': ['Acceptable Use Policy - Formatho', 'Permitted and prohibited uses of Formatho tools including security and crypto tool guidelines.'],
   'privacy': ['Privacy Policy - Formatho', 'Tool processing happens 100% in your browser and inputs are never uploaded. Cookieless analytics. Ads served via Google AdSense with EEA/UK/CH consent — full disclosures inside.'],
-  'about': ['About Formatho - Private Infrastructure for AI Agents | Formatho', 'Formatho builds private infrastructure for AI agents: a self-hosted MCP runtime and 230+ free browser tools. Zero data egress, permissioned, audit-logged.'],
+  'about': ['About Formatho - Private Infrastructure for AI Agents | Formatho', 'Formatho builds private infrastructure for AI agents: a self-hosted MCP runtime and a free browser tool library. Zero data egress, permissioned, audit-logged.'],
   'terms': ['Terms of Service - Formatho', 'Terms of service for using Formatho browser tools and the Formatho Runtime MCP server.'],
   'contact': ['Contact Formatho - Support & Feedback | Formatho', 'Reach the Formatho team: GitHub issues for bugs and features, X for updates, email for security disclosures.'],
   'agents': ['Agent Browser - MCP Tools for AI Agents | Formatho', 'Browse the Formatho tool catalog from an AI agent perspective: what each tool does, how to call it via MCP, input and output formats.'],

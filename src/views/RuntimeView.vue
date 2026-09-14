@@ -108,7 +108,7 @@ const toolFamilies = [
         <p class="text-sm text-muted-foreground mb-8 max-w-2xl">
           Phase 1 ships 20 deterministic tools — the same math powering this site's browser tools, re-implemented
           headlessly and validated against identical ground truths. The public
-          <RouterLink to="/tools" class="underline underline-offset-4">140+ browser tools</RouterLink>
+          <RouterLink to="/tools" class="underline underline-offset-4">browser tools</RouterLink>
           remain free; the runtime is how agents get them privately.
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -14,7 +14,7 @@ export interface RouteMeta {
 export const routeMeta: Record<string, RouteMeta> = {
   'home': {
     title: 'Formatho | Secure On-Premise AI Tool Infrastructure for Agents',
-    description: 'Self-hosted MCP server giving AI agents controlled access to developer, security, and EVM tools - permissioned, audit-logged, zero data egress. Runs in your infrastructure; 140+ browser tools included.',
+    description: 'Self-hosted MCP server giving AI agents controlled access to developer, security, and EVM tools - permissioned, audit-logged, zero data egress. Runs in your infrastructure, with the free browser tool library included.',
     keywords: 'developer tools, json formatter, base64 encoder, uuid generator, privacy-first tools, agent todo, online utilities, free developer tools, client-side tools',
   },
   'runtime': {
@@ -24,7 +24,7 @@ export const routeMeta: Record<string, RouteMeta> = {
   },
   'about': {
     title: 'About Formatho - Private Infrastructure for AI Agents',
-    description: 'Formatho builds self-hosted MCP infrastructure giving AI agents controlled, audited access to developer, security, and EVM tools - plus 140+ free browser tools that run entirely client-side.',
+    description: 'Formatho builds self-hosted MCP infrastructure giving AI agents controlled, audited access to developer, security, and EVM tools - plus a library of free browser tools that run entirely client-side.',
     keywords: 'about formatho, private mcp server, ai agent infrastructure, self-hosted tools, on-premise ai',
   },
   'blogs': {
