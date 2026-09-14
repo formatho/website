@@ -19,7 +19,7 @@ const footerCategories = Object.values(categoryMeta)
             <span class="text-lg font-bold text-foreground">Formatho</span>
           </RouterLink>
           <p class="text-sm text-muted-foreground leading-relaxed">
-            Self-hosted MCP infrastructure for AI agents — plus 140+ developer
+            Self-hosted MCP infrastructure for AI agents — plus a library of free developer
             tools that run where your data lives.
           </p>
           <div class="flex items-center gap-4 social-icons-group justify-start">

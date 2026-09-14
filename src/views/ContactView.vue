@@ -51,7 +51,7 @@ const faqs = [
   },
   {
     q: 'Are these tools free?',
-    a: 'All 122 tools are free with no accounts, no limits, and no paywalls. The source code is open on GitHub.'
+    a: 'All tools are free with no accounts, no limits, and no paywalls. The source code is open on GitHub.'
   },
   {
     q: 'How fast do you respond?',

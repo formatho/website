@@ -44,3 +44,40 @@ eligibility. Keep this file updated when facts change.
 | F6 — thin content | 20 lowest-value posts parked (`scripts/parked-posts.json`): noindexed, out of the sitemap, unlisted — until deepened in Strapi |
 
 _Last updated: 2026-09-14_
+
+## 5. Content classification — Google Publisher Restrictions (F12)
+
+Classified from live CMS tags/titles (`scripts/blog-content-cache.json`,
+regenerated at each build). Google's Publisher Restrictions do not ban
+cryptocurrency content — they let advertisers limit demand against it.
+Monetisation impact is lower ad serving on classified pages; no policy
+violation exists while content stays informational.
+
+**Class: cryptocurrency-related (12 posts)** — informational/educational
+coverage of tokenisation, regulation, and protocol engineering. None
+promote ICOs, price prediction services, unregulated exchanges, or
+investment advice:
+
+    index-tracking-assets-options-not-debt
+    future-of-rwa-tokenization-5-megatrends-reshaping-finance-2030
+    real-estate-tokenization-legal-frameworks-sm-reits-2026
+    structural-reconfiguration-finance-rwa-tokenization-2026
+    why-rwa-ai-privacy-tokens-outperforming-bitcoin-2026
+    clarity-act-victory-regulatory-clarity-3t-crypto-market
+    eip-7702-ethereum-pectra-eoa-smart-contract-upgrade
+    erc-7730-clear-signing-ethereum-standard
+    from-dead-capital-to-programmable-gold-2026
+    ai-meets-blockchain-agent-orchestration-web3
+    ethereum-units-explained
+    bip39-mnemonic-guide
+
+**Class: general/technical (48 posts)** — no restricted themes.
+
+Review triggers: re-run the classification when posts are added or retagged;
+any post that starts advising on trades, promoting token sales, or linking
+paid referral schemes must be treated as restricted content and reviewed
+against the full Publisher Restrictions list.
+
+## 6. Related documents
+
+- `docs/ad-placement-spec.md` — ad placement rules for launch (F10)

@@ -1,6 +1,6 @@
 /**
  * Tool directory - the single source of truth for tool categorization.
- * 6 categories, 122 tools. Consumed by: HomeView, ToolsView (directory),
+ * Consumed by: HomeView, ToolsView (directory),
  * CategoryView, GlobalSearch, AppLayout, useSEO, generate-llms-txt.
  * Tool page URLs are defined in router/index.ts and NEVER change here.
  */

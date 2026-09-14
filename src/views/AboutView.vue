@@ -305,7 +305,48 @@ useSEO({
     </section>
 
     <!-- ============================================ -->
-    <!-- SECTION 6: FOOTER CTA                         -->
+    <!-- SECTION 6: PUBLISHER INFORMATION             -->
+    <!-- ============================================ -->
+    <section class="py-16 md:py-24 border-t border-foreground/10 bg-muted/30">
+      <div class="container mx-auto px-4 md:px-12">
+        <div class="max-w-3xl">
+          <h2 class="text-3xl md:text-4xl font-black tracking-tighter mb-6">Publisher Information</h2>
+          <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-sm">
+            <div>
+              <dt class="text-xs tracking-widest uppercase text-muted-foreground mb-1">Website / Operator</dt>
+              <dd class="font-medium">formatho.com — published and operated by Formatho (independent publisher)</dd>
+            </div>
+            <div>
+              <dt class="text-xs tracking-widest uppercase text-muted-foreground mb-1">Country of operation</dt>
+              <dd class="font-medium">India</dd>
+            </div>
+            <div>
+              <dt class="text-xs tracking-widest uppercase text-muted-foreground mb-1">General contact</dt>
+              <dd><a href="mailto:support@formatho.com" class="text-primary hover:underline">support@formatho.com</a></dd>
+            </div>
+            <div>
+              <dt class="text-xs tracking-widest uppercase text-muted-foreground mb-1">Privacy &amp; legal</dt>
+              <dd>
+                <a href="mailto:privacy@formatho.com" class="text-primary hover:underline">privacy@formatho.com</a>
+                · <RouterLink to="/privacy" class="text-primary hover:underline">Privacy Policy</RouterLink>
+                · <RouterLink to="/acceptable-use" class="text-primary hover:underline">Acceptable Use</RouterLink>
+              </dd>
+            </div>
+            <div>
+              <dt class="text-xs tracking-widest uppercase text-muted-foreground mb-1">Source &amp; issue tracker</dt>
+              <dd><a href="https://github.com/formatho" class="text-primary hover:underline" rel="noopener noreferrer" target="_blank">github.com/formatho</a></dd>
+            </div>
+            <div>
+              <dt class="text-xs tracking-widest uppercase text-muted-foreground mb-1">Advertising</dt>
+              <dd>Google AdSense (publisher <span class="font-mono text-xs">pub-7468579722342385</span>) — see the <RouterLink to="/privacy" class="text-primary hover:underline">privacy policy</RouterLink> for ad, cookie, and consent disclosures</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 7: FOOTER CTA                         -->
     <!-- ============================================ -->
     <section class="py-16 md:py-32">
       <div class="container mx-auto px-4 md:px-12">

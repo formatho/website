@@ -94,7 +94,7 @@ function articleHtml(post) {
         <div class="max-w-4xl mx-auto mt-12 pt-8 border-t border-foreground/10">
           <p class="text-sm text-muted-foreground leading-relaxed">
             <strong class="text-foreground">Formatho Editorial</strong> — written and maintained by the
-            team behind <a href="https://formatho.com">formatho.com</a>, a library of 230+ free,
+            team behind <a href="https://formatho.com">formatho.com</a>, a library of free,
             privacy-first developer tools that run entirely in your browser. Every guide is tested
             against the tools it describes. Corrections and suggestions:
             <a href="https://github.com/formatho">github.com/formatho</a>.

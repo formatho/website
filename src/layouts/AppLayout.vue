@@ -8,6 +8,7 @@ import QABadge from '@/components/QABadge.vue'
 import ToolSEOContent from '@/components/ToolSEOContent.vue'
 import { trackToolUsed, trackResultCopied } from '@/utils/toolTracking'
 import BookmarkHint from '@/components/BookmarkHint.vue'
+import DualUseNotice from '@/components/DualUseNotice.vue'
 import { computed, watch, onMounted, onUnmounted, ref } from 'vue'
 import { tools } from '@/data/tools'
 
@@ -132,6 +133,7 @@ onUnmounted(removeToolSchema)
 
     <Navbar />
     <Breadcrumb v-if="showBreadcrumb" />
+    <DualUseNotice />
     <main id="main-content" class="flex-1 pt-16" :class="{ 'pt-[104px]': showBreadcrumb }">
       <!-- Skeleton Loader: Tool Pages (2-col editor layout) -->
       <Transition
