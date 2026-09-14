@@ -21,11 +21,11 @@ useSEO({
           <h2 class="text-2xl font-bold mb-4">The Short Version</h2>
           <p class="text-muted-foreground leading-relaxed">
             Everything you type into a Formatho tool stays in your browser — nothing you paste, upload, or
-            generate is sent to our servers. We set no first-party cookies and our analytics (Umami) is
-            cookieless. The site is funded by advertising served through Google AdSense: for visitors in the
-            EEA, UK, and Switzerland, a Google-certified consent banner (Funding Choices) is shown first, and
-            third parties including Google may place cookies or use similar technologies for ad purposes as
-            described below.
+            generate is sent to our servers. Our analytics stack is Umami (cookieless) plus Google Analytics 4,
+            which sets cookies for measurement — denied by default in the EEA, UK, and Switzerland until you
+            consent via the Google-certified Funding Choices banner. The site is funded by advertising served
+            through Google AdSense: third parties including Google may place cookies or use similar
+            technologies for ad purposes as described below.
           </p>
         </section>
 
@@ -38,11 +38,17 @@ useSEO({
             transmitted to us or any third party by the tool itself.
           </p>
           <p class="text-muted-foreground leading-relaxed mb-4">
-            <strong>Analytics:</strong> We use <a href="https://umami.is" class="text-primary hover:underline" rel="noopener noreferrer">Umami Analytics</a>,
-            a privacy-first analytics platform that does not use cookies and does not collect personal
-            data. Umami records anonymous, aggregated page views and events (which pages are visited,
-            which tools are used). It cannot identify you, track you across sites, or build a profile
-            of your behavior.
+            <strong>Analytics — Umami (cookieless):</strong> records anonymous, aggregated page views and
+            events (which pages are visited, which tools are used). No cookies, no personal data, no
+            cross-site tracking, no profiling.
+            <br><br>
+            <strong>Analytics — Google Analytics 4 (G-516615571):</strong> sets first-party cookies
+            (<code class="text-xs">_ga</code>, <code class="text-xs">_ga_*</code>) to distinguish visitors and
+            sessions, and reports page views, referrers, and interaction events to Google. It is loaded with
+            Google Consent Mode v2: in the <strong>EEA, UK, and Switzerland</strong> these cookies are not set
+            or used until you grant analytics consent in the banner; elsewhere they are active by default.
+            You can opt out with Google's
+            <a href="https://tools.google.com/dlpage/gaoptout" class="text-primary hover:underline" rel="noopener noreferrer">browser add-on</a>.
           </p>
           <p class="text-muted-foreground leading-relaxed mb-4">
             <strong>Advertising:</strong> We display ads through Google AdSense. As a result, third-party
@@ -126,6 +132,12 @@ useSEO({
           <p class="text-muted-foreground leading-relaxed mb-4">
             <strong>Umami Analytics (cloud.umami.is):</strong> Cookieless analytics. Receives anonymous
             page view and event data. No cookies, no personal data, no cross-site tracking.
+          </p>
+          <p class="text-muted-foreground leading-relaxed mb-4">
+            <strong>Google Analytics (www.googletagmanager.com, *.google-analytics.com):</strong> Measurement
+            cookies and reporting as described in the analytics section above; consent-gated in the
+            EEA/UK/Switzerland via the banner. See Google's
+            <a href="https://policies.google.com/technologies/partner-sites" class="text-primary hover:underline" rel="noopener noreferrer">partner-sites disclosure</a>.
           </p>
           <p class="text-muted-foreground leading-relaxed mb-4">
             <strong>Content Delivery:</strong> Our site is served via standard web infrastructure
