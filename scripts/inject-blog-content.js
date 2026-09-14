@@ -17,6 +17,13 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { part1 } from './blog-upgrade/part1.mjs'
+import { part2 } from './blog-upgrade/part2.mjs'
+import { part3 } from './blog-upgrade/part3.mjs'
+
+// Deepened content for posts that are thin in the CMS (read-only token).
+// Same overrides src/data/strapi.ts applies to the client-side fetch.
+const overrides = { ...part1, ...part2, ...part3 }
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const distDir = path.join(__dirname, '..', 'dist')
@@ -144,7 +151,9 @@ async function main() {
     }
 
     const post = bySlug.get(slug)
-    if (!post || !post.content) { missing++; continue }
+    if (!post) { missing++; continue }
+    if (overrides[slug]) post.content = overrides[slug]
+    if (!post.content) { missing++; continue }
     if (!LOADING_RE.test(html)) { missing++; continue }
 
     html = html.replace(LOADING_RE, articleHtml(post))
@@ -152,7 +161,7 @@ async function main() {
     injected++
   }
 
-  console.log(`inject-blog-content: ${injected} inlined, ${parkedCount} parked (noindex), ${missing} skipped`)
+  console.log(`inject-blog-content: ${injected} inlined (${Object.keys(overrides).length} with deepened overrides), ${parkedCount} parked (noindex), ${missing} skipped`)
 }
 
 main()
