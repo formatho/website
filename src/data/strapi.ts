@@ -2,8 +2,15 @@
  * Strapi CMS API client for Formatho blog
  * Fetches blog posts from cms.formatho.com
  */
+import { part1 } from '../../scripts/blog-upgrade/part1.mjs'
+import { part2 } from '../../scripts/blog-upgrade/part2.mjs'
+import { part3 } from '../../scripts/blog-upgrade/part3.mjs'
 
 const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || 'https://cms.formatho.com'
+
+// Deepened content for posts that are thin in the CMS (read-only API token).
+// Kept next to the build-time injector in scripts/blog-upgrade/.
+const blogContentOverrides: Record<string, string> = { ...part1, ...part2, ...part3 }
 
 // No token needed — public role has find/findOne permissions
 
@@ -145,7 +152,13 @@ export async function fetchBlogPost(slug: string): Promise<BlogPost | null> {
     return null
   }
 
-  return mapStrapiPost(posts[0])
+  const post = mapStrapiPost(posts[0])
+  // Deepened content overrides for posts that were thin in the CMS (the API
+  // token is read-only). Same source the build-time injector uses — drop
+  // after pushing the content to Strapi with a write token.
+  const override = blogContentOverrides[slug]
+  if (post && override) post.content = override
+  return post
 }
 
 /**
