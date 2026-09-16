@@ -128,42 +128,41 @@ for (const [s,n,d] of stacks) {
   fix('dev-tools', s, `${n} Tools - Secure MCP for AI Agents | Formatho`, d.slice(0,160), `${BASE}/dev-tools/${s}`)
 }
 
-// Curated per-category SEO. Title count {n} is filled from the page's real
-// tool-link count so copy stays accurate as tools are added.
+// Curated per-category SEO.
 const catSeo = {
   web3: {
     name: 'Web3 & Blockchain',
-    title: n => `Web3 & Blockchain Tools — ${n} Free EVM, ABI & Crypto Utilities | Formatho`,
+    title: `Web3 & Blockchain Tools — EVM, ABI & Crypto Utilities | Formatho`,
     desc: 'Free web3 dev tools: EVM contract reader, vanity address generator, Keccak-256 hasher, ABI encoder, Uniswap math, multi-chain readers. No upload, client-side.',
     kw: 'web3 tools, blockchain developer tools, evm contract reader, abi encoder, keccak256 hasher, vanity address generator, free crypto tools'
   },
   security: {
     name: 'Security & Auth',
-    title: n => `Security & Auth Tools — ${n} Free JWT, SAML & Hash Utilities | Formatho`,
+    title: `Security & Auth Tools — JWT, SAML & Hash Utilities | Formatho`,
     desc: 'JWT debugger, SAML decoder, OIDC builder, hash generators, RSA keys, encryption, TOTP, password strength. Free, private, all client-side.',
     kw: 'security tools, jwt debugger, saml decoder, oidc builder, hash generator, encryption online, totp generator, password strength checker'
   },
   'data-formats': {
     name: 'Data Formats',
-    title: n => `JSON, YAML, XML & CSV Tools — ${n} Free Format Converters | Formatho`,
+    title: `JSON, YAML, XML & CSV Tools — Free Format Converters | Formatho`,
     desc: 'Validate, format, convert and diff JSON, YAML, XML, TOML, CSV. UUID, ULID, Base64, IBAN validators plus ISO 20022 tools. Free and private.',
     kw: 'json formatter, yaml validator, xml converter, csv tools, toml converter, uuid generator, base64 encoder, iso 20022 validator'
   },
   developer: {
     name: 'Developer Tools',
-    title: n => `Developer Tools — ${n} Free SQL, Git, Regex & SQLite Utilities | Formatho`,
+    title: `Developer Tools — SQL, Git, Regex & SQLite Utilities | Formatho`,
     desc: 'SQL formatter, SQLite browser, Git cheat sheet, regex tester, Docker converter, Mermaid viewer, diff checker. Free, private, in your browser.',
     kw: 'developer tools, sql formatter, sqlite browser, git cheat sheet, regex tester, docker compose converter, mermaid viewer, diff checker'
   },
   converters: {
     name: 'Converters & Calculators',
-    title: n => `Converters & Calculators — ${n} Free Timestamp, Base & Color Tools | Formatho`,
+    title: `Converters & Calculators — Timestamp, Base & Color Tools | Formatho`,
     desc: 'Unix timestamp, date-time, number base, color, case, temperature converters. Math, ETA, percentage calculators. Free, instant, client-side.',
     kw: 'unit converter, timestamp converter, number base converter, color converter, case converter, percentage calculator, free online converters'
   },
   network: {
     name: 'Network & Web',
-    title: n => `Network & Web Tools — ${n} Free Subnet, URL & HTTP Utilities | Formatho`,
+    title: `Network & Web Tools — Subnet, URL & HTTP Utilities | Formatho`,
     desc: 'IPv4 subnet calculator, MAC lookup, IPv6 ULA generator, URL encoder/parser, HTTP status codes, QR generator. Free, private, client-side.',
     kw: 'subnet calculator, ipv4 subnetting, mac address lookup, url encoder, http status codes, qr code generator, network tools online'
   }
@@ -176,7 +175,7 @@ for (const [slug, seo] of Object.entries(catSeo)) {
   if (!fs.existsSync(fp)) { console.log('  miss: category/' + slug); continue }
   const raw = fs.readFileSync(fp, 'utf8')
   const toolItems = parseToolLinks(raw)
-  const title = seo.title(toolItems.length)
+  const title = seo.title
   const jsonLd = [
     jsonldScript('json-ld-category-breadcrumb', breadcrumbLd(seo.name, url)),
     jsonldScript('json-ld-category-collection', collectionLd(seo.name, url, seo.desc, toolItems))

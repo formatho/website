@@ -56,34 +56,34 @@ const catBlurb = computed(() => category.value?.blurb || '')
 
 // SPA-side SEO mirrors the curated copy injected at build time by
 // scripts/inject-specialty-meta.js — titles carry the live tool count.
-const CAT_SEO: Record<string, { title: (n: number) => string; desc: string; kw: string }> = {
+const CAT_SEO: Record<string, { title: string; desc: string; kw: string }> = {
   'web3': {
-    title: n => `Web3 & Blockchain Tools — ${n} Free EVM, ABI & Crypto Utilities | Formatho`,
+    title: `Web3 & Blockchain Tools — EVM, ABI & Crypto Utilities | Formatho`,
     desc: 'Free web3 dev tools: EVM contract reader, vanity address generator, Keccak-256 hasher, ABI encoder, Uniswap math, multi-chain readers. No upload, client-side.',
     kw: 'web3 tools, blockchain developer tools, evm contract reader, abi encoder, keccak256 hasher, vanity address generator, free crypto tools'
   },
   'security': {
-    title: n => `Security & Auth Tools — ${n} Free JWT, SAML & Hash Utilities | Formatho`,
+    title: `Security & Auth Tools — JWT, SAML & Hash Utilities | Formatho`,
     desc: 'JWT debugger, SAML decoder, OIDC builder, hash generators, RSA keys, encryption, TOTP, password strength. Free, private, all client-side.',
     kw: 'security tools, jwt debugger, saml decoder, oidc builder, hash generator, encryption online, totp generator, password strength checker'
   },
   'data-formats': {
-    title: n => `JSON, YAML, XML & CSV Tools — ${n} Free Format Converters | Formatho`,
+    title: `JSON, YAML, XML & CSV Tools — Free Format Converters | Formatho`,
     desc: 'Validate, format, convert and diff JSON, YAML, XML, TOML, CSV. UUID, ULID, Base64, IBAN validators plus ISO 20022 tools. Free and private.',
     kw: 'json formatter, yaml validator, xml converter, csv tools, toml converter, uuid generator, base64 encoder, iso 20022 validator'
   },
   'developer': {
-    title: n => `Developer Tools — ${n} Free SQL, Git, Regex & SQLite Utilities | Formatho`,
+    title: `Developer Tools — SQL, Git, Regex & SQLite Utilities | Formatho`,
     desc: 'SQL formatter, SQLite browser, Git cheat sheet, regex tester, Docker converter, Mermaid viewer, diff checker. Free, private, in your browser.',
     kw: 'developer tools, sql formatter, sqlite browser, git cheat sheet, regex tester, docker compose converter, mermaid viewer, diff checker'
   },
   'converters': {
-    title: n => `Converters & Calculators — ${n} Free Timestamp, Base & Color Tools | Formatho`,
+    title: `Converters & Calculators — Timestamp, Base & Color Tools | Formatho`,
     desc: 'Unix timestamp, date-time, number base, color, case, temperature converters. Math, ETA, percentage calculators. Free, instant, client-side.',
     kw: 'unit converter, timestamp converter, number base converter, color converter, case converter, percentage calculator, free online converters'
   },
   'network': {
-    title: n => `Network & Web Tools — ${n} Free Subnet, URL & HTTP Utilities | Formatho`,
+    title: `Network & Web Tools — Subnet, URL & HTTP Utilities | Formatho`,
     desc: 'IPv4 subnet calculator, MAC lookup, IPv6 ULA generator, URL encoder/parser, HTTP status codes, QR generator. Free, private, client-side.',
     kw: 'subnet calculator, ipv4 subnetting, mac address lookup, url encoder, http status codes, qr code generator, network tools online'
   }
@@ -91,8 +91,7 @@ const CAT_SEO: Record<string, { title: (n: number) => string; desc: string; kw: 
 
 const seo = computed(() => {
   const curated = CAT_SEO[slug.value]
-  const n = category.value?.items.length ?? 0
-  if (curated) return { title: curated.title(n), desc: curated.desc, kw: curated.kw }
+  if (curated) return { title: curated.title, desc: curated.desc, kw: curated.kw }
   return {
     title: `${catName.value} - Free Online Tools | Formatho`,
     desc: `${catBlurb.value} All tools are free, private, and run entirely in your browser.`,
@@ -120,7 +119,7 @@ useSEO({
         <CategoryIcon :slug="category?.slug || ''" :size="36" />
         <div>
           <h1 class="text-3xl md:text-4xl font-bold">{{ catName }}</h1>
-          <p class="text-sm text-muted-foreground mt-1">{{ category?.items.length }} tools — free, private, runs in your browser</p>
+          <p class="text-sm text-muted-foreground mt-1">Free, private, runs in your browser</p>
         </div>
       </div>
       <p class="text-base text-muted-foreground leading-relaxed mt-4 max-w-3xl">{{ catBlurb }}</p>
@@ -177,7 +176,6 @@ useSEO({
         >
           <CategoryIcon :slug="sib.slug" :size="20" />
           <p class="text-sm font-medium group-hover:text-primary transition-colors">{{ sib.category }}</p>
-          <p class="text-xs text-muted-foreground mt-0.5">{{ sib.items.length }} tools</p>
         </RouterLink>
       </div>
     </div>
