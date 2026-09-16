@@ -97,8 +97,7 @@ const toolFamilies = [
   ['Security & tokens', 'SHA-2 + Keccak-256 hashing, HMAC, UUID/ULID, JWT decode, TOTP'],
   ['Web3 / EVM', 'Function selectors, CREATE2, EIP-1967 proxy slots, storage slots, calldata decode, v4 hook permissions'],
   ['DeFi math', 'Exact EIP-4626 vault share/asset math with spec rounding'],
-  ['ISO 20022', 'pain.001 message validation and generation for payments teams'],
-  ['Developer', 'Timestamps, cron expressions, registry metadata']
+  ['Developer', 'Timestamps, regex matching, case conversion, slugs, registry metadata']
 ]
 
 const faqs = [
