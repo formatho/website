@@ -20,6 +20,7 @@ import { fileURLToPath } from 'url'
 import { part1 } from './blog-upgrade/part1.mjs'
 import { part2 } from './blog-upgrade/part2.mjs'
 import { part3 } from './blog-upgrade/part3.mjs'
+import { localPosts } from './blog-upgrade/local-posts.mjs'
 
 // Deepened content for posts that are thin in the CMS (read-only token).
 // Same overrides src/data/strapi.ts applies to the client-side fetch.
@@ -73,7 +74,8 @@ async function fetchPostsWithCache() {
 }
 
 function articleHtml(post) {
-  const tags = (post.tags || '').split(',').map((t) => t.trim()).filter(Boolean)
+  // Strapi sends tags as a comma string; localPosts ship arrays
+  const tags = (Array.isArray(post.tags) ? post.tags : String(post.tags || '').split(',')).map((t) => t.trim()).filter(Boolean)
   const tagHtml = tags
     .map((t) => `<span class="text-xs tracking-widest uppercase text-muted-foreground">${esc(t)}</span>`)
     .join('')
@@ -129,6 +131,7 @@ async function main() {
   }
 
   const bySlug = new Map(posts.map((p) => [p.slug, p]))
+  for (const p of localPosts) if (!bySlug.has(p.slug)) bySlug.set(p.slug, p)
   let injected = 0
   let parkedCount = 0
   let missing = 0

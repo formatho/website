@@ -109,10 +109,12 @@ lines.push(`- [Blog - developer guides and tutorials]: ${BASE}/blogs — Deep di
 // Blog posts from cache (same source as sitemap fallback)
 try {
   const cached = JSON.parse(readFileSync(resolve(process.cwd(), 'scripts', 'blog-meta-cache.json'), 'utf8'))
-  if (cached.length > 0) {
+  const { localPosts } = await import('./blog-upgrade/local-posts.mjs')
+  const allPosts = [...cached, ...localPosts.map((p) => ({ title: p.title, slug: p.slug, excerpt: p.excerpt }))]
+  if (allPosts.length > 0) {
     lines.push('')
     lines.push('### Blog posts')
-    for (const post of cached) {
+    for (const post of allPosts) {
       const excerpt = (post.excerpt || '').replace(/\n/g, ' ').slice(0, 120)
       lines.push(`- [${post.title}]: ${BASE}/blogs/${post.slug}${excerpt ? ' — ' + excerpt : ''}`)
     }
