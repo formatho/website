@@ -10,7 +10,8 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { toolSpecificFAQ } from './faq-data.js'
+import { toolSpecificFAQ, toolSEOContent } from './faq-data.js'
+import { faqHowTo } from './faq-howto-data.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -135,15 +136,40 @@ function generateMetaTags(tool) {
   <!-- FAQPage Structured Data: tool-specific Q&A only. The four generic
        questions were previously prepended to ~136 routes — duplicate
        sitewide markup that Google treats as spam. -->
-  ${(toolSpecificFAQ[tool.path] || []).length ? `<script type="application/ld+json">${JSON.stringify(generateFAQSchema(tool.path))}</script>` : ''}
+  ${((toolSpecificFAQ[tool.path] || []).length || (faqHowTo[tool.path] || []).length) ? `<script type="application/ld+json">${JSON.stringify(generateFAQSchema(tool.path))}</script>` : ''}
+  ${howToSchema(tool) ? `<script type="application/ld+json">${JSON.stringify(howToSchema(tool))}</script>` : ''}
 `
+}
+
+/**
+ * HowTo JSON-LD for tools with curated steps (visible in ToolSEOContent's
+ * "How to use" section — schema and page content match).
+ */
+function howToSchema(tool) {
+  const content = toolSEOContent[tool.path]
+  const steps = content && Array.isArray(content.howTo) ? content.howTo : []
+  if (!steps.length) return null
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to use the ${tool.title.replace(/ - .*$/, '').replace(/ \| Formatho$/, '')}`,
+    description: tool.description,
+    totalTime: 'PT2M',
+    tool: [{ '@type': 'HowToTool', name: `Formatho ${tool.title.split(' - ')[0]} (browser)` }],
+    step: steps.map((s, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: s.split(/[,.]/)[0].slice(0, 60),
+      text: s
+    }))
+  }
 }
 
 /**
  * Generate FAQPage JSON-LD schema for a tool route — specific FAQs only
  */
 function generateFAQSchema(routePath) {
-  const faqs = toolSpecificFAQ[routePath] || []
+  const faqs = [...(toolSpecificFAQ[routePath] || []), ...(faqHowTo[routePath] || [])]
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
