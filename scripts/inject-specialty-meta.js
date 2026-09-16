@@ -3,6 +3,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { runtimeFaq, runtimeHowTo } from './faq-howto-data.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const distDir = path.join(__dirname, '..', 'dist')
@@ -224,6 +225,47 @@ const staticPages = {
 console.log('Static compliance pages:')
 for (const [slug, [title, desc]] of Object.entries(staticPages)) {
   fix('', slug, title, desc, BASE + '/' + slug)
+}
+
+// Runtime landing: FAQPage + HowTo JSON-LD matching the visible sections
+{
+  const fp = path.join(distDir, 'runtime.html')
+  if (fs.existsSync(fp)) {
+    let html = fs.readFileSync(fp, 'utf8')
+    const faqLd = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: runtimeFaq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a }
+      }))
+    }
+    const howToLd = {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: 'How to run a self-hosted MCP server for AI agents',
+      description: 'Deploy Formatho Runtime in Docker and connect Claude Code, Cursor, or Claude Desktop.',
+      totalTime: 'PT5M',
+      tool: [{ '@type': 'HowToTool', name: 'Docker + Formatho Runtime image' }],
+      step: runtimeHowTo.map((s, i) => ({
+        '@type': 'HowToStep',
+        position: i + 1,
+        name: s.split(/[,.]/)[0].slice(0, 60),
+        text: s
+      }))
+    }
+    const strip = (id) => {
+      html = html.replace(new RegExp('<script type="application/ld\\+json" id="' + id + '">[\\s\\S]*?</script>'), '')
+    }
+    strip('json-ld-runtime-faq')
+    strip('json-ld-runtime-howto')
+    html = html.replace('</head>',
+      `<script type="application/ld+json" id="json-ld-runtime-faq">${JSON.stringify(faqLd)}</script>` +
+      `<script type="application/ld+json" id="json-ld-runtime-howto">${JSON.stringify(howToLd)}</script></head>`)
+    fs.writeFileSync(fp, html)
+    console.log('  ok: /runtime FAQPage + HowTo JSON-LD')
+  }
 }
 
 // Redirect stubs and artifacts rendered by the SSG pass: never indexable,

@@ -133,3 +133,24 @@ export const faqHowTo = {
     { question: 'Why subtract 2 addresses from every subnet?', answer: 'The first address identifies the network and the last is the broadcast — neither is assignable to a host.' }
   ]
 }
+
+/**
+ * Runtime landing (/runtime) — FAQ + HowTo data, rendered visibly by
+ * RuntimeView.vue and emitted as JSON-LD by inject-specialty-meta.js.
+ */
+export const runtimeFaq = [
+  { q: 'What is a self-hosted MCP server?', a: 'An MCP (Model Context Protocol) server runs inside your own infrastructure — a container you start, on a host you control — and gives AI agents like Claude Code, Cursor, and Claude Desktop controlled access to tools. Nothing routes through a vendor: connections terminate on your network, and you decide which tools each agent may call.' },
+  { q: 'How do I connect Claude Code to a self-hosted MCP server?', a: 'One command: claude mcp add formatho -- docker run -i --rm -v formatho-audit:/data formatho/formatho-runtime. Claude Code launches the container as a stdio MCP server and the Formatho tools appear in its tool list immediately.' },
+  { q: 'How do I add an MCP server to Cursor?', a: 'Add an mcpServers entry to .cursor/mcp.json (per project) or ~/.cursor/mcp.json (global) with the docker run command — Cursor connects on startup and the tools are selectable in agent mode.' },
+  { q: 'Can agents send my data to a third party through this server?', a: 'No — that is the point of the design. The tool registry refuses to register any tool that declares network, filesystem, secret, or subprocess access. Tools are pure functions over their inputs, so there is no channel for payloads to leave your environment.' },
+  { q: 'What gets logged in the audit trail?', a: 'Metadata only: which tool, which version, which API key, duration, and payload byte sizes. The content of requests and responses is never written to disk, keeping the audit useful for compliance without becoming a data-loss vector itself.' },
+  { q: 'Self-hosted or the hosted tier — which should I use?', a: 'Self-host when data must not leave your network or you want the policy engine under your control — it is one Docker command. The hosted tier (mcp.formatho.com) exists for trying the tools and for teams without container infrastructure; payloads transit the hosted endpoint, so regulated data belongs self-hosted.' },
+  { q: 'What do I need to run it?', a: 'Docker on any Linux, macOS, or Windows host. The stdio transport needs no ports or configuration; the Streamable HTTP deployment binds a port and supports API keys, policies, and rate limits. Image size is small and the dependency chain is three pinned packages.' }
+]
+
+export const runtimeHowTo = [
+  'Pull and run the image: docker run -i --rm -v formatho-audit:/data formatho/formatho-runtime (stdio transport, zero configuration).',
+  'Register it with your agent — claude mcp add formatho for Claude Code, or the mcpServers entry for Cursor and Claude Desktop.',
+  'Ask your agent to use a tool — convert, hash, decode — and watch the invocation land in the metadata-only audit log.',
+  'When you need network reach, API keys, or rate limits, switch to the Streamable HTTP deployment and set policies per key.'
+]
