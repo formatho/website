@@ -78,6 +78,7 @@ Category hub pages group every tool with a one-line description each:
 - [CSV Row & Column Counter]: https://formatho.com/tools/csv-counter — Count rows, columns, and cells in CSV data. Handles quoted fields, auto-detects delimiter, shows column types and empty values.
 - [ISO 20022 Validator]: https://formatho.com/tools/iso20022-validator — Validate ISO 20022 payment messages (pain.001, pacs.008, camt.053). Auto-detects type, checks required fields, pretty-prints XML.
 - [pain.001 Builder]: https://formatho.com/tools/pain001-builder — Build ISO 20022 Customer Credit Transfer Initiation XML visually — debtor, creditor, amount, SEPA service level, purpose codes.
+- [GS1 Digital Link Builder]: https://formatho.com/tools/gs1-digital-link — Build and decode GS1 Digital Link URLs: GTIN, serial, lot, expiry into a web URL and QR code. Check-digit and date validation, element-string conversion. Free, client-side.
 - [XML Formatter]: https://formatho.com/tools/xml-formatter — Format and prettify XML documents.
 - [XML ↔ JSON]: https://formatho.com/tools/xml-json — Bi-directional XML to JSON converter with real-time conversion and clipboard support.
 - [YAML Linter]: https://formatho.com/tools/yaml-lint — Validate and lint YAML code.

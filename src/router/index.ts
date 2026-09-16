@@ -511,6 +511,12 @@ export const routes = [
         meta: routeMeta['pain001-builder']
       },
       {
+        path: '/tools/gs1-digital-link',
+        name: 'gs1-digital-link',
+        component: () => import('@/views/Gs1DigitalLinkView.vue'),
+        meta: routeMeta['gs1-digital-link']
+      },
+      {
         path: '/tools/csv-counter',
         name: 'csv-counter',
         component: () => import('@/views/CsvCounterView.vue'),

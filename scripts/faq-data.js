@@ -705,6 +705,18 @@ export const toolSEOContent = {
       'Copy the rendered prompt with its token estimate.'
     ]
   },
+  '/tools/gs1-digital-link': {
+    intro: [
+      'The GS1 Digital Link turns the numbers behind barcodes into web addresses. Instead of a GTIN that only a scanner understands, a product carries a link like https://example.com/01/09506000134352/21/SN123456 — the same identifiers (GTIN, serial, lot, expiry), but openable by any phone camera and resolvable to your product page. EU FMD serialisation, US DSCSA, and consumer-transparency programs are all pushing identifiers onto the web; Digital Link is the standard bridge.',
+      'This tool builds the URI from your identifiers — validating the GTIN check digit and date formats as you type — and renders the QR code ready for packaging. Paste any Digital Link (or a raw element string like (01)0950…(21)SN123) back in and it decodes and validates every pair. Everything runs locally: your batch and serial data describes real shipments.'
+    ],
+    howTo: [
+      'Enter your stem URL (the domain your product pages live on).',
+      'Add identifier pairs: GTIN (01), serial (21), lot (10), expiry (17), and more.',
+      'Copy the Digital Link, element string, or download the QR code.',
+      'Paste any link back into the parser tab to decode and validate it.'
+    ]
+  },
   '/tools/llm-json-validator': {
     intro: [
       'Language models return JSON surrounded by markdown fences, prose, trailing commas, and smart quotes — all of which break JSON.parse. Every LLM pipeline needs the cleanup step.',
