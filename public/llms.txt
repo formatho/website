@@ -282,4 +282,5 @@ Chain-specific developer tool pages with pre-configured RPC endpoints, chain IDs
 - [Text Encoding vs Encryption: Know the Difference]: https://formatho.com/blogs/encoding-vs-encryption — A critical distinction - encoding is not encryption.
 - [Understanding Unix File Permissions: chmod Calculator]: https://formatho.com/blogs/unix-file-permissions — Demystify Unix file permissions with this guide.
 - [Keccak-256 vs SHA-256: When to Use Which (With Examples)]: https://formatho.com/blogs/keccak-256-vs-sha-256-when-to-use-which — Keccak-256 is not SHA3-256, and neither is a drop-in for the other. The padding-byte difference that splits the Keccak f
+- [The Secure AI-Agent Stack: Zero Data Egress in Practice]: https://formatho.com/blogs/secure-ai-agent-stack-zero-data-egress — Agents leak at every layer: prompts to model APIs, tool payloads to SaaS endpoints, telemetry you did not know you sent.
 
