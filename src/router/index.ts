@@ -517,6 +517,12 @@ export const routes = [
         meta: routeMeta['gs1-digital-link']
       },
       {
+        path: '/enterprise',
+        name: 'enterprise',
+        component: () => import('@/views/EnterpriseView.vue'),
+        meta: routeMeta['enterprise']
+      },
+      {
         path: '/tools/espr-passport',
         name: 'espr-passport',
         component: () => import('@/views/EsprPassportView.vue'),

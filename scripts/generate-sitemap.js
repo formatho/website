@@ -85,6 +85,7 @@ const staticRoutes = [
   { path: '/terms', priority: '0.5', changefreq: 'yearly' },
   { path: '/contact', priority: '0.7', changefreq: 'monthly' },
   { path: '/agents', priority: '0.8', changefreq: 'monthly' },
+  { path: '/enterprise', priority: '0.9', changefreq: 'monthly' },
   ...['owasp', 'soc2', 'sap', 'okta', 'ping-federate'].map(slug => ({ path: `/dev-tools/${slug}`, priority: '0.8', changefreq: 'weekly' })),
   ...[
     'ethereum', 'arbitrum', 'base', 'optimism', 'polygon', 'bnb-chain',
