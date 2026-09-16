@@ -420,6 +420,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Count rows, columns, and cells in CSV data. Handles quoted fields, custom delimiters, shows column types and empty values. Free, client-side.',
     keywords: 'csv row counter, csv column count, count csv lines, csv dimensions, how many rows in csv, csv analyzer',
   },
+  'gs1-digital-link': {
+    title: 'GS1 Digital Link Builder & Parser - GTIN to URL | Formatho',
+    description: 'Build GS1 Digital Link URLs from GTIN, serial, lot, and expiry — with QR code and element-string output. Paste a link back and decode every identifier. Free, client-side.',
+    keywords: 'gs1 digital link, gs1 digital link builder, gtin url builder, gs1 qr code generator, element string parser, ai 01 gtin, fmd serialisation url',
+  },
   'sqlite-browser': {
     title: 'SQLite Browser - Open & Query .db Files Online | Formatho',
     description: 'Open SQLite databases in your browser: browse tables, run SQL, edit cells, import CSV, export .db files. Powered by WebAssembly SQLite — no upload, fully client-side.',
