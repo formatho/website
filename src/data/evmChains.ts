@@ -360,15 +360,24 @@ export const evmChains: EvmChain[] = [
   },
 ]
 
+// desc supports {chain} and {token} placeholders, interpolated per page —
+// keeps anchor text varied and chain-contextual for internal linking.
 export const evmChainTools = [
-  { name: 'EVM Contract Reader', route: '/tools/contract-reader', desc: 'Call view functions on any contract via your own RPC' },
-  { name: 'Vanity Address Generator', route: '/tools/vanity-eth', desc: 'Generate custom addresses — same key works on every EVM chain' },
-  { name: 'Keccak-256 Hasher', route: '/tools/keccak256', desc: 'Hash with the exact algorithm used by the EVM' },
-  { name: 'ABI Encoder & Decoder', route: '/tools/abi-encoder', desc: 'Encode calldata for contract interactions' },
-  { name: 'EVM Unit Converter', route: '/tools/evm-converter', desc: 'Convert between wei, gwei, and the native token' },
-  { name: 'Address Checksum (EIP-55)', route: '/tools/address-checksum', desc: 'Validate and checksum addresses to catch typos' },
+  { name: 'EVM Contract Reader', route: '/tools/contract-reader', desc: 'Call view functions on any {chain} contract via your own RPC' },
+  { name: 'EVM Calldata Decoder', route: '/tools/calldata-decoder', desc: 'Decode {chain} transaction input — function and arguments, before you sign' },
+  { name: 'Transaction Decoder', route: '/tools/tx-decoder', desc: 'Break out a signed {chain} transaction: sender, gas, fees, calldata' },
+  { name: 'ABI Encoder & Decoder', route: '/tools/abi-encoder', desc: 'Encode calldata for {chain} contract interactions' },
   { name: 'Function Selector Calculator', route: '/tools/function-selector', desc: 'Compute 4-byte selectors for function signatures' },
-  { name: 'Multi-Chain Wallet Generator', route: '/tools/multi-chain-keys', desc: 'Generate keys and addresses from one mnemonic' },
+  { name: 'EVM Unit Converter', route: '/tools/evm-converter', desc: 'Convert wei, gwei, and {token} with BigInt-exact math' },
+  { name: 'Vanity Address Generator', route: '/tools/vanity-eth', desc: 'Generate custom addresses — same key works on {chain} and every EVM chain' },
+  { name: 'Address Checksum (EIP-55)', route: '/tools/address-checksum', desc: 'Validate and checksum {chain} addresses to catch typos' },
+  { name: 'CREATE2 Address Calculator', route: '/tools/create2-calculator', desc: 'Derive deterministic contract addresses before deploying to {chain}' },
+  { name: 'EIP-1967 Proxy Slot Checker', route: '/tools/eip1967-checker', desc: 'Read implementation and admin slots of {chain} proxies' },
+  { name: 'Storage Slot Calculator', route: '/tools/storage-slot-calculator', desc: 'Compute Solidity storage slots for {chain} contract state probes' },
+  { name: 'Uniswap Math Calculator', route: '/tools/uniswap-math', desc: 'v2/v3/v4 pool math — amounts out, ticks, sqrtPrice' },
+  { name: 'Uniswap v4 Hook Calculator', route: '/tools/v4-hook-calculator', desc: 'Map hook addresses to their permission flags' },
+  { name: 'Keccak-256 Hasher', route: '/tools/keccak256', desc: 'Hash with the exact algorithm used by the EVM' },
+  { name: 'Multi-Chain Wallet Generator', route: '/tools/multi-chain-keys', desc: 'Generate keys and {chain} addresses from one mnemonic' },
   { name: 'ENS Namehash Calculator', route: '/tools/ens-namehash', desc: 'Derive EIP-137 namehash values for ENS names' },
   { name: 'Solidity to Opcodes', route: '/tools/solidity-to-opcodes', desc: 'Compile Solidity and inspect the EVM assembly' },
 ]

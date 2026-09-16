@@ -13,6 +13,18 @@ const copied = ref('')
 const chain = computed(() => evmChains.find(c => c.slug === route.params.chain))
 const siblings = computed(() => evmChains.filter(c => c.slug !== chain.value?.slug))
 
+// Interpolate {chain}/{token} placeholders so every chain page links to the
+// same tools with varied, contextual anchor text (internal-linking pass).
+const chainTools = computed(() => {
+  if (!chain.value) return []
+  return evmChainTools.map((t) => ({
+    ...t,
+    desc: t.desc
+      .replaceAll('{chain}', chain.value.name)
+      .replaceAll('{token}', chain.value.tokenSymbol)
+  }))
+})
+
 if (chain.value) {
   useSEO({
     title: `${chain.value.name} Developer Tools - Free & Private | Formatho`,
@@ -91,9 +103,17 @@ async function copy(text: string, key: string) {
 
     <!-- Tools grid -->
     <h2 class="text-xl font-bold mb-4">Tools for {{ chain.name }}</h2>
+    <p class="text-sm text-muted-foreground leading-relaxed max-w-3xl mb-6">
+      Every tool below works on {{ chain.name }} and every other EVM chain —
+      <RouterLink to="/tools/contract-reader" class="text-primary underline underline-offset-2">read any {{ chain.name }} contract</RouterLink>,
+      <RouterLink to="/tools/calldata-decoder" class="text-primary underline underline-offset-2">decode {{ chain.name }} calldata</RouterLink>
+      before signing, or
+      <RouterLink to="/tools/evm-converter" class="text-primary underline underline-offset-2">convert wei to {{ chain.tokenSymbol }}</RouterLink>
+      with exact math. All client-side — keys and payloads never upload.
+    </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
       <RouterLink
-        v-for="tool in evmChainTools"
+        v-for="tool in chainTools"
         :key="tool.route"
         :to="tool.route"
         class="group border border-border rounded-xl p-5 hover:border-primary/50 hover:bg-primary/5 transition-colors"
