@@ -4,7 +4,6 @@ import { resolve } from 'path'
 
 const domain = 'https://formatho.com'
 const strapiUrl = process.env.VITE_STRAPI_URL || 'https://cms.formatho.com'
-const currentDate = new Date().toISOString().split('T')[0]
 
 /**
  * Fetch blog post slugs from Strapi CMS (with retries — a failed fetch
@@ -13,7 +12,7 @@ const currentDate = new Date().toISOString().split('T')[0]
 async function fetchBlogSlugs(attempt = 1, maxAttempts = 3) {
   try {
     const res = await fetch(
-      `${strapiUrl}/api/blog-posts?fields[0]=slug&pagination[pageSize]=200`,
+      `${strapiUrl}/api/blog-posts?fields[0]=slug&fields[1]=date&pagination[pageSize]=200`,
       { signal: AbortSignal.timeout(15000) }
     )
     if (!res.ok) {
@@ -21,11 +20,11 @@ async function fetchBlogSlugs(attempt = 1, maxAttempts = 3) {
     }
     const data = await res.json()
     const posts = Array.isArray(data) ? data : data.data || []
-    const slugs = posts.map((p) => p.slug).filter(Boolean)
-    if (slugs.length === 0) {
+    const entries = posts.map((p) => ({ slug: p.slug, date: p.date })).filter((p) => p.slug)
+    if (entries.length === 0) {
       throw new Error('Strapi returned an empty blog list')
     }
-    return slugs
+    return entries
   } catch (err) {
     if (attempt < maxAttempts) {
       console.warn(
@@ -99,11 +98,12 @@ const { parked } = JSON.parse(
   readFileSync(resolve(process.cwd(), 'scripts', 'parked-posts.json'), 'utf8')
 )
 const parkedSet = new Set(parked)
-const blogSlugs = (await fetchBlogSlugs()).filter((slug) => !parkedSet.has(slug))
-const blogRoutes = blogSlugs.map((slug, i) => ({
-  path: `/blogs/${slug}`,
+const blogEntries = (await fetchBlogSlugs()).filter((p) => !parkedSet.has(p.slug))
+const blogRoutes = blogEntries.map((p, i) => ({
+  path: `/blogs/${p.slug}`,
   priority: i < 10 ? '0.8' : '0.7',
   changefreq: 'monthly',
+  lastmod: /^\d{4}-\d{2}-\d{2}/.test(p.date || '') ? p.date.slice(0, 10) : undefined,
 }))
 
 // Dynamically generate tool routes
@@ -124,7 +124,7 @@ const routes = allRoutes.filter(r => !r.path.includes('/admin/'))
 const MIN_EXPECTED_URLS = 50
 if (routes.length < MIN_EXPECTED_URLS) {
   console.error(`⛔ ABORTED: only ${routes.length} URLs (expected 50+). Keeping existing sitemap.`)
-  console.error(`   Blog slugs: ${blogSlugs.length}, tools: ${toolPaths.length}, static: ${staticRoutes.length}`)
+  console.error(`   Blog slugs: ${blogEntries.length}, tools: ${toolPaths.length}, static: ${staticRoutes.length}`)
   process.exit(1)
 }
 
@@ -133,8 +133,8 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 ${routes
   .map(
     (route) => `  <url>
-    <loc>${domain}${route.path}</loc>
-    <lastmod>${currentDate}</lastmod>
+    <loc>${domain}${route.path}</loc>${route.lastmod ? `
+    <lastmod>${route.lastmod}</lastmod>` : ''}
     <changefreq>${route.changefreq}</changefreq>
     <priority>${route.priority}</priority>
   </url>`
