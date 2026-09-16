@@ -153,6 +153,9 @@ const footerCategories = Object.values(categoryMeta)
           <RouterLink to="/runtime" class="hover:text-gray-900 transition-colors">
             Runtime
           </RouterLink>
+          <RouterLink to="/enterprise" class="hover:text-gray-900 transition-colors">
+            Enterprise
+          </RouterLink>
           <RouterLink to="/security" class="hover:text-gray-900 transition-colors">
             Security
           </RouterLink>

@@ -276,10 +276,16 @@ const faqs = [
         </p>
         <div class="flex flex-wrap gap-4 justify-center">
           <RouterLink
-            to="/contact"
+            to="/enterprise"
             class="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground font-semibold rounded-lg"
           >
-            Talk to Formatho Engineering <ArrowRight class="w-4 h-4" />
+            Enterprise services <ArrowRight class="w-4 h-4" />
+          </RouterLink>
+          <RouterLink
+            to="/contact"
+            class="inline-flex items-center gap-2 px-8 py-3 border border-foreground/20 rounded-lg font-semibold hover:bg-muted transition-colors"
+          >
+            Talk to Formatho Engineering
           </RouterLink>
           <a
             href="https://hub.docker.com/r/formatho/formatho-runtime"

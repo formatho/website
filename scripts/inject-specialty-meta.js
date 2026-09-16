@@ -216,6 +216,7 @@ const staticPages = {
   'runtime': ['Self-Hosted MCP Server — Docker, Private AI Agents | Formatho', 'Run your own MCP server in Docker: Claude Code, Cursor and Claude Desktop get permissioned, audit-logged tool access inside your network. Zero data egress, one container.'],
   'security': ['Security - Vulnerability Disclosure | Formatho', 'Report security vulnerabilities to Formatho. Responsible disclosure program with safe harbor protections.'],
   'acceptable-use': ['Acceptable Use Policy - Formatho', 'Permitted and prohibited uses of Formatho tools including security and crypto tool guidelines.'],
+  'enterprise': ['Enterprise Agent-Ready Services — MCP Integration | Formatho', 'We turn internal APIs and workflows into secure, MCP-accessible tools — inside your infrastructure. Permissioned, audit-logged, zero data egress by design.'],
   'privacy': ['Privacy Policy - Formatho', 'Tool processing happens 100% in your browser and inputs are never uploaded. Cookieless analytics. Ads served via Google AdSense with EEA/UK/CH consent — full disclosures inside.'],
   'about': ['About Formatho - Private Infrastructure for AI Agents | Formatho', 'Formatho builds private infrastructure for AI agents: a self-hosted MCP runtime and a free browser tool library. Zero data egress, permissioned, audit-logged.'],
   'terms': ['Terms of Service - Formatho', 'Terms of service for using Formatho browser tools and the Formatho Runtime MCP server.'],
@@ -265,6 +266,32 @@ for (const [slug, [title, desc]] of Object.entries(staticPages)) {
       `<script type="application/ld+json" id="json-ld-runtime-howto">${JSON.stringify(howToLd)}</script></head>`)
     fs.writeFileSync(fp, html)
     console.log('  ok: /runtime FAQPage + HowTo JSON-LD')
+  }
+}
+
+// Enterprise services page: FAQPage JSON-LD matching the visible section
+{
+  const fp = path.join(distDir, 'enterprise.html')
+  if (fs.existsSync(fp)) {
+
+    const faqs = [
+      ['What does "agent-ready" actually mean?', 'An internal system is agent-ready when an AI agent can call it through a governed interface: typed schemas so the agent constructs valid requests, a permission model that says which agent may call what, rate limits that bound blast radius, and an audit trail that records every invocation without recording payloads.'],
+      ['Where does our data go during the engagement?', 'Nowhere. The runtime we deploy runs inside your infrastructure and makes zero outbound requests — verifiable in the open-source code, not a contractual promise. Tool development happens against your staging systems; production access is issued by your team, to your team, and revocable by you.'],
+      ['Do you host anything for us?', 'The default engagement is fully self-hosted: your containers, your network, your keys. A hosted trial tier exists for evaluation, but production deployments in these engagements are self-hosted by design.'],
+      ['How is this different from hiring an MCP consultant?', 'The reference implementation is a maintained, open-source runtime with a published tool registry, MCP Registry listing, and a security model designed for review — not a one-off server somebody leaves behind. Engagements extend that foundation instead of starting from a blank file.'],
+      ['What does an engagement cost?', 'Assessments are fixed-scope; pilots and production rollouts are sized by tool count and system complexity after the assessment. Every engagement ends with handover of all code and configuration — the open-source runtime guarantees there is no lock-in to price against.'],
+      ['Which teams typically start?', 'Platform and developer-experience teams bringing internal tooling to agents, security teams that need governed tool access before broader agent adoption, and payments/fintech engineering groups operating under data-residency constraints.']
+    ]
+    const faqLd = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
+    }
+    let html = fs.readFileSync(fp, 'utf8')
+    html = html.replace(/<script type="application\/ld\+json" id="json-ld-enterprise-faq">[\s\S]*?<\/script>/, '')
+    html = html.replace('</head>', `<script type="application/ld+json" id="json-ld-enterprise-faq">${JSON.stringify(faqLd)}</script></head>`)
+    fs.writeFileSync(fp, html)
+    console.log('  ok: /enterprise FAQPage JSON-LD')
   }
 }
 
