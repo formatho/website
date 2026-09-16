@@ -5,6 +5,7 @@
 import { part1 } from '../../scripts/blog-upgrade/part1.mjs'
 import { part2 } from '../../scripts/blog-upgrade/part2.mjs'
 import { part3 } from '../../scripts/blog-upgrade/part3.mjs'
+import { localPosts } from '../../scripts/blog-upgrade/local-posts.mjs'
 
 const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || 'https://cms.formatho.com'
 
@@ -119,7 +120,7 @@ export async function fetchBlogMetadata(): Promise<BlogMetadata[]> {
   // Strapi v5 returns array directly or {data: [...]} depending on config
   const posts = Array.isArray(data) ? data : data.data || []
 
-  return posts.map((s: StrapiBlogPost): BlogMetadata => ({
+  const cmsPosts = posts.map((s: StrapiBlogPost): BlogMetadata => ({
     id: s.id,
     title: s.title,
     excerpt: s.excerpt,
@@ -130,12 +131,34 @@ export async function fetchBlogMetadata(): Promise<BlogMetadata[]> {
     image: s.image || undefined,
     imageAlt: s.imageAlt || undefined,
   }))
+
+  // In-repo posts ride the same listing (CMS token is read-only)
+  const localMeta: BlogMetadata[] = localPosts.map((p) => ({
+    id: -1,
+    title: p.title,
+    excerpt: p.excerpt,
+    date: p.date,
+    readTime: p.readTime,
+    tags: p.tags,
+    slug: p.slug,
+    image: p.image || undefined,
+    imageAlt: p.imageAlt || undefined,
+  }))
+
+  return [...cmsPosts, ...localMeta].sort((a, b) => (b.date || '').localeCompare(a.date || ''))
 }
 
 /**
  * Fetch a single blog post by slug
  */
 export async function fetchBlogPost(slug: string): Promise<BlogPost | null> {
+  const local = localPosts.find(p => p.slug === slug)
+  if (local) {
+    const post = { title: local.title, slug: local.slug, excerpt: local.excerpt, date: local.date, readTime: local.readTime, tags: local.tags, image: local.image || undefined, imageAlt: local.imageAlt || undefined, content: local.content }
+    const override = blogContentOverrides[slug]
+    if (override) post.content = override
+    return post
+  }
   const res = await fetch(
     `${STRAPI_URL}/api/blog-posts?filters[slug][$eq]=${encodeURIComponent(slug)}&pagination[pageSize]=1`
   )

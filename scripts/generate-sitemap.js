@@ -1,5 +1,6 @@
 /* eslint-env node */
 import { writeFileSync, readFileSync } from 'fs'
+import { localPosts } from './blog-upgrade/local-posts.mjs'
 import { resolve } from 'path'
 
 const domain = 'https://formatho.com'
@@ -98,7 +99,9 @@ const { parked } = JSON.parse(
   readFileSync(resolve(process.cwd(), 'scripts', 'parked-posts.json'), 'utf8')
 )
 const parkedSet = new Set(parked)
-const blogEntries = (await fetchBlogSlugs()).filter((p) => !parkedSet.has(p.slug))
+const fetchedEntries = (await fetchBlogSlugs()).filter((p) => !parkedSet.has(p.slug))
+const localSlugs = new Set(localPosts.map((p) => p.slug))
+const blogEntries = [...fetchedEntries, ...localPosts.map((p) => ({ slug: p.slug, date: p.date }))].filter((p) => !parkedSet.has(p.slug) || localSlugs.has(p.slug))
 const blogRoutes = blogEntries.map((p, i) => ({
   path: `/blogs/${p.slug}`,
   priority: i < 10 ? '0.8' : '0.7',

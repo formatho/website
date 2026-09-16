@@ -11,6 +11,7 @@
  */
 
 import fs from 'fs'
+import { localPosts } from './blog-upgrade/local-posts.mjs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -354,6 +355,12 @@ async function main() {
   let blogPosts
   try {
     blogPosts = await fetchBlogPosts()
+    // Local in-repo posts ride the same pipeline (committed cache + fetch)
+    for (const lp of localPosts) {
+      if (!blogPosts.some((p) => p.slug === lp.slug)) {
+        blogPosts.push({ title: lp.title, slug: lp.slug, excerpt: lp.excerpt, date: lp.date, metaDescription: lp.metaDescription, image: lp.image, imageAlt: lp.imageAlt, tags: lp.tags })
+      }
+    }
     console.log(`📚 Fetched ${blogPosts.length} blog posts from Strapi\n`)
   } catch (error) {
     console.warn(`⚠️  Failed to fetch blog posts from Strapi: ${error.message}`)
