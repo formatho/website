@@ -40,7 +40,7 @@ async function fetchBlogSlugs(attempt = 1, maxAttempts = 3) {
     try {
       const existing = readFileSync(resolve(process.cwd(), 'public', 'sitemap.xml'), 'utf8')
       return [...existing.matchAll(/<loc>https:\/\/formatho\.com\/blogs\/([^<]+)<\/loc>/g)].map(
-        (m) => m[1]
+        (m) => ({ slug: m[1], date: undefined })
       )
     } catch {
       return []
@@ -122,6 +122,11 @@ const routes = allRoutes.filter(r => !r.path.includes('/admin/'))
 // where Strapi is unreachable and the fallback also fails would produce
 // an empty file that replaces the committed version)
 const MIN_EXPECTED_URLS = 50
+if (routes.some((r) => r.path.includes('undefined'))) {
+  console.error('⛔ ABORTED: a route path contains "undefined" — a slug/date mapping broke upstream.')
+  console.error('   Offenders:', routes.filter((r) => r.path.includes('undefined')).slice(0, 3).map((r) => r.path))
+  process.exit(1)
+}
 if (routes.length < MIN_EXPECTED_URLS) {
   console.error(`⛔ ABORTED: only ${routes.length} URLs (expected 50+). Keeping existing sitemap.`)
   console.error(`   Blog slugs: ${blogEntries.length}, tools: ${toolPaths.length}, static: ${staticRoutes.length}`)
