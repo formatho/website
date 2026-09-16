@@ -190,8 +190,10 @@ export function useSEO(config?: SEOConfig) {
     if (toolInfo) {
       // Tool page SEO
       const { tool, category } = toolInfo
-      const title = `${tool.name} - Secure MCP Tool for AI Agents | Formatho`
-      const description = `${tool.description}. Free, privacy-first ${tool.name} tool. No data leaves your browser. 100% client-side processing.`
+      // Prefer the curated routeMeta copy (matches the static HTML crawlers
+      // see); the template below is only a fallback for unregistered tools.
+      const title = (route.meta?.title as string) || `${tool.name} - Free Online Tool | Formatho`
+      const description = (route.meta?.description as string) || `${tool.description}. Free, privacy-first ${tool.name} tool. No data leaves your browser. 100% client-side processing.`
       const keywords = [
         tool.name,
         category.category,
