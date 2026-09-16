@@ -517,6 +517,12 @@ export const routes = [
         meta: routeMeta['gs1-digital-link']
       },
       {
+        path: '/tools/espr-passport',
+        name: 'espr-passport',
+        component: () => import('@/views/EsprPassportView.vue'),
+        meta: routeMeta['espr-passport']
+      },
+      {
         path: '/tools/csv-counter',
         name: 'csv-counter',
         component: () => import('@/views/CsvCounterView.vue'),

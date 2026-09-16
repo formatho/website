@@ -79,6 +79,7 @@ Category hub pages group every tool with a one-line description each:
 - [ISO 20022 Validator]: https://formatho.com/tools/iso20022-validator — Validate ISO 20022 payment messages (pain.001, pacs.008, camt.053). Auto-detects type, checks required fields, pretty-prints XML.
 - [pain.001 Builder]: https://formatho.com/tools/pain001-builder — Build ISO 20022 Customer Credit Transfer Initiation XML visually — debtor, creditor, amount, SEPA service level, purpose codes.
 - [GS1 Digital Link Builder]: https://formatho.com/tools/gs1-digital-link — Build and decode GS1 Digital Link URLs: GTIN, serial, lot, expiry into a web URL and QR code. Check-digit and date validation, element-string conversion. Free, client-side.
+- [ESPR Digital Product Passport]: https://formatho.com/tools/espr-passport — Build and validate a Digital Product Passport prototype for the EU Ecodesign Regulation 2024/1781: identification, Article 7 sustainability parameters, operator data, QR data carrier, JSON export. Client-side.
 - [XML Formatter]: https://formatho.com/tools/xml-formatter — Format and prettify XML documents.
 - [XML ↔ JSON]: https://formatho.com/tools/xml-json — Bi-directional XML to JSON converter with real-time conversion and clipboard support.
 - [YAML Linter]: https://formatho.com/tools/yaml-lint — Validate and lint YAML code.
