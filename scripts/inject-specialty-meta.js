@@ -212,7 +212,7 @@ console.log(`  stripped from ${stripped} pages`)
 
 // Static compliance pages
 const staticPages = {
-  'runtime': ['Formatho Runtime - Private Self-Hosted MCP Server for AI Agents', 'Self-hosted MCP server with a permissioned tool registry, metadata-only audit logging, and Docker deployment. Developer, security, and EVM tools for AI agents - inside your infrastructure.'],
+  'runtime': ['Self-Hosted MCP Server — Docker, Private AI Agents | Formatho', 'Run your own MCP server in Docker: Claude Code, Cursor and Claude Desktop get permissioned, audit-logged tool access inside your network. Zero data egress, one container.'],
   'security': ['Security - Vulnerability Disclosure | Formatho', 'Report security vulnerabilities to Formatho. Responsible disclosure program with safe harbor protections.'],
   'acceptable-use': ['Acceptable Use Policy - Formatho', 'Permitted and prohibited uses of Formatho tools including security and crypto tool guidelines.'],
   'privacy': ['Privacy Policy - Formatho', 'Tool processing happens 100% in your browser and inputs are never uploaded. Cookieless analytics. Ads served via Google AdSense with EEA/UK/CH consent — full disclosures inside.'],

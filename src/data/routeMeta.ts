@@ -17,10 +17,10 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Self-hosted MCP server giving AI agents controlled access to developer, security, and EVM tools - permissioned, audit-logged, zero data egress. Runs in your infrastructure, with the free browser tool library included.',
     keywords: 'developer tools, json formatter, base64 encoder, uuid generator, privacy-first tools, agent todo, online utilities, free developer tools, client-side tools',
   },
-  'runtime': {
-    title: 'Formatho Runtime - Private Self-Hosted MCP Server for AI Agents',
-    description: 'Self-hosted MCP server with a permissioned tool registry, metadata-only audit logging, and Docker deployment. Developer, security, and EVM tools for AI agents - inside your infrastructure.',
-    keywords: 'private mcp server, self-hosted mcp, docker mcp server, enterprise mcp, mcp security, ai agent tools, ai tool sandbox, self-hosted ai tools, developer mcp tools, evm mcp tools',
+    'runtime': {
+    title: 'Self-Hosted MCP Server — Docker, Private AI Agents | Formatho',
+    description: 'Run your own MCP server in Docker: give Claude Code, Cursor and Claude Desktop permissioned, audit-logged tool access inside your network. Zero data egress, one container.',
+    keywords: 'self hosted mcp server, mcp server docker, private ai agent tools, claude code mcp server, cursor mcp, mcp gateway, model context protocol server',
   },
   'about': {
     title: 'About Formatho - Private Infrastructure for AI Agents',
@@ -68,14 +68,14 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'markdown editor, markdown preview, markdown viewer, github markdown, privacy-first',
   },
   'json-yaml': {
-    title: 'JSON to YAML Converter - Secure MCP Tool for AI | Formatho',
-    description: 'Convert JSON to YAML and YAML to JSON online instantly. Free converter for config files, Kubernetes manifests, docker-compose, and CI/CD configs. 100% client-side — your data never leaves your browser.',
-    keywords: 'json to yaml converter, yaml to json, convert json yaml online, json yaml converter free, kubernetes yaml converter, docker compose converter, json yaml online tool, privacy-first',
+    title: 'JSON to YAML Converter — K8s Manifests & CI Configs | Formatho',
+    description: 'Convert JSON to YAML and back online — built for Kubernetes manifests, docker-compose, GitHub Actions and Ansible. 100% client-side: configs never upload.',
+    keywords: 'json to yaml, yaml to json, kubernetes yaml converter, json to k8s manifest, docker compose converter, ci cd config converter',
   },
   'json-csv': {
-    title: 'JSON to CSV Converter - Secure MCP Tool for AI | Formatho',
-    description: 'Convert JSON to CSV and CSV to JSON online instantly. Free converter for data export, spreadsheet import, and API data transformation. Handles nested objects and arrays. 100% client-side, no upload.',
-    keywords: 'json to csv converter, csv to json, convert json csv online, json csv free tool, csv json transformer, excel json converter, data conversion tool, privacy-first',
+    title: 'JSON to CSV Converter — Export API Responses Online | Formatho',
+    description: 'Convert JSON arrays to CSV and back — flatten nested API responses, export for spreadsheets. Handles big files locally, nothing uploaded.',
+    keywords: 'json to csv, csv to json, json array to csv, flatten json to csv, api response to csv',
   },
   'diff': {
     title: 'Text Diff Checker Online | Formatho',
@@ -83,14 +83,14 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'text diff online, diff checker, compare text online, file comparison tool, text difference, code diff, diff tool free, online text compare, privacy-first',
   },
   'base64': {
-    title: 'Base64 Encoder & Decoder - Secure MCP Tool for AI | Formatho',
-    description: 'Encode text to Base64 or decode Base64 to text online instantly. Free Base64 converter supports UTF-8, files, and URLs. No signup, 100% client-side — your data never leaves your browser.',
-    keywords: 'base64 encoder online, base64 decoder online, base64 converter, decode base64, encode base64, base64 to text, text to base64, base64 online tool, free base64, privacy-first',
+    title: 'Base64 Encode & Decode — Client-Side, UTF-8 Safe | Formatho',
+    description: 'Encode and decode Base64 in your browser — UTF-8 correct, file support, no data uploaded. Safe for tokens and payloads you cannot paste into a server.',
+    keywords: 'base64 encode, base64 decode, base64 converter, base64 online, base64 url safe',
   },
   'jwt': {
-    title: 'JWT Debugger - Decode, Verify & Inspect Tokens | Formatho',
-    description: 'Decode JWT (JSON Web Tokens) online instantly. Inspect JWT header, payload, and signature. Check expiry, validate claims, and debug auth tokens. Free JWT debugger — 100% client-side, tokens never leave your browser.',
-    keywords: 'jwt decoder online, decode jwt, jwt debugger, jwt inspector, json web token decoder, jwt payload viewer, jwt validator, jwt expiry checker, free jwt tool, privacy-first',
+    title: 'JWT Decoder & Verifier — Offline, No Token Upload | Formatho',
+    description: 'Decode and inspect JWTs entirely in your browser — payloads, expiry, alg confusion risks. Production tokens never touch a server.',
+    keywords: 'jwt decoder, jwt debugger, offline jwt decoder, client side jwt decoder, decode jwt online, jwt verifier',
   },
   'sql': {
     title: 'SQL Formatter Online - Secure SQL Beautifier | Formatho',
@@ -123,9 +123,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'developer tools, json formatter, yaml validator, base64 encoder, hash generator, privacy-first tools',
   },
   'uuid': {
-    title: 'UUID Generator Online - Secure UUID v4 & v1 | Formatho',
-    description: 'Generate UUIDs online instantly — UUID v4, v1, v3, and v5. Create single or batch unique identifiers for databases, APIs, and distributed systems. Free, 100% client-side, no signup required.',
-    keywords: 'uuid generator online, uuid v4 generator, generate uuid online, guid generator, unique id generator, uuid v1, uuid v5, random uuid, batch uuid generator, free uuid tool, privacy-first',
+    title: 'UUID Generator v4 Online — Offline, Bulk, No Upload | Formatho',
+    description: 'Generate UUID v1, v4 and v7 in bulk — offline in your browser. No server round-trip, no logging: safe for production seeds and test fixtures.',
+    keywords: 'uuid generator, uuid v4, uuidv4 online, bulk uuid generator, offline uuid generator, guid generator',
   },
   'lorem': {
     title: 'Lorem Ipsum Generator Online | Formatho',
@@ -138,9 +138,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'image compressor, compress image online, reduce image size, optimize images, ai image compressor, webp compressor, png optimizer, jpg reducer, batch image compression, free image tool, privacy-first',
   },
   'json-lint': {
-    title: 'JSON Validator & Formatter Online | Formatho',
-    description: 'Free online JSON validator and formatter. Check JSON syntax errors, beautify minified JSON, and validate API responses instantly in your browser. No upload, 100% private. Supports JSON5 comments.',
-    keywords: 'json validator online, json formatter online, json linter, validate json, json checker, json beautifier, json parser online, json syntax checker, json to pretty, free json tool, privacy-first',
+    title: 'JSON Validator & Linter — Find Errors Instantly | Formatho',
+    description: 'Validate JSON and find the exact line of the error — trailing commas, unquoted keys, encoding issues. Big logs paste and lint locally.',
+    keywords: 'json validator, json linter, validate json online, json error finder, json syntax check',
   },
   'yaml-lint': {
     title: 'YAML Validator & Linter Online | Formatho',
@@ -163,9 +163,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'bpmn to visio, bpmn converter, convert bpmn to visio, bpmn to vdx, visio converter, bpmn export, camunda to visio, bpmn diagram import visio',
   },
   'evm-converter': {
-    title: 'Ethereum Unit Converter Online - Wei, Gwei, Ether | Formatho',
-    description: 'Convert between Wei, Gwei, and Ether instantly. Essential tool for Ethereum developers. 100% client-side, privacy-first. Supports all EVM chains including L2s.',
-    keywords: 'ethereum unit converter, wei converter, gwei converter, ether converter, evm tools, wei to ether, gwei to wei, blockchain unit converter',
+    title: 'EVM Unit Converter — Wei, Gwei, Ether, Exact | Formatho',
+    description: 'Convert wei, gwei and ether with BigInt precision — no floating-point rounding, gas math included. Works offline in your browser.',
+    keywords: 'evm unit converter, wei to ether, gwei to ether, wei converter, gas price converter',
   },
   'bls-signature': {
     title: 'BLS12-381 Signature Generator & Verifier Online | Formatho',
@@ -243,8 +243,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'read smart contract online, call contract function, abi reader, contract view functions, eth_call tool, read contract without etherscan, contract interaction tool',
   },
   'calldata-decoder': {
-    title: 'EVM Calldata Decoder | Formatho',
-    description: 'Decode raw Ethereum calldata and error data against a built-in signature dictionary (ERC-20, permit, routers, standard errors), or by pasted ABI. Event topic0 lookup included. 100% client-side.',
+    title: 'EVM Calldata Decoder — Decode Transaction Input | Formatho',
+    description: 'Paste any 0x transaction input and see the function called and every argument decoded — before you sign. Local decoding, nothing broadcast.',
+    keywords: 'calldata decoder, decode transaction input, evm input data decoder, decode 0x hex data, transaction decoder'
   },
   'create2-calculator': {
     title: 'CREATE2 Address Calculator | Formatho',
@@ -271,14 +272,14 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Decode raw signed transactions (legacy, EIP-1559, EIP-2930, EIP-4844) into typed fields: nonce, gas, to, value, calldata selector, signature. 100% client-side.',
   },
   'function-selector': {
-    title: 'Solidity Function Selector Calculator & Lookup | Formatho',
-    description: 'Calculate 4-byte Solidity function selectors with Keccak-256, or look up which function a selector like 0xa9059cbb belongs to. Batch mode, ERC presets, cast sig compatible, 100% client-side.',
-    keywords: 'function selector calculator, solidity function selector, function selector lookup, 4 byte signature lookup, selector decoder, keccak256 selector, cast sig, abi selector, 0xa9059cbb, ethers interface id',
+    title: 'Function Selector Lookup — keccak256 4-Byte | Formatho',
+    description: 'Compute Solidity function selectors (first 4 bytes of keccak256) and look up known signatures — client-side, instant, no RPC needed.',
+    keywords: 'function selector, solidity selector, keccak256 4 byte, method id calculator, function signature hash',
   },
   'ens-namehash': {
-    title: 'ENS Namehash & Labelhash Calculator | Formatho',
-    description: 'Calculate ENS namehash and labelhash values for any ENS name using Keccak-256 per EIP-137. Full node-by-node derivation chain. 100% client-side.',
-    keywords: 'ens namehash calculator, namehash, labelhash, eip-137, ens resolution, keccak256 ens',
+    title: 'ENS Namehash Calculator — namehash() Online | Formatho',
+    description: 'Compute ENS namehash for any .eth name — the exact algorithm from EIP-137, running locally. Verify resolver keys without a console.',
+    keywords: 'ens namehash, namehash calculator, ens name hash, eip 137 namehash',
   },
   'passkey-address': {
     title: 'Passkey Address Deriver - P-256 WebAuthn to EVM | Formatho',
@@ -361,9 +362,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'cookie security analyzer, set-cookie checker, httponly check, samesite cookie, cookie flags, secure cookie validator',
   },
   'jwt-suite': {
-    title: 'JWT & Auth Toolkit - Decode, Verify, Sign | Formatho',
-    description: 'A complete JWT and authentication toolkit: decode and verify tokens, inspect claims, build OIDC authorize URLs, decode SAML, and generate secure tokens. All free and client-side.',
-    keywords: 'jwt toolkit, jwt suite, auth tools, token debugging, oauth tools, oidc tools, saml tools, jwt verify, auth debugging',
+    title: 'JWT Toolkit — Decode, Verify & Debug Locally | Formatho',
+    description: 'A full JWT workbench in your browser: decode, verify signatures, compare algorithms, check claims. Built for security teams that never paste tokens into web tools.',
+    keywords: 'jwt toolkit, jwt verify, jwt inspect, jwt debugging, security team jwt tool',
   },
   'saml-metadata-generator': {
     title: 'SAML Metadata Generator - SP & IdP XML Online | Formatho',
@@ -386,19 +387,19 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'gzip decompress online, gzip compress online, deflate decode online, zlib decompress, base64 to gzip, gzip to base64, saml deflate decompress',
   },
   'saml-decoder': {
-    title: 'SAML Request & Response Decoder to XML | Formatho',
-    description: 'Decode SAML AuthnRequest, LogoutRequest and Response messages. Base64 plus raw-deflate decompression with pretty-printed XML. 100% client-side - nothing is uploaded.',
-    keywords: 'saml decoder, saml pretty print, pretty print saml response, saml formatter, format saml xml, saml request decoder, saml response decoder, decode saml assertion, base64 deflate saml, saml authnrequest, saml tracing, okta saml decoder',
+    title: 'SAML Decoder — Inspect SSO Responses Offline | Formatho',
+    description: 'Decode base64 SAML requests and responses in your browser — attributes, conditions, signature elements. IdP debugging without leaking assertions to a server.',
+    keywords: 'saml decoder, decode saml response, saml inspection, sso debug tool, saml base64 decode',
   },
   'oidc-url-builder': {
-    title: 'OIDC Authorization URL & PKCE Generator - OAuth 2.0 | Formatho',
-    description: 'Build OAuth 2.0 / OpenID Connect authorization URLs with scopes, state, nonce and S256 PKCE code challenges. Works with Okta, Auth0, Entra ID, Keycloak. 100% client-side.',
-    keywords: 'oidc url builder, oauth authorization url, pkce generator, code verifier generator, code challenge s256, okta authorize url, auth0 authorize url, openid connect playground',
+    title: 'OIDC Auth URL Builder — PKCE Generator Online | Formatho',
+    description: 'Build OAuth2/OIDC authorization URLs with PKCE challenge generation — state, scopes, nonce. Constructed client-side for your own apps.',
+    keywords: 'oidc url builder, oauth authorization url, pkce generator, pkce code challenge, openid connect url',
   },
   'abi-encoder': {
-    title: 'ABI Encoder & Decoder - Solidity Tool | Formatho',
-    description: 'Encode and decode Solidity ABI parameters, function calls, and constructor arguments. Generate function selectors and calldata for Foundry/Cast. Decode transaction input data. Supports all Solidity types. Free, 100% client-side.',
-    keywords: 'abi encoder, abi decoder, solidity abi, abi encode online, function selector, calldata encoder, solidity encode, erc20 encode, foundry cast, ethers abi, viem abi, smart contract debugging, free abi tool, privacy-first',
+    title: 'ABI Encoder & Decoder — Solidity eth_abi Online | Formatho',
+    description: 'Encode and decode Solidity ABI calldata in your browser — match eth_abi.encodeExactly, inspect function signatures, debug transaction input offline.',
+    keywords: 'abi encoder, abi decoder, solidity abi encode, eth abi encode data, encode function call',
   },
   'tools-agent-identity-generator': {
     title: 'AI Agent Identity Generator - Secure MCP Tool for AI | Formatho',
@@ -581,8 +582,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Convert lists between different formats (comma, newline, JSON, etc).',
   },
   'toml-to-json': {
-    title: 'TOML to JSON Converter - Secure MCP Tool for AI | Formatho',
-    description: 'Convert TOML configuration files to JSON format.',
+    title: 'TOML to JSON Converter — Cargo.toml & pyproject | Formatho',
+    description: 'Convert TOML to JSON instantly — Rust Cargo.toml, pyproject.toml, and config files. Runs client-side; your configs never leave the browser.',
+    keywords: 'toml to json, cargo toml converter, pyproject.toml to json, toml parser online'
   },
   'toml-to-yaml': {
     title: 'TOML to YAML Converter - Secure MCP Tool for AI | Formatho',
@@ -593,8 +595,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Convert Markdown to HTML with syntax highlighting.',
   },
   'url-encoder': {
-    title: 'URL Encoder & Decoder - Secure MCP Tool for AI | Formatho',
-    description: 'Encode and decode URL strings. Privacy-first tool.',
+    title: 'URL Encoder & Decoder — Query Strings Online | Formatho',
+    description: 'Encode and decode URLs and query strings — percent-encoding, URI components, full URLs. Client-side, instant, nothing logged.',
+    keywords: 'url encoder, url decoder, percent encoding, encode uri component, query string encoder'
   },
   'url-parser': {
     title: 'URL Parser Online - Split & Inspect URLs | Formatho',
@@ -609,8 +612,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'View browser and device information.',
   },
   'basic-auth-generator': {
-    title: 'HTTP Basic Auth Header Generator - Secure MCP Tool for AI | Formatho',
-    description: 'Generate HTTP Basic Authentication headers.',
+    title: 'Basic Auth Header Generator — Client-Side | Formatho',
+    description: 'Generate HTTP Basic Authorization headers in your browser — credentials are never sent anywhere. Copy-ready Authorization: Basic values.',
+    keywords: 'basic auth generator, authorization header, basic authentication online, base64 basic auth'
   },
   'meta-tag-generator': {
     title: 'Meta Tag Generator Online - SEO & Open Graph | Formatho',
@@ -629,8 +633,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Get keyboard keycode information.',
   },
   'slugify-string': {
-    title: 'Slugify String',
-    description: 'Convert text to URL-friendly slugs.',
+    title: 'Slugify — URL-Safe Slugs, Client-Side | Formatho',
+    description: 'Turn any title into a clean URL slug — accent-stripping, stop-word options, bulk mode. Generated locally, never uploaded.',
+    keywords: 'slugify, slug generator, url slug, seo slug generator'
   },
   'html-wysiwyg-editor': {
     title: 'WYSIWYG HTML Editor',
@@ -687,13 +692,14 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Convert docker run commands to docker-compose.yml.',
   },
   'xml-formatter': {
-    title: 'XML Formatter',
-    description: 'Format and beautify XML documents.',
+    title: 'XML Formatter & Validator — Pretty Print, Offline | Formatho',
+    description: 'Format, minify and validate XML in your browser — SOAP, SAML, SVG, configs. No upload, works on large files instantly.',
+    keywords: 'xml formatter, xml validator, xml pretty print, format xml online, xml beautifier'
   },
   'yaml-viewer': {
-    title: 'YAML Linter & Validator Online | Formatho',
-    description: 'Free YAML linter and validator that formats, validates, and beautifies YAML documents instantly. Check YAML syntax errors, fix indentation issues, and format YAML files. 100% privacy-first - runs entirely in your browser with no server uploads.',
-    keywords: 'yaml lint, yaml validator, yaml linter online, yaml checker, yaml formatter, yaml beautifier, validate yaml, yaml syntax checker, yaml indentation fixer, online yaml linter, free yaml validator, yaml format, yaml viewer, yaml editor',
+    title: 'YAML Validator & Formatter — Lint K8s & CI Configs | Formatho',
+    description: 'Validate and format YAML in your browser — catches indentation and duplicate-key errors before kubectl does. Kubernetes, CI, Ansible configs stay local.',
+    keywords: 'yaml validator, yaml linter, yaml formatter, kubernetes yaml validator, ci yaml checker, validate yaml online',
   },
   'email-normalizer': {
     title: 'Email Normalizer',
@@ -814,12 +820,14 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Bi-directional XML to JSON converter with real-time conversion and clipboard support. 100% client-side, zero server API calls.',
   },
   'ulid-generator': {
-    title: 'ULID Generator Online - Secure & Sortable IDs | Formatho',
-    description: 'Generate Universally Unique Lexicographically Sortable Identifiers.',
+    title: 'ULID Generator — Sortable IDs, Bulk, Offline | Formatho',
+    description: 'Generate ULIDs in bulk — timestamp-sortable IDs that index better than UUIDs. Monotonic option, all generated locally in your browser.',
+    keywords: 'ulid generator, ulid vs uuid, sortable id generator, ulid online'
   },
   'case-converter': {
-    title: 'Case Converter Online - Secure Text Case Changer | Formatho',
-    description: 'Convert text case online instantly — UPPER, lower, Title Case, camelCase, snake_case, kebab-case, CONSTANT_CASE, and more. Free text transformer for developers and writers. 100% client-side.',
+    title: 'Case Converter — camelCase, snake_case, Offline | Formatho',
+    description: 'Convert between camelCase, snake_case, kebab-case and more — correctly handling acronyms and digits. Paste whole identifier lists; runs in your browser.',
+    keywords: 'case converter, camelcase to snake case, snake case converter, coding case converter, case conversion'
   },
   'date-time-converter': {
     title: 'Date & Time Converter Online - Unix, ISO 8601, UTC | Formatho',
