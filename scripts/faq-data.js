@@ -705,6 +705,18 @@ export const toolSEOContent = {
       'Copy the rendered prompt with its token estimate.'
     ]
   },
+  '/tools/espr-passport': {
+    intro: [
+      'The EU Ecodesign for Sustainable Products Regulation (2024/1781) turns product sustainability into machine-readable data: regulated products will carry a Digital Product Passport — a data carrier, expected to be a QR code, that resolves to structured information about the product\'s identification, its responsible economic operator, and the sustainability parameters Article 7 attaches to its product group: durability, energy and water use, recycled content, reparability, substances of concern, and environmental footprint.',
+      'This builder assembles that structure as a working prototype: fill in identification (GTIN, commodity code, model), the operator, Article 7 parameter values, and your resolver URL — and export validated JSON plus the QR data carrier. Field rules cover GTIN check digits, CN-8 format, recycled-content ranges, and HTTPS resolvers. The binding per-product-group data sets arrive via delegated acts; the tool exists so teams can mobilise data collection and resolver design now. Everything runs in your browser — passport data describes your products and supply chain.'
+    ],
+    howTo: [
+      'Fill the identification, operator, and Article 7 parameter fields.',
+      'Watch the critical-field tracker reach 100%.',
+      'Export the passport JSON and download the QR data carrier.',
+      'Read the readiness tab for the regulation timeline and preparation checklist.'
+    ]
+  },
   '/tools/gs1-digital-link': {
     intro: [
       'The GS1 Digital Link turns the numbers behind barcodes into web addresses. Instead of a GTIN that only a scanner understands, a product carries a link like https://example.com/01/09506000134352/21/SN123456 — the same identifiers (GTIN, serial, lot, expiry), but openable by any phone camera and resolvable to your product page. EU FMD serialisation, US DSCSA, and consumer-transparency programs are all pushing identifiers onto the web; Digital Link is the standard bridge.',

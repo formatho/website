@@ -420,6 +420,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Count rows, columns, and cells in CSV data. Handles quoted fields, custom delimiters, shows column types and empty values. Free, client-side.',
     keywords: 'csv row counter, csv column count, count csv lines, csv dimensions, how many rows in csv, csv analyzer',
   },
+  'espr-passport': {
+    title: 'ESPR Digital Product Passport Builder - EU 2024/1781 | Formatho',
+    description: 'Prototype a Digital Product Passport under the EU Ecodesign for Sustainable Products Regulation: Art. 9 identification, Art. 7 sustainability parameters, QR data carrier, JSON export. Free, client-side.',
+    keywords: 'espr digital product passport, dpp builder, ecodesign regulation 2024/1781, product passport json, eu sustainability passport, dpp qr code',
+  },
   'gs1-digital-link': {
     title: 'GS1 Digital Link Builder & Parser - GTIN to URL | Formatho',
     description: 'Build GS1 Digital Link URLs from GTIN, serial, lot, and expiry — with QR code and element-string output. Paste a link back and decode every identifier. Free, client-side.',

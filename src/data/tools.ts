@@ -135,6 +135,7 @@ export const tools: ToolCategory[] = [
       { name: 'ISO 20022 Validator', description: 'Validate ISO 20022 payment messages (pain.001, pacs.008, camt.053). Auto-detects type, checks required fields, pretty-prints XML.', route: '/tools/iso20022-validator', iconName: 'FileCode' },
       { name: 'pain.001 Builder', description: 'Build ISO 20022 Customer Credit Transfer Initiation XML visually — debtor, creditor, amount, SEPA service level, purpose codes.', route: '/tools/pain001-builder', iconName: 'Zap' },
       { name: 'GS1 Digital Link Builder', description: 'Build and decode GS1 Digital Link URLs: GTIN, serial, lot, expiry into a web URL and QR code. Check-digit and date validation, element-string conversion. Free, client-side.', route: '/tools/gs1-digital-link', iconName: 'Link2' },
+      { name: 'ESPR Digital Product Passport', description: 'Build and validate a Digital Product Passport prototype for the EU Ecodesign Regulation 2024/1781: identification, Article 7 sustainability parameters, operator data, QR data carrier, JSON export. Client-side.', route: '/tools/espr-passport', iconName: 'Leaf' },
       { name: 'XML Formatter', description: 'Format and prettify XML documents.', route: '/tools/xml-formatter', iconName: 'FileCode' },
       { name: 'XML ↔ JSON', description: 'Bi-directional XML to JSON converter with real-time conversion and clipboard support.', route: '/tools/xml-json', iconName: 'Code' },
       { name: 'YAML Linter', description: 'Validate and lint YAML code.', route: '/tools/yaml-lint', iconName: 'CheckCircle' },
