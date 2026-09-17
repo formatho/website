@@ -111,59 +111,59 @@ const chains = [
 ]
 console.log('EVM chains:')
 for (const [s,n,id] of chains) {
-  fix('evm-tools', s, `${n} Developer Tools - Secure MCP for AI Agents | Formatho`,
-    `Secure ${n} developer tools: contract reader, vanity address generator, Keccak-256 hasher, ABI encoder, and unit converter. Works on ${n} (chain ID ${id}). 100% client-side.`,
+  fix('evm-tools', s, `${n} Developer Tools | Formatho`.slice(0, 60),
+    `Free ${n} dev tools: contract reader, calldata decoder, ABI encoder, unit converter. Chain ID ${id}. 100% client-side, nothing uploads.`,
     `${BASE}/evm-tools/${s}`,
     { jsonLd: [jsonldScript('json-ld-chain-breadcrumb', breadcrumbLd(`${n} Developer Tools`, `${BASE}/evm-tools/${s}`))] })
 }
 
 const stacks = [
   ['owasp','OWASP Security','OWASP security tools: headers analyzer, CSP generator/evaluator, CORS tester, cookie analyzer, JWT debugger. 100% client-side.'],
-  ['soc2','Open Source SOC 2 Compliance Tools','Open-source SOC 2 compliance tools: readiness checklist, policy generator, TLS checker. 100% client-side - audit evidence never leaves your browser. Source on GitHub.'],
-  ['sap','SAP Developer Tools','Tools for SAP PI/PO, CPI, BTP, Gateway: XML formatter, JSON validator, CSV converter, JWT debugger, diff checker.'],
-  ['okta','Okta Developer Tools','Debug Okta auth: SAML decoder, OIDC builder, JWT verifier, TOTP generator, cookie analyzer, CORS tester.'],
-  ['ping-federate','Ping Federate Tools','Debug Ping Federate: SAML decoder, OIDC builder, JWT verifier, hash generator, TOTP generator.'],
+  ['soc2','Open Source SOC 2 Compliance Tools','Open-source SOC 2 compliance tools: readiness checklist, policy generator, TLS checker. Client-side; audit evidence never leaves your browser.'],
+  ['sap','SAP Developer Tools','Tools for SAP PI/PO, CPI, BTP, Gateway: XML formatter, JSON validator, CSV converter, JWT debugger, diff checker. Free, private, and 100% client-side in your browser.'],
+  ['okta','Okta Developer Tools','Debug Okta auth: SAML decoder, OIDC builder, JWT verifier, TOTP generator, cookie analyzer, CORS tester. Free, private, and 100% client-side in your browser.'],
+  ['ping-federate','Ping Federate Tools','Debug Ping Federate: SAML decoder, OIDC builder, JWT verifier, hash generator, TOTP generator. Free, private, and 100% client-side in your browser.'],
 ]
 console.log('Personas:')
 for (const [s,n,d] of stacks) {
-  fix('dev-tools', s, `${n} Tools - Secure MCP for AI Agents | Formatho`, d.slice(0,160), `${BASE}/dev-tools/${s}`)
+  fix('dev-tools', s, `${n} | Formatho`.slice(0, 60), d.slice(0, 155), `${BASE}/dev-tools/${s}`)
 }
 
 // Curated per-category SEO.
 const catSeo = {
   web3: {
     name: 'Web3 & Blockchain',
-    title: `Web3 & Blockchain Tools — EVM, ABI & Crypto Utilities | Formatho`,
-    desc: 'Free web3 dev tools: EVM contract reader, vanity address generator, Keccak-256 hasher, ABI encoder, Uniswap math, multi-chain readers. No upload, client-side.',
+    title: `Web3 & Blockchain Tools — EVM & ABI Utilities | Formatho`,
+    desc: 'Free web3 dev tools: EVM contract reader, calldata decoder, ABI encoder, Keccak-256, Uniswap math. No upload, client-side.',
     kw: 'web3 tools, blockchain developer tools, evm contract reader, abi encoder, keccak256 hasher, vanity address generator, free crypto tools'
   },
   security: {
     name: 'Security & Auth',
-    title: `Security & Auth Tools — JWT, SAML & Hash Utilities | Formatho`,
+    title: `Security & Auth Tools — JWT & SAML | Formatho`,
     desc: 'JWT debugger, SAML decoder, OIDC builder, hash generators, RSA keys, encryption, TOTP, password strength. Free, private, all client-side.',
     kw: 'security tools, jwt debugger, saml decoder, oidc builder, hash generator, encryption online, totp generator, password strength checker'
   },
   'data-formats': {
     name: 'Data Formats',
-    title: `JSON, YAML, XML & CSV Tools — Free Format Converters | Formatho`,
+    title: `JSON, YAML, XML & CSV Tools — Converters | Formatho`,
     desc: 'Validate, format, convert and diff JSON, YAML, XML, TOML, CSV. UUID, ULID, Base64, IBAN validators plus ISO 20022 tools. Free and private.',
     kw: 'json formatter, yaml validator, xml converter, csv tools, toml converter, uuid generator, base64 encoder, iso 20022 validator'
   },
   developer: {
     name: 'Developer Tools',
-    title: `Developer Tools — SQL, Git, Regex & SQLite Utilities | Formatho`,
+    title: `Developer Tools — SQL, Git & Regex | Formatho`,
     desc: 'SQL formatter, SQLite browser, Git cheat sheet, regex tester, Docker converter, Mermaid viewer, diff checker. Free, private, in your browser.',
     kw: 'developer tools, sql formatter, sqlite browser, git cheat sheet, regex tester, docker compose converter, mermaid viewer, diff checker'
   },
   converters: {
     name: 'Converters & Calculators',
-    title: `Converters & Calculators — Timestamp, Base & Color Tools | Formatho`,
+    title: `Converters & Calculators — Timestamp & Base Tools | Formatho`,
     desc: 'Unix timestamp, date-time, number base, color, case, temperature converters. Math, ETA, percentage calculators. Free, instant, client-side.',
     kw: 'unit converter, timestamp converter, number base converter, color converter, case converter, percentage calculator, free online converters'
   },
   network: {
     name: 'Network & Web',
-    title: `Network & Web Tools — Subnet, URL & HTTP Utilities | Formatho`,
+    title: `Network & Web Tools — Subnet & URL | Formatho`,
     desc: 'IPv4 subnet calculator, MAC lookup, IPv6 ULA generator, URL encoder/parser, HTTP status codes, QR generator. Free, private, client-side.',
     kw: 'subnet calculator, ipv4 subnetting, mac address lookup, url encoder, http status codes, qr code generator, network tools online'
   }
@@ -213,14 +213,14 @@ console.log(`  stripped from ${stripped} pages`)
 
 // Static compliance pages
 const staticPages = {
-  'runtime': ['Self-Hosted MCP Server — Docker, Private AI Agents | Formatho', 'Run your own MCP server in Docker: Claude Code, Cursor and Claude Desktop get permissioned, audit-logged tool access inside your network. Zero data egress, one container.'],
-  'security': ['Security - Vulnerability Disclosure | Formatho', 'Report security vulnerabilities to Formatho. Responsible disclosure program with safe harbor protections.'],
-  'acceptable-use': ['Acceptable Use Policy - Formatho', 'Permitted and prohibited uses of Formatho tools including security and crypto tool guidelines.'],
-  'enterprise': ['Enterprise Agent-Ready Services — MCP Integration | Formatho', 'We turn internal APIs and workflows into secure, MCP-accessible tools — inside your infrastructure. Permissioned, audit-logged, zero data egress by design.'],
-  'privacy': ['Privacy Policy - Formatho', 'Tool processing happens 100% in your browser and inputs are never uploaded. Cookieless analytics. Ads served via Google AdSense with EEA/UK/CH consent — full disclosures inside.'],
-  'about': ['About Formatho - Private Infrastructure for AI Agents | Formatho', 'Formatho builds private infrastructure for AI agents: a self-hosted MCP runtime and a free browser tool library. Zero data egress, permissioned, audit-logged.'],
-  'terms': ['Terms of Service - Formatho', 'Terms of service for using Formatho browser tools and the Formatho Runtime MCP server.'],
-  'contact': ['Contact Formatho - Support & Feedback | Formatho', 'Reach the Formatho team: GitHub issues for bugs and features, X for updates, email for security disclosures.'],
+  'runtime': ['Self-Hosted MCP Server — Docker, Private AI Agents', 'Run your own MCP server in Docker: Claude Code and Cursor get permissioned, audit-logged tool access in your network. Zero egress, one container.'],
+  'security': ['Security - Vulnerability Disclosure | Formatho', 'Report security vulnerabilities to Formatho. Responsible disclosure with safe harbor protections and response commitments.'],
+  'acceptable-use': ['Acceptable Use Policy - Formatho', 'Permitted and prohibited uses of Formatho tools: security testing only on systems you own or are explicitly authorized to test.'],
+  'enterprise': ['Enterprise Agent-Ready Services | Formatho', 'We turn internal APIs into secure, MCP-accessible tools inside your infrastructure. Permissioned, audit-logged, zero egress by design.'],
+  'privacy': ['Privacy Policy - Formatho', 'Tool processing is 100% in-browser; inputs never upload. Cookieless analytics plus Google AdSense with EEA consent. Full disclosures inside.'],
+  'about': ['About Formatho - Private Infrastructure for AI Agents', 'Formatho builds private infrastructure for AI agents: a self-hosted MCP runtime and a free browser tool library. Zero data egress, audit-logged.'],
+  'terms': ['Terms of Service - Formatho', 'Terms of service for using Formatho browser tools and the Formatho Runtime MCP server: acceptable use, liability, and changes.'],
+  'contact': ['Contact Formatho - Support & Feedback | Formatho', 'Reach the Formatho team: GitHub issues for bugs and features, X for updates, email for security and partnership disclosures.'],
   'agents': ['Agent Browser - MCP Tools for AI Agents | Formatho', 'Browse the Formatho tool catalog from an AI agent perspective: what each tool does, how to call it via MCP, input and output formats.'],
 }
 console.log('Static compliance pages:')
