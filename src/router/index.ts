@@ -481,6 +481,12 @@ export const routes = [
         meta: routeMeta['saml-decoder']
       },
       {
+        path: '/tools/dmarc-parser',
+        name: 'dmarc-parser',
+        component: () => import(/* webpackPrefetch: true */ '../views/DmarcParserView.vue'),
+        meta: routeMeta['dmarc-parser']
+      },
+      {
         path: '/tools/oidc-url-builder',
         name: 'oidc-url-builder',
         component: () => import(/* webpackPrefetch: true */ '../views/OidcUrlBuilderView.vue'),

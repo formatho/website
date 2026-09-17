@@ -895,6 +895,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://formatho.com/tools/dmarc-parser</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/tools/oidc-url-builder</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
