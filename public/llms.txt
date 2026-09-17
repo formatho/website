@@ -45,6 +45,7 @@ Category hub pages group every tool with a one-line description each:
 - [Certificate Fingerprint]: https://formatho.com/tools/certificate-fingerprint — Calculate SHA-1/256/384/512 fingerprints of X.509 certificates from PEM. For SAML, pinning, and TLS debugging.
 - [Key Format Converter]: https://formatho.com/tools/key-format-converter — Convert RSA keys between PKCS#1 and PKCS#8, public keys between SPKI and PKCS#1, PEM to DER hex. All client-side.
 - [SAML Request & Response Decoder]: https://formatho.com/tools/saml-decoder — Decode SAML AuthnRequest and Response messages - base64 plus raw-deflate - with pretty-printed XML. Essential for Okta, Entra ID and Shibboleth debugging. 100% client-side.
+- [DMARC Record Parser]: https://formatho.com/tools/dmarc-parser — Parse and validate DMARC TXT records: policy strength (p/sp/np), rua/ruf reporting, pct sampling, adkim/aspf alignment and misconfig warnings. Optional DNS lookup, 100% client-side parsing.
 - [OIDC Authorization URL & PKCE Generator]: https://formatho.com/tools/oidc-url-builder — Build OAuth 2.0 / OIDC authorize URLs with state, nonce and S256 PKCE code challenges. Works with Okta, Auth0, Entra ID, Keycloak.
 - [JWT Debugger]: https://formatho.com/tools/jwt — Decode and inspect JWT tokens instantly.
 - [Hash Text]: https://formatho.com/tools/hash-text — Generate Argon2id, bcrypt, PBKDF2, MD5, SHA-1, SHA-256, SHA-384, SHA-512, BLAKE2b, and Poseidon hashes online. 100% client-side Argon2id password hashing for maximum security.

@@ -386,6 +386,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Compress text to gzip/deflate and decompress gzip, zlib, or raw deflate data online. Base64 input/output for SAML and API debugging.',
     keywords: 'gzip decompress online, gzip compress online, deflate decode online, zlib decompress, base64 to gzip, gzip to base64, saml deflate decompress',
   },
+  'dmarc-parser': {
+    title: 'DMARC Record Parser & Validator — Check Your Policy | Formatho',
+    description: 'Parse DMARC TXT records in your browser: policy (p/sp), rua/ruf reporting, pct, adkim/aspf alignment, RFC 7489 validation and misconfiguration warnings. Optional DNS lookup. 100% client-side.',
+    keywords: 'dmarc parser, dmarc record checker, dmarc validator, dmarc lookup, parse dmarc txt record, dmarc policy, rua ruf, email authentication, spf dkim dmarc',
+  },
   'saml-decoder': {
     title: 'SAML Decoder — Inspect SSO Responses Offline | Formatho',
     description: 'Decode base64 SAML requests and responses in your browser — attributes, conditions, signature elements. IdP debugging without leaking assertions to a.',
