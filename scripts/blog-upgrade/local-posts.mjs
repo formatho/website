@@ -172,4 +172,85 @@ createHmac('sha256', secret)
 <p>A stack with literally zero egress including the model call means local inference, and for many workloads that trade is now reasonable. But the practical target for most teams is sharper than perfection: <strong>classify what crosses the model boundary, and make every other layer structurally incapable of egress.</strong> Prompt-time redaction handles the first. Browser-side execution and self-hosted, pure-function tool servers handle the rest — with policies, keys, rate limits, and metadata-only audit so the residual surface is governed rather than hoped away.</p>
 <p>You can try every layer of this stack hands-on: the <a href="/tools/pii-redactor">PII Redactor</a> shows what mechanical pre-send classification looks like; the browser tools on this site demonstrate pure client-side execution (open your network tab — nothing sends); and the <a href="/runtime">Formatho Runtime</a> is a working self-hosted MCP server built on the capability-by-construction model — the registry refuses tools that declare any network, filesystem, or secret access, and its audit log is metadata by construction. Verify all of it: the code is open, and every claim above is checkable with a grep.`
   }
+,
+  {
+    title: 'Decode JWTs & SAML Without Leaking Secrets',
+    slug: 'decode-jwt-saml-without-leaking-secrets',
+    excerpt: 'Every online JWT decoder you paste a token into is a disclosure. How to inspect JWTs and SAML assertions entirely in your browser — what to look for when decoding, and why offline verification is the only safe default.',
+    date: '2026-09-17',
+    readTime: '8 min',
+    tags: ['Security', 'JWT', 'SAML', 'SSO', 'Privacy'],
+    image: '',
+    imageAlt: '',
+    metaDescription: 'Decode and verify JWTs and SAML responses offline — no token ever uploads. What to check in each, and why pasting production tokens into web tools is the leak.',
+    content: `
+<h2>The debugging habit that leaks credentials</h2>
+<p>When an SSO flow fails, the instinct is to paste the failing token into the first online decoder that Google surfaces. That instinct is a data breach in miniature: a production JWT carries user claims, internal identifiers, and sometimes entitlements; a SAML assertion carries the full identity record your IdP asserted — attributes, groups, NameID. The decoder site receives all of it, logs an unknown fraction of it, and is operated by parties you have no contract with.</p>
+<p>The fix is not "use a reputable decoder." The fix is structural: <strong>decode where the token already is — your browser</strong>. A JWT is three Base64URL segments; a SAML response is Base64 (often deflated) XML. Both parse with zero network I/O, which means a client-side decoder is not a convenience feature, it is the correct architecture.</p>
+
+<h2>Decoding a JWT: what to actually look for</h2>
+<p>Split the token on dots; base64url-decode the first two segments. The header declares the algorithm; the payload carries the claims. When debugging, check in this order:</p>
+<ul>
+<li><strong>alg</strong> — is it what your backend expects? Mismatched algorithm expectations are the alg-confusion exploit's habitat. If the verifier only implements RS256 but honors a header claiming HS256 with the public key as the HMAC secret, an attacker forges tokens.</li>
+<li><strong>exp / nbf / iat</strong> — expiry, not-before, issued-at, in epoch seconds. The classic failure: clock skew between issuer and verifier makes fresh tokens "not yet valid." The classic vulnerability: a verifier that decodes claims but never checks exp at all.</li>
+<li><strong>iss / aud</strong> — issuer and audience. A token minted for service A accepted by service B is a token-reuse vulnerability; these two claims are the boundary.</li>
+<li><strong>scope / roles / custom claims</strong> — where entitlement bugs live. Most authorization flaws are right here: a role claim that the backend trusts but the issuer never intended to be authoritative.</li>
+</ul>
+<p>Decoding is safe anywhere. <strong>Verification needs the key and must happen where you trust the key</strong> — your backend for HS256's shared secret, or anywhere for RS256's public key. Never paste the secret into a web tool alongside the token; that combination is full forgery capability.</p>
+
+<h2>Decoding a SAML response: the flow, minus the upload</h2>
+<p>A SAML SSO POST carries the response as a Base64 <code>SAMLResponse</code> form field. To inspect it locally:</p>
+<ol>
+<li>Copy the field value from your browser's dev tools (Network tab → the login POST → form data).</li>
+<li>Base64-decode it. If the result is not XML, it was deflated — inflate it (raw DEFLATE, no zlib header) and XML appears.</li>
+<li>Pretty-print and read: the <code>&lt;Subject&gt;</code>'s NameID (who logged in), <code>&lt;AttributeStatement&gt;</code> (groups, emails, entitlements), <code>&lt;Conditions&gt;</code> (NotBefore/NotOnOrAfter — skew failures live here), and the <code>&lt;Signature&gt;</code> element.</li>
+</ol>
+<p>The assertions you inspect describe real employees and their group memberships. That is precisely the data that should never round-trip through a paste-bin with a decoder attached.</p>
+
+<h2>Why "offline" changes what you can safely debug</h2>
+<p>With client-side decoding, the blast radius of a debugging session is zero: you can inspect production tokens, expired tokens, tokens from pentests, and SAML responses from real IdPs, because nothing transmits. The moment decoding involves an upload, you start self-censoring — pasting only sanitized tokens — and the debugging quality drops. The privacy property and the engineering property point the same direction.</p>
+
+<h2>Try it — both tools run in your browser tab</h2>
+<p>The <a href="/tools/jwt">JWT Debugger</a> decodes and verifies (HS256 secret or RS256 public key, locally via Web Crypto). The <a href="/tools/saml-decoder">SAML Decoder</a> handles the base64 and deflate variants and pretty-prints the XML. Both state the same guarantee in their network tab: nothing leaves the page.</p>`
+  },
+  {
+    title: 'ISO 20022 pain.001 Explained + Builder',
+    slug: 'iso-20022-pain001-explained-build-in-browser',
+    excerpt: 'pain.001 is the XML message businesses submit to banks to move money — the grammar replacing SWIFT MT across payments. A field-by-field walkthrough of what matters, the traps, and a builder that generates valid XML locally.',
+    date: '2026-09-17',
+    readTime: '10 min',
+    tags: ['ISO 20022', 'Payments', 'pain.001', 'Banking', 'XML'],
+    image: '',
+    imageAlt: '',
+    metaDescription: 'pain.001 field by field: group headers, parties, remittance info, and the validation traps — plus a browser builder that generates valid ISO 20022 XML without uploading anything.',
+    content: `
+<h2>The message behind modern payments</h2>
+<p>When a business initiates a credit transfer — payroll file, supplier payment, SEPA batch — the instruction increasingly travels as an ISO 20022 <strong>pain.001</strong> message: an XML document whose name literally means "payment initiation." It is replacing the decades-old SWIFT MT format across the world's payment systems: SEPA in Europe, CHAPS in the UK, FedNow and the ISO migration in the US, RTGS systems across Asia and the Gulf.</p>
+<p>The structure is hierarchical and worth internalizing once:</p>
+<pre><code>&lt;Document&gt;
+  &lt;CstmrCdtTrfInitn&gt;
+    &lt;GrpHdr&gt;      — message-wide: ID, creation time, number of transactions, control sum
+    &lt;PmtInf&gt;      — payment block: method, batch booking, requested execution date
+      &lt;PmtTpInf&gt;  — service level (SEPA, URGP), local instrument
+      &lt;Dbtr&gt;      — the payer: name, IBAN, BIC
+      &lt;DbtrAgt&gt;   — the payer's bank (BIC)
+      &lt;CdtTrfTxInf&gt; — one per payment:
+        &lt;Amt&gt;     — amount and currency
+        &lt;CdtrAgt&gt; — beneficiary bank
+        &lt;Cdtr&gt;    — beneficiary name and IBAN
+        &lt;RmtInf&gt;  — remittance reference (what the beneficiary sees)</code></pre>
+
+<h2>The fields that actually cause rejections</h2>
+<ul>
+<li><strong>GrpHdr/CtrlSum and NbOfTxA</strong> must match the sum and count of the transactions below. A mismatch is an automatic schema rejection — and the easiest bug to introduce when generating files by hand.</li>
+<li><strong>IBAN checksums.</strong> Every beneficiary IBAN carries a mod-97 checksum; a typo is caught by the bank, but catching it before submission saves a day of payment ops ping-pong.</li>
+<li><strong>Service level vs. currency.</strong> <code>SEPA</code> service level with a non-EUR currency is rejected. <code>URGP</code> (instant) has amount caps per scheme that change periodically.</li>
+<li><strong>Character sets.</strong> pain.001 has a restricted business character set — some valid XML characters are invalid in names and remittance text, and banks differ in strictness.</li>
+<li><strong>Dates.</strong> <code>ReqdExctnDt</code> in the past bounces; some schemes require it to be a business day.</li>
+</ul>
+
+<h2>Build one without uploading your payment data</h2>
+<p>Payment files describe your company's money movements — counterparties, amounts, payroll patterns. Generating them through a web service means handing that picture to a third party. A browser-based builder changes the trust model: fill in debtor, creditor, amount, and purpose; the XML generates in your tab and goes nowhere except your clipboard.</p>
+<p>The <a href="/tools/pain001-builder">pain.001 Builder</a> does exactly this — SEPA service levels, purpose codes, and valid XML out. Validate existing messages with schema-aware checks in the <a href="/tools/iso20022-validator">ISO 20022 Validator</a> before they go to the bank. Both run 100% client-side.</p>`
+  }
 ]

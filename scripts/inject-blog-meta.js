@@ -134,6 +134,15 @@ const twitterHandle = '@heyformatho'
 function generateMetaTags(post) {
   const seo = getBlogSEO(post.slug, post.title, post.excerpt)
   const fullTitle = seo.title.includes(siteName) ? seo.title : `${seo.title} - ${siteName}`
+  // SERP discipline: descriptions land in the 120-155 window — trim at a
+  // sentence, then word boundary; never truncate mid-word
+  const clampDesc = (d) => {
+    if (d.length <= 155) return d
+    const cut = d.slice(0, 155)
+    const sentence = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('! '))
+    return sentence > 100 ? cut.slice(0, sentence + 1) : cut.slice(0, cut.lastIndexOf(' ')).trim()
+  }
+  seo.description = clampDesc(seo.description || post.excerpt || '')
   const url = `${baseUrl}/blogs/${post.slug}`
   const image = post.image 
     ? (post.image.startsWith('http') ? post.image : `${baseUrl}${post.image}`)
@@ -212,8 +221,8 @@ function generateMetaTags(post) {
  * Generate meta tags for the blog listing page
  */
 function generateBlogListingMetaTags(blogPosts) {
-  const title = 'Developer Guides, Tutorials, and AI Insights | Formatho Blog'
-  const description = 'Explore expert developer guides, tutorials, and technical insights from the Formatho team. Deep dives into AI agent orchestration, blockchain, RWA tokenization, and privacy-first tools with zero fluff.'
+  const title = 'Developer Guides & Tutorials | Formatho Blog'
+  const description = 'Developer guides and tutorials from the Formatho team: AI agents, blockchain, and privacy-first tooling. Tested against the tools they explain.'
   const url = `${baseUrl}/blogs`
   
   // Generate Blog listing schema
