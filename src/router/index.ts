@@ -517,6 +517,18 @@ export const routes = [
         meta: routeMeta['pain001-builder']
       },
       {
+        path: '/tools/jev-playground',
+        name: 'jev-playground',
+        component: () => import('@/views/JevPlaygroundView.vue'),
+        meta: routeMeta['jev-playground']
+      },
+      {
+        path: '/tools/jev-suitability',
+        name: 'jev-suitability',
+        component: () => import('@/views/JevSuitabilityView.vue'),
+        meta: routeMeta['jev-suitability']
+      },
+      {
         path: '/tools/gs1-digital-link',
         name: 'gs1-digital-link',
         component: () => import('@/views/Gs1DigitalLinkView.vue'),

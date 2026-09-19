@@ -436,6 +436,16 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Prototype a Digital Product Passport under the EU Ecodesign for Sustainable Products Regulation: Art. 9 identification, Art.',
     keywords: 'espr digital product passport, dpp builder, ecodesign regulation 2024/1781, product passport json, eu sustainability passport, dpp qr code',
   },
+  'jev-playground': {
+    title: 'Jev Playground — System One Request Builder | Formatho',
+    description: 'Build Jev requests visually: state plus Noul, Choice, and Score questions with live mock distributions. Generates typesafe_sdk Python code. No API key, fully client-side.',
+    keywords: 'jev playground, jev api builder, typesafe jev, system one model, jev request example, noul choice score primitives',
+  },
+  'jev-suitability': {
+    title: 'Jev Suitability Test — Is Your Task Jev-Shaped? | Formatho',
+    description: 'Six criteria decide if your task fits Jev or belongs to an LLM, reasoning model, or code. Scored verdict with decomposition advice. Free, client-side.',
+    keywords: 'jev suitability test, is my task jev shaped, when to use jev, system one model criteria, jev vs llm',
+  },
   'gs1-digital-link': {
     title: 'GS1 Digital Link Builder & Parser - GTIN to URL | Formatho',
     description: 'Build GS1 Digital Link URLs from GTIN, serial, lot, and expiry — with QR code and element-string output. Paste a link back and decode every identifier.',

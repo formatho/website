@@ -133,6 +133,8 @@ Category hub pages group every tool with a one-line description each:
 - [Context Window Splitter]: https://formatho.com/tools/context-splitter — Chunk long text for RAG by tokens, sentences, or paragraphs. Shows overlap and context usage per chunk.
 - [Prompt Template Renderer]: https://formatho.com/tools/prompt-template-renderer — Auto-generate a form from {{variables}} in your prompt template. Fill values, get the rendered prompt with token count.
 - [LLM JSON Validator]: https://formatho.com/tools/llm-json-validator — Extract and validate JSON from any AI model output — handles markdown fences, prose, trailing commas, smart quotes.
+- [Jev Playground]: https://formatho.com/tools/jev-playground — Build Jev (TypeSafe System One) requests visually: state plus Noul, Choice, and Score questions. Mock responses with probability distributions, Python SDK code generation. Free, client-side, no API key.
+- [Jev Suitability Test]: https://formatho.com/tools/jev-suitability — Is your task Jev-shaped? Six criteria from System One guidance: judgement, bounded, atomic, context-contained, fast-human, machine-consumed — scored with a verdict and decomposition advice.
 - [LLM Token Counter]: https://formatho.com/tools/local-token-counter — Count tokens for GPT-4o, GPT-4, o1, and legacy models locally. Compare across tokenizers, estimate API costs. No API calls.
 - [Meta Tag Generator]: https://formatho.com/tools/meta-tag-generator — Generate HTML meta tags for SEO.
 
