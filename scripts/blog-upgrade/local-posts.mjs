@@ -253,4 +253,61 @@ createHmac('sha256', secret)
 <p>Payment files describe your company's money movements — counterparties, amounts, payroll patterns. Generating them through a web service means handing that picture to a third party. A browser-based builder changes the trust model: fill in debtor, creditor, amount, and purpose; the XML generates in your tab and goes nowhere except your clipboard.</p>
 <p>The <a href="/tools/pain001-builder">pain.001 Builder</a> does exactly this — SEPA service levels, purpose codes, and valid XML out. Validate existing messages with schema-aware checks in the <a href="/tools/iso20022-validator">ISO 20022 Validator</a> before they go to the bank. Both run 100% client-side.</p>`
   }
+,
+  {
+    title: 'What Is Jev? The System One Model Explained',
+    slug: 'what-is-jev-system-one-model-explained',
+    excerpt: 'Jev is TypeSafe AI\'s System One model: state and typed questions in, probability distributions out — no text generation. What that means, the three primitives (Noul, Choice, Score), when to use it instead of an LLM, and the honest limits.',
+    date: '2026-09-17',
+    readTime: '10 min',
+    tags: ['AI', 'Jev', 'TypeSafe', 'Machine Learning', 'Architecture'],
+    image: '',
+    imageAlt: '',
+    metaDescription: 'Jev explained: TypeSafe\'s System One model for typed semantic decisions — Noul, Choice, Score primitives, when to use it vs an LLM, and the calibration limits.',
+    content: `
+<h2>A new category, not a new chatbot</h2>
+<p>Every few months a model appears that is genuinely a different shape rather than a better version of the same shape. Jev — <a href="https://typesafe.ai">TypeSafe AI</a>&#39;s first public &quot;System One&quot; model, released in September 2026 — is one of those. It does not chat, does not write, does not reason in public. Its entire interface is:</p>
+<blockquote><p><strong>Unstructured or structured state in → typed probabilistic decisions out.</strong></p></blockquote>
+<p>The shorthand its creators use:</p>
+<blockquote><p><strong>Code calculates. Jev judges. Reasoning models reason.</strong></p></blockquote>
+<p>If you have ever written an <code>if</code> statement that needed <em>understanding</em> rather than arithmetic — &quot;if this message indicates a safeguarding concern&quot;, &quot;if this passage supports the claim&quot;, &quot;if this tool call looks unsafe&quot; — that is the gap Jev fills. It is a five-second expert judgement at machine scale.</p>
+
+<h2>Why not just use an LLM?</h2>
+<p>Today, teams bolt this onto a text model: prompt it, get prose back, parse the prose, validate the parse, handle the times it invented a new category. It works until it does not — and the failure modes are structural: schema hallucination (output outside your expected format), inconsistent confidences, and token-by-token latency for what should be a instant decision.</p>
+<p>Jev removes the failure modes by removing the degrees of freedom. You define the <strong>answer space in advance</strong>; the model can only return values inside it, each with a probability. There is no parse step because there is no prose. There is no schema hallucination because there is no schema degrees of freedom. And it is roughly two orders of magnitude faster than generating the equivalent judgment as text, because it does not generate tokens at all.</p>
+
+<h2>The three primitives</h2>
+<p>Everything Jev does reduces to three question types:</p>
+<h3>Noul — &quot;Is this true?&quot;</h3>
+<p>A single probability from 0 to 1. &quot;Does this message request a refund?&quot; → <code>0.96</code>. Close to 1 is a strong yes, close to 0 a strong no, close to 0.5 genuine uncertainty. There is no separate confidence field — the probability <em>is</em> the uncertainty.</p>
+<h3>Choice — &quot;Which of these?&quot;</h3>
+<p>One winner from up to 255 predefined options, plus a probability for <em>every</em> option and a confidence value describing how peaked the distribution is. Classification, routing, intent, model selection. The full distribution matters: <code>billing 0.58, technical 0.37</code> tells you the runner-up is plausible, which a one-word answer hides.</p>
+<h3>Score — &quot;Where on this scale?&quot;</h3>
+<p>A position along 2–10 ordered levels you define as <strong>concrete situations</strong> — &quot;Service unavailable and no workaround exists&quot;, not &quot;High&quot;. The returned score can land <em>between</em> levels because it is the probability-weighted position. This is the primitive people design badly: vague adjectives make calibration meaningless.</p>
+
+<h2>The architecture it wants</h2>
+<p>Jev questions in one request evaluate <strong>independently and in parallel</strong> against shared state — question B never sees question A&#39;s answer. That enables the core pattern:</p>
+<pre><code>state (records, messages, policies)
+        ↓
+   fan out narrow questions
+        ↓
+typed answers + probabilities + confidence
+        ↓
+   code branches on certainty:
+     high   → act automatically
+     medium → human review
+     hard   → reasoning model</code></pre>
+<p>The software owns control flow and side effects. Jev supplies the semantic judgements — &quot;smart if-statements&quot; — and confidence gates decide what escalates. If question B genuinely depends on A&#39;s answer, that is two requests, not a conversation.</p>
+
+<h2>The honest limits</h2>
+<ul>
+<li><strong>&quot;Zero hallucinations&quot; means zero <em>schema</em> hallucinations.</strong> Jev cannot invent an output outside your answer space — but it can still confidently pick the wrong option <em>inside</em> it. Type-safe ≠ correct.</li>
+<li><strong>Calibration is a population property.</strong> Trained via RLCD (Reinforcement Learning for Calibrated Decisions), probabilities reflect uncertainty in aggregate — high-probability groups are right more often. An individual high-confidence prediction can still be wrong. Validate thresholds against your own data.</li>
+<li><strong>It is not a reasoning model.</strong> Complex multi-step analysis, research, and novel strategy are exactly what it is built not to do. Decompose those into narrow judgements, or use the right tier.</li>
+</ul>
+
+<h2>Is your task Jev-shaped?</h2>
+<p>Six questions decide it: Is the AI <em>deciding</em> rather than creating? Is the answer space definable in advance? Is it one atomic judgement? Is all needed context placeable in state? Could a knowledgeable human answer in ~5 seconds? Will software consume the result directly? Five or six yeses: strong fit. Zero to two: wrong tool.</p>
+<p>You can run that test interactively — with per-criterion explanations and a scored verdict — in our <a href="/tools/jev-suitability">Jev Suitability Test</a>, then prototype the actual request (state, all three primitives, mock probability distributions, generated SDK code — all client-side, no API key) in the <a href="/tools/jev-playground">Jev Playground</a>. Both were built the week Jev shipped; the concepts are exactly the ones in this piece.</p>`
+  }
 ]

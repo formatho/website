@@ -288,4 +288,5 @@ Chain-specific developer tool pages with pre-configured RPC endpoints, chain IDs
 - [The Secure AI-Agent Stack: Zero Data Egress in Practice]: https://formatho.com/blogs/secure-ai-agent-stack-zero-data-egress — Agents leak at every layer: prompts to model APIs, tool payloads to SaaS endpoints, telemetry you did not know you sent.
 - [Decode JWTs & SAML Without Leaking Secrets]: https://formatho.com/blogs/decode-jwt-saml-without-leaking-secrets — Every online JWT decoder you paste a token into is a disclosure. How to inspect JWTs and SAML assertions entirely in you
 - [ISO 20022 pain.001 Explained + Builder]: https://formatho.com/blogs/iso-20022-pain001-explained-build-in-browser — pain.001 is the XML message businesses submit to banks to move money — the grammar replacing SWIFT MT across payments. A
+- [What Is Jev? The System One Model Explained]: https://formatho.com/blogs/what-is-jev-system-one-model-explained — Jev is TypeSafe AI's System One model: state and typed questions in, probability distributions out — no text generation.
 
