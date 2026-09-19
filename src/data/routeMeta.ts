@@ -386,6 +386,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Compress text to gzip/deflate and decompress gzip, zlib, or raw deflate data online. Base64 input/output for SAML and API debugging.',
     keywords: 'gzip decompress online, gzip compress online, deflate decode online, zlib decompress, base64 to gzip, gzip to base64, saml deflate decompress',
   },
+  'dmarc-parser': {
+    title: 'DMARC Record Parser & Validator — Check Your Policy | Formatho',
+    description: 'Parse DMARC TXT records in your browser: policy (p/sp), rua/ruf reporting, pct, adkim/aspf alignment, RFC 7489 validation and misconfiguration warnings. Optional DNS lookup. 100% client-side.',
+    keywords: 'dmarc parser, dmarc record checker, dmarc validator, dmarc lookup, parse dmarc txt record, dmarc policy, rua ruf, email authentication, spf dkim dmarc',
+  },
   'saml-decoder': {
     title: 'SAML Decoder — Inspect SSO Responses Offline | Formatho',
     description: 'Decode base64 SAML requests and responses in your browser — attributes, conditions, signature elements. IdP debugging without leaking assertions to a.',
@@ -430,6 +435,16 @@ export const routeMeta: Record<string, RouteMeta> = {
     title: 'ESPR Digital Product Passport Builder - EU | Formatho',
     description: 'Prototype a Digital Product Passport under the EU Ecodesign for Sustainable Products Regulation: Art. 9 identification, Art.',
     keywords: 'espr digital product passport, dpp builder, ecodesign regulation 2024/1781, product passport json, eu sustainability passport, dpp qr code',
+  },
+  'jev-playground': {
+    title: 'Jev Playground — System One Request Builder | Formatho',
+    description: 'Build Jev requests visually: state plus Noul, Choice, and Score questions with live mock distributions. Generates typesafe_sdk Python code. No API key, fully client-side.',
+    keywords: 'jev playground, jev api builder, typesafe jev, system one model, jev request example, noul choice score primitives',
+  },
+  'jev-suitability': {
+    title: 'Jev Suitability Test — Is Your Task Jev-Shaped? | Formatho',
+    description: 'Six criteria decide if your task fits Jev or belongs to an LLM, reasoning model, or code. Scored verdict with decomposition advice. Free, client-side.',
+    keywords: 'jev suitability test, is my task jev shaped, when to use jev, system one model criteria, jev vs llm',
   },
   'gs1-digital-link': {
     title: 'GS1 Digital Link Builder & Parser - GTIN to URL | Formatho',

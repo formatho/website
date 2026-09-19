@@ -481,6 +481,12 @@ export const routes = [
         meta: routeMeta['saml-decoder']
       },
       {
+        path: '/tools/dmarc-parser',
+        name: 'dmarc-parser',
+        component: () => import(/* webpackPrefetch: true */ '../views/DmarcParserView.vue'),
+        meta: routeMeta['dmarc-parser']
+      },
+      {
         path: '/tools/oidc-url-builder',
         name: 'oidc-url-builder',
         component: () => import(/* webpackPrefetch: true */ '../views/OidcUrlBuilderView.vue'),
@@ -509,6 +515,18 @@ export const routes = [
         name: 'pain001-builder',
         component: () => import('@/views/Pain001BuilderView.vue'),
         meta: routeMeta['pain001-builder']
+      },
+      {
+        path: '/tools/jev-playground',
+        name: 'jev-playground',
+        component: () => import('@/views/JevPlaygroundView.vue'),
+        meta: routeMeta['jev-playground']
+      },
+      {
+        path: '/tools/jev-suitability',
+        name: 'jev-suitability',
+        component: () => import('@/views/JevSuitabilityView.vue'),
+        meta: routeMeta['jev-suitability']
       },
       {
         path: '/tools/gs1-digital-link',

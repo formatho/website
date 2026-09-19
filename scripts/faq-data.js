@@ -717,6 +717,30 @@ export const toolSEOContent = {
       'Read the readiness tab for the regulation timeline and preparation checklist.'
     ]
   },
+  '/tools/jev-playground': {
+    intro: [
+      'Jev is TypeSafe AI\'s System One model: state and typed questions in, probability distributions out — no text generation, no parsing, no schema hallucination. Building requests by hand means getting three things right at once: the state object, the question instructions, and the per-primitive criteria shapes (a map of options for Choice, an ordered list of concrete levels for Score, optional yes-criteria for Noul).',
+      'This playground composes all three visually and shows a locally-generated mock response — full distributions with confidence — so you see the shape of what comes back before spending tokens. It then emits ready-to-run typesafe_sdk Python for your own terminal: the page never asks for an API key, because it never calls anything. Question IDs, field references like incident.description, and the vague-adjective warning on Score levels follow the documented guidance.'
+    ],
+    howTo: [
+      'Paste or build your state JSON — structured objects keep relationships explicit.',
+      'Add questions: Noul (yes/no probability), Choice (fixed options), Score (concrete levels).',
+      'Review the mock distributions to sanity-check your answer-space design.',
+      'Copy the generated Python and run it from your terminal with your credentials.'
+    ]
+  },
+  '/tools/jev-suitability': {
+    intro: [
+      'The most common Jev mistake is sending it the wrong kind of task — one that needs generation, research, or multi-stage reasoning rather than a fast bounded judgement. TypeSafe\'s guidance distills into six criteria: judgement not creation, bounded answer space, atomic single question, context-contained state, fast-human judgement, and a machine-consumed result.',
+      'Answer the six for your task and get a scored verdict: 5–6 yes means excellent System One fit with a suggested primitive (Noul, Choice, or Score); 3–4 means decompose — extract the narrow judgements and hand the rest to code or a reasoning model; 0–2 means use a different tool entirely. The decision table at the bottom places Jev against code, LLMs, reasoning models, and humans.'
+    ],
+    howTo: [
+      'Describe the task you are considering.',
+      'Answer the six criteria — the explanation under each updates.',
+      'Read the verdict: Jev-shaped, decompose, or use another tool.',
+      'Follow the link to the playground to prototype the Jev parts.'
+    ]
+  },
   '/tools/gs1-digital-link': {
     intro: [
       'The GS1 Digital Link turns the numbers behind barcodes into web addresses. Instead of a GTIN that only a scanner understands, a product carries a link like https://example.com/01/09506000134352/21/SN123456 — the same identifiers (GTIN, serial, lot, expiry), but openable by any phone camera and resolvable to your product page. EU FMD serialisation, US DSCSA, and consumer-transparency programs are all pushing identifiers onto the web; Digital Link is the standard bridge.',
