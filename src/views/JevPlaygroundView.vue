@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Copy, Check, Plus, Trash2, Play, Zap, Boxes, Gauge, AlertCircle, CheckCircle2, ShieldCheck } from 'lucide-vue-next'
+import { Copy, Check, Plus, Trash2, Play, Zap, Boxes, Gauge, AlertCircle, CheckCircle2, ShieldCheck, Key, Loader2, ExternalLink } from 'lucide-vue-next'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
@@ -193,7 +193,103 @@ function generateMock() {
 }
 watch(requestValid, (v) => { if (v) generateMock() }, { immediate: true })
 
-// ─── Sample ───
+// ─── Live API mode (your key, direct to Jev — never touches our servers) ───
+const JEV_ENDPOINT = 'https://api.typesafe.ai/v1/systemone'
+const apiKey = ref('')
+const showKeyInput = ref(false)
+const liveLoading = ref(false)
+const liveError = ref('')
+const liveAnswers = ref<MockAnswer[]>([])
+const liveUsage = ref<{ input: number; output: number; latency: number } | null>(null)
+
+// restore key from localStorage on mount (client only)
+if (typeof window !== 'undefined') {
+  const saved = localStorage.getItem('jev-api-key')
+  if (saved) apiKey.value = saved
+}
+
+function saveKey() {
+  try { localStorage.setItem('jev-api-key', apiKey.value) } catch { /* storage blocked */ }
+  showKeyInput.value = false
+}
+function clearKey() {
+  apiKey.value = ''
+  try { localStorage.removeItem('jev-api-key') } catch { /* storage blocked */ }
+}
+
+function buildApiQuestions(): Record<string, unknown> {
+  const out: Record<string, unknown> = {}
+  for (const q of questions.value) {
+    if (!q.instructions.trim()) continue
+    if (q.type === 'noul') {
+      out[q.id] = q.criteriaYes
+        ? { type: 'noul', instructions: q.instructions, criteria: { true: q.criteriaYes } }
+        : { type: 'noul', instructions: q.instructions }
+    } else if (q.type === 'choice') {
+      const criteria: Record<string, string | null> = {}
+      for (const o of q.options.filter(o => o.label)) criteria[o.label] = o.description || null
+      out[q.id] = { type: 'choice', instructions: q.instructions, criteria }
+    } else {
+      out[q.id] = { type: 'score', instructions: q.instructions, criteria: q.levels.filter(Boolean) }
+    }
+  }
+  return out
+}
+
+async function runLive() {
+  liveError.value = ''
+  liveAnswers.value = []
+  liveUsage.value = null
+  if (!apiKey.value.trim()) { liveError.value = 'Enter your TypeSafe API key first.'; showKeyInput.value = true; return }
+  if (!requestValid.value) { liveError.value = 'Fix the state or add a question first.'; return }
+
+  saveKey()
+  liveLoading.value = true
+  const t0 = performance.now()
+  try {
+    const res = await fetch(JEV_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey.value}` },
+      body: JSON.stringify({ state: JSON.parse(stateJson.value), model: 'jev-latest', questions: buildApiQuestions() })
+    })
+    const latency = Math.round(performance.now() - t0)
+
+    if (res.status === 401) throw new Error('Invalid API key — check it at console.typesafe.ai')
+    if (res.status === 422) {
+      const d = await res.json().catch(() => ({}))
+      throw new Error(`Validation: ${JSON.stringify(d).slice(0, 200)}`)
+    }
+    if (res.status === 429) throw new Error('Rate limited — wait a moment and retry')
+    if (res.status === 529) throw new Error('Jev is overloaded — retry shortly')
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+
+    const data = await res.json()
+    liveUsage.value = { input: data.usage?.input_tokens ?? 0, output: data.usage?.output_tokens ?? 0, latency }
+
+    const out: MockAnswer[] = []
+    for (const [id, answer] of Object.entries(data.answers || {})) {
+      const a = answer as Record<string, unknown>
+      if (a.type === 'noul') {
+        const p = Number(a.noul) || 0
+        out.push({ id, type: 'noul', headline: `noul = ${p}`, dist: [{ label: 'no', p: 1 - p }, { label: 'yes', p }], confidence: p })
+      } else if (a.type === 'choice') {
+        const probs = (a.probabilities || {}) as Record<string, number>
+        const dist = Object.entries(probs).map(([label, p]) => ({ label, p }))
+        out.push({ id, type: 'choice', headline: `choice = "${a.choice}"`, dist, confidence: Number(a.confidence) || 0 })
+      } else if (a.type === 'score') {
+        const probs = (a.probabilities || {}) as Record<string, number>
+        const legend = (a.legend || {}) as Record<string, string>
+        const dist = Object.entries(probs).map(([lvl, p]) => ({ label: `L${lvl}`, p }))
+        out.push({ id, type: 'score', headline: `score = ${a.score}`, dist, confidence: Number(a.confidence) || 0 })
+      }
+    }
+    liveAnswers.value = out
+  } catch (e) {
+    liveError.value = (e as Error).message
+  } finally {
+    liveLoading.value = false
+  }
+}
 function fillSample() {
   stateJson.value = JSON.stringify({
     incident: {
@@ -236,7 +332,7 @@ function fillSample() {
         </div>
       </div>
       <div class="flex items-center gap-2">
-        <span class="flex items-center gap-1.5 text-xs text-muted-foreground"><ShieldCheck class="w-4 h-4 text-green-600" /> No API key needed — you generate the code, you run it</span>
+        <span class="flex items-center gap-1.5 text-xs text-muted-foreground"><ShieldCheck class="w-4 h-4 text-green-600" /> Your key stays in your browser — calls go direct to Jev</span>
         <Button variant="outline" size="sm" @click="fillSample">Sample</Button>
       </div>
     </div>
@@ -244,7 +340,8 @@ function fillSample() {
     <Tabs default-value="build" class="space-y-3">
       <TabsList>
         <TabsTrigger value="build">Build</TabsTrigger>
-        <TabsTrigger value="mock">Mock response</TabsTrigger>
+        <TabsTrigger value="mock">Mock</TabsTrigger>
+        <TabsTrigger value="live">Live ⚡</TabsTrigger>
         <TabsTrigger value="code">Python SDK</TabsTrigger>
         <TabsTrigger value="about">How Jev works</TabsTrigger>
       </TabsList>
@@ -319,7 +416,7 @@ function fillSample() {
         <Card class="border-primary/30">
           <CardContent class="pt-5 flex flex-wrap items-center justify-between gap-3">
             <p class="text-xs text-muted-foreground max-w-xl">
-              <strong class="text-foreground">Mock responses</strong> are generated locally with seeded randomness — no API call, no key, no data leaving this tab. They show the <em>shape</em> of Jev's typed answers: probability distributions and confidence. Regenerate to see different distributions.
+              <strong class="text-foreground">Mock responses</strong> are generated locally with seeded randomness — no API call, no key, no data leaving this tab. They show the <em>shape</em> of Jev's typed answers. Use the <strong>Live ⚡</strong> tab for real Jev responses.
             </p>
             <Button size="sm" @click="generateMock" :disabled="!requestValid"><Play class="w-3.5 h-3.5 mr-1" /> Regenerate</Button>
           </CardContent>
@@ -343,6 +440,72 @@ function fillSample() {
           </div>
         </div>
         <p v-if="!mockAnswers.length" class="text-xs text-muted-foreground text-center py-8">Fill in at least one question to see the response shape.</p>
+      </TabsContent>
+
+      <!-- LIVE -->
+      <TabsContent value="live" class="space-y-3">
+        <Card class="border-green-500/30">
+          <CardContent class="pt-5 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <p class="text-xs text-muted-foreground max-w-lg">
+                <strong class="text-foreground">Real Jev responses.</strong> Your API key is stored in this browser's localStorage only and sent directly to <code class="font-mono text-xs">api.typesafe.ai</code> — never to Formatho servers.
+              </p>
+              <div class="flex items-center gap-2">
+                <template v-if="!showKeyInput && apiKey">
+                  <span class="flex items-center gap-1.5 text-xs text-green-700"><Key class="w-3.5 h-3.5" /> ••••••••{{ apiKey.slice(-4) }}</span>
+                  <Button variant="ghost" size="sm" class="h-7 text-xs" @click="showKeyInput = true">Change</Button>
+                  <Button variant="ghost" size="sm" class="h-7 text-xs text-red-500" @click="clearKey">Remove</Button>
+                </template>
+                <template v-else>
+                  <Input v-model="apiKey" type="password" class="font-mono text-xs h-8 w-56" placeholder="TypeSafe API key" aria-label="TypeSafe API key" />
+                  <Button variant="outline" size="sm" class="h-7 text-xs" @click="saveKey">Save</Button>
+                </template>
+                <a href="https://console.typesafe.ai" target="_blank" rel="noopener noreferrer" class="text-[10px] text-muted-foreground hover:text-primary flex items-center gap-0.5">
+                  Get a key <ExternalLink class="w-3 h-3" />
+                </a>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <Button size="sm" @click="runLive" :disabled="liveLoading || !requestValid">
+                <Loader2 v-if="liveLoading" class="w-3.5 h-3.5 mr-1 animate-spin" />
+                <Play v-else class="w-3.5 h-3.5 mr-1" />
+                {{ liveLoading ? 'Calling Jev…' : 'Run against Jev' }}
+              </Button>
+              <span v-if="liveUsage" class="text-xs text-muted-foreground font-mono">
+                {{ liveUsage.latency }}ms · {{ liveUsage.input }} in / {{ liveUsage.output }} out tokens
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card v-if="liveError" class="border-red-500/40">
+          <CardContent class="pt-5 flex items-start gap-2">
+            <AlertCircle class="w-4 h-4 text-red-500 mt-0.5 shrink-0" />
+            <p class="text-xs font-mono text-red-600">{{ liveError }}</p>
+          </CardContent>
+        </Card>
+
+        <div v-for="a in liveAnswers" :key="a.id" class="border border-green-500/20 rounded-lg p-4">
+          <div class="flex flex-wrap items-center gap-3 mb-3">
+            <span class="text-[10px] px-1.5 py-0.5 rounded font-semibold uppercase"
+              :class="{ 'bg-blue-100 text-blue-700': a.type === 'noul', 'bg-purple-100 text-purple-700': a.type === 'choice', 'bg-amber-100 text-amber-700': a.type === 'score' }">{{ a.type }}</span>
+            <code class="text-xs font-semibold">{{ a.id }}</code>
+            <code class="ml-auto text-sm font-mono text-green-700">{{ a.headline }}</code>
+            <span v-if="a.type !== 'noul'" class="text-[10px] text-muted-foreground">confidence {{ a.confidence.toFixed(2) }}</span>
+          </div>
+          <div class="space-y-1">
+            <div v-for="d in a.dist" :key="d.label" class="flex items-center gap-2 text-xs">
+              <code class="w-24 text-right text-muted-foreground font-mono truncate">{{ d.label }}</code>
+              <div class="flex-1 h-4 bg-muted rounded overflow-hidden">
+                <div class="h-full bg-green-500/60 transition-all" :style="{ width: (d.p * 100).toFixed(1) + '%' }" />
+              </div>
+              <code class="w-12 font-mono">{{ d.p.toFixed(2) }}</code>
+            </div>
+          </div>
+        </div>
+        <p v-if="!liveAnswers.length && !liveError && !liveLoading" class="text-xs text-muted-foreground text-center py-8">
+          Enter your API key and hit "Run against Jev" to get real responses.
+        </p>
       </TabsContent>
 
       <!-- CODE -->
