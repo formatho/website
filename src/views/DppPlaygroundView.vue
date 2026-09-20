@@ -3,8 +3,6 @@ import { ref, computed } from 'vue'
 import { Copy, Check, Package, Factory, FileCheck2, AlertTriangle, CheckCircle2, Download, ArrowRight, Info } from 'lucide-vue-next'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
@@ -196,10 +194,38 @@ const INDUSTRIES: Industry[] = [
   },
 ]
 
+
+const DOCS_INFO: Record<string, string> = {
+  'tech_pack': 'Your factory technical file for the product: construction, measurements, materials. The base document every DPP field starts from.',
+  'composition_cert': 'Lab test certifying fibre/material percentages. Third-party tested composition is what regulators and retailers accept.',
+  'origin_decl': 'Certificate of Origin (CoO) from a chamber of commerce. Proves where the product was manufactured.',
+  'grs_gots': 'GRS/GOTS/RCS audit certificate from an approved certification body. Verifies recycled or organic content claims.',
+  'reach': 'REACH or RSL (restricted substances) test report from an accredited lab. Shows the product is free of banned chemicals.',
+  'lca': 'Life-cycle assessment or product carbon footprint study. The basis for the sustainability data in the passport.',
+  'durability_test': 'Wear/wash-cycle or stress test results. Increasingly requested as an ESPR durability parameter.',
+  'repair_guide': 'Instructions for repair, disassembly and care. Required circularity data for textiles.',
+  'eol': 'What happens at end of life: recycling, take-back, safe disposal instructions.',
+  'supplier_list': 'Named factories and suppliers with addresses. Minimum viable traceability for the supply-chain fields.',
+  'doc': 'EU Declaration of Conformity signed by the manufacturer or importer. The legal anchor of the conformity section.',
+  'spec': 'Technical datasheet from engineering: model numbers, ratings, chemistry, dimensions.',
+  'bom': 'Bill of materials with where each critical material comes from. Needed for raw-material origin fields.',
+  'recycled_cert': 'Verification of recycled content shares (mass-balance or audited).',
+  'pcf': 'Product carbon footprint study done to a recognized method (EF, GHG Protocol, ISO 14067).',
+  'dd_policy': 'Supply-chain due diligence policy report, OECD-aligned. Covers risk areas like conflict minerals.',
+  'rohs_cert': 'RoHS test report proving restricted hazardous substances are below limits.',
+  'energy_label': 'EU energy label registration in EPREL. Already mandatory for most electronics.',
+  'repair_manual': 'Repair manual plus spare-parts availability list. EU right-to-repair data.',
+  'weee': 'WEEE registration and recycling information for the producer country.',
+  'dop': 'Declaration of Performance under the Construction Products Regulation: declared essential characteristics.',
+  'epd': 'Environmental Product Declaration to EN 15804. The standard construction sustainability proof.',
+  'test': 'Test reports performed to the harmonised European standard methods.',
+  'materials': 'Material composition sheet from your supplier or production records.',
+  'chem_test': 'Chemical emissions or safety test report (e.g. formaldehyde, flame retardants).',
+  'repair': 'Spare parts list and repairability documentation.',
+}
+
 const step = ref<1 | 2 | 3>(1)
 const industryId = ref('')
-const productName = ref('')
-const productNote = ref('')
 const ownedDocs = ref<string[]>([])
 const copied = ref(false)
 
@@ -234,7 +260,7 @@ const passportJson = computed(() => {
   if (!industry.value) return ''
   const obj: Record<string, unknown> = {
     schema: 'draft-eu-dpp/v0',
-    product: { name: productName.value || 'Unnamed product', industry: industry.value.name },
+    industry: industry.value.name,
     regulation: industry.value.regulation,
     data_fields: Object.fromEntries(
       industry.value.fields.map((f) => [
@@ -244,7 +270,6 @@ const passportJson = computed(() => {
           : { status: f.required ? 'missing (required)' : 'missing (optional)' },
       ])
     ),
-    notes: productNote.value || undefined,
     generated: new Date().toISOString(),
     disclaimer: 'Draft generated client-side for planning purposes. Not a regulatory submission.',
   }
@@ -320,18 +345,7 @@ const grouped = computed(() => {
     <!-- Step 2: product + docs -->
     <template v-if="industry">
       <Card>
-        <CardHeader><CardTitle class="text-lg flex items-center gap-2"><Package class="w-4 h-4" /> 2. Your export product</CardTitle></CardHeader>
-        <CardContent class="space-y-4">
-          <div class="grid sm:grid-cols-2 gap-3">
-            <Input v-model="productName" placeholder="Product name (e.g. Cotton crew-neck T-shirt)" />
-            <Input :model-value="industry.name" disabled />
-          </div>
-          <Textarea v-model="productNote" rows="2" placeholder="Optional notes: target market, HS code, current buyers…" />
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader><CardTitle class="text-lg flex items-center gap-2"><FileCheck2 class="w-4 h-4" /> 3. Documents you already have</CardTitle></CardHeader>
+        <CardHeader><CardTitle class="text-lg flex items-center gap-2"><FileCheck2 class="w-4 h-4" /> 2. Documents you already have</CardTitle></CardHeader>
         <CardContent>
           <div class="grid sm:grid-cols-2 gap-2">
             <button
@@ -342,7 +356,11 @@ const grouped = computed(() => {
               :class="ownedDocs.includes(d.id) ? 'border-primary bg-primary/5' : 'hover:bg-muted hover:border-foreground/40'"
             >
               <component :is="ownedDocs.includes(d.id) ? CheckCircle2 : FileCheck2" class="w-4 h-4 mt-0.5 shrink-0" :class="ownedDocs.includes(d.id) ? 'text-green-600' : 'text-muted-foreground'" />
-              <span>{{ d.label }}</span>
+              <span>
+                <span class="font-medium">{{ d.label }}</span>
+                <span v-if="DOCS_INFO[d.id]" class="block text-xs text-muted-foreground mt-0.5">{{ DOCS_INFO[d.id] }}</span>
+                <span class="block text-xs mt-1 text-muted-foreground">Covers: {{ d.satisfies.map(k => industry.fields.find(f => f.key === k)?.label).filter(Boolean).join(' · ') }}</span>
+              </span>
             </button>
           </div>
           <div class="mt-4 pt-4 border-t flex items-center justify-between">
