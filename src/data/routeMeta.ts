@@ -391,6 +391,46 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Parse DMARC TXT records in your browser: policy (p/sp), rua/ruf reporting, pct, adkim/aspf alignment, RFC 7489 validation and misconfiguration warnings. Optional DNS lookup. 100% client-side.',
     keywords: 'dmarc parser, dmarc record checker, dmarc validator, dmarc lookup, parse dmarc txt record, dmarc policy, rua ruf, email authentication, spf dkim dmarc',
   },
+  'battery-passport-checklist': {
+    title: 'EU Battery Passport Checklist — 71 Data Points | Formatho',
+    description: 'All mandatory data points (Annex XIII, Reg 2023/1542): EV 46, LMT 49, industrial 32. Interactive readiness tracker before 18 Feb 2027.',
+    keywords: 'battery passport checklist, eu battery regulation, annex xiii, ev battery passport',
+  },
+  'dpp-json-validator': {
+    title: 'DPP JSON Validator — Digital Product Passport | Formatho',
+    description: 'Validate a DPP payload: required fields, battery data, operator, data carrier. Free, client-side.',
+    keywords: 'dpp validator, validate passport json, dpp schema check',
+  },
+  'dpp-resolver-tester': {
+    title: 'DPP Resolver Tester — QR Verification | Formatho',
+    description: 'Test the full chain: QR URL to resolver to passport. Verify fields, CORS, JSON structure.',
+    keywords: 'dpp resolver test, passport qr verify, resolver conformance',
+  },
+  'espr-timeline': {
+    title: 'ESPR DPP Timeline — Delegated Acts | Formatho',
+    description: 'Every ESPR deadline on one page: battery passport Feb 2027, textiles 2027, electronics 2028.',
+    keywords: 'espr timeline, dpp deadline, delegated acts schedule',
+  },
+  'supplier-data-request': {
+    title: 'DPP Supplier Data Request Generator | Formatho',
+    description: 'Generate a structured data request for suppliers: DPP fields, formats, deadlines. CSV/JSON export.',
+    keywords: 'dpp supplier request, supply chain data template',
+  },
+  'textile-dpp-builder': {
+    title: 'Textile DPP Builder — EU Passport | Formatho',
+    description: 'Textile passport: fiber composition, recycled content, chemicals, care. Free, client-side.',
+    keywords: 'textile dpp, clothing passport, apparel dpp builder',
+  },
+  'battery-carbon-footprint': {
+    title: 'Battery Carbon Footprint | Formatho',
+    description: 'Structure the carbon footprint declaration: kg CO2e/kWh per EU methodology. Free.',
+    keywords: 'battery carbon footprint, ev battery co2, battery lca',
+  },
+  'ppwr-declaration': {
+    title: 'PPWR Declaration of Conformity | Formatho',
+    description: 'Generate a packaging DoC per PPWR 2025/40 Annex VIII. Free, client-side.',
+    keywords: 'ppwr declaration, packaging doc, eu packaging regulation',
+  },
   'dpp-playground': {
     title: 'DPP Playground — Digital Product Passport Builder | Formatho',
     description: 'Draft an EU Digital Product Passport: pick your industry, list documents you have, see exactly what is missing before the 2027 deadlines. Free, client-side.',

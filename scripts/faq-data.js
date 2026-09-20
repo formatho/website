@@ -717,6 +717,70 @@ export const toolSEOContent = {
       'Read the readiness tab for the regulation timeline and preparation checklist.'
     ]
   },
+  '/tools/battery-passport-checklist': {
+    intro: [
+      'The EU Battery Regulation requires a passport from 18 Feb 2027 for EV, LMT, and industrial batteries. Annex XIII defines 46-49 data points by type covering identification, chemistry, carbon, supply chain, and end of life. This checklist makes them trackable with export.'
+    ],
+    howTo: [
+      'Pick battery type, check off fields, export the gap report.'
+    ]
+  },
+  '/tools/dpp-json-validator': {
+    intro: [
+      'A DPP is only useful if the data is correct. This validator checks a JSON payload: identification, operator, battery fields, conformity, circularity, data carrier — reporting present, missing, and invalid fields without uploading anything.'
+    ],
+    howTo: [
+      'Paste JSON, validate, review field results, fix gaps.'
+    ]
+  },
+  '/tools/dpp-resolver-tester': {
+    intro: [
+      'Tests the full chain: QR URL, resolver, passport data. Fetches the URL and verifies required ESPR fields, CORS, and JSON structure — surfacing the most common deployment gaps.'
+    ],
+    howTo: [
+      'Paste QR URL, test, review field checks and raw response.'
+    ]
+  },
+  '/tools/espr-timeline': {
+    intro: [
+      'Requirements arrive product-group by product-group through delegated acts. This timeline shows every milestone: ESPR in force, working plan, delegated acts, battery passport Feb 2027, textiles 2027, electronics 2028, construction 2029.'
+    ],
+    howTo: [
+      'Browse timeline, filter by category, click through to tools.'
+    ]
+  },
+  '/tools/supplier-data-request': {
+    intro: [
+      'Getting data from your supply chain is the hardest part of DPP compliance. This generates a structured request: fields, formats, deadlines — exported as CSV or JSON suppliers can fill in.'
+    ],
+    howTo: [
+      'Enter supplier info, select fields, export request, send to supplier.'
+    ]
+  },
+  '/tools/textile-dpp-builder': {
+    intro: [
+      'Textiles are the first ESPR DPP category. Builder covers fiber composition, recycled content, origin, chemical treatments, care, durability, carbon and water footprint. Exports JSON.'
+    ],
+    howTo: [
+      'Fill in fields, review JSON, copy or download.'
+    ]
+  },
+  '/tools/battery-carbon-footprint': {
+    intro: [
+      'Carbon footprint is mandatory in the battery passport, expressed as kg CO2e/kWh. Structures lifecycle stages, computes per-kWh value and performance class, formats per EU methodology.'
+    ],
+    howTo: [
+      'Enter lifecycle emissions, get declaration with performance class.'
+    ]
+  },
+  '/tools/ppwr-declaration': {
+    intro: [
+      'PPWR (EU) 2025/40 requires a Declaration of Conformity for packaging. Generator structures it per Annex VIII with manufacturer, packaging type, standards, recyclability. Live preview.'
+    ],
+    howTo: [
+      'Fill in details, preview, copy or download the declaration.'
+    ]
+  },
   '/tools/dpp-playground': {
     intro: [
       'The EU Digital Product Passport is coming: Regulation 2024/1781 requires physical products sold in the EU to carry a structured data record — identification, composition, sustainability parameters — accessible through a data carrier (expected QR code). The first delegated acts target batteries (mandatory from 18 February 2027 for EV, LMT, and >2kWh industrial) and textiles, with other categories following in the working plan.',

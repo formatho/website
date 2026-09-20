@@ -601,6 +601,54 @@ export const routes = [
         meta: routeMeta['bom-cost-rollup']
       },
       {
+        path: '/tools/battery-passport-checklist',
+        name: 'battery-passport-checklist',
+        component: () => import('@/views/BatteryPassportChecklistView.vue'),
+        meta: routeMeta['battery-passport-checklist']
+      },
+      {
+        path: '/tools/dpp-json-validator',
+        name: 'dpp-json-validator',
+        component: () => import('@/views/DppJsonValidatorView.vue'),
+        meta: routeMeta['dpp-json-validator']
+      },
+      {
+        path: '/tools/dpp-resolver-tester',
+        name: 'dpp-resolver-tester',
+        component: () => import('@/views/DppResolverTesterView.vue'),
+        meta: routeMeta['dpp-resolver-tester']
+      },
+      {
+        path: '/tools/espr-timeline',
+        name: 'espr-timeline',
+        component: () => import('@/views/EsprTimelineView.vue'),
+        meta: routeMeta['espr-timeline']
+      },
+      {
+        path: '/tools/supplier-data-request',
+        name: 'supplier-data-request',
+        component: () => import('@/views/SupplierDataRequestView.vue'),
+        meta: routeMeta['supplier-data-request']
+      },
+      {
+        path: '/tools/textile-dpp-builder',
+        name: 'textile-dpp-builder',
+        component: () => import('@/views/TextileDppBuilderView.vue'),
+        meta: routeMeta['textile-dpp-builder']
+      },
+      {
+        path: '/tools/battery-carbon-footprint',
+        name: 'battery-carbon-footprint',
+        component: () => import('@/views/BatteryCarbonFootprintView.vue'),
+        meta: routeMeta['battery-carbon-footprint']
+      },
+      {
+        path: '/tools/ppwr-declaration',
+        name: 'ppwr-declaration',
+        component: () => import('@/views/PpwrDeclarationView.vue'),
+        meta: routeMeta['ppwr-declaration']
+      },
+      {
         path: '/tools/part-number-generator',
         name: 'part-number-generator',
         component: () => import('@/views/PartNumberGeneratorView.vue'),
