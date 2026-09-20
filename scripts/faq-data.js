@@ -717,6 +717,18 @@ export const toolSEOContent = {
       'Read the readiness tab for the regulation timeline and preparation checklist.'
     ]
   },
+  '/tools/dpp-playground': {
+    intro: [
+      'The EU Digital Product Passport is coming: Regulation 2024/1781 requires physical products sold in the EU to carry a structured data record — identification, composition, sustainability parameters — accessible through a data carrier (expected QR code). The first delegated acts target batteries (mandatory from 18 February 2027 for EV, LMT, and >2kWh industrial) and textiles, with other categories following in the working plan.',
+      'This playground is for exporters and product teams who need to prepare before the deadlines: pick your industry, list the documents and data you already have (test reports, declarations, material composition), and the tool identifies exactly which passport fields are covered and which are gaps. Large retailers are already requesting this data from suppliers ahead of the legal requirement — the playground shows you where you stand. Everything runs client-side: your product data never uploads.'
+    ],
+    howTo: [
+      'Pick your industry — textile, battery, electronics, construction, tyres, or furniture.',
+      'List the documents you already have (test reports, certificates, material declarations).',
+      'See the gap analysis: which passport fields are covered and what is missing.',
+      'Export the draft passport data for your compliance team.'
+    ]
+  },
   '/tools/jev-playground': {
     intro: [
       'Jev is TypeSafe AI\'s System One model: state and typed questions in, probability distributions out — no text generation, no parsing, no schema hallucination. Building requests by hand means getting three things right at once: the state object, the question instructions, and the per-primitive criteria shapes (a map of options for Choice, an ordered list of concrete levels for Score, optional yes-criteria for Noul).',

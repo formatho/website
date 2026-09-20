@@ -393,7 +393,7 @@ export const routeMeta: Record<string, RouteMeta> = {
   },
   'dpp-playground': {
     title: 'DPP Playground — Digital Product Passport Builder | Formatho',
-    description: 'Draft an EU Digital Product Passport for your export product: industry requirements (textile, battery, electronics, tyres), the documents you already have, and exactly what is missing. 100% client-side.',
+    description: 'Draft an EU Digital Product Passport: pick your industry, list documents you have, see exactly what is missing before the 2027 deadlines. Free, client-side.',
     keywords: 'digital product passport, dpp tool, dpp builder, eu dpp regulation, espr, battery passport, textile passport, export eu compliance',
   },
   'saml-decoder': {
