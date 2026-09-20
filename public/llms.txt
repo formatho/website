@@ -178,6 +178,14 @@ Category hub pages group every tool with a one-line description each:
 - [SOC 2 Readiness Checklist]: https://formatho.com/tools/soc2-checklist — Interactive checklist covering all 5 Trust Service Criteria with linked tools for each control.
 - [BOM Diff Tool]: https://formatho.com/tools/bom-diff — Compare two Bills of Materials — see added, removed, and changed parts with quantity differences.
 - [BOM Cost Roll-up]: https://formatho.com/tools/bom-cost-rollup — Calculate total cost of multi-level BOMs. Handles indented assemblies, quantities, and unit costs.
+- [Battery Passport Checklist]: https://formatho.com/tools/battery-passport-checklist — Interactive checklist for all EU Battery Passport data points (Annex XIII, Regulation 2023/1542): EV (46), LMT (49), industrial >2kWh (32). Track readiness before 18 Feb 2027. Free, client-side.
+- [DPP JSON Validator]: https://formatho.com/tools/dpp-json-validator — Validate a Digital Product Passport JSON payload: required fields, battery data, operator, data carrier. Free, client-side.
+- [DPP Resolver Tester]: https://formatho.com/tools/dpp-resolver-tester — Test a DPP resolver: paste the QR URL, fetch the passport, verify required fields present. Tests the full scan→resolve→verify chain. Free.
+- [ESPR DPP Timeline]: https://formatho.com/tools/espr-timeline — Interactive timeline of EU ESPR delegated acts and DPP deadlines: battery passport Feb 2027, textiles, electronics, construction. Free.
+- [DPP Supplier Data Request]: https://formatho.com/tools/supplier-data-request — Generate a structured data request for suppliers: which DPP fields you need, in what format, with deadlines. Export CSV or JSON. Free, client-side.
+- [Textile DPP Builder]: https://formatho.com/tools/textile-dpp-builder — Build a textile-specific Digital Product Passport: fiber composition, recycled content, chemical treatments, care. Free, client-side.
+- [Battery Carbon Footprint Declaration]: https://formatho.com/tools/battery-carbon-footprint — Build the carbon footprint declaration for an EU battery passport: cradle-to-gate kg CO₂e/kWh per the delegated regulation. Free, client-side.
+- [PPWR Declaration of Conformity]: https://formatho.com/tools/ppwr-declaration — Generate an EU Declaration of Conformity for packaging under PPWR Regulation 2025/40, Annex VIII. Free, client-side.
 - [Part Number Generator]: https://formatho.com/tools/part-number-generator — Generate intelligent part numbers with configurable category/type/sequence codes. Batch generation.
 - [ISO 20022 Validator]: https://formatho.com/tools/iso20022-validator — Validate ISO 20022 payment messages (pain.001, pacs.008, camt.053). Auto-detects type, checks required fields, pretty-prints XML.
 - [pain.001 Builder]: https://formatho.com/tools/pain001-builder — Build ISO 20022 Customer Credit Transfer Initiation XML visually — debtor, creditor, amount, SEPA service level, purpose codes.

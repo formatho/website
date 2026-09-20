@@ -1031,6 +1031,46 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://formatho.com/tools/battery-passport-checklist</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/dpp-json-validator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/dpp-resolver-tester</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/espr-timeline</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/supplier-data-request</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/textile-dpp-builder</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/battery-carbon-footprint</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/ppwr-declaration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/tools/part-number-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
