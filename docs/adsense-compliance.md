@@ -19,7 +19,7 @@ eligibility. Keep this file updated when facts change.
   bot farms, or traffic-exchange mechanisms exist anywhere in the codebase.
 - Acquisition channels in use: organic search, the tool directory listings
   (MCP Registry), and product/social presence (X: @heyformatho, LinkedIn, GitHub).
-- Analytics is Umami (cookieless) plus Google Analytics 4 (G-516615571,
+- Analytics is Umami (cookieless) plus Google Analytics 4 (G-ZJ1GXW78TW,
   Consent Mode v2 — analytics cookies denied by default in EEA/UK/CH until
   banner consent). No traffic is purchased or artificially generated; no
   scripts exist that could simulate visits.
