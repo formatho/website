@@ -42,7 +42,7 @@ useSEO({
             events (which pages are visited, which tools are used). No cookies, no personal data, no
             cross-site tracking, no profiling.
             <br><br>
-            <strong>Analytics — Google Analytics 4 (G-516615571):</strong> sets first-party cookies
+            <strong>Analytics — Google Analytics 4 (G-ZJ1GXW78TW):</strong> sets first-party cookies
             (<code class="text-xs">_ga</code>, <code class="text-xs">_ga_*</code>) to distinguish visitors and
             sessions, and reports page views, referrers, and interaction events to Google. It is loaded with
             Google Consent Mode v2: in the <strong>EEA, UK, and Switzerland</strong> these cookies are not set
