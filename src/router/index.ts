@@ -529,6 +529,12 @@ export const routes = [
         meta: routeMeta['jev-suitability']
       },
       {
+        path: '/tools/dpp-playground',
+        name: 'dpp-playground',
+        component: () => import(/* webpackPrefetch: true */ '../views/DppPlaygroundView.vue'),
+        meta: routeMeta['dpp-playground']
+      },
+      {
         path: '/tools/gs1-digital-link',
         name: 'gs1-digital-link',
         component: () => import('@/views/Gs1DigitalLinkView.vue'),

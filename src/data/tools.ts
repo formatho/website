@@ -197,6 +197,7 @@ export const tools: ToolCategory[] = [
       { name: 'LLM JSON Validator', description: 'Extract and validate JSON from any AI model output — handles markdown fences, prose, trailing commas, smart quotes.', route: '/tools/llm-json-validator', iconName: 'FileJson' },
       { name: 'Jev Playground', description: 'Build Jev (TypeSafe System One) requests visually: state plus Noul, Choice, and Score questions. Mock responses with probability distributions, Python SDK code generation. Free, client-side, no API key.', route: '/tools/jev-playground', iconName: 'Zap' },
       { name: 'Jev Suitability Test', description: 'Is your task Jev-shaped? Six criteria from System One guidance: judgement, bounded, atomic, context-contained, fast-human, machine-consumed — scored with a verdict and decomposition advice.', route: '/tools/jev-suitability', iconName: 'Gauge' },
+      { name: 'DPP Playground', description: 'Build a draft EU Digital Product Passport: pick your industry (textile, battery, electronics...), list the documents you have, and see exactly what information is missing. 100% client-side.', route: '/tools/dpp-playground', iconName: 'Package' },
       { name: 'LLM Token Counter', description: 'Count tokens for GPT-4o, GPT-4, o1, and legacy models locally. Compare across tokenizers, estimate API costs. No API calls.', route: '/tools/local-token-counter', iconName: 'Hash' },
       { name: 'Meta Tag Generator', description: 'Generate HTML meta tags for SEO.', route: '/tools/meta-tag-generator', iconName: 'Tag' },
     ]

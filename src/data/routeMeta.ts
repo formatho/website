@@ -391,6 +391,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Parse DMARC TXT records in your browser: policy (p/sp), rua/ruf reporting, pct, adkim/aspf alignment, RFC 7489 validation and misconfiguration warnings. Optional DNS lookup. 100% client-side.',
     keywords: 'dmarc parser, dmarc record checker, dmarc validator, dmarc lookup, parse dmarc txt record, dmarc policy, rua ruf, email authentication, spf dkim dmarc',
   },
+  'dpp-playground': {
+    title: 'DPP Playground — Digital Product Passport Builder | Formatho',
+    description: 'Draft an EU Digital Product Passport for your export product: industry requirements (textile, battery, electronics, tyres), the documents you already have, and exactly what is missing. 100% client-side.',
+    keywords: 'digital product passport, dpp tool, dpp builder, eu dpp regulation, espr, battery passport, textile passport, export eu compliance',
+  },
   'saml-decoder': {
     title: 'SAML Decoder — Inspect SSO Responses Offline | Formatho',
     description: 'Decode base64 SAML requests and responses in your browser — attributes, conditions, signature elements. IdP debugging without leaking assertions to a.',
