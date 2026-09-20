@@ -305,7 +305,7 @@ const grouped = computed(() => {
             :key="ind.id"
             @click="industryId = ind.id; step = 2"
             class="p-4 rounded-xl border text-left transition-colors"
-            :class="industryId === ind.id ? 'border-primary bg-primary/5' : 'hover:border-foreground/40'"
+            :class="industryId === ind.id ? 'border-primary bg-primary/5' : 'hover:bg-muted hover:border-foreground/40'"
           >
             <div class="font-semibold text-sm">{{ ind.name }}</div>
             <div class="text-xs text-muted-foreground mt-1">{{ ind.timing }}</div>
@@ -339,7 +339,7 @@ const grouped = computed(() => {
               :key="d.id"
               @click="toggleDoc(d.id)"
               class="flex items-start gap-2 p-3 rounded-lg border text-left text-sm transition-colors"
-              :class="ownedDocs.includes(d.id) ? 'border-primary bg-primary/5' : 'hover:border-foreground/40'"
+              :class="ownedDocs.includes(d.id) ? 'border-primary bg-primary/5' : 'hover:bg-muted hover:border-foreground/40'"
             >
               <component :is="ownedDocs.includes(d.id) ? CheckCircle2 : FileCheck2" class="w-4 h-4 mt-0.5 shrink-0" :class="ownedDocs.includes(d.id) ? 'text-green-600' : 'text-muted-foreground'" />
               <span>{{ d.label }}</span>
