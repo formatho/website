@@ -166,6 +166,12 @@ const catSeo = {
     title: `Network & Web Tools — Subnet & URL | Formatho`,
     desc: 'IPv4 subnet calculator, MAC lookup, IPv6 ULA generator, URL encoder/parser, HTTP status codes, QR generator. Free, private, client-side.',
     kw: 'subnet calculator, ipv4 subnetting, mac address lookup, url encoder, http status codes, qr code generator, network tools online'
+  },
+  compliance: {
+    name: 'Compliance & Standards',
+    title: `Compliance & Standards Tools — DPP, ISO 20022, SOC 2 | Formatho`,
+    desc: 'EU Digital Product Passport (ESPR), ISO 20022 payments, GS1 supply chain, SOC 2 readiness, and PLM/BOM tools. Free, private, client-side.',
+    kw: 'compliance tools, dpp builder, espr passport, iso 20022 validator, pain.001 builder, gs1 digital link, soc 2 checklist, bom diff, bom cost rollup, part number generator, eu regulation tools'
   }
 }
 

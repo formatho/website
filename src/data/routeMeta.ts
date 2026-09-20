@@ -892,6 +892,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     title: 'A/B Test Dashboard - Formatho Admin',
     description: 'Monitor and analyze A/B test results for landing page optimization Free, private, and 100% client-side in your browser. No signup, no upload.',
   },
+  'category-compliance': {
+    title: 'Compliance & Standards Tools — DPP, ISO 20022, SOC 2 | Formatho',
+    description: 'EU Digital Product Passport, ISO 20022 payments, GS1 supply chain, SOC 2 readiness, and BOM tools. Regulatory compliance — free, private, client-side.',
+    keywords: 'compliance tools, dpp builder, espr passport, iso 20022, pain.001, gs1 digital link, soc 2 checklist, bom tools, eu regulations',
+  },
   'category-web3': {
     title: 'Web3 & Blockchain Tools - Secure MCP for AI | Formatho',
     description: 'EVM contract reader, vanity address generator, multi-chain readers for Solana, Polkadot, Cardano, Cosmos. Keccak-256 hasher, ABI tools, ENS calculator.',

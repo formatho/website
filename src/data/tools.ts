@@ -83,7 +83,6 @@ export const tools: ToolCategory[] = [
     items: [
       { name: 'TLS Certificate Checker', description: 'Check TLS/SSL certificate expiry, issuer, and security configuration. Paste openssl output for instant analysis.', route: '/tools/tls-checker', iconName: 'Lock' },
       { name: 'Prompt Injection Tester', description: 'Scan prompts and untrusted content for injection patterns: overrides, exfiltration commands, hidden Unicode, encoded payloads. Includes attack payloads and the Lethal Trifecta checklist.', route: '/tools/prompt-injection-tester', iconName: 'ShieldAlert' },
-      { name: 'SOC 2 Readiness Checklist', description: 'Interactive checklist covering all 5 Trust Service Criteria with linked tools for each control.', route: '/tools/soc2-checklist', iconName: 'ClipboardCheck' },
       { name: 'Security Policy Generator', description: 'Generate password, access control, and incident response policies for SOC 2 compliance.', route: '/tools/policy-generator', iconName: 'FileText' },
       { name: 'Security Headers Analyzer', description: 'Check HSTS, CSP, X-Frame-Options and more on any URL. Graded A-F with fix recommendations.', route: '/tools/security-headers', iconName: 'ShieldCheck' },
       { name: 'CSP Generator', description: 'Build Content-Security-Policy headers visually. Configure directives and copy the header.', route: '/tools/csp-generator', iconName: 'Shield' },
@@ -104,9 +103,6 @@ export const tools: ToolCategory[] = [
       { name: 'HMAC Generator', description: 'Generate HMAC hash codes with various algorithms.', route: '/tools/hmac-generator', iconName: 'Hash' },
       { name: 'X25519 Key Exchange', description: 'Generate X25519 keypairs and perform ECDH key exchange. See how two parties derive the same shared secret without transmitting it.', route: '/tools/x25519-demo', iconName: 'ArrowRightLeft' },
       { name: 'CTR Mode Visualizer', description: 'Interactive counter mode encryption demo: watch keystream blocks XOR with plaintext. Block-by-block breakdown with nonce/counter visualization.', route: '/tools/ctr-mode', iconName: 'Binary' },
-      { name: 'BOM Diff Tool', description: 'Compare two Bills of Materials — see added, removed, and changed parts with quantity differences.', route: '/tools/bom-diff', iconName: 'GitCompare' },
-      { name: 'BOM Cost Roll-up', description: 'Calculate total cost of multi-level BOMs. Handles indented assemblies, quantities, and unit costs.', route: '/tools/bom-cost-rollup', iconName: 'Calculator' },
-      { name: 'Part Number Generator', description: 'Generate intelligent part numbers with configurable category/type/sequence codes. Batch generation.', route: '/tools/part-number-generator', iconName: 'Hash' },
       { name: 'Shamir Secret Sharing', description: 'Split secrets into N shares where any threshold K reconstructs. Visual polynomial interpolation over GF(257). Client-side.', route: '/tools/shamir-splitter', iconName: 'Split' },
       { name: 'MPC Demo', description: 'Interactive demo of secure multi-party computation: split numbers into shares, compute on encrypted data, reconstruct without revealing inputs.', route: '/tools/mpc-demo', iconName: 'Cpu' },
       { name: 'Pedersen Commitment', description: 'Create Pedersen commitments over secp256k1: bind to a value without revealing it. Hiding and binding properties. Client-side.', route: '/tools/pedersen-commitment', iconName: 'Lock' },
@@ -133,10 +129,6 @@ export const tools: ToolCategory[] = [
       { name: 'JSON <> CSV', description: 'Convert JSON to CSV and CSV to JSON format instantly.', route: '/tools/json-csv', iconName: 'FileSpreadsheet' },
       { name: 'JSON Diff', description: 'Compare two JSON objects and see differences.', route: '/tools/json-diff', iconName: 'GitCompare' },
       { name: 'CSV Row & Column Counter', description: 'Count rows, columns, and cells in CSV data. Handles quoted fields, auto-detects delimiter, shows column types and empty values.', route: '/tools/csv-counter', iconName: 'Table' },
-      { name: 'ISO 20022 Validator', description: 'Validate ISO 20022 payment messages (pain.001, pacs.008, camt.053). Auto-detects type, checks required fields, pretty-prints XML.', route: '/tools/iso20022-validator', iconName: 'FileCode' },
-      { name: 'pain.001 Builder', description: 'Build ISO 20022 Customer Credit Transfer Initiation XML visually — debtor, creditor, amount, SEPA service level, purpose codes.', route: '/tools/pain001-builder', iconName: 'Zap' },
-      { name: 'GS1 Digital Link Builder', description: 'Build and decode GS1 Digital Link URLs: GTIN, serial, lot, expiry into a web URL and QR code. Check-digit and date validation, element-string conversion. Free, client-side.', route: '/tools/gs1-digital-link', iconName: 'Link2' },
-      { name: 'ESPR Digital Product Passport', description: 'Build and validate a Digital Product Passport prototype for the EU Ecodesign Regulation 2024/1781: identification, Article 7 sustainability parameters, operator data, QR data carrier, JSON export. Client-side.', route: '/tools/espr-passport', iconName: 'Leaf' },
       { name: 'XML Formatter', description: 'Format and prettify XML documents.', route: '/tools/xml-formatter', iconName: 'FileCode' },
       { name: 'XML ↔ JSON', description: 'Bi-directional XML to JSON converter with real-time conversion and clipboard support.', route: '/tools/xml-json', iconName: 'Code' },
       { name: 'YAML Linter', description: 'Validate and lint YAML code.', route: '/tools/yaml-lint', iconName: 'CheckCircle' },
@@ -197,7 +189,6 @@ export const tools: ToolCategory[] = [
       { name: 'LLM JSON Validator', description: 'Extract and validate JSON from any AI model output — handles markdown fences, prose, trailing commas, smart quotes.', route: '/tools/llm-json-validator', iconName: 'FileJson' },
       { name: 'Jev Playground', description: 'Build Jev (TypeSafe System One) requests visually: state plus Noul, Choice, and Score questions. Mock responses with probability distributions, Python SDK code generation. Free, client-side, no API key.', route: '/tools/jev-playground', iconName: 'Zap' },
       { name: 'Jev Suitability Test', description: 'Is your task Jev-shaped? Six criteria from System One guidance: judgement, bounded, atomic, context-contained, fast-human, machine-consumed — scored with a verdict and decomposition advice.', route: '/tools/jev-suitability', iconName: 'Gauge' },
-      { name: 'DPP Playground', description: 'Build a draft EU Digital Product Passport: pick your industry (textile, battery, electronics...), list the documents you have, and see exactly what information is missing. 100% client-side.', route: '/tools/dpp-playground', iconName: 'Package' },
       { name: 'LLM Token Counter', description: 'Count tokens for GPT-4o, GPT-4, o1, and legacy models locally. Compare across tokenizers, estimate API costs. No API calls.', route: '/tools/local-token-counter', iconName: 'Hash' },
       { name: 'Meta Tag Generator', description: 'Generate HTML meta tags for SEO.', route: '/tools/meta-tag-generator', iconName: 'Tag' },
     ]
@@ -255,6 +246,24 @@ export const tools: ToolCategory[] = [
       { name: 'WiFi QR Code', description: 'Generate QR codes for WiFi network credentials.', route: '/tools/wifi-qr-code-generator', iconName: 'Wifi' },
       { name: 'Random Port Generator', description: 'Generate random port numbers for development.', route: '/tools/random-port-generator', iconName: 'Dices' },
       { name: 'Outlook Safelink Decoder', description: 'safelink-decoder - free, privacy-first, and 100% client-side.', route: '/tools/safelink-decoder', iconName: 'Link2' },
+    ]
+  },
+  {
+    category: 'Compliance & Standards',
+    slug: 'compliance',
+    route: '/category/compliance',
+    icon: '📋',
+    blurb: 'EU Digital Product Passport (ESPR), ISO 20022 payments, GS1 supply chain, SOC 2, and PLM/BOM tools. Regulatory readiness and product compliance — free, private, client-side.',
+    items: [
+      { name: 'SOC 2 Readiness Checklist', description: 'Interactive checklist covering all 5 Trust Service Criteria with linked tools for each control.', route: '/tools/soc2-checklist', iconName: 'ClipboardCheck' },
+      { name: 'BOM Diff Tool', description: 'Compare two Bills of Materials — see added, removed, and changed parts with quantity differences.', route: '/tools/bom-diff', iconName: 'GitCompare' },
+      { name: 'BOM Cost Roll-up', description: 'Calculate total cost of multi-level BOMs. Handles indented assemblies, quantities, and unit costs.', route: '/tools/bom-cost-rollup', iconName: 'Calculator' },
+      { name: 'Part Number Generator', description: 'Generate intelligent part numbers with configurable category/type/sequence codes. Batch generation.', route: '/tools/part-number-generator', iconName: 'Hash' },
+      { name: 'ISO 20022 Validator', description: 'Validate ISO 20022 payment messages (pain.001, pacs.008, camt.053). Auto-detects type, checks required fields, pretty-prints XML.', route: '/tools/iso20022-validator', iconName: 'FileCode' },
+      { name: 'pain.001 Builder', description: 'Build ISO 20022 Customer Credit Transfer Initiation XML visually — debtor, creditor, amount, SEPA service level, purpose codes.', route: '/tools/pain001-builder', iconName: 'Zap' },
+      { name: 'GS1 Digital Link Builder', description: 'Build and decode GS1 Digital Link URLs: GTIN, serial, lot, expiry into a web URL and QR code. Check-digit and date validation, element-string conversion. Free, client-side.', route: '/tools/gs1-digital-link', iconName: 'Link2' },
+      { name: 'ESPR Digital Product Passport', description: 'Build and validate a Digital Product Passport prototype for the EU Ecodesign Regulation 2024/1781: identification, Article 7 sustainability parameters, operator data, QR data carrier, JSON export. Client-side.', route: '/tools/espr-passport', iconName: 'Leaf' },
+      { name: 'DPP Playground', description: 'Build a draft EU Digital Product Passport: pick your industry (textile, battery, electronics...), list the documents you have, and see exactly what information is missing. 100% client-side.', route: '/tools/dpp-playground', iconName: 'Package' },
     ]
   },
 ]

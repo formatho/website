@@ -1226,6 +1226,12 @@ export const routes = [
         meta: routeMeta['category-converters']
       },
       {
+        path: '/category/compliance',
+        name: 'category-compliance',
+        component: () => import('@/views/CategoryView.vue'),
+        meta: routeMeta['category-compliance']
+      },
+      {
         path: '/category/network',
         name: 'category-network',
         component: () => import('../views/CategoryView.vue'),
