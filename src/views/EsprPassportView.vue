@@ -296,7 +296,7 @@ function downloadJson() {
             </div>
             <p v-else class="text-xs text-muted-foreground py-8 text-center">Enter a valid HTTPS resolver URL to render the data carrier.</p>
             <p class="text-[10px] text-muted-foreground leading-relaxed">
-              ESPR requires a data carrier physically on the product (Art. 8(4)); QR codes are the expected default. The QR encodes the resolver URL — the passport JSON is served from your infrastructure at that address. Pair it with the <RouterLink to="/tools/gs1-digital-link" class="text-primary hover:underline">GS1 Digital Link builder</RouterLink> if you identify products with GS1 keys.
+              ESPR requires a data carrier physically on the product (Art. 8(4)); QR codes are the expected default. The QR encodes the resolver URL — the passport JSON is served from your infrastructure at that address. Pair it with the <RouterLink to="/tools/gs1-digital-link" class="text-primary hover:underline">GS1 Digital Link builder</RouterLink> if you identify products with GS1 keys, and check the <RouterLink to="/tools/dpp-playground" class="text-primary hover:underline">DPP Playground</RouterLink> for an industry-specific gap analysis of your existing documents.
             </p>
           </CardContent>
         </Card>

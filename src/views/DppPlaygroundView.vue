@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router'
 import { ref, computed } from 'vue'
 import { Copy, Check, Package, Factory, FileCheck2, AlertTriangle, CheckCircle2, Download, ArrowRight, Info } from 'lucide-vue-next'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -438,6 +439,11 @@ const grouped = computed(() => {
         <p>
           Exporters to the EU will need this data even before the legal deadlines: large retailers already request it in
           supplier onboarding. This playground turns the regulation into a concrete checklist for your actual product.
+        </p>
+        <p class="text-xs text-muted-foreground">
+          Related: fill the actual passport fields with the <RouterLink to="/tools/espr-passport" class="text-primary underline underline-offset-2">ESPR Digital Product Passport builder</RouterLink>,
+          encode product identifiers with the <RouterLink to="/tools/gs1-digital-link" class="text-primary underline underline-offset-2">GS1 Digital Link builder</RouterLink>,
+          or validate payment messages with the <RouterLink to="/tools/iso20022-validator" class="text-primary underline underline-offset-2">ISO 20022 validator</RouterLink>.
         </p>
       </CardContent>
     </Card>

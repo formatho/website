@@ -78,6 +78,13 @@ function parseToolRoutes() {
 // Static pages
 const staticRoutes = [
   { path: '/tools', priority: '1.0', changefreq: 'weekly' },
+  { path: '/category/web3', priority: '0.8', changefreq: 'weekly' },
+  { path: '/category/security', priority: '0.8', changefreq: 'weekly' },
+  { path: '/category/data-formats', priority: '0.8', changefreq: 'weekly' },
+  { path: '/category/developer', priority: '0.8', changefreq: 'weekly' },
+  { path: '/category/converters', priority: '0.8', changefreq: 'weekly' },
+  { path: '/category/network', priority: '0.8', changefreq: 'weekly' },
+  { path: '/category/compliance', priority: '0.8', changefreq: 'weekly' },
   { path: '/about', priority: '0.9', changefreq: 'monthly' },
   { path: '/runtime', priority: '0.9', changefreq: 'weekly' },
   { path: '/blogs', priority: '0.9', changefreq: 'weekly' },

@@ -82,6 +82,11 @@ const CAT_SEO: Record<string, { title: string; desc: string; kw: string }> = {
     desc: 'Unix timestamp, date-time, number base, color, case, temperature converters. Math, ETA, percentage calculators. Free, instant, client-side.',
     kw: 'unit converter, timestamp converter, number base converter, color converter, case converter, percentage calculator, free online converters'
   },
+  'compliance': {
+    title: n => `Compliance & Standards Tools — DPP, ISO 20022, SOC 2 | Formatho`,
+    desc: 'EU Digital Product Passport (ESPR), ISO 20022 payments, GS1 supply chain, SOC 2 readiness, and PLM/BOM tools. Free, private, client-side.',
+    kw: 'compliance tools, dpp builder, espr passport, iso 20022 validator, pain.001 builder, gs1 digital link, soc 2 checklist, bom diff, bom cost rollup, part number generator, eu regulation tools'
+  },
   'network': {
     title: `Network & Web Tools — Subnet, URL & HTTP Utilities | Formatho`,
     desc: 'IPv4 subnet calculator, MAC lookup, IPv6 ULA generator, URL encoder/parser, HTTP status codes, QR generator. Free, private, client-side.',
