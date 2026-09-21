@@ -194,7 +194,10 @@ function generateMock() {
 watch(requestValid, (v) => { if (v) generateMock() }, { immediate: true })
 
 // ─── Live API mode (your key, direct to Jev — never touches our servers) ───
-const JEV_ENDPOINT = 'https://api.typesafe.ai/v1/systemone'
+// Direct calls to api.typesafe.ai fail CORS (no Access-Control-Allow-Origin).
+// Our proxy adds the header and passes through — the key still goes only to
+// TypeSafe's servers, we just relay it.
+const JEV_ENDPOINT = '/api/jev/systemone'
 const apiKey = ref('')
 const showKeyInput = ref(false)
 const liveLoading = ref(false)
@@ -448,7 +451,7 @@ function fillSample() {
           <CardContent class="pt-5 space-y-3">
             <div class="flex flex-wrap items-center justify-between gap-3">
               <p class="text-xs text-muted-foreground max-w-lg">
-                <strong class="text-foreground">Real Jev responses.</strong> Your API key is stored in this browser's localStorage only and sent directly to <code class="font-mono text-xs">api.typesafe.ai</code> — never to Formatho servers.
+                <strong class="text-foreground">Real Jev responses.</strong> Your API key is stored in this browser's localStorage only and forwarded directly to the Jev API — Formatho never stores or logs it.
               </p>
               <div class="flex items-center gap-2">
                 <template v-if="!showKeyInput && apiKey">
