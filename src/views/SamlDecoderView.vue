@@ -130,6 +130,7 @@ async function copyOutput() {
     /* clipboard unavailable */
   }
 }
+import EnterpriseCta from '@/components/EnterpriseCta.vue'
 </script>
 
 <template>
@@ -201,4 +202,5 @@ async function copyOutput() {
       </CardContent>
     </Card>
   </div>
+  <EnterpriseCta />
 </template>

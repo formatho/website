@@ -183,6 +183,7 @@ async function verify(): Promise<void> {
     verifying.value = false
   }
 }
+import EnterpriseCta from '@/components/EnterpriseCta.vue'
 </script>
 
 <template>
@@ -325,4 +326,5 @@ async function verify(): Promise<void> {
       </CardContent>
     </Card>
   </div>
+  <EnterpriseCta />
 </template>
