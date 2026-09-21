@@ -99,6 +99,7 @@ function refreshAll() {
   nonce.value = randomUrlSafe(16)
   if (usePkce.value) verifier.value = randomUrlSafe(64)
 }
+import EnterpriseCta from '@/components/EnterpriseCta.vue'
 </script>
 
 <template>
@@ -197,4 +198,5 @@ function refreshAll() {
       </CardContent>
     </Card>
   </div>
+  <EnterpriseCta />
 </template>

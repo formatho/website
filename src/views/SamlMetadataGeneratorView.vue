@@ -116,6 +116,7 @@ function download() {
   a.click()
   URL.revokeObjectURL(a.href)
 }
+import EnterpriseCta from '@/components/EnterpriseCta.vue'
 </script>
 
 <template>
@@ -204,4 +205,5 @@ function download() {
       <AlertCircle class="w-4 h-4 shrink-0" /> {{ outputError }}
     </p>
   </div>
+  <EnterpriseCta />
 </template>

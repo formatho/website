@@ -76,6 +76,7 @@ const tools = [
     tag: 'Security',
   },
 ]
+import EnterpriseCta from '@/components/EnterpriseCta.vue'
 </script>
 
 <template>
@@ -143,4 +144,5 @@ const tools = [
       </div>
     </div>
   </div>
+  <EnterpriseCta />
 </template>
