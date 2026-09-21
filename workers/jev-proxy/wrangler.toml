@@ -1,0 +1,7 @@
+name = "formatho-jev-proxy"
+main = "index.js"
+compatibility_date = "2026-01-15"
+
+routes = [
+  { pattern = "formatho.com/api/jev/*", custom_domain = false }
+]
