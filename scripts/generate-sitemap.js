@@ -87,6 +87,7 @@ const staticRoutes = [
   { path: '/category/compliance', priority: '0.8', changefreq: 'weekly' },
   { path: '/about', priority: '0.9', changefreq: 'monthly' },
   { path: '/runtime', priority: '0.9', changefreq: 'weekly' },
+  { path: '/funnels', priority: '0.8', changefreq: 'weekly' },
   { path: '/blogs', priority: '0.9', changefreq: 'weekly' },
   { path: '/privacy', priority: '0.5', changefreq: 'yearly' },
   { path: '/terms', priority: '0.5', changefreq: 'yearly' },
