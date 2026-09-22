@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { QrCode, Download, Copy, Check } from 'lucide-vue-next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import QRCode from 'qrcode'
 import CodeEditor from '@/components/CodeEditor.vue'
+import { useFunnelHandoff } from '@/composables/useFunnelHandoff'
 
 const text = ref('')
 const qrDataUrl = ref('')
@@ -13,6 +14,18 @@ const size = ref(256)
 const errorCorrectionLevel = ref<'L' | 'M' | 'Q' | 'H'>('M')
 const foreground = ref('#000000')
 const background = ref('#FFFFFF')
+
+// Funnel handoff: when opened as a funnel step, prefill the QR content with
+// the previous step's saved output (e.g. the GS1 Digital Link URL).
+const { inFunnel, previousOutput, saveOutput } = useFunnelHandoff()
+onMounted(() => {
+  if (!inFunnel) return
+  const prev = previousOutput()
+  if (prev) {
+    text.value = prev
+    generateQR()
+  }
+})
 
 const generateQR = async () => {
   if (!text.value) {
