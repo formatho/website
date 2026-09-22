@@ -436,6 +436,16 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Draft an EU Digital Product Passport: pick your industry, list documents you have, see exactly what is missing before the 2027 deadlines. Free, client-side.',
     keywords: 'digital product passport, dpp tool, dpp builder, eu dpp regulation, espr, battery passport, textile passport, export eu compliance',
   },
+  'funnels': {
+    title: 'Tool Funnels - Chained Workflows | Formatho',
+    description: 'Guided multi-tool workflows where one tool output feeds the next: GTIN to EU DPP QR code, SPF to DMARC hardening. Free, 100% client-side.',
+    keywords: 'tool funnels, chained tools, developer workflow, dpp workflow, spf dmarc workflow',
+  },
+  'funnel-detail': {
+    title: 'Funnel - Tool Chain | Formatho',
+    description: 'A chained multi-tool workflow: each step output is the next step input. 100% client-side.',
+    keywords: 'tool funnel, chained tools',
+  },
   'saml-decoder': {
     title: 'SAML Decoder — Inspect SSO Responses Offline | Formatho',
     description: 'Decode base64 SAML requests and responses in your browser — attributes, conditions, signature elements. IdP debugging without leaking assertions to a.',

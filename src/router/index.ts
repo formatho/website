@@ -18,6 +18,18 @@ export const routes = [
         meta: routeMeta['home']
       },
       {
+        path: '/funnels',
+        name: 'funnels',
+        component: () => import(/* webpackPrefetch: true */ '../views/FunnelListView.vue'),
+        meta: routeMeta['funnels']
+      },
+      {
+        path: '/funnels/:slug',
+        name: 'funnel-detail',
+        component: () => import(/* webpackPrefetch: true */ '../views/FunnelDetailView.vue'),
+        meta: routeMeta['funnel-detail']
+      },
+      {
         path: '/runtime',
         name: 'runtime',
         component: () => import('@/views/RuntimeView.vue'),
