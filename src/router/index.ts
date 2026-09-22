@@ -576,6 +576,22 @@ export const routes = [
         name: 'password-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/PasswordGeneratorView.vue'),
         meta: routeMeta['password-generator']
+        path: '/tools/dpp-readiness',
+        name: 'dpp-readiness',
+        component: () => import(/* webpackPrefetch: true */ '../views/DppReadinessView.vue'),
+        meta: routeMeta['dpp-readiness']
+      },
+      {
+        path: '/tools/gtin-validator',
+        name: 'gtin-validator',
+        component: () => import(/* webpackPrefetch: true */ '../views/GtinValidatorView.vue'),
+        meta: routeMeta['gtin-validator']
+      },
+      {
+        path: '/tools/spf-analyzer',
+        name: 'spf-analyzer',
+        component: () => import(/* webpackPrefetch: true */ '../views/SpfAnalyzerView.vue'),
+        meta: routeMeta['spf-analyzer']
       },
       {
         path: '/tools/gs1-digital-link',
