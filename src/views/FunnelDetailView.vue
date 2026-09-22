@@ -9,7 +9,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
 const route = useRoute()
-const funnel = computed(() => funnels.find((f) => f.slug === route.params.slug))
+const slug = computed(() => (route.params.slug as string) || route.path.split('/').filter(Boolean).pop() || '')
+const funnel = computed(() => funnels.find((f) => f.slug === slug.value))
 const siblings = computed(() => funnels.filter((f) => f.slug !== funnel.value?.slug))
 
 useSEO({
