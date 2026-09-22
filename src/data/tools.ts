@@ -272,6 +272,9 @@ export const tools: ToolCategory[] = [
       { name: 'GS1 Digital Link Builder', description: 'Build and decode GS1 Digital Link URLs: GTIN, serial, lot, expiry into a web URL and QR code. Check-digit and date validation, element-string conversion. Free, client-side.', route: '/tools/gs1-digital-link', iconName: 'Link2' },
       { name: 'ESPR Digital Product Passport', description: 'Build and validate a Digital Product Passport prototype for the EU Ecodesign Regulation 2024/1781: identification, Article 7 sustainability parameters, operator data, QR data carrier, JSON export. Client-side.', route: '/tools/espr-passport', iconName: 'Leaf' },
       { name: 'DPP Playground', description: 'Build a draft EU Digital Product Passport: pick your industry (textile, battery, electronics...), list the documents you have, and see exactly what information is missing. 100% client-side.', route: '/tools/dpp-playground', iconName: 'Package' },
+      { name: 'DPP Readiness Score', description: 'How ready is your export product for the EU Digital Product Passport? Answer 14 questions and get a 0-100 score with a prioritized action list. 100% client-side.', route: '/tools/dpp-readiness', iconName: 'ClipboardCheck' },
+      { name: 'GTIN Validator', description: 'Validate GTIN-8/12/13/14 (EAN/UPC) barcodes: check digit verification, GS1 prefix decode to issuing country, and check digit generation. 100% client-side.', route: '/tools/gtin-validator', iconName: 'Barcode' },
+      { name: 'SPF Record Analyzer', description: 'Parse and validate SPF records: mechanisms, qualifiers, the 10-DNS-lookup limit, and syntax errors with plain-English fixes. Optional DNS lookup. 100% client-side.', route: '/tools/spf-analyzer', iconName: 'Shield' },
     ]
   },
 ]

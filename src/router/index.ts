@@ -535,6 +535,24 @@ export const routes = [
         meta: routeMeta['dpp-playground']
       },
       {
+        path: '/tools/dpp-readiness',
+        name: 'dpp-readiness',
+        component: () => import(/* webpackPrefetch: true */ '../views/DppReadinessView.vue'),
+        meta: routeMeta['dpp-readiness']
+      },
+      {
+        path: '/tools/gtin-validator',
+        name: 'gtin-validator',
+        component: () => import(/* webpackPrefetch: true */ '../views/GtinValidatorView.vue'),
+        meta: routeMeta['gtin-validator']
+      },
+      {
+        path: '/tools/spf-analyzer',
+        name: 'spf-analyzer',
+        component: () => import(/* webpackPrefetch: true */ '../views/SpfAnalyzerView.vue'),
+        meta: routeMeta['spf-analyzer']
+      },
+      {
         path: '/tools/gs1-digital-link',
         name: 'gs1-digital-link',
         component: () => import('@/views/Gs1DigitalLinkView.vue'),

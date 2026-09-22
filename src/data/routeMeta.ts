@@ -431,6 +431,21 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Generate a packaging DoC per PPWR 2025/40 Annex VIII. Free, client-side.',
     keywords: 'ppwr declaration, packaging doc, eu packaging regulation',
   },
+  'dpp-readiness': {
+    title: 'DPP Readiness Score — Is Your Product EU-Ready? | Formatho',
+    description: 'Score your export product 0-100 for EU Digital Product Passport readiness: identification, materials, chemicals, supply chain, circularity. Prioritized action list, 100% client-side.',
+    keywords: 'dpp readiness score, digital product passport checklist, dpp readiness, eu dpp compliance, textile dpp, export eu checklist',
+  },
+  'gtin-validator': {
+    title: 'GTIN Validator — EAN/UPC Check Digit & Prefix Lookup | Formatho',
+    description: 'Validate GTIN, EAN-13, EAN-8, UPC-A and ITF-14 barcodes: check digit verification, GS1 prefix decode to issuing country, and check digit generation. 100% client-side.',
+    keywords: 'gtin validator, gtin check digit, ean 13 validator, upc validator, barcode checker, gs1 prefix lookup, check digit calculator',
+  },
+  'spf-analyzer': {
+    title: 'SPF Record Analyzer — Lookup Limit & Syntax Check | Formatho',
+    description: 'Parse SPF records against RFC 7208: mechanism breakdown, DNS lookup counting against the 10-lookup limit, qualifiers, and syntax errors with fixes. Optional DNS lookup. 100% client-side.',
+    keywords: 'spf analyzer, spf record checker, spf validator, spf lookup limit, spf too many lookups, spf include, flatten spf',
+  },
   'dpp-playground': {
     title: 'DPP Playground — Digital Product Passport Builder | Formatho',
     description: 'Draft an EU Digital Product Passport: pick your industry, list documents you have, see exactly what is missing before the 2027 deadlines. Free, client-side.',
