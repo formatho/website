@@ -1,6 +1,7 @@
 import AppLayout from '../layouts/AppLayout.vue'
 import HomeView from '../views/HomeView.vue'
 import { routeMeta } from '../data/routeMeta'
+import { funnels } from '../data/funnels'
 
 export const routes = [
   {
@@ -29,6 +30,12 @@ export const routes = [
         component: () => import(/* webpackPrefetch: true */ '../views/FunnelDetailView.vue'),
         meta: routeMeta['funnel-detail']
       },
+      ...funnels.map((f) => ({
+        path: `/funnels/${f.slug}`,
+        name: `funnel-${f.slug}`,
+        component: () => import(/* webpackPrefetch: true */ '../views/FunnelDetailView.vue'),
+        meta: { ...routeMeta['funnel-detail'], title: `${f.name} Funnel - Chained Tool Workflow | Formatho`, description: f.seoDescription, keywords: f.keywords.join(', ') }
+      })),
       {
         path: '/runtime',
         name: 'runtime',
