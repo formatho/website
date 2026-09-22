@@ -10,7 +10,7 @@ const distDir = path.join(__dirname, '..', 'dist')
 const BASE = 'https://formatho.com'
 
 function esc(s) {
-  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
 }
 
 function jsonldScript(id, obj) {

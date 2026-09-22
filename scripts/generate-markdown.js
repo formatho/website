@@ -31,6 +31,12 @@ const pages = [
   ...existsSync(join(DIST, 'runtime')) ? [{ file: 'runtime/index.html', url: '/runtime' }] : [],
 ]
 
+// decode HTML entities in a single ordered pass so pre-decoded sequences
+// (e.g. "&amp;lt;") cannot be double-unescaped into markup
+function decodeEntities(s) {
+  return String(s).replace(/&(amp|lt|gt|quot|#39|nbsp);/g, (_, e) => ({ amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'", nbsp: ' ' })[e])
+}
+
 function htmlToMarkdown(html) {
   // extract main content area (skip nav, footer, scripts)
   const bodyMatch = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i) || html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)
@@ -89,14 +95,8 @@ function htmlToMarkdown(html) {
   content = content.replace(/<\/?section[^>]*>/gi, '\n')
   content = content.replace(/<\/?[a-z][^>]*>/gi, '')
 
-  // clean up whitespace
-  content = content
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
+  // clean up whitespace (entities decoded once, at the end, in a single pass)
+  content = decodeEntities(content)
     .replace(/\n{3,}/g, '\n\n')
     .split('\n').map(l => l.trim()).join('\n')
     .replace(/\n{3,}/g, '\n\n')
@@ -105,14 +105,7 @@ function htmlToMarkdown(html) {
 }
 
 function clean(text) {
-  return text
-    .replace(/<[^>]*>/g, '')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
+  return decodeEntities(text.replace(/<[^>]*>/g, ''))
     .replace(/\s+/g, ' ')
     .trim()
 }

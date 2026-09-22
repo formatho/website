@@ -131,7 +131,7 @@ const pythonCode = computed(() => {
   const imports = [...types].sort().join(', ')
   return `from typesafe_sdk import TypeSafeClient${types.size ? ', ' + imports : ''}
 
-state = ${JSON.stringify(JSON.parse(stateJson.value || '{}'), null, 4).replace(/\n/g, '\n')}
+state = ${JSON.stringify(JSON.parse(stateJson.value || '{}'), null, 4)}
 
 with TypeSafeClient() as client:
     response = client.system_one(

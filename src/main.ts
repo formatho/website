@@ -179,6 +179,12 @@ export const createApp = ViteSSG(
         registerServiceWorker()
       })
 
+      // Revenue conversion tracking (backlog #3) — fires per-tool-page
+      // conversion events to Umami + GA4. See docs/REVENUE_INSTRUMENTATION.md
+      import('./utils/conversionTracking').then(({ initConversionTracking }) => {
+        initConversionTracking(router)
+      })
+
       // Monitor Core Web Vitals in development
       if (import.meta.env.DEV) {
         import('./composables/useCoreWebVitals').then(({ useCoreWebVitals }) => {
