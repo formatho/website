@@ -56,6 +56,22 @@ function fix(dir, slug, title, desc, canonical, extra) {
   return html
 }
 
+
+// ---------- Funnels: SEO meta for funnel pages ----------
+console.log('Funnels:')
+const funnelPages = [
+  { file: 'funnels.html', title: 'Tool Funnels - Chained Workflows, Output Feeds Input | Formatho', desc: 'Guided multi-tool workflows where one tool output feeds the next: GTIN to EU DPP QR code, SPF to DMARC hardening. Free, 100% client-side.', path: '/funnels' },
+  { file: 'funnels/eu-product-passport.html', title: 'EU Product Passport Funnel - GTIN to DPP QR Code | Formatho', desc: 'From barcode to a Digital Product Passport QR: validate your GTIN, build the GS1 Digital Link, score DPP readiness, draft the passport, generate the QR. Free, client-side.', path: '/funnels/eu-product-passport' },
+  { file: 'funnels/email-auth-hardening.html', title: 'Email Auth Hardening Funnel - SPF to DMARC | Formatho', desc: 'The SPF to DMARC workflow: analyze your SPF record against the 10-lookup limit, then parse and grade your DMARC policy. Free, client-side.', path: '/funnels/email-auth-hardening' },
+]
+for (const fp of funnelPages) {
+  const full = path.join(distDir, fp.file)
+  if (!fs.existsSync(full)) { console.log('  miss: ' + fp.file); continue }
+  const html = fs.readFileSync(full, 'utf8')
+  fs.writeFileSync(full, inject(html, fp.title, fp.desc, BASE + fp.path))
+  console.log('  ok: ' + fp.path + ' -> ' + fp.title.slice(0, 45))
+}
+
 // Extract (href, tool-name) pairs from a rendered category page — the anchor
 // cards wrap an <h3>, which footer/related plain links do not.
 function parseToolLinks(html) {
