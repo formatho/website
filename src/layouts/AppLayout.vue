@@ -8,6 +8,7 @@ import QABadge from '@/components/QABadge.vue'
 import ToolSEOContent from '@/components/ToolSEOContent.vue'
 import { trackToolUsed, trackResultCopied } from '@/utils/toolTracking'
 import BookmarkHint from '@/components/BookmarkHint.vue'
+import FunnelBar from '@/components/FunnelBar.vue'
 import DualUseNotice from '@/components/DualUseNotice.vue'
 import { computed, watch, onMounted, onUnmounted, ref } from 'vue'
 import { tools } from '@/data/tools'
@@ -234,6 +235,7 @@ onUnmounted(removeToolSchema)
         </div>
       </Transition>
 
+      <FunnelBar />
       <RouterView v-show="!isLoading" @vue:mounted="onComponentReady" />
       <ToolSEOContent />
       <BookmarkHint />
