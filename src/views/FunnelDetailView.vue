@@ -57,10 +57,10 @@ useSEO({
               </div>
             </div>
             <div class="flex items-center justify-between">
-              <Button @click="() => $router.push(s.toolRoute)">
+              <Button @click="() => $router.push(`/tools/${s.toolRoute.split('/tools/')[1]}?funnel=${funnel.slug}&step=${i + 1}`)">
                 Open {{ s.toolName }} <ArrowRight class="w-4 h-4 ml-2" />
               </Button>
-              <a :href="s.toolRoute" target="_blank" class="text-xs text-muted-foreground inline-flex items-center gap-1 hover:underline">
+              <a :href="`${s.toolRoute}?funnel=${funnel.slug}&step=${i + 1}`" target="_blank" class="text-xs text-muted-foreground inline-flex items-center gap-1 hover:underline">
                 <ExternalLink class="w-3 h-3" /> new tab
               </a>
             </div>
