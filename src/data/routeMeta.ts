@@ -431,6 +431,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Generate a packaging DoC per PPWR 2025/40 Annex VIII. Free, client-side.',
     keywords: 'ppwr declaration, packaging doc, eu packaging regulation',
   },
+  'pint-ae': {
+    title: 'PINT AE Invoice Builder & Validator - UAE E-Invoicing | Formatho',
+    description: 'Build PINT AE XML invoices for the UAE e-invoicing mandate (Peppol), or paste XML to validate: TRN, VAT categories, required UBL fields, totals math. 100% client-side.',
+    keywords: 'pint ae, uae e-invoicing, peppol invoice uae, pint ae validator, uae invoice xml, ubl invoice, fta e-invoice format',
+  },
   'invoice-generator': {
     title: 'Invoice Generator - Create & Download PDF Invoices | Formatho',
     description: 'Create professional invoices in your browser and download them as PDF: line items, GST/VAT, discounts, multi-currency, payment notes. Draft auto-saves locally. 100% client-side.',

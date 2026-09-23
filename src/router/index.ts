@@ -560,6 +560,12 @@ export const routes = [
         meta: routeMeta['invoice-generator']
       },
       {
+        path: '/tools/pint-ae',
+        name: 'pint-ae',
+        component: () => import(/* webpackPrefetch: true */ '../views/PintAeView.vue'),
+        meta: routeMeta['pint-ae']
+      },
+      {
         path: '/tools/gs1-digital-link',
         name: 'gs1-digital-link',
         component: () => import('@/views/Gs1DigitalLinkView.vue'),

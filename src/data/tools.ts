@@ -273,6 +273,7 @@ export const tools: ToolCategory[] = [
       { name: 'ESPR Digital Product Passport', description: 'Build and validate a Digital Product Passport prototype for the EU Ecodesign Regulation 2024/1781: identification, Article 7 sustainability parameters, operator data, QR data carrier, JSON export. Client-side.', route: '/tools/espr-passport', iconName: 'Leaf' },
       { name: 'DPP Playground', description: 'Build a draft EU Digital Product Passport: pick your industry (textile, battery, electronics...), list the documents you have, and see exactly what information is missing. 100% client-side.', route: '/tools/dpp-playground', iconName: 'Package' },
       { name: 'Invoice Generator', description: 'Create professional invoices with line items, tax, discounts and multi-currency support. Live preview, PDF download generated on your device, draft auto-save. 100% client-side.', route: '/tools/invoice-generator', iconName: 'FileText' },
+      { name: 'PINT AE Invoice Builder & Validator', description: 'Build PINT AE XML invoices for the UAE 2026 e-invoicing mandate (Peppol), or paste XML to validate: TRN format, VAT categories, required UBL fields and totals math. 100% client-side.', route: '/tools/pint-ae', iconName: 'FileCheck2' },
     ]
   },
 ]
