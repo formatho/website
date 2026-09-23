@@ -177,6 +177,12 @@ jobs:
   deploy-qa:
     needs: [build]
     runs-on: ubuntu-latest
+    # packages:read lets the swarm nodes pull the private ghcr.io image with
+    # the job's GITHUB_TOKEN - without it the update rolls back silently
+    # (the prod deploy job already had this; deploy-qa did not)
+    permissions:
+      contents: read
+      packages: read
     if: always() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && needs.build.result == 'success'
     steps:
       - name: Validate required secrets
@@ -204,13 +210,24 @@ jobs:
           script: |
             set -e
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-            # :qa is pushed to the registry by the build job for main refs -
-            # deploy by remote tag so swarm resolves the FRESH digest (local
-            # retagging was not picked up by docker service update)
-            docker service update --force --with-registry-auth --image ghcr.io/${{ env.IMAGE_NAME }}:qa qa_qa-app
+            # :qa is a floating tag - the swarm manager resolves it against its
+            # LOCAL image cache and silently keeps the old digest (2026-09-23:
+            # service "converged" but still ran a Sep-5 build; prod was fine).
+            # Deploy by the unique per-commit sha tag (e.g. main-da2ed2e) so
+            # the manager can never resolve locally and must pull fresh.
+            docker service update --force --with-registry-auth --image ghcr.io/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.image-tag }} qa_qa-app
             sleep 5
             echo "=== running image ==="
             docker service inspect qa_qa-app --format '{{.Spec.TaskTemplate.ContainerSpec.Image}}'
+            # Fail the deploy if the spec is not on this build's unique
+            # tag - a floating tag or old sha here means QA serves stale
+            # content (the spec stores the tag reference as passed to
+            # --image; digest shows on the task, not the spec).
+            SPEC_IMAGE=$(docker service inspect qa_qa-app --format '{{.Spec.TaskTemplate.ContainerSpec.Image}}')
+            if ! echo "$SPEC_IMAGE" | grep -q "${{ needs.build.outputs.image-tag }}"; then
+              echo "::error::QA service still on stale image '$SPEC_IMAGE' - expected tag ${{ needs.build.outputs.image-tag }}"
+              exit 1
+            fi
             CID=$(docker ps --filter name=qa_qa-app --format '{{.ID}}' | head -1)
             if [ -n "$CID" ]; then
               echo "=== nginx routing config in running container ==="

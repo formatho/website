@@ -554,22 +554,10 @@ export const routes = [
         meta: routeMeta['dpp-playground']
       },
       {
-        path: '/tools/dpp-readiness',
-        name: 'dpp-readiness',
-        component: () => import(/* webpackPrefetch: true */ '../views/DppReadinessView.vue'),
-        meta: routeMeta['dpp-readiness']
-      },
-      {
-        path: '/tools/gtin-validator',
-        name: 'gtin-validator',
-        component: () => import(/* webpackPrefetch: true */ '../views/GtinValidatorView.vue'),
-        meta: routeMeta['gtin-validator']
-      },
-      {
-        path: '/tools/spf-analyzer',
-        name: 'spf-analyzer',
-        component: () => import(/* webpackPrefetch: true */ '../views/SpfAnalyzerView.vue'),
-        meta: routeMeta['spf-analyzer']
+        path: '/tools/invoice-generator',
+        name: 'invoice-generator',
+        component: () => import(/* webpackPrefetch: true */ '../views/InvoiceGeneratorView.vue'),
+        meta: routeMeta['invoice-generator']
       },
       {
         path: '/tools/gs1-digital-link',

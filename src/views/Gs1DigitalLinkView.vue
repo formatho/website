@@ -6,6 +6,8 @@ import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Link2, QrCode, Copy, Check, Plus, Trash2, AlertCircle, CheckCircle2, FileJson } from 'lucide-vue-next'
 import { useSEO } from '@/composables/useSEO'
+import { useFunnelHandoff } from '@/composables/useFunnelHandoff'
+import { onMounted } from 'vue'
 
 useSEO({
   title: 'GS1 Digital Link Builder & Parser - GTIN URLs | Formatho',
@@ -140,6 +142,24 @@ const elementString = computed(() =>
 )
 
 const qrDataUrl = ref('')
+const { inFunnel, saveOutput, previousOutput } = useFunnelHandoff()
+// Funnel handoff: prefill GTIN row from the previous step's output (e.g. a
+// validated GTIN from GTIN Validator), and publish the built URL as this
+// step's output so the next tool (QR generator) can pick it up.
+onMounted(() => {
+  if (!inFunnel) return
+  const prev = previousOutput()
+  if (!prev) return
+  const gtin = prev.match(/\b(\d{8}|\d{12,14})\b/)?.[1]
+  if (gtin) {
+    const row = rows.value.find((r) => r.ai === '01')
+    if (row) row.value = gtin.padStart(14, '0')
+    else rows.value.unshift({ ai: '01', value: gtin.padStart(14, '0') })
+  }
+})
+watch(builderUrl, (url) => {
+  if (inFunnel && url) saveOutput(url)
+})
 watch(builderUrl, async (url) => {
   qrDataUrl.value = ''
   if (!url) return
