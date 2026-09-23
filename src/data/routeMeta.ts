@@ -154,7 +154,7 @@ export const routeMeta: Record<string, RouteMeta> = {
   },
   'visio-viewer': {
     title: 'Visio Viewer Online - Open .vsdx Files Securely | Formatho',
-    description: 'View Microsoft Visio .vsdx files in your browser without Visio or an upload. Multi-page rendering, zoom, SVG export. 100% client-side — the file never.',
+    description: 'View Microsoft Visio .vsdx files in your browser without Visio or an upload. Multi-page rendering, zoom, SVG export. 100% client-side — the file never leaves your machine.',
     keywords: 'visio viewer, microsoft visio viewer, vsdx viewer online, open visio file online, view vsdx without visio, visio file viewer free',
   },
   'bpmn-to-visio': {
