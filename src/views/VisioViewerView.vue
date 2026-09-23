@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { ZoomIn, ZoomOut, Maximize2, Download, FileText, AlertCircle, Upload } from 'lucide-vue-next'
+import { ZoomIn, ZoomOut, Maximize2, Download, FileText, AlertCircle, Upload, CheckCircle2 } from 'lucide-vue-next'
 import { unzipSync } from 'fflate'
 import { useSEO } from '@/composables/useSEO'
 
@@ -297,5 +297,79 @@ function downloadSvg() {
         </CardContent>
       </Card>
     </template>
+
+    <!-- Feature strip -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs text-muted-foreground">
+      <div class="flex items-start gap-2">
+        <CheckCircle2 class="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+        <span>100% client-side — your .vsdx file never leaves your browser</span>
+      </div>
+      <div class="flex items-start gap-2">
+        <CheckCircle2 class="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+        <span>No Visio license, no install, no signup — works on Mac, Linux, Windows, and mobile</span>
+      </div>
+      <div class="flex items-start gap-2">
+        <CheckCircle2 class="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+        <span>Multi-page files render as tabs, with zoom controls and exact shape geometry</span>
+      </div>
+      <div class="flex items-start gap-2">
+        <CheckCircle2 class="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+        <span>One-click SVG export for docs, slides, and wikis — crisp at any zoom level</span>
+      </div>
+    </div>
+
+    <!-- SEO: How to view -->
+    <section class="mt-8 space-y-4 prose-sm">
+      <h2 class="text-xl font-bold">How to View a Visio File Online</h2>
+      <ol class="list-decimal pl-6 space-y-2 text-muted-foreground">
+        <li><strong class="text-foreground">Open this page in any modern browser</strong> — there is nothing to install and no account to create. The viewer works the same on macOS, Linux, Windows, and mobile.</li>
+        <li><strong class="text-foreground">Click or drop your .vsdx file</strong> — the file is read by the browser's FileReader API, unzipped in memory, and rendered as SVG. Watch the network tab: zero requests fire, because nothing is uploaded.</li>
+        <li><strong class="text-foreground">Browse pages, zoom, and export</strong> — multi-page files show a tab per page; zoom in on details or export the current page as SVG for documentation.</li>
+      </ol>
+
+      <h2 class="text-xl font-bold mt-6">How to Open a Visio File Without Visio Installed</h2>
+      <p class="text-muted-foreground">Microsoft Visio is Windows-only and licensed; Microsoft's own viewer add-on is too. If someone sent you a .vsdx and you need to read it — an org chart, a network diagram, a floor plan, a process flow — you have three options: buy Visio, install a viewer, or open the file here in your browser. This Visio viewer reads the .vsdx format (an OPC package of XML parts) directly: shapes, connectors, text labels, fills, and rotation are rendered exactly. For process diagrams going the other direction — BPMN models that need to open in Visio — use our <a class="text-primary underline" href="/tools/bpmn-to-visio">BPMN to Visio converter</a>.</p>
+
+      <h2 class="text-xl font-bold mt-6">.vsd vs .vsdx — What This Viewer Supports</h2>
+      <ul class="list-disc pl-6 space-y-1 text-muted-foreground">
+        <li><strong class="text-foreground">.vsdx</strong> (Visio 2013, 2016, 2019, 2021, Microsoft 365) — fully supported; this is the modern XML-based format</li>
+        <li><strong class="text-foreground">.vsd</strong> (Visio 2003–2010) — not supported; legacy binary OLE format. Re-save as .vsdx in Visio first (File → Save As)</li>
+        <li>Multi-page drawings — every page renders as its own tab with per-page shape counts</li>
+        <li>Shape geometry — position, size, rotation, fill and line colors, and text labels</li>
+        <li>SVG export — the current page downloads as clean vector SVG</li>
+        <li>Rendered with best-effort fidelity: heavily themed stencils, embedded images, and CAD-imported shapes appear simplified</li>
+      </ul>
+
+      <h2 class="text-xl font-bold mt-6">Why View Visio Files Client-Side?</h2>
+      <p class="text-muted-foreground">Visio diagrams describe the inside of an organization — reporting lines, network topologies, floor plans, vendor boundaries. Most online viewers upload that file to a server to convert it. This viewer runs 100% in your browser: <a class="text-primary underline" href="/blogs/developer-tools-that-dont-spy-on-you">no uploads, no tracking</a>, and it keeps working offline once the page has loaded.</p>
+    </section>
+
+    <!-- Related Tools -->
+    <div class="mt-4 p-6 bg-muted/20 rounded-lg border border-border">
+      <h2 class="text-xl font-bold mb-4">Related Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a
+          href="/tools/bpmn-to-visio"
+          class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
+        >
+          <h3 class="font-semibold mb-2">BPMN to Visio Converter</h3>
+          <p class="text-sm text-muted-foreground">Convert BPMN 2.0 diagrams to editable Visio (.vdx) files</p>
+        </a>
+        <a
+          href="/tools/bpmn"
+          class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
+        >
+          <h3 class="font-semibold mb-2">BPMN Viewer</h3>
+          <p class="text-sm text-muted-foreground">View and export BPMN process diagrams as PDF</p>
+        </a>
+        <a
+          href="/tools/xml-json"
+          class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
+        >
+          <h3 class="font-semibold mb-2">XML to JSON Converter</h3>
+          <p class="text-sm text-muted-foreground">Convert XML documents to JSON format</p>
+        </a>
+      </div>
+    </div>
   </div>
 </template>

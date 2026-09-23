@@ -1115,11 +1115,11 @@ watch(conversionSuccess, (success) => {
           <p class="text-sm text-muted-foreground">Convert XML documents to JSON format</p>
         </a>
         <a
-          href="/tools/xml-formatter"
+          href="/tools/visio-viewer"
           class="block p-4 rounded-lg border border-border hover:border-primary hover:bg-muted/30 transition-all"
         >
-          <h3 class="font-semibold mb-2">XML Formatter</h3>
-          <p class="text-sm text-muted-foreground">Format and beautify XML documents</p>
+          <h3 class="font-semibold mb-2">Visio Viewer</h3>
+          <p class="text-sm text-muted-foreground">Open .vsdx files in your browser without Visio</p>
         </a>
       </div>
     </div>

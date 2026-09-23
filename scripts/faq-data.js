@@ -2946,6 +2946,14 @@ const visioViewerFAQs = {
     {
       question: 'Can I export or convert the diagram?',
       answer: 'The current page exports as SVG, which imports cleanly into PowerPoint, Word, Google Slides, Figma, and Illustrator. SVG is also the right intermediate if you need PNG — any converter can rasterize it.'
+    },
+    {
+      question: "What's the difference between .vsd and .vsdx?",
+      answer: '.vsdx (Visio 2013 and later) is an open, XML-based OPC package — that is why this viewer can parse it in the browser. .vsd (Visio 2003-2010) is a legacy binary OLE compound document that practically requires Visio itself to read. If you have a .vsd, re-save it as .vsdx in Visio (File → Save As) before opening it here.'
+    },
+    {
+      question: 'Is there a free Visio viewer for Mac or Linux?',
+      answer: 'Yes — this one. Microsoft Visio and its official viewer run on Windows only. Because Formatho\'s Visio viewer is a web page that renders .vsdx files locally, it works identically on macOS, Linux, Windows, ChromeOS, and mobile browsers, with no license and no install.'
     }
   ]
 }
