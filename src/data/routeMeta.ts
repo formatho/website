@@ -431,6 +431,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Generate a packaging DoC per PPWR 2025/40 Annex VIII. Free, client-side.',
     keywords: 'ppwr declaration, packaging doc, eu packaging regulation',
   },
+  'invoice-generator': {
+    title: 'Invoice Generator - Create & Download PDF Invoices | Formatho',
+    description: 'Create professional invoices in your browser and download them as PDF: line items, GST/VAT, discounts, multi-currency, payment notes. Draft auto-saves locally. 100% client-side.',
+    keywords: 'invoice generator, create invoice online, invoice pdf, free invoice maker, gst invoice generator, invoice template, bill generator',
+  },
   'dpp-playground': {
     title: 'DPP Playground — Digital Product Passport Builder | Formatho',
     description: 'Draft an EU Digital Product Passport: pick your industry, list documents you have, see exactly what is missing before the 2027 deadlines. Free, client-side.',

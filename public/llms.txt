@@ -192,6 +192,7 @@ Category hub pages group every tool with a one-line description each:
 - [GS1 Digital Link Builder]: https://formatho.com/tools/gs1-digital-link — Build and decode GS1 Digital Link URLs: GTIN, serial, lot, expiry into a web URL and QR code. Check-digit and date validation, element-string conversion. Free, client-side.
 - [ESPR Digital Product Passport]: https://formatho.com/tools/espr-passport — Build and validate a Digital Product Passport prototype for the EU Ecodesign Regulation 2024/1781: identification, Article 7 sustainability parameters, operator data, QR data carrier, JSON export. Client-side.
 - [DPP Playground]: https://formatho.com/tools/dpp-playground — Build a draft EU Digital Product Passport: pick your industry (textile, battery, electronics...), list the documents you have, and see exactly what information is missing. 100% client-side.
+- [Invoice Generator]: https://formatho.com/tools/invoice-generator — Create professional invoices with line items, tax, discounts and multi-currency support. Live preview, PDF download generated on your device, draft auto-save. 100% client-side.
 
 ## Developer Stack Tools
 Persona-specific tool pages:

@@ -272,6 +272,7 @@ export const tools: ToolCategory[] = [
       { name: 'GS1 Digital Link Builder', description: 'Build and decode GS1 Digital Link URLs: GTIN, serial, lot, expiry into a web URL and QR code. Check-digit and date validation, element-string conversion. Free, client-side.', route: '/tools/gs1-digital-link', iconName: 'Link2' },
       { name: 'ESPR Digital Product Passport', description: 'Build and validate a Digital Product Passport prototype for the EU Ecodesign Regulation 2024/1781: identification, Article 7 sustainability parameters, operator data, QR data carrier, JSON export. Client-side.', route: '/tools/espr-passport', iconName: 'Leaf' },
       { name: 'DPP Playground', description: 'Build a draft EU Digital Product Passport: pick your industry (textile, battery, electronics...), list the documents you have, and see exactly what information is missing. 100% client-side.', route: '/tools/dpp-playground', iconName: 'Package' },
+      { name: 'Invoice Generator', description: 'Create professional invoices with line items, tax, discounts and multi-currency support. Live preview, PDF download generated on your device, draft auto-save. 100% client-side.', route: '/tools/invoice-generator', iconName: 'FileText' },
     ]
   },
 ]

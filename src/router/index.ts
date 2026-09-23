@@ -554,6 +554,12 @@ export const routes = [
         meta: routeMeta['dpp-playground']
       },
       {
+        path: '/tools/invoice-generator',
+        name: 'invoice-generator',
+        component: () => import(/* webpackPrefetch: true */ '../views/InvoiceGeneratorView.vue'),
+        meta: routeMeta['invoice-generator']
+      },
+      {
         path: '/tools/gs1-digital-link',
         name: 'gs1-digital-link',
         component: () => import('@/views/Gs1DigitalLinkView.vue'),
