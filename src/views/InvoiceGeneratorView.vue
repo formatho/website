@@ -19,10 +19,10 @@ const STORAGE_KEY = 'formatho:invoice-draft'
 
 interface Item { desc: string; qty: number; rate: number }
 
-const CURRENCIES: Record<string, string> = { INR: '₹', USD: '$', EUR: '€', GBP: '£', AUD: 'A$', CAD: 'C$', AED: 'د.إ', SGD: 'S$', JPY: '¥' }
+const CURRENCIES: Record<string, string> = { USD: '$', EUR: '€', GBP: '£', INR: '₹', AUD: 'A$', CAD: 'C$', AED: 'د.إ', SGD: 'S$', JPY: '¥', CHF: 'CHF', NZD: 'NZ$', CNY: '¥', HKD: 'HK$', ZAR: 'R', BRL: 'R$', SEK: 'kr' }
 
 const defaults = () => ({
-  currency: 'INR',
+  currency: 'USD',
   number: 'INV-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 900) + 100),
   date: new Date().toISOString().slice(0, 10),
   due: new Date(Date.now() + 15 * 864e5).toISOString().slice(0, 10),
