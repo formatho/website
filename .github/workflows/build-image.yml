@@ -219,11 +219,13 @@ jobs:
             sleep 5
             echo "=== running image ==="
             docker service inspect qa_qa-app --format '{{.Spec.TaskTemplate.ContainerSpec.Image}}'
-            # Fail the deploy if the spec did not pin the expected digest -
-            # a floating/unpinned image here means QA serves stale content.
+            # Fail the deploy if the spec is not on this build's unique
+            # tag - a floating tag or old sha here means QA serves stale
+            # content (the spec stores the tag reference as passed to
+            # --image; digest shows on the task, not the spec).
             SPEC_IMAGE=$(docker service inspect qa_qa-app --format '{{.Spec.TaskTemplate.ContainerSpec.Image}}')
-            if ! echo "$SPEC_IMAGE" | grep -q "${{ needs.build.outputs.image-digest }}"; then
-              echo "::error::QA service image not pinned to ${{ needs.build.outputs.image-digest }} (spec: $SPEC_IMAGE)"
+            if ! echo "$SPEC_IMAGE" | grep -q "${{ needs.build.outputs.image-tag }}"; then
+              echo "::error::QA service still on stale image '$SPEC_IMAGE' - expected tag ${{ needs.build.outputs.image-tag }}"
               exit 1
             fi
             CID=$(docker ps --filter name=qa_qa-app --format '{{.ID}}' | head -1)
