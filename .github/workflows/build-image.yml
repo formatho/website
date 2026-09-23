@@ -177,6 +177,12 @@ jobs:
   deploy-qa:
     needs: [build]
     runs-on: ubuntu-latest
+    # packages:read lets the swarm nodes pull the private ghcr.io image with
+    # the job's GITHUB_TOKEN - without it the update rolls back silently
+    # (the prod deploy job already had this; deploy-qa did not)
+    permissions:
+      contents: read
+      packages: read
     if: always() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && needs.build.result == 'success'
     steps:
       - name: Validate required secrets
