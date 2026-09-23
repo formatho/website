@@ -161,24 +161,25 @@ async function downloadPdf() {
       <!-- FORM -->
       <div class="space-y-4">
         <Card>
-          <CardContent class="pt-6 space-y-3">
-            <div class="grid grid-cols-3 gap-2">
-              <div><label class="text-xs font-medium text-muted-foreground">Invoice #</label><Input v-model="inv.number" /></div>
-              <div><label class="text-xs font-medium text-muted-foreground">Date</label><Input type="date" v-model="inv.date" /></div>
-              <div><label class="text-xs font-medium text-muted-foreground">Due</label><Input type="date" v-model="inv.due" /></div>
+          <CardHeader class="pb-3"><CardTitle class="text-base">Invoice details</CardTitle></CardHeader>
+          <CardContent class="space-y-4">
+            <div class="grid grid-cols-3 gap-3">
+              <div><label class="block text-sm font-medium mb-1.5 text-foreground">Invoice #</label><Input v-model="inv.number" class="text-sm" /></div>
+              <div><label class="block text-sm font-medium mb-1.5 text-foreground">Date</label><Input type="date" v-model="inv.date" class="text-sm" /></div>
+              <div><label class="block text-sm font-medium mb-1.5 text-foreground">Due</label><Input type="date" v-model="inv.due" class="text-sm" /></div>
             </div>
             <div class="grid grid-cols-3 gap-2">
-              <div><label class="text-xs font-medium text-muted-foreground">Currency</label>
-                <select v-model="inv.currency" class="w-full h-9 rounded-md border bg-transparent px-2 text-sm">
+              <div><label class="block text-sm font-medium mb-1.5 text-foreground">Currency</label>
+                <select v-model="inv.currency" class="w-full h-9 rounded-md border border-input bg-transparent px-3 text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-ring">
                   <option v-for="(s, c) in CURRENCIES" :key="c" :value="c">{{ c }} {{ s }}</option>
                 </select>
               </div>
-              <div><label class="text-xs font-medium text-muted-foreground">Tax % (GST/VAT)</label><Input type="number" v-model.number="inv.taxRate" min="0" /></div>
-              <div><label class="text-xs font-medium text-muted-foreground">Discount %</label><Input type="number" v-model.number="inv.discount" min="0" max="100" /></div>
+              <div><label class="block text-sm font-medium mb-1.5 text-foreground">Tax % (GST/VAT)</label><Input type="number" v-model.number="inv.taxRate" min="0" class="text-sm" /></div>
+              <div><label class="block text-sm font-medium mb-1.5 text-foreground">Discount %</label><Input type="number" v-model.number="inv.discount" min="0" max="100" class="text-sm" /></div>
             </div>
             <div class="grid grid-cols-2 gap-2">
-              <div><label class="text-xs font-medium text-muted-foreground">From (your business)</label><Textarea v-model="inv.from" rows="4" class="text-sm" /></div>
-              <div><label class="text-xs font-medium text-muted-foreground">Bill to</label><Textarea v-model="inv.to" rows="4" class="text-sm" /></div>
+              <div><label class="block text-sm font-medium mb-1.5 text-foreground">From (your business)</label><Textarea v-model="inv.from" rows="4" class="text-sm leading-relaxed" /></div>
+              <div><label class="block text-sm font-medium mb-1.5 text-foreground">Bill to</label><Textarea v-model="inv.to" rows="4" class="text-sm leading-relaxed" /></div>
             </div>
           </CardContent>
         </Card>
@@ -186,11 +187,11 @@ async function downloadPdf() {
         <Card>
           <CardHeader class="pb-2"><CardTitle class="text-base">Line items</CardTitle></CardHeader>
           <CardContent class="space-y-2">
-            <div v-for="(it, i) in inv.items" :key="i" class="flex gap-2 items-start">
-              <Input v-model="it.desc" placeholder="Description" class="flex-1" />
-              <Input v-model.number="it.qty" type="number" min="0" class="w-20" placeholder="Qty" />
-              <Input v-model.number="it.rate" type="number" min="0" class="w-28" placeholder="Rate" />
-              <span class="w-24 text-right text-sm font-medium pt-2 whitespace-nowrap">{{ fmt(lineTotals[i]) }}</span>
+            <div v-for="(it, i) in inv.items" :key="i" class="grid grid-cols-[1fr_64px_110px_96px_32px] gap-2 items-center">
+              <Input v-model="it.desc" placeholder="Item description" class="text-sm" />
+              <Input v-model.number="it.qty" type="number" min="0" class="text-sm text-right" placeholder="Qty" />
+              <Input v-model.number="it.rate" type="number" min="0" class="text-sm text-right" placeholder="Rate" />
+              <span class="text-sm font-medium text-right whitespace-nowrap">{{ fmt(lineTotals[i]) }}</span>
               <Button variant="ghost" size="sm" @click="removeItem(i)" aria-label="Remove"><Trash2 class="w-4 h-4 text-muted-foreground" /></Button>
             </div>
             <div class="flex justify-between pt-2">
@@ -201,8 +202,8 @@ async function downloadPdf() {
         </Card>
 
         <Card>
-          <CardContent class="pt-6 space-y-2">
-            <label class="text-xs font-medium text-muted-foreground">Notes / payment terms</label>
+          <CardHeader class="pb-3"><CardTitle class="text-base">Notes & payment terms</CardTitle></CardHeader>
+          <CardContent class="space-y-2">
             <Textarea v-model="inv.notes" rows="2" class="text-sm" />
           </CardContent>
         </Card>
