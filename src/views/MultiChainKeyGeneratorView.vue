@@ -73,7 +73,7 @@ const generateKeys = () => {
     const ethChild = master.derive(ethPath)
     if (ethChild.publicKey && ethChild.privateKey) {
       // Derive from the private key via viem: correct decompression + EIP-55 checksum
-      const ethAddress = privateKeyToAccount(toHex(ethChild.privateKey)).address
+      const ethAddress = privateKeyToAccount('0x' + toHex(ethChild.privateKey)).address
       resultsList.push({
         name: 'Ethereum',
         ticker: 'ETH',
