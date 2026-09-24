@@ -352,12 +352,12 @@ const reset = () => {
           <details class="group">
             <summary class="font-medium cursor-pointer list-none flex items-center gap-2">
               <span class="transition-transform group-open:rotate-90">▶</span>
-              Why does Solana show "Requires SLIP-0010"?
+              How is the Solana address derived?
             </summary>
             <p class="mt-2 text-muted-foreground">
-              Solana uses Ed25519 signatures, which require SLIP-0010 derivation instead of BIP-32.
-              The address generation needs a different cryptographic library. The private key shown here
-              is derived via BIP-44 secp256k1 as a reference, but a real Solana wallet uses SLIP-0010.
+              Solana uses Ed25519 signatures with SLIP-0010 hardened-only derivation at m/44'/501'/0'/0'.
+              This tool performs that derivation directly in your browser, so the address matches what
+              Phantom, Solflare and the Solana CLI show for the same phrase.
             </p>
           </details>
         </div>
