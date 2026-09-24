@@ -194,6 +194,7 @@ Category hub pages group every tool with a one-line description each:
 - [DPP Playground]: https://formatho.com/tools/dpp-playground — Build a draft EU Digital Product Passport: pick your industry (textile, battery, electronics...), list the documents you have, and see exactly what information is missing. 100% client-side.
 - [Invoice Generator]: https://formatho.com/tools/invoice-generator — Create professional invoices with line items, tax, discounts and multi-currency support. Live preview, PDF download generated on your device, draft auto-save. 100% client-side.
 - [PINT AE Invoice Builder & Validator]: https://formatho.com/tools/pint-ae — Build PINT AE XML invoices for the UAE 2026 e-invoicing mandate (Peppol), or paste XML to validate: TRN format, VAT categories, required UBL fields and totals math. 100% client-side.
+- [Password Generator]: https://formatho.com/tools/password-generator — Generate strong random passwords and passphrases with crypto-grade randomness: length control, character sets, exclude look-alikes, entropy meter. 100% client-side — passwords never leave your device.
 
 ## Developer Stack Tools
 Persona-specific tool pages:

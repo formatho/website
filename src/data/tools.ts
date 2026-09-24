@@ -274,6 +274,7 @@ export const tools: ToolCategory[] = [
       { name: 'DPP Playground', description: 'Build a draft EU Digital Product Passport: pick your industry (textile, battery, electronics...), list the documents you have, and see exactly what information is missing. 100% client-side.', route: '/tools/dpp-playground', iconName: 'Package' },
       { name: 'Invoice Generator', description: 'Create professional invoices with line items, tax, discounts and multi-currency support. Live preview, PDF download generated on your device, draft auto-save. 100% client-side.', route: '/tools/invoice-generator', iconName: 'FileText' },
       { name: 'PINT AE Invoice Builder & Validator', description: 'Build PINT AE XML invoices for the UAE 2026 e-invoicing mandate (Peppol), or paste XML to validate: TRN format, VAT categories, required UBL fields and totals math. 100% client-side.', route: '/tools/pint-ae', iconName: 'FileCheck2' },
+      { name: 'Password Generator', description: 'Generate strong random passwords and passphrases with crypto-grade randomness: length control, character sets, exclude look-alikes, entropy meter. 100% client-side — passwords never leave your device.', route: '/tools/password-generator', iconName: 'KeyRound' },
     ]
   },
 ]

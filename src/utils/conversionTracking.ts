@@ -7,6 +7,9 @@
  *  - tool_page_view     : user landed on a tool page (once per session per tool)
  *  - tool_result_copied : user copied output on a tool page (usage proxy)
  *  - enterprise_cta_click: user clicked a mailto/contact CTA on a tool page (lead proxy)
+ *  - affiliate_click     : user clicked an outbound affiliate link (backlog #8; fires on
+ *                           anchors with data-affiliate="merchant" — links are owner-gated)
+ *  - outbound_click       : any other outbound link click on a tool page (funnel context)
  *
  * Privacy: only slugs + categories, never inputs/outputs/PII.
  */
@@ -90,6 +93,45 @@ export function initConversionTracking(router: Router): void {
           tool_name: tool.name,
           tool_category: tool.category,
           cta_href: (target as HTMLAnchorElement).href,
+        })
+      },
+      true
+    )
+
+    // 4. Outbound + affiliate clicks (backlog #8 funnel — affiliate links themselves owner-gated)
+    document.addEventListener(
+      'click',
+      (event) => {
+        const anchor = (event.target as HTMLElement | null)?.closest?.('a[href]') as
+          | HTMLAnchorElement
+          | null
+        if (!anchor) return
+        const href = anchor.getAttribute('href') ?? ''
+        // Absolute http(s) links to another host = outbound
+        if (!/^https?:\/\//i.test(href)) return
+        const tool = toolForPath(router.currentRoute.value.path)
+        const affiliateMerchant = anchor.dataset.affiliate
+        if (affiliateMerchant) {
+          send('affiliate_click', {
+            tool_name: tool?.name,
+            tool_category: tool?.category,
+            merchant: affiliateMerchant,
+            path: router.currentRoute.value.path,
+          })
+          return // affiliate_click supersedes generic outbound_click
+        }
+        if (!tool) return
+        let host = ''
+        try {
+          host = new URL(anchor.href, window.location.href).host
+        } catch {
+          return
+        }
+        if (host === window.location.host) return
+        send('outbound_click', {
+          tool_name: tool.name,
+          tool_category: tool.category,
+          outbound_host: host,
         })
       },
       true
