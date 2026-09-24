@@ -23,6 +23,7 @@
     "@scure/bip39": "^2.0.1",
     "@solana/web3.js": "^1.98.4",
     "@tailwindcss/vite": "^4.1.18",
+    "@unhead/vue": "^2.1.13",
     "@vueuse/core": "^14.1.0",
     "bcryptjs": "^3.0.3",
     "bech32": "^2.0.0",
@@ -36,6 +37,7 @@
     "crypto-js": "^4.2.0",
     "diff": "^8.0.3",
     "docx": "^9.5.1",
+    "ed25519-hd-key": "^2.0.0",
     "fflate": "^0.8.3",
     "file-saver": "^2.0.5",
     "github-markdown-css": "^5.8.1",
@@ -63,8 +65,7 @@
     "viem": "^2.45.0",
     "vue": "^3.5.24",
     "vue-chartjs": "^5.3.3",
-    "vue-router": "^4.6.4",
-    "@unhead/vue": "^2.1.13"
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.2.0",

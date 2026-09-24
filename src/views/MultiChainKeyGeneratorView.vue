@@ -6,6 +6,9 @@ import { HDKey } from '@scure/bip32'
 import { sha256 } from '@noble/hashes/sha256'
 import { ripemd160 } from '@noble/hashes/ripemd160'
 import { privateKeyToAccount } from 'viem/accounts'
+import { derivePath } from 'ed25519-hd-key'
+import { Keypair } from '@solana/web3.js'
+import { mnemonicToMiniSecret, sr25519PairFromSeed, encodeAddress as ss58Encode, cryptoWaitReady } from '@polkadot/util-crypto'
 import { bech32 } from 'bech32'
 import { Button } from '@/components/ui/button'
 import {  } from '@/components/ui/card'
@@ -31,7 +34,7 @@ const results = ref<ChainResult[]>([])
 // Helper: convert Uint8Array to hex string
 const toHex = (bytes: Uint8Array) => Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('')
 
-const generateMnemonic = () => {
+const generateMnemonic = async () => {
   try {
     if (typeof window === 'undefined' || !window.crypto) {
       error.value = 'Crypto API not available. Please use a modern browser over HTTPS.'
@@ -39,14 +42,14 @@ const generateMnemonic = () => {
     }
     mnemonic.value = bip39.generateMnemonic(wordlist, 128)
     error.value = ''
-    generateKeys()
+    await generateKeys()
   } catch (err: any) {
     console.error(err)
     error.value = 'Error generating mnemonic: ' + err.message
   }
 }
 
-const validateAndGenerate = () => {
+const validateAndGenerate = async () => {
   if (!bip39.validateMnemonic(mnemonic.value, wordlist)) {
     error.value = 'Invalid mnemonic phrase'
     return
@@ -62,7 +65,7 @@ const getCosmosAddress = (pubKey: Uint8Array) => {
   return bech32.encode('cosmos', words)
 }
 
-const generateKeys = () => {
+const generateKeys = async () => {
   try {
     const seed = bip39.mnemonicToSeedSync(mnemonic.value)
     const master = HDKey.fromMasterSeed(seed)
@@ -87,22 +90,21 @@ const generateKeys = () => {
       })
     }
 
-    // 2. Solana (BIP44 derivation path — note: real Solana uses SLIP-0010 Ed25519)
+    // 2. Solana (SLIP-0010 Ed25519, standard m/44'/501'/0'/0')
     const solPath = "m/44'/501'/0'/0'"
-    const solChild = master.derive(solPath)
-    if (solChild.publicKey) {
-      resultsList.push({
-        name: 'Solana',
-        ticker: 'SOL',
-        address: 'Requires SLIP-0010 Ed25519 derivation',
-        privateKey: solChild.privateKey ? toHex(solChild.privateKey) : 'Unavailable',
-        publicKey: toHex(solChild.publicKey),
-        path: solPath,
-        algo: 'Ed25519',
-        algoDesc: 'EdDSA on Curve25519. Solana uses SLIP-0010 Ed25519 with specific derivation.',
-        color: 'bg-indigo-100 dark:bg-indigo-900'
-      })
-    }
+    const solDerived = derivePath(solPath, toHex(seed))
+    const solKeypair = Keypair.fromSeed(solDerived.key)
+    resultsList.push({
+      name: 'Solana',
+      ticker: 'SOL',
+      address: solKeypair.publicKey.toString(),
+      privateKey: toHex(solDerived.key),
+      publicKey: toHex(solKeypair.publicKey.toBytes()),
+      path: solPath,
+      algo: 'Ed25519',
+      algoDesc: 'EdDSA on Curve25519 via SLIP-0010 hardened-only derivation. Matches Phantom and Solana CLI.',
+      color: 'bg-indigo-100 dark:bg-indigo-900'
+    })
 
     // 3. Cosmos
     const cosmosPath = "m/44'/118'/0'/0/0"
@@ -122,35 +124,42 @@ const generateKeys = () => {
       })
     }
 
-    // 4. Bitcoin (Native SegWit)
+    // 4. Bitcoin (Native SegWit, BIP84 P2WPKH)
     const btcPath = "m/84'/0'/0'/0/0"
     const btcChild = master.derive(btcPath)
     if (btcChild.publicKey) {
+      const h160 = ripemd160(sha256(btcChild.publicKey))
+      const witWords = bech32.toWords(h160)
+      witWords.unshift(0x00) // witness version 0
       resultsList.push({
         name: 'Bitcoin',
         ticker: 'BTC',
-        address: 'Requires Bech32m encoding',
+        address: bech32.encode('bc', witWords),
         privateKey: btcChild.privateKey ? toHex(btcChild.privateKey) : 'Unavailable',
         publicKey: toHex(btcChild.publicKey),
         path: btcPath,
         algo: 'Secp256k1',
-        algoDesc: 'Native SegWit (BIP84). Uses Bech32m encoding for addresses.',
+        algoDesc: 'Native SegWit (BIP84). Bech32 P2WPKH address from the compressed public key.',
         color: 'bg-orange-100 dark:bg-orange-900'
       })
     }
 
-    // 5. Polkadot
+    // 5. Polkadot (sr25519, substrate BIP39)
+    await cryptoWaitReady()
+    const dotMini = mnemonicToMiniSecret(mnemonic.value)
+    const dotPair = sr25519PairFromSeed(dotMini)
     resultsList.push({
       name: 'Polkadot',
       ticker: 'DOT',
-      address: 'Requires Sr25519 WASM',
-      privateKey: 'Requires @polkadot WASM',
-      publicKey: 'Requires @polkadot WASM',
-      path: '//polkadot',
+      address: ss58Encode(dotPair.publicKey, 0),
+      privateKey: toHex(dotMini),
+      publicKey: toHex(dotPair.publicKey),
+      path: 'substrate (mnemonic to mini-secret)',
       algo: 'Sr25519',
-      algoDesc: 'Schnorr signatures on Ristretto group. Requires WASM initialization.',
+      algoDesc: 'Schnorrkel (sr25519) with SS58 encoding, network prefix 0. Matches Polkadot.js default accounts.',
       color: 'bg-pink-100 dark:bg-pink-900'
     })
+
 
     results.value = resultsList
     generated.value = true
