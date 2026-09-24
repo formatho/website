@@ -177,6 +177,13 @@ jobs:
   deploy-qa:
     needs: [build]
     runs-on: ubuntu-latest
+    # Serialize every deploy-qa run. 2026-09-24: two pushes landing within
+    # seconds raced on `docker service update qa_qa-app` and the stale-image
+    # guard failed the loser spuriously (cff7103 vs 9f1d21c). Queue - never
+    # cancel - so an in-flight SSH deploy is never killed half-verified.
+    concurrency:
+      group: deploy-qa-app
+      cancel-in-progress: false
     # packages:read lets the swarm nodes pull the private ghcr.io image with
     # the job's GITHUB_TOKEN - without it the update rolls back silently
     # (the prod deploy job already had this; deploy-qa did not)
@@ -201,7 +208,31 @@ jobs:
           fi
           echo "✅ All required secrets are set"
 
+      - name: Skip if superseded by a newer commit
+        id: tip-check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # A queued OLDER run can start after a NEWER one (order inside a
+          # concurrency group is not guaranteed). Without this check the older
+          # sha would win the service and QA would silently serve stale code
+          # with all-green builds - the exact class the guard exists to catch.
+          # Fail-open: on API trouble deploy anyway; the concurrency group
+          # above already prevents the race itself.
+          TIP=$(curl -s --max-time 15 \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/commits/${{ github.ref_name }}" \
+            | jq -r '.sha // empty' 2>/dev/null) || TIP=""
+          if [ -n "$TIP" ] && [ "$TIP" != "${{ github.sha }}" ]; then
+            echo "Run sha ${{ github.sha }} is not the tip of ${{ github.ref_name }} ($TIP) - newer deploy supersedes this one"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Deploy QA via SSH
+        if: steps.tip-check.outputs.skip != 'true'
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.DO_HOST }}
