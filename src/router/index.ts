@@ -572,6 +572,12 @@ export const routes = [
         meta: routeMeta['pint-ae']
       },
       {
+        path: '/tools/password-generator',
+        name: 'password-generator',
+        component: () => import(/* webpackPrefetch: true */ '../views/PasswordGeneratorView.vue'),
+        meta: routeMeta['password-generator']
+      },
+      {
         path: '/tools/gs1-digital-link',
         name: 'gs1-digital-link',
         component: () => import('@/views/Gs1DigitalLinkView.vue'),

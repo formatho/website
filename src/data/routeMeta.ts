@@ -436,6 +436,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Generate a packaging DoC per PPWR 2025/40 Annex VIII. Free, client-side.',
     keywords: 'ppwr declaration, packaging doc, eu packaging regulation',
   },
+  'password-generator': {
+    title: 'Password Generator - Strong Random Passwords & Passphrases | Formatho',
+    description: 'Generate strong random passwords and passphrases in your browser: length control, character sets, exclude look-alike characters, entropy meter. Crypto-grade randomness, 100% client-side.',
+    keywords: 'password generator, strong password, random password generator, passphrase generator, secure password, generate password',
+  },
   'pint-ae': {
     title: 'PINT AE Invoice Builder & Validator - UAE E-Invoicing | Formatho',
     description: 'Build PINT AE XML invoices for the UAE e-invoicing mandate (Peppol), or paste XML to validate: TRN, VAT categories, required UBL fields, totals math. 100% client-side.',
