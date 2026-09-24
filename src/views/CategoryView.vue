@@ -169,6 +169,18 @@ useSEO({
       </div>
     </div>
 
+    <!-- elizaOS cross-link (only on web3 category) -->
+    <div v-if="category?.slug === 'web3'" class="mb-12">
+      <h2 class="text-xl font-bold mb-4">For elizaOS agent builders</h2>
+      <RouterLink to="/eliza-tools" class="group inline-flex items-center gap-3 border border-border rounded-lg p-4 hover:border-primary/50 hover:bg-primary/5 transition-colors">
+        <span class="text-2xl">🤖</span>
+        <span>
+          <span class="block text-sm font-medium group-hover:text-primary transition-colors">elizaOS Developer Tools</span>
+          <span class="block text-xs text-muted-foreground mt-0.5">keccak-256, function selectors, EIP-55 and more — as free pure-function plugin actions and browser tools</span>
+        </span>
+      </RouterLink>
+    </div>
+
     <!-- Sibling categories (internal links) -->
     <div class="border-t border-border pt-8">
       <h2 class="text-xl font-bold mb-4">Browse other categories</h2>

@@ -75,6 +75,23 @@ function parseToolRoutes() {
   return [...new Set(routes)].filter(r => !r.includes('/admin/') && !redirectPaths.has(r))
 }
 
+/**
+ * Parse funnel detail slugs from src/data/funnels.ts so new funnels
+ * flow into the sitemap automatically (quoted values only — the
+ * `slug: string` interface field is never matched)
+ */
+function parseFunnelSlugs() {
+  const funnelsPath = resolve(process.cwd(), 'src', 'data', 'funnels.ts')
+  const content = readFileSync(funnelsPath, 'utf8')
+  const slugs = []
+  const slugRegex = /^\s+slug:\s*['"`]([^'"`]+)['"`]/gm
+  let match
+  while ((match = slugRegex.exec(content)) !== null) {
+    slugs.push(match[1])
+  }
+  return [...new Set(slugs)]
+}
+
 // Static pages
 const staticRoutes = [
   { path: '/tools', priority: '1.0', changefreq: 'weekly' },
@@ -126,8 +143,16 @@ const toolRoutes = toolPaths.map((p) => ({
   changefreq: 'monthly',
 }))
 
+// Funnel detail routes — data-driven from src/data/funnels.ts
+const funnelSlugs = parseFunnelSlugs()
+const funnelRoutes = funnelSlugs.map((slug) => ({
+  path: `/funnels/${slug}`,
+  priority: '0.8',
+  changefreq: 'weekly',
+}))
+
 // Filter out admin routes - they should NOT be in the public sitemap
-const allRoutes = [...staticRoutes, ...blogRoutes, ...toolRoutes]
+const allRoutes = [...staticRoutes, ...funnelRoutes, ...blogRoutes, ...toolRoutes]
 const routes = allRoutes.filter(r => !r.path.includes('/admin/'))
 
 // Safety check: never write a suspiciously small sitemap (CI environments
@@ -164,6 +189,7 @@ writeFileSync(outputPath, sitemap, 'utf-8')
 
 console.log(`✅ Sitemap generated at ${outputPath}`)
 console.log(`   ${staticRoutes.length} static pages`)
+console.log(`   ${funnelRoutes.length} funnel detail slugs (from src/data/funnels.ts)`)
 console.log(`   ${blogRoutes.length} blog posts (fetched from Strapi)`)
 console.log(`   ${toolRoutes.length} tool routes (auto-detected from router)`)
 console.log(`   Total: ${routes.length} URLs`)

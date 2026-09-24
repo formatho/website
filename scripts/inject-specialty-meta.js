@@ -243,6 +243,7 @@ const staticPages = {
   'about': ['About Formatho - Private Infrastructure for AI Agents', 'Formatho builds private infrastructure for AI agents: a self-hosted MCP runtime and a free browser tool library. Zero data egress, audit-logged.'],
   'terms': ['Terms of Service - Formatho', 'Terms of service for using Formatho browser tools and the Formatho Runtime MCP server: acceptable use, liability, and changes.'],
   'contact': ['Contact Formatho - Support & Feedback | Formatho', 'Reach the Formatho team: GitHub issues for bugs and features, X for updates, email for security and partnership disclosures.'],
+  'eliza-tools': ['elizaOS Developer Tools — Free, Private, Client-Side | Formatho', 'Free developer tools for elizaOS agent builders: pure-function plugin actions plus browser-side config validators. Zero network, zero tracking.'],
   'agents': ['Agent Browser - MCP Tools for AI Agents | Formatho', 'Browse the Formatho tool catalog from an AI agent perspective: what each tool does, how to call it via MCP, input and output formats.'],
 }
 console.log('Static compliance pages:')

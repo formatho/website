@@ -43,6 +43,12 @@ export const routes = [
         meta: routeMeta['runtime']
       },
       {
+        path: '/eliza-tools',
+        name: 'eliza-tools',
+        component: () => import('@/views/ElizaToolsView.vue'),
+        meta: routeMeta['eliza-tools']
+      },
+      {
         path: '/about',
         name: 'about',
         component: () => import(/* webpackPrefetch: true */ '../views/AboutView.vue'),
