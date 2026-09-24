@@ -22,6 +22,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Run your own MCP server in Docker: give Claude Code, Cursor and Claude Desktop permissioned, audit-logged tool access inside your network.',
     keywords: 'self hosted mcp server, mcp server docker, private ai agent tools, claude code mcp server, cursor mcp, mcp gateway, model context protocol server',
   },
+  'eliza-tools': {
+    title: 'elizaOS Developer Tools — Free, Private, Client-Side | Formatho',
+    description: 'Free developer tools for elizaOS agent builders: pure-function plugin actions plus browser-side config validators. Zero network, zero tracking.',
+    keywords: 'elizaos tools, elizaos plugin, plugin-formatho, eliza character validator, env checker, keccak256, function selector, eip-55, jwt decode',
+  },
   'about': {
     title: 'About Formatho - Private Infrastructure for AI Agents',
     description: 'Formatho builds self-hosted MCP infrastructure giving AI agents controlled, audited access to developer, security, and EVM tools - plus a library of free.',

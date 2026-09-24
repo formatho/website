@@ -66,6 +66,15 @@ const clients = [
 }`
   },
   {
+    name: 'elizaOS agents',
+    blurb: 'Point @elizaos/plugin-mcp at the HTTP endpoint — all 26 tools become agent actions:',
+    code: `# in your elizaOS project
+elizaos plugins add @elizaos/plugin-mcp
+# MCP endpoint: http://localhost:8787/mcp
+
+# Also see the free native plugin: /eliza-tools`
+  },
+  {
     name: 'Any MCP client (HTTP)',
     blurb: 'Run the gateway and point clients at the Streamable HTTP endpoint:',
     code: `docker run -p 8787:8787 -e FORMATHO_HOST=0.0.0.0 \\
