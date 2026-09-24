@@ -5,7 +5,7 @@ import { wordlist } from '@scure/bip39/wordlists/english.js'
 import { HDKey } from '@scure/bip32'
 import { sha256 } from '@noble/hashes/sha256'
 import { ripemd160 } from '@noble/hashes/ripemd160'
-import { keccak_256 } from '@noble/hashes/sha3'
+import { privateKeyToAccount } from 'viem/accounts'
 import { bech32 } from 'bech32'
 import { Button } from '@/components/ui/button'
 import {  } from '@/components/ui/card'
@@ -30,15 +30,6 @@ const results = ref<ChainResult[]>([])
 
 // Helper: convert Uint8Array to hex string
 const toHex = (bytes: Uint8Array) => Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('')
-
-// Generate Ethereum address from public key
-const getEthAddress = (publicKey: Uint8Array) => {
-  // Uncompressed public key: first byte is 0x04, rest is X + Y coordinates
-  // Remove the 0x04 prefix, then keccak256 hash the rest
-  const pubKeyBytes = publicKey.length === 65 ? publicKey.slice(1) : publicKey
-  const hash = keccak_256(pubKeyBytes)
-  return '0x' + toHex(hash.slice(-20))
-}
 
 const generateMnemonic = () => {
   try {
@@ -80,8 +71,9 @@ const generateKeys = () => {
     // 1. Ethereum (and EVM)
     const ethPath = "m/44'/60'/0'/0/0"
     const ethChild = master.derive(ethPath)
-    if (ethChild.publicKey) {
-      const ethAddress = getEthAddress(ethChild.publicKey)
+    if (ethChild.publicKey && ethChild.privateKey) {
+      // Derive from the private key via viem: correct decompression + EIP-55 checksum
+      const ethAddress = privateKeyToAccount(toHex(ethChild.privateKey)).address
       resultsList.push({
         name: 'Ethereum',
         ticker: 'ETH',
