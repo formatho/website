@@ -257,21 +257,6 @@
     ]
   },
   {
-    "title": "Need Developer Tools That Don't Spy On You?",
-    "slug": "developer-tools-that-dont-spy-on-you",
-    "excerpt": "Discover why most free developer tools harvest your data. Learn about zero-trust, client-side development and the rise of privacy-first tools.",
-    "date": "2026-03-18",
-    "metaDescription": "",
-    "image": "/images/blog/blog-02/cybersecurity.jpg",
-    "imageAlt": "Secure developer workspace with privacy-focused tools",
-    "tags": [
-      "Privacy",
-      "Developer Tools",
-      "Security",
-      "Zero-Trust"
-    ]
-  },
-  {
     "title": "Privacy-First Developer Tools: Why Your Data Should Never Leave Your Browser",
     "slug": "privacy-first-developer-tools-2026",
     "excerpt": "The data harvesting problem in developer tooling is real. Learn why privacy-first tools matter in 2026 and how client-side processing protects your code, configs, and credentials.",
@@ -288,19 +273,18 @@
     ]
   },
   {
-    "title": "JSON to YAML Converter: A Practical Guide for DevOps Engineers",
-    "slug": "json-to-yaml-converter-tools",
-    "excerpt": "Master JSON to YAML conversion for Docker Compose, Kubernetes, and CI/CD configs. Learn when to use each format and avoid common conversion pitfalls.",
-    "date": "2026-03-17",
+    "title": "Need Developer Tools That Don't Spy On You?",
+    "slug": "developer-tools-that-dont-spy-on-you",
+    "excerpt": "Discover why most free developer tools harvest your data. Learn about zero-trust, client-side development and the rise of privacy-first tools.",
+    "date": "2026-03-18",
     "metaDescription": "",
-    "image": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&h=225&fit=crop",
-    "imageAlt": "Data format conversion between JSON and YAML",
+    "image": "/images/blog/blog-02/cybersecurity.jpg",
+    "imageAlt": "Secure developer workspace with privacy-focused tools",
     "tags": [
-      "JSON",
-      "YAML",
-      "DevOps",
-      "Tutorial",
-      "Developer Tools"
+      "Privacy",
+      "Developer Tools",
+      "Security",
+      "Zero-Trust"
     ]
   },
   {
@@ -316,6 +300,22 @@
       "YAML",
       "Configuration",
       "Kubernetes"
+    ]
+  },
+  {
+    "title": "JSON to YAML Converter: A Practical Guide for DevOps Engineers",
+    "slug": "json-to-yaml-converter-tools",
+    "excerpt": "Master JSON to YAML conversion for Docker Compose, Kubernetes, and CI/CD configs. Learn when to use each format and avoid common conversion pitfalls.",
+    "date": "2026-03-17",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&h=225&fit=crop",
+    "imageAlt": "Data format conversion between JSON and YAML",
+    "tags": [
+      "JSON",
+      "YAML",
+      "DevOps",
+      "Tutorial",
+      "Developer Tools"
     ]
   },
   {
@@ -350,21 +350,6 @@
     ]
   },
   {
-    "title": "Format SQL Queries Without Cloud Uploads",
-    "slug": "format-sql-queries-without-cloud-uploads",
-    "excerpt": "Learn why pasting SQL queries into online formatters exposes your database schema. Discover client-side SQL formatting that keeps your queries private.",
-    "date": "2026-03-15",
-    "metaDescription": "",
-    "image": "/images/blog/blog-06/database.jpg",
-    "imageAlt": "Database schema and SQL query visualization",
-    "tags": [
-      "SQL",
-      "Database",
-      "Security",
-      "Privacy"
-    ]
-  },
-  {
     "title": "SQL Formatter for Security: Spot Vulnerabilities in Plain Sight",
     "slug": "sql-formatter-security",
     "excerpt": "Unformatted SQL is a security blind spot. Learn how proper formatting reveals injection vulnerabilities, improves code reviews, and makes your database layer safer.",
@@ -381,18 +366,18 @@
     ]
   },
   {
-    "title": "Encode/Decode Base64 — Files Never Leave Your Browser",
-    "slug": "encode-decode-base64-files-never-leave-browser",
-    "excerpt": "Learn why Base64 is not encryption and why using online decoders for secrets is dangerous. Discover zero-trust, client-side Base64 encoding.",
-    "date": "2026-03-14",
+    "title": "Format SQL Queries Without Cloud Uploads",
+    "slug": "format-sql-queries-without-cloud-uploads",
+    "excerpt": "Learn why pasting SQL queries into online formatters exposes your database schema. Discover client-side SQL formatting that keeps your queries private.",
+    "date": "2026-03-15",
     "metaDescription": "",
-    "image": "/images/blog/blog-07/encryption.jpg",
-    "imageAlt": "Encryption and data transformation visualization",
+    "image": "/images/blog/blog-06/database.jpg",
+    "imageAlt": "Database schema and SQL query visualization",
     "tags": [
-      "Base64",
-      "Encoding",
+      "SQL",
+      "Database",
       "Security",
-      "Kubernetes"
+      "Privacy"
     ]
   },
   {
@@ -412,19 +397,18 @@
     ]
   },
   {
-    "title": "We Built 100+ Privacy-First Developer Tools. Here's What We Learned.",
-    "slug": "100-plus-developer-tools-launch",
-    "excerpt": "The story behind Formatho's 100+ developer tools — the architecture decisions, the hard trade-offs, and why we chose client-side processing over data harvesting.",
-    "date": "2026-03-13",
+    "title": "Encode/Decode Base64 — Files Never Leave Your Browser",
+    "slug": "encode-decode-base64-files-never-leave-browser",
+    "excerpt": "Learn why Base64 is not encryption and why using online decoders for secrets is dangerous. Discover zero-trust, client-side Base64 encoding.",
+    "date": "2026-03-14",
     "metaDescription": "",
-    "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=225&fit=crop",
-    "imageAlt": "100+ privacy-first developer tools launch",
+    "image": "/images/blog/blog-07/encryption.jpg",
+    "imageAlt": "Encryption and data transformation visualization",
     "tags": [
-      "Developer Tools",
-      "Launch",
-      "Privacy",
-      "Productivity",
-      "Open Source"
+      "Base64",
+      "Encoding",
+      "Security",
+      "Kubernetes"
     ]
   },
   {
@@ -443,19 +427,19 @@
     ]
   },
   {
-    "title": "Regex Tester Security: Patterns That Protect and Patterns That Kill",
-    "slug": "regex-tester-security",
-    "excerpt": "Regular expressions can validate input or bring your server to its knees. Learn about ReDoS attacks, safe regex patterns, and why client-side testing matters.",
-    "date": "2026-03-12",
+    "title": "We Built 100+ Privacy-First Developer Tools. Here's What We Learned.",
+    "slug": "100-plus-developer-tools-launch",
+    "excerpt": "The story behind Formatho's 100+ developer tools — the architecture decisions, the hard trade-offs, and why we chose client-side processing over data harvesting.",
+    "date": "2026-03-13",
     "metaDescription": "",
-    "image": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&h=225&fit=crop",
-    "imageAlt": "Regular expression testing for security",
+    "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=225&fit=crop",
+    "imageAlt": "100+ privacy-first developer tools launch",
     "tags": [
-      "Regex",
-      "Security",
-      "Tutorial",
       "Developer Tools",
-      "Testing"
+      "Launch",
+      "Privacy",
+      "Productivity",
+      "Open Source"
     ]
   },
   {
@@ -470,6 +454,22 @@
       "Regex",
       "Security",
       "Data Privacy",
+      "Testing"
+    ]
+  },
+  {
+    "title": "Regex Tester Security: Patterns That Protect and Patterns That Kill",
+    "slug": "regex-tester-security",
+    "excerpt": "Regular expressions can validate input or bring your server to its knees. Learn about ReDoS attacks, safe regex patterns, and why client-side testing matters.",
+    "date": "2026-03-12",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&h=225&fit=crop",
+    "imageAlt": "Regular expression testing for security",
+    "tags": [
+      "Regex",
+      "Security",
+      "Tutorial",
+      "Developer Tools",
       "Testing"
     ]
   },
@@ -490,21 +490,6 @@
     ]
   },
   {
-    "title": "Generate UUIDs Without Internet Connection: The 2026 Masterclass",
-    "slug": "generate-uuids-without-internet-connection-2026",
-    "excerpt": "Learn why generating UUIDs offline is critical for security. Discover how client-side UUID generation protects your database primary keys from prediction attacks.",
-    "date": "2026-03-10",
-    "metaDescription": "",
-    "image": "/images/blog/blog-10/unique-id.jpg",
-    "imageAlt": "Database server infrastructure representing unique identifiers and primary keys",
-    "tags": [
-      "UUID",
-      "Security",
-      "Offline Tools",
-      "Databases"
-    ]
-  },
-  {
     "title": "UUID Generator Masterclass: Everything You Need to Know About Unique Identifiers",
     "slug": "uuid-generator-masterclass",
     "excerpt": "Complete guide to UUIDs — from v1 to v5, security implications of predictable IDs, and how to generate unique identifiers safely in JavaScript and Node.js.",
@@ -518,6 +503,21 @@
       "JavaScript",
       "Tutorial",
       "Developer Tools"
+    ]
+  },
+  {
+    "title": "Generate UUIDs Without Internet Connection: The 2026 Masterclass",
+    "slug": "generate-uuids-without-internet-connection-2026",
+    "excerpt": "Learn why generating UUIDs offline is critical for security. Discover how client-side UUID generation protects your database primary keys from prediction attacks.",
+    "date": "2026-03-10",
+    "metaDescription": "",
+    "image": "/images/blog/blog-10/unique-id.jpg",
+    "imageAlt": "Database server infrastructure representing unique identifiers and primary keys",
+    "tags": [
+      "UUID",
+      "Security",
+      "Offline Tools",
+      "Databases"
     ]
   },
   {
@@ -551,18 +551,17 @@
     ]
   },
   {
-    "title": "The Strategic Horizon of AI Agent Orchestration: Your 2026 Career Blueprint",
-    "slug": "ai-agent-orchestration-career-blueprint-2026",
-    "excerpt": "A comprehensive guide to building a career in AI Agent Orchestration. Learn the tech stack, frameworks, and skills that matter for the autonomous multi-agent revolution.",
+    "title": "UUID v1 vs v4: Which Should You Use?",
+    "slug": "uuid-v1-vs-v4",
+    "excerpt": "Understanding the key differences between UUID versions and when to use each for your projects.",
     "date": "2026-03-07",
     "metaDescription": "",
-    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80&auto=format&fit=crop",
-    "imageAlt": "Artificial Intelligence robot brain representing autonomous AI agent systems",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Database server racks representing unique identifier storage and management",
     "tags": [
-      "AI Agents",
-      "Career",
-      "Technology",
-      "Enterprise AI"
+      "UUID",
+      "Databases",
+      "Best Practices"
     ]
   },
   {
@@ -581,20 +580,6 @@
     ]
   },
   {
-    "title": "UUID v1 vs v4: Which Should You Use?",
-    "slug": "uuid-v1-vs-v4",
-    "excerpt": "Understanding the key differences between UUID versions and when to use each for your projects.",
-    "date": "2026-03-07",
-    "metaDescription": "",
-    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop",
-    "imageAlt": "Database server racks representing unique identifier storage and management",
-    "tags": [
-      "UUID",
-      "Databases",
-      "Best Practices"
-    ]
-  },
-  {
     "title": "Inside Meta's AI Restructuring: The Race for Applied Superintelligence",
     "slug": "meta-ai-restructuring-applied-superintelligence-2026",
     "excerpt": "Meta's radical 2026 reorganization reveals the strategic tensions and architectural decisions shaping the AI industry. Here's what it means for the future of enterprise AI.",
@@ -607,6 +592,21 @@
       "AI Industry",
       "Technology",
       "Enterprise"
+    ]
+  },
+  {
+    "title": "The Strategic Horizon of AI Agent Orchestration: Your 2026 Career Blueprint",
+    "slug": "ai-agent-orchestration-career-blueprint-2026",
+    "excerpt": "A comprehensive guide to building a career in AI Agent Orchestration. Learn the tech stack, frameworks, and skills that matter for the autonomous multi-agent revolution.",
+    "date": "2026-03-07",
+    "metaDescription": "",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80&auto=format&fit=crop",
+    "imageAlt": "Artificial Intelligence robot brain representing autonomous AI agent systems",
+    "tags": [
+      "AI Agents",
+      "Career",
+      "Technology",
+      "Enterprise AI"
     ]
   },
   {

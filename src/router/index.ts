@@ -797,6 +797,12 @@ export const routes = [
         meta: routeMeta['prompt-injection-tester']
       },
       {
+        path: '/tools/zap-report-analyzer',
+        name: 'zap-report-analyzer',
+        component: () => import('@/views/ZapReportView.vue'),
+        meta: routeMeta['zap-report-analyzer']
+      },
+      {
                 path: '/tools/pdf-signature-checker',
         name: 'pdf-signature-checker',
         component: () => import(/* webpackPrefetch: true */ '../views/PdfSignatureCheckerView.vue'),
