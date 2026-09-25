@@ -8,10 +8,10 @@ import { Lock, Unlock, Cpu } from 'lucide-vue-next'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
-  title: 'MPC Demo - How Secure Multi-Party Computation Works | Formatho',
+  title: 'Secure Multi-Party Computation Demo - How Secure Multi-Party Computation Works | Formatho',
   description:
     'Interactive demo of additive secret sharing: split numbers into shares, compute addition and multiplication on encrypted shares, then reconstruct. See how MPC lets parties compute without seeing inputs. Client-side.',
-  keywords: ['mpc demo', 'secure multi-party computation explained', 'additive secret sharing', 'how does mpc work', 'encrypted computation', 'privacy preserving computation'],
+  keywords: ['mpc demo', 'secure multiparty computation', 'mpc vs mcp', 'additive secret sharing', 'how does mpc work', 'encrypted computation', 'privacy preserving computation'],
   ogType: 'website'
 })
 

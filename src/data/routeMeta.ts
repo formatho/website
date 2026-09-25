@@ -542,9 +542,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'shamir secret sharing, split secret into shares, threshold cryptography, secret sharing online, k of n scheme',
   },
   'mpc-demo': {
-    title: 'MPC Demo - How Secure Multi-Party Computation | Formatho',
-    description: 'Interactive demo: split numbers into additive shares, compute on encrypted shares, reconstruct result. See how MPC enables private AI, confidential DeFi.',
-    keywords: 'mpc demo, secure multi-party computation, additive secret sharing, how does mpc work, encrypted computation, privacy preserving',
+    title: 'Secure Multi-Party Computation Demo - MPC Explained | Formatho',
+    description: 'Interactive secure multi-party computation (MPC) demo: split numbers into additive shares, compute on encrypted shares, reconstruct without revealing inputs. How MPC enables private AI and confidential DeFi - and how MPC differs from MCP.',
+    keywords: 'secure multiparty computation, mpc demo, what is mpc, how does mpc work, mpc vs mcp, multi-party computation explained, additive secret sharing, encrypted computation, privacy preserving computation, mpc wallets',
   },
   'pedersen-commitment': {
     title: 'Pedersen Commitment Calculator - Commit Without | Formatho',
