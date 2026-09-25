@@ -83,6 +83,7 @@ export const tools: ToolCategory[] = [
     items: [
       { name: 'TLS Certificate Checker', description: 'Check TLS/SSL certificate expiry, issuer, and security configuration. Paste openssl output for instant analysis.', route: '/tools/tls-checker', iconName: 'Lock' },
       { name: 'Prompt Injection Tester', description: 'Scan prompts and untrusted content for injection patterns: overrides, exfiltration commands, hidden Unicode, encoded payloads. Includes attack payloads and the Lethal Trifecta checklist.', route: '/tools/prompt-injection-tester', iconName: 'ShieldAlert' },
+      { name: 'OWASP ZAP Report Analyzer', description: 'Paste an OWASP ZAP JSON or Markdown scan report and get a triaged summary: risk counts, affected URLs, CWE links and fix guidance. 100% client-side.', route: '/tools/zap-report-analyzer', iconName: 'Radar' },
       { name: 'Security Policy Generator', description: 'Generate password, access control, and incident response policies for SOC 2 compliance.', route: '/tools/policy-generator', iconName: 'FileText' },
       { name: 'Security Headers Analyzer', description: 'Check HSTS, CSP, X-Frame-Options and more on any URL. Graded A-F with fix recommendations.', route: '/tools/security-headers', iconName: 'ShieldCheck' },
       { name: 'CSP Generator', description: 'Build Content-Security-Policy headers visually. Configure directives and copy the header.', route: '/tools/csp-generator', iconName: 'Shield' },

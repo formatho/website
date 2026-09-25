@@ -267,32 +267,62 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://formatho.com/blogs/5-privacy-focused-developer-tools</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/blogs/base64-encoding-guide</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/blogs/ai-meets-blockchain-agent-orchestration-web3</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/blogs/ai-job-safety-22-careers-anthropic-research</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/blogs/bip39-mnemonic-guide</loc>
+    <lastmod>2026-02-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/blogs/base64-encoder-decoder-complete-guide</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/blogs/jwt-tokens-complete-guide</loc>
     <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/blogs/regex-practical-guide</loc>
     <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/blogs/privacy-first-developer-tools-2026</loc>
     <lastmod>2026-03-18</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://formatho.com/blogs/erc-7730-clear-signing-ethereum-standard</loc>
     <lastmod>2026-05-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/index-tracking-assets-options-not-debt</loc>
-    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -339,14 +369,20 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://formatho.com/blogs/beyond-the-chatbot-agentic-orchestration-digital-workforce</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/blogs/password-security-guide</loc>
     <lastmod>2026-02-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://formatho.com/blogs/beyond-the-chatbot-agentic-orchestration-digital-workforce</loc>
-    <lastmod>2026-04-14</lastmod>
+    <loc>https://formatho.com/blogs/index-tracking-assets-options-not-debt</loc>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -399,12 +435,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://formatho.com/blogs/base64-encoding-guide</loc>
-    <lastmod>2026-03-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/blogs/regex-tester-security</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
@@ -429,8 +459,20 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://formatho.com/blogs/clarity-act-victory-regulatory-clarity-3t-crypto-market</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/blogs/100-developer-tools-all-free-all-private</loc>
     <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/blogs/case-conversion-guide</loc>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -442,12 +484,6 @@
   </url>
   <url>
     <loc>https://formatho.com/blogs/ai-agent-orchestration-career-blueprint-2026</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/ai-job-safety-22-careers-anthropic-research</loc>
     <lastmod>2026-03-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -477,20 +513,8 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://formatho.com/blogs/bip39-mnemonic-guide</loc>
-    <lastmod>2026-02-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/blogs/unix-file-permissions</loc>
     <lastmod>2026-02-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/ai-meets-blockchain-agent-orchestration-web3</loc>
-    <lastmod>2026-04-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -519,20 +543,8 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://formatho.com/blogs/clarity-act-victory-regulatory-clarity-3t-crypto-market</loc>
-    <lastmod>2026-05-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/blogs/bcrypt-password-hashing-guide</loc>
     <lastmod>2026-03-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/base64-encoder-decoder-complete-guide</loc>
-    <lastmod>2026-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -575,18 +587,6 @@
   <url>
     <loc>https://formatho.com/blogs/ulids-vs-uuids</loc>
     <lastmod>2026-03-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/case-conversion-guide</loc>
-    <lastmod>2026-02-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/blogs/5-privacy-focused-developer-tools</loc>
-    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1177,6 +1177,11 @@
   </url>
   <url>
     <loc>https://formatho.com/tools/prompt-injection-tester</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/zap-report-analyzer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

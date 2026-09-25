@@ -441,6 +441,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Generate strong random passwords and passphrases in your browser: length control, character sets, exclude look-alike characters, entropy meter. Crypto-grade randomness, 100% client-side.',
     keywords: 'password generator, strong password, random password generator, passphrase generator, secure password, generate password',
   },
+  'zap-report-analyzer': {
+    title: 'OWASP ZAP Report Analyzer - Triage Scan Results | Formatho',
+    description: 'Paste an OWASP ZAP JSON or Markdown report and get a triaged summary: risk counts, affected URLs, CWE links and fixes. 100% client-side.',
+    keywords: 'owasp zap, zap report analyzer, zap json parser, zap report viewer, zap alerts, web security scanner, zap scan triage',
+  },
   'pint-ae': {
     title: 'PINT AE Invoice Builder & Validator - UAE E-Invoicing | Formatho',
     description: 'Build PINT AE XML invoices for the UAE e-invoicing mandate (Peppol), or paste XML to validate: TRN, VAT categories, required UBL fields, totals math. 100% client-side.',
