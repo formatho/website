@@ -287,8 +287,62 @@ for (const [slug, [title, desc]] of Object.entries(staticPages)) {
     html = html.replace('</head>',
       `<script type="application/ld+json" id="json-ld-runtime-faq">${JSON.stringify(faqLd)}</script>` +
       `<script type="application/ld+json" id="json-ld-runtime-howto">${JSON.stringify(howToLd)}</script></head>`)
+
+const softwareAppLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': 'https://formatho.com/runtime#softwareapp',
+  name: 'Formatho Runtime',
+  url: 'https://formatho.com/runtime',
+  description:
+    'Self-hosted MCP server for AI agents: one Docker container with 26 permissioned developer, security, and EVM tools, per-client API keys, rate limits, and metadata-only audit. Zero data egress.',
+  softwareVersion: '0.3.0',
+  applicationCategory: 'DeveloperApplication',
+  applicationSubCategory: 'MCP Server',
+  operatingSystem: 'Linux, macOS, Windows',
+  softwareRequirements: 'Docker',
+  runtimePlatform: ['Docker', 'Linux', 'macOS', 'Windows'],
+  featureList: [
+    '26 deterministic developer, security, and EVM tools',
+    'Zero data egress — tools are pure functions with no network, filesystem, or subprocess access',
+    'Per-client API keys with allow/deny tool policies',
+    'Per-key and per-tool rate limits',
+    'Metadata-only audit log — tool, version, key, duration, byte sizes; payloads never recorded',
+    'stdio and Streamable HTTP transports in one Docker image',
+    'REST gateway exposing the same tools over plain HTTP for scripts and CI',
+    'Listed in the MCP Registry as com.formatho/runtime'
+  ],
+  isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  downloadUrl: 'https://hub.docker.com/r/formatho/formatho-runtime',
+  installUrl: 'https://formatho.com/runtime',
+  releaseNotes: 'https://github.com/formatho/formatho-runtime/releases',
+  sameAs: [
+    'https://github.com/formatho/formatho-runtime',
+    'https://hub.docker.com/r/formatho/formatho-runtime',
+    'https://registry.modelcontextprotocol.io',
+    'https://x.com/heyformatho',
+    'https://linkedin.com/company/formatho'
+  ],
+  additionalProperty: [
+    { '@type': 'PropertyValue', name: 'MCP Registry ID', value: 'com.formatho/runtime' },
+    { '@type': 'PropertyValue', name: 'Transports', value: 'stdio, Streamable HTTP, REST gateway' },
+    { '@type': 'PropertyValue', name: 'Programming language', value: 'TypeScript' }
+  ],
+  keywords:
+    'MCP server, self-hosted MCP server, private MCP server, AI agent tools, Claude Code, Cursor, Claude Desktop, Docker, zero data egress, audit logging',
+  publisher: { '@type': 'Organization', name: 'Formatho', url: 'https://formatho.com/' },
+  datePublished: '2026-09-06' // v0.3.0 release date (GitHub releases API, verified 2026-09-24)
+}
+
+strip('json-ld-runtime-softwareapp')
+html = html.replace(
+  '</head>',
+  `${jsonldScript('json-ld-runtime-softwareapp', softwareAppLd)}</head>`
+)
+
     fs.writeFileSync(fp, html)
-    console.log('  ok: /runtime FAQPage + HowTo JSON-LD')
+    console.log('  ok: /runtime FAQPage + HowTo + SoftwareApplication JSON-LD')
   }
 }
 
