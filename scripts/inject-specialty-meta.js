@@ -398,3 +398,22 @@ for (const [slug, target] of Object.entries(stubs)) {
 }
 
 console.log('Done.')
+
+// Fix 404.html: vite-ssg copies the raw dev template (src/main.ts) instead of
+// the built bundle, so the prod 404 page is a blank shell. Swap in the real
+// entry script from the built index.html.
+const f404 = path.resolve(distDir, '404.html')
+if (fs.existsSync(f404)) {
+  let html = fs.readFileSync(f404, 'utf8')
+  if (html.includes('/src/main.ts')) {
+    const idxHtml = fs.readFileSync(path.resolve(distDir, 'index.html'), 'utf8')
+    const entry = idxHtml.match(/<script type="module"[^>]*src="\/assets\/[^"]+\.js"[^>]*>/)
+    if (entry) {
+      html = html.replace(/<script type="module"[^>]*src="\/src\/main\.ts"[^>]*>/, entry[0])
+      fs.writeFileSync(f404, html)
+      console.log('404.html: patched entry script -> ' + entry[0].match(/src="([^"]+)"/)[1])
+    } else {
+      console.warn('404.html: no built entry found in index.html, left unpatched')
+    }
+  }
+}
