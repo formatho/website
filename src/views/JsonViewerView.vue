@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import CodeEditor from '@/components/CodeEditor.vue'
 import { useTwins } from '@/composables/useTwins'
+import HouseAd from '@/components/HouseAd.vue'
 
 const { summonTwin } = useTwins()
 
@@ -107,4 +108,5 @@ watch(jsonInput, formatJson)
       {{ error }}
     </div>
   </div>
+  <HouseAd />
 </template>

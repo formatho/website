@@ -10,6 +10,7 @@
  *  - affiliate_click     : user clicked an outbound affiliate link (backlog #8; fires on
  *                           anchors with data-affiliate="merchant" — links are owner-gated)
  *  - outbound_click       : any other outbound link click on a tool page (funnel context)
+ *  - house_ad_view/click  : flag-gated house-ad slots, backlog #4 phase 1 (off by default)
  *
  * Privacy: only slugs + categories, never inputs/outputs/PII.
  */
@@ -54,6 +55,13 @@ function toolForPath(path: string): { name: string; category: string } | null {
 const viewedTools = new Set<string>()
 
 let initialized = false
+
+export function trackHouseAd(
+  eventName: 'house_ad_view' | 'house_ad_click',
+  slot: string
+): void {
+  send(eventName, { slot, program: 'house' })
+}
 
 export function initConversionTracking(router: Router): void {
   if (!initialized && typeof window !== 'undefined') {
