@@ -10,6 +10,7 @@ import {
   ZoomIn, ZoomOut, Maximize2, Loader2, Info
 } from 'lucide-vue-next'
 import { useTwins } from '@/composables/useTwins'
+import HouseAd from '@/components/HouseAd.vue'
 
 const { summonTwin } = useTwins()
 
@@ -1124,4 +1125,5 @@ watch(conversionSuccess, (success) => {
       </div>
     </div>
   </div>
+  <HouseAd />
 </template>
