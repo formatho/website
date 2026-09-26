@@ -274,11 +274,20 @@ jobs:
             echo "=== FRONT PROXY CONFIG DUMP (read-only) ==="
             CONF_DIR=$(docker service inspect nginx_nginx --format '{{range .Spec.TaskTemplate.ContainerSpec.Mounts}}{{.Source}}:{{.Target}}{{"\n"}}{{end}}' | grep -E '/etc/nginx' | head -1 | cut -d: -f1)
             echo "conf dir: $CONF_DIR"
-            if [ -n "$CONF_DIR" ]; then
+            # The /etc/nginx mount source may be a single nginx.conf FILE (direct
+            # bind mount) or a directory of *.conf snippets — handle both, and
+            # never let an unmatched glob literal fail the deploy (script_stop).
+            if [ -f "$CONF_DIR" ]; then
+              echo "## FILE: $CONF_DIR"
+              cat "$CONF_DIR" || true
+            elif [ -d "$CONF_DIR" ]; then
               for f in "$CONF_DIR"/*.conf; do
+                [ -f "$f" ] || continue
                 echo "## FILE: $f"
-                cat "$f"
+                cat "$f" || true
               done
+            else
+              echo "no nginx conf mount resolved at $CONF_DIR"
             fi
             (command -v nginx >/dev/null && nginx -T 2>/dev/null | grep -E 'server_name|proxy_pass|try_files|error_page' | head -30) || echo "no host nginx"
             echo "--- other proxy containers ---"
