@@ -138,7 +138,8 @@ const blogRoutes = blogEntries.map((p, i) => ({
 
 // Dynamically generate tool routes
 const toolPaths = parseToolRoutes()
-const toolRoutes = toolPaths.map((p) => ({
+// /tools/all duplicates /tools (same catalog page) — exclude from sitemap
+const toolRoutes = toolPaths.filter((p) => p !== '/tools/all').map((p) => ({
   path: p,
   priority: p === '/tools/markdown' || p === '/tools/bpmn' || p === '/tools/bpmn-to-visio' ? '0.9' : '0.8',
   changefreq: 'monthly',

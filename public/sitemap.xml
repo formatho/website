@@ -681,11 +681,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://formatho.com/tools/all</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/tools/uuid</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
