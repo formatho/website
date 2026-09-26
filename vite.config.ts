@@ -37,6 +37,10 @@ export default defineConfig({
     include: ['qrcode', 'pngjs'],
   },
   build: {
+    // ES2018 so optional chaining / nullish coalescing are transpiled:
+    // ES2020 output threw 'Unexpected token .' SyntaxErrors on older browsers
+    // (Safari < 13.1, Chrome < 80, old in-app webviews), blanking the app.
+    target: 'es2018',
     rollupOptions: {
       output: {
         chunkFileNames: 'assets/[name]-[hash].js',
