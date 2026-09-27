@@ -1,5 +1,7 @@
 # Formatho — Privacy-First Developer Tools
 
+<p align="center"><img src="public/logo.png" alt="Formatho logo" width="120"></p>
+
 **Free developer tools that run entirely in your browser.** No uploads, no accounts, no tracking.
 
 Live at **[formatho.com](https://formatho.com)**
