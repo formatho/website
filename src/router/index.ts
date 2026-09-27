@@ -803,6 +803,42 @@ export const routes = [
         meta: routeMeta['zap-report-analyzer']
       },
       {
+        path: '/tools/toml-yaml-json-converter',
+        name: 'toml-yaml-json-converter',
+        component: () => import(/* webpackPrefetch: true */ '../views/TomlYamlJsonConverterView.vue'),
+        meta: routeMeta['toml-yaml-json-converter']
+      },
+      {
+        path: '/tools/ipv4-converter-suite',
+        name: 'ipv4-converter-suite',
+        component: () => import(/* webpackPrefetch: true */ '../views/Ipv4ConverterSuiteView.vue'),
+        meta: routeMeta['ipv4-converter-suite']
+      },
+      {
+        path: '/tools/mac-address-toolkit',
+        name: 'mac-address-toolkit',
+        component: () => import(/* webpackPrefetch: true */ '../views/MacAddressToolkitView.vue'),
+        meta: routeMeta['mac-address-toolkit']
+      },
+      {
+        path: '/tools/everyday-converters',
+        name: 'everyday-converters',
+        component: () => import(/* webpackPrefetch: true */ '../views/EverydayConvertersView.vue'),
+        meta: routeMeta['everyday-converters']
+      },
+      {
+        path: '/tools/text-encoding-playground',
+        name: 'text-encoding-playground',
+        component: () => import(/* webpackPrefetch: true */ '../views/TextEncodingPlaygroundView.vue'),
+        meta: routeMeta['text-encoding-playground']
+      },
+      {
+        path: '/tools/quick-utilities',
+        name: 'quick-utilities',
+        component: () => import(/* webpackPrefetch: true */ '../views/QuickUtilitiesView.vue'),
+        meta: routeMeta['quick-utilities']
+      },
+      {
                 path: '/tools/pdf-signature-checker',
         name: 'pdf-signature-checker',
         component: () => import(/* webpackPrefetch: true */ '../views/PdfSignatureCheckerView.vue'),
@@ -810,66 +846,16 @@ export const routes = [
       },
       // Converter Tools
       {
-        path: '/tools/integer-base-converter',
-        name: 'integer-base-converter',
-        component: () =>
-          import(/* webpackPrefetch: true */ '../views/IntegerBaseConverterView.vue'),
-        meta: routeMeta['integer-base-converter']
-      },
-      {
-        path: '/tools/roman-numeral-converter',
-        name: 'roman-numeral-converter',
-        component: () =>
-          import(/* webpackPrefetch: true */ '../views/RomanNumeralConverterView.vue'),
-        meta: routeMeta['roman-numeral-converter']
-      },
-      {
         path: '/tools/base64-file-converter',
         name: 'base64-file-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/Base64FileConverterView.vue'),
         meta: routeMeta['base64-file-converter']
       },
       {
-        path: '/tools/text-to-nato-alphabet',
-        name: 'text-to-nato-alphabet',
-        component: () => import(/* webpackPrefetch: true */ '../views/TextToNatoAlphabetView.vue'),
-        meta: routeMeta['text-to-nato-alphabet']
-      },
-      {
-        path: '/tools/text-to-unicode',
-        name: 'text-to-unicode',
-        component: () => import(/* webpackPrefetch: true */ '../views/TextToUnicodeView.vue'),
-        meta: routeMeta['text-to-unicode']
-      },
-      {
-        path: '/tools/yaml-to-toml',
-        name: 'yaml-to-toml',
-        component: () => import(/* webpackPrefetch: true */ '../views/YamlToTomlView.vue'),
-        meta: routeMeta['yaml-to-toml']
-      },
-      {
-        path: '/tools/json-to-toml',
-        name: 'json-to-toml',
-        component: () => import(/* webpackPrefetch: true */ '../views/JsonToTomlView.vue'),
-        meta: routeMeta['json-to-toml']
-      },
-      {
         path: '/tools/list-converter',
         name: 'list-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/ListConverterView.vue'),
         meta: routeMeta['list-converter']
-      },
-      {
-        path: '/tools/toml-to-json',
-        name: 'toml-to-json',
-        component: () => import(/* webpackPrefetch: true */ '../views/TomlToJsonView.vue'),
-        meta: routeMeta['toml-to-json']
-      },
-      {
-        path: '/tools/toml-to-yaml',
-        name: 'toml-to-yaml',
-        component: () => import(/* webpackPrefetch: true */ '../views/TomlToYamlView.vue'),
-        meta: routeMeta['toml-to-yaml']
       },
       {
         path: '/tools/markdown-to-html',
@@ -921,18 +907,6 @@ export const routes = [
         meta: routeMeta['otp-code-generator']
       },
       {
-        path: '/tools/mime-types',
-        name: 'mime-types',
-        component: () => import(/* webpackPrefetch: true */ '../views/MimeTypesView.vue'),
-        meta: routeMeta['mime-types']
-      },
-      {
-        path: '/tools/keycode-info',
-        name: 'keycode-info',
-        component: () => import(/* webpackPrefetch: true */ '../views/KeycodeInfoView.vue'),
-        meta: routeMeta['keycode-info']
-      },
-      {
         path: '/tools/slugify-string',
         name: 'slugify-string',
         component: () => import(/* webpackPrefetch: true */ '../views/SlugifyStringView.vue'),
@@ -957,44 +931,13 @@ export const routes = [
         component: () => import(/* webpackPrefetch: true */ '../views/JsonDiffView.vue'),
         meta: routeMeta['json-diff']
       },
-      {
-        path: '/tools/safelink-decoder',
-        name: 'safelink-decoder',
-        component: () => import(/* webpackPrefetch: true */ '../views/SafelinkDecoderView.vue'),
-        meta: routeMeta['safelink-decoder']
-      },
       // Images/Videos Tools
-      {
-        path: '/tools/wifi-qr-code-generator',
-        name: 'wifi-qr-code-generator',
-        component: () => import(/* webpackPrefetch: true */ '../views/WifiQrCodeGeneratorView.vue'),
-        meta: routeMeta['wifi-qr-code-generator']
-      },
-      {
-        path: '/tools/svg-placeholder-generator',
-        name: 'svg-placeholder-generator',
-        component: () =>
-          import(/* webpackPrefetch: true */ '../views/SvgPlaceholderGeneratorView.vue'),
-        meta: routeMeta['svg-placeholder-generator']
-      },
-      {
-        path: '/tools/camera-recorder',
-        name: 'camera-recorder',
-        component: () => import(/* webpackPrefetch: true */ '../views/CameraRecorderView.vue'),
-        meta: routeMeta['camera-recorder']
-      },
       // Development Tools
       {
         path: '/tools/git-memo',
         name: 'git-memo',
         component: () => import(/* webpackPrefetch: true */ '../views/GitMemoView.vue'),
         meta: routeMeta['git-memo']
-      },
-      {
-        path: '/tools/random-port-generator',
-        name: 'random-port-generator',
-        component: () => import(/* webpackPrefetch: true */ '../views/RandomPortGeneratorView.vue'),
-        meta: routeMeta['random-port-generator']
       },
       {
         path: '/tools/json-viewer',
@@ -1032,18 +975,6 @@ export const routes = [
         component: () => import(/* webpackPrefetch: true */ '../views/YamlViewerView.vue'),
         meta: routeMeta['yaml-viewer']
       },
-      {
-        path: '/tools/email-normalizer',
-        name: 'email-normalizer',
-        component: () => import(/* webpackPrefetch: true */ '../views/EmailNormalizerView.vue'),
-        meta: routeMeta['email-normalizer']
-      },
-      {
-        path: '/tools/regex-memo',
-        name: 'regex-memo',
-        component: () => import(/* webpackPrefetch: true */ '../views/RegexMemoView.vue'),
-        meta: routeMeta['regex-memo']
-      },
       // Network Tools
       {
         path: '/tools/ipv4-subnet-calculator',
@@ -1051,31 +982,6 @@ export const routes = [
         component: () =>
           import(/* webpackPrefetch: true */ '../views/Ipv4SubnetCalculatorView.vue'),
         meta: routeMeta['ipv4-subnet-calculator']
-      },
-      {
-        path: '/tools/ipv4-address-converter',
-        name: 'ipv4-address-converter',
-        component: () =>
-          import(/* webpackPrefetch: true */ '../views/Ipv4AddressConverterView.vue'),
-        meta: routeMeta['ipv4-address-converter']
-      },
-      {
-        path: '/tools/ipv4-range-expander',
-        name: 'ipv4-range-expander',
-        component: () => import(/* webpackPrefetch: true */ '../views/Ipv4RangeExpanderView.vue'),
-        meta: routeMeta['ipv4-range-expander']
-      },
-      {
-        path: '/tools/mac-address-lookup',
-        name: 'mac-address-lookup',
-        component: () => import(/* webpackPrefetch: true */ '../views/MacAddressLookupView.vue'),
-        meta: routeMeta['mac-address-lookup']
-      },
-      {
-        path: '/tools/mac-address-generator',
-        name: 'mac-address-generator',
-        component: () => import(/* webpackPrefetch: true */ '../views/MacAddressGeneratorView.vue'),
-        meta: routeMeta['mac-address-generator']
       },
       {
         path: '/tools/ipv6-ula-generator',
@@ -1092,19 +998,6 @@ export const routes = [
       },
       // Measurement Tools
       {
-        path: '/tools/chronometer',
-        name: 'chronometer',
-        component: () => import(/* webpackPrefetch: true */ '../views/ChronometerView.vue'),
-        meta: routeMeta['chronometer']
-      },
-      {
-        path: '/tools/temperature-converter',
-        name: 'temperature-converter',
-        component: () =>
-          import(/* webpackPrefetch: true */ '../views/TemperatureConverterView.vue'),
-        meta: routeMeta['temperature-converter']
-      },
-      {
         path: '/tools/benchmark-builder',
         name: 'benchmark-builder',
         component: () => import(/* webpackPrefetch: true */ '../views/BenchmarkBuilderView.vue'),
@@ -1118,28 +1011,10 @@ export const routes = [
         meta: routeMeta['text-statistics']
       },
       {
-        path: '/tools/emoji-picker',
-        name: 'emoji-picker',
-        component: () => import(/* webpackPrefetch: true */ '../views/EmojiPickerView.vue'),
-        meta: routeMeta['emoji-picker']
-      },
-      {
         path: '/tools/string-obfuscator',
         name: 'string-obfuscator',
         component: () => import(/* webpackPrefetch: true */ '../views/StringObfuscatorView.vue'),
         meta: routeMeta['string-obfuscator']
-      },
-      {
-        path: '/tools/numeronym-generator',
-        name: 'numeronym-generator',
-        component: () => import(/* webpackPrefetch: true */ '../views/NumeronymGeneratorView.vue'),
-        meta: routeMeta['numeronym-generator']
-      },
-      {
-        path: '/tools/ascii-text-drawer',
-        name: 'ascii-text-drawer',
-        component: () => import(/* webpackPrefetch: true */ '../views/AsciiTextDrawerView.vue'),
-        meta: routeMeta['ascii-text-drawer']
       },
       // Data Tools
       {
@@ -1174,23 +1049,10 @@ export const routes = [
         meta: routeMeta['regex-tester']
       },
       {
-        path: '/tools/math-evaluator',
-        name: 'math-evaluator',
-        component: () => import(/* webpackPrefetch: true */ '../views/MathEvaluatorView.vue'),
-        meta: routeMeta['math-evaluator']
-      },
-      {
         path: '/tools/quantum-circuit-simulator',
         name: 'quantum-circuit-simulator',
         component: () => import(/* webpackPrefetch: true */ '../views/QuantumCircuitSimulatorView.vue'),
         meta: routeMeta['quantum-circuit-simulator']
-      },
-      {
-        path: '/tools/percentage-calculator',
-        name: 'percentage-calculator',
-        component: () =>
-          import(/* webpackPrefetch: true */ '../views/PercentageCalculatorView.vue'),
-        meta: routeMeta['percentage-calculator']
       },
       {
         path: '/tools/token-generator',
@@ -1235,12 +1097,6 @@ export const routes = [
         meta: routeMeta['unix-timestamp']
       },
       {
-        path: '/tools/color-converter',
-        name: 'color-converter',
-        component: () => import(/* webpackPrefetch: true */ '../views/ColorConverterView.vue'),
-        meta: routeMeta['color-converter']
-      },
-      {
         path: '/tools/text-to-binary',
         name: 'text-to-binary',
         component: () => import(/* webpackPrefetch: true */ '../views/TextToBinaryView.vue'),
@@ -1257,12 +1113,6 @@ export const routes = [
         name: 'mermaid-viewer',
         component: () => import(/* webpackPrefetch: true */ '../views/tools/MermaidViewer.vue'),
         meta: routeMeta['mermaid-viewer']
-      },
-      {
-        path: '/tools/beta-feedback',
-        name: 'beta-feedback',
-        component: () => import(/* webpackPrefetch: true */ '../views/BetaFeedbackView.vue'),
-        meta: routeMeta['beta-feedback']
       },
       {
         path: '/tools/admin/beta-feedback',

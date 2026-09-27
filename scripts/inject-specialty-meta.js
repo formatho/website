@@ -384,6 +384,16 @@ const stubs = {
   // for the public)
   'tools/admin/ab-tests': '/',
   'tools/admin/beta-feedback': '/',
+  // AdSense cleanup: thin persona pages kept live but not indexed
+  'dev-tools/sap': '/tools',
+  'dev-tools/ping-federate': '/tools',
+  'dev-tools/okta': '/tools',
+  'evm-tools/robinhood': '/tools',
+  'evm-tools/stable': '/tools',
+  'evm-tools/tempo': '/tools',
+  'evm-tools/katana': '/tools',
+  'evm-tools/ritual': '/tools',
+  'evm-tools/hyperevm': '/tools',
 }
 for (const [slug, target] of Object.entries(stubs)) {
   const fp = path.join(distDir, slug + '.html')

@@ -1,0 +1,61 @@
+<template>
+  <div class="max-w-6xl mx-auto p-4 md:p-8 space-y-6">
+    <div class="flex items-center gap-3">
+      <div class="p-2 rounded-lg bg-primary/10">
+        <FileCode class="w-6 h-6 text-primary" />
+      </div>
+      <div>
+        <h1 class="text-2xl font-bold">TOML YAML JSON Converter</h1>
+        <p class="text-sm text-muted-foreground">Convert between TOML, YAML and JSON in one tabbed tool. 100% client-side.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      <button v-for="t in tabs" :key="t.label" @click="active = t.label"
+        class="px-4 py-2 rounded-md text-sm font-medium border transition-colors"
+        :class="active === t.label ? 'bg-primary text-primary-foreground' : 'bg-background hover:bg-muted'">
+        {{ t.label }}
+      </button>
+    </div>
+
+    <div v-if="mounted">
+      <component :is="currentComp" />
+    </div>
+    <p v-else class="text-muted-foreground">Loading tool…</p>
+
+    <Card>
+      <CardHeader><CardTitle>About this page</CardTitle></CardHeader>
+      <CardContent class="text-sm text-muted-foreground">
+        <p>All four conversion modes run locally in your browser. Nothing is uploaded. Pick a tab, paste your data, copy the result.</p>
+      </CardContent>
+    </Card>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed, onMounted, defineAsyncComponent } from 'vue'
+import { FileCode } from 'lucide-vue-next'
+const TomlToYaml = defineAsyncComponent(() => import('@/views/TomlToYamlView.vue'))
+const YamlToToml = defineAsyncComponent(() => import('@/views/YamlToTomlView.vue'))
+const JsonToToml = defineAsyncComponent(() => import('@/views/JsonToTomlView.vue'))
+const TomlToJson = defineAsyncComponent(() => import('@/views/TomlToJsonView.vue'))
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { useSEO } from '@/composables/useSEO'
+
+useSEO({
+  title: 'TOML YAML JSON Converter - All Formats One Tool | Formatho',
+  description: 'Convert between TOML, YAML and JSON in one tabbed tool. Four modes, live validation, 100% client-side.',
+  keywords: ['toml to yaml', 'yaml to toml', 'json to toml', 'toml to json', 'toml converter', 'yaml converter']
+})
+
+const tabs = [
+    ['TOML to YAML', TomlToYaml],
+    ['YAML to TOML', YamlToToml],
+    ['JSON to TOML', JsonToToml],
+    ['TOML to JSON', TomlToJson]
+  ].map(([label, comp]) => ({ label, comp }))
+const active = ref(tabs[0].label)
+const mounted = ref(false)
+onMounted(() => { mounted.value = true })
+const currentComp = computed(() => tabs.find(t => t.label === active.value)?.comp)
+</script>
