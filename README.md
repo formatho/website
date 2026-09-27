@@ -1,6 +1,6 @@
 # Formatho — Privacy-First Developer Tools
 
-**160+ free developer tools that run entirely in your browser.** No uploads, no accounts, no tracking.
+**Free developer tools that run entirely in your browser.** No uploads, no accounts, no tracking.
 
 Live at **[formatho.com](https://formatho.com)**
 
@@ -12,11 +12,11 @@ never leave your device. The site even works offline once loaded.
 
 ## Categories
 
-- **Security & Auth (33)** — JWT debugger, SAML decoder, OIDC/PKCE builder, OWASP ZAP report analyzer, security headers checker, CSP generator, TLS certificate checker, Argon2id/bcrypt/PBKDF2 hashing, TOTP, RSA/X25519 key tools
-- **Compliance & Standards (20)** — EU Digital Product Passport builder/validator, ESPR readiness, ISO 20022 pain.001 builder, PINT AE invoice builder (UAE e-invoicing), SOC 2 checklist, battery passport, GS1 Digital Link, BOM tools
-- **Web3 & Blockchain (35)** — multi-chain wallet generator (ETH/BTC/SOL/ATOM/DOT with verified test vectors), EVM contract reader, vanity address generator, Solana/Polkadot/Cardano/Cosmos readers, ABI tools, ENS namehash, ERC-4626 analyzer, Uniswap calculators, RWA tokenization lab
-- **Developer Tools (36)** — SQL formatter and schema tools, Git and regex references, Docker conversion, Mermaid viewer, Markdown editor, LLM token counter, Jev playground
-- **Data Formats (20)** — JSON / YAML / XML / TOML / CSV formatters, validators, converters, diff tools, UUID/ULID
+- **Security & Auth** — JWT debugger, SAML decoder, OIDC/PKCE builder, OWASP ZAP report analyzer, security headers checker, CSP generator, TLS certificate checker, Argon2id/bcrypt/PBKDF2 hashing, TOTP, RSA/X25519 key tools
+- **Compliance & Standards** — EU Digital Product Passport builder/validator, ESPR readiness, ISO 20022 pain.001 builder, PINT AE invoice builder (UAE e-invoicing), SOC 2 checklist, battery passport, GS1 Digital Link, BOM tools
+- **Web3 & Blockchain** — multi-chain wallet generator (ETH/BTC/SOL/ATOM/DOT with verified test vectors), EVM contract reader, vanity address generator, Solana/Polkadot/Cardano/Cosmos readers, ABI tools, ENS namehash, ERC-4626 analyzer, Uniswap calculators, RWA tokenization lab
+- **Developer Tools** — SQL formatter and schema tools, Git and regex references, Docker conversion, Mermaid viewer, Markdown editor, LLM token counter, Jev playground
+- **Data Formats** — JSON / YAML / XML / TOML / CSV formatters, validators, converters, diff tools, UUID/ULID
 - **Converters & Calculators** — Unix timestamp, number base, color, case, roman numerals, temperature (combined tool pages)
 - **Network & Web** — IPv4 subnet calculator and converter suite, MAC address toolkit, IPv6 ULA generator, URL encoder/parser, QR codes, HTTP status codes, CORS tester
 
