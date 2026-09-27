@@ -201,7 +201,10 @@ const opSymbol = computed(() => operation.value === 'add' ? '+' : '×')
         </Button>
       </CardContent>
       <CardContent v-else>
-        <p class="text-sm text-muted-foreground text-center py-4">Click "Split & Compute" to start the demo</p>
+        <Button @click="doShare" class="w-full">
+          <Lock class="w-4 h-4 mr-1" /> Split & Compute
+        </Button>
+        <p class="text-xs text-muted-foreground text-center mt-2">Splits both secrets into shares so no single party sees them</p>
       </CardContent>
     </Card>
 
