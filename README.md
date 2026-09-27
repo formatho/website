@@ -2,7 +2,7 @@
 
 <p align="center"><img src="public/logo.png" alt="Formatho logo" width="120"></p>
 
-**Free developer tools that run entirely in your browser.** No uploads, no accounts, no tracking.
+**Free developer tools that run entirely in your browser.** No uploads, no accounts — your tool inputs never leave your device.
 
 Live at **[formatho.com](https://formatho.com)**
 
@@ -10,7 +10,8 @@ Live at **[formatho.com](https://formatho.com)**
 
 Most online dev tools (JSON formatters, JWT decoders, hash generators) send your data to a server.
 Formatho doesn't — everything runs 100% client-side. Your tokens, keys, config files, and secrets
-never leave your device. The site even works offline once loaded.
+never leave your device (analytics are cookieless and never see tool inputs). The site even works
+offline once loaded.
 
 ## Categories
 
