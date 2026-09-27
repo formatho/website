@@ -211,9 +211,6 @@
 
 <body>
   <div id="app"></div>
-  <!-- Buffer polyfill - loaded async, self-assigns globally for crypto libs -->
-  <!-- Vite plugin also polyfills Buffer in bundled chunks; this is a belt-and-suspenders fallback -->
-  <script defer src="https://cdn.jsdelivr.net/npm/buffer@6.0.3/index.min.js"></script>
   <script>
     // Self-executing: if Buffer isn't set yet, check again on DOMContentLoaded
     (function ensureBuffer() {
