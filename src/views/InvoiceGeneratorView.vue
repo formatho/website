@@ -75,7 +75,8 @@ async function downloadPdf() {
   doc.text(`#${inv.value.number}`, W - M, y, { align: 'right' })
   y += 6
   doc.setFontSize(9).setTextColor(110)
-  doc.text(`Date: ${inv.value.date}    Due: ${inv.value.due}`, W - M, y, { align: 'right' })
+  const duePart = inv.value.due ? `    Due: ${inv.value.due}` : ''
+  doc.text(`Date: ${inv.value.date}${duePart}`, W - M, y, { align: 'right' })
   y += 10
   doc.setTextColor(0)
 
@@ -219,7 +220,7 @@ async function downloadPdf() {
             </div>
             <div class="text-xs text-gray-600 text-right">
               <div>Date: {{ inv.date }}</div>
-              <div>Due: {{ inv.due }}</div>
+              <div v-if="inv.due">Due: {{ inv.due }}</div>
             </div>
           </div>
           <div class="grid grid-cols-2 gap-4 mt-6 text-[11px] leading-snug">
