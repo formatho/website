@@ -446,6 +446,36 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Paste an OWASP ZAP JSON or Markdown report and get a triaged summary: risk counts, affected URLs, CWE links and fixes. 100% client-side.',
     keywords: 'owasp zap, zap report analyzer, zap json parser, zap report viewer, zap alerts, web security scanner, zap scan triage',
   },
+  'toml-yaml-json-converter': {
+    title: 'TOML YAML JSON Converter - All Formats One Tool | Formatho',
+    description: 'Convert between TOML, YAML and JSON in one tabbed tool. Four modes, live validation, 100% client-side.',
+    keywords: 'toml to yaml, yaml to toml, json to toml, toml to json, toml converter, yaml converter',
+  },
+  'ipv4-converter-suite': {
+    title: 'IPv4 Converter Suite - Address, Range and Mask Tools | Formatho',
+    description: 'Convert IPv4 addresses across formats and expand CIDR ranges into host lists. Client-side networking tools.',
+    keywords: 'ipv4 converter, ip address converter, cidr range expander, binary ip, hex ip',
+  },
+  'mac-address-toolkit': {
+    title: 'MAC Address Toolkit - Vendor Lookup and Generator | Formatho',
+    description: 'Look up MAC address vendors by OUI and generate random MAC addresses. Tabbed, client-side.',
+    keywords: 'mac address lookup, mac vendor lookup, random mac generator, oui lookup',
+  },
+  'everyday-converters': {
+    title: 'Everyday Converters - Roman, Temperature, Percent and More | Formatho',
+    description: 'Six everyday converters in one tabbed page: roman numerals, temperature, percentages, math, number bases, colors.',
+    keywords: 'roman numeral converter, temperature converter, percentage calculator, color converter, integer base converter',
+  },
+  'text-encoding-playground': {
+    title: 'Text Encoding Playground - Unicode, NATO and ASCII Art | Formatho',
+    description: 'Convert text to Unicode escapes, NATO phonetic alphabet, numeronyms and ASCII art in one tabbed playground.',
+    keywords: 'text to unicode, nato alphabet converter, numeronym generator, ascii art generator',
+  },
+  'quick-utilities': {
+    title: 'Quick Utilities - QR, Timer, Emoji and Keycodes | Formatho',
+    description: 'SVG placeholders, WiFi QR codes, camera recorder, chronometer, emoji picker and keycode info in one page.',
+    keywords: 'wifi qr code generator, svg placeholder, online chronometer, emoji picker, keycode tester',
+  },
   'pint-ae': {
     title: 'PINT AE Invoice Builder & Validator - UAE E-Invoicing | Formatho',
     description: 'Build PINT AE XML invoices for the UAE e-invoicing mandate (Peppol), or paste XML to validate: TRN, VAT categories, required UBL fields, totals math. 100% client-side.',
@@ -649,46 +679,13 @@ export const routeMeta: Record<string, RouteMeta> = {
     title: 'PDF Signature Checker - Validate Digital | Formatho',
     description: 'Check and validate digital signatures in PDF files. Privacy-first tool. Free, private, and 100% client-side in your browser. No signup, no upload.',
   },
-  'integer-base-converter': {
-    title: 'Number Base Converter - Binary, Hex, Octal | Formatho',
-    description: 'Convert numbers between binary, octal, decimal, and hexadecimal. Free, private, and 100% client-side in your browser. No signup, no upload.',
-  },
-  'roman-numeral-converter': {
-    title: 'Roman Numeral Converter - Secure MCP Tool for AI | Formatho',
-    description: 'Convert Roman numerals to numbers and back. Handles subtractive notation (IV, IX, XL), validates malformed input, and shows the arithmetic.',
-  },
   'base64-file-converter': {
     title: 'Base64 File Converter Online | Formatho',
     description: 'Convert files to and from Base64 format. Privacy-first tool. Free, private, and 100% client-side in your browser. No signup, no upload.',
   },
-  'text-to-nato-alphabet': {
-    title: 'Text to NATO Alphabet Converter | Formatho',
-    description: 'Convert any text to the NATO phonetic alphabet (Alpha, Bravo, Charlie) and back — for reading strings aloud over voice channels without ambiguity.',
-  },
-  'text-to-unicode': {
-    title: 'Text to Unicode Converter | Formatho',
-    description: 'Convert text to Unicode code points and HTML entities. Free, private, and 100% client-side in your browser. No signup, no upload.',
-  },
-  'yaml-to-toml': {
-    title: 'YAML to TOML Converter - Secure MCP Tool for AI | Formatho',
-    description: 'Convert YAML configuration files to TOML format. Free, private, and 100% client-side in your browser. No signup, no upload.',
-  },
-  'json-to-toml': {
-    title: 'JSON to TOML Converter',
-    description: 'Convert JSON to TOML instantly — tables, arrays of tables, and nested values mapped to their TOML equivalents. Runs entirely client-side; your configs.',
-  },
   'list-converter': {
     title: 'List Converter Online - Comma, Newline, JSON | Formatho',
     description: 'Convert lists between different formats (comma, newline, JSON, etc). Free, private, and 100% client-side in your browser. No signup, no upload.',
-  },
-  'toml-to-json': {
-    title: 'TOML to JSON Converter — Cargo.toml & pyproject | Formatho',
-    description: 'Convert TOML to JSON instantly — Rust Cargo.toml, pyproject.toml, and config files. Runs client-side; your configs never leave the browser.',
-    keywords: 'toml to json, cargo toml converter, pyproject.toml to json, toml parser online'
-  },
-  'toml-to-yaml': {
-    title: 'TOML to YAML Converter - Secure MCP Tool for AI | Formatho',
-    description: 'Convert TOML configuration files to YAML format. Free, private, and 100% client-side in your browser. No signup, no upload.',
   },
   'markdown-to-html': {
     title: 'Markdown to HTML Converter | Formatho',
@@ -724,14 +721,6 @@ export const routeMeta: Record<string, RouteMeta> = {
     title: 'TOTP Generator Online - 2FA OTP Codes | Formatho',
     description: 'Generate TOTP codes from secrets. Privacy-first tool. Free, private, and 100% client-side in your browser. No signup, no upload.',
   },
-  'mime-types': {
-    title: 'MIME Type Lookup',
-    description: 'Look up MIME types by file extension and vice versa — official IANA types with common alternates and category. Instant reference for headers, uploads, and.',
-  },
-  'keycode-info': {
-    title: 'Keycode Info',
-    description: 'Press any key to see its JavaScript event data: keyCode, key, code, and modifier state. Essential for keyboard shortcuts, games, and accessibility work.',
-  },
   'slugify-string': {
     title: 'Slugify — URL-Safe Slugs, Client-Side | Formatho',
     description: 'Turn any title into a clean URL slug — accent-stripping, stop-word options, bulk mode. Generated locally, never uploaded.',
@@ -749,31 +738,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     title: 'JSON Diff Checker - Compare JSON Online | Formatho',
     description: 'Compare and find differences between JSON objects. Free, private, and 100% client-side in your browser. No signup, no upload.',
   },
-  'safelink-decoder': {
-    title: 'Outlook Safelink Decoder',
-    description: 'Decode Outlook SafeLinks wrapper URLs back to their original destination. Strip the redirection tracking layer to see where a link really goes before you.',
-  },
-  'wifi-qr-code-generator': {
-    title: 'WiFi QR Code Generator - Share WiFi by QR | Formatho',
-    description: 'Generate QR codes for WiFi network credentials instantly. Share your WiFi password with guests without typing — scan and connect.',
-    keywords: 'wifi qr code generator, wifi password qr, qr code wifi, share wifi, wifi qr code, wifi network qr, free wifi qr generator, scan wifi qr, guest wifi qr code, privacy-first',
-  },
-  'svg-placeholder-generator': {
-    title: 'SVG Placeholder Generator | Formatho',
-    description: 'Generate clean SVG placeholder images with custom dimensions, colors, and text labels — data-URI ready for mockups and tests.',
-  },
-  'camera-recorder': {
-    title: 'Webcam Recorder - Record Video & Audio in Browser | Formatho',
-    description: 'Record video and audio directly from your webcam — no software install needed. Capture HD video, take snapshots, and download as WebM.',
-    keywords: 'webcam recorder, record video online, browser camera, video capture, webm recorder, online video recorder, camera snapshot, screen recording, free webcam tool, privacy-first',
-  },
   'git-memo': {
     title: 'Git Cheat Sheet',
     description: 'A searchable Git cheat sheet: staging, branching, undoing, and recovery commands with when-to-use notes. The reference for fixing mistakes without.',
-  },
-  'random-port-generator': {
-    title: 'Random Port Generator - Secure MCP Tool for AI | Formatho',
-    description: 'Generate random port numbers for development. Free, private, and 100% client-side in your browser. No signup, no upload.',
   },
   'json-viewer': {
     title: 'JSON Viewer/Formatter',
@@ -801,33 +768,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Validate and format YAML in your browser — catches indentation and duplicate-key errors before kubectl does. Kubernetes, CI, Ansible configs stay local.',
     keywords: 'yaml validator, yaml linter, yaml formatter, kubernetes yaml validator, ci yaml checker, validate yaml online',
   },
-  'email-normalizer': {
-    title: 'Email Normalizer',
-    description: 'Normalize email addresses for deduplication: lowercasing, Gmail dot and plus-addressing rules, and provider-specific quirks.',
-  },
-  'regex-memo': {
-    title: 'Regex Cheat Sheet - Patterns & Syntax Reference | Formatho',
-    description: 'Regular expression patterns and syntax reference. Free, private, and 100% client-side in your browser. No signup, no upload.',
-  },
   'ipv4-subnet-calculator': {
     title: 'IPv4 Subnet Calculator',
     description: 'IPv4 subnet calculator: CIDR to mask, network and broadcast addresses, usable host ranges, and split planning for any prefix.',
-  },
-  'ipv4-address-converter': {
-    title: 'IPv4 Address Converter - Decimal, Binary, Hex | Formatho',
-    description: 'Convert IPv4 addresses between dotted decimal, binary, octal, decimal, and hex representations — with the bit layout shown.',
-  },
-  'ipv4-range-expander': {
-    title: 'IPv4 Range Expander - Expand CIDR to IP List | Formatho',
-    description: 'Expand IPv4 address ranges to individual IPs. Free, private, and 100% client-side in your browser. No signup, no upload.',
-  },
-  'mac-address-lookup': {
-    title: 'MAC Address Lookup - Find Vendor by MAC | Formatho',
-    description: 'Look up MAC address vendors by OUI prefix, and generate or format MAC addresses in any notation (colon, hyphen, dot, bare).',
-  },
-  'mac-address-generator': {
-    title: 'MAC Address Generator',
-    description: 'Generate random MAC addresses with vendor OUI prefixes or fully random locally-administered addresses — bulk output, any notation.',
   },
   'ipv6-ula-generator': {
     title: 'IPv6 ULA Generator',
@@ -837,14 +780,6 @@ export const routeMeta: Record<string, RouteMeta> = {
     title: 'ETA Calculator',
     description: 'Calculate arrival times from distance and speed, or the speed needed to hit a deadline — with unit conversions built in.',
   },
-  'chronometer': {
-    title: 'Chronometer',
-    description: 'Online stopwatch and timer. Free, private, and 100% client-side in your browser. No signup, no upload. Free, private, and 100% client-side in your browser.',
-  },
-  'temperature-converter': {
-    title: 'Temperature Converter',
-    description: 'Convert temperatures between Celsius, Fahrenheit, Kelvin, and Rankine. Free, private, and 100% client-side in your browser.',
-  },
   'benchmark-builder': {
     title: 'Benchmark Builder',
     description: 'Build performance benchmarks and compare results — track runs, compute statistics, and export findings. Prototype your methodology in the browser before.',
@@ -853,21 +788,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     title: 'Text Statistics Counter | Formatho',
     description: 'Analyze text statistics (characters, words, etc). Free, private, and 100% client-side in your browser. No signup, no upload.',
   },
-  'emoji-picker': {
-    title: 'Emoji Picker',
-    description: 'Browse and copy emojis. Free, private, and 100% client-side in your browser. No signup, no upload. Free, private, and 100% client-side in your browser.',
-  },
   'string-obfuscator': {
     title: 'String Obfuscator',
     description: 'Obfuscate strings for basic anti-scraping and casual hiding — encoding layers and character tricks with reversible output.',
-  },
-  'numeronym-generator': {
-    title: 'Numeronym Generator',
-    description: 'Generate numeronyms like i18n and k8s from any word or phrase — the abbreviation convention behind DevOps vocabulary. Bulk conversion, instant, entirely.',
-  },
-  'ascii-text-drawer': {
-    title: 'ASCII Text Drawer',
-    description: 'Generate ASCII art text. Free, private, and 100% client-side in your browser. No signup, no upload. Free, private, and 100% client-side in your browser.',
   },
   'phone-parser': {
     title: 'Phone Parser & Formatter',
@@ -891,18 +814,10 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Test and debug regular expressions online instantly. Match patterns, capture groups, flags (global, case-insensitive), and see results in real-time.',
     keywords: 'regex tester online, regular expression tester, regex checker, regex validator, test regex online, regex matcher, regex debugger, free regex tool, privacy-first',
   },
-  'math-evaluator': {
-    title: 'Math Evaluator',
-    description: 'Evaluate mathematical expressions with full operator precedence, functions, and constants — safer than eval, with step-by-step parsing.',
-  },
   'quantum-circuit-simulator': {
     title: 'Quantum Circuit Simulator | Formatho',
     description: 'Design and simulate quantum circuits with real quantum gates. Build circuits with Hadamard, Pauli gates, CNOT, and measurements.',
     keywords: 'quantum circuit simulator, quantum computing, quantum gates, hadamard gate, cnot gate, quantum simulator, qubits, superposition, entanglement, quantum learning, free quantum tool, privacy-first',
-  },
-  'percentage-calculator': {
-    title: 'Percentage Calculator - Secure MCP Tool for AI | Formatho',
-    description: 'Calculate percentages, increases, and decreases. Free, private, and 100% client-side in your browser. No signup, no upload.',
   },
   'token-generator': {
     title: 'Random Token Generator - Secure API Secrets | Formatho',
@@ -937,10 +852,6 @@ export const routeMeta: Record<string, RouteMeta> = {
     title: 'Unix Timestamp Converter Online - Epoch to Date | Formatho',
     description: 'Convert Unix timestamps to human-readable dates and vice versa. Live clock with current time in both formats. Unix timestamps — seconds or milliseconds.',
   },
-  'color-converter': {
-    title: 'Color Converter Online - HEX, RGB, HSL | Formatho',
-    description: 'Convert colors between HEX, RGB, HSL formats. Free, private, and 100% client-side in your browser. No signup, no upload.',
-  },
   'text-to-binary': {
     title: 'Text to Binary Converter - Secure MCP Tool for AI | Formatho',
     description: 'Convert text to binary and back — UTF-8 bytes, hex, and decimal alongside. See exactly how strings encode at the bit level.',
@@ -953,11 +864,6 @@ export const routeMeta: Record<string, RouteMeta> = {
     title: 'Mermaid Diagram Viewer & Editor Online | Formatho',
     description: 'Free online Mermaid diagram viewer and editor. Paste Mermaid.js code from ChatGPT, Claude, or Copilot and render flowcharts, sequence diagrams, ER.',
     keywords: 'mermaid viewer, mermaid diagram, mermaid online, ai diagram tool, chatgpt diagram, claude mermaid, copilot diagram, flowchart maker, sequence diagram, er diagram, gantt chart, markdown diagram, free diagram tool, mermaid js, architecture diagram, privacy-first',
-  },
-  'beta-feedback': {
-    title: 'Beta Feedback - Formatho',
-    description: 'Share your feedback to help us improve Formatho Free, private, and 100% client-side in your browser. No signup, no upload.',
-    keywords: 'beta feedback, bug report, feature request',
   },
   'admin-beta-feedback': {
     title: 'Beta Feedback Dashboard - Formatho Admin',

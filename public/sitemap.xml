@@ -1181,17 +1181,37 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://formatho.com/tools/toml-yaml-json-converter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/ipv4-converter-suite</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/mac-address-toolkit</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/everyday-converters</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/text-encoding-playground</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/quick-utilities</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/tools/pdf-signature-checker</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/integer-base-converter</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/roman-numeral-converter</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1201,37 +1221,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://formatho.com/tools/text-to-nato-alphabet</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/text-to-unicode</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/yaml-to-toml</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/json-to-toml</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/tools/list-converter</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/toml-to-json</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/toml-to-yaml</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1276,16 +1266,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://formatho.com/tools/mime-types</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/keycode-info</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/tools/slugify-string</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -1306,32 +1286,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://formatho.com/tools/safelink-decoder</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/wifi-qr-code-generator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/svg-placeholder-generator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/camera-recorder</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/tools/git-memo</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/random-port-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1366,37 +1321,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://formatho.com/tools/email-normalizer</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/regex-memo</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/tools/ipv4-subnet-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/ipv4-address-converter</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/ipv4-range-expander</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/mac-address-lookup</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/mac-address-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1411,16 +1336,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://formatho.com/tools/chronometer</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/temperature-converter</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/tools/benchmark-builder</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -1431,22 +1346,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://formatho.com/tools/emoji-picker</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/tools/string-obfuscator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/numeronym-generator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/ascii-text-drawer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1476,17 +1376,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://formatho.com/tools/math-evaluator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/tools/quantum-circuit-simulator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/percentage-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1526,11 +1416,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://formatho.com/tools/color-converter</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://formatho.com/tools/text-to-binary</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -1542,11 +1427,6 @@
   </url>
   <url>
     <loc>https://formatho.com/tools/mermaid-viewer</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://formatho.com/tools/beta-feedback</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
