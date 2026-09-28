@@ -94,6 +94,7 @@ function parseFunnelSlugs() {
 
 // Static pages
 const staticRoutes = [
+  { path: '/', priority: '1.0', changefreq: 'weekly' },
   { path: '/tools', priority: '1.0', changefreq: 'weekly' },
   { path: '/category/web3', priority: '0.8', changefreq: 'weekly' },
   { path: '/category/security', priority: '0.8', changefreq: 'weekly' },
@@ -127,8 +128,14 @@ const { parked } = JSON.parse(
 )
 const parkedSet = new Set(parked)
 const fetchedEntries = (await fetchBlogSlugs()).filter((p) => !parkedSet.has(p.slug))
-const localSlugs = new Set(localPosts.map((p) => p.slug))
-const blogEntries = [...fetchedEntries, ...localPosts.map((p) => ({ slug: p.slug, date: p.date }))].filter((p) => !parkedSet.has(p.slug) || localSlugs.has(p.slug))
+const localBySlug = new Map(localPosts.map((p) => [p.slug, p.date]))
+const fetchedBySlug = new Map(fetchedEntries.map((p) => [p.slug, p.date]))
+// Dedupe by slug: a post present in BOTH Strapi and localPosts must be
+// emitted once (duplicate <loc> violates the sitemap protocol and wastes
+// crawl budget). Strapi date wins, local date is the fallback.
+const blogEntries = [...new Set([...fetchedBySlug.keys(), ...localPosts.map((p) => p.slug)])]
+  .filter((slug) => !parkedSet.has(slug) || localBySlug.has(slug))
+  .map((slug) => ({ slug, date: fetchedBySlug.get(slug) ?? localBySlug.get(slug) }))
 const blogRoutes = blogEntries.map((p, i) => ({
   path: `/blogs/${p.slug}`,
   priority: i < 10 ? '0.8' : '0.7',
@@ -154,8 +161,16 @@ const funnelRoutes = funnelSlugs.map((slug) => ({
 }))
 
 // Filter out admin routes - they should NOT be in the public sitemap
+// Dedupe by path — belt-and-braces so no source combination can ever
+// emit the same <loc> twice
 const allRoutes = [...staticRoutes, ...funnelRoutes, ...blogRoutes, ...toolRoutes]
-const routes = allRoutes.filter(r => !r.path.includes('/admin/'))
+const routePaths = new Set()
+const routes = allRoutes.filter((r) => {
+  if (r.path.includes('/admin/')) return false
+  if (routePaths.has(r.path)) return false
+  routePaths.add(r.path)
+  return true
+})
 
 // Safety check: never write a suspiciously small sitemap (CI environments
 // where Strapi is unreachable and the fallback also fails would produce
