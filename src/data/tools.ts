@@ -253,6 +253,9 @@ export const tools: ToolCategory[] = [
       { name: 'Invoice Generator', description: 'Create professional invoices with line items, tax, discounts and multi-currency support. Live preview, PDF download generated on your device, draft auto-save. 100% client-side.', route: '/tools/invoice-generator', iconName: 'FileText' },
       { name: 'PINT AE Invoice Builder & Validator', description: 'Build PINT AE XML invoices for the UAE 2026 e-invoicing mandate (Peppol), or paste XML to validate: TRN format, VAT categories, required UBL fields and totals math. 100% client-side.', route: '/tools/pint-ae', iconName: 'FileCheck2' },
       { name: 'Password Generator', description: 'Generate strong random passwords and passphrases with crypto-grade randomness: length control, character sets, exclude look-alikes, entropy meter. 100% client-side — passwords never leave your device.', route: '/tools/password-generator', iconName: 'KeyRound' },
+      { name: 'DPP Readiness Score', description: 'How ready is your export product for the EU Digital Product Passport? Answer 14 questions and get a 0-100 score with a prioritized action list. 100% client-side.', route: '/tools/dpp-readiness', iconName: 'ClipboardCheck' },
+      { name: 'GTIN Validator', description: 'Validate GTIN-8/12/13/14 (EAN/UPC) barcodes: check digit verification, GS1 prefix decode to issuing country, and check digit generation. 100% client-side.', route: '/tools/gtin-validator', iconName: 'Barcode' },
+      { name: 'SPF Record Analyzer', description: 'Parse and validate SPF records: mechanisms, qualifiers, the 10-DNS-lookup limit, and syntax errors with plain-English fixes. Optional DNS lookup. 100% client-side.', route: '/tools/spf-analyzer', iconName: 'Shield' },
     ]
   },
 ]
