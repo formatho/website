@@ -233,7 +233,7 @@ async function decode() {
                 const bits = data[data.length - 1]
                 const unused = data.length > 1 ? data[data.length - 2] : 0
                 const nbits = 8 - unused
-                value = KU_BITS.slice(0, nbits).filter((_, i) => bits & (1 << (7 - i - (8 - nbits)))).join(', ') || 'none'
+                value = KU_BITS.slice(0, nbits).filter((_, i) => bits & (1 << (7 - i))).join(', ') || 'none'
               } else if (name === 'extendedKeyUsage') {
                 value = children(children(payload)[0]).map(c => { const d = c.raw.slice(c.raw.length - (c.end - c.start)); const k = EKU_OIDS[oid(d)] || oid(d); return k }).join(', ')
               } else if (name === 'basicConstraints') {
