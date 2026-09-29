@@ -821,6 +821,12 @@ export const routes = [
         meta: routeMeta['zap-report-analyzer']
       },
       {
+        path: '/tools/csr-decoder',
+        name: 'csr-decoder',
+        component: () => import(/* webpackPrefetch: true */ '../views/CsrDecoderView.vue'),
+        meta: routeMeta['csr-decoder']
+      },
+      {
         path: '/tools/toml-yaml-json-converter',
         name: 'toml-yaml-json-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/TomlYamlJsonConverterView.vue'),

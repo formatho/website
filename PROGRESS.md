@@ -1,0 +1,1 @@
+2026-09-29 | work-block am: shipped 3 stranded tools (gtin-validator, dpp-readiness, spf-analyzer) to main — were prod-only (0720fab) and 404 live; cherry-pick+merge resolved 2 merge-brace breaks, deploys green (b39664e/e55d2c8), live 200 all 3, sitemap 170 lastmod incl new URLs | ✅ verified | https://formatho.com/tools/gtin-validator

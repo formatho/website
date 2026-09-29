@@ -476,6 +476,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'SVG placeholders, WiFi QR codes, camera recorder, chronometer, emoji picker and keycode info in one page.',
     keywords: 'wifi qr code generator, svg placeholder, online chronometer, emoji picker, keycode tester',
   },
+  'csr-decoder': {
+    title: 'CSR Decoder - Check PKCS#10 Certificate Signing Requests | Formatho',
+    description: 'Decode a Certificate Signing Request (PKCS#10) in your browser: subject, SANs, public key, extensions and signature verification. Nothing uploaded.',
+    keywords: 'csr decoder, decode csr, check csr, pkcs#10, certificate signing request decoder, csr checker, openssl req text, csr san decoder',
+  },
   'pint-ae': {
     title: 'PINT AE Invoice Builder & Validator - UAE E-Invoicing | Formatho',
     description: 'Build PINT AE XML invoices for the UAE e-invoicing mandate (Peppol), or paste XML to validate: TRN, VAT categories, required UBL fields, totals math. 100% client-side.',
