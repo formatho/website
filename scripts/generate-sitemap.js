@@ -15,6 +15,7 @@ const strapiUrl = process.env.VITE_STRAPI_URL || 'https://cms.formatho.com'
  * file-set; silently omitted when git is unavailable (previous behavior).
  */
 const gitDateCache = new Map()
+let warnedNoGit = false
 function gitLastmod(files) {
   const key = files.join('|')
   if (gitDateCache.has(key)) return gitDateCache.get(key)
@@ -24,7 +25,12 @@ function gitLastmod(files) {
       cwd: process.cwd(), stdio: ['ignore', 'pipe', 'ignore'], timeout: 5000
     }).toString().trim()
     if (/^\d{4}-\d{2}-\d{2}$/.test(out)) date = out
-  } catch { /* no git / no commits — omit lastmod */ }
+  } catch {
+    if (!warnedNoGit) {
+      console.warn('⚠️  git unavailable — tool-route lastmod omitted (recrawl signal lost). Ensure .git is in the build context and git is installed.')
+      warnedNoGit = true
+    }
+  }
   gitDateCache.set(key, date)
   return date
 }
