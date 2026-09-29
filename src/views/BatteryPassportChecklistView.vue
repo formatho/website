@@ -6,7 +6,7 @@ import { Battery, CheckCircle2, Circle, Download, AlertCircle } from 'lucide-vue
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
-  title: 'EU Battery Passport Checklist — 71 Data Points | Formatho',
+  title: 'EV Battery Passport Checklist - EU 2027 Data Points | Formatho',
   description:
     'Interactive checklist for the EU Battery Passport (Regulation 2023/1542 Annex XIII): all mandatory data points by battery type — EV (46), LMT (49), industrial >2kWh (32). Track readiness before 18 Feb 2027.',
   keywords: ['battery passport checklist', 'eu battery regulation 2023/1542', 'annex xiii data points', 'ev battery passport', 'battery dpp requirements', 'battery passport 2027', 'lmt battery', 'industrial battery passport'],
