@@ -7,7 +7,7 @@ import { Leaf, Download, Copy, Check, Info } from 'lucide-vue-next'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
-  title: 'Battery Carbon Footprint Declaration | Formatho',
+  title: 'EV Battery Carbon Footprint Declaration - kg CO2e/kWh | Formatho',
   description:
     'Build the carbon footprint declaration for an EU battery passport: cradle-to-gate kg CO₂e/kWh per the delegated regulation methodology. Free, client-side.',
   keywords: ['battery carbon footprint', 'ev battery co2', 'battery passport carbon declaration', 'kg co2e kwh battery', 'eu battery regulation carbon', 'battery lca calculator'],

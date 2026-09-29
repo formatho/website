@@ -397,9 +397,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'dmarc parser, dmarc record checker, dmarc validator, dmarc lookup, parse dmarc txt record, dmarc policy, rua ruf, email authentication, spf dkim dmarc',
   },
   'battery-passport-checklist': {
-    title: 'EU Battery Passport Checklist — 71 Data Points | Formatho',
-    description: 'All mandatory data points (Annex XIII, Reg 2023/1542): EV 46, LMT 49, industrial 32. Interactive readiness tracker before 18 Feb 2027.',
-    keywords: 'battery passport checklist, eu battery regulation, annex xiii, ev battery passport',
+    title: 'EV Battery Passport Checklist - EU 2027 Data Points | Formatho',
+    description: 'Interactive checklist of every mandatory EV battery passport data point (Annex XIII, EU Regulation 2023/1542): 46 EV points, carbon footprint, due diligence, QR data carrier. Track readiness before 18 Feb 2027.',
+    keywords: 'ev battery passport, battery passport checklist, eu battery regulation 2023/1542, battery passport 2027, ev battery passport requirements, annex xiii battery, lmt battery passport, battery passport data points',
   },
   'dpp-json-validator': {
     title: 'DPP JSON Validator — Digital Product Passport | Formatho',
@@ -427,9 +427,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'textile dpp, clothing passport, apparel dpp builder',
   },
   'battery-carbon-footprint': {
-    title: 'Battery Carbon Footprint | Formatho',
-    description: 'Structure the carbon footprint declaration: kg CO2e/kWh per EU methodology. Free.',
-    keywords: 'battery carbon footprint, ev battery co2, battery lca',
+    title: 'EV Battery Carbon Footprint Declaration - kg CO2e/kWh | Formatho',
+    description: 'Build the carbon footprint declaration for an EV battery passport: cradle-to-gate kg CO2e/kWh per the EU delegated regulation methodology. Free, client-side.',
+    keywords: 'battery carbon footprint, ev battery carbon footprint, battery passport carbon declaration, kg co2e kwh battery, eu battery regulation carbon footprint, battery lca',
   },
   'ppwr-declaration': {
     title: 'PPWR Declaration of Conformity | Formatho',
