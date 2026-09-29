@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -117,9 +117,22 @@ function download() {
   URL.revokeObjectURL(a.href)
 }
 import EnterpriseCta from '@/components/EnterpriseCta.vue'
+
+/* Backlog #2 A/B iterate path (CTA_AB_PLAN.md): above-fold CTA on this page
+ * only when the `formatho_cta_ab` flag is on; bottom CTA moves (not duplicates). */
+const ctaAbTop = ref(false)
+onMounted(() => {
+  try {
+    const flag = localStorage.getItem('formatho_cta_ab')
+    ctaAbTop.value = flag === 'a' || flag === 'b' || flag === 'on' || import.meta.env.VITE_CTA_AB === 'on'
+  } catch {
+    ctaAbTop.value = false
+  }
+})
 </script>
 
 <template>
+  <EnterpriseCta v-if="ctaAbTop" />
   <div class="max-w-4xl mx-auto px-4 py-8 space-y-6">
     <div class="flex items-center gap-3">
       <div class="p-2 bg-primary/10 rounded-lg">
@@ -205,5 +218,5 @@ import EnterpriseCta from '@/components/EnterpriseCta.vue'
       <AlertCircle class="w-4 h-4 shrink-0" /> {{ outputError }}
     </p>
   </div>
-  <EnterpriseCta />
+  <EnterpriseCta v-if="!ctaAbTop" />
 </template>

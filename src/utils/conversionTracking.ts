@@ -97,10 +97,12 @@ export function initConversionTracking(router: Router): void {
         if (!target) return
         const tool = toolForPath(router.currentRoute.value.path)
         if (!tool) return
+        const variantEl = target.closest?.('[data-cta-variant]') as HTMLElement | null
         send('enterprise_cta_click', {
           tool_name: tool.name,
           tool_category: tool.category,
           cta_href: (target as HTMLAnchorElement).href,
+          ...(variantEl ? { cta_variant: variantEl.dataset.ctaVariant } : {}),
         })
       },
       true
