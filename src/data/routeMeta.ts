@@ -485,6 +485,7 @@ export const routeMeta: Record<string, RouteMeta> = {
     title: 'Invoice Generator - Create & Download PDF Invoices | Formatho',
     description: 'Create professional invoices in your browser and download them as PDF: line items, GST/VAT, discounts, multi-currency, payment notes. Draft auto-saves locally. 100% client-side.',
     keywords: 'invoice generator, create invoice online, invoice pdf, free invoice maker, gst invoice generator, invoice template, bill generator',
+  },
   'dpp-readiness': {
     title: 'DPP Readiness Score — Is Your Product EU-Ready? | Formatho',
     description: 'Score your export product 0-100 for EU Digital Product Passport readiness: identification, materials, chemicals, supply chain, circularity. Prioritized action list, 100% client-side.',
