@@ -576,6 +576,8 @@ export const routes = [
         name: 'password-generator',
         component: () => import(/* webpackPrefetch: true */ '../views/PasswordGeneratorView.vue'),
         meta: routeMeta['password-generator']
+      },
+      {
         path: '/tools/dpp-readiness',
         name: 'dpp-readiness',
         component: () => import(/* webpackPrefetch: true */ '../views/DppReadinessView.vue'),
