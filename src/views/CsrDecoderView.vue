@@ -189,8 +189,12 @@ async function decode() {
     let keyAlg = algOid === '1.2.840.113549.1.1.1' ? 'RSA' : algOid === '1.2.840.10045.2.1' ? 'EC' : algOid === '1.3.101.112' ? 'Ed25519' : algOid
     let keyBits = 0
     if (algOid === '1.2.840.113549.1.1.1') {
-      const rs = children(keyBitsNode)[0]
-      keyBits = (rs.end - rs.start - 1) * 8
+      // BIT STRING content: unused-bits byte, then RSAPublicKey SEQUENCE
+      const kc = keyBitsNode.raw.slice(keyBitsNode.raw.length - (keyBitsNode.end - keyBitsNode.start) + 1)
+      const rsaSeq = der(kc)[0]
+      const mod = children(rsaSeq)[0]
+      const modContent = mod.raw.slice(mod.raw.length - (mod.end - mod.start))
+      keyBits = (modContent[0] === 0 ? modContent.length - 1 : modContent.length) * 8
     } else if (algOid === '1.2.840.10045.2.1' && children(algNode)[1]) {
       const curveOid = oid(children(algNode)[1].raw.slice(children(algNode)[1].raw.length - (children(algNode)[1].end - children(algNode)[1].start)))
       keyAlg = 'EC (' + (curveOid === '1.2.840.10045.3.1.7' ? 'P-256' : curveOid === '1.3.132.0.34' ? 'P-384' : curveOid === '1.3.132.0.35' ? 'P-521' : curveOid) + ')'
@@ -201,14 +205,13 @@ async function decode() {
     const extensions: { name: string; critical: boolean; value: string }[] = []
     let challenge = ''
     if (criKids[3]) {
-      const attrs = children(criKids[3])
-      for (const attrSet of attrs) {
-        for (const attr of children(attrSet)) {
+      // [0] IMPLICIT SET: children are the Attribute SEQUENCEs directly
+      for (const attr of children(criKids[3])) {
           const [o, vals] = children(attr)
           const aOid = oid(o.raw.slice(o.raw.length - (o.end - o.start)))
           if (aOid === '1.2.840.113549.1.9.14') {
-            const extSeq = children(children(vals)[0])[0]
-            for (const ext of children(extSeq)) {
+            // vals SET -> Extensions SEQUENCE -> Extension SEQUENCEs
+            for (const ext of children(children(vals)[0])) {
               const [eo, ev] = children(ext)
               const eOid = oid(eo.raw.slice(eo.raw.length - (eo.end - eo.start)))
               let critical = false; let payload = ev
@@ -243,7 +246,6 @@ async function decode() {
           } else if (aOid === '1.2.840.113549.1.9.7') {
             challenge = new TextDecoder().decode(children(children(vals)[0])[0].raw.slice(0))
           }
-        }
       }
     }
 
