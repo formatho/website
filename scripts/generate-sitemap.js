@@ -2,9 +2,63 @@
 import { writeFileSync, readFileSync } from 'fs'
 import { localPosts } from './blog-upgrade/local-posts.mjs'
 import { resolve } from 'path'
+import { execSync } from 'node:child_process'
 
 const domain = 'https://formatho.com'
 const strapiUrl = process.env.VITE_STRAPI_URL || 'https://cms.formatho.com'
+
+/**
+ * Git-derived lastmod for recrawl signalling: Google ignores IndexNow, so a
+ * <lastmod> that moves with real content changes is the standing recrawl
+ * nudge. Date = last commit touching the route's view file OR the shared
+ * content sources (faq-data.js content kits, routeMeta titles). Cached per
+ * file-set; silently omitted when git is unavailable (previous behavior).
+ */
+const gitDateCache = new Map()
+function gitLastmod(files) {
+  const key = files.join('|')
+  if (gitDateCache.has(key)) return gitDateCache.get(key)
+  let date
+  try {
+    const out = execSync(`git log -1 --format=%cs -- ${files.map(f => `'${f}'`).join(' ')}`, {
+      cwd: process.cwd(), stdio: ['ignore', 'pipe', 'ignore'], timeout: 5000
+    }).toString().trim()
+    if (/^\d{4}-\d{2}-\d{2}$/.test(out)) date = out
+  } catch { /* no git / no commits — omit lastmod */ }
+  gitDateCache.set(key, date)
+  return date
+}
+
+/** Map /tools/x -> src/views/<Name>.vue via the router's import() lines
+ *  (handles both single-line '@/views/' and multiline commented '../views/' formats) */
+function parseToolViewMap() {
+  const content = readFileSync(resolve(process.cwd(), 'src', 'router', 'index.ts'), 'utf8')
+  const map = new Map()
+  const re = /path:\s*['"`](\/tools\/[^'"`]+)['"`][\s\S]{0,150}?component:[\s\S]{0,150}?import\(\s*(?:\/\*[\s\S]*?\*\/\s*)?['"`](?:@\/|\.\.\/|\.\/)views\/([^'"`]+)['"`]/g
+  let m
+  while ((m = re.exec(content)) !== null) map.set(m[1], m[2])
+  return map
+}
+
+/**
+ * Last commit whose diff touched the route's own kit block in faq-data.js
+ * (git -G matches the diff lines containing the route slug). Slightly
+ * under-signaling by design — stable lastmods are what earn Google trust.
+ */
+function kitBlockDate(routePath) {
+  const slug = routePath.split('/').pop()
+  const key = `kit:${routePath}`
+  if (gitDateCache.has(key)) return gitDateCache.get(key)
+  let date
+  try {
+    const out = execSync(`git log -1 --format=%cs -G "tools/${slug}" -- scripts/faq-data.js`, {
+      cwd: process.cwd(), stdio: ['ignore', 'pipe', 'ignore'], timeout: 5000
+    }).toString().trim()
+    if (/^\d{4}-\d{2}-\d{2}$/.test(out)) date = out
+  } catch { /* git unavailable — omit */ }
+  gitDateCache.set(key, date)
+  return date
+}
 
 /**
  * Fetch blog post slugs from Strapi CMS (with retries — a failed fetch
@@ -145,12 +199,23 @@ const blogRoutes = blogEntries.map((p, i) => ({
 
 // Dynamically generate tool routes
 const toolPaths = parseToolRoutes()
+const toolViewMap = parseToolViewMap()
+// faq-data.js content renders ONLY on routes that have a kit/FAQ entry —
+// per-route kit dates via pickaxe so one kit edit doesn't stamp every page.
+const { toolSEOContent, toolSpecificFAQ } = await import('./faq-data.js')
+const kitRoutes = new Set([...Object.keys(toolSEOContent), ...Object.keys(toolSpecificFAQ)])
 // /tools/all duplicates /tools (same catalog page) — exclude from sitemap
-const toolRoutes = toolPaths.filter((p) => p !== '/tools/all').map((p) => ({
-  path: p,
-  priority: p === '/tools/markdown' || p === '/tools/bpmn' || p === '/tools/bpmn-to-visio' ? '0.9' : '0.8',
-  changefreq: 'monthly',
-}))
+const toolRoutes = toolPaths.filter((p) => p !== '/tools/all').map((p) => {
+  const view = toolViewMap.get(p)
+  const viewDate = view ? gitLastmod([`src/views/${view}`]) : undefined
+  const candidates = [viewDate, kitRoutes.has(p) ? kitBlockDate(p) : undefined].filter(Boolean)
+  return {
+    path: p,
+    priority: p === '/tools/markdown' || p === '/tools/bpmn' || p === '/tools/bpmn-to-visio' ? '0.9' : '0.8',
+    changefreq: 'monthly',
+    lastmod: candidates.length ? candidates.sort().pop() : undefined,
+  }
+})
 
 // Funnel detail routes — data-driven from src/data/funnels.ts
 const funnelSlugs = parseFunnelSlugs()
