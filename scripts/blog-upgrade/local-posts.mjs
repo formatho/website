@@ -309,5 +309,54 @@ typed answers + probabilities + confidence
 <h2>Is your task Jev-shaped?</h2>
 <p>Six questions decide it: Is the AI <em>deciding</em> rather than creating? Is the answer space definable in advance? Is it one atomic judgement? Is all needed context placeable in state? Could a knowledgeable human answer in ~5 seconds? Will software consume the result directly? Five or six yeses: strong fit. Zero to two: wrong tool.</p>
 <p>You can run that test interactively — with per-criterion explanations and a scored verdict — in our <a href="/tools/jev-suitability">Jev Suitability Test</a>, then prototype the actual request (state, all three primitives, mock probability distributions, generated SDK code — all client-side, no API key) in the <a href="/tools/jev-playground">Jev Playground</a>. Both were built the week Jev shipped; the concepts are exactly the ones in this piece.</p>`
+  },
+  {
+    title: 'How to Open Camunda BPMN Files in Visio (Free, No Plugins)',
+    slug: 'how-to-open-camunda-bpmn-files-in-visio',
+    excerpt: 'Visio cannot import .bpmn files from Camunda Modeler. Here is the reliable path: export BPMN 2.0 XML, convert it to Visio VDX, open natively. Plus what breaks in conversion and how to keep your layout.',
+    date: '2026-09-30',
+    readTime: '7 min',
+    tags: ['BPMN', 'Camunda', 'Visio', 'Process Automation'],
+    image: '',
+    imageAlt: '',
+    metaDescription: 'Visio has no BPMN import. Convert Camunda Modeler .bpmn files to Visio VDX format step by step, keep your diagram layout, and avoid the three conversion gotchas.',
+    content: `
+<h2>The problem: Visio cannot open .bpmn files</h2>
+<p>Camunda Modeler saves diagrams as <code>.bpmn</code> files, which are BPMN 2.0 XML. Microsoft Visio has <strong>no native BPMN import</strong>. Drag a .bpmn file onto Visio and nothing happens. There is no Microsoft add-in that fixes this, and Camunda treats Visio as a competitor, not a target.</p>
+<p>Yet the request is constant: process analysts model in Camunda because the engine executes BPMN directly, but stakeholders, steering committees, and compliance reviews live in Visio and PowerPoint. You need the same diagram on both sides.</p>
+
+<h2>The reliable path: BPMN XML to VDX</h2>
+<p>Visio's interchange format is <strong>VDX</strong> (Visio 2003-2010 XML). The workflow that works:</p>
+<ol>
+<li><strong>Export from Camunda Modeler</strong> — File, Save As is already .bpmn (BPMN 2.0 XML). Keep the <code>BPMNDiagram</code> section in the file; it holds your layout (positions, connection routes). Exporting "semantic only" XML loses the visual layout.</li>
+<li><strong>Convert the XML to VDX</strong> — a converter maps each BPMN element (tasks, gateways, events, pools, sequence flows) to the equivalent Visio shapes and writes a .vdx file. You can do this for free and client-side with the <a href="/tools/bpmn-to-visio">Formatho BPMN to Visio converter</a>: paste your BPMN XML, download the VDX.</li>
+<li><strong>Open in Visio</strong> — File, Open, pick the .vdx file. No plugin or stencil installation needed. Every recent Visio version reads VDX natively, and from there you can edit, restyle, and paste into PowerPoint.</li>
+</ol>
+<p>The whole path takes under a minute, and because the conversion runs in your browser, the diagram never leaves your machine — relevant if your process models are internal.</p>
+
+<h2>Three gotchas that break conversions</h2>
+<h3>1. Missing BPMNDiagram section</h3>
+<p>BPMN 2.0 separates semantics (what the process does) from diagram (where shapes sit). If your export has no <code>BPMNDiagram</code> element, converters have to auto-layout, and the result rarely resembles your original. Camunda Modeler always includes it; some CI pipelines that generate BPMN do not.</p>
+<h3>2. Collapsed sub-processes</h3>
+<p>A collapsed sub-process shows as a single task with a marker. The child process lives in a separate diagram. Convert the child separately if stakeholders need the detail level.</p>
+<h3>3>Custom namespaces and extensions</h3>
+<p>Camunda adds its own extension elements (<code>camunda:assignee</code>, <code>camunda:expression</code> and friends). They carry execution config, not visual meaning — converters drop them, which is correct for a Visio deliverable, but do not expect execution properties to survive the round trip back.</p>
+
+<h2>Checking the result before you present it</h2>
+<p>After conversion, open the .vdx in Visio and verify: pools and lanes kept their order, gateways kept their XOR/AND markers, boundary events stayed attached to their tasks, and label positions are sane. A quick <a href="/tools/bpmn">render of the original BPMN</a> side by side catches anything the converter misplaced.</p>
+
+<h2>Alternatives, ranked</h2>
+<ul>
+<li><strong>Rebuild by hand in Visio</strong> — exact, and an hour per diagram. Fine once; unsustainable for a process library.</li>
+<li><strong>Screenshot the Camunda canvas</strong> — fast, not editable, and pixelated on a projector. Stakeholders ask for changes, and you are back to rebuilding by hand.</li>
+<li><strong>Camunda Play screenshots with the SVG export</strong> — SVG imports into Visio as a picture, not shapes. Editable-ish, painful.</li>
+<li><strong>XML to VDX conversion</strong> — real Visio shapes, native open, free. This is why the path above is the standard answer.</li>
+</ul>
+
+<h2>Round-tripping back to Camunda</h2>
+<p>One honest warning: treat the Visio copy as a <em>deliverable</em>, not a source of truth. Editing the process in Visio and converting back to executable BPMN is possible in principle but lossy — Camunda extensions and execution semantics do not survive. Model in Camunda, convert to Visio when humans in suits need it, and keep the .bpmn file as the master.</p>
+
+<h2>Try it</h2>
+<p>Paste a Camunda .bpmn export into the <a href="/tools/bpmn-to-visio">BPMN to Visio converter</a> and get a VDX you can open in Visio immediately — free, no account, nothing uploaded. If you only need to view a diagram, the <a href="/tools/bpmn">BPMN Viewer</a> renders any BPMN 2.0 XML directly in the browser.</p>`
   }
 ]
