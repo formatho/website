@@ -617,9 +617,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'bom diff, bill of materials comparison, bom changes, compare bom, engineering change',
   },
   'bom-cost-rollup': {
-    title: 'BOM Cost Roll-up Calculator - Multi-Level | Formatho',
-    description: 'Calculate total cost of multi-level Bills of Materials. Handles indented BOMs with quantities and unit costs. Free, client-side.',
-    keywords: 'bom cost calculator, bill of materials cost, multi-level bom, rolled up cost, product cost',
+    title: 'Automotive BOM Cost Roll-up Calculator - Multi-Level | Formatho',
+    description: 'Roll up multi-level automotive and manufacturing BOMs: indented EBOM/MBOM trees, per-tier quantities, unit costs and cost per assembly level. Free, client-side.',
+    keywords: 'automotive bom cost, bom cost rollup, multi-level bom cost calculator, mbom costing, ebom cost, bill of materials cost roll up, indented bom calculator, product cost estimate',
   },
   'part-number-generator': {
     title: 'Intelligent Part Number Generator | Formatho',

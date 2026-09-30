@@ -236,7 +236,7 @@ export const tools: ToolCategory[] = [
     items: [
       { name: 'SOC 2 Readiness Checklist', description: 'Interactive checklist covering all 5 Trust Service Criteria with linked tools for each control.', route: '/tools/soc2-checklist', iconName: 'ClipboardCheck' },
       { name: 'BOM Diff Tool', description: 'Compare two Bills of Materials — see added, removed, and changed parts with quantity differences.', route: '/tools/bom-diff', iconName: 'GitCompare' },
-      { name: 'BOM Cost Roll-up', description: 'Calculate total cost of multi-level BOMs. Handles indented assemblies, quantities, and unit costs.', route: '/tools/bom-cost-rollup', iconName: 'Calculator' },
+      { name: 'BOM Cost Roll-up', description: 'Roll up multi-level automotive and manufacturing BOMs: indented EBOM/MBOM trees, per-tier quantities, unit costs and cost per assembly. Free, client-side.', route: '/tools/bom-cost-rollup', iconName: 'Calculator' },
       { name: 'Battery Passport Checklist', description: 'Interactive checklist for all EU Battery Passport data points (Annex XIII, Regulation 2023/1542): EV (46), LMT (49), industrial >2kWh (32). Track readiness before 18 Feb 2027. Free, client-side.', route: '/tools/battery-passport-checklist', iconName: 'BatteryCharging' },
       { name: 'DPP JSON Validator', description: 'Validate a Digital Product Passport JSON payload: required fields, battery data, operator, data carrier. Free, client-side.', route: '/tools/dpp-json-validator', iconName: 'FileJson' },
       { name: 'DPP Resolver Tester', description: 'Test a DPP resolver: paste the QR URL, fetch the passport, verify required fields present. Tests the full scan→resolve→verify chain. Free.', route: '/tools/dpp-resolver-tester', iconName: 'ScanLine' },
