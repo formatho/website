@@ -1,1 +1,174 @@
+# PROGRESS.md — website-qa agent work log
+
+One line per work block: date | summary | status | link. Detailed archive for 2026-09-22→09-24 at bottom (pre-format).
+
 2026-09-29 | work-block am: shipped 3 stranded tools (gtin-validator, dpp-readiness, spf-analyzer) to main — were prod-only (0720fab) and 404 live; cherry-pick+merge resolved 2 merge-brace breaks, deploys green (b39664e/e55d2c8), live 200 all 3, sitemap 170 lastmod incl new URLs | ✅ verified | https://formatho.com/tools/gtin-validator
+2026-10-01 | work-block am: OKR-2 KR3 weekly QA crawl — 279/279 URLs OK on qa.formatho.com (avg 382ms, 0 slow >3s); QA current with main 081dee4 (newest 5 tools 200; live bom-cost-rollup title = 'Automotive BOM…' from 081dee4; 172 lastmod entries live) | ✅ verified | https://qa.formatho.com/sitemap.xml
+
+---
+
+## Detailed archive (2026-09-22 → 2026-09-24, superseded by line format above)
+
+## Work log
+
+### 2026-09-22 (Tue AM work block)
+- **Task:** OKR-2 KR3 — weekly QA crawl of all site pages (no backlog item assigned; top QA-lane item within autonomy).
+- **Artifact:** `scripts/qa-crawl-report.mjs` — sitemap-driven crawler for qa.formatho.com (rewrites canonical prod `<loc>` URLs onto the QA host, 8-way concurrency, follows redirects, flags non-200s and >3s responses). Commit `13aebae`, pushed to main.
+- **Result (pre-push crawl):** 246/246 sitemap URLs OK on qa.formatho.com, avg 358ms, 0 slow, 0 failures → weekly crawl clean.
+- **Gates:** lint 0 errors (119 pre-existing warnings), build clean, pre-commit checks passed.
+- **Status posted** to C0C44G305PS.
+- Note: workboard tools (workboard_create etc.) not available in this toolset this session — logged here instead.
+
+### 2026-09-23 (Wed AM work block)
+- **Task:** No backlog item assigned; QA lane (OKR-2 KR3). Post-crawl verification of the 7 new main commits (funnel system e11ac0e..934d4b6 + visio-viewer da2ed2e).
+- **Found:** qa.formatho.com was silently serving a ~Sep-5 build — `/funnels` + both detail pages 404 on QA (200 on prod), old bundle + old sitemap, while deploy-qa stayed green. Root cause: `docker service update --image ghcr.io/formatho/website:qa` resolved the floating tag from the swarm's local cache, so "converged" deploys never rolled the new image. A hidden second layer: nodes couldn't pull the private ghcr package because deploy-qa lacked `packages: read` (the prod deploy job had it).
+- **Fixes (main da2ed2e..0abe1b7):**
+  - `dd30164` — deploy by unique per-commit tag (`main-<sha>`) + stale-image guard on the service spec; first run correctly turned the silent failure into a red build (update rolled back)
+  - `3faf765` — `packages: read` for deploy-qa → swarm pulled the fresh image, QA updated
+  - `0abe1b7` — guard asserts the spec's unique tag (digest lives on the task, not the spec, so the digest check failed a healthy deploy)
+- **Verified:** qa.formatho.com `/funnels`, `/funnels/eu-product-passport`, `/funnels/email-auth-hardening`, `/tools/visio-viewer` all 200; visio-viewer "How to View a Visio File Online" section live on QA; crawl 246/246 OK earlier in the block. Sitemap-driven crawl alone can't catch this class (stale sitemap hides missing pages) — the CI guard now does.
+- **Next:** CI green-run confirmation for 0abe1b7; sitemap gap — `generate-sitemap.js` lists `/funnels` but not the detail slugs (both prod + QA) → OKR-2 KR3 indexing gap, small data-driven fix.
+
+### 2026-09-24 (Thu AM work block)
+- **Task:** OKR-2 KR3 sub-work (assigned, no backlog row) — (1) sitemap funnel-slug gap fix, (2) official CI green confirmation for 0abe1b7.
+- **(2) CI confirmation for `0abe1b7` (recorded):**
+  - Build and Deploy run 35817717576 — conclusion **success** (build ✅, deploy-qa ✅; generate-version/create-release/deploy skipped as expected for non-tag) — https://github.com/formatho/website/actions/runs/35817717576
+  - CodeQL run 35817717562 — conclusion **success** — https://github.com/formatho/website/actions/runs/35817717562
+  - This closes the loop on the 2026-09-23 deploy-pipeline repair: all three fix commits verified green end-to-end.
+- **(1) Sitemap funnel-slug fix:**
+  - `generate-sitemap.js` gained `parseFunnelSlugs()` — regex-parses quoted `slug:` values from `src/data/funnels.ts` (regex not TS-import because Docker builds on node:20-alpine, no native type stripping), emits `/funnels/<slug>` entries (0.8/weekly) after staticRoutes. New funnels flow into the sitemap automatically.
+  - Verified: funnel detail meta carries no noindex/canonical → safe to advertise. Sitemap 293 → 295 URLs (`+` exactly 2 new `<url>` blocks).
+  - Gates: lint 0 errors (122 pre-existing warnings), build clean, pre-commit gate passed; funnel meta checks ok in post-build verification.
+  - Commit `9f1d21c` pushed to main → CI + deploy-qa. Milestones posted to C0C44G305PS.
+- **Result (verified live):**
+  - CI run 35948407435 (sha 9f1d21c): build ✅, deploy-qa ✅ — https://github.com/formatho/website/actions/runs/35948407435
+  - QA sitemap: `/funnels` + both detail slugs present; all three pages 200.
+  - **Prod**: main→prod merge (run 35948424834) deployed successfully + IndexNow pinged; `formatho.com/sitemap.xml` carries all 3 funnel URLs → gap closed on **both prod + QA**.
+- **Incident (not mine, handled):** `cff7103` (eliza landing) deploy-qa failed with the stale-image guard — root cause was a **concurrent-deploy race** (two deploy-qa jobs hit `qa_qa-app` within seconds; guard saw the other run's fresh tag main-9f1d21c, expected main-cff7103). Not a broken build (build job green). Re-ran the failed job → success; QA now current with main (`/eliza-tools` 200).
+  - Follow-up candidate: serialize deploy-qa (workflow `concurrency` group for the QA service) to prevent the race from reddening builds.
+
+#### 2026-09-24 (Thu AM work block, follow-up shipped)
+- **Task:** The follow-up above — serialize deploy-qa so concurrent pushes can't race on `docker service update qa_qa-app`.
+- **Race proof mid-block:** revenue agent's run 35953939347 (`affiliate_click` push) went in-flight while I was committing — held my push until it completed (completed/success) instead of re-creating the race.
+- **Fix (commit `16e6e78`, after rebase onto `5897382`):**
+  - `deploy-qa` job-level `concurrency: group deploy-qa-app, cancel-in-progress: false` — queue, never cancel, so an in-flight SSH deploy is never killed half-verified.
+  - New `Skip if superseded by a newer commit` step: queries the GitHub API for the branch tip; if this run's sha isn't the tip, deploy is skipped (a queued OLDER run can start after a NEWER one — without this the older sha would win the service with all-green builds, the exact silent-staleness class the guard exists to catch). Fail-open on API trouble; concurrency group already prevents the race itself.
+  - Known corner (documented): if the NEWEST run's deploy genuinely fails, queued older runs skip and QA holds the last good image — loud (red build), standard play is fix + re-run newest.
+- **Gates:** lint 0 errors (122 pre-existing warnings), build clean, pre-commit hook passed; workspace-state deletions (TOOLS.md etc.) kept uncommitted.
+- **Verified:** CI run 35954195452 **success** — deploy-qa ✓ 21s, first live exercise of both new steps (`Skip if superseded…` ✓, `Deploy QA via SSH` ✓); image `main-16e6e78` deployed, guard passed; QA live (`/eliza-tools` 200, sitemap 300 URLs) — https://github.com/formatho/website/actions/runs/35954195452
+- **Status posted** to C0C44G305PS.
+
+### 2026-09-25 (Fri AM work block)
+- **Task:** OKR-2 KR3 weekly QA crawl + post-push verification of the 6 new main commits since `16e6e78` (`6e6fe76`..`12ffbd1`: password generator tool, CSP fix for Clarity/Cloudflare beacon, 4 multi-chain wallet address fixes).
+- **CI verified:** tip `12ffbd1` Build and Deploy run [36001975279](https://github.com/formatho/website/actions/runs/36001975279) success — deploy-qa ✓ with both new steps exercised (`Skip if superseded by a newer commit` ✓, `Deploy QA via SSH` ✓); CodeQL ✓. Concurrency serialization working as designed on real subsequent runs.
+- **QA live:** `/tools/password-generator` 200, sitemap 300→301 URLs (new tool picked up automatically via data-driven generation).
+- **Weekly crawl:** `node scripts/qa-crawl-report.mjs` → **301/301 OK, avg 378ms, 0 slow >3s, 0 failures** — clean.
+- **Prod spot-check:** sitemap 301 URLs, `password-generator` listed, page 200 — prod current too.
+- **Status posted** to C0C44G305PS.
+
+### 2026-09-25 (Fri midday work block)
+- **Task:** 09-25 briefing — (1) QA crawl + flag sitemap deltas, re-run after website-agent's deploy; (2) 525 incident verification (growth's JEV-SEO-AUDIT-2026-09-24.md: ~40% edge→origin 525/SSL failures on prod, all recover-on-retry).
+- **Crawl run 1 (pre-deploy):** 301/301 OK, avg 381ms, 0 slow. Sitemap delta vs 09-24 baseline (git show 9f1d21c): +6 URLs (5 blog posts from Strapi + /tools/password-generator), 0 dropped.
+- **website-agent deploy watched:** `e95584a` (runtime SoftwareApplication JSON-LD + /eliza-tools in sitemap) — CI 36106692274 build ✅ deploy-qa ✅, CodeQL ✅.
+- **Crawl run 2 (post-deploy):** 302/302 OK, avg 394ms, 0 slow. `/eliza-tools` confirmed in QA sitemap.
+- **525 verification (both hosts, exact 09-24 failure endpoints):** 6× each of `/`, `/llms.txt`, `/manifest.json`, `/sitemap.xml` on formatho.com + qa.formatho.com → **48/48 × 200, zero 525s/SSL errors**. Combined with crawls: ~650 requests today, 0 failures. Caveats noted for seo-build: sampled via SIN edge only; original issue was intermittent, so not-reproducing ≠ fixed — their nginx/origin fix should still land. Findings posted to C0C44G305PS for seo-build coordination.
+- **Backlog:** monitoring/watch work only → no status change (per dispatch rules; nothing new shipped).
+- Tooling note: background exec sessions have a broken PATH (`seq`/`curl` not found → false ERRs); use absolute paths (`/usr/bin/curl`) or foreground for curl loops.
+
+### 2026-09-26 (Sat AM work block)
+- **Task:** No backlog item assigned; QA lane (OKR-2 KR3) — verify the 2 new main commits since `12ffbd1`: `1967a54` (SEO: blank-404 patch + blog→blogs 301) and `753e608` (build target es2018).
+- **Verified (QA live):**
+  - CI green for both: Build and Deploy [36213352152](https://github.com/formatho/website/actions/runs/36213352152) success (deploy-qa ✓, skip-guard ✓), CodeQL ✓.
+  - Weekly crawl: **302/302 OK, avg 359ms, 0 slow >3s, 0 failures** — clean.
+  - `/blog/<slug>` → 301 → `/blogs/<slug>` live; 404 page patched (serves built entry `/assets/app-C5tesXhg.js`, no `/src/main.ts` dev template).
+  - es2018 fix: deployed bundle contains **0 `?.` / `??` / `??=` / `||=` / `&&=` tokens** (node scan of app-C5tesXhg.js). Note: dynamic `import()` remains (ES2020) — vite intentionally keeps it in EDM output; browsers too old for it can't run the app anyway, not the class the fix targeted.
+- **Gap found + fixed:** bare `/blog` 404'd (1967a54's regex `^/blog/(.+)$` only covers slugged paths). Committed `location = /blog { return 301 /blogs; }`.
+- **Concurrent-fix collision (handled):** website-agent pushed the identical fix (`f15cc63`) while my commit was in pre-commit build → my rebase stacked a **duplicate `location = /blog`** into nginx.conf (nginx won't boot with duplicate exact-match locations). Deduped in `7df2792` and pushed before the broken image could deploy — the deploy-qa supersede guard skipped `0f4c0ca`'s deploy ("Deploy QA via SSH: skipped"), so QA never served the bad config. `7df2792` CI [36216779921](https://github.com/formatho/website/actions/runs/36216779921) success.
+- **Final live verify:** `/blog` → 301 → `/blogs`; `/blog/some-post` → 301 → `/blogs/some-post`; `/blogs` 200; `/` 200. Single `location = /blog` in nginx.conf.
+- **Observation (no action):** `/blogs` SSR HTML shows "No posts found" pre-hydration — identical on prod, so normal behavior, not a QA regression. JSON-LD carries all 10 posts.
+- **Status posted** to C0C44G305PS.
+
+### 2026-09-26 (Sat AM block — completed retro; wrap-up was cut off mid-session)
+- **525 verification handoff (row #10): PASSED.** 3 spaced rounds × (40 seq + 48 burst) on formatho.com + qa.formatho.com = 120/120 seq ×200 + 144/144 burst ×200 at 24-way concurrency; weekly QA crawl 302/302 OK — zero 525s all day. Fix (nginx worker_connections 8192 etc., live 09-25) holding.
+- **Incident + fix:** 3 red main builds (09-25 11:03 → 09-26 02:38) — deploy-qa's new FRONT PROXY CONFIG DUMP (seo-build hardening) cat'd `$CONF_DIR/*.conf` but the /etc/nginx mount source is a single FILE → 'Not a directory' → script_stop killed the job before the stale-image guard. Fixed in `3c89420` (file-or-dir handling + glob guard). **Confirmed success: run 36212854789**; deploy-qa green on all subsequent runs (04:03 ×2, 04:05, prod merges, 09-27 thin-pages). Stale QA worry was moot: service had rolled forward despite red jobs.
+- Local npm install needed after multi-chain commits (ed25519-hd-key) — pre-commit build gate caught it before push.
+
+### 2026-09-27 (Sun AM block)
+- **Task:** Standing weekly crawl vs prod + spot-check 09-26 fixes hold.
+- **Prod crawl:** 302/302 OK, avg 382ms, 0 slow, 0 4xx/5xx, no divergence (briefing est. ~301 — actual 302, all covered).
+- **Spot-checks (all hold):** `/blog` → 301 → `https://formatho.com/blogs` ✅; `/blogs` → 200 ✅; HouseAd chunk live on prod (`HouseAd…-CVISwpxz.js`, 200/1.2KB) with `formatho_house_ads` gate present, and zero house-ad markup rendered on default pages (flag OFF) ✅.
+- Thin-pages adsense merge (`9942495`) deployed green mid-block (36289096907, CodeQL ✅).
+- **Backlog:** appended live-verification evidence to #4 (house-ads phase-1) and #10 (525 handoff close) notes; no status changes (standing crawl = monitoring, no dedicated row; per dispatch rules).
+
+### 2026-09-27 (Sun 09:30 block)
+- **Task:** No open website-qa backlog rows (all shipped); QA lane — verify new main commits since `9942495`, investigate QA sitemap delta.
+- **`7e8b3df` (prod-drift guard, backlog #14):** CI Build and Deploy [36289346312](https://github.com/formatho/website/actions/runs/36289346312) success + CodeQL ✓. Ran `scripts/prod-drift-check.sh` from this checkout → **healthy: prod==main, 6 live pages match** (exit 0) — first independent website-qa validation of the guard.
+- **Thin-pages merge (`9942495`) verified on QA:** sitemap 302→278 is the deliberate merge; **prod also 278 (QA==prod)**. All 28 merged-away tool URLs → **301 to combined tool/category pages, zero 404s**; all 9 redirect targets (toml-yaml-json-converter, mac-address-toolkit, ipv4-converter-suite, text-encoding-playground, everyday-converters, quick-utilities, /category/developer, /category/network, /tools) → 200. `pdf-signature-checker` + `base64-file-converter` still in live sitemap (diff-extraction noise, not actually removed).
+- **QA spot checks:** `/`, `/blogs`, `/eliza-tools`, `/tools/jwt` → 200.
+- **Status posted** to C0C44G305PS.
+
+### 2026-09-28 (Mon AM block)
+- **Task:** Verify post-deploy of website-agent's sitemap F1/F2 patch (`80812ca` — homepage entry + loc dedupe).
+- **Pre-patch live state (quantified the bugs):** 278 URLs with **5 duplicate blog locs** (Strapi∩localPosts overlap: decode-jwt-saml, iso-20022-pain001, keccak-256-vs-sha-256, secure-ai-agent-stack, what-is-jev-system-one) and **no homepage entry**.
+- **Deploy:** Build+deploy-qa ✅ (36370792348), CodeQL ✅, main→prod merge ✅ (36370807703), IndexNow pinged ✅.
+- **Post-deploy verification — ALL PASS:**
+  - Sitemap: **274 URLs** (278 − 5 dupes + 1 homepage — exactly as predicted), homepage `https://formatho.com/` as first entry, **0 duplicates**
+  - Chunks live: app chunk rotated to `app-l9yd-xWi.js`, 200; homepage 200
+  - Zero regressions: prod crawl **274/274 OK**, avg 350ms, 0 slow
+  - prod-drift-guard: **healthy, prod==main**, 6 live pages match; no drift posts in #agent-ops
+- Watch methodology: bounded origin/main poller (3-min interval, absolute git path for background-shell PATH gotcha) caught the commit 3 min after push.
+
+### 2026-09-28 (Mon 09:30 work block)
+- **Task:** No open website-qa backlog rows (all shipped/closed); no new commits on origin/main since `80812ca`; CI green through the 03:30 UTC scheduled runs. QA lane: standing weekly QA crawl (last QA crawl 09-25 at 302 URLs; sitemap has since changed 302→278→274) + QA-side confirmation of the F1/F2 sitemap fix.
+- **QA↔prod sitemap parity:** both 274 `<loc>`s, diff **IDENTICAL**, homepage `https://formatho.com/` first entry on QA too, **0 duplicate locs** → the 80812ca F1/F2 patch is verifiably live on **QA as well as prod** (deploy-qa run 36370792348), not just prod.
+- **Weekly QA crawl:** `node scripts/qa-crawl-report.mjs` → **274/274 OK, avg 374ms, 0 slow >3s, 0 failures** — clean.
+- **Backlog:** monitoring only → no status changes (per dispatch rules).
+- **Status posted** to C0C44G305PS.
+
+### 2026-09-29 (Tue AM block)
+- **Task:** Weekly crawl (09-29 briefing) — monitoring only, no BACKLOG changes per dispatch.
+- **Result:** **274/274 OK**, avg 382ms, 0 slow >3s, 0 failures — clean.
+- **vs last week (09-26, 302-URL crawl):** count 302 → 274 = −28, **fully accounted for by intentional changes** — thin-page consolidation 9942495 (−24: 24 merged into 6 combined, 6 removed, 9 persona pages noindexed) + F1/F2 80812ca (−5 dup blog locs, +1 homepage) → 302−24−5+1 = 274 exactly. No unexplained drops, no 4xx/5xx, deduped blogs still resolve (once), homepage crawls OK. Health identical week-over-week (100% OK, avg 382ms both).
+- Overnight: `9c9b907` (EV battery keywords on battery tools) deployed green + IndexNow'd before the crawl.
+
+### 2026-09-29 (Tue 09:30 work block)
+- **Task:** QA-lane verification of the 2 new main commits since `9c9b907` — `d5b9620` (git-derived sitemap lastmod for all tool routes; motivator: Google ignores IndexNow, visio-viewer push of 09-23 still not recrawled) + `c188963` (Docker fix: builder stage lacked git + .dockerignore excluded .git, so d5b9620's first deploy silently shipped **no** lastmods).
+- **CI:** both green — Build and Deploy [36515922879](https://github.com/formatho/website/actions/runs/36515922879) (d5b9620) + [36516727949](https://github.com/formatho/website/actions/runs/36516727949) (c188963) success, CodeQL ✓, IndexNow pinged; prod deployed both (live evidence below).
+- **Live verification — all pass (QA + prod identical):** 274 `<loc>` (count unchanged), **167 git-derived `<lastmod>`** entries now live on both hosts (fix verifiably worked: pre-c188963 deploy had 0), xmllint well-formed, date range 2026-08-21→2026-09-29 sane.
+- **Date-sanity spot checks vs git:** visio-viewer lastmod `2026-09-23` (exactly the content-push date claimed in commit msg) ✓; password-generator `2026-09-24` = git last-touch ✓; jwt `2026-09-21` ✓ — per-route pickaxe stamping accurate, no global restamp.
+- **Crawl regression:** 274/274 OK, avg 392ms, 0 slow, 0 failures — lastmod addition broke nothing downstream.
+- **Status posted** to C0C44G305PS. Monitoring/verification only → no BACKLOG changes.
+
+### 2026-09-30 (Wed AM block)
+- **Task:** Independent prod verification pass (09-30 briefing) — drift guard, key pages/chunks, no regressions vs yesterday.
+- **All PASS:**
+  - prod-drift-guard: healthy, prod==main, 6 live pages match
+  - Key pages 8/8 → 200 (/, /tools, /funnels, /eliza-tools, /runtime, /blogs, /tools/jwt, /tools/visio-viewer)
+  - Sitemap **279 URLs** — briefing's 274 + 5 intentional overnight additions (1 blog: how-to-open-camunda-bpmn-files-in-visio via `cb5e75e` + 4 tools: csr-decoder, dpp-readiness, gtin-validator, spf-analyzer), 0 dropped, homepage-first, 0 dupes — all 5 new URLs → 200
+  - Overnight **git-derived sitemap lastmod** feature (`d5b9620` + Docker fix `c188963`) live and correct: 172 lastmod entries; /tools/visio-viewer → 2026-09-23 exactly matching the content-push commit
+  - HouseAd: chunk live (Cl-a-m3e.js 200) with flag + house_ad_view/click events; **0 markup rendered by default → gated OFF**
+  - Conversion events: tool_page_view / tool_result_copied / enterprise_cta_click present in current conversionTracking chunk
+  - Overnight CI: all green (last: cb5e75e run 36654041013 + CodeQL + IndexNow)
+
+### 2026-09-30 (Wed 09:30 work block)
+- **Task:** No new commits since `cb5e75e` (verified earlier AM block); QA lane — independent verification of backlog #2's A/B iterate path (`36e70b4`, shipped 09-29: variant B copy + `formatho_cta_ab` flag + `cta_variant` payload) ahead of the Oct-5 gate, plus the GA consent-mode change (`9722d7a`).
+- **All PASS:**
+  - Default state: `/tools/saml-metadata-generator` serves control copy only on prod AND QA (A-copy 1×, B-copy strings 0× in HTML on both hosts) — flag OFF by default, zero public change
+  - Chunks: gate + both copy variants live in EnterpriseCta chunks (prod `…-CmSzrN7a.js` / QA `…-BHNiFuBJ.js` — separate builds, both 200); `cta_variant` + `enterprise_cta_click` in `conversionTracking-DRyAA0LP.js`
+  - **Browser functional test (prod):** localStorage `formatho_cta_ab=b` → variant B renders ("Air-gap your SAML stack" + air-gapped body, `data-cta-variant="b"`); `=a` → control A; cleared → control with no variant attr. Iterate path fully functional — Oct-5 ITERATE decision = zero code
+  - GA (`9722d7a`): standard gtag snippet live, 0 manual `gtag('consent')` calls; remaining "consent" strings are privacy-policy prose (CMP handles consent)
+- **Backlog:** appended verification evidence to row #2. Tab hygiene: test tab closed, flag + seed cleared on the visitor profile.
+- **Status posted** to C0C44G305PS.
+
+### 2026-10-01 (Thu AM block)
+- **Re-dispatch closure (stale 09-24 assignment):** both items shipped 09-24 and still holding — 0abe1b7 CI runs all `success` (Build+deploy-qa + CodeQL); funnel detail slugs present in current sitemap (2), /funnels/eu-product-passport 200. No new work needed; dispatcher queue item explicitly closed.
+- **Independent verification pass (today's briefing):**
+  - Conversion events: chunk rotated to `conversionTracking-QkfGd2vB.js` (200), all 3 events intact (tool_page_view / tool_result_copied / enterprise_cta_click)
+  - HouseAd: chunk `3f50atAb.js` (200) with flag gate; **0 markup by default on bpmn-to-visio → OFF**
+  - **A/B flag state: nothing ACTIVE on prod; both mechanisms verified** — (a) hero A/B (`formatho_ab_test`) is unwired dead code, config window expired 2026-04-05, zero strings in deployed main bundle; (b) CTA A/B (`formatho_cta_ab`, shipped 09-29 36e70b4) machinery IS live in lazy view chunks (SamlDecoderView-Bt6J_DOY.js: flag ×3 + data-cta-variant ×2), default renders **control-only** (0 variant markers in HTML), `cta_variant` event present in conversionTracking chunk — Oct-5 ITERATE flip needs zero further code, per #2 gate memo
+  - Drift guard cross-check: healthy — prod==main, 6 live pages match
+
+## Notes / next
+- OKR-2 KR3 says "134 tool pages"; sitemap now carries 301 URLs (tools + categories + content) — crawl covers all of them.
+- Next run: `node scripts/qa-crawl-report.mjs` (optionally pass a base URL, e.g. https://formatho.com for prod spot-checks).
+- Workspace files (AGENTS.md, DREAMS.md, memory/, TOOLS.md deletion) are agent workspace state — intentionally not committed.
