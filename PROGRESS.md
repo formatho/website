@@ -4,6 +4,7 @@ One line per work block: date | summary | status | link. Detailed archive for 20
 
 2026-09-29 | work-block am: shipped 3 stranded tools (gtin-validator, dpp-readiness, spf-analyzer) to main — were prod-only (0720fab) and 404 live; cherry-pick+merge resolved 2 merge-brace breaks, deploys green (b39664e/e55d2c8), live 200 all 3, sitemap 170 lastmod incl new URLs | ✅ verified | https://formatho.com/tools/gtin-validator
 2026-10-01 | work-block am: OKR-2 KR3 weekly QA crawl — 279/279 URLs OK on qa.formatho.com (avg 382ms, 0 slow >3s); QA current with main 081dee4 (newest 5 tools 200; live bom-cost-rollup title = 'Automotive BOM…' from 081dee4; 172 lastmod entries live) | ✅ verified | https://qa.formatho.com/sitemap.xml
+2026-10-02 | work-block am: no new main commits (tip 6585055); standing QA pass all green — overnight CI success (incl. 03:57 UTC scheduled runs), prod-drift-guard healthy (prod==main, 6/6 live titles), QA↔prod sitemap parity IDENTICAL (279/279 locs, 0 diff), fresh QA crawl 279/279 OK (avg 431ms, 0 slow >3s); secrets store empty → backlog #2's 10-05 gate still needs owner Umami read | ✅ verified | https://qa.formatho.com/sitemap.xml
 
 ---
 
