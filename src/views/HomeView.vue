@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const featuredCategories = ['security', 'compliance', 'web3']
 import { ref, computed, onMounted } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { useSEO } from '@/composables/useSEO'
@@ -289,6 +290,7 @@ const _popularTools = [
           </h1>
           <p class="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed" data-v-8d4ed633="">
             Give AI agents secure, controlled access to your developer, security, and EVM tools — entirely inside your infrastructure.
+            The free tools below are that same library, running entirely in your browser.
           </p>
           <p class="text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed" data-v-8d4ed633="">
             <RouterLink to="/runtime" class="text-foreground font-semibold underline underline-offset-4">Formatho Runtime</RouterLink> is a self-hosted MCP server with permissioned tools, sandboxed execution, and metadata-only audit logs. Sensitive data stays inside your network.
@@ -342,14 +344,14 @@ const _popularTools = [
           </div>
           <!-- Conversion CTA -->
           <div class="flex flex-col sm:flex-row gap-4 items-center mt-4" data-v-8d4ed633="">
-            <RouterLink to="/runtime" data-v-8d4ed633="">
+            <RouterLink to="/tools/all" data-v-8d4ed633="">
               <button class="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg" data-v-8d4ed633="">
-                Deploy Formatho
+                Explore Tools
               </button>
             </RouterLink>
-            <RouterLink to="/tools/all" data-v-8d4ed633="">
+            <RouterLink to="/runtime" data-v-8d4ed633="">
               <button class="px-6 py-3 bg-foreground/10 border border-foreground text-foreground rounded-lg font-semibold text-lg hover:bg-foreground hover:text-background transition-colors" data-v-8d4ed633="">
-                Explore Tools
+                Deploy Formatho
               </button>
             </RouterLink>
           </div>
@@ -430,12 +432,15 @@ const _popularTools = [
             v-for="category in tools"
             :key="category.slug"
             :to="category.route"
-            class="group border border-border rounded-xl p-6 hover:border-primary/50 hover:bg-primary/5 transition-colors"
+            class="group border rounded-xl p-6 hover:border-primary/50 hover:bg-primary/5 transition-colors"
+            :class="featuredCategories.includes(category.slug) ? 'border-primary/50 bg-primary/5 ring-1 ring-primary/20' : 'border-border'"
           >
             <div class="flex items-center gap-3 mb-3">
               <CategoryIcon :slug="category.slug" :size="28" />
               <div>
-                <h3 class="text-lg font-bold group-hover:text-primary transition-colors">{{ category.category }}</h3>
+                <h3 class="text-lg font-bold group-hover:text-primary transition-colors flex items-center gap-2">{{ category.category }}
+                  <span v-if="featuredCategories.includes(category.slug)" class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-primary/15 text-primary uppercase tracking-wide">start here</span>
+                </h3>
                 <p class="text-xs text-muted-foreground">{{ category.items.length }} tools</p>
               </div>
             </div>
