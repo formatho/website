@@ -114,7 +114,7 @@ export const routeMeta: Record<string, RouteMeta> = {
   },
   'sql-dialect-converter': {
     title: 'SQL Dialect Converter - Postgres, MySQL, T-SQL | Formatho',
-    description: 'Convert SQL queries between PostgreSQL, MySQL, SQLite, SQL Server, BigQuery, Snowflake, and more. Handles syntax differences, data types, and.',
+    description: 'Convert SQL queries between PostgreSQL, MySQL, SQLite, SQL Server, BigQuery, Snowflake, and more. Handles syntax differences, data types, and functions — free, no upload, runs in your browser.',
     keywords: 'sql dialect converter, postgresql to mysql, mysql to postgresql, sql converter, tsql converter, sql translation, database migration tool, free sql converter, privacy-first',
   },
   'foreign-key-visualizer': {
@@ -139,7 +139,7 @@ export const routeMeta: Record<string, RouteMeta> = {
   },
   'image': {
     title: 'Image Compressor - Reduce Image Size Securely | Formatho',
-    description: 'Compress JPG, PNG, and WebP images by up to 80% without quality loss. Perfect for reducing AI-generated image sizes, optimizing web performance, and.',
+    description: 'Compress JPG, PNG, and WebP images by up to 80% without quality loss. Perfect for reducing AI-generated image sizes and optimizing web performance — free, private, no upload.',
     keywords: 'image compressor, compress image online, reduce image size, optimize images, ai image compressor, webp compressor, png optimizer, jpg reducer, batch image compression, free image tool, privacy-first',
   },
   'json-lint': {
@@ -164,7 +164,7 @@ export const routeMeta: Record<string, RouteMeta> = {
   },
   'bpmn-to-visio': {
     title: 'BPMN to Visio Converter - Free, Layout Preserved | Formatho',
-    description: 'Convert BPMN 2.0 XML to Visio (.vdx) with a live preview and exact BPMN DI layout preservation. Waypoint connectors, auto-layout fallback, conversion.',
+    description: 'Convert BPMN 2.0 XML to Visio (.vdx) with a live preview and exact BPMN DI layout preservation. Waypoint connectors, auto-layout fallback — free, no upload, runs entirely in your browser.',
     keywords: 'bpmn to visio, bpmn converter, convert bpmn to visio, bpmn to vdx, visio converter, bpmn export, camunda to visio, bpmn diagram import visio',
   },
   'evm-converter': {
@@ -274,7 +274,7 @@ export const routeMeta: Record<string, RouteMeta> = {
   },
   'tx-decoder': {
     title: 'Ethereum Transaction Decoder | Formatho',
-    description: 'Decode raw signed transactions (legacy, EIP-1559, EIP-2930, EIP-4844) into typed fields: nonce, gas, to, value, calldata selector, signature.',
+    description: 'Decode raw signed transactions (legacy, EIP-1559, EIP-2930, EIP-4844) into typed fields: nonce, gas, to, value, calldata, and signature — free, no upload.',
   },
   'function-selector': {
     title: 'Function Selector Lookup — keccak256 4-Byte | Formatho',
@@ -583,7 +583,7 @@ export const routeMeta: Record<string, RouteMeta> = {
   },
   'sqlite-browser': {
     title: 'SQLite Browser - Open & Query .db Files Online | Formatho',
-    description: 'Open SQLite databases in your browser: browse tables, run SQL, edit cells, import CSV, export .db files. Powered by WebAssembly SQLite — no upload, fully.',
+    description: 'Open SQLite databases in your browser: browse tables, run SQL, edit cells, import CSV, export .db files. WebAssembly SQLite — no upload, fully private.',
     keywords: 'sqlite browser, sqlite viewer, open sqlite online, sqlite online, run sql in browser, db browser online, db file viewer, sqlite editor, sqlite wasm',
   },
   'shamir-splitter': {
