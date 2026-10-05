@@ -17,17 +17,22 @@ findings=()
 
 # --- 1. prod branch vs main ---
 git fetch origin main prod --quiet 2>/dev/null
-missing=$(git rev-list --count origin/prod..origin/main 2>/dev/null)
-if [ -z "$missing" ]; then
-  findings+=("FATAL: could not compute rev-list origin/prod..origin/main (fetch or refs failed)")
+# git cherry marks '-' for commits whose patch-content already exists in prod
+# (re-commit/cherry-pick pattern — 10-04/10-05 false positives) and '+' for
+# genuinely missing content; raw rev-list cannot tell them apart.
+missing_out=$(git cherry origin/prod origin/main 2>/dev/null)
+if [ -z "$missing_out" ] && [ -z "$(git rev-parse --verify origin/prod 2>/dev/null)" ]; then
+  findings+=("FATAL: could not run git cherry against origin/prod (fetch or refs failed)")
   fail=1
-elif [ "$missing" -gt 0 ]; then
-  shas=$(git rev-list origin/prod..origin/main | head -5)
-  findings+=("prod drift: $missing commit(s) on main missing from prod:")
-  for s in $shas; do
-    findings+=("  $s $(git log -1 --format=%s "$s" | cut -c1-80)")
-  done
-  fail=1
+else
+  count=$(printf '%s\n' "$missing_out" | grep -c '^+')
+  if [ "$count" -gt 0 ]; then
+    findings+=("prod drift: $count commit(s) on main missing from prod:")
+    for s in $(printf '%s\n' "$missing_out" | grep '^+' | sed 's/^+//' | head -5); do
+      findings+=("  ${s:0:9} $(git log -1 --format=%s "$s" | cut -c1-80)")
+    done
+    fail=1
+  fi
 fi
 
 # latest prod deploy conclusion (green deploy on the drifted tip is also broken)
