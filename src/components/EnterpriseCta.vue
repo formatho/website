@@ -3,9 +3,12 @@ import { computed, onMounted, ref } from 'vue'
 import { Building2 } from 'lucide-vue-next'
 
 /**
- * A/B variant (backlog #2 iterate path, docs/CTA_AB_PLAN.md):
- * flag `formatho_cta_ab` OFF by default — goes live only if the Oct-5
- * gate decision is "iterate". QA override: localStorage formatho_cta_ab=a|b.
+ * A/B variant (backlog #2 iterate path, docs/CTA_AB_PLAN.md).
+ * Live since the Oct-5 gate flip: default ON for the saml-metadata-generator
+ * call site via the `ab-default` prop (stable 50/50 by visitor seed).
+ * QA override: localStorage formatho_cta_ab=a|b. Kill-switch (must win over
+ * everything, incl. ab-default): localStorage formatho_cta_ab=off or build
+ * VITE_CTA_AB=off — control copy on every instance.
  * Variant rides on the mailto links via data-variant so the existing
  * enterprise_cta_click event can split A/B with zero new events.
  */
@@ -20,6 +23,10 @@ const abEnabled = ref(false)
 onMounted(() => {
   try {
     const flag = localStorage.getItem('formatho_cta_ab')
+    // Kill-switch wins over forced a/b AND over ab-default: 'off' must restore
+    // control copy everywhere (else post-kill visitors still get variant copy
+    // + data-cta-variant riding the mailto links, polluting cta_variant).
+    if (flag === 'off' || import.meta.env.VITE_CTA_AB === 'off') return
     if (flag === 'a' || flag === 'b') {
       abEnabled.value = true
       variant.value = flag
