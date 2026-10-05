@@ -9,6 +9,12 @@ import { Building2 } from 'lucide-vue-next'
  * Variant rides on the mailto links via data-variant so the existing
  * enterprise_cta_click event can split A/B with zero new events.
  */
+const props = defineProps<{
+  /** Backlog #2 A/B default-on for this instance (Oct-5 gate iterate flip).
+   *  Kill-switch: flip the prop off at the call site (one-line revert). */
+  abDefault?: boolean
+}>()
+
 const variant = ref<'a' | 'b'>('a')
 const abEnabled = ref(false)
 onMounted(() => {
@@ -17,7 +23,7 @@ onMounted(() => {
     if (flag === 'a' || flag === 'b') {
       abEnabled.value = true
       variant.value = flag
-    } else if (flag === 'on' || import.meta.env.VITE_CTA_AB === 'on') {
+    } else if (flag === 'on' || import.meta.env.VITE_CTA_AB === 'on' || props.abDefault) {
       abEnabled.value = true
       // Stable 50/50 by visitor hash (house-ads flag pattern)
       const seed = localStorage.getItem('formatho_cta_ab_seed')

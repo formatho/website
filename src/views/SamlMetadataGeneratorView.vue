@@ -119,20 +119,26 @@ function download() {
 import EnterpriseCta from '@/components/EnterpriseCta.vue'
 
 /* Backlog #2 A/B iterate path (CTA_AB_PLAN.md): above-fold CTA on this page
- * only when the `formatho_cta_ab` flag is on; bottom CTA moves (not duplicates). */
-const ctaAbTop = ref(false)
+ * only when the `formatho_cta_ab` flag is on; bottom CTA moves (not duplicates).
+ * Oct-5 gate flip: default ON for THIS page only (ab-default); kill-switch =
+ * localStorage formatho_cta_ab=off or revert the default below (one line). */
+const ctaAbTop = ref(true)
 onMounted(() => {
   try {
     const flag = localStorage.getItem('formatho_cta_ab')
-    ctaAbTop.value = flag === 'a' || flag === 'b' || flag === 'on' || import.meta.env.VITE_CTA_AB === 'on'
+    if (flag === 'off' || import.meta.env.VITE_CTA_AB === 'off') {
+      ctaAbTop.value = false
+    } else if (flag === 'a' || flag === 'b' || flag === 'on') {
+      ctaAbTop.value = true
+    }
   } catch {
-    ctaAbTop.value = false
+    ctaAbTop.value = true
   }
 })
 </script>
 
 <template>
-  <EnterpriseCta v-if="ctaAbTop" />
+  <EnterpriseCta v-if="ctaAbTop" ab-default />
   <div class="max-w-4xl mx-auto px-4 py-8 space-y-6">
     <div class="flex items-center gap-3">
       <div class="p-2 bg-primary/10 rounded-lg">
@@ -218,5 +224,5 @@ onMounted(() => {
       <AlertCircle class="w-4 h-4 shrink-0" /> {{ outputError }}
     </p>
   </div>
-  <EnterpriseCta v-if="!ctaAbTop" />
+  <EnterpriseCta v-if="!ctaAbTop" ab-default />
 </template>
