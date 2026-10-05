@@ -5,6 +5,8 @@ One line per work block: date | summary | status | link. Detailed archive for 20
 2026-09-29 | work-block am: shipped 3 stranded tools (gtin-validator, dpp-readiness, spf-analyzer) to main — were prod-only (0720fab) and 404 live; cherry-pick+merge resolved 2 merge-brace breaks, deploys green (b39664e/e55d2c8), live 200 all 3, sitemap 170 lastmod incl new URLs | ✅ verified | https://formatho.com/tools/gtin-validator
 2026-10-01 | work-block am: OKR-2 KR3 weekly QA crawl — 279/279 URLs OK on qa.formatho.com (avg 382ms, 0 slow >3s); QA current with main 081dee4 (newest 5 tools 200; live bom-cost-rollup title = 'Automotive BOM…' from 081dee4; 172 lastmod entries live) | ✅ verified | https://qa.formatho.com/sitemap.xml
 2026-10-02 | work-block am: no new main commits (tip 6585055); standing QA pass all green — overnight CI success (incl. 03:57 UTC scheduled runs), prod-drift-guard healthy (prod==main, 6/6 live titles), QA↔prod sitemap parity IDENTICAL (279/279 locs, 0 diff), fresh QA crawl 279/279 OK (avg 431ms, 0 slow >3s); secrets store empty → backlog #2's 10-05 gate still needs owner Umami read | ✅ verified | https://qa.formatho.com/sitemap.xml
+2026-10-04 | work-block am: pre-gate rehearsal for #2 (Oct-5) — A/B machinery re-verified in current rotated chunks: EnterpriseCta is now its own lazy chunk (-fQBYXmr0 QA / -BgP49xFN prod) w/ all 4 markers (flag/attr/copy/seed), view chunks import it; prod browser functional test: formatho_cta_ab=b → variant B w/ data-cta-variant="b" + Air-gap copy, default = control-only SSR; gate-decision.sh rehearsal exits 3 = blind ITERATE/HOLD, sole blocker UMAMI_API_KEY (store empty). Standing pass: c013aa4 (homepage UX) live QA+prod, parity 279/279 IDENTICAL (172 lastmod), crawl 279/279 OK avg 410ms | ✅ verified | https://formatho.com/tools/saml-metadata-generator
+2026-10-05 | work-block am: post-flip QA verification of #2's Oct-5 A/B found the kill-switch BROKEN — formatho_cta_ab=off only moved the CTA to the bottom while ab-default still ran the 50/50 (variant B copy + data-cta-variant rendered post-kill; proven live on QA w/ deterministic seed bbbb2222); fixed 29caa33 (explicit off / VITE_CTA_AB=off overrides abDefault in EnterpriseCta), CI 37262099087 green (build + deploy-qa + CodeQL), verified live on QA post-fix: off+seed→b = control-only (no variant attr, CTA bottom), default = top CTA + variant b (flip intact); jwt-decoder spot-check: no CTA at all (scope guardrail holds); PROD still serves 9d9b048 w/ broken kill-switch — main→prod merge of 29caa33 flagged to website-agent in C0C44G305PS | ✅ verified | https://github.com/formatho/website/actions/runs/37262099087
 
 ---
 
@@ -168,6 +170,22 @@ One line per work block: date | summary | status | link. Detailed archive for 20
   - HouseAd: chunk `3f50atAb.js` (200) with flag gate; **0 markup by default on bpmn-to-visio → OFF**
   - **A/B flag state: nothing ACTIVE on prod; both mechanisms verified** — (a) hero A/B (`formatho_ab_test`) is unwired dead code, config window expired 2026-04-05, zero strings in deployed main bundle; (b) CTA A/B (`formatho_cta_ab`, shipped 09-29 36e70b4) machinery IS live in lazy view chunks (SamlDecoderView-Bt6J_DOY.js: flag ×3 + data-cta-variant ×2), default renders **control-only** (0 variant markers in HTML), `cta_variant` event present in conversionTracking chunk — Oct-5 ITERATE flip needs zero further code, per #2 gate memo
   - Drift guard cross-check: healthy — prod==main, 6 live pages match
+
+### 2026-10-04 (Sun midday — steward check, no work block)
+- Steward asked for status after ~2-day runtime outage (10-02 PM → 10-04 AM). **No website-qa block was in-flight** — last completed: 10-01 AM (this session); 09-30 CTA A/B entry was a sibling website-qa session. No 10-02/10-03 entries = no sessions ran during the outage, as expected.
+- Post-outage health: prod-drift-guard **healthy (prod==main, 6 live pages match)**; key pages /, /tools, /funnels all 200; GitHub Actions kept running through the outage (scheduled runs green 10-03→10-04). Nothing drifted; nothing blocking.
+- Note: any briefings dispatched into the outage window never reached a session — re-dispatch if still relevant.
+
+### 2026-10-04 (Sun midday — T-1 gate verification pass, outage-delayed briefing)
+- **Task:** Independent prod verification, T-1 to backlog #2's Oct-5 gate.
+- **ALL PASS:**
+  - Drift guard: healthy — prod==main, 6 live pages match (incl. `c013aa4` homepage-UX deploy)
+  - Key routes 6/6 → 200
+  - **Conversion events: all 4 gate-relevant events live** in `conversionTracking-BHgkHCN0.js` (200): tool_page_view / tool_result_copied / enterprise_cta_click / **cta_variant**
+  - CTA A/B: machinery now consolidated in the **EnterpriseCta chunk** (`BgP49xFN.js`, 200: formatho_cta_ab ×3 + data-cta-variant ×2 — moved out of per-view chunks by the 10-02→04 deploys, not a regression); default renders control-only (0 variant markers on /tools/saml-decoder)
+  - HouseAd: chunk `ZLrNFDlP.js` 200; 0 markup by default → **OFF**
+- Context: no Build-and-Deploy ran during the runtime outage (only scheduled GH Actions); current chunks are from the 10-02 morning deploys + c013aa4. Repo's committed work log (6585055/560c50a) confirmed the 10-02 09:31 standing-pass session pre-outage.
+- **Oct-5 gate readiness: ITERATE path fully functional, zero code needed** — events + flag machinery + control default all verified on current prod chunks.
 
 ## Notes / next
 - OKR-2 KR3 says "134 tool pages"; sitemap now carries 301 URLs (tools + categories + content) — crawl covers all of them.
