@@ -1328,6 +1328,31 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://formatho.com/tools/comfyui-workflow-inspector</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/comfyui-api-converter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/comfyui-workflow-diff</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/safetensors-reader</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/comfyui-sampler-guide</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/tools/toml-yaml-json-converter</loc>
     <lastmod>2026-09-27</lastmod>
     <changefreq>monthly</changefreq>

@@ -481,6 +481,31 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Decode a Certificate Signing Request (PKCS#10) in your browser: subject, SANs, public key, extensions and signature verification. Nothing uploaded.',
     keywords: 'csr decoder, decode csr, check csr, pkcs#10, certificate signing request decoder, csr checker, openssl req text, csr san decoder',
   },
+  'comfyui-workflow-inspector': {
+    title: 'ComfyUI Workflow Inspector - Check Any Workflow JSON | Formatho',
+    description: 'Paste a ComfyUI workflow (API or canvas format): models required, sampler and CFG settings, resolution, and which nodes need custom node packs. Free, client-side.',
+    keywords: 'comfyui workflow inspector, comfyui workflow viewer, comfyui json checker, comfyui api format, comfyui workflow analyzer',
+  },
+  'comfyui-api-converter': {
+    title: 'ComfyUI API to Workflow Converter - Both Directions | Formatho',
+    description: 'Convert ComfyUI API/prompt format JSON to the canvas workflow format and back. Widget values, links and node positions rebuilt. Free, client-side.',
+    keywords: 'comfyui api to workflow, comfyui workflow converter, comfyui api format convert, comfyui prompt json to workflow',
+  },
+  'comfyui-workflow-diff': {
+    title: 'ComfyUI Workflow Diff - Compare Two Workflows | Formatho',
+    description: 'Diff two ComfyUI workflow JSONs: added and removed nodes, changed sampler settings, seed, CFG and prompt edits. Free, client-side.',
+    keywords: 'comfyui workflow diff, compare comfyui workflows, comfyui json diff, comfyui what changed',
+  },
+  'safetensors-reader': {
+    title: 'Safetensors Header Reader - Inspect Model Metadata | Formatho',
+    description: 'Read the JSON header of any .safetensors file in your browser: LoRA metadata, base model version, network rank, tensor names and dtypes. No upload.',
+    keywords: 'safetensors reader, safetensors metadata viewer, lora metadata reader, read safetensors header, safetensors inspector',
+  },
+  'comfyui-sampler-guide': {
+    title: 'ComfyUI Sampler Guide - Samplers, Schedulers, CFG Explained | Formatho',
+    description: 'Plain-language reference for ComfyUI samplers, sigma schedulers, and how steps, CFG, denoise and seed interact.',
+    keywords: 'comfyui sampler guide, which comfyui sampler, euler vs dpmpp_2m, comfyui scheduler explained, comfyui cfg settings',
+  },
   'pint-ae': {
     title: 'PINT AE Invoice Builder & Validator - UAE E-Invoicing | Formatho',
     description: 'Build PINT AE XML invoices for the UAE e-invoicing mandate (Peppol), or paste XML to validate: TRN, VAT categories, required UBL fields, totals math. 100% client-side.',

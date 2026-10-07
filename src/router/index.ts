@@ -827,6 +827,36 @@ export const routes = [
         meta: routeMeta['csr-decoder']
       },
       {
+        path: '/tools/comfyui-workflow-inspector',
+        name: 'comfyui-workflow-inspector',
+        component: () => import(/* webpackPrefetch: true */ '../views/ComfyWorkflowInspectorView.vue'),
+        meta: routeMeta['comfyui-workflow-inspector']
+      },
+      {
+        path: '/tools/comfyui-api-converter',
+        name: 'comfyui-api-converter',
+        component: () => import(/* webpackPrefetch: true */ '../views/ComfyApiConverterView.vue'),
+        meta: routeMeta['comfyui-api-converter']
+      },
+      {
+        path: '/tools/comfyui-workflow-diff',
+        name: 'comfyui-workflow-diff',
+        component: () => import(/* webpackPrefetch: true */ '../views/ComfyWorkflowDiffView.vue'),
+        meta: routeMeta['comfyui-workflow-diff']
+      },
+      {
+        path: '/tools/safetensors-reader',
+        name: 'safetensors-reader',
+        component: () => import(/* webpackPrefetch: true */ '../views/SafetensorsReaderView.vue'),
+        meta: routeMeta['safetensors-reader']
+      },
+      {
+        path: '/tools/comfyui-sampler-guide',
+        name: 'comfyui-sampler-guide',
+        component: () => import(/* webpackPrefetch: true */ '../views/ComfySamplerGuideView.vue'),
+        meta: routeMeta['comfyui-sampler-guide']
+      },
+      {
         path: '/tools/toml-yaml-json-converter',
         name: 'toml-yaml-json-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/TomlYamlJsonConverterView.vue'),
