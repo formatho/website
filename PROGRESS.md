@@ -187,6 +187,46 @@ One line per work block: date | summary | status | link. Detailed archive for 20
 - Context: no Build-and-Deploy ran during the runtime outage (only scheduled GH Actions); current chunks are from the 10-02 morning deploys + c013aa4. Repo's committed work log (6585055/560c50a) confirmed the 10-02 09:31 standing-pass session pre-outage.
 - **Oct-5 gate readiness: ITERATE path fully functional, zero code needed** — events + flag machinery + control default all verified on current prod chunks.
 
+### 2026-10-05 (Mon AM block — gate-day QA pass on #2 ITERATE flip)
+- **Flip:** `9d9b048` (abDefault prop, page-scoped to saml-metadata-generator) — CI green incl. prod merge 37256658388 + IndexNow; watched it land 3 min after push.
+- **Prod functional battery (browser, fresh localStorage): ALL PASS** — default split ON (variant b, B copy, above-fold y≈221/873, seed auto-created); reload-stable (same variant + seed); `=a`→control copy/attr=a; `=b`→B copy/attr=b; cleared→natural re-split (new seed → variant a — both hash arms observed). **Scope isolation:** saml-decoder = control copy, NO variant attr (seed present but unused).
+- **QA battery:** default split + reload determinism PASS.
+- **⚠️ Finding — kill-switch `off` broken in 9d9b048:** prod ignores `formatho_cta_ab=off` (falls through abDefault → split continues; attr=b persisted). Verified in deployed chunk (no "off" literal in EC-CgkThRBj.js) + committed source (no off branch). Commit message documented a kill-switch the code never had. A sibling website-qa session independently found + fixed it (`29caa33`, live on QA — I browser-verified: off→control-only, no attr). **Prod still awaits main→prod merge of 29caa33** (flagged to website-agent via #agent-ops + backlog #2). Working kill today: one-line revert at call site.
+- Standard checks: 4/4 conversion events in `conversionTracking-B_GR1rx6.js`; HouseAd chunk 200 + 0 markup default → OFF; drift: prod behind main by fix+docs commits (expected until prod merge).
+- Tab hygiene: prod + QA localStorage cleared, tab reset to about:blank.
+
+### 2026-10-06 (Tue AM block — standing prod pass + kill-switch hold confirmation)
+- **Context:** 29caa33 (kill-switch fix) merged to prod at 1404dfe; drift healthy prod==main; prod chunks rotated (app-DWMivJmW.js, EC-CgN1LdMU.js carries "off").
+- **Browser battery on prod — ALL PASS:**
+  - **Kill-switch holding:** `formatho_cta_ab=off` → control-only, `data-cta-variant` **absent** (verified twice — inherited off state from sibling's test + explicit re-test after re-enabling the split)
+  - **Default split stays ON post-fix:** cleared → variant b + B copy above-fold, fresh seed, reload-deterministic (same variant+seed)
+  - **Scope intact:** saml-decoder (clean state) → no variant attr, control copy — split remains page-scoped to saml-metadata-generator
+- Standard: 4/4 conversion events in `conversionTracking-BLFvqK4d.js` (200); HouseAd chunk 200 + 0 default markup → OFF; key routes 4/4 × 200.
+- Tab hygiene: prod localStorage cleared, tab reset to about:blank.
+
+### 2026-10-06 (Tue AM work block — QA-domain pass + repo convergence)
+- **Assignment check:** no new briefings; backlog has no open website-qa items (sibling session already completed the 10-06 standing prod pass + #2 HOLD-confirm). #4 CRO watch noted: ad gate pushed OUT — DO NOT flip.
+- **CI health:** last 8 runs green incl. overnight dependabot wave (77ed8c3 dompurify + ef74133 vue/katex/source-map-js, prod deploys 37405652255/37406354582).
+- **QA crawl** (`scripts/qa-crawl-report.mjs` vs qa.formatho.com): **279/279 OK, avg 383ms, 0 slow** — weekly crawl clean.
+- **Repo convergence:** prod+QA sitemaps already serve `lastmod 2026-10-05` for /tools/saml-metadata-generator (rotated by the 10-05 ITERATE flip deploys) but main was one behind (uncommitted local regen). Committed the sync (`107045e`, rebased over the overnight dependabot wave after an initial push rejection); first two attempts hit commitlint (header 107>100, then body line >100) — build itself passed all pre-commit checks each time; third attempt with wrapped message.
+
+### 2026-10-07 (Wed AM block — standing prod pass)
+- **Overnight changes:** `107045e` (lastmod sync) + `ef74133` (dependabot wave: vue 3.5.43, katex, source-map-js) — chunks rotated to app-CJZh95n6 / EC-Dw0zU8hC / conversionTracking-DhVCEY3r.
+- **All PASS:**
+  - Kill-switch holding on the NEW build (post-dependabot rebuild): off → control-only, `data-cta-variant` absent
+  - Default 50/50 split ON (fresh: variant b + B copy, seed auto-created); scope intact (saml-decoder clean → no attr, control copy)
+  - 4/4 events in conversionTracking-DhVCEY3r.js; HouseAd chunk 200 + 0 default markup → OFF
+  - Drift: healthy prod==main; key pages 5/5 × 200
+- Sitemap lastmod sync (`107045e`) verified live yesterday: saml-metadata-generator carries lastmod 2026-10-05.
+- Tab hygiene: localStorage cleared, tab reset.
+
+### 2026-10-07 (Wed AM work block — #2 A/B morning battery scripted)
+- **Task:** No new assignment (the 10-07 standing prod pass above was done by a sibling session); QA lane — automated the 3-morning manual #2 A/B battery into a one-command guard.
+- **Artifact:** `scripts/ab-battery-check.sh` (commit `02785cf`, CI 37570123108 green incl. deploy-qa): resolves entry HTML → app chunk map → view chunks; asserts flip wiring (`ab-default` ×2 in SamlMetadataGeneratorView) + view off-check + scope (`ab-default` absent from SamlDecoderView); discovers the shared EnterpriseCta chunk via the saml views' import intersection (it ships as a `vue_vue_type_*` chunk, not a named one) and asserts flag ×3 / `data-cta-variant` ×2 / `"off"` kill literal / `abDefault` / both copy variants; all 4 conversion events in the conversionTracking chunk; HouseAd machinery via tool-view imports. `--selftest` 5/5 offline fixtures (kill-switch-broken, scope-leak, missing-event, no-shell cases). Guards the 10-05 9d9b048 class — green chunk greps with a broken kill-switch.
+- **Find en route:** CTA copy strings are NOT present in served HTML on either host (client-render only, incl. prerendered pages) — battery therefore asserts at chunk level, not HTML level.
+- **Live:** prod 20/20 ALL GREEN (app-CJZh95n6, off-literal present in EC chunk, cta_variant in conversionTracking-DhVCEY3r); QA 20/20 pre-push and 20/20 post-deploy (app-CkEh4VJy / conversionTracking-CsYAsuoU).
+- **Status posted** to C0C44G305PS.
+
 ## Notes / next
 - OKR-2 KR3 says "134 tool pages"; sitemap now carries 301 URLs (tools + categories + content) — crawl covers all of them.
 - Next run: `node scripts/qa-crawl-report.mjs` (optionally pass a base URL, e.g. https://formatho.com for prod spot-checks).
