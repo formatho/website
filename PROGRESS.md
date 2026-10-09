@@ -7,6 +7,7 @@ One line per work block: date | summary | status | link. Detailed archive for 20
 2026-10-02 | work-block am: no new main commits (tip 6585055); standing QA pass all green — overnight CI success (incl. 03:57 UTC scheduled runs), prod-drift-guard healthy (prod==main, 6/6 live titles), QA↔prod sitemap parity IDENTICAL (279/279 locs, 0 diff), fresh QA crawl 279/279 OK (avg 431ms, 0 slow >3s); secrets store empty → backlog #2's 10-05 gate still needs owner Umami read | ✅ verified | https://qa.formatho.com/sitemap.xml
 2026-10-04 | work-block am: pre-gate rehearsal for #2 (Oct-5) — A/B machinery re-verified in current rotated chunks: EnterpriseCta is now its own lazy chunk (-fQBYXmr0 QA / -BgP49xFN prod) w/ all 4 markers (flag/attr/copy/seed), view chunks import it; prod browser functional test: formatho_cta_ab=b → variant B w/ data-cta-variant="b" + Air-gap copy, default = control-only SSR; gate-decision.sh rehearsal exits 3 = blind ITERATE/HOLD, sole blocker UMAMI_API_KEY (store empty). Standing pass: c013aa4 (homepage UX) live QA+prod, parity 279/279 IDENTICAL (172 lastmod), crawl 279/279 OK avg 410ms | ✅ verified | https://formatho.com/tools/saml-metadata-generator
 2026-10-05 | work-block am: post-flip QA verification of #2's Oct-5 A/B found the kill-switch BROKEN — formatho_cta_ab=off only moved the CTA to the bottom while ab-default still ran the 50/50 (variant B copy + data-cta-variant rendered post-kill; proven live on QA w/ deterministic seed bbbb2222); fixed 29caa33 (explicit off / VITE_CTA_AB=off overrides abDefault in EnterpriseCta), CI 37262099087 green (build + deploy-qa + CodeQL), verified live on QA post-fix: off+seed→b = control-only (no variant attr, CTA bottom), default = top CTA + variant b (flip intact); jwt-decoder spot-check: no CTA at all (scope guardrail holds); PROD still serves 9d9b048 w/ broken kill-switch — main→prod merge of 29caa33 flagged to website-agent in C0C44G305PS | ✅ verified | https://github.com/formatho/website/actions/runs/37262099087
+2026-10-09 | work-block am: standing pass all green on new tip 220ece6 — #2 A/B battery 20/20 prod + 20/20 QA (flip, saml-only scope, kill-switch, 4/4 events, HouseAd OFF — machinery intact through the comfyui deploy's chunk rotation); verified 220ece6: 5/5 new ComfyUI/safetensors tools 200 on QA+prod, CI 37637807730 green, IndexNow pinged, sitemap 284 locs w/ QA↔prod parity IDENTICAL, prod-drift healthy (prod==main, 6/6 titles) | ✅ verified | https://formatho.com/tools/comfyui-workflow-inspector
 
 ---
 
@@ -227,7 +228,15 @@ One line per work block: date | summary | status | link. Detailed archive for 20
 - **Live:** prod 20/20 ALL GREEN (app-CJZh95n6, off-literal present in EC chunk, cta_variant in conversionTracking-DhVCEY3r); QA 20/20 pre-push and 20/20 post-deploy (app-CkEh4VJy / conversionTracking-CsYAsuoU).
 - **Status posted** to C0C44G305PS.
 
+### 2026-10-09 (Fri AM work block — standing pass + 220ece6 comfyui deploy verification)
+- **Assignment check:** no new briefings; no open website-qa backlog items (all shipped/reassigned). QA lane: standing morning pass + first-pass verification of `220ece6` (5 new ComfyUI/safetensors tool pages, shipped 10-07 20:03 by website-agent — after my 10-07 AM block).
+- **#2 A/B battery** (`scripts/ab-battery-check.sh`): **prod 20/20 + QA 20/20 ALL GREEN** on the 220ece6 build — flip wiring (`ab-default` ×2, saml-metadata-generator only), scope (saml-decoder clean), EnterpriseCta markers (flag ×3, `data-cta-variant` ×2, `"off"` kill literal, `abDefault` ×2, both copies), 4/4 conversion events (prod `conversionTracking-C1v8mp_p` / QA `-UG2dlY3d`), HouseAd machinery shipped + OFF. Machinery survived the comfyui deploy's chunk rotation.
+- **220ece6 verification:** CI 37637807730 success (Build+Deploy incl. deploy-qa) + IndexNow ping success; **5/5 new pages 200 on both hosts** — comfyui-workflow-inspector / comfyui-api-converter / comfyui-workflow-diff / comfyui-sampler-guide / safetensors-reader (QA 0.6–1.5s, prod ~0.6s); title + meta description render correctly (inspector title "ComfyUI Workflow Inspector - Check Any Workflow JSON | Formatho", matches established-page pattern).
+- **Sitemap:** 284 locs live (279 + 5 new), QA↔prod parity IDENTICAL (0-loc diff).
+- **Drift:** `prod-drift-check.sh` healthy — prod==main, 6 live pages match.
+- **Status posted** to C0C44G305PS.
+
 ## Notes / next
-- OKR-2 KR3 says "134 tool pages"; sitemap now carries 301 URLs (tools + categories + content) — crawl covers all of them.
+- OKR-2 KR3 says "134 tool pages"; live sitemap carries 284 URLs (tools + categories + content, +5 comfyui/safetensors on 10-07) — crawl covers all of them.
 - Next run: `node scripts/qa-crawl-report.mjs` (optionally pass a base URL, e.g. https://formatho.com for prod spot-checks).
 - Workspace files (AGENTS.md, DREAMS.md, memory/, TOOLS.md deletion) are agent workspace state — intentionally not committed.
