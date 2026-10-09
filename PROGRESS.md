@@ -240,3 +240,4 @@ One line per work block: date | summary | status | link. Detailed archive for 20
 - OKR-2 KR3 says "134 tool pages"; live sitemap carries 284 URLs (tools + categories + content, +5 comfyui/safetensors on 10-07) — crawl covers all of them.
 - Next run: `node scripts/qa-crawl-report.mjs` (optionally pass a base URL, e.g. https://formatho.com for prod spot-checks).
 - Workspace files (AGENTS.md, DREAMS.md, memory/, TOOLS.md deletion) are agent workspace state — intentionally not committed.
+2026-10-09 | work-block pm: resolved drift — merged main→prod (c31d168, docs-only 059c3e1), deploy 37911732534 green, drift guard healthy (prod==main), routes /, /tools/saml-metadata-generator, /eliza-tools, /blogs all 200 | ✅ verified | https://github.com/formatho/website/actions/runs/37911732534
