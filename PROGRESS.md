@@ -236,8 +236,19 @@ One line per work block: date | summary | status | link. Detailed archive for 20
 - **Drift:** `prod-drift-check.sh` healthy — prod==main, 6 live pages match.
 - **Status posted** to C0C44G305PS.
 
+### 2026-10-10 (Sat AM block — standing A/B battery via ab-battery-check.sh)
+- **Repo state:** 4 commits since 02785cf (comfyui suite 220ece6 + docs) → both hosts in scope per dispatch.
+- **Battery: 20 pass / 0 FAIL — ALL GREEN on PROD *and* QA** (first scripted run; sibling's 02785cf tooling):
+  - A/B machinery live through chunk rotations (prod app-nUn17Wj0 / EC markers ×3+×2 / off literal / abDefault ×2 / both copy variants)
+  - Scope: ab-default only in SamlMetadataGeneratorView; absent from SamlDecoderView
+  - 4/4 events in current conversionTracking chunks (prod CfG6SKuI / QA CDz-hs6E)
+  - HouseAd phase-1 machinery shipped (flag + house_ad_view/click); default OFF (0 markup)
+- Drift healthy (prod==main, 6 live pages) · prod / 200.
+- No reds → nothing to diagnose.
+
 ## Notes / next
 - OKR-2 KR3 says "134 tool pages"; live sitemap carries 284 URLs (tools + categories + content, +5 comfyui/safetensors on 10-07) — crawl covers all of them.
 - Next run: `node scripts/qa-crawl-report.mjs` (optionally pass a base URL, e.g. https://formatho.com for prod spot-checks).
 - Workspace files (AGENTS.md, DREAMS.md, memory/, TOOLS.md deletion) are agent workspace state — intentionally not committed.
 2026-10-09 | work-block pm: resolved drift — merged main→prod (c31d168, docs-only 059c3e1), deploy 37911732534 green, drift guard healthy (prod==main), routes /, /tools/saml-metadata-generator, /eliza-tools, /blogs all 200 | ✅ verified | https://github.com/formatho/website/actions/runs/37911732534
+2026-10-10 | work-block am (2nd): converged sitemap lastmod for comfyui suite — committed 8464ded (+5 lastmod 2026-10-07 stamps; both hosts already served them, repo was behind live, same class as 107045e); CI 38022674407 green (build + deploy-qa; CodeQL 38022674088); QA redeploy verified live (284 locs, comfyui lastmods present, / + /tools/comfyui-workflow-inspector + /blogs 200); weekly QA crawl 284/284 OK avg 394ms 0 slow — first crawl covering the 5 comfyui/safetensors URLs | ✅ verified | https://github.com/formatho/website/actions/runs/38022674407
