@@ -246,6 +246,29 @@ One line per work block: date | summary | status | link. Detailed archive for 20
 - Drift healthy (prod==main, 6 live pages) · prod / 200.
 - No reds → nothing to diagnose.
 
+### 2026-10-11 (Sun AM block — standing A/B battery + key-page spot checks)
+- **Battery: 20 pass / 0 FAIL — ALL GREEN on PROD *and* QA** (prod app-B4KNMfjM / conv B7yZXJnc; QA app-Bc5DSJV4 / conv dLOEcTdw — chunk rotations absorbed, all compiled markers hold: flip scoped, kill override, abDefault, both copies, 4/4 events, house-ad machinery OFF).
+- Drift healthy (prod==main, 6 live pages) · key pages 7/7 × 200 (/, /tools, /funnels, /eliza-tools, /blogs, /tools/jwt, /tools/saml-metadata-generator).
+- No reds → nothing to diagnose.
+
+### 2026-10-11 (Sun AM work block 2 — sitemap lastmod host-parity guard)
+- **Assignment check:** no new briefings; no open website-qa backlog rows; standing pass green —
+  CI all green (incl. 10-10 PM prod merge 18cba94, run 38041922241), drift healthy (prod==main,
+  6/6 titles), sitemap loc parity 284/284 identical across hosts.
+- **Finding (root-caused, benign):** full-file sitemap diff prod↔QA showed 3 lastmod divergences
+  (dpp-readiness / gtin-validator / spf-analyzer: prod 2026-09-22 vs QA 2026-09-29). Root cause:
+  the 09-29 rescue cherry-pick — tools authored prod-only at 0720fab (commit-dated 09-22),
+  cherry-picked to main as 5b7a3b0 (commit-dated 09-29); generate-sitemap.js stamps %cs
+  (commit date), so each branch reports its own last-touch. Prod's 09-22 is the true content
+  authoring date; Google sees a stable truthful date; self-heals on next real content edit.
+  No live change made (fake-dating lastmods would burn recrawl trust).
+- **Artifact:** `scripts/prod-drift-check.sh` gained section 3 — WARN-only sitemap lastmod
+  host-parity check (fetch both sitemaps, join loc→lastmod, report divergence; loc-set mismatch
+  or empty fetch also WARN; exit code unchanged so website-agent's 6h cron stays
+  silent-when-healthy). Known-benign class documented in-script.
+- **Verified live:** `bash -n` clean; full run from repo root → exactly the 3 expected WARNs +
+  `healthy: prod==main, 6 live pages match`, exit 0.
+
 ## Notes / next
 - OKR-2 KR3 says "134 tool pages"; live sitemap carries 284 URLs (tools + categories + content, +5 comfyui/safetensors on 10-07) — crawl covers all of them.
 - Next run: `node scripts/qa-crawl-report.mjs` (optionally pass a base URL, e.g. https://formatho.com for prod spot-checks).
@@ -253,3 +276,4 @@ One line per work block: date | summary | status | link. Detailed archive for 20
 2026-10-09 | work-block pm: resolved drift — merged main→prod (c31d168, docs-only 059c3e1), deploy 37911732534 green, drift guard healthy (prod==main), routes /, /tools/saml-metadata-generator, /eliza-tools, /blogs all 200 | ✅ verified | https://github.com/formatho/website/actions/runs/37911732534
 2026-10-10 | work-block am (2nd): converged sitemap lastmod for comfyui suite — committed 8464ded (+5 lastmod 2026-10-07 stamps; both hosts already served them, repo was behind live, same class as 107045e); CI 38022674407 green (build + deploy-qa; CodeQL 38022674088); QA redeploy verified live (284 locs, comfyui lastmods present, / + /tools/comfyui-workflow-inspector + /blogs 200); weekly QA crawl 284/284 OK avg 394ms 0 slow — first crawl covering the 5 comfyui/safetensors URLs | ✅ verified | https://github.com/formatho/website/actions/runs/38022674407
 2026-10-10 | work-block pm: resolved drift — merged main→prod (c167386: comfyui sitemap lastmod 8464ded + docs 3c8f083), deploy 38041620623 green, drift guard healthy (prod==main), /, /sitemap.xml, /tools/comfyui-workflow-inspector, /eliza-tools all 200, sitemap contains comfyui entry | ✅ verified | https://github.com/formatho/website/actions/runs/38041620623
+2026-10-11 | work-block am (2): standing pass green (CI 12/12 incl 18cba94 prod merge, drift healthy, loc parity 284/284); root-caused 3-URL lastmod divergence prod↔QA (09-29 cherry-pick date skew, benign); shipped WARN-only sitemap host-parity check into prod-drift-check.sh — live run shows exactly the 3 expected WARNs, exit 0 | ✅ verified | https://github.com/formatho/website/actions/runs/38041922241
