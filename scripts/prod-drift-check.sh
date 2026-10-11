@@ -69,6 +69,34 @@ for entry in "${CHECKS[@]}"; do
   fi
 done
 
+# --- 3. sitemap lastmod parity prod vs QA (WARN-only) ---
+# Git-derived lastmod can legitimately differ between hosts when a cherry-pick
+# re-dates a commit on one branch only (known class: 0720fab 09-22 on prod vs
+# cherry-pick 5b7a3b0 commit-dated 09-29 on main -> dpp-readiness, gtin-validator,
+# spf-analyzer). That divergence is benign and self-heals on the next real
+# content edit, so divergences WARN here without failing the guard; loc-set
+# mismatch / empty fetch also WARN only (section 1 already fails on genuine
+# prod-vs-main drift). Locs are canonical formatho.com URLs on both hosts.
+QA_URL="${FORMATHO_QA_URL:-https://qa.formatho.com}"
+sitemap_pairs() { # $1 = sitemap URL -> "loc lastmod" lines
+  curl -s --max-time 20 "$1" | awk '
+    /<loc>/ { match($0, /<loc>[^<]*<\/loc>/); loc = substr($0, RSTART+5, RLENGTH-11) }
+    /<lastmod>/ { match($0, /<lastmod>[^<]*<\/lastmod>/); lm = substr($0, RSTART+9, RLENGTH-19); if (loc != "") { print loc " " lm; loc = "" } }
+    /<\/url>/ { loc = "" }
+  '
+}
+prod_sm=$(sitemap_pairs "$BASE_URL/sitemap.xml")
+qa_sm=$(sitemap_pairs "$QA_URL/sitemap.xml")
+if [ -z "$prod_sm" ] || [ -z "$qa_sm" ]; then
+  echo "WARN: sitemap parity check skipped (empty fetch) prod=${#prod_sm}B qa=${#qa_sm}B"
+else
+  comm -3 <(printf '%s\n' "$prod_sm" | awk '{print $1}' | sort) \
+           <(printf '%s\n' "$qa_sm" | awk '{print $1}' | sort) \
+    | sed 's/^\t//' | while read -r l; do [ -n "$l" ] && echo "WARN: sitemap loc on one host only: $l"; done
+  join <(printf '%s\n' "$prod_sm" | sort) <(printf '%s\n' "$qa_sm" | sort) \
+    | awk '$2 != $3 { print "WARN: sitemap lastmod differs prod=" $2 " qa=" $3 " " $1 }'
+fi
+
 if [ "$fail" -eq 1 ]; then
   printf 'PROD DRIFT DETECTED (%s)\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
   printf '%s\n' "${findings[@]}"
