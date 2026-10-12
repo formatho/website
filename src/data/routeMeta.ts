@@ -158,9 +158,9 @@ export const routeMeta: Record<string, RouteMeta> = {
     keywords: 'bpmn viewer, bpmn to pdf, bpmn diagram, business process model, bpmn export, privacy-first',
   },
   'visio-viewer': {
-    title: 'Visio Viewer Online - Open .vsdx Files Securely | Formatho',
-    description: 'View Microsoft Visio .vsdx files in your browser without Visio or an upload. Multi-page rendering, zoom, SVG export. 100% client-side — the file never leaves your machine.',
-    keywords: 'visio viewer, microsoft visio viewer, vsdx viewer online, open visio file online, view vsdx without visio, visio file viewer free',
+    title: 'Visio File Viewer — Open .vsdx Online Free (No Visio Needed) | Formatho',
+    description: 'Open and view Visio .vsdx files online without Visio installed — works on Mac, Linux, Windows, mobile. Multi-page rendering, zoom, SVG export. No upload, no signup: the file never leaves your browser.',
+    keywords: 'visio file viewer, vsdx viewer, open vsdx online, view vsdx without visio, visio viewer online free, open visio file without visio, visio reader',
   },
   'bpmn-to-visio': {
     title: 'BPMN to Visio Converter - Free, Layout Preserved | Formatho',

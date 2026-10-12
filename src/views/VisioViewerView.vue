@@ -7,16 +7,17 @@ import { unzipSync } from 'fflate'
 import { useSEO } from '@/composables/useSEO'
 
 useSEO({
-  title: 'Visio Viewer Online - Open .vsdx Files in Browser | Formatho',
+  title: 'Visio File Viewer — Open .vsdx Online Free (No Visio Needed) | Formatho',
   description:
-    'Open and view Microsoft Visio .vsdx files online without Visio or any upload. Multi-page diagram rendering, zoom, and SVG export. Runs entirely in your browser — your file never leaves your machine.',
+    'Open and view Visio .vsdx files online without Visio installed — works on Mac, Linux, Windows, mobile. Multi-page rendering, zoom, SVG export. No upload, no signup: the file never leaves your browser.',
   keywords: [
-    'visio viewer',
-    'microsoft visio viewer',
-    'vsdx viewer online',
-    'open visio file online',
-    'visio file viewer free',
-    'view vsdx without visio'
+    'visio file viewer',
+    'vsdx viewer',
+    'open vsdx online',
+    'view vsdx without visio',
+    'visio viewer online free',
+    'open visio file without visio',
+    'visio reader'
   ],
   ogType: 'website'
 })
@@ -229,7 +230,7 @@ function downloadSvg() {
         <FileText class="w-6 h-6 text-primary" />
       </div>
       <div>
-        <h1 class="text-2xl md:text-3xl font-bold">Visio Viewer — open .vsdx in your browser</h1>
+        <h1 class="text-2xl md:text-3xl font-bold">Visio File Viewer — open .vsdx online, no Visio needed</h1>
         <p class="text-sm text-muted-foreground">
           View Microsoft Visio diagrams without Visio installed. The file is parsed locally — nothing is uploaded.
         </p>
