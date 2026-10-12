@@ -857,6 +857,12 @@ export const routes = [
         meta: routeMeta['comfyui-sampler-guide']
       },
       {
+        path: '/tools/cloudhsm-evm-address',
+        name: 'cloudhsm-evm-address',
+        component: () => import(/* webpackPrefetch: true */ '../views/CloudHsmEvmAddressView.vue'),
+        meta: routeMeta['cloudhsm-evm-address']
+      },
+      {
         path: '/tools/toml-yaml-json-converter',
         name: 'toml-yaml-json-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/TomlYamlJsonConverterView.vue'),
