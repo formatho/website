@@ -506,6 +506,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Plain-language reference for ComfyUI samplers, sigma schedulers, and how steps, CFG, denoise and seed interact.',
     keywords: 'comfyui sampler guide, which comfyui sampler, euler vs dpmpp_2m, comfyui scheduler explained, comfyui cfg settings',
   },
+  'cloudhsm-evm-address': {
+    title: 'CloudHSM Key List & EVM Address Deriver | Formatho',
+    description: 'List keys in AWS CloudHSM (cloudhsm-cli, key_mgmt_tool, PKCS#11), inspect key attributes, and derive the EVM wallet address from an secp256k1 public key. Free, client-side.',
+    keywords: 'cloudhsm list keys, cloudhsm key list, aws cloudhsm evm address, cloudhsm ethereum wallet, cloudhsm secp256k1, hsm evm custody, derive evm address from public key',
+  },
   'pint-ae': {
     title: 'PINT AE Invoice Builder & Validator - UAE E-Invoicing | Formatho',
     description: 'Build PINT AE XML invoices for the UAE e-invoicing mandate (Peppol), or paste XML to validate: TRN, VAT categories, required UBL fields, totals math. 100% client-side.',
