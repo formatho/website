@@ -90,11 +90,17 @@ qa_sm=$(sitemap_pairs "$QA_URL/sitemap.xml")
 if [ -z "$prod_sm" ] || [ -z "$qa_sm" ]; then
   echo "WARN: sitemap parity check skipped (empty fetch) prod=${#prod_sm}B qa=${#qa_sm}B"
 else
-  comm -3 <(printf '%s\n' "$prod_sm" | awk '{print $1}' | sort) \
-           <(printf '%s\n' "$qa_sm" | awk '{print $1}' | sort) \
+  # POSIX-safe: no process substitution (cron may invoke via /bin/sh) — use sorted temp files
+  tmp_dir=$(mktemp -d 2>/dev/null || { tmp_dir="/tmp/prod-drift-check.$$"; mkdir -p "$tmp_dir"; })
+  printf '%s\n' "$prod_sm" | sort > "$tmp_dir/prod.sm"
+  printf '%s\n' "$qa_sm"   | sort > "$tmp_dir/qa.sm"
+  cut -d' ' -f1 "$tmp_dir/prod.sm" > "$tmp_dir/prod.locs"
+  cut -d' ' -f1 "$tmp_dir/qa.sm"   > "$tmp_dir/qa.locs"
+  comm -3 "$tmp_dir/prod.locs" "$tmp_dir/qa.locs" \
     | sed 's/^\t//' | while read -r l; do [ -n "$l" ] && echo "WARN: sitemap loc on one host only: $l"; done
-  join <(printf '%s\n' "$prod_sm" | sort) <(printf '%s\n' "$qa_sm" | sort) \
+  join "$tmp_dir/prod.sm" "$tmp_dir/qa.sm" \
     | awk '$2 != $3 { print "WARN: sitemap lastmod differs prod=" $2 " qa=" $3 " " $1 }'
+  rm -rf "$tmp_dir"
 fi
 
 if [ "$fail" -eq 1 ]; then
