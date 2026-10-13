@@ -863,6 +863,24 @@ export const routes = [
         meta: routeMeta['cloudhsm-evm-address']
       },
       {
+        path: '/tools/eliza-character-validator',
+        name: 'eliza-character-validator',
+        component: () => import(/* webpackPrefetch: true */ '../views/ElizaCharacterValidatorView.vue'),
+        meta: routeMeta['eliza-character-validator']
+      },
+      {
+        path: '/tools/env-hygiene-checker',
+        name: 'env-hygiene-checker',
+        component: () => import(/* webpackPrefetch: true */ '../views/EnvHygieneCheckerView.vue'),
+        meta: routeMeta['env-hygiene-checker']
+      },
+      {
+        path: '/tools/eliza-plugin-linter',
+        name: 'eliza-plugin-linter',
+        component: () => import(/* webpackPrefetch: true */ '../views/ElizaPluginLintView.vue'),
+        meta: routeMeta['eliza-plugin-linter']
+      },
+      {
         path: '/tools/toml-yaml-json-converter',
         name: 'toml-yaml-json-converter',
         component: () => import(/* webpackPrefetch: true */ '../views/TomlYamlJsonConverterView.vue'),

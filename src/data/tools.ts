@@ -192,6 +192,9 @@ export const tools: ToolCategory[] = [
       { name: 'Jev Playground', description: 'Build Jev (TypeSafe System One) requests visually: state plus Noul, Choice, and Score questions. Mock responses with probability distributions, Python SDK code generation. Free, client-side, no API key.', route: '/tools/jev-playground', iconName: 'Zap' },
       { name: 'Jev Suitability Test', description: 'Is your task Jev-shaped? Six criteria from System One guidance: judgement, bounded, atomic, context-contained, fast-human, machine-consumed — scored with a verdict and decomposition advice.', route: '/tools/jev-suitability', iconName: 'Gauge' },
       { name: 'LLM Token Counter', description: 'Count tokens for GPT-4o, GPT-4, o1, and legacy models locally. Compare across tokenizers, estimate API costs. No API calls.', route: '/tools/local-token-counter', iconName: 'Hash' },
+       { name: 'elizaOS Character Validator', description: 'Validate your elizaOS character.json against the real schema: missing required fields, type errors, empty bio or style, malformed messageExamples, and leaked secrets. Free, client-side.', route: '/tools/eliza-character-validator', iconName: 'Bot' },
+       { name: '.env Hygiene Checker', description: 'Client-side scan of agent .env files: duplicate keys, empty values, quote and whitespace issues, and known elizaOS variable names. Nothing is ever uploaded.', route: '/tools/env-hygiene-checker', iconName: 'FileCog' },
+       { name: 'elizaOS Plugin Manifest Linter', description: 'Lint your plugin package.json against the elizaOS registry conventions: plugin- name prefix, elizaos keywords, dual-format build fields and registry assets. Free, client-side.', route: '/tools/eliza-plugin-linter', iconName: 'PackageCheck' },
       { name: 'Meta Tag Generator', description: 'Generate HTML meta tags for SEO.', route: '/tools/meta-tag-generator', iconName: 'Tag' },
     ]
   },

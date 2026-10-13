@@ -506,6 +506,21 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Plain-language reference for ComfyUI samplers, sigma schedulers, and how steps, CFG, denoise and seed interact.',
     keywords: 'comfyui sampler guide, which comfyui sampler, euler vs dpmpp_2m, comfyui scheduler explained, comfyui cfg settings',
   },
+  'eliza-character-validator': {
+    title: 'elizaOS Character Validator - Check character.json | Formatho',
+    description: 'Validate an elizaOS character file against the real schema: missing required fields, type errors, empty bio or style, malformed messageExamples, and leaked API keys. Free, client-side.',
+    keywords: 'elizaos character validator, character.json validator, elizaos character file, elizaos agent config, elizaos schema check',
+  },
+  'env-hygiene-checker': {
+    title: '.env Hygiene Checker - Scan Agent Config Files | Formatho',
+    description: 'Client-side scanner for agent .env files: duplicate keys, empty values, quote and whitespace issues, and known elizaOS variable names. Nothing is ever uploaded.',
+    keywords: 'env file checker, env linter, dotenv validator, elizaos env variables, env hygiene, duplicate env keys',
+  },
+  'eliza-plugin-linter': {
+    title: 'elizaOS Plugin Manifest Linter - package.json Check | Formatho',
+    description: 'Lint your plugin package.json against elizaOS registry conventions: plugin- name prefix, elizaos keywords, dual-format build fields, semver, and registry asset requirements. Free, client-side.',
+    keywords: 'elizaos plugin linter, elizaos package.json, elizaos registry conventions, plugin manifest check, elizaos publish requirements',
+  },
   'cloudhsm-evm-address': {
     title: 'CloudHSM Key List & EVM Address Deriver | Formatho',
     description: 'List keys in AWS CloudHSM (cloudhsm-cli, key_mgmt_tool, PKCS#11), inspect key attributes, and derive the EVM wallet address from an secp256k1 public key. Free, client-side.',
