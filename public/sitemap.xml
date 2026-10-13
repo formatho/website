@@ -1364,6 +1364,21 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://formatho.com/tools/eliza-character-validator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/env-hygiene-checker</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://formatho.com/tools/eliza-plugin-linter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/tools/toml-yaml-json-converter</loc>
     <lastmod>2026-09-27</lastmod>
     <changefreq>monthly</changefreq>
