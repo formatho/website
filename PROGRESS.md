@@ -279,6 +279,27 @@ One line per work block: date | summary | status | link. Detailed archive for 20
 - **Fix:** prod-drift-check.sh sitemap host-parity check rewritten POSIX-safe — bash-only process substitution (`comm -3 <(...)`, `join <(...)`) replaced with sorted `mktemp -d` files + explicit cleanup. Restores the `/bin/sh scripts/prod-drift-check.sh` invocation documented in the prod-verification-pass skill, and de-risks the 6h prod-drift-guard cron regardless of how it invokes the script.
 - **Verified live:** `bash -n` + `/bin/sh -n` clean, zero `<( ` remaining in the file; full runs under BOTH shells byte-identical: exactly the 3 known-benign lastmod WARNs (dpp-readiness/gtin-validator/spf-analyzer, prod 09-22 vs QA 09-29) + `healthy: prod==main, 6 live pages match`, exit 0. (prod==main held through c8b6d14 visio patch — prod already converged by the growth session; AM note's "2 WARNs" was an undercount, full set is 3.)
 
+### 2026-10-13 (Tue AM block — A/B battery + posix-fix close-out)
+- **Part 1 — Battery: 20 pass / 0 FAIL — ALL GREEN on PROD and QA** · key pages 5/5 × 200 · HouseAd OFF.
+- **Part 2 — 9ee1c2f posix fix VERIFIED: GREEN.**
+  - Diff audit: assertion-equivalent (full-line sort → cut ≡ cut → sort with unique locs; identical comm/join inputs; WARN logic untouched — no weakened checks)
+  - Empirical: /bin/sh and bash both execute the full check-set; outputs byte-identical modulo run timestamps (only diff: DETECTED-line timestamp 10s apart); sh exit 1 was a legitimate drift finding (clean output), NOT a syntax error
+  - Cron: prod-drift-guard (6e85b01c, every 6h, website-agent isolated) **last run 3h ago: ok, no last-error** on the fixed script → posix-safe end-to-end confirmed; state DB protected so exact shell mode uninspectable, but post-fix run health is the operative proof. Next run +3h.
+  - Current drift finding = `b07ced2` (sibling's docs commit) pending routine prod merge — guard working as designed, not a red.
+- Note: mid-block the drift state moved (healthy → 1-commit drift) as the sibling pushed; the earlier wild-hav session proved the healthy state pre-push. Both states correctly reported.
+
+### 2026-10-14 (Wed AM block — standing A/B battery)
+- **Battery: 20 pass / 0 FAIL — ALL GREEN on PROD and QA** against current chunks (prod app-S_n1guHb 752,893B / conv DKXatNYU; QA conv CYmhbky0 — hash rotations verified per briefing, not yesterday's).
+- Drift healthy (prod==main — b07ced2 merged overnight) · key pages 5/5 × 200 · HouseAd OFF.
+- Note: entry bundle +3.9KB vs 10-12 = cloudhsm guide + EVM deriver tool (41dbc28) now live on both hosts.
+
+### 2026-10-14 (Wed AM work block 2 — mid-week crawl on expanded URL set + rebase housekeeping)
+- **Assignment check:** delegated slack:read blocked this run; no open website-qa backlog rows → standing QA pass on the 3 overnight commits (3e383b4 / 178499f / 9136f3e).
+- **Housekeeping:** worktree was behind 3 with unstaged changes — stashed, rebased to 9136f3e, popped; one sitemap.xml conflict resolved to origin's version (my stashed cloudhsm lastmod one-liner already upstream; 288 locs both). Workspace-state deletions/untracked left uncommitted as always.
+- **Crawl artifact: QA 288/288 OK, avg 406ms, 0 slow** (`qa-crawl-report.mjs`) — first full crawl of the expanded set: /tools/cloudhsm-evm-address + the 3 new eliza/env URLs (eliza-character-validator, env-hygiene-checker, eliza-plugin-linter) all crawled green; +4 vs 10-10's 284.
+- **Drift:** `/bin/sh scripts/prod-drift-check.sh` healthy (prod==main through the 9136f3e prod merge d28c02d / deploy 38443272149) — only the 3 known-benign 09-29-skew lastmod WARNs, exit 0.
+- **Spot checks:** 3 new tool URLs + /about all 200 on prod; 178499f publisher-section removal verified live on both hosts (remaining `publisher` matches = schema.org JSON-LD only — intentional structured data).
+
 ## Notes / next
 - OKR-2 KR3 says "134 tool pages"; live sitemap carries 284 URLs (tools + categories + content, +5 comfyui/safetensors on 10-07) — crawl covers all of them.
 - Next run: `node scripts/qa-crawl-report.mjs` (optionally pass a base URL, e.g. https://formatho.com for prod spot-checks).
@@ -291,3 +312,4 @@ One line per work block: date | summary | status | link. Detailed archive for 20
 2026-10-12 | work-block am (2): shipped posix-safe prod-drift-check (9ee1c2f) — mktemp sorted files replace c1919f5's bash-only proc-sub; verified byte-identical under bash AND /bin/sh (3 benign lastmod WARNs + healthy, exit 0); CI 38202391831 green on main; prod auto-converged by create-release as 94057c5 (deploy 38202468136 green, prod⊇main); guard re-run healthy under /bin/sh post-deploy | ✅ verified | https://github.com/formatho/website/actions/runs/38202468136
 2026-10-13 | work-block am: standing pass green on new tip 41dbc28 — #2 A/B battery 20/20 prod + 20/20 QA through the cloudhsm deploy's chunk rotations (conv CXiQjbV- / CvH-mJ4C); drift guard healthy when invoked as /bin/sh (cron path confirmed post-9ee1c2f, only the 3 known-benign 09-29-skew lastmod WARNs, exit 0); new tool /tools/cloudhsm-evm-address 200 on both hosts, live sitemap 285 locs w/ lastmod 2026-10-12 on the new entry (committed sitemap's missing lastmod = benign — npm build regenerates pre-deploy); QA battery run also validated 9ee1c2f didn't break ab-battery-check (my earlier 'prod' arg was invalid — script takes base URL) | ✅ verified | https://formatho.com/tools/cloudhsm-evm-address
 2026-10-13 | work-block pm: resolved drift — merged main→prod (3aaed5c, docs b07ced2d), deploy 38376784389 green, drift guard healthy (git cherry 0), 4/4 key routes 200; #9 eliza owner-blocked, #2 measuring | ✅ verified | https://github.com/formatho/website/actions/runs/38376784389
+2026-10-14 | work-block am (2): standing pass on overnight ships (9136f3e) — mid-week QA crawl 288/288 OK avg 406ms 0 slow (first crawl of cloudhsm + 3 eliza/env URLs); drift healthy via /bin/sh (prod==main @d28c02d, 3 benign WARNs); 3 new tool URLs + /about 200 on prod, publisher-section removal verified live (JSON-LD publisher = intentional) | ✅ verified | https://qa.formatho.com/sitemap.xml
