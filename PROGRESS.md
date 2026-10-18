@@ -300,6 +300,21 @@ One line per work block: date | summary | status | link. Detailed archive for 20
 - **Drift:** `/bin/sh scripts/prod-drift-check.sh` healthy (prod==main through the 9136f3e prod merge d28c02d / deploy 38443272149) — only the 3 known-benign 09-29-skew lastmod WARNs, exit 0.
 - **Spot checks:** 3 new tool URLs + /about all 200 on prod; 178499f publisher-section removal verified live on both hosts (remaining `publisher` matches = schema.org JSON-LD only — intentional structured data).
 
+### 2026-10-15 (Thu AM block — standing A/B battery + posix-path drift)
+- **Battery: 20 pass / 0 FAIL — ALL GREEN on PROD and QA** (prod app-xF3Odgsc / conv BwzYMyYE; QA conv eTB6azZv — daily rotations, all markers hold).
+- **Drift via /bin/sh (posix path, per briefing): exit 0, healthy prod==main** — exactly the 3 known-benign 09-29-skew lastmod WARNs (dpp-readiness, gtin-validator, spf-analyzer), no others. 9ee1c2f posix behavior stable day 2.
+- Key pages 5/5 × 200. Monitoring-only → no BACKLOG changes per dispatch rules.
+- Context: sibling ran a 288-URL crawl 10-14 PM (76d1339) — sitemap grew again (+9 since my 279 baseline; new tools/blogs flowing).
+
+### 2026-10-18 (Sun AM block — standing battery after 3-day gap + sitemap lastmod convergence)
+- **Assignment check:** no open website-qa backlog rows; blocks 10-16/17 didn't run but repo was quiet (zero main commits since 10-14 PM tip 56730a5) → standing #2 A/B morning pass + crawl.
+- **Battery: 20 pass / 0 FAIL — ALL GREEN on PROD and QA** (prod app-xF3Odgsc / SamlMetadataGeneratorView-BtmyaD6D / conv BwzYMyYE; QA app-Bv6e06RX / SMV-G8dGuROb / conv eTB6azZv — identical chunks to 10-15, expected with no deploys in the gap; flip, saml-only scope, kill-switch override, 4/4 events, HouseAd OFF all asserted).
+- **Drift via /bin/sh (posix path): exit 0, healthy prod==main** at 56730a5 pre-push — 6/6 live titles, exactly the 3 known-benign 09-29-skew lastmod WARNs (dpp-readiness/gtin-validator/spf-analyzer). 9ee1c2f posix behavior stable day 5.
+- **Key pages 5/5 × 200 on BOTH hosts** (/, /tools/saml-metadata-generator, /eliza-tools, /blogs, /sitemap.xml).
+- **Crawl: QA 288/288 OK, avg 404ms, 0 slow** — URL count unchanged vs 10-14 (no sitemap growth during the gap).
+- **Artifact fcd5e4e** — converged repo sitemap lastmod 2026-10-13 for eliza-character-validator / env-hygiene-checker / eliza-plugin-linter (both hosts already served the stamps; repo-behind-live, same class as 8464ded/107045e). Gates: lint 0 errors (125 pre-existing warnings), pre-commit build clean; pushed main 56730a5..fcd5e4e; main→prod merge + deploy verification + guard re-run in this block (final status posted to C0C44G305PS).
+- Monitoring-only for #2 → no BACKLOG row changes.
+
 ## Notes / next
 - OKR-2 KR3 says "134 tool pages"; live sitemap carries 284 URLs (tools + categories + content, +5 comfyui/safetensors on 10-07) — crawl covers all of them.
 - Next run: `node scripts/qa-crawl-report.mjs` (optionally pass a base URL, e.g. https://formatho.com for prod spot-checks).
@@ -314,3 +329,5 @@ One line per work block: date | summary | status | link. Detailed archive for 20
 2026-10-13 | work-block pm: resolved drift — merged main→prod (3aaed5c, docs b07ced2d), deploy 38376784389 green, drift guard healthy (git cherry 0), 4/4 key routes 200; #9 eliza owner-blocked, #2 measuring | ✅ verified | https://github.com/formatho/website/actions/runs/38376784389
 2026-10-14 | work-block am (2): standing pass on overnight ships (9136f3e) — mid-week QA crawl 288/288 OK avg 406ms 0 slow (first crawl of cloudhsm + 3 eliza/env URLs); drift healthy via /bin/sh (prod==main @d28c02d, 3 benign WARNs); 3 new tool URLs + /about 200 on prod, publisher-section removal verified live (JSON-LD publisher = intentional) | ✅ verified | https://qa.formatho.com/sitemap.xml
 2026-10-14 | work-block pm: resolved drift — docs-only 76d1339 merged main→prod (0e6d54c), deploy 38542829169 green, drift guard healthy (prod==main, 6/6 titles), 4/4 key routes 200; #9 eliza owner-blocked, #2 measuring | ✅ verified | https://github.com/formatho/website/actions/runs/38542829169
+2026-10-15 | work-block am: standing battery 20/0 ALL GREEN prod+QA (prod app-xF3Odgsc/conv BwzYMyYE; QA conv eTB6azZv); drift via /bin/sh exit 0 healthy (3 benign WARNs); key pages 5/5 × 200 | ✅ verified | https://formatho.com/tools/saml-metadata-generator
+2026-10-18 | work-block am: standing pass after 3-day gap — battery 20/0 ALL GREEN prod+QA (chunks flat vs 10-15, zero deploys in gap); drift healthy; key pages 5/5 × 200 both hosts; crawl 288/288 OK avg 404ms 0 slow; shipped fcd5e4e (sitemap lastmod convergence for 3 eliza/env URLs — live already served them, repo was behind, 8464ded class); main→prod merge + deploy + guard re-run same block, status → C0C44G305PS | ✅ verified | https://qa.formatho.com/sitemap.xml
