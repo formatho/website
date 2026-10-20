@@ -57,9 +57,14 @@ declare -a CHECKS=(
   "/blogs|Developer Guides & Tutorials | Formatho Blog"
   "/tools/jwt|JWT Decoder & Verifier"
 )
+fetch_title() {
+  curl -s --max-time 15 "$BASE_URL$1" | grep -m1 -o '<title>[^<]*</title>' | sed 's/<[^>]*>//g; s/&amp;/\&/g; s/&#39;/'"'"'/g' || true
+}
 for entry in "${CHECKS[@]}"; do
   path="${entry%%|*}"; expect="${entry#*|}"
-  live=$(curl -s --max-time 15 "$BASE_URL$path" | grep -m1 -o '<title>[^<]*</title>' | sed 's/<[^>]*>//g; s/&amp;/\&/g; s/&#39;/'"'"'/g' || true)
+  live=$(fetch_title "$path")
+  # transient CDN/network drops can return an empty body; retry once before failing
+  if [ -z "$live" ]; then sleep 2; live=$(fetch_title "$path"); fi
   if [ -z "$live" ]; then
     findings+=("live check failed: $BASE_URL$path returned no title (down or empty)")
     fail=1
