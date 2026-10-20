@@ -863,6 +863,12 @@ export const routes = [
         meta: routeMeta['cloudhsm-evm-address']
       },
       {
+        path: '/tools/create2-proxy-deployer',
+        name: 'create2-proxy-deployer',
+        component: () => import(/* webpackPrefetch: true */ '../views/Create2ProxyDeployView.vue'),
+        meta: routeMeta['create2-proxy-deployer']
+      },
+      {
         path: '/tools/eliza-character-validator',
         name: 'eliza-character-validator',
         component: () => import(/* webpackPrefetch: true */ '../views/ElizaCharacterValidatorView.vue'),
