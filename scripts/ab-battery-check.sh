@@ -21,6 +21,9 @@
 #   FORMATHO_BASE_URL=... scripts/ab-battery-check.sh
 #   scripts/ab-battery-check.sh --selftest           # offline fixtures
 # Exit 0 = all checks pass, exit 1 = findings on stdout. curl-only, no keys.
+# Runs under bash and /bin/sh (bash-3.2 sh-mode): no process substitution —
+# the one former <(...) intersection degraded under sh to a false
+# 'EnterpriseCta chunk not found' FAIL (seen 10-20); now sorted tempfiles.
 set -uo pipefail
 
 PASS=()
@@ -111,13 +114,18 @@ run_battery() {
 
   # --- 3. EnterpriseCta chunk: shared import of both saml views that carries
   #        the A/B machinery (ships as a vue_vue_type_* chunk, name varies) ---
-  local ec_body cand c
+  local ec_body cand c ec_list_a ec_list_b
   ec_body=""
-  for c in $(comm -12 <(import_list "$smgv_body") <(import_list "$sdv_body")); do
+  ec_list_a="$(mktemp)" || { note_fail "FATAL: mktemp for import intersection"; return 1; }
+  ec_list_b="$(mktemp)" || { note_fail "FATAL: mktemp for import intersection"; rm -f "$ec_list_a"; return 1; }
+  import_list "$smgv_body" >"$ec_list_a"
+  import_list "$sdv_body" >"$ec_list_b"
+  for c in $(comm -12 "$ec_list_a" "$ec_list_b"); do
     case "$c" in app-*) continue ;; esac
     local body; body="$(http_get "$(chunk_url "$c")")"
     if [ "$(occurrences "$body" 'data-cta-variant')" -gt 0 ]; then ec_body="$body"; break; fi
   done
+  rm -f "$ec_list_a" "$ec_list_b"
   if [ -z "$ec_body" ]; then
     note_fail "EnterpriseCta chunk not found via saml view shared imports (A/B machinery vanished from build)"
   else
