@@ -521,6 +521,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Lint your plugin package.json against elizaOS registry conventions: plugin- name prefix, elizaos keywords, dual-format build fields, semver, and registry asset requirements. Free, client-side.',
     keywords: 'elizaos plugin linter, elizaos package.json, elizaos registry conventions, plugin manifest check, elizaos publish requirements',
   },
+  'create2-proxy-deployer': {
+    title: 'CREATE2 Proxy Deployer - Deploy 0x4e59b4 on Any Chain | Formatho',
+    description: 'Connect MetaMask and deploy the deterministic deployment proxy (0x4e59b44847b379578588920cA78FbF26c0B4956C) to any EVM chain, then deploy your contracts to the same address everywhere via CREATE2.',
+    keywords: 'create2 proxy deployer, deterministic deployment proxy, 0x4e59b44847b379578588920cA78FbF26c0B4956C, arachnid create2, deploy create2 factory any chain, deterministic contract address metamask',
+  },
   'cloudhsm-evm-address': {
     title: 'CloudHSM Key List & EVM Address Deriver | Formatho',
     description: 'List keys in AWS CloudHSM (cloudhsm-cli, key_mgmt_tool, PKCS#11), inspect key attributes, and derive the EVM wallet address from an secp256k1 public key. Free, client-side.',
