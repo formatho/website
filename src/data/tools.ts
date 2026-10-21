@@ -196,6 +196,7 @@ export const tools: ToolCategory[] = [
        { name: 'elizaOS Character Validator', description: 'Validate your elizaOS character.json against the real schema: missing required fields, type errors, empty bio or style, malformed messageExamples, and leaked secrets. Free, client-side.', route: '/tools/eliza-character-validator', iconName: 'Bot' },
        { name: '.env Hygiene Checker', description: 'Client-side scan of agent .env files: duplicate keys, empty values, quote and whitespace issues, and known elizaOS variable names. Nothing is ever uploaded.', route: '/tools/env-hygiene-checker', iconName: 'FileCog' },
        { name: 'elizaOS Plugin Manifest Linter', description: 'Lint your plugin package.json against the elizaOS registry conventions: plugin- name prefix, elizaos keywords, dual-format build fields and registry assets. Free, client-side.', route: '/tools/eliza-plugin-linter', iconName: 'PackageCheck' },
+      { name: 'Polyaxonfile Validator', description: 'Lint polyaxonfile.yaml against the real spec: version and kind checks, input/output typing, matrix and early-stopping validation. Plus a hyperparameter matrix builder with total-run counting. Free, client-side.', route: '/tools/polyaxon-validator', iconName: 'FlaskConical' },
       { name: 'Meta Tag Generator', description: 'Generate HTML meta tags for SEO.', route: '/tools/meta-tag-generator', iconName: 'Tag' },
     ]
   },

@@ -869,6 +869,12 @@ export const routes = [
         meta: routeMeta['create2-proxy-deployer']
       },
       {
+        path: '/tools/polyaxon-validator',
+        name: 'polyaxon-validator',
+        component: () => import(/* webpackPrefetch: true */ '../views/PolyaxonValidatorView.vue'),
+        meta: routeMeta['polyaxon-validator']
+      },
+      {
         path: '/tools/eliza-character-validator',
         name: 'eliza-character-validator',
         component: () => import(/* webpackPrefetch: true */ '../views/ElizaCharacterValidatorView.vue'),
