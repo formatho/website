@@ -125,7 +125,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { FlaskConical } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
@@ -294,4 +294,6 @@ const generatedYaml = computed(() => {
 })
 
 function copyYaml() { navigator.clipboard.writeText(generatedYaml.value) }
+
+onMounted(() => { input.value = sample; validate() })
 </script>
