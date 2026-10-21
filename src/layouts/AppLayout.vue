@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterView, useRoute } from 'vue-router'
+import RelatedTools from '@/components/RelatedTools.vue'
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
 // REMOVED: import LiveSiteAnalytics from '@/components/LiveSiteAnalytics.vue'
@@ -237,6 +238,7 @@ onUnmounted(removeToolSchema)
 
       <FunnelBar />
       <RouterView v-show="!isLoading" @vue:mounted="onComponentReady" />
+      <RelatedTools />
       <ToolSEOContent />
       <BookmarkHint />
     </main>

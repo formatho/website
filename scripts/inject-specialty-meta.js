@@ -256,6 +256,10 @@ for (const [slug, [title, desc]] of Object.entries(staticPages)) {
   const fp = path.join(distDir, 'runtime.html')
   if (fs.existsSync(fp)) {
     let html = fs.readFileSync(fp, 'utf8')
+    // T5: og/twitter url must point at /runtime, not the homepage default
+    html = html
+      .replace(/property="og:url" content="[^"]*"/, 'property="og:url" content="https://formatho.com/runtime"')
+      .replace(/name="twitter:url" content="[^"]*"/, 'name="twitter:url" content="https://formatho.com/runtime"')
     const faqLd = {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
