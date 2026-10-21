@@ -1370,6 +1370,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://formatho.com/tools/polyaxon-validator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://formatho.com/tools/eliza-character-validator</loc>
     <lastmod>2026-10-13</lastmod>
     <changefreq>monthly</changefreq>

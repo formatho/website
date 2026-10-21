@@ -521,6 +521,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description: 'Lint your plugin package.json against elizaOS registry conventions: plugin- name prefix, elizaos keywords, dual-format build fields, semver, and registry asset requirements. Free, client-side.',
     keywords: 'elizaos plugin linter, elizaos package.json, elizaos registry conventions, plugin manifest check, elizaos publish requirements',
   },
+  'polyaxon-validator': {
+    title: 'Polyaxonfile Validator & Matrix Builder | Formatho',
+    description: 'Lint polyaxonfile.yaml against the real spec: version and kind checks, input/output typing, matrix and early-stopping validation. Plus a hyperparameter matrix builder with total-run counting.',
+    keywords: 'polyaxonfile validator, polyaxon yaml lint, polyaxon matrix, polyaxon hyperparameter tuning, polyaxon grid search runs, polyaxon bayes optimization',
+  },
   'create2-proxy-deployer': {
     title: 'CREATE2 Proxy Deployer - Deploy 0x4e59b4 on Any Chain | Formatho',
     description: 'Connect MetaMask and deploy the deterministic deployment proxy (0x4e59b44847b379578588920cA78FbF26c0B4956C) to any EVM chain, then deploy your contracts to the same address everywhere via CREATE2.',

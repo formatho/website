@@ -132,6 +132,7 @@ Category hub pages group every tool with a one-line description each:
 - [elizaOS Character Validator]: https://formatho.com/tools/eliza-character-validator — Validate your elizaOS character.json against the real schema: missing required fields, type errors, empty bio or style, malformed messageExamples, and leaked secrets. Free, client-side.
 - [.env Hygiene Checker]: https://formatho.com/tools/env-hygiene-checker — Client-side scan of agent .env files: duplicate keys, empty values, quote and whitespace issues, and known elizaOS variable names. Nothing is ever uploaded.
 - [elizaOS Plugin Manifest Linter]: https://formatho.com/tools/eliza-plugin-linter — Lint your plugin package.json against the elizaOS registry conventions: plugin- name prefix, elizaos keywords, dual-format build fields and registry assets. Free, client-side.
+- [Polyaxonfile Validator]: https://formatho.com/tools/polyaxon-validator — Lint polyaxonfile.yaml against the real spec: version and kind checks, input/output typing, matrix and early-stopping validation. Plus a hyperparameter matrix builder with total-run counting. Free, client-side.
 - [Meta Tag Generator]: https://formatho.com/tools/meta-tag-generator — Generate HTML meta tags for SEO.
 
 ### Converters & Calculators
