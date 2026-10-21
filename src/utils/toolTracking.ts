@@ -19,12 +19,43 @@ function umami(): UmamiFn | null {
 const sessionFiredTools = new Set<string>()
 
 /** Track primary tool action (Generate/Format/Encode/Convert/etc.) */
-export function trackToolUsed(toolSlug: string, toolCategory?: string): void {
+export function trackToolUsed(
+  toolSlug: string,
+  toolCategory?: string,
+  actionType: 'convert' | 'format' | 'validate' | 'decode' | 'generate' | 'calculate' | 'execute' = 'execute',
+  result: 'success' | 'error' = 'success'
+): void {
   if (sessionFiredTools.has(toolSlug)) return
   sessionFiredTools.add(toolSlug)
   umami()?.('tool_used', {
+    tool_id: toolSlug,
     tool_name: toolSlug,
     tool_category: toolCategory || 'unknown',
+    action_type: actionType,
+    result,
+  })
+}
+
+/** Funnel: related-tools module / copy chip click */
+export function trackRelatedToolClick(fromTool: string, toTool: string): void {
+  umami()?.('related_tool_click', {
+    from_tool: fromTool,
+    to_tool: toTool,
+  })
+}
+
+/** Key event: runtime CTA click (footer / chip / post-copy) */
+export function trackRuntimeCtaClick(sourceTool: string, placement: 'footer' | 'chip' | 'post_copy_4' | 'page'): void {
+  umami()?.('runtime_cta_click', {
+    source_tool: sourceTool,
+    placement,
+  })
+}
+
+/** Key event: consultation click */
+export function trackConsultationClick(sourcePage: string): void {
+  umami()?.('consultation_click', {
+    source_page: sourcePage,
   })
 }
 

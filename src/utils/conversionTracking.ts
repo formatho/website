@@ -73,6 +73,7 @@ export function initConversionTracking(router: Router): void {
       if (!tool || viewedTools.has(to.path)) return
       viewedTools.add(to.path)
       send('tool_page_view', {
+        tool_id: to.path.replace('/tools/', ''),
         tool_name: tool.name,
         tool_category: tool.category,
         path: to.path,
@@ -83,11 +84,45 @@ export function initConversionTracking(router: Router): void {
     document.addEventListener('copy', () => {
       const tool = toolForPath(router.currentRoute.value.path)
       if (!tool) return
+      const toolId = router.currentRoute.value.path.replace('/tools/', '')
       send('tool_result_copied', {
+        tool_id: toolId,
         tool_name: tool.name,
         tool_category: tool.category,
       })
+      window.dispatchEvent(new CustomEvent('formatho:tool-copied', { detail: { tool_id: toolId } }))
     })
+
+    // 1b. Central tool_used heuristic: first button interaction on a tool page
+    // (session-guarded per tool; excludes copy/clear/reset/sample/nav buttons).
+    const usedTools = new Set<string>()
+    const NON_ACTION = /^(copy|clear|reset|load sample|sample|close|search|menu|back|cancel|dismiss|×|→|next|prev|install|continue reading|read more)/i
+    document.addEventListener('click', (event) => {
+      const target = (event.target as HTMLElement | null)?.closest?.('button')
+      if (!target) return
+      const path = router.currentRoute.value.path
+      const tool = toolForPath(path)
+      if (!tool || usedTools.has(path)) return
+      const label = (target.textContent || '').trim()
+      if (!label || NON_ACTION.test(label)) return
+      usedTools.add(path)
+      const toolId = path.replace('/tools/', '')
+      const name = tool.name.toLowerCase()
+      const actionType = /valid/.test(name) ? 'validate'
+        : /convert/.test(name) ? 'convert'
+        : /decod|parse|read/.test(name) ? 'decode'
+        : /format|lint|prett/.test(name) ? 'format'
+        : /generat|builder|create/.test(name) ? 'generate'
+        : /calc|compute/.test(name) ? 'calculate'
+        : 'execute'
+      send('tool_used', {
+        tool_id: toolId,
+        tool_name: tool.name,
+        tool_category: tool.category,
+        action_type: actionType,
+        result: 'success',
+      })
+    }, true)
 
     // 3. Contact/mailto clicks on tool pages = B2B lead proxy (backlog #2 funnel)
     document.addEventListener(
