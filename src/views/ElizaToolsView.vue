@@ -76,8 +76,18 @@ const browserTools = [
       </p>
       <div class="mb-6 rounded-lg border bg-muted/50 p-4 font-mono text-sm">
         <div class="mb-2 text-muted-foreground"># add to any elizaOS project</div>
-        <div>elizaos plugins add plugin-formatho</div>
+        <div>npm install github:formatho/plugin-formatho</div>
       </div>
+      <p class="mb-6 text-sm text-muted-foreground">
+        Source, tests, and issue tracker on
+        <a
+          href="https://github.com/formatho/plugin-formatho"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-primary underline underline-offset-2 hover:text-primary/80"
+          >GitHub</a
+        > — 9 actions, 28 tests, MIT. The npm package and elizaOS registry listing follow the public release.
+      </p>
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <div v-for="a in actions" :key="a.name" class="rounded-lg border bg-card p-4">
           <div class="mb-2 flex items-center gap-2">
